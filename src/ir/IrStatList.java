@@ -1,4 +1,7 @@
 package ir;
 
-public class IrStatList {
+public class IrStatList extends IrStat {
+    public IrStatList(int lineNumber, int colNumber) {
+        super(lineNumber, colNumber);
+    }
 }

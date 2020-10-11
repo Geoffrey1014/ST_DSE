@@ -92,7 +92,7 @@ var_type:
      |  'VAR_INPUT'
      |  'VAR_OUTPUT'
      |  'VAR_INPUT_OUTPUT'
-     |  'VAR_TEMP'
+//     |  'VAR_TEMP'
      ;
 
 type_rule:
