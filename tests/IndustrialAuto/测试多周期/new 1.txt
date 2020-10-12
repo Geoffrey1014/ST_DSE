@@ -1,0 +1,38 @@
+PROGRAM FB_G4LTL5
+
+   VAR_INPUT
+      x0	: BOOL;
+      x1	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      y0	: BOOL;
+   END_VAR
+   VAR
+      cstate55	: INT := 0;	  
+   END_VAR
+   
+IF cstate55 = 10 THEN
+    IF ((NOT x0) AND  (x1)) THEN 
+        cstate55 := 10; y0 := FALSE; 
+    ELSIF ((x0) AND  (x1)) THEN 
+        cstate55 := 14; y0 := FALSE; 
+    ELSIF ((NOT x0) AND  (NOT x1)) THEN 
+        cstate55 := 10; y0 := FALSE;  
+    END_IF;
+ELSIF cstate55 = 0 THEN
+    IF ((NOT x0) AND  (x1)) THEN 
+        cstate55 := 10; y0 := FALSE;  
+    ELSIF ((x0) AND  (x1)) THEN 
+        cstate55 := 14; y0 := FALSE; 
+    
+    ELSIF ((NOT x0) AND  (NOT x1)) THEN 
+        cstate55 := 10; y0 := FALSE;  
+    END_IF;
+
+ELSIF cstate55 = 14 THEN
+    cstate55 := 14; y0 := FALSE; 
+END_IF;
+
+END_PROGRAM
+
+

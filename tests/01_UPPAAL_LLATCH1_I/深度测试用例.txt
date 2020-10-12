@@ -1,0 +1,6 @@
+InstructionCovearge:100.0%   BranchCovearge:100.0%
+sequence1:
+is_lead_edge=( and ( not false ) false ) ,out_1=false,load=false,in_1=false,prev_load=false ,reset=false,tload=false,
+is_lead_edge=( and ( not false ) false ) ,out_1=false ,load=true,in_1=false,prev_load=false ,reset=false,tload=false,
+is_lead_edge=( and ( not false ) false ) ,out_1=true ,load=false,in_1=true,prev_load=false ,reset=false,tload=true,
+time:170

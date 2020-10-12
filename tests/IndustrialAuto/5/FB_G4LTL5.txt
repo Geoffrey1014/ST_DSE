@@ -1,0 +1,95 @@
+PROGRAM FB_G4LTL5
+
+(* Variable definition *)
+   VAR_INPUT
+      x0	: BOOL;
+      x1	: BOOL;
+ 
+   END_VAR
+   VAR_OUTPUT
+      y0	: BOOL;
+
+   END_VAR
+   VAR
+   (* The total number of states equals to 1 *)
+      cstate55	: INT := 0;
+
+    (* Counter *)	  
+	  c1 : INT := 0;
+	  c1_geq10	: BOOL;
+	  c1_add1	: BOOL;
+      c1_reset	: BOOL;
+   END_VAR
+   
+(* Prepare counter input (manually added) *)
+IF (c1 >= 10) THEN
+	c1_geq10 := TRUE;
+ELSE
+	c1_geq10 := FALSE;
+END_IF;
+
+   (* Control logic *)
+IF cstate55 = 10 THEN
+    IF ((NOT x0) AND  (x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := TRUE;  
+    ELSIF ((x0) AND  (x1)) THEN 
+        cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+    ELSIF ((NOT x0) AND  (x1) AND  (c1_geq10)) THEN 
+        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := TRUE;  
+    ELSIF ((NOT x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
+        cstate55 := 13; y0 := TRUE; c1_add1 := TRUE; c1_reset := FALSE;  
+    ELSIF ((NOT x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
+        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 13; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+    END_IF;
+ELSIF cstate55 = 0 THEN
+    IF ((NOT x0) AND  (x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := TRUE;  
+    ELSIF ((x0) AND  (x1)) THEN 
+        cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+    ELSIF ((NOT x0) AND  (x1) AND  (c1_geq10)) THEN 
+        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := TRUE;  
+    ELSIF ((NOT x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
+        cstate55 := 13; y0 := TRUE; c1_add1 := TRUE; c1_reset := FALSE;  
+    ELSIF ((NOT x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
+        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 13; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+    END_IF;
+ELSIF cstate55 = 13 THEN
+    IF ((NOT x0) AND  (x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := TRUE;  
+    ELSIF ((x0) AND  (x1)) THEN 
+        cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+    ELSIF ((NOT x0) AND  (x1) AND  (c1_geq10)) THEN 
+        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := TRUE;  
+    ELSIF ((NOT x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
+        cstate55 := 13; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((NOT x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
+        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+    ELSIF ((x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
+        cstate55 := 13; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+    END_IF;
+ELSIF cstate55 = 14 THEN
+    cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+END_IF;
+
+
+(* Prepare counter output (manually added); in the specification, it is said that one can not reset and add 1 simultaneously *)
+IF(c1_reset) THEN
+	c1 := 0;
+END_IF;
+
+IF(c1_add1) THEN
+	c1 := c1 +1;
+END_IF;
+END_PROGRAM
+
+

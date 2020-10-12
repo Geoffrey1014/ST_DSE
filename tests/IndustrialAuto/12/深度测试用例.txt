@@ -1,0 +1,50 @@
+sequence1:
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=2116 ,x_5=false,
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=2116 ,x_5=false,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=617 ,x_5=false,
+sequence2:
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+sequence3:
+x_0=false,x_2=false,y_1=false ,x_1=true,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1188 ,x_5=false,
+x_0=false,x_2=false,y_1=false ,x_1=true,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1188 ,x_5=false,
+x_0=false,x_2=false,y_1=false ,x_1=true,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1190 ,x_5=true,
+x_0=false,x_2=false,y_1=false ,x_1=true,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1190 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+sequence4:
+x_0=false,x_2=false,y_1=false ,x_1=true,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1190 ,x_5=true,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1714 ,x_5=true,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1714 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+sequence5:
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1618 ,x_5=true,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1618 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+sequence6:
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1616 ,x_5=false,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1616 ,x_5=false,
+x_0=true,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=false,y_2=false ,cstate98=617 ,x_5=false,
+sequence7:
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=true,y_2=false ,cstate98=2094 ,x_5=true,
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=true,y_2=false ,cstate98=2094 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1198 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1198 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+sequence8:
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=true,y_2=false ,cstate98=2092 ,x_5=false,
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=true,y_2=false ,cstate98=2092 ,x_5=false,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1198 ,x_5=true,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1706 ,x_5=true,
+x_0=false,x_2=true,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=false,y_2=false ,cstate98=1706 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=617 ,x_5=false,
+sequence9:
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=2119 ,x_5=true,
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=false,x_3=true,y_2=false ,cstate98=2119 ,x_5=true,
+x_0=false,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=true,y_2=false ,cstate98=2094 ,x_5=true,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=true ,x_4=false,x_3=false,y_2=false ,cstate98=3214 ,x_5=false,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=true ,x_4=false,x_3=false,y_2=false ,cstate98=3214 ,x_5=false,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=false,y_2=false ,cstate98=1198 ,x_5=true,
+x_0=false,x_2=true,y_1=true ,x_1=false,y_0=false ,x_4=true,x_3=false,y_2=false ,cstate98=2698 ,x_5=false,
+x_0=false,x_2=true,y_1=true ,x_1=false,y_0=false ,x_4=true,x_3=false,y_2=false ,cstate98=2698 ,x_5=false,
+x_0=true,x_2=false,y_1=false ,x_1=false,y_0=false ,x_4=true,x_3=true,y_2=false ,cstate98=617 ,x_5=true,

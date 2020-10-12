@@ -1,0 +1,112 @@
+
+PROGRAM FB_G4LTL7
+
+   (* Variable definition *)
+   VAR_INPUT
+      x_1	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      y_1	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 4 *)
+      cstate78	: INT := 0;
+      t_reset	: BOOL;
+      t_up	: BOOL;
+      t_start	: BOOL;
+	  count : INT := 0;
+	  q : BOOL;
+	  T_VALUE	: int := 5;
+   END_VAR
+
+   (* Constant definition  *)
+
+  (* Control logic *)
+IF cstate78 = 48 THEN
+    IF ((x_1) AND  (NOT q)) THEN 
+        cstate78 := 48; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((NOT x_1) AND  (NOT q)) THEN 
+        cstate78 := 199; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((NOT x_1) AND  (q)) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((x_1) AND  (q)) THEN 
+        cstate78 := 10; y_1 := TRUE; t_start := FALSE; 
+    END_IF;
+ELSIF cstate78 = 10 THEN
+    IF (x_1) THEN 
+        cstate78 := 10; y_1 := TRUE; t_start := FALSE; 
+    ELSIF (NOT x_1) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    END_IF;
+ELSIF cstate78 = 0 THEN
+    IF ((x_1) AND  (NOT q)) THEN 
+        cstate78 := 11; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+    ELSIF ((NOT x_1)) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((x_1) AND  (q)) THEN 
+        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+    END_IF;
+ELSIF cstate78 = 7 THEN
+    IF ((x_1) AND  (NOT q)) THEN 
+        cstate78 := 48; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+    ELSIF ((NOT x_1) AND  (NOT q)) THEN 
+        cstate78 := 7; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((NOT x_1) AND  (q)) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((x_1) AND  (q)) THEN 
+        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+    END_IF;
+ELSIF cstate78 = 199 THEN
+    IF ((x_1) AND  (NOT q)) THEN 
+        cstate78 := 48; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+    ELSIF ((NOT x_1) AND  (NOT q)) THEN 
+        cstate78 := 199; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((NOT x_1) AND  (q)) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((x_1) AND  (q)) THEN 
+        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+    END_IF;
+ELSIF cstate78 = 6 THEN
+    IF ((x_1) AND  (NOT q)) THEN 
+        cstate78 := 48; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+    ELSIF ((NOT x_1)) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((x_1) AND  (q)) THEN 
+        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+    END_IF;
+ELSIF cstate78 = 11 THEN
+    IF ((x_1) AND  (NOT q)) THEN 
+        cstate78 := 11; y_1 := TRUE; t_start := FALSE; 
+    ELSIF ((NOT x_1) AND  (NOT q)) THEN 
+        cstate78 := 7; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((NOT x_1) AND  (q)) THEN 
+        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+    ELSIF ((x_1) AND  (q)) THEN 
+        cstate78 := 10; y_1 := TRUE; t_start := FALSE; 
+    END_IF;
+END_IF;
+
+(* Additional processing to handle clocks - in CODESYS, it only starts
+    with rising edge and can not be placed inside IF statement *) 
+IF(t_up) THEN
+    t_reset := TRUE;
+ELSIF(t_start AND (NOT t_up)) THEN
+    t_up := TRUE;  t_reset := FALSE;
+END_IF;
+
+IF(t_reset) THEN
+	IF(count=T_VALUE) THEN
+		q := TRUE;
+		
+	ELSE
+		(*count := count + 1;	 *)
+		count := T_VALUE;
+	END_IF;
+ELSE
+	q := FALSE;	
+	count := 0;
+END_IF;
+
+
+END_PROGRAM
+  

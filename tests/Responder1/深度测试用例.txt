@@ -1,0 +1,5 @@
+InstructionCovearge:100.0%   BranchCovearge:75.0%
+sequence1:
+req1=false,grant_1=false ,cstate12=0 ,
+grant_1=true ,req1=false,cstate12=0 ,
+time:123

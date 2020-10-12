@@ -1,0 +1,102 @@
+
+PROGRAM ArbitorLTL
+
+
+   (* Variable definition *)
+   VAR_INPUT
+      req1	: BOOL;
+      req2	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      grant_1	: BOOL;
+      grant_2	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 15 *)
+      cstate60	: INT := 0;
+   END_VAR
+
+   (* Control logic *)
+IF cstate60 = 11 THEN
+    
+    cstate60 := 8; grant_1 := FALSE; grant_2 := TRUE;  
+    
+ELSIF cstate60 = 12 THEN
+    
+    cstate60 := 3; grant_1 := TRUE; grant_2 := FALSE;  
+    
+ELSIF cstate60 = 13 THEN
+     
+    cstate60 := 8; grant_1 := FALSE; grant_2 := TRUE;  
+    
+ELSIF cstate60 = 14 THEN
+    
+    cstate60 := 13; grant_1 := FALSE; grant_2 := FALSE;  
+    
+ELSIF cstate60 = 0 THEN
+    IF (req1 AND  (NOT req2)) THEN 
+        cstate60 := 5; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF ((NOT req1) AND  (req2)) THEN 
+        cstate60 := 6; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF ((req1) AND  (req2)) THEN 
+        cstate60 := 14; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF ((NOT req1) AND  (NOT req2)) THEN 
+        cstate60 := 0; grant_1 := FALSE; grant_2 := FALSE;  
+    END_IF;
+ELSIF cstate60 = 1 THEN
+    
+    cstate60 := 2; grant_1 := FALSE; grant_2 := FALSE;  
+    
+ELSIF cstate60 = 2 THEN
+    
+    cstate60 := 4; grant_1 := TRUE; grant_2 := FALSE;  
+    
+ELSIF cstate60 = 3 THEN
+    IF ((NOT req1) ) THEN 
+        cstate60 := 4; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF (req1) THEN 
+        cstate60 := 9; grant_1 := FALSE; grant_2 := FALSE;  
+    END_IF;
+ELSIF cstate60 = 4 THEN
+    IF ((NOT req1)) THEN 
+        cstate60 := 0; grant_1 := FALSE; grant_2 := TRUE;  
+    ELSIF (req1) THEN 
+        cstate60 := 5; grant_1 := FALSE; grant_2 := TRUE;  
+    END_IF;
+ELSIF cstate60 = 5 THEN
+    IF ( NOT req2 ) THEN 
+        cstate60 := 10; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF (req2) THEN 
+        cstate60 := 1; grant_1 := FALSE; grant_2 := FALSE;  
+    END_IF;
+ELSIF cstate60 = 6 THEN
+    IF (req1) THEN 
+        cstate60 := 7; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF ((NOT req1) ) THEN 
+        cstate60 := 3; grant_1 := FALSE; grant_2 := FALSE;  
+    END_IF;
+ELSIF cstate60 = 7 THEN
+    
+    cstate60 := 11; grant_1 := FALSE; grant_2 := FALSE;  
+    
+ELSIF cstate60 = 8 THEN
+    IF (req2) THEN 
+        cstate60 := 6; grant_1 := TRUE; grant_2 := FALSE;  
+    ELSIF ( (NOT req2)) THEN 
+        cstate60 := 0; grant_1 := TRUE; grant_2 := FALSE;  
+    END_IF;
+ELSIF cstate60 = 9 THEN
+    
+    cstate60 := 10; grant_1 := FALSE; grant_2 := TRUE;  
+    
+ELSIF cstate60 = 10 THEN
+    IF (req2) THEN 
+        cstate60 := 12; grant_1 := FALSE; grant_2 := FALSE;  
+    ELSIF (NOT req2) THEN 
+        cstate60 := 8; grant_1 := FALSE; grant_2 := FALSE;  
+    END_IF;
+END_IF;
+
+END_PROGRAM
+
+

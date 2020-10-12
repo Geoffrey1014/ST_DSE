@@ -1,0 +1,16 @@
+InstructionCovearge:89.04109589041096%   BranchCovearge:80.55555555555556%
+sequence1:
+req2=false,req1=false,cstate94=0 ,grant_1=false ,grant_2=false ,
+req2=false,cstate94=3 ,grant_1=false ,grant_2=false ,req1=true,
+req2=false,cstate94=3 ,grant_1=true ,grant_2=false ,req1=true,
+req2=true,cstate94=1 ,grant_1=true ,grant_2=false ,req1=false,
+req2=true,cstate94=1 ,grant_1=false ,grant_2=true ,req1=false,
+req2=false,cstate94=0 ,grant_1=false ,grant_2=true ,req1=false,
+req2=true,cstate94=2 ,grant_1=false ,grant_2=false ,req1=true,
+req2=true,cstate94=2 ,grant_1=false ,grant_2=false ,req1=true,
+req2=false,cstate94=2 ,grant_1=false ,grant_2=false ,req1=true,
+sequence2:
+req2=true,cstate94=1 ,grant_1=false ,grant_2=false ,req1=false,
+req2=false,cstate94=3 ,grant_1=false ,grant_2=true ,req1=true,
+req2=false,cstate94=2 ,grant_1=false ,grant_2=false ,req1=false,
+time:1344

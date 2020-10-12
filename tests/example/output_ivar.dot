@@ -1,0 +1,3 @@
+x1	INT	VAR_INPUT	[0, 0]
+o	INT	VAR_OUTPUT	[0, 0]
+v1	INT	VAR	[0, 0]

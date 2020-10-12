@@ -1,0 +1,21 @@
+InstructionCovearge:74.64788732394366%   BranchCovearge:78.57142857142857%
+sequence1:
+c1_reset=false ,y0=false ,x0=false,x1=false,c1_geq10=false ,cstate55=10 ,c1=0,c1_add1=false ,
+c1_reset=false ,y0=false ,x0=false,x1=false,c1_geq10=false ,cstate55=10 ,c1=0,c1_add1=false ,
+c1_reset=false ,y0=false ,x0=true,x1=false,c1_geq10=false ,cstate55=13 ,c1=( + 0 1 ) ,c1_add1=true ,
+c1_reset=false ,y0=true ,x0=true,x1=false,c1_geq10=true ,cstate55=13 ,c1=1,c1_add1=false ,
+c1_reset=false ,y0=true ,x0=false,x1=false,c1_geq10=true ,cstate55=10 ,c1=1,c1_add1=false ,
+c1_reset=false ,y0=true ,x0=false,x1=false,c1_geq10=true ,cstate55=10 ,c1=1,c1_add1=false ,
+c1_reset=false ,y0=true ,x0=true,x1=false,c1_geq10=true ,cstate55=13 ,c1=( + 1 1 ) ,c1_add1=true ,
+c1_reset=true ,y0=true ,x0=false,x1=true,c1_geq10=true ,cstate55=10 ,c1=0 ,c1_add1=false ,
+c1_reset=false ,y0=false ,x0=true,x1=true,c1_geq10=false ,cstate55=14 ,c1=( + 0 1 ) ,c1_add1=true ,
+c1_reset=false ,y0=false ,x0=false,x1=false,c1_geq10=true ,cstate55=14 ,c1=( + 1 1 ) ,c1_add1=true ,
+sequence2:
+c1_reset=false ,y0=false ,x0=true,x1=false,c1_geq10=false ,cstate55=13 ,c1=( + 0 1 ) ,c1_add1=true ,
+c1_reset=false ,y0=false ,x0=false,x1=false,c1_geq10=true ,cstate55=14 ,c1=( + 1 1 ) ,c1_add1=true ,
+sequence3:
+c1_reset=false ,y0=false ,x0=false,x1=false,c1_geq10=false ,cstate55=14 ,c1=( + 0 1 ) ,c1_add1=true ,
+sequence4:
+c1_reset=true ,y0=false ,x0=false,x1=true,c1_geq10=false ,cstate55=10 ,c1=0 ,c1_add1=false ,
+c1_reset=true ,y0=false ,x0=true,x1=false,c1_geq10=false ,cstate55=10 ,c1=0 ,c1_add1=false ,
+time:5191

@@ -1,0 +1,28 @@
+PROGRAM Prog
+(* Variable definition *)
+   VAR_INPUT
+      x_0	: BOOL;
+      x_1	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      y_0	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 1 *)
+      cstate14	: INT := 0;
+   END_VAR
+
+   (* Constant definition  *)
+
+   
+(* Control logic *)
+IF cstate14 = 0 THEN
+    IF (x_0 AND  (NOT x_1)) THEN 
+        cstate14 := 0; y_0 := TRUE;  
+    ELSIF ((NOT x_0) AND  ( TRUE )) OR (x_0 AND  x_1) THEN 
+        cstate14 := 0; y_0 := FALSE;  
+    END_IF;
+END_IF;
+END_PROGRAM
+
+

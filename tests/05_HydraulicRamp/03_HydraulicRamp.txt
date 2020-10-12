@@ -1,0 +1,91 @@
+
+PROGRAM HydraulicRamp
+
+
+ (* Variable definition *)
+   VAR_INPUT
+      s_1	: BOOL;
+      s_2	: BOOL;
+      s_3	: BOOL;
+      s_4	: BOOL;
+      s_5	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      k_1	: BOOL;
+      k_2	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 5 *)
+      cstate6	: INT := 0;
+   END_VAR  
+
+  (* Control logic *)
+IF cstate6 = 0 THEN
+    IF ((NOT s_1) AND  (NOT s_2)) THEN 
+        cstate6 := 1; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_4) AND  (s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (NOT s_4)) THEN 
+        cstate6 := 3; k_1 := TRUE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (NOT s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((NOT s_1) AND  (s_2) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) OR ((s_1) AND  (s_2)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_5)) THEN 
+        cstate6 := 4; k_1 := FALSE; k_2 := TRUE;  
+    END_IF;
+ELSIF cstate6 = 1 THEN
+    IF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_4) AND  (s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (NOT s_4)) THEN 
+        cstate6 := 3; k_1 := TRUE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((NOT s_1) AND  (s_2) AND  (s_3) ) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((s_1) AND  (NOT s_2) AND  (s_3) ) OR ((s_1) AND  (s_2)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (NOT s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_5)) THEN 
+        cstate6 := 4; k_1 := FALSE; k_2 := TRUE;  
+    ELSIF ((NOT s_1) AND  (NOT s_2)) THEN 
+        cstate6 := 1; k_1 := FALSE; k_2 := FALSE;  
+    END_IF;
+ELSIF cstate6 = 2 THEN
+    IF ((NOT s_1) AND  (NOT s_2)) OR ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((NOT s_1) AND  (s_2) AND  (s_3) ) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) OR ((s_1) AND  (s_2)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (NOT s_4)) THEN 
+        cstate6 := 3; k_1 := TRUE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_4) AND  (s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_5)) THEN 
+        cstate6 := 4; k_1 := FALSE; k_2 := TRUE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (NOT s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    END_IF;
+ELSIF cstate6 = 3 THEN
+    IF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_5)) THEN 
+        cstate6 := 4; k_1 := FALSE; k_2 := TRUE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_4) AND  (s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_2) AND  (NOT s_3) AND  (NOT s_4)) THEN 
+        cstate6 := 3; k_1 := TRUE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (NOT s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) ) OR ((NOT s_1) AND  (NOT s_2) AND  (s_3) ) OR ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((NOT s_1) AND  (s_2) AND  (s_3) ) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) OR ((s_1) AND  (s_2)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    END_IF;
+ELSIF cstate6 = 4 THEN
+    IF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (NOT s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (NOT s_4) AND  (s_5)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((NOT s_1) AND  (NOT s_3) AND  (NOT s_5)) THEN 
+        cstate6 := 4; k_1 := FALSE; k_2 := TRUE;  
+    ELSIF ((NOT s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_5)) OR ((NOT s_1) AND  (NOT s_2) AND  (s_3) ) OR ((NOT s_1) AND  (s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((NOT s_1) AND  (s_2) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (s_4) AND  (s_5)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) OR ((s_1) AND  (s_2)) THEN 
+        cstate6 := 2; k_1 := FALSE; k_2 := FALSE;  
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3) AND  (NOT s_4) ) THEN 
+        cstate6 := 3; k_1 := TRUE; k_2 := FALSE;  
+    END_IF;
+END_IF; 
+
+END_PROGRAM
+
+

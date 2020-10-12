@@ -1,0 +1,17 @@
+dbc_pv_costep	INT	VAR_INPUT	[0, 0]
+dbc_pv_c_fan1lo	BOOL	VAR_OUTPUT	FALSE
+dbc_pv_c_fan1hi	BOOL	VAR_OUTPUT	FALSE
+dbc_pv_c_fan2lo	BOOL	VAR_OUTPUT	FALSE
+dbc_pv_c_fan2hi	BOOL	VAR_OUTPUT	FALSE
+dbc_pv_c_fan3lo	BOOL	VAR_OUTPUT	FALSE
+dbc_pv_c_fan3hi	BOOL	VAR_OUTPUT	FALSE
+p_fan1lo_1	INT	VAR	[3, 3]
+p_fan1lo_2	INT	VAR	[7, 7]
+p_fan1hi	INT	VAR	[8, 8]
+p_fan2lo_1	INT	VAR	[4, 4]
+p_fan2lo_2	INT	VAR	[6, 6]
+p_fan2hi_1	INT	VAR	[7, 7]
+p_fan2hi_2	INT	VAR	[8, 8]
+p_fan3lo	INT	VAR	[5, 5]
+p_fan3hi_1	INT	VAR	[6, 6]
+p_fan3hi_2	INT	VAR	[8, 8]

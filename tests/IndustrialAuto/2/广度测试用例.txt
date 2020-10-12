@@ -1,0 +1,5 @@
+InstructionCovearge:100.0%   BranchCovearge:66.66666666666666%
+sequence1:
+x_0=false,x_1=false,y_0=true ,cstate_46=0 ,
+x_0=false,x_1=true,y_0=false ,cstate_46=0 ,
+time:165

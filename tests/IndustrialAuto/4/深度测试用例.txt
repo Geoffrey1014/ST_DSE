@@ -1,0 +1,8 @@
+InstructionCovearge:100.0%   BranchCovearge:83.33333333333334%
+sequence1:
+cstate_52=0 ,x_0=false,x_2=false,y_1=false ,x_1=false,y_0=true ,error=false,x_3=false,
+cstate_52=0 ,x_0=false,x_2=false,y_1=false ,x_1=true,y_0=false ,error=false,x_3=false,
+cstate_52=0 ,x_0=true,x_2=false,y_1=true ,x_1=true,y_0=true ,error=false,x_3=false,
+cstate_52=19 ,x_0=true,x_2=true,y_1=false ,x_1=true,y_0=true ,error=false,x_3=true,
+cstate_52=19 ,x_0=false,x_2=false,y_1=false ,x_1=false,y_0=true ,error=true ,x_3=false,
+time:391

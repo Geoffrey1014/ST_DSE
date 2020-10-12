@@ -1,0 +1,19 @@
+InstructionCovearge:73.33333333333333%   BranchCovearge:80.0%
+sequence1:
+req2=false,cstate0=0 ,req1=false,grant_1=false ,grant_2=false ,
+req2=true,grant_1=false ,grant_2=false ,cstate0=14 ,req1=true,
+req2=true,grant_1=false ,grant_2=false ,cstate0=13 ,req1=true,
+req2=true,grant_1=false ,grant_2=true ,cstate0=8 ,req1=true,
+req2=true,grant_1=true ,grant_2=false ,cstate0=6 ,req1=true,
+req2=true,grant_1=false ,grant_2=false ,cstate0=7 ,req1=true,
+req2=true,grant_1=false ,grant_2=false ,cstate0=11 ,req1=true,
+req2=true,grant_1=false ,grant_2=true ,cstate0=8 ,req1=true,
+req2=false,grant_1=true ,grant_2=false ,cstate0=0 ,req1=true,
+req2=true,grant_1=false ,grant_2=false ,cstate0=6 ,req1=false,
+req2=true,grant_1=false ,grant_2=false ,cstate0=3 ,req1=false,
+req2=true,grant_1=false ,grant_2=false ,cstate0=4 ,req1=false,
+req2=true,grant_1=false ,grant_2=true ,cstate0=0 ,req1=false,
+req2=false,grant_1=false ,grant_2=false ,cstate0=5 ,req1=true,
+req2=false,grant_1=false ,grant_2=false ,cstate0=10 ,req1=true,
+req2=true,grant_1=false ,grant_2=false ,cstate0=8 ,req1=false,
+time:2790

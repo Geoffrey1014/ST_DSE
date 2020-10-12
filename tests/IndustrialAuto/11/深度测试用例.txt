@@ -1,0 +1,17 @@
+InstructionCovearge:100.0%   BranchCovearge:84.375%
+sequence1:
+x_2=false,y_1=false ,x_1=false,y_0=false ,cstate42=7 ,y_2=true ,
+x_2=false,y_1=false ,x_1=false,y_0=false ,cstate42=7 ,y_2=true ,
+x_2=true,y_1=true ,x_1=true,y_0=false ,cstate42=14 ,y_2=false ,
+x_2=true,y_1=true ,x_1=true,y_0=false ,cstate42=14 ,y_2=false ,
+x_2=true,y_1=false ,x_1=false,y_0=false ,cstate42=7 ,y_2=true ,
+x_2=false,y_1=true ,x_1=true,y_0=true ,cstate42=12 ,y_2=false ,
+x_2=false,y_1=true ,x_1=true,y_0=true ,cstate42=12 ,y_2=false ,
+x_2=true,y_1=true ,x_1=true,y_0=false ,cstate42=14 ,y_2=false ,
+x_2=false,y_1=true ,x_1=true,y_0=true ,cstate42=12 ,y_2=false ,
+x_2=false,y_1=false ,x_1=true,y_0=false ,cstate42=7 ,y_2=true ,
+sequence2:
+x_2=false,y_1=true ,x_1=false,y_0=false ,cstate42=14 ,y_2=false ,
+sequence3:
+x_2=true,y_1=true ,x_1=false,y_0=true ,cstate42=12 ,y_2=false ,
+time:1212
