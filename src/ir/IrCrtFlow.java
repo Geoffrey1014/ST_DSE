@@ -1,6 +1,6 @@
 package ir;
 
-public class IrCrtFlow extends IrStat {
+public class IrCrtFlow extends IrStmt {
     final IrExpr condExpr;
     final IrCodeBlock stmtBody;
 

@@ -4,7 +4,12 @@ public abstract class IrExpr extends Ir {
     public IrExpr(int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
     }
-//    public abstract IrType getExpressionType();
+
+    protected static IrExpr canonicalizeExpr(IrExpr Operand) {
+        //TODO:  规范化
+        return Operand;
+    }
+    public abstract IrType getExpressionType();
 
     public String toString() {
         return "IrExpr";
