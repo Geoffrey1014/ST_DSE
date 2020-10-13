@@ -1,6 +1,6 @@
 package ir;
 
-public class IrCtrFlowIf extends IrCrtFlow {
+public class IrCtrFlowIf extends IrCtrFlow {
     public IrCtrFlowIf(IrExpr condExpr, IrCodeBlock stmtBody) {
         super(condExpr, stmtBody);
     }

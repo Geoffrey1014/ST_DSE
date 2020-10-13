@@ -26,8 +26,4 @@ public class IrLocationArray extends IrLocation {
     }
 
 
-
-
-
-
 }
