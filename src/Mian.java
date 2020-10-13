@@ -39,20 +39,21 @@ public class Mian {
                 boolean done = false;
                 while (!done) {
                     try {
-                        for (token = scanner.nextToken();
-                             token.getType() != STParser.EOF;
-                             token = scanner.nextToken()) {
+                        for (token = scanner.nextToken(); token.getType() != STParser.EOF; token = scanner.nextToken()) {
                             String type = "";
                             String text = token.getText();
 
 //              System.out.println("\n\n"+token.getType());
                             switch (token.getType()) {
                                 // TODO: add strings for the other types here...
-                                case STScanner.Floating_point_literal:
-                                    type = " Floating_point_literal_LITERAL";
+                                case STScanner.AS_OP:
+                                    type = " AS_OP";
                                     break;
-                                case STScanner.Pure_decimal_digits:
-                                    type = " Pure_decimal_digits_LITERAL";
+                                case STScanner.FromTo:
+                                    type = " FromTo";
+                                    break;
+                                case STScanner.Decimal_literal:
+                                    type = " Decimal_literal";
                                     break;
                                 case STScanner.Static_string_literal:
                                     type = " STRINGLITERAL";

@@ -1,7 +1,9 @@
 package ir;
 
+import java.util.List;
+
 public class IrVarBlockOutput extends IrVarBlock {
-    public IrVarBlockOutput(int lineNumber, int colNumber) {
-        super(lineNumber, colNumber);
+    public IrVarBlockOutput(int lineNumber, int colNumber, List<IrVar> varList) {
+        super(lineNumber, colNumber, varList);
     }
 }

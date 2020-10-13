@@ -8,11 +8,10 @@ options
     //buildAST = true;
 }
 @parser::header{
-     package grammar;
 }
 
 
-pous : pou pou*;
+pous : pou pou* EOF;
 
 pou: program
     | function_block
@@ -23,7 +22,7 @@ program :
     RES_PROGRAM name=ID
     var_blocks+=var_block*
     stat_list
-    RES_PROGRAM_END
+    RES_END_PROGRAM
     ;
 
 function_block:
@@ -45,21 +44,22 @@ stat
     : assign_stat
     | if_stat
 //    | case_stat
-//    | for_stat
-//    | while_stat
+    | for_stat
+    | while_stat
 //    | repeat_stat
 //    | invoc_stat
     ;
-assign_stat : ID AS_OP expression SEMI_COL;
+assign_stat : location AS_OP expression SEMI_COL;
+
 if_stat : RES_IF expression RES_THEN stat_list (RES_ELSIF expression RES_THEN stat_list)* (RES_ELSE stat_list)? RES_END_IF SEMI_COL ;
 //case_stat : 'CASE' expression 'OF' integer_literal (',' integer_literal)* ':' stat_list  // TODO:   case_state可以泛化 interger_literal 成 subrange | signed_integer | enumerated_value
 //        ( integer_literal (',' integer_literal)* ':' stat_list)*
 //        ('ELSE' stat_list)?
 //        'END_CASE' ';' ;
-//for_stat :  'FOR' control_variable=ID ':=' for_list 'DO' stat_list 'END_FOR' ';' ;
-//for_list : expression 'TO' expression ('BY' expression)? ;
-//
-//while_stat : 'WHILE' expression 'DO' stat_list 'END_WHILE' ';' ;
+for_stat :  RES_FOR control_variable=ID AS_OP for_list RES_DO stat_list RES_END_FOR SEMI_COL ;
+for_list : expression RES_TO expression (RES_BY expression)? ;
+
+while_stat : RES_WHILE expression RES_DO stat_list RES_END_WHILE SEMI_COL ;
 //repeat_stat : 'REPEAT' stat_list 'UNTIL' expression 'END_REPEAT' ';' ;
 //invoc_stat : fb_name=ID '(' (param_assignment (',' param_assignment)* ) ?')' ;
 //param_assignment : ((variable_name=ID ':=')? expression) | ('NOT'? variable_name=ID '=>' variable=ID);
@@ -78,13 +78,13 @@ expression
     | left=expression OR right=expression # Logic
     ;
 
-primary_expression : constant # Const
+primary_expression : constant
 //                    | enumerated_value
-                    | variable=ID # Varibale
-                    | L_PAREN expression R_PAREN # ParenthesisExpr
+                    | location
 //                    | function_name=ID '(' param_assignment (',' param_assignment)* ')' # FunctionCall
                     ;
 //enumerated_value: ' '; // TODO
+location: ID | ID L_SQUARE expression R_SQUARE;
 
 //var_block locals[boolean input, boolean output, boolean temp]
 //  : ('VAR'
@@ -95,7 +95,7 @@ primary_expression : constant # Const
 //    ( variables+=variable_declaration* 'END_VAR');
 
 var_block
-  : var_type  ( variables+=variable_declaration* RES_END_VAR);
+  : var_type  variable_declaration*  RES_END_VAR;
 
 var_type:
      RES_VAR
@@ -107,20 +107,22 @@ var_type:
 
 type_rule:
   name=elementary_type_name #simpleType
-//  | array=array_type #arrayType
+  | array=array_type #arrayType
 //  | pointer=pointer_type #pointerType
   ;
 
-//array_type
-//  : 'ARRAY' '[' ranges+=range (',' ranges+=range)* ']' 'OF' type=type_rule;
-//
-//range
-//  : lbound=integer_literal '..' ubound=integer_literal;
+array_type
+  : RES_ARRAY L_SQUARE range R_SQUARE RES_OF elementary_type_name;
+
+range
+  : lbound=integer_literal FromTo ubound=integer_literal;
 //
 //pointer_type: 'POINTER' 'TO' type=type_rule;
 
+//structure_type_declaration: ' ';
+
 variable_declaration:
-  names+=ID (COMMA names+=ID)* COLON type=type_rule (AS_OP initializer=variable_initializer)? SEMI_COL ;
+  names+=ID (COMMA names+=ID)* COLON type=type_rule (AS_OP variable_initializer)? SEMI_COL ;
 
 elementary_type_name : numeric_type_name | date_type_name | bit_string_type_name;
 numeric_type_name : integer_type_name | real_type_name;
@@ -132,7 +134,16 @@ date_type_name : DATE | TIME_OF_DAY | TOD | DATE_AND_TIME | DT;
 bit_string_type_name : RES_BOOL | BYTE | WORD | DWORD | LWORD;
 
 variable_initializer:
-  constant;
+  constant
+  | array_initialization
+  ;
+
+array_initialization : L_SQUARE (constant COMMA)*  constant R_SQUARE;
+
+
+//structure_initialization: ' ';
+//
+//enumerated_value: ' ';
 
 constant:
   numeric_literal | string_literal | BOOL;
@@ -157,3 +168,4 @@ integer_literal
 string_literal
   : Static_string_literal
   ;
+

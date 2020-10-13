@@ -1,6 +1,6 @@
 package ir;
 
-abstract class Ir {
+public abstract class Ir {
     // keep track of the line & column number for
     // for error reporting purposes
     private final int lineNumber;

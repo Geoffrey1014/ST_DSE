@@ -47,16 +47,25 @@ AS_OP : ':=';
 
 // reserved words
 
-//RES_BREAK : 'break';
-//RES_EXTERN : 'extern';
-//RES_CONTINUE : 'continue';
-//RES_FOR : 'for';
-//RES_WHILE : 'while';
+RES_FOR : 'FOR';
+RES_DO : 'DO';
+RES_END_FOR : 'END_FOR';
+RES_TO : 'TO';
+RES_BY : 'BY';
+
+RES_WHILE : 'WHILE';
+RES_END_WHILE : 'END_WHILE';
+
 RES_IF : 'IF';
 RES_THEN : 'THEN';
 RES_ELSE : 'ELSE';
 RES_ELSIF : 'ELSIF';
 RES_END_IF : 'END_IF';
+
+
+RES_ARRAY: 'ARRAY';
+FromTo : '..';
+RES_OF : 'OF';
 
 RES_BOOL : 'BOOL';
 //RES_TRUE:'TRUE' ;
@@ -87,7 +96,7 @@ DWORD :  'DWORD';
 LWORD : 'LWORD';
 
 RES_PROGRAM : 'PROGRAM';
-RES_PROGRAM_END : 'PROGRAM_END';
+RES_END_PROGRAM : 'END_PROGRAM';
 RES_FUNCTION_BLOCK : 'FUNCTION_BLOCK';
 RES_END_FUNCTION_BLOCK : 'END_FUNCTION_BLOCK';
 RES_FUNCTION : 'FUNCTION';
@@ -145,5 +154,8 @@ Escaped_character
   | '$' Hexadecimal_digit Hexadecimal_digit
   ;
 ID: [A-Za-z][A-Za-z_0-9]*;
-WS : [ \n\r\t]+ -> channel(HIDDEN) ;
-Block_comment : '(*' (Block_comment|.)*? '*)' -> channel(HIDDEN) ; // nesting comments allowed
+//WS : [ \n\r\t]+ -> channel(HIDDEN) ;
+//Block_comment : '(*' (Block_comment|.)*? '*)' -> channel(HIDDEN) ; // nesting comments allowed
+
+WS : [ \n\r\t]+ -> skip ;
+Block_comment : '(*' (Block_comment|.)*? '*)' -> skip ; // nesting comments allowed
