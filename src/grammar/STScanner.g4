@@ -1,22 +1,106 @@
 lexer grammar STScanner;
+options
+{
+  language = 'Java';
+  superClass = 'Lexer'; //class DecafScanner extends Lexer;
+}
 
-LP : '(' ;
-RP : '}' ;
-POWER : '**' ;
-MUL : '*';
-DIV : '/';
-MOD : 'MOD';
-ADD : '+';
-MIN : '_';
-GT : '>';
-LT : '<';
-EQ : '=';
-GTE : '>=';
-LTE : '<=';
-NE : '<>';
-AND : 'AND' | '&';
+
+// Miscillaneous characters
+L_SQUARE : '[';
+R_SQUARE : ']';
+L_PAREN : '(';
+R_PAREN : ')';
+L_CURL : '{';
+R_CURL : '}';
+COMMA : ',';
+SEMI_COL :  ';';
+COLON :':';
+
+// arithmatic ops
+ADD_OP  : '+';
+SUB_OP : '-';
+MUL_OP : '*';
+DIV_OP : '/';
+MOD_OP : 'MOD';
+POWER_OP : '**' ;
+
+
+// boolean ops
+LT_OP : '<';
+GT_OP : '>';
+LEQ_OP : '<=';
+GEQ_OP : '>=';
+EQ_OP : '=';
+NEQ_OP : '<>';
+AND_OP : 'AND' | '&';
 XOR : 'XOR';
 OR : 'OR';
+NOT_OP : 'NOT';
+
+
+
+// assignment op
+AS_OP : ':=';
+//ADD_AS_OP : '+=';
+//SUB_AS_OP : '-=';
+
+// reserved words
+
+//RES_BREAK : 'break';
+//RES_EXTERN : 'extern';
+//RES_CONTINUE : 'continue';
+//RES_FOR : 'for';
+//RES_WHILE : 'while';
+RES_IF : 'IF';
+RES_THEN : 'THEN';
+RES_ELSE : 'ELSE';
+RES_ELSIF : 'ELSIF';
+RES_END_IF : 'END_IF';
+
+RES_BOOL : 'BOOL';
+//RES_TRUE:'TRUE' ;
+//RES_FALSE : 'FALSE';
+
+RES_SINT: 'SINT' ;
+RES_INT: 'INT' ;
+RES_DINT :'DINT' ;
+RES_LINT :'LINT';
+
+REAL :'REAL' ;
+LREAL :'LREAL';
+
+USINT : 'USINT' ;
+ UINT :'UINT' ;
+UDINT : 'UDINT' ;
+ULINT : 'ULINT';
+
+DATE : 'DATE';
+TIME_OF_DAY: 'TIME_OF_DAY';
+TOD: 'TOD';
+DATE_AND_TIME:  'DATE_AND_TIME';
+DT: 'DT';
+
+BYTE: 'BYTE' ;
+WORD : 'WORD';
+DWORD :  'DWORD';
+LWORD : 'LWORD';
+
+RES_PROGRAM : 'PROGRAM';
+RES_PROGRAM_END : 'PROGRAM_END';
+RES_FUNCTION_BLOCK : 'FUNCTION_BLOCK';
+RES_END_FUNCTION_BLOCK : 'END_FUNCTION_BLOCK';
+RES_FUNCTION : 'FUNCTION';
+RES_END_FUNCTION : 'END_FUNCTION';
+
+RES_VAR:    'VAR';
+RES_VAR_INPUT   :  'VAR_INPUT';
+RES_VAR_OUTPUT  :  'VAR_OUTPUT';
+RES_VAR_INPUT_OUTPUT:  'VAR_INPUT_OUTPUT';
+RES_END_VAR : 'END_VAR';
+
+// main tokens
+BOOL: 'TRUE' | 'FALSE';
 
 Binary_literal : '2#' Binary_digit Binary_literal_characters? ;
 fragment Binary_digit : [01] ;
@@ -49,9 +133,6 @@ fragment Floating_point_e : [eE] ;
 fragment Floating_point_p : [pP] ;
 fragment Sign : [+\-] ;
 
-string_literal
-  : Static_string_literal
-  ;
 Static_string_literal : '\'' Quoted_text? '\'' ;
 fragment Quoted_text : Quoted_text_item+ ;
 fragment Quoted_text_item
