@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import java.util.ArrayList;
 
 public class STListener extends STParserBaseListener {
+    public IrPousDecl pous;
     @Override public void exitPous(STParser.PousContext ctx) {
         STListener.ProgramLocation l = this.new ProgramLocation(ctx);
 
@@ -20,7 +21,7 @@ public class STListener extends STParserBaseListener {
          * 可以用stack来传递ASTNode，或者可以将这些数据结构挂在具体语法树上
          * */
 
-        IrPousDecl pous = new IrPousDecl(programDeclsArrayList, functionBlockDeclsArrayList, functionDeclArrayList, l.line,l.col);
+         this.pous = new IrPousDecl(programDeclsArrayList, functionBlockDeclsArrayList, functionDeclArrayList, l.line,l.col);
     }
 
     class ProgramLocation {

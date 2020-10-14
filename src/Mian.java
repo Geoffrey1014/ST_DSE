@@ -1,31 +1,23 @@
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
-
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Token;
+import org.antlr.v4.gui.Trees;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import tools.CLI;
 import tools.CLI.Action;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mian {
-    public static void main(String[] args) throws IOException {
-//        MyPrint myprint  = new MyPrint(true);
-//        myprint.print(System.getProperty("user.home"));
 
-//        String inputFile = null;
-//        if ( args.length>0 ) inputFile = args[0];
-//        InputStream is = System.in;
-//        if ( inputFile!=null ) {
-//            is = new FileInputStream(inputFile);
-//        }
-//        ANTLRInputStream input = new ANTLRInputStream(is);
-//        STLexer lexer = new STLexer(input);
-//        CommonTokenStream tokens = new CommonTokenStream(lexer);
-//        STParser parser = new STParser(tokens);
+
+    public static void run(String[] args ){
         try {
             CLI.parse(args, new String[0]);
             InputStream inputStream = args.length == 0 ?
@@ -92,6 +84,37 @@ public class Mian {
             // print the error:
             System.err.println(CLI.infile+" "+e);
         }
+
+    }
+
+    public static void walkTree(String[] args){
+        String prefix = "tests/";
+        String inputFile = prefix + "test.txt";
+
+        try{
+            CharStream stream = CharStreams.fromFileName(inputFile);
+            STScanner lexer = new STScanner(stream);
+            TokenStream tokens = new CommonTokenStream(lexer);
+            STParser parser = new STParser(tokens);
+            ParseTree tree = parser.pous();
+            ParseTreeWalker walker = new ParseTreeWalker();
+            STListener listener = new STListener();
+            walker.walk(listener,tree);
+//            ArrayList<String> ruleNames = new ArrayList<>();
+//            ruleNames.add("program");
+            Trees.inspect(tree, parser);
+            System.out.println(listener.pous.getProgramDeclsArrayList());
+        }
+        catch (IOException e){
+            System.err.println("There was an error:\n" + e);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+//        MyPrint myprint  = new MyPrint(true);
+//        myprint.print(System.getProperty("user.home"));
+        walkTree(args);
+
 
 
     }

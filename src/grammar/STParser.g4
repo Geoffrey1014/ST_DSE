@@ -11,7 +11,7 @@ options
 }
 
 
-pous : pou pou* EOF;
+pous : pou+ EOF;
 
 pou: program
     | function_block
