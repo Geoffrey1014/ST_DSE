@@ -14,7 +14,7 @@ public class IrBoolLiteral extends IrLiteral {
 
     @Override
     public IrType getExpressionType() {
-        new IrTypeBool(this.getLineNumber(), this.getColNumber())        ;
+        return  new IrTypeBool(this.getLineNumber(), this.getColNumber()) ;
 
     }
 }
