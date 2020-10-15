@@ -1,0 +1,60 @@
+FUNCTION COMPENSATION_PT : REAL
+
+VAR_INPUT (* 输 人变 量声 明段*)
+    P1, PO : REAL ;  ( * 实 际 压力和设 计 压 力，单 位 kpa * )
+    T1, T0 : REAL ; (* 实 际 温 度和设 计 温 度，单 位 尤 *)
+END_VAR
+VAR
+    CP, CT : REAL ;
+END_VAR
+
+CT := DIV( ADD( T0+273.15) ,  ADD(T1 +273.15)) ;
+CP := DIV( ADD( P1+103.32) , ADD(PO + 103.32)) ;
+COMPENSATION_PT := MUL(CT, CP);
+
+END_FUNCTION
+
+
+FUNCTION_BLOCK max_pou
+VAR
+    max : INT := 0;
+    count : INT ;
+END_VAR
+VAR_INPUT
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+FOR count := 1 TO 5 DO
+    IF lst[count] > max THEN
+        max := lst[max];
+    END_IF;
+END_FOR;
+END_FUNCTION_BLOCK
+
+PROGRAM Main
+VAR
+	IS_LEAD_EDGE: BOOL;
+	PREV_LOAD: BOOL;
+END_VAR
+
+VAR_OUTPUT
+	OUT_1: BOOL;
+END_VAR
+
+VAR_INPUT
+	TLOAD: BOOL;
+	RESET: BOOL;
+	LOAD: BOOL;
+	IN_1: BOOL;
+END_VAR
+
+IS_LEAD_EDGE := (NOT PREV_LOAD) AND TLOAD;
+IF RESET THEN
+    OUT_1 := TRUE;
+ELSIF LOAD OR (IS_LEAD_EDGE) THEN
+    OUT_1 := IN_1;
+END_IF;
+PREV_LOAD := TLOAD;
+
+END_PROGRAM
+

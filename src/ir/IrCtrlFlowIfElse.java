@@ -2,12 +2,16 @@ package ir;
 
 /**
  */
-public class IrCtrlFlowIfElse extends IrCtrFlow{
+public class IrCtrlFlowIfElse extends IrCtrlFlow {
     private final IrCodeBlock elseBlock;
 
     public IrCtrlFlowIfElse(IrCodeBlock elseBlock, IrExpr condExpr,
-                            IrCodeBlock stmtBody, int lineNumber, int colNumber) {
+                            IrCodeBlock stmtBody) {
         super(condExpr, stmtBody);
         this.elseBlock = elseBlock;
+    }
+
+    public IrCodeBlock getElseBlock() {
+        return elseBlock;
     }
 }

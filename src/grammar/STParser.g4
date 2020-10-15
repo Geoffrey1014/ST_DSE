@@ -11,7 +11,7 @@ options
 }
 
 
-pous : pou+ EOF;
+pous : pou+ ;
 
 pou: program
     | function_block
@@ -26,13 +26,13 @@ program :
     ;
 
 function_block:
-    RES_FUNCTION_BLOCK name=ID
+    RES_FUNCTION_BLOCK ID
     var_blocks+=var_block*
     stat_list
     RES_END_FUNCTION_BLOCK
     ;
 
-function: RES_FUNCTION name=ID COLON type=type_rule
+function: RES_FUNCTION ID COLON type=type_rule
     var_blocks+=var_block*
     stat_list
     RES_END_FUNCTION
@@ -47,7 +47,7 @@ stat
     | for_stat
     | while_stat
 //    | repeat_stat
-//    | invoc_stat
+    | invoc_stat
     ;
 assign_stat : location AS_OP expression SEMI_COL;
 
@@ -61,9 +61,11 @@ for_list : expression RES_TO expression (RES_BY expression)? ;
 
 while_stat : RES_WHILE expression RES_DO stat_list RES_END_WHILE SEMI_COL ;
 //repeat_stat : 'REPEAT' stat_list 'UNTIL' expression 'END_REPEAT' ';' ;
-//invoc_stat : fb_name=ID '(' (param_assignment (',' param_assignment)* ) ?')' ;
-//param_assignment : ((variable_name=ID ':=')? expression) | ('NOT'? variable_name=ID '=>' variable=ID);
-//exit_stat : 'EXIT' ;
+exit_stat : RES_EXIT ;
+
+
+invoc_stat : fb_name=ID L_PAREN (param_assignment (COMMA param_assignment)* ) ? R_PAREN ;
+param_assignment : ((variable_name=ID AS_OP)? expression) | (NOT_OP ? variable_name=ID RT_AS_OP variable=ID);
 
 expression
     : primary_expression # PrimaryExpr
@@ -76,23 +78,17 @@ expression
     | left=expression AND_OP right=expression # Logic
     | left=expression XOR right=expression # Logic
     | left=expression OR right=expression # Logic
+    | L_PAREN expression R_PAREN  # PAREN_Exper
     ;
 
 primary_expression : constant
 //                    | enumerated_value
                     | location
-//                    | function_name=ID '(' param_assignment (',' param_assignment)* ')' # FunctionCall
+                    | invoc_stat
                     ;
 //enumerated_value: ' '; // TODO
 location: ID | ID L_SQUARE expression R_SQUARE;
 
-//var_block locals[boolean input, boolean output, boolean temp]
-//  : ('VAR'
-//     | { $input=true; } 'VAR_INPUT'
-//     | { $output=true; } 'VAR_OUTPUT'
-//     | { $input=$output=true; } 'VAR_INPUT_OUTPUT'
-//     | { $temp=true; } 'VAR_TEMP')
-//    ( variables+=variable_declaration* 'END_VAR');
 
 var_block
   : var_type  variable_declaration*  RES_END_VAR;

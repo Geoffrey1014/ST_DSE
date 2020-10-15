@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mian {
+    public static MyPrint myprint  = new MyPrint(true);
+
 
 
     public static void run(String[] args ){
@@ -89,7 +91,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/";
-        String inputFile = prefix + "test.txt";
+        String inputFile = prefix + "01_a_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -102,8 +104,11 @@ public class Mian {
             walker.walk(listener,tree);
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
-            Trees.inspect(tree, parser);
-            System.out.println(listener.pous.getProgramDeclsArrayList());
+//            Trees.inspect(tree, parser);
+            myprint.print(listener.pous.getProgramDeclsArrayList().get(0).getName().getName());
+            myprint.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName().getName());
+            myprint.print(listener.pous.getFunctionDeclArrayList().get(0).getName().getName());
+
         }
         catch (IOException e){
             System.err.println("There was an error:\n" + e);
@@ -111,8 +116,7 @@ public class Mian {
     }
 
     public static void main(String[] args) throws IOException {
-//        MyPrint myprint  = new MyPrint(true);
-//        myprint.print(System.getProperty("user.home"));
+        myprint.print(System.getProperty("user.home"));
         walkTree(args);
 
 

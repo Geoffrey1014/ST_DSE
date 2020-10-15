@@ -1,9 +1,19 @@
 package ir.POUDecl;
 
+import ir.IrCodeBlock;
 import ir.IrIdent;
+import ir.VARBlockDecl.IrVARBlockDecl;
 
 public class IrFunctionDecl extends IrPouDecl {
-    public IrFunctionDecl(IrIdent name, int lineNumber, int colNumber) {
-        super(name, lineNumber, colNumber);
+    private final IrVARBlockDecl VarBlockVAR;
+    private final IrVARBlockDecl VarBlockVAR_INPUT;
+    private final IrVARBlockDecl VarBlockVAR_OUTPUT;
+    private final IrCodeBlock CodeBlock;
+    public IrFunctionDecl(IrIdent name, IrVARBlockDecl varBlockVAR, IrVARBlockDecl varBlockVAR_input, IrVARBlockDecl varBlockVAR_output, IrCodeBlock codeBlock) {
+        super(name);
+        VarBlockVAR = varBlockVAR;
+        VarBlockVAR_INPUT = varBlockVAR_input;
+        VarBlockVAR_OUTPUT = varBlockVAR_output;
+        CodeBlock = codeBlock;
     }
 }

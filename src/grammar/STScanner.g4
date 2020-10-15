@@ -44,7 +44,7 @@ NOT_OP : 'NOT';
 AS_OP : ':=';
 //ADD_AS_OP : '+=';
 //SUB_AS_OP : '-=';
-
+RT_AS_OP: '=>';
 // reserved words
 
 RES_FOR : 'FOR';
@@ -61,7 +61,7 @@ RES_THEN : 'THEN';
 RES_ELSE : 'ELSE';
 RES_ELSIF : 'ELSIF';
 RES_END_IF : 'END_IF';
-
+RES_EXIT : 'EXIT';
 
 RES_ARRAY: 'ARRAY';
 FromTo : '..';
@@ -157,5 +157,5 @@ ID: [A-Za-z][A-Za-z_0-9]*;
 //WS : [ \n\r\t]+ -> channel(HIDDEN) ;
 //Block_comment : '(*' (Block_comment|.)*? '*)' -> channel(HIDDEN) ; // nesting comments allowed
 
+Block_comment : '(' WS* '*' (Block_comment|.)*? '*' WS* ')' -> skip ; // nesting comments allowed
 WS : [ \n\r\t]+ -> skip ;
-Block_comment : '(*' (Block_comment|.)*? '*)' -> skip ; // nesting comments allowed

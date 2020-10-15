@@ -1,6 +1,6 @@
 package ir;
 
-public class IrCtrFlow extends IrStmt {
+public class IrCtrlFlow extends IrStmt {
     final IrExpr condExpr;
     final IrCodeBlock stmtBody;
 
@@ -12,7 +12,7 @@ public class IrCtrFlow extends IrStmt {
     }
 
 
-    public IrCtrFlow(IrExpr condExpr, IrCodeBlock stmtBody) {
+    public IrCtrlFlow(IrExpr condExpr, IrCodeBlock stmtBody) {
         super(condExpr.getLineNumber(), condExpr.getColNumber());
         this.condExpr = condExpr;
         this.stmtBody = stmtBody;
