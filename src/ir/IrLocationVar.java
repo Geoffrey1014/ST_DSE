@@ -7,8 +7,8 @@ package ir;
 public class IrLocationVar extends IrLocation {
     protected Ir irDeclObject; // IrFieldDeclArray, IrFieldDeclVar, IrParamDecl
 
-    public IrLocationVar(IrIdent varName, int lineNumber, int colNumber) {
-        super(varName, lineNumber, colNumber);
+    public IrLocationVar(IrIdent varName) {
+        super(varName);
     }
 
     protected void setIrDecl(Ir irDeclObject) {

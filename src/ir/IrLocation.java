@@ -7,8 +7,8 @@ public abstract class IrLocation extends IrExpr {
     protected IrIdent varName;
     protected IrType varType;
 
-    public IrLocation(IrIdent varName, int lineNumber, int colNumber) {
-        super(lineNumber, colNumber);
+    public IrLocation(IrIdent varName) {
+        super(varName.getLineNumber(), varName.getColNumber());
         this.varName = varName;
     }
 

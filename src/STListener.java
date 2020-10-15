@@ -296,12 +296,14 @@ public class STListener extends STParserBaseListener {
     }
 
     @Override public void enterFor_stat(STParser.For_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitFor_stat(STParser.For_statContext ctx) { }
+
+    @Override public void exitFor_stat(STParser.For_statContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrIdent ident = new IrIdent(ctx.ID().getText(), ctx.control_variable.getLine(), ctx.control_variable.getCharPositionInLine());
+        IrLocationVar locationVar = new IrLocationVar(ident);
+
+
+    }
     /**
      * {@inheritDoc}
      *
