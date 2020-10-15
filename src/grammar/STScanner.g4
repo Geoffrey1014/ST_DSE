@@ -16,7 +16,7 @@ R_CURL : '}';
 COMMA : ',';
 SEMI_COL :  ';';
 COLON :':';
-
+DOT : '.';
 // arithmatic ops
 ADD_OP  : '+';
 SUB_OP : '-';

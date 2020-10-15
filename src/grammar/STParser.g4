@@ -99,7 +99,11 @@ primary_expression : constant
                     | invoc_stat
                     ;
 //enumerated_value: ' '; // TODO
-location: ID | ID L_SQUARE expression R_SQUARE;
+location:
+    ID   #VarLocation
+    | ID L_SQUARE expression R_SQUARE  # ArrayLocation
+    | ID DOT ID #FbLcation
+    ;
 
 
 var_block
@@ -126,8 +130,8 @@ range
   : lbound=integer_literal FromTo ubound=integer_literal;
 //
 //pointer_type: 'POINTER' 'TO' type=type_rule;
-
 //structure_type_declaration: ' ';
+
 
 variable_declaration:
   names+=ID (COMMA names+=ID)* COLON type=type_rule (AS_OP variable_initializer)? SEMI_COL ;
