@@ -104,7 +104,7 @@ public class Mian {
             walker.walk(listener,tree);
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
-//            Trees.inspect(tree, parser);
+            Trees.inspect(tree, parser);
             myprint.print(listener.pous.getProgramDeclsArrayList().get(0).getName().getName());
             myprint.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName().getName());
             myprint.print(listener.pous.getFunctionDeclArrayList().get(0).getName().getName());

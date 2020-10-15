@@ -2,8 +2,8 @@ package ir;
 
 public abstract class IrAssignStmt extends IrStmt {
     private final IrLocation storeLocation;
-    public IrAssignStmt( IrLocation storeLocation) {
-        super(storeLocation.getLineNumber(), storeLocation.getColNumber());
+    public IrAssignStmt( IrLocation storeLocation, int lineNumber, int colNumber) {
+        super(lineNumber, colNumber);
         this.storeLocation = storeLocation;
     }
 }

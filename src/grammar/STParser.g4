@@ -43,6 +43,9 @@ stat_list : stat (stat)*;
 stat
     : assign_stat
     | if_stat
+    | if_else_stat
+    | if_elsif_stat
+    | if_elsif_else_stat
 //    | case_stat
     | for_stat
     | while_stat
@@ -51,7 +54,16 @@ stat
     ;
 assign_stat : location AS_OP expression SEMI_COL;
 
-if_stat : RES_IF expression RES_THEN stat_list (RES_ELSIF expression RES_THEN stat_list)* (RES_ELSE stat_list)? RES_END_IF SEMI_COL ;
+//if_stat : RES_IF expression RES_THEN stat_list (RES_ELSIF expression RES_THEN stat_list)* (RES_ELSE stat_list)? RES_END_IF SEMI_COL ;
+if_stat : if_stmt RES_END_IF SEMI_COL;
+if_else_stat : if_stmt else_stmt RES_END_IF SEMI_COL;
+if_elsif_stat: if_stmt elsif_stmt+ RES_END_IF SEMI_COL;
+if_elsif_else_stat: if_stmt elsif_stmt+ else_stmt RES_END_IF SEMI_COL ;
+
+if_stmt :  RES_IF expression RES_THEN stat_list;
+elsif_stmt : RES_ELSIF expression RES_THEN stat_list;
+else_stmt : RES_ELSE stat_list;
+
 //case_stat : 'CASE' expression 'OF' integer_literal (',' integer_literal)* ':' stat_list  // TODO:   case_state可以泛化 interger_literal 成 subrange | signed_integer | enumerated_value
 //        ( integer_literal (',' integer_literal)* ':' stat_list)*
 //        ('ELSE' stat_list)?

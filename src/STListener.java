@@ -152,20 +152,15 @@ public class STListener extends STParserBaseListener {
         setASTNode(ctx,function);
 
     }
-    @Override public void enterStat_list(STParser.Stat_listContext ctx) {
+    @Override public void enterStat_list(STParser.Stat_listContext ctx) {}
 
-    }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
     @Override public void exitStat_list(STParser.Stat_listContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
 
         ArrayList<IrStmt> stmts = new ArrayList<>();
         for(ParseTree node :ctx.children){
             Ir AstNode = ASTNodes.get(node);
+            stmts.add((IrStmt) AstNode);
         }
         IrCodeBlock codeBlock = new IrCodeBlock(l.line,l.col,stmts);
         setASTNode(ctx, codeBlock);
@@ -197,25 +192,109 @@ public class STListener extends STParserBaseListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitAssign_stat(STParser.Assign_statContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrLocation location = (IrLocation) getASTNode(ctx.location());
+        IrExpr expr = (IrExpr) getASTNode(ctx.expression());
+
+        IrAssignStmtEq stmtEq = new IrAssignStmtEq(location, expr, l.line,l.col);
+        setASTNode(ctx, stmtEq);
 
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterIf_stat(STParser.If_statContext ctx) { }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitIf_stat(STParser.If_statContext ctx) { }
+    @Override public void exitIf_stat(STParser.If_statContext ctx) {
+        IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
+        setASTNode(ctx, ctrlFlowIf);
+
+    }
+    @Override public void enterIf_else_stat(STParser.If_else_statContext ctx) { }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
+    @Override public void exitIf_else_stat(STParser.If_else_statContext ctx) {
+        IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
+        IrCodeBlock elseStmt = (IrCodeBlock) getASTNode(ctx.else_stmt());
+        IrCtrlFlowIfElse ctrlFlowIfElse = new IrCtrlFlowIfElse(ctrlFlowIf.getCondExpr(), ctrlFlowIf.getStmtBody(),elseStmt);
+        setASTNode(ctx, ctrlFlowIfElse);
+    }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void enterIf_elsif_stat(STParser.If_elsif_statContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitIf_elsif_stat(STParser.If_elsif_statContext ctx) {
+        IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
+        ArrayList<IrCtrlFlowElsif> ctrlFlowElsifArrayList = new ArrayList<>();
+        for ( ParseTree node :ctx.elsif_stmt()){
+            IrCtrlFlowElsif AstNode = (IrCtrlFlowElsif) getASTNode(node);
+            ctrlFlowElsifArrayList.add(AstNode);
+        }
+        IrCtrlFlowIfElsif ctrlFlowElsif = new IrCtrlFlowIfElsif(ctrlFlowIf.getCondExpr(), ctrlFlowIf.getStmtBody(),ctrlFlowElsifArrayList);
+        setASTNode(ctx,ctrlFlowElsif);
+    }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void enterIf_elsif_else_stat(STParser.If_elsif_else_statContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitIf_elsif_else_stat(STParser.If_elsif_else_statContext ctx) {
+        IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
+        ArrayList<IrCtrlFlowElsif> ctrlFlowElsifArrayList = new ArrayList<>();
+        for ( ParseTree node :ctx.elsif_stmt()){
+            IrCtrlFlowElsif AstNode = (IrCtrlFlowElsif) getASTNode(node);
+            ctrlFlowElsifArrayList.add(AstNode);
+        }
+        IrCodeBlock elseStmt = (IrCodeBlock) getASTNode(ctx.else_stmt());
+
+        IrCtrlFlowIfElsifElse ctrlFlowIfElsifElse = new IrCtrlFlowIfElsifElse(ctrlFlowIf.getCondExpr(),ctrlFlowIf.getStmtBody(),
+                ctrlFlowElsifArrayList, elseStmt);
+        setASTNode(ctx,ctrlFlowIfElsifElse);
+    }
+
+    @Override public void enterIf_stmt(STParser.If_stmtContext ctx) { }
+
+    @Override public void exitIf_stmt(STParser.If_stmtContext ctx) {
+        IrExpr expr = (IrExpr) getASTNode(ctx.expression());
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
+        IrCtrlFlowIf ctrlFlowIf = new IrCtrlFlowIf(expr, codeBlock);
+        setASTNode(ctx, ctrlFlowIf);
+    }
+
+    @Override public void enterElsif_stmt(STParser.Elsif_stmtContext ctx) { }
+
+    @Override public void exitElsif_stmt(STParser.Elsif_stmtContext ctx) {
+        IrExpr expr = (IrExpr) getASTNode(ctx.expression());
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
+        IrCtrlFlowElsif ctrlFlowElsif = new IrCtrlFlowElsif(expr, codeBlock);
+        setASTNode(ctx, ctrlFlowElsif);
+    }
+
+    @Override public void enterElse_stmt(STParser.Else_stmtContext ctx) { }
+
+    @Override public void exitElse_stmt(STParser.Else_stmtContext ctx) {
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
+        setASTNode(ctx, codeBlock);
+    }
+
     @Override public void enterFor_stat(STParser.For_statContext ctx) { }
     /**
      * {@inheritDoc}
@@ -439,7 +518,7 @@ public class STListener extends STParserBaseListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitRange(STParser.RangeContext ctx) {
-        System.err.println(ctx.lbound.getText());
+        myPrint.print(ctx.lbound.getText());
         myPrint.print(ctx.ubound.getText());
 
     }
