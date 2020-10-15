@@ -298,29 +298,25 @@ public class STListener extends STParserBaseListener {
     @Override public void enterFor_stat(STParser.For_statContext ctx) { }
 
     @Override public void exitFor_stat(STParser.For_statContext ctx) {
-        STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent ident = new IrIdent(ctx.ID().getText(), ctx.control_variable.getLine(), ctx.control_variable.getCharPositionInLine());
         IrLocationVar locationVar = new IrLocationVar(ident);
+        IrCtrlFlowForRange ctrlFlowForRange = (IrCtrlFlowForRange) getASTNode(ctx.for_range());
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
 
-
+        IrCtrlFlowFor ctrlFlowFor = new IrCtrlFlowFor(locationVar, ctrlFlowForRange,codeBlock);
+        setASTNode(ctx, ctrlFlowFor);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterFor_list(STParser.For_listContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitFor_list(STParser.For_listContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    @Override public void enterFor_range(STParser.For_rangeContext ctx) { }
+
+    @Override public void exitFor_range(STParser.For_rangeContext ctx) {
+        IrExpr low = (IrExpr) getASTNode(ctx.expression(0));
+        IrExpr high = (IrExpr) getASTNode(ctx.expression(1));
+        int step = Integer.parseInt(ctx.step.getText());
+        IrCtrlFlowForRange range = new IrCtrlFlowForRange(low, high, step);
+        setASTNode(ctx, range);
+    }
+
+
     @Override public void enterWhile_stat(STParser.While_statContext ctx) { }
     /**
      * {@inheritDoc}
@@ -328,11 +324,17 @@ public class STListener extends STParserBaseListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitWhile_stat(STParser.While_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
+    @Override public void enterInvoc_stat(STParser.Invoc_statContext ctx) { }
+
+    @Override public void exitInvoc_stat(STParser.Invoc_statContext ctx) {
+
+    }
+
+    @Override public void enterParam_assignment(STParser.Param_assignmentContext ctx) { }
+
+    @Override public void exitParam_assignment(STParser.Param_assignmentContext ctx) { }
+
     @Override public void enterNot(STParser.NotContext ctx) { }
     /**
      * {@inheritDoc}

@@ -68,16 +68,16 @@ else_stmt : RES_ELSE stat_list;
 //        ( integer_literal (',' integer_literal)* ':' stat_list)*
 //        ('ELSE' stat_list)?
 //        'END_CASE' ';' ;
-for_stat :  RES_FOR control_variable=ID AS_OP for_list RES_DO stat_list RES_END_FOR SEMI_COL ;
-for_list : expression RES_TO expression (RES_BY expression)? ;
+for_stat :  RES_FOR control_variable=ID AS_OP for_range RES_DO stat_list RES_END_FOR SEMI_COL ;
+for_range : expression RES_TO expression (RES_BY expression)? ;
 
 while_stat : RES_WHILE expression RES_DO stat_list RES_END_WHILE SEMI_COL ;
 //repeat_stat : 'REPEAT' stat_list 'UNTIL' expression 'END_REPEAT' ';' ;
-exit_stat : RES_EXIT ;
+//exit_stat : RES_EXIT ;
 
 
 invoc_stat : fb_name=ID L_PAREN (param_assignment (COMMA param_assignment)* ) ? R_PAREN ;
-param_assignment : ((variable_name=ID AS_OP)? expression) | (NOT_OP ? variable_name=ID RT_AS_OP variable=ID);
+param_assignment : ((variable_name=ID AS_OP)? expression) | (NOT_OP ? variable_name=ID RT_AS_OP variable=ID); //似乎复杂了点
 
 expression
     : primary_expression # PrimaryExpr
