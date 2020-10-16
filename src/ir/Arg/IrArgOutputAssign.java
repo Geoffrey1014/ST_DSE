@@ -1,4 +1,6 @@
-package ir;
+package ir.Arg;
+
+import ir.IrIdent;
 
 public class IrArgOutputAssign extends IrArg {
     private final IrIdent fbOutput;

@@ -1,4 +1,8 @@
-package ir;
+package ir.CtrlFlow;
+
+import ir.IrCodeBlock;
+import ir.IrExpr;
+import ir.IrStmt;
 
 public class IrCtrlFlow extends IrStmt {
     final IrExpr condExpr;

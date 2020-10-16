@@ -1,5 +1,7 @@
 package ir;
 
+import ir.Location.IrLocation;
+
 public class IrAssignStmtEq extends IrAssignStmt {
     private final IrExpr expr;
 

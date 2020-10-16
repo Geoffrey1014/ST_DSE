@@ -1,14 +1,16 @@
-package ir;
+package ir.Operation;
+
+import ir.IrExpr;
 
 /**
  * Created by geo on 2020/10/13.
  */
 public abstract class IrOperBinary extends IrOper {
-    public String operation;
+    public OperKeyWords operation;
     public IrExpr leftOperand;
     public IrExpr rightOperand;
 
-    public IrOperBinary(String operation, IrExpr leftOperand, IrExpr rightOperand) {
+    public IrOperBinary(OperKeyWords operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(leftOperand.getLineNumber(), leftOperand.getColNumber());
         this.operation = operation;
         this.leftOperand = IrExpr.canonicalizeExpr(leftOperand);
@@ -23,7 +25,7 @@ public abstract class IrOperBinary extends IrOper {
         return this.rightOperand;
     }
 
-    public String getOperation() {
+    public OperKeyWords getOperation() {
         return this.operation;
     }
 

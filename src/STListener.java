@@ -1,6 +1,13 @@
 import grammar.gen.STParser;
 import grammar.gen.STParserBaseListener;
 import ir.*;
+import ir.Arg.IrArg;
+import ir.Arg.IrArgAssign;
+import ir.Arg.IrArgInputAssign;
+import ir.CtrlFlow.*;
+import ir.Location.IrLocation;
+import ir.Location.IrLocationVar;
+import ir.Operation.*;
 import ir.POUDecl.IrFunctionBlockDecl;
 import ir.POUDecl.IrFunctionDecl;
 import ir.POUDecl.IrProgramDecl;
@@ -13,6 +20,7 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
+
 
 import java.util.ArrayList;
 
@@ -340,10 +348,150 @@ public class STListener extends STParserBaseListener {
         IrIdent acceptLocation = new IrIdent(node.getText(), node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() );
     }
 
+    @Override public void enterNotExpr(STParser.NotExprContext ctx) { }
+
+    @Override public void exitNotExpr(STParser.NotExprContext ctx) {
+        IrOperUnaryNot operUnaryNot = new IrOperUnaryNot((IrExpr) getASTNode(ctx.expression()));
+        setASTNode(ctx, operUnaryNot);
+    }
+    @Override public void enterNegateExpr(STParser.NegateExprContext ctx) { }
+
+    @Override public void exitNegateExpr(STParser.NegateExprContext ctx) {
+        IrOperUnaryNeg operUnaryNeg = new IrOperUnaryNeg((IrExpr) getASTNode(ctx.expression()));
+        setASTNode(ctx, operUnaryNeg);
+    }
+
+    @Override public void enterArithExpr(STParser.ArithExprContext ctx) { }
+
+    @Override public void exitArithExpr(STParser.ArithExprContext ctx) {
+        IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
+        IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
+        IrOperBinaryArith operBinaryArith = null;
+        myPrint.levelTwo.print(ctx.op.getText());
+        String op = ctx.op.getText();
+        OperKeyWords type = OperKeyWords.fromOperTpye(op);
+        if (type == null){
+            System.err.println("There is no such operation: " + op);
+        }
+        else {
+            switch (type){
+                case ADD_OP:
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.ADD_OP,left,right );
+                    break;
+                case SUB_OP:
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.SUB_OP,left,right );
+                    break;
+                case MUL_OP:
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.MUL_OP,left,right );
+                    break;
+                case DIV_OP:
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.DIV_OP,left,right );
+                    break;
+                case MOD_OP:
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.MOD_OP,left,right );
+                    break;
+                case POWER_OP:
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.POWER_OP,left,right );
+                    break;
+                default:
+
+            }
+            setASTNode(ctx, operBinaryArith);
+        }
+
+    }
+
+    @Override public void enterComparison(STParser.ComparisonContext ctx) { }
+
+    @Override public void exitComparison(STParser.ComparisonContext ctx) {
+        IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
+        IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
+        IrOperBinaryCond operBinaryCond = null;
+        myPrint.levelTwo.print(ctx.op.getText());
+        String op = ctx.op.getText();
+        OperKeyWords type = OperKeyWords.fromOperTpye(op);
+        if (type == null){
+            System.err.println("There is no such operation: " + op);
+        }
+        else {
+            switch (type){
+                case LT_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.LT_OP,left,right );
+                    break;
+                case GT_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.GT_OP,left,right );
+                    break;
+                case LEQ_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.LEQ_OP,left,right );
+                    break;
+                case GEQ_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.GEQ_OP,left,right );
+                    break;
+                case EQ_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.EQ_OP,left,right );
+                    break;
+                case NEQ_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.NEQ_OP,left,right );
+                    break;
+                default:
+                    break;
+            }
+            setASTNode(ctx, operBinaryCond);
+        }
+
+    }
+
+
+    @Override public void enterLogic(STParser.LogicContext ctx) { }
+
+    @Override public void exitLogic(STParser.LogicContext ctx) {
+        IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
+        IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
+        IrOperBinaryCond operBinaryCond = null;
+        myPrint.levelTwo.print(ctx.op.getText());
+        String op = ctx.op.getText();
+        OperKeyWords type = OperKeyWords.fromOperTpye(op);
+        if (type == null){
+            System.err.println("There is no such operation: " + op);
+        }
+        else {
+            switch (type){
+                case AND_OP:
+                case AND_S_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.AND_OP,left,right );
+                    break;
+                case OR_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.OR_OP,left,right );
+                    break;
+                case XOR_OP:
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.XOR_OP,left,right );
+                    break;
+                default:
+                    break;
+            }
+            setASTNode(ctx, operBinaryCond);
+        }
+
+    }
 
 
 
 
+    @Override public void enterParenExper(STParser.ParenExperContext ctx) { }
+
+    @Override public void exitParenExper(STParser.ParenExperContext ctx) {
+        setASTNode(ctx, getASTNode(ctx.expression()));
+    }
+
+    @Override public void enterPrimaryExpr(STParser.PrimaryExprContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitPrimaryExpr(STParser.PrimaryExprContext ctx) {
+
+    }
 
     @Override public void enterRange(STParser.RangeContext ctx) { }
     /**

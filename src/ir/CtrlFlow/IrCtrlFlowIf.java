@@ -1,4 +1,7 @@
-package ir;
+package ir.CtrlFlow;
+
+import ir.IrCodeBlock;
+import ir.IrExpr;
 
 public class IrCtrlFlowIf extends IrCtrlFlow {
     public IrCtrlFlowIf(IrExpr condExpr, IrCodeBlock stmtBody) {

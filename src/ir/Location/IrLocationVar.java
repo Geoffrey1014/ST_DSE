@@ -1,5 +1,9 @@
-package ir;
+package ir.Location;
 
+
+import ir.Ir;
+import ir.IrIdent;
+import ir.IrType;
 
 /**
  * Created by geo on 2020/10/13.

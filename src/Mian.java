@@ -99,15 +99,17 @@ public class Mian {
             TokenStream tokens = new CommonTokenStream(lexer);
             STParser parser = new STParser(tokens);
             ParseTree tree = parser.pous();
+            Trees.inspect(tree, parser);
+
             ParseTreeWalker walker = new ParseTreeWalker();
             STListener listener = new STListener();
             walker.walk(listener,tree);
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
-            Trees.inspect(tree, parser);
-            myprint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName().getName());
-            myprint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName().getName());
-            myprint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName().getName());
+
+            myprint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
+            myprint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
+            myprint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
 
         }
         catch (IOException e){

@@ -1,12 +1,16 @@
-package ir;
+package ir.Operation;
 
+
+import ir.IrExpr;
+import ir.IrType;
+import ir.IrTypeBool;
 
 /**
  * Created by geo on 2020/10/13.
  */
 public class IrOperBinaryCond extends IrOperBinary {
 
-    public IrOperBinaryCond(String operation, IrExpr leftOperand, IrExpr rightOperand) {
+    public IrOperBinaryCond(OperKeyWords operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(operation, leftOperand, rightOperand);
     }
 

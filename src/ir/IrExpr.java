@@ -5,7 +5,7 @@ public abstract class IrExpr extends Ir {
         super(lineNumber, colNumber);
     }
 
-    protected static IrExpr canonicalizeExpr(IrExpr Operand) {
+    public static IrExpr canonicalizeExpr(IrExpr Operand) {
         //TODO:  规范化
         return Operand;
     }

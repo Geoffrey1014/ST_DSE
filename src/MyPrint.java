@@ -24,7 +24,7 @@ public class MyPrint {
             this.level = l;
         }
         public void print(Object s){
-            if (control <= this.level){
+            if ( this.level <= control){
                 System.out.println(s);
             }
         }

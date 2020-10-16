@@ -148,33 +148,12 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignOutput(STParser.AssignOutputContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Not}
+	 * Visit a parse tree produced by the {@code ArithExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNot(STParser.NotContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code MulDivMod}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMulDivMod(STParser.MulDivModContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PAREN_Exper}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPAREN_Exper(STParser.PAREN_ExperContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code AddSub}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAddSub(STParser.AddSubContext ctx);
+	T visitArithExpr(STParser.ArithExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Comparison}
 	 * labeled alternative in {@link STParser#expression}.
@@ -183,12 +162,26 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComparison(STParser.ComparisonContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ParenExper}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenExper(STParser.ParenExperContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code PrimaryExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrimaryExpr(STParser.PrimaryExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NotExpr}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotExpr(STParser.NotExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Logic}
 	 * labeled alternative in {@link STParser#expression}.
@@ -197,12 +190,12 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogic(STParser.LogicContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Power}
+	 * Visit a parse tree produced by the {@code NegateExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPower(STParser.PowerContext ctx);
+	T visitNegateExpr(STParser.NegateExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link STParser#primary_expression}.
 	 * @param ctx the parse tree

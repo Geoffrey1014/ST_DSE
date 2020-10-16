@@ -86,16 +86,15 @@ param_assignment :
 
 expression
     : primary_expression # PrimaryExpr
-    | op=(SUB_OP| NOT_OP ) expression # Not
-    | base=expression POWER_OP exponent=expression # Power
-    | left=expression op=(MUL_OP|DIV_OP| MOD_OP) right=expression #MulDivMod
-    | left=expression op=(ADD_OP| SUB_OP) right=expression # AddSub
+    | NOT_OP expression #NotExpr
+    | SUB_OP expression # NegateExpr
+//    | base=expression POWER_OP exponent=expression # PowerExpr
+    | left=expression op=(MUL_OP| DIV_OP| MOD_OP | ADD_OP| SUB_OP | POWER_OP) right=expression #ArithExpr
     | left=expression op=(LT_OP | GT_OP | LEQ_OP | GEQ_OP) right=expression # Comparison
     | left=expression op=(EQ_OP| NEQ_OP) right=expression # Comparison
-    | left=expression AND_OP right=expression # Logic
-    | left=expression XOR right=expression # Logic
-    | left=expression OR right=expression # Logic
-    | L_PAREN expression R_PAREN  # PAREN_Exper
+    | left=expression op = (AND_OP | XOR | OR) right=expression # Logic
+
+    | L_PAREN expression R_PAREN  # ParenExper
     ;
 
 primary_expression : constant

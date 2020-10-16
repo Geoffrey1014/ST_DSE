@@ -1,4 +1,6 @@
-package ir;
+package ir.Arg;
+
+import ir.IrIdent;
 
 public class IrArgInputAssign extends IrArgAssign {
     private final IrIdent argName;

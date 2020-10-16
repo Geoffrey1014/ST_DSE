@@ -1,5 +1,7 @@
 package ir;
 
+import ir.Arg.IrArg;
+
 import java.util.List;
 
 public class IrFunctionCallExpr extends IrExpr {

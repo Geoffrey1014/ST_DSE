@@ -1,4 +1,7 @@
-package ir;
+package ir.CtrlFlow;
+
+import ir.Ir;
+import ir.IrExpr;
 
 public class IrCtrlFlowForRange extends Ir {
     private final IrExpr low;

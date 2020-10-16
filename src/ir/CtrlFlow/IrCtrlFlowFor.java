@@ -1,4 +1,8 @@
-package ir;
+package ir.CtrlFlow;
+
+import ir.Ir;
+import ir.IrCodeBlock;
+import ir.Location.IrLocationVar;
 
 public class IrCtrlFlowFor extends Ir {
     private final IrLocationVar counter;

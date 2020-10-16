@@ -236,53 +236,17 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitAssignOutput(STParser.AssignOutputContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Not}
+	 * Enter a parse tree produced by the {@code ArithExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterNot(STParser.NotContext ctx);
+	void enterArithExpr(STParser.ArithExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Not}
+	 * Exit a parse tree produced by the {@code ArithExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitNot(STParser.NotContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code MulDivMod}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterMulDivMod(STParser.MulDivModContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code MulDivMod}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitMulDivMod(STParser.MulDivModContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code PAREN_Exper}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterPAREN_Exper(STParser.PAREN_ExperContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PAREN_Exper}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitPAREN_Exper(STParser.PAREN_ExperContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code AddSub}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddSub(STParser.AddSubContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code AddSub}
-	 * labeled alternative in {@link STParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddSub(STParser.AddSubContext ctx);
+	void exitArithExpr(STParser.ArithExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Comparison}
 	 * labeled alternative in {@link STParser#expression}.
@@ -296,6 +260,18 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitComparison(STParser.ComparisonContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ParenExper}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenExper(STParser.ParenExperContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ParenExper}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenExper(STParser.ParenExperContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code PrimaryExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
@@ -307,6 +283,18 @@ public interface STParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrimaryExpr(STParser.PrimaryExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NotExpr}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotExpr(STParser.NotExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NotExpr}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotExpr(STParser.NotExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Logic}
 	 * labeled alternative in {@link STParser#expression}.
@@ -320,17 +308,17 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitLogic(STParser.LogicContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Power}
+	 * Enter a parse tree produced by the {@code NegateExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterPower(STParser.PowerContext ctx);
+	void enterNegateExpr(STParser.NegateExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Power}
+	 * Exit a parse tree produced by the {@code NegateExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitPower(STParser.PowerContext ctx);
+	void exitNegateExpr(STParser.NegateExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link STParser#primary_expression}.
 	 * @param ctx the parse tree

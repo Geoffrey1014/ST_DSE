@@ -8,8 +8,9 @@ VAR
     CP, CT : REAL ;
 END_VAR
 
-CT := DIV( ADD( T0+273.15) ,  ADD(T1 +273.15)) ;
-CP := DIV( ADD( P1+103.32) , ADD(PO + 103.32)) ;
+CT := DIV( ADD( (T0) +273.15) ,  ADD(T1 - 273.15)) ;
+CP := DIV( ADD( P1 * 103.32) , ADD(PO / 103.32)) ;
+
 COMPENSATION_PT := MUL(CT, CP);
 
 END_FUNCTION

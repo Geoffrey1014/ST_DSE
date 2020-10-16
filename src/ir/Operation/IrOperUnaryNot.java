@@ -1,5 +1,9 @@
-package ir;
+package ir.Operation;
 
+
+import ir.IrExpr;
+import ir.IrType;
+import ir.IrTypeBool;
 
 /**
  * Created by geo on 2020/10/13.

@@ -1,4 +1,6 @@
-package ir;
+package ir.Operation;
+
+import ir.IrExpr;
 
 public abstract class IrOperUnary extends IrOper {
     public IrExpr operand;
