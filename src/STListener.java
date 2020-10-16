@@ -165,32 +165,16 @@ public class STListener extends STParserBaseListener {
         IrCodeBlock codeBlock = new IrCodeBlock(l.line,l.col,stmts);
         setASTNode(ctx, codeBlock);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterStat(STParser.StatContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitStat(STParser.StatContext ctx) {
         Ir pou = getASTNode(ctx.getChild(0));
         setASTNode(ctx, pou);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterAssign_stat(STParser.Assign_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitAssign_stat(STParser.Assign_statContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrLocation location = (IrLocation) getASTNode(ctx.location());
@@ -202,39 +186,23 @@ public class STListener extends STParserBaseListener {
     }
 
     @Override public void enterIf_stat(STParser.If_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitIf_stat(STParser.If_statContext ctx) {
         IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
         setASTNode(ctx, ctrlFlowIf);
 
     }
     @Override public void enterIf_else_stat(STParser.If_else_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitIf_else_stat(STParser.If_else_statContext ctx) {
         IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
         IrCodeBlock elseStmt = (IrCodeBlock) getASTNode(ctx.else_stmt());
         IrCtrlFlowIfElse ctrlFlowIfElse = new IrCtrlFlowIfElse(ctrlFlowIf.getCondExpr(), ctrlFlowIf.getStmtBody(),elseStmt);
         setASTNode(ctx, ctrlFlowIfElse);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterIf_elsif_stat(STParser.If_elsif_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitIf_elsif_stat(STParser.If_elsif_statContext ctx) {
         IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
         ArrayList<IrCtrlFlowElsif> ctrlFlowElsifArrayList = new ArrayList<>();
@@ -245,17 +213,9 @@ public class STListener extends STParserBaseListener {
         IrCtrlFlowIfElsif ctrlFlowElsif = new IrCtrlFlowIfElsif(ctrlFlowIf.getCondExpr(), ctrlFlowIf.getStmtBody(),ctrlFlowElsifArrayList);
         setASTNode(ctx,ctrlFlowElsif);
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void enterIf_elsif_else_stat(STParser.If_elsif_else_statContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitIf_elsif_else_stat(STParser.If_elsif_else_statContext ctx) {
         IrCtrlFlowIf ctrlFlowIf = (IrCtrlFlowIf) getASTNode(ctx.if_stmt());
         ArrayList<IrCtrlFlowElsif> ctrlFlowElsifArrayList = new ArrayList<>();
@@ -328,193 +288,45 @@ public class STListener extends STParserBaseListener {
     @Override public void enterInvoc_stat(STParser.Invoc_statContext ctx) { }
 
     @Override public void exitInvoc_stat(STParser.Invoc_statContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrIdent fbName = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        ArrayList<IrArg> argArrayList = new ArrayList<>();
+        for (ParseTree node : ctx.param_assignment()){
+            argArrayList.add((IrArg) getASTNode(node));
+        }
+        setASTNode(ctx, new IrFunctionCallExpr(fbName, argArrayList));
 
     }
 
-    @Override public void enterParam_assignment(STParser.Param_assignmentContext ctx) { }
+    @Override public void enterExternArg(STParser.ExternArgContext ctx) { }
 
-    @Override public void exitParam_assignment(STParser.Param_assignmentContext ctx) { }
+    @Override public void exitExternArg(STParser.ExternArgContext ctx) {
 
-    @Override public void enterNot(STParser.NotContext ctx) { }
+    }
+
+    @Override public void enterAssignParam(STParser.AssignParamContext ctx) { }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitNot(STParser.NotContext ctx) { }
+    @Override public void exitAssignParam(STParser.AssignParamContext ctx) { }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void enterMulDivMod(STParser.MulDivModContext ctx) { }
+    @Override public void enterAssignOutput(STParser.AssignOutputContext ctx) { }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitMulDivMod(STParser.MulDivModContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterPAREN_Exper(STParser.PAREN_ExperContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitPAREN_Exper(STParser.PAREN_ExperContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterAddSub(STParser.AddSubContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitAddSub(STParser.AddSubContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterComparison(STParser.ComparisonContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitComparison(STParser.ComparisonContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterPrimaryExpr(STParser.PrimaryExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitPrimaryExpr(STParser.PrimaryExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterLogic(STParser.LogicContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitLogic(STParser.LogicContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterPower(STParser.PowerContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitPower(STParser.PowerContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterPrimary_expression(STParser.Primary_expressionContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitPrimary_expression(STParser.Primary_expressionContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterLocation(STParser.LocationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitLocation(STParser.LocationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterVar_block(STParser.Var_blockContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitVar_block(STParser.Var_blockContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterVar_type(STParser.Var_typeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitVar_type(STParser.Var_typeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterSimpleType(STParser.SimpleTypeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitSimpleType(STParser.SimpleTypeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterArrayType(STParser.ArrayTypeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitArrayType(STParser.ArrayTypeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterArray_type(STParser.Array_typeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitArray_type(STParser.Array_typeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    @Override public void exitAssignOutput(STParser.AssignOutputContext ctx) { }
+
+
+
+
     @Override public void enterRange(STParser.RangeContext ctx) { }
     /**
      * {@inheritDoc}
@@ -527,174 +339,7 @@ public class STListener extends STParserBaseListener {
 
     }
 
-    @Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterElementary_type_name(STParser.Elementary_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitElementary_type_name(STParser.Elementary_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterNumeric_type_name(STParser.Numeric_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitNumeric_type_name(STParser.Numeric_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterInteger_type_name(STParser.Integer_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitInteger_type_name(STParser.Integer_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterSigned_integer_type_name(STParser.Signed_integer_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitSigned_integer_type_name(STParser.Signed_integer_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterUnsigned_integer_type_name(STParser.Unsigned_integer_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitUnsigned_integer_type_name(STParser.Unsigned_integer_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterReal_type_name(STParser.Real_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitReal_type_name(STParser.Real_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterDate_type_name(STParser.Date_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitDate_type_name(STParser.Date_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterBit_string_type_name(STParser.Bit_string_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitBit_string_type_name(STParser.Bit_string_type_nameContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterVariable_initializer(STParser.Variable_initializerContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitVariable_initializer(STParser.Variable_initializerContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterArray_initialization(STParser.Array_initializationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitArray_initialization(STParser.Array_initializationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterConstant(STParser.ConstantContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitConstant(STParser.ConstantContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterNumeric_literal(STParser.Numeric_literalContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitNumeric_literal(STParser.Numeric_literalContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterInteger_literal(STParser.Integer_literalContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitInteger_literal(STParser.Integer_literalContext ctx) { }
 
-    @Override public void enterString_literal(STParser.String_literalContext ctx) { }
-    @Override public void exitString_literal(STParser.String_literalContext ctx) {
-
-    }
 
     @Override public void enterEveryRule(ParserRuleContext ctx) { }
     @Override public void exitEveryRule(ParserRuleContext ctx) { }
