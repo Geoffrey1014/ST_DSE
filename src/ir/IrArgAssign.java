@@ -1,7 +1,7 @@
 package ir;
 
 
-public abstract class IrArgAssign extends IrArg {
+public class IrArgAssign extends IrArg {
     private final Object argValue;
 
     public IrArgAssign(Object argValue, int lineNum, int colNum) {

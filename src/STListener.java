@@ -301,16 +301,20 @@ public class STListener extends STParserBaseListener {
     @Override public void enterExternArg(STParser.ExternArgContext ctx) { }
 
     @Override public void exitExternArg(STParser.ExternArgContext ctx) {
-
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        setASTNode(ctx, new IrArgAssign( getASTNode(ctx.expression()) , l.line, l.col ) );
     }
 
     @Override public void enterAssignParam(STParser.AssignParamContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitAssignParam(STParser.AssignParamContext ctx) { }
+
+    @Override public void exitAssignParam(STParser.AssignParamContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrIdent argName = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        IrExpr value = (IrExpr) getASTNode(ctx.expression());
+        IrArgInputAssign argInputAssign = new IrArgInputAssign(value,argName);
+        setASTNode(ctx, argInputAssign);
+
+    }
     /**
      * {@inheritDoc}
      *
@@ -322,7 +326,13 @@ public class STListener extends STParserBaseListener {
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitAssignOutput(STParser.AssignOutputContext ctx) { }
+    @Override public void exitAssignOutput(STParser.AssignOutputContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrIdent fbOutput = new IrIdent(ctx.ID(0).getText(), l.line, l.col); //TODO: 这里可以尝试一下 l.line, l.col 和 ctx.ID(1)
+        TerminalNode node = ctx.ID(1);
+        IrIdent acceptLocation = new IrIdent(node.getText(), node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() );
+    }
+
 
 
 
