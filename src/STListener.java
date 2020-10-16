@@ -17,7 +17,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 
 public class STListener extends STParserBaseListener {
-    MyPrint myPrint = new MyPrint(true);
+    MyPrint myPrint = new MyPrint(0);
 
     public IrPousDecl pous;
     ParseTreeProperty<Ir> ASTNodes = new ParseTreeProperty<>();
@@ -129,6 +129,7 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFunction(STParser.FunctionContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent fuctionName = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        IrType type = (IrType) getASTNode(ctx.type_rule());
 
         IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
         IrVARBlockDecl varBlockVAR = null;
@@ -148,7 +149,7 @@ public class STListener extends STParserBaseListener {
                 varBlockVAR_OUTPUT = (IrVARBlockDecl) AstNode;
             }
         }
-        IrFunctionDecl function = new IrFunctionDecl(fuctionName,varBlockVAR,varBlockVAR_INPUT, varBlockVAR_OUTPUT, codeBlock);
+        IrFunctionDecl function = new IrFunctionDecl(fuctionName,type,varBlockVAR,varBlockVAR_INPUT, varBlockVAR_OUTPUT, codeBlock);
         setASTNode(ctx,function);
 
     }
@@ -271,7 +272,13 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFor_range(STParser.For_rangeContext ctx) {
         IrExpr low = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr high = (IrExpr) getASTNode(ctx.expression(1));
-        int step = Integer.parseInt(ctx.step.getText());
+        myPrint.LevelOne.print("=====");
+        Integer step = null;
+        if (ctx.step != null){
+            step = Integer.valueOf(ctx.step.getText());
+        }
+
+        myPrint.LevelOne.print("=====");
         IrCtrlFlowForRange range = new IrCtrlFlowForRange(low, high, step);
         setASTNode(ctx, range);
     }
@@ -337,6 +344,7 @@ public class STListener extends STParserBaseListener {
 
 
 
+
     @Override public void enterRange(STParser.RangeContext ctx) { }
     /**
      * {@inheritDoc}
@@ -344,8 +352,9 @@ public class STListener extends STParserBaseListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitRange(STParser.RangeContext ctx) {
-        myPrint.print(ctx.lbound.getText());
-        myPrint.print(ctx.ubound.getText());
+        myPrint.LevelOne.print(ctx.lbound.getText());
+        myPrint.LevelOne.print(ctx.ubound.getText());
+
 
     }
 

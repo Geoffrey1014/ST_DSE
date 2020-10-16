@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mian {
-    public static MyPrint myprint  = new MyPrint(true);
+    public static MyPrint myprint  = new MyPrint(0);
 
 
 
@@ -105,9 +105,9 @@ public class Mian {
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
             Trees.inspect(tree, parser);
-            myprint.print(listener.pous.getProgramDeclsArrayList().get(0).getName().getName());
-            myprint.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName().getName());
-            myprint.print(listener.pous.getFunctionDeclArrayList().get(0).getName().getName());
+            myprint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName().getName());
+            myprint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName().getName());
+            myprint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName().getName());
 
         }
         catch (IOException e){
@@ -116,7 +116,7 @@ public class Mian {
     }
 
     public static void main(String[] args) throws IOException {
-        myprint.print(System.getProperty("user.home"));
+        myprint.levelZero.print(System.getProperty("user.home"));
         walkTree(args);
 
 

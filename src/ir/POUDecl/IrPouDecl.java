@@ -2,15 +2,12 @@ package ir.POUDecl;
 
 import ir.Ir;
 import ir.IrIdent;
+import ir.IrMemberDecl;
 
-public abstract class IrPouDecl extends Ir {
-    private final IrIdent name;
+public abstract class IrPouDecl extends IrMemberDecl {
+
     public IrPouDecl(IrIdent name) {
-        super(name.getLineNumber(), name.getColNumber());
-        this.name = name;
+        super(name, name.getLineNumber(), name.getColNumber());
     }
-
-    public IrIdent getName() {
-        return name;
-    }
+    
 }

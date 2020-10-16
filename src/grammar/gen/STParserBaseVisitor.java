@@ -264,7 +264,7 @@ public class STParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVar_type(STParser.Var_typeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVar_acc_type(STParser.Var_acc_typeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

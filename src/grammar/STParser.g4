@@ -32,7 +32,7 @@ function_block:
     RES_END_FUNCTION_BLOCK
     ;
 
-function: RES_FUNCTION ID COLON type=type_rule
+function: RES_FUNCTION ID COLON type_rule
     var_blocks+=var_block*
     stat_list
     RES_END_FUNCTION
@@ -112,19 +112,19 @@ location:
 
 
 var_block
-  : var_type  variable_declaration*  RES_END_VAR;
+  : var_acc_type  variable_declaration*  RES_END_VAR;
 
-var_type:
+var_acc_type:
      RES_VAR
      |  RES_VAR_INPUT
      |  RES_VAR_OUTPUT
      |  RES_VAR_INPUT_OUTPUT
-//     |  'VAR_TEMP'
+     |  RES_VAR_TEMP
      ;
 
 type_rule:
-  name=elementary_type_name #simpleType
-  | array=array_type #arrayType
+  elementary_type_name #simpleType
+  | array_type #arrayType
 //  | pointer=pointer_type #pointerType
   ;
 

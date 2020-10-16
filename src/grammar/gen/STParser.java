@@ -31,9 +31,9 @@ public class STParser extends Parser {
 		DT=60, BYTE=61, WORD=62, DWORD=63, LWORD=64, RES_PROGRAM=65, RES_END_PROGRAM=66, 
 		RES_FUNCTION_BLOCK=67, RES_END_FUNCTION_BLOCK=68, RES_FUNCTION=69, RES_END_FUNCTION=70, 
 		RES_VAR=71, RES_VAR_INPUT=72, RES_VAR_OUTPUT=73, RES_VAR_INPUT_OUTPUT=74, 
-		RES_END_VAR=75, BOOL=76, Binary_literal=77, Octal_literal=78, Decimal_literal=79, 
-		Pure_decimal_digits=80, Hexadecimal_literal=81, Floating_point_literal=82, 
-		Static_string_literal=83, ID=84, Block_comment=85, WS=86;
+		RES_END_VAR=75, RES_VAR_TEMP=76, BOOL=77, Binary_literal=78, Octal_literal=79, 
+		Decimal_literal=80, Pure_decimal_digits=81, Hexadecimal_literal=82, Floating_point_literal=83, 
+		Static_string_literal=84, ID=85, Block_comment=86, WS=87;
 	public static final int
 		RULE_pous = 0, RULE_pou = 1, RULE_program = 2, RULE_function_block = 3, 
 		RULE_function = 4, RULE_stat_list = 5, RULE_stat = 6, RULE_assign_stat = 7, 
@@ -41,7 +41,7 @@ public class STParser extends Parser {
 		RULE_if_stmt = 12, RULE_elsif_stmt = 13, RULE_else_stmt = 14, RULE_for_stat = 15, 
 		RULE_for_range = 16, RULE_while_stat = 17, RULE_invoc_stat = 18, RULE_param_assignment = 19, 
 		RULE_expression = 20, RULE_primary_expression = 21, RULE_location = 22, 
-		RULE_var_block = 23, RULE_var_type = 24, RULE_type_rule = 25, RULE_array_type = 26, 
+		RULE_var_block = 23, RULE_var_acc_type = 24, RULE_type_rule = 25, RULE_array_type = 26, 
 		RULE_range = 27, RULE_variable_declaration = 28, RULE_elementary_type_name = 29, 
 		RULE_numeric_type_name = 30, RULE_integer_type_name = 31, RULE_signed_integer_type_name = 32, 
 		RULE_unsigned_integer_type_name = 33, RULE_real_type_name = 34, RULE_date_type_name = 35, 
@@ -54,7 +54,7 @@ public class STParser extends Parser {
 			"stat", "assign_stat", "if_stat", "if_else_stat", "if_elsif_stat", "if_elsif_else_stat", 
 			"if_stmt", "elsif_stmt", "else_stmt", "for_stat", "for_range", "while_stat", 
 			"invoc_stat", "param_assignment", "expression", "primary_expression", 
-			"location", "var_block", "var_type", "type_rule", "array_type", "range", 
+			"location", "var_block", "var_acc_type", "type_rule", "array_type", "range", 
 			"variable_declaration", "elementary_type_name", "numeric_type_name", 
 			"integer_type_name", "signed_integer_type_name", "unsigned_integer_type_name", 
 			"real_type_name", "date_type_name", "bit_string_type_name", "variable_initializer", 
@@ -76,7 +76,7 @@ public class STParser extends Parser {
 			"'TOD'", "'DATE_AND_TIME'", "'DT'", "'BYTE'", "'WORD'", "'DWORD'", "'LWORD'", 
 			"'PROGRAM'", "'END_PROGRAM'", "'FUNCTION_BLOCK'", "'END_FUNCTION_BLOCK'", 
 			"'FUNCTION'", "'END_FUNCTION'", "'VAR'", "'VAR_INPUT'", "'VAR_OUTPUT'", 
-			"'VAR_INPUT_OUTPUT'", "'END_VAR'"
+			"'VAR_INPUT_OUTPUT'", "'END_VAR'", "'VAR_TEMP'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -93,9 +93,10 @@ public class STParser extends Parser {
 			"TIME_OF_DAY", "TOD", "DATE_AND_TIME", "DT", "BYTE", "WORD", "DWORD", 
 			"LWORD", "RES_PROGRAM", "RES_END_PROGRAM", "RES_FUNCTION_BLOCK", "RES_END_FUNCTION_BLOCK", 
 			"RES_FUNCTION", "RES_END_FUNCTION", "RES_VAR", "RES_VAR_INPUT", "RES_VAR_OUTPUT", 
-			"RES_VAR_INPUT_OUTPUT", "RES_END_VAR", "BOOL", "Binary_literal", "Octal_literal", 
-			"Decimal_literal", "Pure_decimal_digits", "Hexadecimal_literal", "Floating_point_literal", 
-			"Static_string_literal", "ID", "Block_comment", "WS"
+			"RES_VAR_INPUT_OUTPUT", "RES_END_VAR", "RES_VAR_TEMP", "BOOL", "Binary_literal", 
+			"Octal_literal", "Decimal_literal", "Pure_decimal_digits", "Hexadecimal_literal", 
+			"Floating_point_literal", "Static_string_literal", "ID", "Block_comment", 
+			"WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -330,7 +331,7 @@ public class STParser extends Parser {
 			setState(101);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)))) != 0)) {
+			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) {
 				{
 				{
 				setState(98);
@@ -407,7 +408,7 @@ public class STParser extends Parser {
 			setState(112);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)))) != 0)) {
+			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) {
 				{
 				{
 				setState(109);
@@ -437,19 +438,18 @@ public class STParser extends Parser {
 	}
 
 	public static class FunctionContext extends ParserRuleContext {
-		public Type_ruleContext type;
 		public Var_blockContext var_block;
 		public List<Var_blockContext> var_blocks = new ArrayList<Var_blockContext>();
 		public TerminalNode RES_FUNCTION() { return getToken(STParser.RES_FUNCTION, 0); }
 		public TerminalNode ID() { return getToken(STParser.ID, 0); }
 		public TerminalNode COLON() { return getToken(STParser.COLON, 0); }
+		public Type_ruleContext type_rule() {
+			return getRuleContext(Type_ruleContext.class,0);
+		}
 		public Stat_listContext stat_list() {
 			return getRuleContext(Stat_listContext.class,0);
 		}
 		public TerminalNode RES_END_FUNCTION() { return getToken(STParser.RES_END_FUNCTION, 0); }
-		public Type_ruleContext type_rule() {
-			return getRuleContext(Type_ruleContext.class,0);
-		}
 		public List<Var_blockContext> var_block() {
 			return getRuleContexts(Var_blockContext.class);
 		}
@@ -489,11 +489,11 @@ public class STParser extends Parser {
 			setState(120);
 			match(COLON);
 			setState(121);
-			((FunctionContext)_localctx).type = type_rule();
+			type_rule();
 			setState(125);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)))) != 0)) {
+			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) {
 				{
 				{
 				setState(122);
@@ -1412,7 +1412,7 @@ public class STParser extends Parser {
 			setState(227);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << L_PAREN) | (1L << SUB_OP) | (1L << NOT_OP))) != 0) || ((((_la - 76)) & ~0x3f) == 0 && ((1L << (_la - 76)) & ((1L << (BOOL - 76)) | (1L << (Binary_literal - 76)) | (1L << (Octal_literal - 76)) | (1L << (Decimal_literal - 76)) | (1L << (Pure_decimal_digits - 76)) | (1L << (Hexadecimal_literal - 76)) | (1L << (Floating_point_literal - 76)) | (1L << (Static_string_literal - 76)) | (1L << (ID - 76)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << L_PAREN) | (1L << SUB_OP) | (1L << NOT_OP))) != 0) || ((((_la - 77)) & ~0x3f) == 0 && ((1L << (_la - 77)) & ((1L << (BOOL - 77)) | (1L << (Binary_literal - 77)) | (1L << (Octal_literal - 77)) | (1L << (Decimal_literal - 77)) | (1L << (Pure_decimal_digits - 77)) | (1L << (Hexadecimal_literal - 77)) | (1L << (Floating_point_literal - 77)) | (1L << (Static_string_literal - 77)) | (1L << (ID - 77)))) != 0)) {
 				{
 				setState(219);
 				param_assignment();
@@ -2233,8 +2233,8 @@ public class STParser extends Parser {
 	}
 
 	public static class Var_blockContext extends ParserRuleContext {
-		public Var_typeContext var_type() {
-			return getRuleContext(Var_typeContext.class,0);
+		public Var_acc_typeContext var_acc_type() {
+			return getRuleContext(Var_acc_typeContext.class,0);
 		}
 		public TerminalNode RES_END_VAR() { return getToken(STParser.RES_END_VAR, 0); }
 		public List<Variable_declarationContext> variable_declaration() {
@@ -2270,7 +2270,7 @@ public class STParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(298);
-			var_type();
+			var_acc_type();
 			setState(302);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -2300,40 +2300,41 @@ public class STParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Var_typeContext extends ParserRuleContext {
+	public static class Var_acc_typeContext extends ParserRuleContext {
 		public TerminalNode RES_VAR() { return getToken(STParser.RES_VAR, 0); }
 		public TerminalNode RES_VAR_INPUT() { return getToken(STParser.RES_VAR_INPUT, 0); }
 		public TerminalNode RES_VAR_OUTPUT() { return getToken(STParser.RES_VAR_OUTPUT, 0); }
 		public TerminalNode RES_VAR_INPUT_OUTPUT() { return getToken(STParser.RES_VAR_INPUT_OUTPUT, 0); }
-		public Var_typeContext(ParserRuleContext parent, int invokingState) {
+		public TerminalNode RES_VAR_TEMP() { return getToken(STParser.RES_VAR_TEMP, 0); }
+		public Var_acc_typeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_var_type; }
+		@Override public int getRuleIndex() { return RULE_var_acc_type; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof STParserListener ) ((STParserListener)listener).enterVar_type(this);
+			if ( listener instanceof STParserListener ) ((STParserListener)listener).enterVar_acc_type(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof STParserListener ) ((STParserListener)listener).exitVar_type(this);
+			if ( listener instanceof STParserListener ) ((STParserListener)listener).exitVar_acc_type(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof STParserVisitor ) return ((STParserVisitor<? extends T>)visitor).visitVar_type(this);
+			if ( visitor instanceof STParserVisitor ) return ((STParserVisitor<? extends T>)visitor).visitVar_acc_type(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Var_typeContext var_type() throws RecognitionException {
-		Var_typeContext _localctx = new Var_typeContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_var_type);
+	public final Var_acc_typeContext var_acc_type() throws RecognitionException {
+		Var_acc_typeContext _localctx = new Var_acc_typeContext(_ctx, getState());
+		enterRule(_localctx, 48, RULE_var_acc_type);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(307);
 			_la = _input.LA(1);
-			if ( !(((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)))) != 0)) ) {
+			if ( !(((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2366,7 +2367,6 @@ public class STParser extends Parser {
 		}
 	}
 	public static class SimpleTypeContext extends Type_ruleContext {
-		public Elementary_type_nameContext name;
 		public Elementary_type_nameContext elementary_type_name() {
 			return getRuleContext(Elementary_type_nameContext.class,0);
 		}
@@ -2386,7 +2386,6 @@ public class STParser extends Parser {
 		}
 	}
 	public static class ArrayTypeContext extends Type_ruleContext {
-		public Array_typeContext array;
 		public Array_typeContext array_type() {
 			return getRuleContext(Array_typeContext.class,0);
 		}
@@ -2437,7 +2436,7 @@ public class STParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(309);
-				((SimpleTypeContext)_localctx).name = elementary_type_name();
+				elementary_type_name();
 				}
 				break;
 			case RES_ARRAY:
@@ -2445,7 +2444,7 @@ public class STParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(310);
-				((ArrayTypeContext)_localctx).array = array_type();
+				array_type();
 				}
 				break;
 			default:
@@ -3509,7 +3508,7 @@ public class STParser extends Parser {
 			{
 			setState(394);
 			_la = _input.LA(1);
-			if ( !(((((_la - 77)) & ~0x3f) == 0 && ((1L << (_la - 77)) & ((1L << (Binary_literal - 77)) | (1L << (Octal_literal - 77)) | (1L << (Decimal_literal - 77)) | (1L << (Pure_decimal_digits - 77)) | (1L << (Hexadecimal_literal - 77)))) != 0)) ) {
+			if ( !(((((_la - 78)) & ~0x3f) == 0 && ((1L << (_la - 78)) & ((1L << (Binary_literal - 78)) | (1L << (Octal_literal - 78)) | (1L << (Decimal_literal - 78)) | (1L << (Pure_decimal_digits - 78)) | (1L << (Hexadecimal_literal - 78)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3602,7 +3601,7 @@ public class STParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3X\u0191\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3Y\u0191\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3633,7 +3632,7 @@ public class STParser extends Parser {
 		")\5)\u0181\n)\3*\5*\u0184\n*\3*\3*\5*\u0188\n*\3*\5*\u018b\n*\3+\3+\3"+
 		",\3,\3,\2\3*-\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64"+
 		"\668:<>@BDFHJLNPRTV\2\16\4\2\16\16\34\34\3\2\17\21\3\2\r\16\3\2\23\26"+
-		"\3\2\27\30\3\2IL\3\2\60\63\3\2\669\3\2\64\65\3\2:>\4\2//?B\3\2OS\2\u0198"+
+		"\3\2\27\30\4\2ILNN\3\2\60\63\3\2\669\3\2\64\65\3\2:>\4\2//?B\3\2PT\2\u0198"+
 		"\2Y\3\2\2\2\4`\3\2\2\2\6b\3\2\2\2\bm\3\2\2\2\nx\3\2\2\2\f\u0085\3\2\2"+
 		"\2\16\u0094\3\2\2\2\20\u0096\3\2\2\2\22\u009b\3\2\2\2\24\u009f\3\2\2\2"+
 		"\26\u00a4\3\2\2\2\30\u00ad\3\2\2\2\32\u00b7\3\2\2\2\34\u00bc\3\2\2\2\36"+
@@ -3645,10 +3644,10 @@ public class STParser extends Parser {
 		"\2\2L\u016f\3\2\2\2N\u0171\3\2\2\2P\u0180\3\2\2\2R\u018a\3\2\2\2T\u018c"+
 		"\3\2\2\2V\u018e\3\2\2\2XZ\5\4\3\2YX\3\2\2\2Z[\3\2\2\2[Y\3\2\2\2[\\\3\2"+
 		"\2\2\\\3\3\2\2\2]a\5\6\4\2^a\5\b\5\2_a\5\n\6\2`]\3\2\2\2`^\3\2\2\2`_\3"+
-		"\2\2\2a\5\3\2\2\2bc\7C\2\2cg\7V\2\2df\5\60\31\2ed\3\2\2\2fi\3\2\2\2ge"+
+		"\2\2\2a\5\3\2\2\2bc\7C\2\2cg\7W\2\2df\5\60\31\2ed\3\2\2\2fi\3\2\2\2ge"+
 		"\3\2\2\2gh\3\2\2\2hj\3\2\2\2ig\3\2\2\2jk\5\f\7\2kl\7D\2\2l\7\3\2\2\2m"+
-		"n\7E\2\2nr\7V\2\2oq\5\60\31\2po\3\2\2\2qt\3\2\2\2rp\3\2\2\2rs\3\2\2\2"+
-		"su\3\2\2\2tr\3\2\2\2uv\5\f\7\2vw\7F\2\2w\t\3\2\2\2xy\7G\2\2yz\7V\2\2z"+
+		"n\7E\2\2nr\7W\2\2oq\5\60\31\2po\3\2\2\2qt\3\2\2\2rp\3\2\2\2rs\3\2\2\2"+
+		"su\3\2\2\2tr\3\2\2\2uv\5\f\7\2vw\7F\2\2w\t\3\2\2\2xy\7G\2\2yz\7W\2\2z"+
 		"{\7\13\2\2{\177\5\64\33\2|~\5\60\31\2}|\3\2\2\2~\u0081\3\2\2\2\177}\3"+
 		"\2\2\2\177\u0080\3\2\2\2\u0080\u0082\3\2\2\2\u0081\177\3\2\2\2\u0082\u0083"+
 		"\5\f\7\2\u0083\u0084\7H\2\2\u0084\13\3\2\2\2\u0085\u0089\5\16\b\2\u0086"+
@@ -3672,21 +3671,21 @@ public class STParser extends Parser {
 		"\u00b8\u00b9\5*\26\2\u00b9\u00ba\7\'\2\2\u00ba\u00bb\5\f\7\2\u00bb\33"+
 		"\3\2\2\2\u00bc\u00bd\7)\2\2\u00bd\u00be\5*\26\2\u00be\u00bf\7\'\2\2\u00bf"+
 		"\u00c0\5\f\7\2\u00c0\35\3\2\2\2\u00c1\u00c2\7(\2\2\u00c2\u00c3\5\f\7\2"+
-		"\u00c3\37\3\2\2\2\u00c4\u00c5\7\37\2\2\u00c5\u00c6\7V\2\2\u00c6\u00c7"+
+		"\u00c3\37\3\2\2\2\u00c4\u00c5\7\37\2\2\u00c5\u00c6\7W\2\2\u00c6\u00c7"+
 		"\7\35\2\2\u00c7\u00c8\5\"\22\2\u00c8\u00c9\7 \2\2\u00c9\u00ca\5\f\7\2"+
 		"\u00ca\u00cb\7!\2\2\u00cb\u00cc\7\n\2\2\u00cc!\3\2\2\2\u00cd\u00ce\5*"+
 		"\26\2\u00ce\u00cf\7\"\2\2\u00cf\u00d2\5*\26\2\u00d0\u00d1\7#\2\2\u00d1"+
 		"\u00d3\5*\26\2\u00d2\u00d0\3\2\2\2\u00d2\u00d3\3\2\2\2\u00d3#\3\2\2\2"+
 		"\u00d4\u00d5\7$\2\2\u00d5\u00d6\5*\26\2\u00d6\u00d7\7 \2\2\u00d7\u00d8"+
 		"\5\f\7\2\u00d8\u00d9\7%\2\2\u00d9\u00da\7\n\2\2\u00da%\3\2\2\2\u00db\u00dc"+
-		"\7V\2\2\u00dc\u00e5\7\5\2\2\u00dd\u00e2\5(\25\2\u00de\u00df\7\t\2\2\u00df"+
+		"\7W\2\2\u00dc\u00e5\7\5\2\2\u00dd\u00e2\5(\25\2\u00de\u00df\7\t\2\2\u00df"+
 		"\u00e1\5(\25\2\u00e0\u00de\3\2\2\2\u00e1\u00e4\3\2\2\2\u00e2\u00e0\3\2"+
 		"\2\2\u00e2\u00e3\3\2\2\2\u00e3\u00e6\3\2\2\2\u00e4\u00e2\3\2\2\2\u00e5"+
 		"\u00dd\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00e8\7\6"+
-		"\2\2\u00e8\'\3\2\2\2\u00e9\u00f4\5*\26\2\u00ea\u00eb\7V\2\2\u00eb\u00ec"+
+		"\2\2\u00e8\'\3\2\2\2\u00e9\u00f4\5*\26\2\u00ea\u00eb\7W\2\2\u00eb\u00ec"+
 		"\7\35\2\2\u00ec\u00f4\5*\26\2\u00ed\u00ef\7\34\2\2\u00ee\u00ed\3\2\2\2"+
-		"\u00ee\u00ef\3\2\2\2\u00ef\u00f0\3\2\2\2\u00f0\u00f1\7V\2\2\u00f1\u00f2"+
-		"\7\36\2\2\u00f2\u00f4\7V\2\2\u00f3\u00e9\3\2\2\2\u00f3\u00ea\3\2\2\2\u00f3"+
+		"\u00ee\u00ef\3\2\2\2\u00ef\u00f0\3\2\2\2\u00f0\u00f1\7W\2\2\u00f1\u00f2"+
+		"\7\36\2\2\u00f2\u00f4\7W\2\2\u00f3\u00e9\3\2\2\2\u00f3\u00ea\3\2\2\2\u00f3"+
 		"\u00ee\3\2\2\2\u00f4)\3\2\2\2\u00f5\u00f6\b\26\1\2\u00f6\u00fe\5,\27\2"+
 		"\u00f7\u00f8\t\2\2\2\u00f8\u00fe\5*\26\f\u00f9\u00fa\7\5\2\2\u00fa\u00fb"+
 		"\5*\26\2\u00fb\u00fc\7\6\2\2\u00fc\u00fe\3\2\2\2\u00fd\u00f5\3\2\2\2\u00fd"+
@@ -3703,9 +3702,9 @@ public class STParser extends Parser {
 		"\u011b\3\2\2\2\u0119\u0117\3\2\2\2\u0119\u011a\3\2\2\2\u011a+\3\2\2\2"+
 		"\u011b\u0119\3\2\2\2\u011c\u0120\5P)\2\u011d\u0120\5.\30\2\u011e\u0120"+
 		"\5&\24\2\u011f\u011c\3\2\2\2\u011f\u011d\3\2\2\2\u011f\u011e\3\2\2\2\u0120"+
-		"-\3\2\2\2\u0121\u012b\7V\2\2\u0122\u0123\7V\2\2\u0123\u0124\7\3\2\2\u0124"+
-		"\u0125\5*\26\2\u0125\u0126\7\4\2\2\u0126\u012b\3\2\2\2\u0127\u0128\7V"+
-		"\2\2\u0128\u0129\7\f\2\2\u0129\u012b\7V\2\2\u012a\u0121\3\2\2\2\u012a"+
+		"-\3\2\2\2\u0121\u012b\7W\2\2\u0122\u0123\7W\2\2\u0123\u0124\7\3\2\2\u0124"+
+		"\u0125\5*\26\2\u0125\u0126\7\4\2\2\u0126\u012b\3\2\2\2\u0127\u0128\7W"+
+		"\2\2\u0128\u0129\7\f\2\2\u0129\u012b\7W\2\2\u012a\u0121\3\2\2\2\u012a"+
 		"\u0122\3\2\2\2\u012a\u0127\3\2\2\2\u012b/\3\2\2\2\u012c\u0130\5\62\32"+
 		"\2\u012d\u012f\5:\36\2\u012e\u012d\3\2\2\2\u012f\u0132\3\2\2\2\u0130\u012e"+
 		"\3\2\2\2\u0130\u0131\3\2\2\2\u0131\u0133\3\2\2\2\u0132\u0130\3\2\2\2\u0133"+
@@ -3714,7 +3713,7 @@ public class STParser extends Parser {
 		"\2\2\2\u013a\65\3\2\2\2\u013b\u013c\7,\2\2\u013c\u013d\7\3\2\2\u013d\u013e"+
 		"\58\35\2\u013e\u013f\7\4\2\2\u013f\u0140\7.\2\2\u0140\u0141\5<\37\2\u0141"+
 		"\67\3\2\2\2\u0142\u0143\5T+\2\u0143\u0144\7-\2\2\u0144\u0145\5T+\2\u0145"+
-		"9\3\2\2\2\u0146\u014b\7V\2\2\u0147\u0148\7\t\2\2\u0148\u014a\7V\2\2\u0149"+
+		"9\3\2\2\2\u0146\u014b\7W\2\2\u0147\u0148\7\t\2\2\u0148\u014a\7W\2\2\u0149"+
 		"\u0147\3\2\2\2\u014a\u014d\3\2\2\2\u014b\u0149\3\2\2\2\u014b\u014c\3\2"+
 		"\2\2\u014c\u014e\3\2\2\2\u014d\u014b\3\2\2\2\u014e\u014f\7\13\2\2\u014f"+
 		"\u0152\5\64\33\2\u0150\u0151\7\35\2\2\u0151\u0153\5L\'\2\u0152\u0150\3"+
@@ -3731,13 +3730,13 @@ public class STParser extends Parser {
 		"\u0174\7\t\2\2\u0174\u0176\3\2\2\2\u0175\u0172\3\2\2\2\u0176\u0179\3\2"+
 		"\2\2\u0177\u0175\3\2\2\2\u0177\u0178\3\2\2\2\u0178\u017a\3\2\2\2\u0179"+
 		"\u0177\3\2\2\2\u017a\u017b\5P)\2\u017b\u017c\7\4\2\2\u017cO\3\2\2\2\u017d"+
-		"\u0181\5R*\2\u017e\u0181\5V,\2\u017f\u0181\7N\2\2\u0180\u017d\3\2\2\2"+
+		"\u0181\5R*\2\u017e\u0181\5V,\2\u017f\u0181\7O\2\2\u0180\u017d\3\2\2\2"+
 		"\u0180\u017e\3\2\2\2\u0180\u017f\3\2\2\2\u0181Q\3\2\2\2\u0182\u0184\7"+
 		"\16\2\2\u0183\u0182\3\2\2\2\u0183\u0184\3\2\2\2\u0184\u0185\3\2\2\2\u0185"+
 		"\u018b\5T+\2\u0186\u0188\7\16\2\2\u0187\u0186\3\2\2\2\u0187\u0188\3\2"+
-		"\2\2\u0188\u0189\3\2\2\2\u0189\u018b\7T\2\2\u018a\u0183\3\2\2\2\u018a"+
+		"\2\2\u0188\u0189\3\2\2\2\u0189\u018b\7U\2\2\u018a\u0183\3\2\2\2\u018a"+
 		"\u0187\3\2\2\2\u018bS\3\2\2\2\u018c\u018d\t\r\2\2\u018dU\3\2\2\2\u018e"+
-		"\u018f\7U\2\2\u018fW\3\2\2\2\"[`gr\177\u0089\u0094\u00a8\u00b1\u00d2\u00e2"+
+		"\u018f\7V\2\2\u018fW\3\2\2\2\"[`gr\177\u0089\u0094\u00a8\u00b1\u00d2\u00e2"+
 		"\u00e5\u00ee\u00f3\u00fd\u0117\u0119\u011f\u012a\u0130\u0139\u014b\u0152"+
 		"\u0159\u015d\u0161\u016f\u0177\u0180\u0183\u0187\u018a";
 	public static final ATN _ATN =

@@ -388,15 +388,15 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitVar_block(STParser.Var_blockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link STParser#var_type}.
+	 * Enter a parse tree produced by {@link STParser#var_acc_type}.
 	 * @param ctx the parse tree
 	 */
-	void enterVar_type(STParser.Var_typeContext ctx);
+	void enterVar_acc_type(STParser.Var_acc_typeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link STParser#var_type}.
+	 * Exit a parse tree produced by {@link STParser#var_acc_type}.
 	 * @param ctx the parse tree
 	 */
-	void exitVar_type(STParser.Var_typeContext ctx);
+	void exitVar_acc_type(STParser.Var_acc_typeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code simpleType}
 	 * labeled alternative in {@link STParser#type_rule}.

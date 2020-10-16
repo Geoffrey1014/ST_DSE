@@ -15,8 +15,8 @@ public class IrLocationArray extends IrLocation {
 
     private IrExpr elementIndex;
 
-    public IrLocationArray(IrExpr elementIndex, IrIdent varName, int lineNumber, int colNumber) {
-        super(varName, lineNumber, colNumber);
+    public IrLocationArray(IrExpr elementIndex, IrIdent varName) {
+        super(varName);
         this.elementIndex = canonicalizeExpr(elementIndex);
     }
 

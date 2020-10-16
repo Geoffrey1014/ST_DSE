@@ -237,11 +237,11 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVar_block(STParser.Var_blockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link STParser#var_type}.
+	 * Visit a parse tree produced by {@link STParser#var_acc_type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVar_type(STParser.Var_typeContext ctx);
+	T visitVar_acc_type(STParser.Var_acc_typeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code simpleType}
 	 * labeled alternative in {@link STParser#type_rule}.

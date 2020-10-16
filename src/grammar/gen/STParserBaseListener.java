@@ -438,13 +438,13 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVar_type(STParser.Var_typeContext ctx) { }
+	@Override public void enterVar_acc_type(STParser.Var_acc_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVar_type(STParser.Var_typeContext ctx) { }
+	@Override public void exitVar_acc_type(STParser.Var_acc_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
