@@ -5,7 +5,9 @@ import ir.Arg.IrArg;
 import ir.Arg.IrArgAssign;
 import ir.Arg.IrArgInputAssign;
 import ir.CtrlFlow.*;
+import ir.Location.IrFbStLocation;
 import ir.Location.IrLocation;
+import ir.Location.IrLocationArray;
 import ir.Location.IrLocationVar;
 import ir.Operation.*;
 import ir.POUDecl.IrFunctionBlockDecl;
@@ -483,22 +485,61 @@ public class STListener extends STParserBaseListener {
         setASTNode(ctx, getASTNode(ctx.expression()));
     }
 
-    @Override public void enterPrimaryExpr(STParser.PrimaryExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
+
+    @Override public void enterPrimaryExpr(STParser.PrimaryExprContext ctx) {
+        setASTNode(ctx, getASTNode(ctx.primary_expression()));
+    }
+
     @Override public void exitPrimaryExpr(STParser.PrimaryExprContext ctx) {
 
     }
 
+    @Override public void enterPrimary_expression(STParser.Primary_expressionContext ctx) { }
+
+    @Override public void exitPrimary_expression(STParser.Primary_expressionContext ctx) {
+//        System.err.println(        ctx.getChild(0).getText());
+
+        setASTNode(ctx,getASTNode(ctx.getChild(0)));
+    }
+
+    @Override public void enterVarLocation(STParser.VarLocationContext ctx) { }
+
+    @Override public void exitVarLocation(STParser.VarLocationContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrIdent irIdent = new IrIdent(ctx.ID().getText(),l.line,l.col);
+        IrLocationVar locationVar = new IrLocationVar(irIdent);
+        setASTNode(ctx, locationVar);
+    }
+
+    @Override public void enterArrayLocation(STParser.ArrayLocationContext ctx) {    }
+
+    @Override public void exitArrayLocation(STParser.ArrayLocationContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrIdent irIdent = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        IrExpr expr = (IrExpr) getASTNode(ctx.expression());
+        IrLocationArray locationArray = new IrLocationArray(irIdent, expr);
+        setASTNode(ctx, locationArray);
+
+    }
+
+    @Override public void enterFbLcation(STParser.FbLcationContext ctx) { }
+
+    @Override public void exitFbLcation(STParser.FbLcationContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        ArrayList<String> strings = new ArrayList<>();
+        String name = "";
+        for (ParseTree node : ctx.ID()){
+            name += node.getText();
+        }
+        IrIdent irIdent = new IrIdent(name,l.line, l.col);
+
+        setASTNode(ctx,new IrFbStLocation(irIdent));
+    }
+
+
     @Override public void enterRange(STParser.RangeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitRange(STParser.RangeContext ctx) {
         myPrint.LevelOne.print(ctx.lbound.getText());
         myPrint.LevelOne.print(ctx.ubound.getText());

@@ -19,7 +19,7 @@ public class IrLocationArray extends IrLocation {
 
     private IrExpr elementIndex;
 
-    public IrLocationArray(IrExpr elementIndex, IrIdent varName) {
+    public IrLocationArray(IrIdent varName , IrExpr elementIndex) {
         super(varName);
         this.elementIndex = canonicalizeExpr(elementIndex);
     }
