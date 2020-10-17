@@ -10,7 +10,7 @@ public abstract class IrMemberDecl extends Ir {
 
 
     public String getName() {
-        return this.name.getName();
+        return this.name.getValue();
     }
 
     public IrIdent getIdentName() {

@@ -1,11 +1,12 @@
 package ir.CtrlFlow;
 
 import ir.Ir;
+import ir.IrStmt;
 import ir.Where;
 import ir.IrCodeBlock;
 import ir.Location.IrLocationVar;
 
-public class IrCtrlFlowFor extends Ir {
+public class IrCtrlFlowFor extends IrStmt {
     private final IrLocationVar counter;
     private final IrCtrlFlowForRange range;
     private final IrCodeBlock codeBlock;

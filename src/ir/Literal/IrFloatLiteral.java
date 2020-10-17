@@ -1,5 +1,6 @@
 package ir.Literal;
 
+import SymbolTable.SymTable;
 import ir.VarTypeEnum;
 
 public class IrFloatLiteral extends IrLiteral {
@@ -18,4 +19,17 @@ public class IrFloatLiteral extends IrLiteral {
     public Double getValue() {
         return value;
     }
+
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return "";
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        String prettyPrint = indentSpace + "|--FloatLiteral\n";
+        prettyPrint += ("  " + indentSpace + "|--value: " + this.value + "\n");
+        return prettyPrint;
+    }
+
 }

@@ -2,14 +2,18 @@
 package grammar.gen;
 
 
-import org.antlr.v4.runtime.atn.*;
-import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
-import org.antlr.v4.runtime.tree.*;
-import java.util.List;
-import java.util.Iterator;
+import org.antlr.v4.runtime.atn.ATN;
+import org.antlr.v4.runtime.atn.ATNDeserializer;
+import org.antlr.v4.runtime.atn.ParserATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class STParser extends Parser {
@@ -1648,8 +1652,6 @@ public class STParser extends Parser {
 		public TerminalNode GT_OP() { return getToken(STParser.GT_OP, 0); }
 		public TerminalNode LEQ_OP() { return getToken(STParser.LEQ_OP, 0); }
 		public TerminalNode GEQ_OP() { return getToken(STParser.GEQ_OP, 0); }
-		public TerminalNode EQ_OP() { return getToken(STParser.EQ_OP, 0); }
-		public TerminalNode NEQ_OP() { return getToken(STParser.NEQ_OP, 0); }
 		public ComparisonContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -1683,6 +1685,33 @@ public class STParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof STParserVisitor ) return ((STParserVisitor<? extends T>)visitor).visitParenExper(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class EquateExprContext extends ExpressionContext {
+		public ExpressionContext left;
+		public Token op;
+		public ExpressionContext right;
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public TerminalNode EQ_OP() { return getToken(STParser.EQ_OP, 0); }
+		public TerminalNode NEQ_OP() { return getToken(STParser.NEQ_OP, 0); }
+		public EquateExprContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof STParserListener ) ((STParserListener)listener).enterEquateExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof STParserListener ) ((STParserListener)listener).exitEquateExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof STParserVisitor ) return ((STParserVisitor<? extends T>)visitor).visitEquateExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1897,16 +1926,16 @@ public class STParser extends Parser {
 						break;
 					case 3:
 						{
-						_localctx = new ComparisonContext(new ExpressionContext(_parentctx, _parentState));
-						((ComparisonContext)_localctx).left = _prevctx;
+						_localctx = new EquateExprContext(new ExpressionContext(_parentctx, _parentState));
+						((EquateExprContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(263);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(264);
-						((ComparisonContext)_localctx).op = _input.LT(1);
+						((EquateExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==EQ_OP || _la==NEQ_OP) ) {
-							((ComparisonContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+							((EquateExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -1914,7 +1943,7 @@ public class STParser extends Parser {
 							consume();
 						}
 						setState(265);
-						((ComparisonContext)_localctx).right = expression(4);
+						((EquateExprContext)_localctx).right = expression(4);
 						}
 						break;
 					case 4:

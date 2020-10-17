@@ -8,9 +8,9 @@ import ir.VarTypeEnum;
 /**
  * Created by geo on 2020/10/13.
  */
-public class IrOperBinaryRel extends IrOperBinary {
+public class IrOperBinaryLogic extends IrOperBinary {
 
-    public IrOperBinaryRel(OperKeyWordEnum operation, IrExpr leftOperand, IrExpr rightOperand) {
+    public IrOperBinaryLogic(OperKeyWordEnum operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(operation, leftOperand, rightOperand);
     }
 
@@ -27,14 +27,10 @@ public class IrOperBinaryRel extends IrOperBinary {
         errorMessage += this.rightOperand.semanticCheck(symTable);
         errorMessage += this.leftOperand.semanticCheck(symTable);
 
-        // 2) verify that both lhs and rhs are int or real
-        boolean bothAreReals = (this.rightOperand.getExpressionType() == VarTypeEnum.RES_REAL)
-                && (this.leftOperand.getExpressionType() == VarTypeEnum.RES_REAL );
-        boolean bothAreInts = (this.rightOperand.getExpressionType()  == VarTypeEnum.RES_INT)
-                && (this.leftOperand.getExpressionType() == VarTypeEnum.RES_INT );
-
-        if (! bothAreInts  && !bothAreReals) {
-            errorMessage += "The lhs and rhs of a relational expression must be of type int or real" +
+        // 2) verify that both lhs and rhs are  int
+        if (!((this.rightOperand.getExpressionType() == VarTypeEnum.RES_BOOL)
+                && (this.leftOperand.getExpressionType()  == VarTypeEnum.RES_BOOL))) {
+            errorMessage += "The lhs and rhs of an arithmetic expression must be of type bool" +
                     " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
         }
 
@@ -43,19 +39,20 @@ public class IrOperBinaryRel extends IrOperBinary {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        String prettyString = indentSpace + "|__binaryRelOper\n";
+        String prettyString = indentSpace + "|--binaryCondOper\n";
 
         // pretty print the lhs
-        prettyString += "  " + indentSpace + "|__lhs\n";
+        prettyString += "  " + indentSpace + "|--lhs\n";
         prettyString += this.leftOperand.prettyPrint("    " + indentSpace);
 
         // print the operator
-        prettyString += "  " + indentSpace + "|__op: " + this.operation + "\n";
+        prettyString += "  " + indentSpace + "|--op: " + this.operation + "\n";
 
         // pretty print the rhs
-        prettyString += "  " + indentSpace + "|__rhs\n";
+        prettyString += "  " + indentSpace + "|--rhs\n";
         prettyString += this.rightOperand.prettyPrint("    " + indentSpace);
 
         return prettyString;
+
     }
 }

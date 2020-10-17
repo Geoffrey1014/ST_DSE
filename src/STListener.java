@@ -1,10 +1,10 @@
 import grammar.gen.STParser;
 import grammar.gen.STParserBaseListener;
-import ir.*;
 import ir.Arg.IrArg;
-import ir.Arg.IrArgAssign;
+import ir.Arg.IrArgExpr;
 import ir.Arg.IrArgInputAssign;
 import ir.CtrlFlow.*;
+import ir.*;
 import ir.Literal.*;
 import ir.Location.IrFbStLocation;
 import ir.Location.IrLocation;
@@ -20,7 +20,6 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
 
 import java.util.ArrayList;
 
@@ -162,7 +161,7 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitFunction(STParser.FunctionContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        VarTypeEnum type = (VarTypeEnum) getASTNode(ctx.type_rule());
+        IrType type = (IrType) getASTNode(ctx.type_rule());
 
         IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
         IrVARBlockDecl varBlockVAR = null;
@@ -358,7 +357,7 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitExternArg(STParser.ExternArgContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        setASTNode(ctx, new IrArgAssign( getASTNode(ctx.expression()) , l.line, l.col ) );
+        setASTNode(ctx, new IrArgExpr((IrExpr) getASTNode(ctx.expression()), l.line, l.col ) );
     }
 
     @Override public void enterAssignParam(STParser.AssignParamContext ctx) { }
@@ -366,8 +365,9 @@ public class STListener extends STParserBaseListener {
     @Override public void exitAssignParam(STParser.AssignParamContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent argName = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        IrLocation location = new IrLocationVar(argName);
         IrExpr value = (IrExpr) getASTNode(ctx.expression());
-        IrArgInputAssign argInputAssign = new IrArgInputAssign(value,argName);
+        IrArgInputAssign argInputAssign = new IrArgInputAssign(value,location);
         setASTNode(ctx, argInputAssign);
 
     }
@@ -447,7 +447,7 @@ public class STListener extends STParserBaseListener {
     @Override public void exitComparison(STParser.ComparisonContext ctx) {
         IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
-        IrOperBinaryCond operBinaryCond = null;
+        IrOperBinaryRel operBinaryCond = null;
         myPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
@@ -457,23 +457,23 @@ public class STListener extends STParserBaseListener {
         else {
             switch (type){
                 case LT_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.LT_OP,left,right );
+                    operBinaryCond = new IrOperBinaryRel(OperKeyWordEnum.LT_OP,left,right );
                     break;
                 case GT_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.GT_OP,left,right );
+                    operBinaryCond = new IrOperBinaryRel(OperKeyWordEnum.GT_OP,left,right );
                     break;
                 case LEQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.LEQ_OP,left,right );
+                    operBinaryCond = new IrOperBinaryRel(OperKeyWordEnum.LEQ_OP,left,right );
                     break;
                 case GEQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.GEQ_OP,left,right );
+                    operBinaryCond = new IrOperBinaryRel(OperKeyWordEnum.GEQ_OP,left,right );
                     break;
-                case EQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.EQ_OP,left,right );
-                    break;
-                case NEQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.NEQ_OP,left,right );
-                    break;
+//                case EQ_OP:
+//                    operBinaryCond = new IrOperBinaryRel(OperKeyWordEnum.EQ_OP,left,right );
+//                    break;
+//                case NEQ_OP:
+//                    operBinaryCond = new IrOperBinaryRel(OperKeyWordEnum.NEQ_OP,left,right );
+//                    break;
                 default:
                     break;
             }
@@ -482,13 +482,40 @@ public class STListener extends STParserBaseListener {
 
     }
 
+    @Override public void enterEquateExpr(STParser.EquateExprContext ctx) { }
+
+    @Override public void exitEquateExpr(STParser.EquateExprContext ctx) {
+        IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
+        IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
+        IrOperBinaryEq operBinaryCond = null;
+        myPrint.levelTwo.print(ctx.op.getText());
+        String op = ctx.op.getText();
+        OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
+        if (type == null){
+            System.err.println("There is no such operation: " + op);
+        }
+        else {
+            switch (type){
+
+                case EQ_OP:
+                    operBinaryCond = new IrOperBinaryEq(OperKeyWordEnum.EQ_OP,left,right );
+                    break;
+                case NEQ_OP:
+                    operBinaryCond = new IrOperBinaryEq(OperKeyWordEnum.NEQ_OP,left,right );
+                    break;
+                default:
+                    break;
+            }
+            setASTNode(ctx, operBinaryCond);
+        }
+    }
 
     @Override public void enterLogic(STParser.LogicContext ctx) { }
 
     @Override public void exitLogic(STParser.LogicContext ctx) {
         IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
-        IrOperBinaryCond operBinaryCond = null;
+        IrOperBinaryLogic operBinaryCond = null;
         myPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
@@ -499,13 +526,13 @@ public class STListener extends STParserBaseListener {
             switch (type){
                 case AND_OP:
                 case AND_S_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.AND_OP,left,right );
+                    operBinaryCond = new IrOperBinaryLogic(OperKeyWordEnum.AND_OP,left,right );
                     break;
                 case OR_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.OR_OP,left,right );
+                    operBinaryCond = new IrOperBinaryLogic(OperKeyWordEnum.OR_OP,left,right );
                     break;
                 case XOR_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.XOR_OP,left,right );
+                    operBinaryCond = new IrOperBinaryLogic(OperKeyWordEnum.XOR_OP,left,right );
                     break;
                 default:
                     break;
@@ -527,11 +554,11 @@ public class STListener extends STParserBaseListener {
 
 
     @Override public void enterPrimaryExpr(STParser.PrimaryExprContext ctx) {
-        setASTNode(ctx, getASTNode(ctx.primary_expression()));
+
     }
 
     @Override public void exitPrimaryExpr(STParser.PrimaryExprContext ctx) {
-
+        setASTNode(ctx, getASTNode(ctx.primary_expression()));
     }
 
     @Override public void enterPrimary_expression(STParser.Primary_expressionContext ctx) { }
@@ -566,33 +593,33 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitFbLcation(STParser.FbLcationContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        ArrayList<String> strings = new ArrayList<>();
-//        StringBuilder name = new StringBuilder();
-        for (ParseTree node : ctx.ID()){
-            strings.add(node.getText());
-        }
-        IrIdent irIdent = new IrIdent(strings,l.line, l.col);
+//        ArrayList<IrIdent> names = new ArrayList<>();
+//        for (ParseTree node : ctx.ID()){
+            IrIdent id1 = new IrIdent(ctx.ID(0).getText(),l.line, l.col);
+        IrIdent id2 = new IrIdent(ctx.ID(2).getText(),l.line, l.col);
 
-        setASTNode(ctx,new IrFbStLocation(irIdent));
+//        }
+
+
+        setASTNode(ctx,new IrFbStLocation(id1, id2));
     }
 
     @Override public void enterVar_block(STParser.Var_blockContext ctx) { }
 
     @Override public void exitVar_block(STParser.Var_blockContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
 
-        //TODO varibale_declaration   需要先完成
+        ArrayList<IrVarDecl> varDeclArrayList = new ArrayList<>();
         for (ParseTree node : ctx.variable_declaration()){
-            IrVarDecl varDecl = (IrVarDecl) getASTNode(node);
+              varDeclArrayList.add( (IrVarDecl) getASTNode(node));
         }
 
         VarAccessTypeEnum type = VarAccessTypeEnum.fromVarAccessType(ctx.var_acc_type.getText());
         if (type == null){
             System.err.println("There is no such operation: " + ctx.getText());
         }
-        else {
-
-        }
-
+        IrVARBlockDecl varBlockDecl = new IrVARBlockDecl(l.line,l.col,varDeclArrayList,type);
+        setASTNode(ctx, varBlockDecl);
     }
 
     @Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
@@ -617,7 +644,7 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitSimpleType(STParser.SimpleTypeContext ctx) {
         IrTypeSimple typeSimple = new IrTypeSimple((VarTypeEnum) getASTNode(ctx.elementary_type_name()));
-        setASTNode(ctx, getASTNode(ctx.getChild(0)));
+        setASTNode(ctx, typeSimple);
     }
 
 
@@ -627,6 +654,7 @@ public class STListener extends STParserBaseListener {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrTypeArray typeArray = new IrTypeArray(l.line, l.col, (IrIntLiteral)getASTNode(ctx.range.get(0)),
                 (IrIntLiteral)getASTNode(ctx.range.get(1)), (VarTypeEnum) getASTNode(ctx.elementary_type_name()));
+        setASTNode(ctx, typeArray);
     }
 
     @Override public void enterElementary_type_name(STParser.Elementary_type_nameContext ctx) { }
@@ -785,9 +813,17 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFloating_point_literal(STParser.Floating_point_literalContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrFloatLiteral floatLiteral = (IrFloatLiteral) getASTNode(ctx.floating_point_fraction());
-        IrIntLiteral irIntLiteral = (IrIntLiteral) getASTNode(ctx.decimal_exponent());
-        floatLiteral = new IrFloatLiteral(floatLiteral.getValue() * irIntLiteral.getValue(), l.line, l.col);
+        Long exponent = 1L;
+        if (ctx.decimal_exponent() != null){
+            IrIntLiteral irIntLiteral = (IrIntLiteral) getASTNode(ctx.decimal_exponent());
+            exponent = irIntLiteral.getValue();
+        }
+
+//        System.out.println(floatLiteral.getValue());
+
+        floatLiteral = new IrFloatLiteral(floatLiteral.getValue() * Math.pow(10, exponent) , l.line, l.col);
         setASTNode(ctx, floatLiteral);
+
 
     }
 
@@ -805,7 +841,7 @@ public class STListener extends STParserBaseListener {
 //        }
         String s = ctx.getText();
 
-        new IrFloatLiteral(Double.valueOf(s.replaceAll("_", "")),l.line, l.col );
+        setASTNode(ctx, new IrFloatLiteral(Double.valueOf(s.replaceAll("_", "")),l.line, l.col ));
     }
 
     @Override public void enterDecimal_exponent(STParser.Decimal_exponentContext ctx) { }

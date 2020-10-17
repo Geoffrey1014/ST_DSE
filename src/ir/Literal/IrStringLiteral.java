@@ -1,9 +1,10 @@
 package ir.Literal;
 
+import SymbolTable.SymTable;
 import ir.VarTypeEnum;
 
 /**
- 这个应该是用不上的 TODO: 应该是没有这个类型
+ 这个应该是用不上的 TODO: 这个类型不太清楚怎么用的
  */
 public class IrStringLiteral extends IrLiteral {
     private final String value;
@@ -20,5 +21,17 @@ public class IrStringLiteral extends IrLiteral {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return "";
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        String prettyPrint = indentSpace + "|--stringLiteral\n";
+        prettyPrint += "  " + indentSpace + "|--value: " + this.value + "\n";
+        return prettyPrint;
     }
 }

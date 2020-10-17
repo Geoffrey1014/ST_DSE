@@ -3,7 +3,7 @@ package ir.Operation;
 import ir.Where;
 
 public enum OperKeyWordEnum implements Where {
-    ADD_OP("+"),SUB_OP("-"),MUL_OP("*"),DIV_OP("?"), MOD_OP("MOD"), POWER_OP("**"),
+    ADD_OP("+"),SUB_OP("-"),MUL_OP("*"),DIV_OP("/"), MOD_OP("MOD"), POWER_OP("**"),
     LT_OP("<") , GT_OP(">") , LEQ_OP("<=") , GEQ_OP(">="),
     EQ_OP("=") , NEQ_OP("<>"),
     AND_OP("AND") , AND_S_OP("&"), OR_OP("OR"), XOR_OP("XOR");

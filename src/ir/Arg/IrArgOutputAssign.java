@@ -1,5 +1,6 @@
 package ir.Arg;
 
+import SymbolTable.SymTable;
 import ir.IrIdent;
 
 public class IrArgOutputAssign extends IrArg {
@@ -9,5 +10,15 @@ public class IrArgOutputAssign extends IrArg {
         super(lineNumber, colNumber);
         this.fbOutput = fbOutput;
         this.acceptLocation = acceptLocation;
+    }
+
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return null;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return null;
     }
 }

@@ -1,5 +1,7 @@
 package ir;
 
+import SymbolTable.SymTable;
+
 public abstract class Ir implements Where {
     private final int lineNumber;
     private final int colNumber;
@@ -18,4 +20,9 @@ public abstract class Ir implements Where {
     public int getColNumber() {
         return colNumber;
     }
+
+    public abstract  String semanticCheck(SymTable symTable);
+
+
+    public abstract String prettyPrint(String indentSpace);
 }

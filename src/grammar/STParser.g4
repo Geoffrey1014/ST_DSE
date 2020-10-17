@@ -90,7 +90,7 @@ expression
     | SUB_OP expression # NegateExpr
     | left=expression op=(MUL_OP| DIV_OP| MOD_OP | ADD_OP| SUB_OP | POWER_OP) right=expression #ArithExpr
     | left=expression op=(LT_OP | GT_OP | LEQ_OP | GEQ_OP) right=expression # Comparison
-    | left=expression op=(EQ_OP| NEQ_OP) right=expression # Comparison
+    | left=expression op=(EQ_OP| NEQ_OP) right=expression # EquateExpr
     | left=expression op = (AND_OP | XOR | OR) right=expression # Logic
     | L_PAREN expression R_PAREN  # ParenExper
     ;
@@ -100,11 +100,11 @@ primary_expression : constant
                     | location
                     | invoc_stat
                     ;
-//enumerated_value: ' '; // TODO
+//enumerated_value: ' ';
 location:
     ID   #VarLocation
     | ID L_SQUARE expression R_SQUARE  # ArrayLocation
-    | ID (DOT ID)+ #FbLcation  //TODO: 这个比较麻烦
+    | ID DOT ID #FbLcation  //TODO: 这个比较麻烦, 不考虑多层
     ;
 
 

@@ -1,5 +1,7 @@
 package ir;
 
+import SymbolTable.SymTable;
+
 import java.util.ArrayList;
 
 public class IrIdent extends Ir {
@@ -23,8 +25,17 @@ public class IrIdent extends Ir {
         this.name = name;
     }
 
-    public String getName() {
+    public String getValue() {
         return name;
     }
 
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return "";
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return "";
+    }
 }

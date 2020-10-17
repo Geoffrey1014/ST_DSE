@@ -107,9 +107,9 @@ public class Mian {
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
 
-//            myprint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
-//            myprint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
-//            myprint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
+            myprint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
+            myprint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
+            myprint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
 
         }
         catch (IOException e){

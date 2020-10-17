@@ -169,6 +169,13 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenExper(STParser.ParenExperContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code EquateExpr}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEquateExpr(STParser.EquateExprContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code PrimaryExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree

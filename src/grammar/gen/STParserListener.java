@@ -272,6 +272,18 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitParenExper(STParser.ParenExperContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code EquateExpr}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterEquateExpr(STParser.EquateExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code EquateExpr}
+	 * labeled alternative in {@link STParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitEquateExpr(STParser.EquateExprContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code PrimaryExpr}
 	 * labeled alternative in {@link STParser#expression}.
 	 * @param ctx the parse tree

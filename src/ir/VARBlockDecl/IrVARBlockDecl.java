@@ -1,17 +1,16 @@
 package ir.VARBlockDecl;
 
+import SymbolTable.SymTable;
 import ir.Ir;
-import ir.Where;
 
-import java.util.List;
-
+import java.util.ArrayList;
 
 
-public abstract class IrVARBlockDecl extends Ir {
+public class IrVARBlockDecl extends Ir {
 
-    private final List<IrVarDecl> VarList;
+    private final ArrayList<IrVarDecl> VarList;
     private final VarAccessTypeEnum accessType;
-    public IrVARBlockDecl(int lineNumber, int colNumber, List<IrVarDecl> varList, VarAccessTypeEnum accessType) {
+    public IrVARBlockDecl(int lineNumber, int colNumber, ArrayList<IrVarDecl> varList, VarAccessTypeEnum accessType) {
         super(lineNumber, colNumber);
         this.VarList = varList;
         this.accessType = accessType;
@@ -22,4 +21,37 @@ public abstract class IrVARBlockDecl extends Ir {
     }
 
 
+    public ArrayList<IrVarDecl> getVarList() {
+        return VarList;
+    }
+
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        String errorMessage = "";
+
+        // 1) check that no identifiers declared twice in same scope
+        for (IrVarDecl varDecl : this.VarList) {
+            if (symTable.checkIfSymbolExistsAtCurrentScope(varDecl.getName())) {
+                errorMessage += "Duplicate declaration in same scope __filename__" +
+                        " line: " + varDecl.getLineNumber() + " col: " + varDecl.getColNumber() + "\n";
+            }
+            symTable.addObjectToCurrentScope(varDecl.getName(), varDecl);
+
+            // make sure each vardDecl is correct
+            errorMessage += varDecl.semanticCheck(symTable);
+        }
+        return errorMessage;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        String prettyString = indentSpace + "|--codeBlock:\n";
+
+        // pretty print statement
+        for (IrVarDecl varDecl : this.VarList) {
+            prettyString += varDecl.prettyPrint("  " + indentSpace);
+        }
+
+        return prettyString;
+    }
 }
