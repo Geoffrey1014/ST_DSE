@@ -6,11 +6,11 @@ import ir.IrExpr;
  * Created by geo on 2020/10/13.
  */
 public abstract class IrOperBinary extends IrOper {
-    public OperKeyWords operation;
+    public OperKeyWordEnum operation;
     public IrExpr leftOperand;
     public IrExpr rightOperand;
 
-    public IrOperBinary(OperKeyWords operation, IrExpr leftOperand, IrExpr rightOperand) {
+    public IrOperBinary(OperKeyWordEnum operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(leftOperand.getLineNumber(), leftOperand.getColNumber());
         this.operation = operation;
         this.leftOperand = IrExpr.canonicalizeExpr(leftOperand);
@@ -25,7 +25,7 @@ public abstract class IrOperBinary extends IrOper {
         return this.rightOperand;
     }
 
-    public OperKeyWords getOperation() {
+    public OperKeyWordEnum getOperation() {
         return this.operation;
     }
 

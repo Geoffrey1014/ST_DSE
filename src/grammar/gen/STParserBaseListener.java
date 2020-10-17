@@ -426,13 +426,13 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVar_acc_type(STParser.Var_acc_typeContext ctx) { }
+	@Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVar_acc_type(STParser.Var_acc_typeContext ctx) { }
+	@Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -481,18 +481,6 @@ public class STParserBaseListener implements STParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRange(STParser.RangeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

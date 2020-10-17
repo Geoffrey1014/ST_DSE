@@ -10,7 +10,7 @@ import ir.IrTypeBool;
  */
 public class IrOperBinaryRel extends IrOperBinary {
 
-    public IrOperBinaryRel(OperKeyWords operation, IrExpr leftOperand, IrExpr rightOperand) {
+    public IrOperBinaryRel(OperKeyWordEnum operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(operation, leftOperand, rightOperand);
     }
 

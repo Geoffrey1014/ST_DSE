@@ -9,7 +9,7 @@ import ir.IrTypeInt;
  */
 public class IrOperBinaryArith extends IrOperBinary {
 
-    public IrOperBinaryArith(OperKeyWords operation, IrExpr leftOperand, IrExpr rightOperand) {
+    public IrOperBinaryArith(OperKeyWordEnum operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(operation, leftOperand, rightOperand);
     }
 

@@ -376,15 +376,15 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitVar_block(STParser.Var_blockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link STParser#var_acc_type}.
+	 * Enter a parse tree produced by {@link STParser#variable_declaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterVar_acc_type(STParser.Var_acc_typeContext ctx);
+	void enterVariable_declaration(STParser.Variable_declarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link STParser#var_acc_type}.
+	 * Exit a parse tree produced by {@link STParser#variable_declaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitVar_acc_type(STParser.Var_acc_typeContext ctx);
+	void exitVariable_declaration(STParser.Variable_declarationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code simpleType}
 	 * labeled alternative in {@link STParser#type_rule}.
@@ -429,16 +429,6 @@ public interface STParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRange(STParser.RangeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link STParser#variable_declaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariable_declaration(STParser.Variable_declarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link STParser#variable_declaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariable_declaration(STParser.Variable_declarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link STParser#elementary_type_name}.
 	 * @param ctx the parse tree

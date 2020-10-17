@@ -230,11 +230,11 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVar_block(STParser.Var_blockContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link STParser#var_acc_type}.
+	 * Visit a parse tree produced by {@link STParser#variable_declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVar_acc_type(STParser.Var_acc_typeContext ctx);
+	T visitVariable_declaration(STParser.Variable_declarationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code simpleType}
 	 * labeled alternative in {@link STParser#type_rule}.
@@ -261,12 +261,6 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRange(STParser.RangeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link STParser#variable_declaration}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariable_declaration(STParser.Variable_declarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link STParser#elementary_type_name}.
 	 * @param ctx the parse tree

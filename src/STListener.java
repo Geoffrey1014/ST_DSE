@@ -13,10 +13,7 @@ import ir.Operation.*;
 import ir.POUDecl.IrFunctionBlockDecl;
 import ir.POUDecl.IrFunctionDecl;
 import ir.POUDecl.IrProgramDecl;
-import ir.VARBlockDecl.IrVARBlockDecl;
-import ir.VARBlockDecl.IrVARBlockDeclInput;
-import ir.VARBlockDecl.IrVARBlockDeclOutput;
-import ir.VARBlockDecl.IrVARBlockDeclVar;
+import ir.VARBlockDecl.*;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -77,29 +74,43 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitProgram(STParser.ProgramContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        IrIdent programName = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
 //        System.out.println(ctx.name);
         System.err.println(ctx.ID().getSymbol());
 
         IrVARBlockDecl varBlockVAR = null;
         IrVARBlockDecl varBlockVAR_INPUT = null;
         IrVARBlockDecl varBlockVAR_OUTPUT = null;
+        IrVARBlockDecl varBlockVAR_INPUT_OUTPUT =null;
+        IrVARBlockDecl varBlockVAR_TEMP= null;
         IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
 
         for (ParseTree node :ctx.var_blocks){
-            Ir AstNode = ASTNodes.get(node);
+            IrVARBlockDecl varBlockDecl = (IrVARBlockDecl) getASTNode(node);
+            VarAccessTypeEnum type = varBlockDecl.getAccessType();
+            switch (type){
+                case VAR:
+                    varBlockVAR = varBlockDecl;
+                    break;
+                case VAR_INPUT:
+                    varBlockVAR_INPUT = varBlockDecl;
+                    break;
+                case VAR_OUTPUT:
+                    varBlockVAR_OUTPUT = varBlockDecl;
+                    break;
+                case VAR_INPUT_OUTPUT:
+                    varBlockVAR_INPUT_OUTPUT = varBlockDecl;
+                    break;
+                case RES_VAR_TEMP:
+                    varBlockVAR_TEMP = varBlockDecl;
+                    break;
+                default:
+                    System.err.println("there is no such var access type" + type.getTypeName());
 
-            if (AstNode instanceof IrVARBlockDeclInput){
-                varBlockVAR = (IrVARBlockDecl) AstNode;
-            }
-            else if (AstNode instanceof IrVARBlockDeclOutput){
-                varBlockVAR_INPUT = (IrVARBlockDecl) AstNode;
-            }
-            else if (AstNode instanceof IrVARBlockDeclVar){
-                varBlockVAR_OUTPUT = (IrVARBlockDecl) AstNode;
             }
         }
-        IrProgramDecl program = new IrProgramDecl(programName, varBlockVAR, varBlockVAR_INPUT, varBlockVAR_OUTPUT, codeBlock);
+        IrProgramDecl program = new IrProgramDecl(name, varBlockVAR, varBlockVAR_INPUT, varBlockVAR_OUTPUT,
+                varBlockVAR_INPUT_OUTPUT, varBlockVAR_TEMP,codeBlock);
         setASTNode(ctx, program);
     }
 
@@ -108,29 +119,41 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitFunction_block(STParser.Function_blockContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        IrIdent fuctionBlockName = new IrIdent(ctx.ID().getText(), l.line, l.col);
-
-        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
+        IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
         IrVARBlockDecl varBlockVAR = null;
         IrVARBlockDecl varBlockVAR_INPUT = null;
         IrVARBlockDecl varBlockVAR_OUTPUT = null;
+        IrVARBlockDecl varBlockVAR_INPUT_OUTPUT =null;
+        IrVARBlockDecl varBlockVAR_TEMP= null;
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
 
         for (ParseTree node :ctx.var_blocks){
-            Ir AstNode = ASTNodes.get(node);
+            IrVARBlockDecl varBlockDecl = (IrVARBlockDecl) getASTNode(node);
+            VarAccessTypeEnum type = varBlockDecl.getAccessType();
+            switch (type){
+                case VAR:
+                    varBlockVAR = varBlockDecl;
+                    break;
+                case VAR_INPUT:
+                    varBlockVAR_INPUT = varBlockDecl;
+                    break;
+                case VAR_OUTPUT:
+                    varBlockVAR_OUTPUT = varBlockDecl;
+                    break;
+                case VAR_INPUT_OUTPUT:
+                    varBlockVAR_INPUT_OUTPUT = varBlockDecl;
+                    break;
+                case RES_VAR_TEMP:
+                    varBlockVAR_TEMP = varBlockDecl;
+                    break;
+                default:
+                    System.err.println("there is no such var access type" + type.getTypeName());
 
-            if (AstNode instanceof IrVARBlockDeclInput){
-                varBlockVAR = (IrVARBlockDecl) AstNode;
-            }
-            else if (AstNode instanceof IrVARBlockDeclOutput){
-                varBlockVAR_INPUT = (IrVARBlockDecl) AstNode;
-            }
-            else if (AstNode instanceof IrVARBlockDeclVar){
-                 varBlockVAR_OUTPUT = (IrVARBlockDecl) AstNode;
             }
         }
 
-        IrFunctionBlockDecl functionBlock = new IrFunctionBlockDecl(fuctionBlockName,
-                varBlockVAR, varBlockVAR_INPUT, varBlockVAR_OUTPUT, codeBlock);
+        IrFunctionBlockDecl functionBlock = new IrFunctionBlockDecl(name, varBlockVAR, varBlockVAR_INPUT, varBlockVAR_OUTPUT,
+                varBlockVAR_INPUT_OUTPUT, varBlockVAR_TEMP,codeBlock);
         setASTNode(ctx, functionBlock);
     }
 
@@ -138,28 +161,43 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitFunction(STParser.FunctionContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        IrIdent fuctionName = new IrIdent(ctx.ID().getText(), l.line, l.col);
         IrType type = (IrType) getASTNode(ctx.type_rule());
 
-        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
+        IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
         IrVARBlockDecl varBlockVAR = null;
         IrVARBlockDecl varBlockVAR_INPUT = null;
         IrVARBlockDecl varBlockVAR_OUTPUT = null;
+        IrVARBlockDecl varBlockVAR_INPUT_OUTPUT =null;
+        IrVARBlockDecl varBlockVAR_TEMP= null;
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
 
         for (ParseTree node :ctx.var_blocks){
-            Ir AstNode = ASTNodes.get(node);
+            IrVARBlockDecl varBlockDecl = (IrVARBlockDecl) getASTNode(node);
+            VarAccessTypeEnum accessType = varBlockDecl.getAccessType();
+            switch (accessType){
+                case VAR:
+                    varBlockVAR = varBlockDecl;
+                    break;
+                case VAR_INPUT:
+                    varBlockVAR_INPUT = varBlockDecl;
+                    break;
+                case VAR_OUTPUT:
+                    varBlockVAR_OUTPUT = varBlockDecl;
+                    break;
+                case VAR_INPUT_OUTPUT:
+                    varBlockVAR_INPUT_OUTPUT = varBlockDecl;
+                    break;
+                case RES_VAR_TEMP:
+                    varBlockVAR_TEMP = varBlockDecl;
+                    break;
+                default:
+                    System.err.println("there is no such var access type" + accessType.getTypeName());
 
-            if (AstNode instanceof IrVARBlockDeclInput){
-                varBlockVAR = (IrVARBlockDecl) AstNode;
-            }
-            else if (AstNode instanceof IrVARBlockDeclOutput){
-                varBlockVAR_INPUT = (IrVARBlockDecl) AstNode;
-            }
-            else if (AstNode instanceof IrVARBlockDeclVar){
-                varBlockVAR_OUTPUT = (IrVARBlockDecl) AstNode;
             }
         }
-        IrFunctionDecl function = new IrFunctionDecl(fuctionName,type,varBlockVAR,varBlockVAR_INPUT, varBlockVAR_OUTPUT, codeBlock);
+        IrFunctionDecl function = new IrFunctionDecl(name,type,
+                varBlockVAR, varBlockVAR_INPUT, varBlockVAR_OUTPUT,
+                varBlockVAR_INPUT_OUTPUT, varBlockVAR_TEMP,codeBlock);
         setASTNode(ctx,function);
 
     }
@@ -371,29 +409,29 @@ public class STListener extends STParserBaseListener {
         IrOperBinaryArith operBinaryArith = null;
         myPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
-        OperKeyWords type = OperKeyWords.fromOperTpye(op);
+        OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
             System.err.println("There is no such operation: " + op);
         }
         else {
             switch (type){
                 case ADD_OP:
-                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.ADD_OP,left,right );
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWordEnum.ADD_OP,left,right );
                     break;
                 case SUB_OP:
-                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.SUB_OP,left,right );
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWordEnum.SUB_OP,left,right );
                     break;
                 case MUL_OP:
-                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.MUL_OP,left,right );
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWordEnum.MUL_OP,left,right );
                     break;
                 case DIV_OP:
-                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.DIV_OP,left,right );
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWordEnum.DIV_OP,left,right );
                     break;
                 case MOD_OP:
-                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.MOD_OP,left,right );
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWordEnum.MOD_OP,left,right );
                     break;
                 case POWER_OP:
-                    operBinaryArith = new IrOperBinaryArith(OperKeyWords.POWER_OP,left,right );
+                    operBinaryArith = new IrOperBinaryArith(OperKeyWordEnum.POWER_OP,left,right );
                     break;
                 default:
 
@@ -411,29 +449,29 @@ public class STListener extends STParserBaseListener {
         IrOperBinaryCond operBinaryCond = null;
         myPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
-        OperKeyWords type = OperKeyWords.fromOperTpye(op);
+        OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
             System.err.println("There is no such operation: " + op);
         }
         else {
             switch (type){
                 case LT_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.LT_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.LT_OP,left,right );
                     break;
                 case GT_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.GT_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.GT_OP,left,right );
                     break;
                 case LEQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.LEQ_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.LEQ_OP,left,right );
                     break;
                 case GEQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.GEQ_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.GEQ_OP,left,right );
                     break;
                 case EQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.EQ_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.EQ_OP,left,right );
                     break;
                 case NEQ_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.NEQ_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.NEQ_OP,left,right );
                     break;
                 default:
                     break;
@@ -452,7 +490,7 @@ public class STListener extends STParserBaseListener {
         IrOperBinaryCond operBinaryCond = null;
         myPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
-        OperKeyWords type = OperKeyWords.fromOperTpye(op);
+        OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
             System.err.println("There is no such operation: " + op);
         }
@@ -460,13 +498,13 @@ public class STListener extends STParserBaseListener {
             switch (type){
                 case AND_OP:
                 case AND_S_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.AND_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.AND_OP,left,right );
                     break;
                 case OR_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.OR_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.OR_OP,left,right );
                     break;
                 case XOR_OP:
-                    operBinaryCond = new IrOperBinaryCond(OperKeyWords.XOR_OP,left,right );
+                    operBinaryCond = new IrOperBinaryCond(OperKeyWordEnum.XOR_OP,left,right );
                     break;
                 default:
                     break;
@@ -537,13 +575,40 @@ public class STListener extends STParserBaseListener {
         setASTNode(ctx,new IrFbStLocation(irIdent));
     }
 
+    @Override public void enterVar_block(STParser.Var_blockContext ctx) { }
+
+    @Override public void exitVar_block(STParser.Var_blockContext ctx) {
+
+
+        for (ParseTree node : ctx.variable_declaration()){
+            IrVarDecl varDecl = (IrVarDecl) getASTNode(node);
+        }
+        VarAccessTypeEnum type = VarAccessTypeEnum.fromVarAccessType(ctx.var_acc_type.getText());
+        if (type == null){
+            System.err.println("There is no such operation: " + ctx.getText());
+        }
+        else {
+
+        }
+
+    }
+
+
+
+    @Override public void enterArrayType(STParser.ArrayTypeContext ctx) { }
+
+    @Override public void exitArrayType(STParser.ArrayTypeContext ctx) { }
+
+    @Override public void enterArray_type(STParser.Array_typeContext ctx) { }
+
+    @Override public void exitArray_type(STParser.Array_typeContext ctx) { }
+
 
     @Override public void enterRange(STParser.RangeContext ctx) { }
 
     @Override public void exitRange(STParser.RangeContext ctx) {
         myPrint.LevelOne.print(ctx.lbound.getText());
         myPrint.LevelOne.print(ctx.ubound.getText());
-
 
     }
 

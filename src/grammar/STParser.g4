@@ -110,15 +110,15 @@ location:
 
 
 var_block
-  : var_acc_type  variable_declaration*  RES_END_VAR;
-
-var_acc_type:
+  : var_acc_type=(
      RES_VAR
      |  RES_VAR_INPUT
      |  RES_VAR_OUTPUT
      |  RES_VAR_INPUT_OUTPUT
-     |  RES_VAR_TEMP
-     ;
+     |  RES_VAR_TEMP)  variable_declaration*  RES_END_VAR;
+
+variable_declaration:
+  names+=ID (COMMA names+=ID)* COLON type=type_rule (AS_OP variable_initializer)? SEMI_COL ;
 
 type_rule:
   elementary_type_name #simpleType
@@ -136,8 +136,7 @@ range
 //structure_type_declaration: ' ';
 
 
-variable_declaration:
-  names+=ID (COMMA names+=ID)* COLON type=type_rule (AS_OP variable_initializer)? SEMI_COL ;
+
 
 elementary_type_name : numeric_type_name | date_type_name | bit_string_type_name;
 numeric_type_name : integer_type_name | real_type_name;
