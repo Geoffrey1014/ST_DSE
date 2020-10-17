@@ -5,9 +5,7 @@ import ir.Arg.IrArg;
 import ir.Arg.IrArgAssign;
 import ir.Arg.IrArgInputAssign;
 import ir.CtrlFlow.*;
-import ir.Literal.IrIntLiteral;
-import ir.Literal.IrLiteral;
-import ir.Literal.IrStringLiteral;
+import ir.Literal.*;
 import ir.Location.IrFbStLocation;
 import ir.Location.IrLocation;
 import ir.Location.IrLocationArray;
@@ -569,11 +567,11 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFbLcation(STParser.FbLcationContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         ArrayList<String> strings = new ArrayList<>();
-        StringBuilder name = new StringBuilder();
+//        StringBuilder name = new StringBuilder();
         for (ParseTree node : ctx.ID()){
-            name.append(node.getText());
+            strings.add(node.getText());
         }
-        IrIdent irIdent = new IrIdent(name.toString(),l.line, l.col);
+        IrIdent irIdent = new IrIdent(strings,l.line, l.col);
 
         setASTNode(ctx,new IrFbStLocation(irIdent));
     }
@@ -600,6 +598,17 @@ public class STListener extends STParserBaseListener {
     @Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
 
     @Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) {
+        ArrayList<IrIdent> nameArrayList = new ArrayList<>();
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        for (TerminalNode node : ctx.ID()){
+            nameArrayList.add(new IrIdent(node.getText(),node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() ));
+        }
+        IrType type = (IrType) getASTNode(ctx.type_rule());
+        IrValue value = null;
+        value = (IrValue) getASTNode(ctx.variable_initializer());
+        IrVarDecl varDecl = new IrVarDecl(l.line, l.col, nameArrayList, type, value);
+        setASTNode(ctx, varDecl);
+
 
     }
 
@@ -607,6 +616,7 @@ public class STListener extends STParserBaseListener {
     }
 
     @Override public void exitSimpleType(STParser.SimpleTypeContext ctx) {
+        IrTypeSimple typeSimple = new IrTypeSimple((VarTypeEnum) getASTNode(ctx.elementary_type_name()));
         setASTNode(ctx, getASTNode(ctx.getChild(0)));
     }
 
@@ -614,7 +624,9 @@ public class STListener extends STParserBaseListener {
     @Override public void enterArrayType(STParser.ArrayTypeContext ctx) { }
 
     @Override public void exitArrayType(STParser.ArrayTypeContext ctx) {
-
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrTypeArray typeArray = new IrTypeArray(l.line, l.col, (IrIntLiteral)getASTNode(ctx.range.get(0)),
+                (IrIntLiteral)getASTNode(ctx.range.get(1)), (VarTypeEnum) getASTNode(ctx.elementary_type_name()));
     }
 
     @Override public void enterElementary_type_name(STParser.Elementary_type_nameContext ctx) { }
@@ -705,11 +717,109 @@ public class STListener extends STParserBaseListener {
     }
 
 
-    @Override public void enterRange(STParser.RangeContext ctx) { }
+    @Override public void enterVariable_initializer(STParser.Variable_initializerContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitVariable_initializer(STParser.Variable_initializerContext ctx) {
+        Where node = getASTNode(ctx.getChild(0));
+        if (node  instanceof IrValueArray){
+            setASTNode(ctx, node);
+        }
+        else {
+            setASTNode(ctx, new IrValueSimple((IrLiteral) node));
+        }
+    }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void enterArray_initialization(STParser.Array_initializationContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitArray_initialization(STParser.Array_initializationContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        ArrayList<IrLiteral> arrayList = new ArrayList<>();
 
-    @Override public void exitRange(STParser.RangeContext ctx) {
-        myPrint.LevelOne.print(ctx.lbound.getText());
-        myPrint.LevelOne.print(ctx.ubound.getText());
+        for (ParseTree node : ctx.constant()){
+            arrayList.add((IrLiteral) getASTNode(node));
+        }
+        IrValueArray valueArray = new IrValueArray(l.line,l.col, arrayList);
+        setASTNode(ctx, valueArray);
+
+    }
+
+
+    @Override public void enterConstant(STParser.ConstantContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitConstant(STParser.ConstantContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        if (ctx.BOOL() != null){
+            setASTNode(ctx, new IrBoolLiteral(Boolean.valueOf(ctx.BOOL().getText().toLowerCase()),l.line, l.col ));
+        }
+        else {
+            setASTNode(ctx, getASTNode(ctx.getChild(0)));
+        }
+    }
+
+    @Override public void enterNumeric_literal(STParser.Numeric_literalContext ctx) { }
+
+    @Override public void exitNumeric_literal(STParser.Numeric_literalContext ctx) {
+
+        setASTNode(ctx, getASTNode(ctx.getChild(0)));
+
+    }
+
+    @Override public void enterFloating_point_literal(STParser.Floating_point_literalContext ctx) { }
+
+    @Override public void exitFloating_point_literal(STParser.Floating_point_literalContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrFloatLiteral floatLiteral = (IrFloatLiteral) getASTNode(ctx.floating_point_fraction());
+        IrIntLiteral irIntLiteral = (IrIntLiteral) getASTNode(ctx.decimal_exponent());
+        floatLiteral = new IrFloatLiteral(floatLiteral.getValue() * irIntLiteral.getValue(), l.line, l.col);
+        setASTNode(ctx, floatLiteral);
+
+    }
+
+    @Override public void enterFloating_point_fraction(STParser.Floating_point_fractionContext ctx) { }
+
+    @Override public void exitFloating_point_fraction(STParser.Floating_point_fractionContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+//        String  s = ctx.Decimal_literal(0).getText();
+//        if (ctx.SUB_OP() != null){
+//            s = ctx.SUB_OP().getText() + s;
+//        }
+//        if (ctx.DOT() != null){
+//            s += ctx.DOT().getText();
+//            s += ctx.Decimal_literal(1).getText();
+//        }
+        String s = ctx.getText();
+
+        new IrFloatLiteral(Double.valueOf(s.replaceAll("_", "")),l.line, l.col );
+    }
+
+    @Override public void enterDecimal_exponent(STParser.Decimal_exponentContext ctx) { }
+
+    @Override public void exitDecimal_exponent(STParser.Decimal_exponentContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        String s = "";
+        if (ctx.Sign() != null){
+            s = ctx.Sign().getText();
+        }
+        s +=ctx.Decimal_literal().getText();
+
+        IrLiteral literal = new IrIntLiteral(valueOfDecimalLiteral(s) , l.line, l.col );
+        setASTNode(ctx, literal);
     }
 
     @Override public void enterInteger_literal(STParser.Integer_literalContext ctx) { }

@@ -15,4 +15,8 @@ public class IrBoolLiteral extends IrLiteral {
         return  VarTypeEnum.RES_BOOL ;
 
     }
+
+    public Boolean getValue() {
+        return value;
+    }
 }

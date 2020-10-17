@@ -462,18 +462,6 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRange(STParser.RangeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRange(STParser.RangeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterElementary_type_name(STParser.Elementary_type_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -642,13 +630,13 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDecimal_fraction(STParser.Decimal_fractionContext ctx) { }
+	@Override public void enterFloating_point_fraction(STParser.Floating_point_fractionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDecimal_fraction(STParser.Decimal_fractionContext ctx) { }
+	@Override public void exitFloating_point_fraction(STParser.Floating_point_fractionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

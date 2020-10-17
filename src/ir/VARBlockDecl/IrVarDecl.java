@@ -1,14 +1,21 @@
 package ir.VARBlockDecl;
 
+import ir.Ir;
 import ir.IrIdent;
-import ir.IrMemberDecl;
 import ir.VarTypeEnum;
 
-public class IrVarDecl extends IrMemberDecl {
-    private final VarTypeEnum type;
-    public IrVarDecl(int lineNumber, int colNumber, IrIdent name, VarTypeEnum type) {
-        super(name, lineNumber, colNumber);
+import java.util.ArrayList;
+
+public class IrVarDecl extends Ir {
+    private final ArrayList<IrIdent> nameArrayList;
+    private final IrType type;
+    private final IrValue value;
+    public IrVarDecl(int lineNumber, int colNumber, ArrayList<IrIdent> name, IrType type, IrValue value) {
+        super(lineNumber, colNumber);
+
+        this.nameArrayList = name;
         this.type = type;
 
+        this.value = value;
     }
 }

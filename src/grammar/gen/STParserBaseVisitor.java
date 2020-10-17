@@ -278,13 +278,6 @@ public class STParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRange(STParser.RangeContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitElementary_type_name(STParser.Elementary_type_nameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -383,7 +376,7 @@ public class STParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDecimal_fraction(STParser.Decimal_fractionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFloating_point_fraction(STParser.Floating_point_fractionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

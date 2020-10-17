@@ -5,6 +5,8 @@ public class EnumTest {
         useEnumInJava();
         SimpleEnum a;
         a = SimpleEnum.AUTUMN;
+        System.out.println(Long.valueOf("-1234"));
+        System.out.println(Double.parseDouble("1.234") + 1d);
 
 
     }

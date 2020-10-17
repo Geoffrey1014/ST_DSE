@@ -14,4 +14,8 @@ public class IrFloatLiteral extends IrLiteral {
     public VarTypeEnum getExpressionType() {
         return  VarTypeEnum.RES_REAL;
     }
+
+    public Double getValue() {
+        return value;
+    }
 }

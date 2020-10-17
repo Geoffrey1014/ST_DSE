@@ -250,12 +250,6 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayType(STParser.ArrayTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link STParser#range}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRange(STParser.RangeContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link STParser#elementary_type_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -340,11 +334,11 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFloating_point_literal(STParser.Floating_point_literalContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link STParser#decimal_fraction}.
+	 * Visit a parse tree produced by {@link STParser#floating_point_fraction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDecimal_fraction(STParser.Decimal_fractionContext ctx);
+	T visitFloating_point_fraction(STParser.Floating_point_fractionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link STParser#decimal_exponent}.
 	 * @param ctx the parse tree

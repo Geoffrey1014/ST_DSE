@@ -17,6 +17,7 @@ public class IrIdent extends Ir {
         super(lineNumber, colNumber);
         String name = "";
         for (String s : arrayListName){
+            name += ".";
             name += s;
         }
         this.name = name;

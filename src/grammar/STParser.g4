@@ -88,7 +88,6 @@ expression
     : primary_expression # PrimaryExpr
     | NOT_OP expression #NotExpr
     | SUB_OP expression # NegateExpr
-//    | base=expression POWER_OP exponent=expression # PowerExpr
     | left=expression op=(MUL_OP| DIV_OP| MOD_OP | ADD_OP| SUB_OP | POWER_OP) right=expression #ArithExpr
     | left=expression op=(LT_OP | GT_OP | LEQ_OP | GEQ_OP) right=expression # Comparison
     | left=expression op=(EQ_OP| NEQ_OP) right=expression # Comparison
@@ -122,13 +121,12 @@ variable_declaration:
 
 type_rule:
   elementary_type_name #simpleType
-  | RES_ARRAY L_SQUARE range R_SQUARE RES_OF elementary_type_name #arrayType
+  | RES_ARRAY L_SQUARE range+=integer_literal FromTo range+=integer_literal R_SQUARE RES_OF elementary_type_name #arrayType
 //  | pointer=pointer_type #pointerType
 //   | structure_type_declaration
   ;
 
-range
-  : lbound=integer_literal FromTo ubound=integer_literal;
+
 //
 //pointer_type: 'POINTER' 'TO' type=type_rule;
 //structure_type_declaration: ' ';
@@ -160,21 +158,21 @@ constant:
 
 
 numeric_literal
-  : SUB_OP? integer_literal
-  | SUB_OP? floating_point_literal
+  : integer_literal
+  | floating_point_literal
   ;
 floating_point_literal
- : Decimal_literal decimal_fraction? decimal_exponent?
+ :  floating_point_fraction decimal_exponent?
  ;
-decimal_fraction : DOT Decimal_literal;
+floating_point_fraction : SUB_OP? Decimal_literal ( DOT Decimal_literal )?;
 decimal_exponent : Floating_point_e Sign? Decimal_literal ;
 
 integer_literal
- : Binary_literal
+ : SUB_OP? (Binary_literal
  | Octal_literal
  | Decimal_literal
  | Pure_decimal_digits
- | Hexadecimal_literal
+ | Hexadecimal_literal)
  ;
 
 

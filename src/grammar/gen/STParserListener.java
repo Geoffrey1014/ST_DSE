@@ -410,16 +410,6 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitArrayType(STParser.ArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link STParser#range}.
-	 * @param ctx the parse tree
-	 */
-	void enterRange(STParser.RangeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link STParser#range}.
-	 * @param ctx the parse tree
-	 */
-	void exitRange(STParser.RangeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link STParser#elementary_type_name}.
 	 * @param ctx the parse tree
 	 */
@@ -560,15 +550,15 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitFloating_point_literal(STParser.Floating_point_literalContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link STParser#decimal_fraction}.
+	 * Enter a parse tree produced by {@link STParser#floating_point_fraction}.
 	 * @param ctx the parse tree
 	 */
-	void enterDecimal_fraction(STParser.Decimal_fractionContext ctx);
+	void enterFloating_point_fraction(STParser.Floating_point_fractionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link STParser#decimal_fraction}.
+	 * Exit a parse tree produced by {@link STParser#floating_point_fraction}.
 	 * @param ctx the parse tree
 	 */
-	void exitDecimal_fraction(STParser.Decimal_fractionContext ctx);
+	void exitFloating_point_fraction(STParser.Floating_point_fractionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link STParser#decimal_exponent}.
 	 * @param ctx the parse tree

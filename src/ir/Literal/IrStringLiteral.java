@@ -17,4 +17,8 @@ public class IrStringLiteral extends IrLiteral {
     public VarTypeEnum getExpressionType() {
         return VarTypeEnum.RES_STRING;
     }
+
+    public String getValue() {
+        return value;
+    }
 }
