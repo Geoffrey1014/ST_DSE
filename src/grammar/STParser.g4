@@ -118,12 +118,13 @@ var_block
      |  RES_VAR_TEMP)  variable_declaration*  RES_END_VAR;
 
 variable_declaration:
-  names+=ID (COMMA names+=ID)* COLON type=type_rule (AS_OP variable_initializer)? SEMI_COL ;
+  names+=ID (COMMA names+=ID)* COLON type_rule (AS_OP variable_initializer)? SEMI_COL ;
 
 type_rule:
   elementary_type_name #simpleType
   | array_type #arrayType
 //  | pointer=pointer_type #pointerType
+//   | structure_type_declaration
   ;
 
 array_type
@@ -134,9 +135,6 @@ range
 //
 //pointer_type: 'POINTER' 'TO' type=type_rule;
 //structure_type_declaration: ' ';
-
-
-
 
 elementary_type_name : numeric_type_name | date_type_name | bit_string_type_name;
 numeric_type_name : integer_type_name | real_type_name;
@@ -161,7 +159,6 @@ array_initialization : L_SQUARE (constant COMMA)*  constant R_SQUARE;
 
 constant:
   numeric_literal | string_literal | BOOL;
-
 
 
 numeric_literal

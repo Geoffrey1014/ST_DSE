@@ -579,10 +579,11 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitVar_block(STParser.Var_blockContext ctx) {
 
-
+        //TODO varibale_declaration   需要先完成
         for (ParseTree node : ctx.variable_declaration()){
             IrVarDecl varDecl = (IrVarDecl) getASTNode(node);
         }
+
         VarAccessTypeEnum type = VarAccessTypeEnum.fromVarAccessType(ctx.var_acc_type.getText());
         if (type == null){
             System.err.println("There is no such operation: " + ctx.getText());
@@ -593,6 +594,25 @@ public class STListener extends STParserBaseListener {
 
     }
 
+    @Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void enterSimpleType(STParser.SimpleTypeContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitSimpleType(STParser.SimpleTypeContext ctx) { }
 
 
     @Override public void enterArrayType(STParser.ArrayTypeContext ctx) { }
