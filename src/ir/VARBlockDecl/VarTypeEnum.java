@@ -1,15 +1,19 @@
 package ir.VARBlockDecl;
 
-public enum VarTypeEnum {
+import ir.Ir;
+
+public enum VarTypeEnum implements Ir {
     RES_BOOL("BOOL"),
     RES_SINT("SINT"), RES_INT("INT"), RES_DINT("DINT"), RES_LINT("LINT"),
-    REAL("REAL"), LREAL("LREAL"),
-    USINT("USINT"), UINT("UINT"), UDINT("UDINT"), ULINT("ULINT"),
-    DATE("DATE"), TIME_OF_DAY("TIME_OF_DAY"), TOD("TOD"), DATE_AND_TIME("DATE_AND_TIME"), DT("DT"),
-    BYTE("BYTE"),
-    WORD("WORD"),  DWORD("DWORD"), LWORD("LWORD");
+    RES_REAL("REAL"), RES_LREAL("LREAL"),
+    RES_USINT("USINT"), RES_UINT("UINT"), RES_UDINT("UDINT"), RES_ULINT("ULINT"),
+    RES_DATE("DATE"), RES_TIME_OF_DAY("TIME_OF_DAY"), RES_TOD("TOD"), DRES_ATE_AND_TIME("DATE_AND_TIME"), RES_DT("DT"),
+    RES_BYTE("BYTE"),
+    RES_WORD("WORD"),  RES_DWORD("DWORD"), RES_LWORD("LWORD");
 
     private  String typeName;
+    private  int lineNumber;
+    private  int colNumber;
 
     VarTypeEnum(String s) {
         this.typeName = s;
@@ -27,5 +31,22 @@ public enum VarTypeEnum {
 
     public String getTypeName() {
         return this.typeName;
+    }
+
+    @Override
+    public int getLineNumber() {
+        return this.lineNumber;
+    }
+
+    @Override
+    public int getColNumber() {
+        return this.colNumber;
+    }
+
+    public void setLineNumber(int lineNumber){
+        this.lineNumber = lineNumber;
+    }
+    public void setColNumber(int colNumber){
+        this.colNumber = colNumber;
     }
 }

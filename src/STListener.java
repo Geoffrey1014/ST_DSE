@@ -566,11 +566,11 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFbLcation(STParser.FbLcationContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         ArrayList<String> strings = new ArrayList<>();
-        String name = "";
+        StringBuilder name = new StringBuilder();
         for (ParseTree node : ctx.ID()){
-            name += node.getText();
+            name.append(node.getText());
         }
-        IrIdent irIdent = new IrIdent(name,l.line, l.col);
+        IrIdent irIdent = new IrIdent(name.toString(),l.line, l.col);
 
         setASTNode(ctx,new IrFbStLocation(irIdent));
     }
@@ -595,33 +595,100 @@ public class STListener extends STParserBaseListener {
     }
 
     @Override public void enterVariable_declaration(STParser.Variable_declarationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterSimpleType(STParser.SimpleTypeContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitSimpleType(STParser.SimpleTypeContext ctx) { }
+
+    @Override public void exitVariable_declaration(STParser.Variable_declarationContext ctx) {
+
+    }
+
+    @Override public void enterSimpleType(STParser.SimpleTypeContext ctx) {
+    }
+
+    @Override public void exitSimpleType(STParser.SimpleTypeContext ctx) {
+        setASTNode(ctx, getASTNode(ctx.getChild(0)));
+    }
 
 
     @Override public void enterArrayType(STParser.ArrayTypeContext ctx) { }
 
-    @Override public void exitArrayType(STParser.ArrayTypeContext ctx) { }
+    @Override public void exitArrayType(STParser.ArrayTypeContext ctx) {
 
-    @Override public void enterArray_type(STParser.Array_typeContext ctx) { }
+    }
 
-    @Override public void exitArray_type(STParser.Array_typeContext ctx) { }
+    @Override public void enterElementary_type_name(STParser.Elementary_type_nameContext ctx) { }
+
+    @Override public void exitElementary_type_name(STParser.Elementary_type_nameContext ctx) {
+        setASTNode(ctx, getASTNode(ctx.getChild(0)));
+    }
+
+    @Override public void enterNumeric_type_name(STParser.Numeric_type_nameContext ctx) { }
+
+    @Override public void exitNumeric_type_name(STParser.Numeric_type_nameContext ctx) {
+        setASTNode(ctx, getASTNode(ctx.getChild(0)));
+    }
+
+    @Override public void enterInteger_type_name(STParser.Integer_type_nameContext ctx) { }
+
+    @Override public void exitInteger_type_name(STParser.Integer_type_nameContext ctx) {
+        setASTNode(ctx, getASTNode(ctx.getChild(0)));
+    }
+
+    @Override public void enterSigned_integer_type_name(STParser.Signed_integer_type_nameContext ctx) { }
+
+    @Override public void exitSigned_integer_type_name(STParser.Signed_integer_type_nameContext ctx) {
+        VarTypeEnum type = VarTypeEnum.fromVarTpye(ctx.getText());
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        assert type != null;
+        type.setColNumber(l.col);
+        type.setLineNumber(l.line);
+        setASTNode(ctx,type);
+
+    }
+
+    @Override public void enterUnsigned_integer_type_name(STParser.Unsigned_integer_type_nameContext ctx) { }
+
+    @Override public void exitUnsigned_integer_type_name(STParser.Unsigned_integer_type_nameContext ctx) {
+        VarTypeEnum type = VarTypeEnum.fromVarTpye(ctx.getText());
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        assert type != null;
+        type.setColNumber(l.col);
+        type.setLineNumber(l.line);
+        setASTNode(ctx,type);
+    }
+
+    @Override public void enterReal_type_name(STParser.Real_type_nameContext ctx) { }
+
+    @Override public void exitReal_type_name(STParser.Real_type_nameContext ctx) {
+        VarTypeEnum type = VarTypeEnum.fromVarTpye(ctx.getText());
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        assert type != null;
+        type.setColNumber(l.col);
+        type.setLineNumber(l.line);
+        setASTNode(ctx,type);
+    }
+
+    @Override public void enterDate_type_name(STParser.Date_type_nameContext ctx) {
+    }
+
+    @Override public void exitDate_type_name(STParser.Date_type_nameContext ctx) {
+        VarTypeEnum type = VarTypeEnum.fromVarTpye(ctx.getText());
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        assert type != null;
+        type.setColNumber(l.col);
+        type.setLineNumber(l.line);
+        setASTNode(ctx,type);
+    }
+
+    @Override public void enterBit_string_type_name(STParser.Bit_string_type_nameContext ctx) { }
+
+    @Override public void exitBit_string_type_name(STParser.Bit_string_type_nameContext ctx) {
+
+        VarTypeEnum type = VarTypeEnum.fromVarTpye(ctx.getText());
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        assert type != null;
+        type.setColNumber(l.col);
+        type.setLineNumber(l.line);
+        setASTNode(ctx,type);
+    }
 
 
     @Override public void enterRange(STParser.RangeContext ctx) { }

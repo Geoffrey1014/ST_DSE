@@ -1,5 +1,4 @@
 // Generated from /Users/heweigang/MY_project/ST_DSE/src/grammar/STScanner.g4 by ANTLR 4.8
-package grammar.gen;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -24,13 +23,14 @@ public class STScanner extends Lexer {
 		RES_FOR=29, RES_DO=30, RES_END_FOR=31, RES_TO=32, RES_BY=33, RES_WHILE=34, 
 		RES_END_WHILE=35, RES_IF=36, RES_THEN=37, RES_ELSE=38, RES_ELSIF=39, RES_END_IF=40, 
 		RES_EXIT=41, RES_ARRAY=42, FromTo=43, RES_OF=44, RES_BOOL=45, RES_SINT=46, 
-		RES_INT=47, RES_DINT=48, RES_LINT=49, REAL=50, LREAL=51, USINT=52, UINT=53, 
-		UDINT=54, ULINT=55, DATE=56, TIME_OF_DAY=57, TOD=58, DATE_AND_TIME=59, 
-		DT=60, BYTE=61, WORD=62, DWORD=63, LWORD=64, RES_PROGRAM=65, RES_END_PROGRAM=66, 
-		RES_FUNCTION_BLOCK=67, RES_END_FUNCTION_BLOCK=68, RES_FUNCTION=69, RES_END_FUNCTION=70, 
-		RES_VAR=71, RES_VAR_INPUT=72, RES_VAR_OUTPUT=73, RES_VAR_INPUT_OUTPUT=74, 
-		RES_END_VAR=75, RES_VAR_TEMP=76, BOOL=77, Binary_literal=78, Octal_literal=79, 
-		Decimal_literal=80, Pure_decimal_digits=81, Hexadecimal_literal=82, Floating_point_literal=83, 
+		RES_INT=47, RES_DINT=48, RES_LINT=49, RES_REAL=50, RES_LREAL=51, RES_USINT=52, 
+		RES_UINT=53, RES_UDINT=54, RES_ULINT=55, RES_DATE=56, RES_TIME_OF_DAY=57, 
+		RES_TOD=58, RES_DATE_AND_TIME=59, RES_DT=60, RES_BYTE=61, RES_WORD=62, 
+		RES_DWORD=63, RES_LWORD=64, RES_PROGRAM=65, RES_END_PROGRAM=66, RES_FUNCTION_BLOCK=67, 
+		RES_END_FUNCTION_BLOCK=68, RES_FUNCTION=69, RES_END_FUNCTION=70, RES_VAR=71, 
+		RES_VAR_INPUT=72, RES_VAR_OUTPUT=73, RES_VAR_INPUT_OUTPUT=74, RES_END_VAR=75, 
+		RES_VAR_TEMP=76, BOOL=77, Binary_literal=78, Octal_literal=79, Decimal_literal=80, 
+		Pure_decimal_digits=81, Hexadecimal_literal=82, Floating_point_literal=83, 
 		Static_string_literal=84, ID=85, Block_comment=86, WS=87;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -49,10 +49,11 @@ public class STScanner extends Lexer {
 			"RES_END_FOR", "RES_TO", "RES_BY", "RES_WHILE", "RES_END_WHILE", "RES_IF", 
 			"RES_THEN", "RES_ELSE", "RES_ELSIF", "RES_END_IF", "RES_EXIT", "RES_ARRAY", 
 			"FromTo", "RES_OF", "RES_BOOL", "RES_SINT", "RES_INT", "RES_DINT", "RES_LINT", 
-			"REAL", "LREAL", "USINT", "UINT", "UDINT", "ULINT", "DATE", "TIME_OF_DAY", 
-			"TOD", "DATE_AND_TIME", "DT", "BYTE", "WORD", "DWORD", "LWORD", "RES_PROGRAM", 
-			"RES_END_PROGRAM", "RES_FUNCTION_BLOCK", "RES_END_FUNCTION_BLOCK", "RES_FUNCTION", 
-			"RES_END_FUNCTION", "RES_VAR", "RES_VAR_INPUT", "RES_VAR_OUTPUT", "RES_VAR_INPUT_OUTPUT", 
+			"RES_REAL", "RES_LREAL", "RES_USINT", "RES_UINT", "RES_UDINT", "RES_ULINT", 
+			"RES_DATE", "RES_TIME_OF_DAY", "RES_TOD", "RES_DATE_AND_TIME", "RES_DT", 
+			"RES_BYTE", "RES_WORD", "RES_DWORD", "RES_LWORD", "RES_PROGRAM", "RES_END_PROGRAM", 
+			"RES_FUNCTION_BLOCK", "RES_END_FUNCTION_BLOCK", "RES_FUNCTION", "RES_END_FUNCTION", 
+			"RES_VAR", "RES_VAR_INPUT", "RES_VAR_OUTPUT", "RES_VAR_INPUT_OUTPUT", 
 			"RES_END_VAR", "RES_VAR_TEMP", "BOOL", "Binary_literal", "Binary_digit", 
 			"Binary_literal_character", "Binary_literal_characters", "Octal_literal", 
 			"Octal_digit", "Octal_literal_character", "Octal_literal_characters", 
@@ -91,14 +92,14 @@ public class STScanner extends Lexer {
 			"RES_DO", "RES_END_FOR", "RES_TO", "RES_BY", "RES_WHILE", "RES_END_WHILE", 
 			"RES_IF", "RES_THEN", "RES_ELSE", "RES_ELSIF", "RES_END_IF", "RES_EXIT", 
 			"RES_ARRAY", "FromTo", "RES_OF", "RES_BOOL", "RES_SINT", "RES_INT", "RES_DINT", 
-			"RES_LINT", "REAL", "LREAL", "USINT", "UINT", "UDINT", "ULINT", "DATE", 
-			"TIME_OF_DAY", "TOD", "DATE_AND_TIME", "DT", "BYTE", "WORD", "DWORD", 
-			"LWORD", "RES_PROGRAM", "RES_END_PROGRAM", "RES_FUNCTION_BLOCK", "RES_END_FUNCTION_BLOCK", 
-			"RES_FUNCTION", "RES_END_FUNCTION", "RES_VAR", "RES_VAR_INPUT", "RES_VAR_OUTPUT", 
-			"RES_VAR_INPUT_OUTPUT", "RES_END_VAR", "RES_VAR_TEMP", "BOOL", "Binary_literal", 
-			"Octal_literal", "Decimal_literal", "Pure_decimal_digits", "Hexadecimal_literal", 
-			"Floating_point_literal", "Static_string_literal", "ID", "Block_comment", 
-			"WS"
+			"RES_LINT", "RES_REAL", "RES_LREAL", "RES_USINT", "RES_UINT", "RES_UDINT", 
+			"RES_ULINT", "RES_DATE", "RES_TIME_OF_DAY", "RES_TOD", "RES_DATE_AND_TIME", 
+			"RES_DT", "RES_BYTE", "RES_WORD", "RES_DWORD", "RES_LWORD", "RES_PROGRAM", 
+			"RES_END_PROGRAM", "RES_FUNCTION_BLOCK", "RES_END_FUNCTION_BLOCK", "RES_FUNCTION", 
+			"RES_END_FUNCTION", "RES_VAR", "RES_VAR_INPUT", "RES_VAR_OUTPUT", "RES_VAR_INPUT_OUTPUT", 
+			"RES_END_VAR", "RES_VAR_TEMP", "BOOL", "Binary_literal", "Octal_literal", 
+			"Decimal_literal", "Pure_decimal_digits", "Hexadecimal_literal", "Floating_point_literal", 
+			"Static_string_literal", "ID", "Block_comment", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();

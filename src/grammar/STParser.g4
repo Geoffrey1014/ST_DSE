@@ -122,13 +122,10 @@ variable_declaration:
 
 type_rule:
   elementary_type_name #simpleType
-  | array_type #arrayType
+  | RES_ARRAY L_SQUARE range R_SQUARE RES_OF elementary_type_name #arrayType
 //  | pointer=pointer_type #pointerType
 //   | structure_type_declaration
   ;
-
-array_type
-  : RES_ARRAY L_SQUARE range R_SQUARE RES_OF elementary_type_name;
 
 range
   : lbound=integer_literal FromTo ubound=integer_literal;
@@ -140,10 +137,10 @@ elementary_type_name : numeric_type_name | date_type_name | bit_string_type_name
 numeric_type_name : integer_type_name | real_type_name;
 integer_type_name : signed_integer_type_name | unsigned_integer_type_name ;
 signed_integer_type_name : RES_SINT | RES_INT | RES_DINT | RES_LINT;
-unsigned_integer_type_name : USINT | UINT | UDINT | ULINT;
-real_type_name : REAL | LREAL;
-date_type_name : DATE | TIME_OF_DAY | TOD | DATE_AND_TIME | DT;
-bit_string_type_name : RES_BOOL | BYTE | WORD | DWORD | LWORD;
+unsigned_integer_type_name : RES_USINT | RES_UINT | RES_UDINT | RES_ULINT;
+real_type_name : RES_REAL | RES_LREAL;
+date_type_name : RES_DATE | RES_TIME_OF_DAY | RES_TOD | RES_DATE_AND_TIME | RES_DT;
+bit_string_type_name : RES_RES_BOOL | RES_BYTE | RES_WORD | RES_DWORD | RES_LWORD;
 
 variable_initializer:
   constant

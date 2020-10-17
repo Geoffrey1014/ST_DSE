@@ -5,8 +5,8 @@ import ir.IrMemberDecl;
 import ir.IrType;
 
 public class IrVarDecl extends IrMemberDecl {
-    private final IrType type;
-    public IrVarDecl(int lineNumber, int colNumber, IrIdent name, IrType type) {
+    private final VarTypeEnum type;
+    public IrVarDecl(int lineNumber, int colNumber, IrIdent name, VarTypeEnum type) {
         super(name, lineNumber, colNumber);
         this.type = type;
 
