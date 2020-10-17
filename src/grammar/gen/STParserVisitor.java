@@ -334,6 +334,24 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNumeric_literal(STParser.Numeric_literalContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link STParser#floating_point_literal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloating_point_literal(STParser.Floating_point_literalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link STParser#decimal_fraction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecimal_fraction(STParser.Decimal_fractionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link STParser#decimal_exponent}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecimal_exponent(STParser.Decimal_exponentContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link STParser#integer_literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

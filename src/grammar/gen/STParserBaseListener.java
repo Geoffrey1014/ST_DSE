@@ -576,9 +576,7 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitString_type_name(STParser.String_type_nameContext ctx) {
-
-	}
+	@Override public void exitString_type_name(STParser.String_type_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -627,6 +625,42 @@ public class STParserBaseListener implements STParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNumeric_literal(STParser.Numeric_literalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloating_point_literal(STParser.Floating_point_literalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloating_point_literal(STParser.Floating_point_literalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecimal_fraction(STParser.Decimal_fractionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecimal_fraction(STParser.Decimal_fractionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecimal_exponent(STParser.Decimal_exponentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecimal_exponent(STParser.Decimal_exponentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

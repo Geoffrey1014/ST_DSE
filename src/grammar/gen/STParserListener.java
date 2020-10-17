@@ -550,6 +550,36 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitNumeric_literal(STParser.Numeric_literalContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link STParser#floating_point_literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloating_point_literal(STParser.Floating_point_literalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link STParser#floating_point_literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloating_point_literal(STParser.Floating_point_literalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link STParser#decimal_fraction}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecimal_fraction(STParser.Decimal_fractionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link STParser#decimal_fraction}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecimal_fraction(STParser.Decimal_fractionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link STParser#decimal_exponent}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecimal_exponent(STParser.Decimal_exponentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link STParser#decimal_exponent}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecimal_exponent(STParser.Decimal_exponentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link STParser#integer_literal}.
 	 * @param ctx the parse tree
 	 */

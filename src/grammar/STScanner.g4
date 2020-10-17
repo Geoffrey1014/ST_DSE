@@ -135,9 +135,8 @@ fragment Hexadecimal_literal_characters : Hexadecimal_literal_character+ ;
 
 
 
-Decimal_exponent : Floating_point_e Sign? Decimal_literal ;
-fragment Floating_point_e : [eE] ;
-fragment Sign : [+\-] ;
+Floating_point_e : [eE] ;
+Sign : [+\-] ;
 
 Static_string_literal : '\'' Quoted_text? '\'' ;
 fragment Quoted_text : Quoted_text_item+ ;
