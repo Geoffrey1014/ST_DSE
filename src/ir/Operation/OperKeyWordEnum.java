@@ -1,8 +1,8 @@
 package ir.Operation;
 
-import ir.Ir;
+import ir.Where;
 
-public enum OperKeyWordEnum implements Ir {
+public enum OperKeyWordEnum implements Where {
     ADD_OP("+"),SUB_OP("-"),MUL_OP("*"),DIV_OP("?"), MOD_OP("MOD"), POWER_OP("**"),
     LT_OP("<") , GT_OP(">") , LEQ_OP("<=") , GEQ_OP(">="),
     EQ_OP("=") , NEQ_OP("<>"),

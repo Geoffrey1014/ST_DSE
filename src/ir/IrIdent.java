@@ -2,7 +2,7 @@ package ir;
 
 import java.util.ArrayList;
 
-public class IrIdent implements Ir {
+public class IrIdent implements Where {
     private final int lineNumber;
     private final int colNumber;
 

@@ -1,6 +1,6 @@
 package ir;
 
-public interface Ir {
+public interface Where {
     // keep track of the line & column number for
     // for error reporting purposes
 

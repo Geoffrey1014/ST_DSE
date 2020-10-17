@@ -1,9 +1,9 @@
 package ir.CtrlFlow;
 
-import ir.Ir;
+import ir.Where;
 import ir.IrExpr;
 
-public class IrCtrlFlowForRange implements Ir {
+public class IrCtrlFlowForRange implements Where {
     private final IrExpr low;
     private final IrExpr high;
     private final Integer step;

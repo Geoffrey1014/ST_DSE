@@ -2,7 +2,7 @@ package ir;
 
 import java.util.List;
 
-public class IrCodeBlock implements Ir {
+public class IrCodeBlock implements Where {
     private final int lineNumber;
     private final int colNumber;
 

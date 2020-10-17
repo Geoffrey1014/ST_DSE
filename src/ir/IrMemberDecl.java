@@ -1,6 +1,6 @@
 package ir;
 
-public abstract class IrMemberDecl implements Ir {
+public abstract class IrMemberDecl implements Where {
     private final IrIdent name;
     private final int lineNumber;
     private final int colNumber;

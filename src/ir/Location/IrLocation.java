@@ -1,6 +1,6 @@
 package ir.Location;
 
-import ir.Ir;
+import ir.Where;
 import ir.IrExpr;
 import ir.IrIdent;
 import ir.VarTypeEnum;
@@ -37,7 +37,7 @@ public abstract class IrLocation extends IrExpr {
         if (!(that instanceof IrLocation)) {
             return false;
         }
-        Ir otherIr = (IrLocation) that;
+        Where otherIr = (IrLocation) that;
         return (this.getLocationName().equals(((IrLocation) otherIr).getLocationName())) && (this.getLocationType().equals(((IrLocation) otherIr).getLocationType()));
     }
 

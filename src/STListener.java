@@ -30,7 +30,7 @@ public class STListener extends STParserBaseListener {
     MyPrint myPrint = new MyPrint(0);
 
     public IrPousDecl pous;
-    ParseTreeProperty<Ir> ASTNodes = new ParseTreeProperty<>();
+    ParseTreeProperty<Where> ASTNodes = new ParseTreeProperty<>();
 
     @Override public void exitPous(STParser.PousContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
@@ -43,7 +43,7 @@ public class STListener extends STParserBaseListener {
          * 可以用stack来传递ASTNode，或者可以将这些数据结构挂在具体语法树上
          * */
         for(ParseTree node :ctx.children){
-            Ir AstNode = ASTNodes.get(node);
+            Where AstNode = ASTNodes.get(node);
            if ( AstNode instanceof IrProgramDecl){
                programDeclsArrayList.add((IrProgramDecl) AstNode);
            }
@@ -62,7 +62,7 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitPou(STParser.PouContext ctx) {
         /** 把子节点的ASTcopy一下就行了*/
-        Ir pou = getASTNode(ctx.getChild(0));
+        Where pou = getASTNode(ctx.getChild(0));
         setASTNode(ctx, pou);
 //         = getASTNode(ctx.program());
 //        if (pou != null) {setASTNode(ctx, pou);}
@@ -211,7 +211,7 @@ public class STListener extends STParserBaseListener {
 
         ArrayList<IrStmt> stmts = new ArrayList<>();
         for(ParseTree node :ctx.children){
-            Ir AstNode = ASTNodes.get(node);
+            Where AstNode = ASTNodes.get(node);
             stmts.add((IrStmt) AstNode);
         }
         IrCodeBlock codeBlock = new IrCodeBlock(l.line,l.col,stmts);
@@ -221,7 +221,7 @@ public class STListener extends STParserBaseListener {
     @Override public void enterStat(STParser.StatContext ctx) { }
 
     @Override public void exitStat(STParser.StatContext ctx) {
-        Ir pou = getASTNode(ctx.getChild(0));
+        Where pou = getASTNode(ctx.getChild(0));
         setASTNode(ctx, pou);
     }
 
@@ -752,8 +752,8 @@ public class STListener extends STParserBaseListener {
     @Override public void visitTerminal(TerminalNode node) { }
     @Override public void visitErrorNode(ErrorNode node) { }
 
-    public void setASTNode(ParseTree parseTreeNode, Ir ASTNode){this.ASTNodes.put(parseTreeNode, ASTNode);}
-    public Ir getASTNode(ParseTree parseTreeNode){ return this.ASTNodes.get(parseTreeNode);}
+    public void setASTNode(ParseTree parseTreeNode, Where ASTNode){this.ASTNodes.put(parseTreeNode, ASTNode);}
+    public Where getASTNode(ParseTree parseTreeNode){ return this.ASTNodes.get(parseTreeNode);}
     public Long valueOfDecimalLiteral(String literal){
         return Long.valueOf(literal.replaceAll("_", ""));
     }

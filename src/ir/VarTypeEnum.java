@@ -1,6 +1,6 @@
 package ir;
 
-public enum VarTypeEnum implements Ir {
+public enum VarTypeEnum implements Where {
     RES_BOOL("BOOL"),
     RES_SINT("SINT"), RES_INT("INT"), RES_DINT("DINT"), RES_LINT("LINT"),
     RES_REAL("REAL"), RES_LREAL("LREAL"),

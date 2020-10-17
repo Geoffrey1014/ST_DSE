@@ -1,11 +1,10 @@
 package ir;
 
-import ir.POUDecl.IrPouDecl;
 import ir.POUDecl.*;
 
 import java.util.ArrayList;
 
-public class IrPousDecl implements Ir {
+public class IrPousDecl implements Where {
     /**  POUS  的 lineNumber, colNumber) 是程序最开始的那个字符
     POUS应该能包含很多POU，很多POU中只有一个是PROGRAM
      还有其他要实现的功能和语法检查吗？

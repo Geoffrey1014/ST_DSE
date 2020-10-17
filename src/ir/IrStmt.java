@@ -1,6 +1,6 @@
 package ir;
 
-public abstract class IrStmt implements Ir {
+public abstract class IrStmt implements Where {
     private final int lineNumber;
     private final int colNumber;
 

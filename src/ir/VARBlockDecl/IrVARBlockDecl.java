@@ -1,12 +1,12 @@
 package ir.VARBlockDecl;
 
-import ir.Ir;
+import ir.Where;
 
 import java.util.List;
 
 
 
-public abstract class IrVARBlockDecl implements Ir {
+public abstract class IrVARBlockDecl implements Where {
     private final int lineNumber;
     private final int colNumber;
 

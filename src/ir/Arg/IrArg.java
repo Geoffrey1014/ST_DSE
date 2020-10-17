@@ -1,8 +1,8 @@
 package ir.Arg;
 
-import ir.Ir;
+import ir.Where;
 
-public abstract class IrArg implements Ir{
+public abstract class IrArg implements Where {
     private final int lineNumber;
     private final int colNumber;
 
