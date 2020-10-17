@@ -133,14 +133,15 @@ range
 //pointer_type: 'POINTER' 'TO' type=type_rule;
 //structure_type_declaration: ' ';
 
-elementary_type_name : numeric_type_name | date_type_name | bit_string_type_name;
+elementary_type_name : numeric_type_name | date_type_name | bit_string_type_name | string_type_name;
 numeric_type_name : integer_type_name | real_type_name;
 integer_type_name : signed_integer_type_name | unsigned_integer_type_name ;
 signed_integer_type_name : RES_SINT | RES_INT | RES_DINT | RES_LINT;
 unsigned_integer_type_name : RES_USINT | RES_UINT | RES_UDINT | RES_ULINT;
 real_type_name : RES_REAL | RES_LREAL;
 date_type_name : RES_DATE | RES_TIME_OF_DAY | RES_TOD | RES_DATE_AND_TIME | RES_DT;
-bit_string_type_name : RES_RES_BOOL | RES_BYTE | RES_WORD | RES_DWORD | RES_LWORD;
+bit_string_type_name : RES_BOOL | RES_BYTE | RES_WORD | RES_DWORD | RES_LWORD;
+string_type_name : RES_STRING;
 
 variable_initializer:
   constant
@@ -160,9 +161,13 @@ constant:
 
 numeric_literal
   : SUB_OP? integer_literal
-  | SUB_OP? Floating_point_literal
+  | SUB_OP? floating_point_literal
   ;
-
+floating_point_literal
+ : Decimal_literal decimal_fraction? decimal_exponent?
+ ;
+decimal_fraction : DOT Decimal_literal;
+decimal_exponent : Floating_point_e Sign? Decimal_literal ;
 
 integer_literal
  : Binary_literal

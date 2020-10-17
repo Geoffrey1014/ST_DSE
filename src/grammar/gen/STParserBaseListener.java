@@ -462,18 +462,6 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray_type(STParser.Array_typeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArray_type(STParser.Array_typeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRange(STParser.RangeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -577,6 +565,20 @@ public class STParserBaseListener implements STParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBit_string_type_name(STParser.Bit_string_type_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString_type_name(STParser.String_type_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString_type_name(STParser.String_type_nameContext ctx) {
+
+	}
 	/**
 	 * {@inheritDoc}
 	 *

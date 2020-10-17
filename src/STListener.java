@@ -5,6 +5,9 @@ import ir.Arg.IrArg;
 import ir.Arg.IrArgAssign;
 import ir.Arg.IrArgInputAssign;
 import ir.CtrlFlow.*;
+import ir.Literal.IrIntLiteral;
+import ir.Literal.IrLiteral;
+import ir.Literal.IrStringLiteral;
 import ir.Location.IrFbStLocation;
 import ir.Location.IrLocation;
 import ir.Location.IrLocationArray;
@@ -161,7 +164,7 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitFunction(STParser.FunctionContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        IrType type = (IrType) getASTNode(ctx.type_rule());
+        VarTypeEnum type = (VarTypeEnum) getASTNode(ctx.type_rule());
 
         IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
         IrVARBlockDecl varBlockVAR = null;
@@ -690,13 +693,56 @@ public class STListener extends STParserBaseListener {
         setASTNode(ctx,type);
     }
 
+    @Override public void enterString_type_name(STParser.String_type_nameContext ctx) { }
+
+    @Override public void exitString_type_name(STParser.String_type_nameContext ctx) {
+        VarTypeEnum type = VarTypeEnum.fromVarTpye(ctx.getText());
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        assert type != null;
+        type.setColNumber(l.col);
+        type.setLineNumber(l.line);
+        setASTNode(ctx,type);
+    }
+
 
     @Override public void enterRange(STParser.RangeContext ctx) { }
 
     @Override public void exitRange(STParser.RangeContext ctx) {
         myPrint.LevelOne.print(ctx.lbound.getText());
         myPrint.LevelOne.print(ctx.ubound.getText());
+    }
 
+    @Override public void enterInteger_literal(STParser.Integer_literalContext ctx) { }
+
+    @Override public void exitInteger_literal(STParser.Integer_literalContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrLiteral literal = null;
+
+        if (ctx.Binary_literal() != null){
+            System.out.println("Binary_literal");
+        }
+        if (ctx.Octal_literal() != null){
+            System.out.println("Octal_literal");
+        }
+        if (ctx.Hexadecimal_literal() != null){
+            System.out.println("Hexadecimal_literal");
+        }
+        if (ctx.Decimal_literal() != null){
+            literal = new IrIntLiteral(Long.valueOf(ctx.getText().replaceAll("_", "")),l.line, l.col );
+        }
+        if (ctx.Pure_decimal_digits() != null){
+            literal = new IrIntLiteral(Long.valueOf(ctx.getText()),l.line, l.col );
+        }
+        setASTNode(ctx, literal);
+    }
+
+
+    @Override public void enterString_literal(STParser.String_literalContext ctx) { }
+
+    @Override public void exitString_literal(STParser.String_literalContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        IrStringLiteral stringLiteral = new IrStringLiteral(ctx.getText(),l.line, l.col );
+        setASTNode(ctx, stringLiteral);
     }
 
 

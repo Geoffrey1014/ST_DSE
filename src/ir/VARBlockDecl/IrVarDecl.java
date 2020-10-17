@@ -2,7 +2,7 @@ package ir.VARBlockDecl;
 
 import ir.IrIdent;
 import ir.IrMemberDecl;
-import ir.IrType;
+import ir.VarTypeEnum;
 
 public class IrVarDecl extends IrMemberDecl {
     private final VarTypeEnum type;

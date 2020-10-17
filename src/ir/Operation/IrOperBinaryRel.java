@@ -2,8 +2,7 @@ package ir.Operation;
 
 
 import ir.IrExpr;
-import ir.IrType;
-import ir.IrTypeBool;
+import ir.VarTypeEnum;
 
 /**
  * Created by geo on 2020/10/13.
@@ -15,8 +14,8 @@ public class IrOperBinaryRel extends IrOperBinary {
     }
 
     @Override
-    public IrType getExpressionType() {
-        return new IrTypeBool(this.leftOperand.getLineNumber(), this.leftOperand.getColNumber());
+    public VarTypeEnum getExpressionType() {
+        return VarTypeEnum.RES_BOOL;
     }
 
 }

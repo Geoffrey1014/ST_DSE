@@ -7,7 +7,7 @@ import java.util.List;
 public class IrFunctionCallExpr extends IrExpr {
     private final IrIdent methodName;
     private final List<IrArg> argsList;
-    private IrType methodType;
+    private VarTypeEnum methodType;
 
     public IrFunctionCallExpr(IrIdent methodName, List<IrArg> argsList) {
         super(methodName.getLineNumber(), methodName.getColNumber());
@@ -15,7 +15,7 @@ public class IrFunctionCallExpr extends IrExpr {
         this.argsList = argsList;
     }
 
-    public IrType getExpressionType() {
+    public VarTypeEnum getExpressionType() {
         return this.methodType;
     }
 

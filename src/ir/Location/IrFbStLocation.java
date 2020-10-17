@@ -2,11 +2,11 @@ package ir.Location;
 
 import ir.IrExpr;
 import ir.IrIdent;
-import ir.IrType;
+import ir.VarTypeEnum;
 
 public class IrFbStLocation extends IrExpr {
     protected IrIdent varName;
-    protected IrType varType;
+    protected VarTypeEnum varType;
 
     public IrFbStLocation(IrIdent varName) {
         super(varName.getLineNumber(), varName.getColNumber());
@@ -17,15 +17,15 @@ public class IrFbStLocation extends IrExpr {
         return this.varName;
     }
 
-    public IrType getLocationType() {
+    public VarTypeEnum getLocationType() {
         return this.varType;
     }
 
-    protected void setLocationType(IrType type) {
+    protected void setLocationType(VarTypeEnum type) {
         this.varType = type;
     }
     @Override
-    public IrType getExpressionType() {
+    public VarTypeEnum getExpressionType() {
         return this.varType;
     }
 }

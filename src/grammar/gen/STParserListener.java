@@ -410,16 +410,6 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitArrayType(STParser.ArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link STParser#array_type}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_type(STParser.Array_typeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link STParser#array_type}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_type(STParser.Array_typeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link STParser#range}.
 	 * @param ctx the parse tree
 	 */
@@ -509,6 +499,16 @@ public interface STParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBit_string_type_name(STParser.Bit_string_type_nameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link STParser#string_type_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterString_type_name(STParser.String_type_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link STParser#string_type_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitString_type_name(STParser.String_type_nameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link STParser#variable_initializer}.
 	 * @param ctx the parse tree

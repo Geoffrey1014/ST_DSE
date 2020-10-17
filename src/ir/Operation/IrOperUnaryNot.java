@@ -2,8 +2,7 @@ package ir.Operation;
 
 
 import ir.IrExpr;
-import ir.IrType;
-import ir.IrTypeBool;
+import ir.VarTypeEnum;
 
 /**
  * Created by geo on 2020/10/13.
@@ -14,8 +13,8 @@ public class IrOperUnaryNot extends IrOperUnary {
     }
 
     @Override
-    public IrType getExpressionType() {
-        return new IrTypeBool(this.operand.getLineNumber(), this.operand.getColNumber());
+    public VarTypeEnum getExpressionType() {
+        return VarTypeEnum.RES_BOOL;
     }
 
 }

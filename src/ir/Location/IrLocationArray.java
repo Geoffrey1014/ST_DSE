@@ -3,7 +3,7 @@ package ir.Location;
 
 import ir.IrExpr;
 import ir.IrIdent;
-import ir.IrType;
+import ir.VarTypeEnum;
 
 /**
  * Created by geo on 2020/10/13.
@@ -25,7 +25,7 @@ public class IrLocationArray extends IrLocation {
     }
 
     @Override
-    public IrType getExpressionType() {
+    public VarTypeEnum getExpressionType() {
         return this.varType;
     }
 

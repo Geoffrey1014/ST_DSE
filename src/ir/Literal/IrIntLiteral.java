@@ -1,18 +1,17 @@
 package ir.Literal;
 
-import ir.IrType;
-import ir.IrTypeInt;
+import ir.VarTypeEnum;
 
 public class IrIntLiteral extends IrLiteral {
-    private final int value;
+    private final Long value;
 
-    public IrIntLiteral(int value, int lineNumber, int colNumber) {
+    public IrIntLiteral(Long value, int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
         this.value = value;
     }
 
     @Override
-    public IrType getExpressionType() {
-        return  new IrTypeInt(this.getLineNumber(), this.getColNumber());
+    public VarTypeEnum getExpressionType() {
+        return  VarTypeEnum.RES_INT;
     }
 }

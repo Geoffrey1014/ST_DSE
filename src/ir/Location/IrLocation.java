@@ -3,14 +3,14 @@ package ir.Location;
 import ir.Ir;
 import ir.IrExpr;
 import ir.IrIdent;
-import ir.IrType;
+import ir.VarTypeEnum;
 
 /**
  * Created by geo on 2020/10/13.
  */
 public abstract class IrLocation extends IrExpr {
     protected IrIdent varName;
-    protected IrType varType;
+    protected VarTypeEnum varType;
 
     public IrLocation(IrIdent varName) {
         super(varName.getLineNumber(), varName.getColNumber());
@@ -21,11 +21,11 @@ public abstract class IrLocation extends IrExpr {
         return this.varName;
     }
 
-    public IrType getLocationType() {
+    public VarTypeEnum getLocationType() {
         return this.varType;
     }
 
-    protected void setLocationType(IrType type) {
+    protected void setLocationType(VarTypeEnum type) {
         this.varType = type;
     }
 

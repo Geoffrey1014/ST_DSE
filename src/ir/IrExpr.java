@@ -13,7 +13,7 @@ public abstract class IrExpr implements Ir {
         //TODO:  规范化
         return Operand;
     }
-    public abstract IrType getExpressionType();
+    public abstract VarTypeEnum getExpressionType();
 
     public String toString() {
         return "IrExpr";

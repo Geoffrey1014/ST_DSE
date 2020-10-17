@@ -70,6 +70,7 @@ RES_OF : 'OF';
 RES_BOOL : 'BOOL';
 //RES_TRUE:'TRUE' ;
 //RES_FALSE : 'FALSE';
+RES_STRING : 'STRING';
 
 RES_SINT: 'SINT' ;
 RES_INT: 'INT' ;
@@ -132,14 +133,10 @@ fragment Hexadecimal_digit : [0-9a-fA-F] ;
 fragment Hexadecimal_literal_character : Hexadecimal_digit | '_'  ;
 fragment Hexadecimal_literal_characters : Hexadecimal_literal_character+ ;
 
-Floating_point_literal
- : Decimal_literal Decimal_fraction? Decimal_exponent?
- ;
 
-fragment Decimal_fraction : '.' Decimal_literal ;
-fragment Decimal_exponent : Floating_point_e Sign? Decimal_literal ;
+
+Decimal_exponent : Floating_point_e Sign? Decimal_literal ;
 fragment Floating_point_e : [eE] ;
-fragment Floating_point_p : [pP] ;
 fragment Sign : [+\-] ;
 
 Static_string_literal : '\'' Quoted_text? '\'' ;

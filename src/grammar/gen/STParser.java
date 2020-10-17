@@ -25,15 +25,16 @@ public class STParser extends Parser {
 		NEQ_OP=22, AND_OP=23, XOR=24, OR=25, NOT_OP=26, AS_OP=27, RT_AS_OP=28, 
 		RES_FOR=29, RES_DO=30, RES_END_FOR=31, RES_TO=32, RES_BY=33, RES_WHILE=34, 
 		RES_END_WHILE=35, RES_IF=36, RES_THEN=37, RES_ELSE=38, RES_ELSIF=39, RES_END_IF=40, 
-		RES_EXIT=41, RES_ARRAY=42, FromTo=43, RES_OF=44, RES_BOOL=45, RES_SINT=46, 
-		RES_INT=47, RES_DINT=48, RES_LINT=49, REAL=50, LREAL=51, USINT=52, UINT=53, 
-		UDINT=54, ULINT=55, DATE=56, TIME_OF_DAY=57, TOD=58, DATE_AND_TIME=59, 
-		DT=60, BYTE=61, WORD=62, DWORD=63, LWORD=64, RES_PROGRAM=65, RES_END_PROGRAM=66, 
-		RES_FUNCTION_BLOCK=67, RES_END_FUNCTION_BLOCK=68, RES_FUNCTION=69, RES_END_FUNCTION=70, 
-		RES_VAR=71, RES_VAR_INPUT=72, RES_VAR_OUTPUT=73, RES_VAR_INPUT_OUTPUT=74, 
-		RES_END_VAR=75, RES_VAR_TEMP=76, BOOL=77, Binary_literal=78, Octal_literal=79, 
-		Decimal_literal=80, Pure_decimal_digits=81, Hexadecimal_literal=82, Floating_point_literal=83, 
-		Static_string_literal=84, ID=85, Block_comment=86, WS=87;
+		RES_EXIT=41, RES_ARRAY=42, FromTo=43, RES_OF=44, RES_BOOL=45, RES_STRING=46, 
+		RES_SINT=47, RES_INT=48, RES_DINT=49, RES_LINT=50, RES_REAL=51, RES_LREAL=52, 
+		RES_USINT=53, RES_UINT=54, RES_UDINT=55, RES_ULINT=56, RES_DATE=57, RES_TIME_OF_DAY=58, 
+		RES_TOD=59, RES_DATE_AND_TIME=60, RES_DT=61, RES_BYTE=62, RES_WORD=63, 
+		RES_DWORD=64, RES_LWORD=65, RES_PROGRAM=66, RES_END_PROGRAM=67, RES_FUNCTION_BLOCK=68, 
+		RES_END_FUNCTION_BLOCK=69, RES_FUNCTION=70, RES_END_FUNCTION=71, RES_VAR=72, 
+		RES_VAR_INPUT=73, RES_VAR_OUTPUT=74, RES_VAR_INPUT_OUTPUT=75, RES_END_VAR=76, 
+		RES_VAR_TEMP=77, BOOL=78, Binary_literal=79, Octal_literal=80, Decimal_literal=81, 
+		Pure_decimal_digits=82, Hexadecimal_literal=83, Floating_point_literal=84, 
+		Static_string_literal=85, ID=86, Block_comment=87, WS=88;
 	public static final int
 		RULE_pous = 0, RULE_pou = 1, RULE_program = 2, RULE_function_block = 3, 
 		RULE_function = 4, RULE_stat_list = 5, RULE_stat = 6, RULE_assign_stat = 7, 
@@ -42,10 +43,10 @@ public class STParser extends Parser {
 		RULE_for_range = 16, RULE_while_stat = 17, RULE_invoc_stat = 18, RULE_param_assignment = 19, 
 		RULE_expression = 20, RULE_primary_expression = 21, RULE_location = 22, 
 		RULE_var_block = 23, RULE_variable_declaration = 24, RULE_type_rule = 25, 
-		RULE_array_type = 26, RULE_range = 27, RULE_elementary_type_name = 28, 
-		RULE_numeric_type_name = 29, RULE_integer_type_name = 30, RULE_signed_integer_type_name = 31, 
-		RULE_unsigned_integer_type_name = 32, RULE_real_type_name = 33, RULE_date_type_name = 34, 
-		RULE_bit_string_type_name = 35, RULE_variable_initializer = 36, RULE_array_initialization = 37, 
+		RULE_range = 26, RULE_elementary_type_name = 27, RULE_numeric_type_name = 28, 
+		RULE_integer_type_name = 29, RULE_signed_integer_type_name = 30, RULE_unsigned_integer_type_name = 31, 
+		RULE_real_type_name = 32, RULE_date_type_name = 33, RULE_bit_string_type_name = 34, 
+		RULE_string_type_name = 35, RULE_variable_initializer = 36, RULE_array_initialization = 37, 
 		RULE_constant = 38, RULE_numeric_literal = 39, RULE_integer_literal = 40, 
 		RULE_string_literal = 41;
 	private static String[] makeRuleNames() {
@@ -54,11 +55,11 @@ public class STParser extends Parser {
 			"stat", "assign_stat", "if_stat", "if_else_stat", "if_elsif_stat", "if_elsif_else_stat", 
 			"if_stmt", "elsif_stmt", "else_stmt", "for_stat", "for_range", "while_stat", 
 			"invoc_stat", "param_assignment", "expression", "primary_expression", 
-			"location", "var_block", "variable_declaration", "type_rule", "array_type", 
-			"range", "elementary_type_name", "numeric_type_name", "integer_type_name", 
-			"signed_integer_type_name", "unsigned_integer_type_name", "real_type_name", 
-			"date_type_name", "bit_string_type_name", "variable_initializer", "array_initialization", 
-			"constant", "numeric_literal", "integer_literal", "string_literal"
+			"location", "var_block", "variable_declaration", "type_rule", "range", 
+			"elementary_type_name", "numeric_type_name", "integer_type_name", "signed_integer_type_name", 
+			"unsigned_integer_type_name", "real_type_name", "date_type_name", "bit_string_type_name", 
+			"string_type_name", "variable_initializer", "array_initialization", "constant", 
+			"numeric_literal", "integer_literal", "string_literal"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -70,12 +71,12 @@ public class STParser extends Parser {
 			"'>='", "'='", "'<>'", null, "'XOR'", "'OR'", "'NOT'", "':='", "'=>'", 
 			"'FOR'", "'DO'", "'END_FOR'", "'TO'", "'BY'", "'WHILE'", "'END_WHILE'", 
 			"'IF'", "'THEN'", "'ELSE'", "'ELSIF'", "'END_IF'", "'EXIT'", "'ARRAY'", 
-			"'..'", "'OF'", "'BOOL'", "'SINT'", "'INT'", "'DINT'", "'LINT'", "'REAL'", 
-			"'LREAL'", "'USINT'", "'UINT'", "'UDINT'", "'ULINT'", "'DATE'", "'TIME_OF_DAY'", 
-			"'TOD'", "'DATE_AND_TIME'", "'DT'", "'BYTE'", "'WORD'", "'DWORD'", "'LWORD'", 
-			"'PROGRAM'", "'END_PROGRAM'", "'FUNCTION_BLOCK'", "'END_FUNCTION_BLOCK'", 
-			"'FUNCTION'", "'END_FUNCTION'", "'VAR'", "'VAR_INPUT'", "'VAR_OUTPUT'", 
-			"'VAR_INPUT_OUTPUT'", "'END_VAR'", "'VAR_TEMP'"
+			"'..'", "'OF'", "'BOOL'", "'STRING'", "'SINT'", "'INT'", "'DINT'", "'LINT'", 
+			"'REAL'", "'LREAL'", "'USINT'", "'UINT'", "'UDINT'", "'ULINT'", "'DATE'", 
+			"'TIME_OF_DAY'", "'TOD'", "'DATE_AND_TIME'", "'DT'", "'BYTE'", "'WORD'", 
+			"'DWORD'", "'LWORD'", "'PROGRAM'", "'END_PROGRAM'", "'FUNCTION_BLOCK'", 
+			"'END_FUNCTION_BLOCK'", "'FUNCTION'", "'END_FUNCTION'", "'VAR'", "'VAR_INPUT'", 
+			"'VAR_OUTPUT'", "'VAR_INPUT_OUTPUT'", "'END_VAR'", "'VAR_TEMP'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -87,15 +88,16 @@ public class STParser extends Parser {
 			"NEQ_OP", "AND_OP", "XOR", "OR", "NOT_OP", "AS_OP", "RT_AS_OP", "RES_FOR", 
 			"RES_DO", "RES_END_FOR", "RES_TO", "RES_BY", "RES_WHILE", "RES_END_WHILE", 
 			"RES_IF", "RES_THEN", "RES_ELSE", "RES_ELSIF", "RES_END_IF", "RES_EXIT", 
-			"RES_ARRAY", "FromTo", "RES_OF", "RES_BOOL", "RES_SINT", "RES_INT", "RES_DINT", 
-			"RES_LINT", "REAL", "LREAL", "USINT", "UINT", "UDINT", "ULINT", "DATE", 
-			"TIME_OF_DAY", "TOD", "DATE_AND_TIME", "DT", "BYTE", "WORD", "DWORD", 
-			"LWORD", "RES_PROGRAM", "RES_END_PROGRAM", "RES_FUNCTION_BLOCK", "RES_END_FUNCTION_BLOCK", 
-			"RES_FUNCTION", "RES_END_FUNCTION", "RES_VAR", "RES_VAR_INPUT", "RES_VAR_OUTPUT", 
-			"RES_VAR_INPUT_OUTPUT", "RES_END_VAR", "RES_VAR_TEMP", "BOOL", "Binary_literal", 
-			"Octal_literal", "Decimal_literal", "Pure_decimal_digits", "Hexadecimal_literal", 
-			"Floating_point_literal", "Static_string_literal", "ID", "Block_comment", 
-			"WS"
+			"RES_ARRAY", "FromTo", "RES_OF", "RES_BOOL", "RES_STRING", "RES_SINT", 
+			"RES_INT", "RES_DINT", "RES_LINT", "RES_REAL", "RES_LREAL", "RES_USINT", 
+			"RES_UINT", "RES_UDINT", "RES_ULINT", "RES_DATE", "RES_TIME_OF_DAY", 
+			"RES_TOD", "RES_DATE_AND_TIME", "RES_DT", "RES_BYTE", "RES_WORD", "RES_DWORD", 
+			"RES_LWORD", "RES_PROGRAM", "RES_END_PROGRAM", "RES_FUNCTION_BLOCK", 
+			"RES_END_FUNCTION_BLOCK", "RES_FUNCTION", "RES_END_FUNCTION", "RES_VAR", 
+			"RES_VAR_INPUT", "RES_VAR_OUTPUT", "RES_VAR_INPUT_OUTPUT", "RES_END_VAR", 
+			"RES_VAR_TEMP", "BOOL", "Binary_literal", "Octal_literal", "Decimal_literal", 
+			"Pure_decimal_digits", "Hexadecimal_literal", "Floating_point_literal", 
+			"Static_string_literal", "ID", "Block_comment", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -195,7 +197,7 @@ public class STParser extends Parser {
 				setState(87); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( ((((_la - 65)) & ~0x3f) == 0 && ((1L << (_la - 65)) & ((1L << (RES_PROGRAM - 65)) | (1L << (RES_FUNCTION_BLOCK - 65)) | (1L << (RES_FUNCTION - 65)))) != 0) );
+			} while ( ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (RES_PROGRAM - 66)) | (1L << (RES_FUNCTION_BLOCK - 66)) | (1L << (RES_FUNCTION - 66)))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -330,7 +332,7 @@ public class STParser extends Parser {
 			setState(99);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) {
+			while (((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (RES_VAR - 72)) | (1L << (RES_VAR_INPUT - 72)) | (1L << (RES_VAR_OUTPUT - 72)) | (1L << (RES_VAR_INPUT_OUTPUT - 72)) | (1L << (RES_VAR_TEMP - 72)))) != 0)) {
 				{
 				{
 				setState(96);
@@ -407,7 +409,7 @@ public class STParser extends Parser {
 			setState(110);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) {
+			while (((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (RES_VAR - 72)) | (1L << (RES_VAR_INPUT - 72)) | (1L << (RES_VAR_OUTPUT - 72)) | (1L << (RES_VAR_INPUT_OUTPUT - 72)) | (1L << (RES_VAR_TEMP - 72)))) != 0)) {
 				{
 				{
 				setState(107);
@@ -492,7 +494,7 @@ public class STParser extends Parser {
 			setState(123);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) {
+			while (((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (RES_VAR - 72)) | (1L << (RES_VAR_INPUT - 72)) | (1L << (RES_VAR_OUTPUT - 72)) | (1L << (RES_VAR_INPUT_OUTPUT - 72)) | (1L << (RES_VAR_TEMP - 72)))) != 0)) {
 				{
 				{
 				setState(120);
@@ -1411,7 +1413,7 @@ public class STParser extends Parser {
 			setState(225);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << L_PAREN) | (1L << SUB_OP) | (1L << NOT_OP))) != 0) || ((((_la - 77)) & ~0x3f) == 0 && ((1L << (_la - 77)) & ((1L << (BOOL - 77)) | (1L << (Binary_literal - 77)) | (1L << (Octal_literal - 77)) | (1L << (Decimal_literal - 77)) | (1L << (Pure_decimal_digits - 77)) | (1L << (Hexadecimal_literal - 77)) | (1L << (Floating_point_literal - 77)) | (1L << (Static_string_literal - 77)) | (1L << (ID - 77)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << L_PAREN) | (1L << SUB_OP) | (1L << NOT_OP))) != 0) || ((((_la - 78)) & ~0x3f) == 0 && ((1L << (_la - 78)) & ((1L << (BOOL - 78)) | (1L << (Binary_literal - 78)) | (1L << (Octal_literal - 78)) | (1L << (Decimal_literal - 78)) | (1L << (Pure_decimal_digits - 78)) | (1L << (Hexadecimal_literal - 78)) | (1L << (Floating_point_literal - 78)) | (1L << (Static_string_literal - 78)) | (1L << (ID - 78)))) != 0)) {
 				{
 				setState(217);
 				param_assignment();
@@ -2216,7 +2218,7 @@ public class STParser extends Parser {
 			setState(290);
 			((Var_blockContext)_localctx).var_acc_type = _input.LT(1);
 			_la = _input.LA(1);
-			if ( !(((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (RES_VAR - 71)) | (1L << (RES_VAR_INPUT - 71)) | (1L << (RES_VAR_OUTPUT - 71)) | (1L << (RES_VAR_INPUT_OUTPUT - 71)) | (1L << (RES_VAR_TEMP - 71)))) != 0)) ) {
+			if ( !(((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (RES_VAR - 72)) | (1L << (RES_VAR_INPUT - 72)) | (1L << (RES_VAR_OUTPUT - 72)) | (1L << (RES_VAR_INPUT_OUTPUT - 72)) | (1L << (RES_VAR_TEMP - 72)))) != 0)) ) {
 				((Var_blockContext)_localctx).var_acc_type = (Token)_errHandler.recoverInline(this);
 			}
 			else {
@@ -2256,15 +2258,14 @@ public class STParser extends Parser {
 	public static class Variable_declarationContext extends ParserRuleContext {
 		public Token ID;
 		public List<Token> names = new ArrayList<Token>();
-		public Type_ruleContext type;
 		public TerminalNode COLON() { return getToken(STParser.COLON, 0); }
+		public Type_ruleContext type_rule() {
+			return getRuleContext(Type_ruleContext.class,0);
+		}
 		public TerminalNode SEMI_COL() { return getToken(STParser.SEMI_COL, 0); }
 		public List<TerminalNode> ID() { return getTokens(STParser.ID); }
 		public TerminalNode ID(int i) {
 			return getToken(STParser.ID, i);
-		}
-		public Type_ruleContext type_rule() {
-			return getRuleContext(Type_ruleContext.class,0);
 		}
 		public List<TerminalNode> COMMA() { return getTokens(STParser.COMMA); }
 		public TerminalNode COMMA(int i) {
@@ -2323,7 +2324,7 @@ public class STParser extends Parser {
 			setState(307);
 			match(COLON);
 			setState(308);
-			((Variable_declarationContext)_localctx).type = type_rule();
+			type_rule();
 			setState(311);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -2382,8 +2383,15 @@ public class STParser extends Parser {
 		}
 	}
 	public static class ArrayTypeContext extends Type_ruleContext {
-		public Array_typeContext array_type() {
-			return getRuleContext(Array_typeContext.class,0);
+		public TerminalNode RES_ARRAY() { return getToken(STParser.RES_ARRAY, 0); }
+		public TerminalNode L_SQUARE() { return getToken(STParser.L_SQUARE, 0); }
+		public RangeContext range() {
+			return getRuleContext(RangeContext.class,0);
+		}
+		public TerminalNode R_SQUARE() { return getToken(STParser.R_SQUARE, 0); }
+		public TerminalNode RES_OF() { return getToken(STParser.RES_OF, 0); }
+		public Elementary_type_nameContext elementary_type_name() {
+			return getRuleContext(Elementary_type_nameContext.class,0);
 		}
 		public ArrayTypeContext(Type_ruleContext ctx) { copyFrom(ctx); }
 		@Override
@@ -2405,29 +2413,30 @@ public class STParser extends Parser {
 		Type_ruleContext _localctx = new Type_ruleContext(_ctx, getState());
 		enterRule(_localctx, 50, RULE_type_rule);
 		try {
-			setState(317);
+			setState(323);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case RES_BOOL:
+			case RES_STRING:
 			case RES_SINT:
 			case RES_INT:
 			case RES_DINT:
 			case RES_LINT:
-			case REAL:
-			case LREAL:
-			case USINT:
-			case UINT:
-			case UDINT:
-			case ULINT:
-			case DATE:
-			case TIME_OF_DAY:
-			case TOD:
-			case DATE_AND_TIME:
-			case DT:
-			case BYTE:
-			case WORD:
-			case DWORD:
-			case LWORD:
+			case RES_REAL:
+			case RES_LREAL:
+			case RES_USINT:
+			case RES_UINT:
+			case RES_UDINT:
+			case RES_ULINT:
+			case RES_DATE:
+			case RES_TIME_OF_DAY:
+			case RES_TOD:
+			case RES_DATE_AND_TIME:
+			case RES_DT:
+			case RES_BYTE:
+			case RES_WORD:
+			case RES_DWORD:
+			case RES_LWORD:
 				_localctx = new SimpleTypeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
@@ -2440,72 +2449,21 @@ public class STParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(316);
-				array_type();
+				match(RES_ARRAY);
+				setState(317);
+				match(L_SQUARE);
+				setState(318);
+				range();
+				setState(319);
+				match(R_SQUARE);
+				setState(320);
+				match(RES_OF);
+				setState(321);
+				elementary_type_name();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Array_typeContext extends ParserRuleContext {
-		public TerminalNode RES_ARRAY() { return getToken(STParser.RES_ARRAY, 0); }
-		public TerminalNode L_SQUARE() { return getToken(STParser.L_SQUARE, 0); }
-		public RangeContext range() {
-			return getRuleContext(RangeContext.class,0);
-		}
-		public TerminalNode R_SQUARE() { return getToken(STParser.R_SQUARE, 0); }
-		public TerminalNode RES_OF() { return getToken(STParser.RES_OF, 0); }
-		public Elementary_type_nameContext elementary_type_name() {
-			return getRuleContext(Elementary_type_nameContext.class,0);
-		}
-		public Array_typeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_array_type; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof STParserListener ) ((STParserListener)listener).enterArray_type(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof STParserListener ) ((STParserListener)listener).exitArray_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof STParserVisitor ) return ((STParserVisitor<? extends T>)visitor).visitArray_type(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Array_typeContext array_type() throws RecognitionException {
-		Array_typeContext _localctx = new Array_typeContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_array_type);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(319);
-			match(RES_ARRAY);
-			setState(320);
-			match(L_SQUARE);
-			setState(321);
-			range();
-			setState(322);
-			match(R_SQUARE);
-			setState(323);
-			match(RES_OF);
-			setState(324);
-			elementary_type_name();
 			}
 		}
 		catch (RecognitionException re) {
@@ -2550,15 +2508,15 @@ public class STParser extends Parser {
 
 	public final RangeContext range() throws RecognitionException {
 		RangeContext _localctx = new RangeContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_range);
+		enterRule(_localctx, 52, RULE_range);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(326);
+			setState(325);
 			((RangeContext)_localctx).lbound = integer_literal();
-			setState(327);
+			setState(326);
 			match(FromTo);
-			setState(328);
+			setState(327);
 			((RangeContext)_localctx).ubound = integer_literal();
 			}
 		}
@@ -2583,6 +2541,9 @@ public class STParser extends Parser {
 		public Bit_string_type_nameContext bit_string_type_name() {
 			return getRuleContext(Bit_string_type_nameContext.class,0);
 		}
+		public String_type_nameContext string_type_name() {
+			return getRuleContext(String_type_nameContext.class,0);
+		}
 		public Elementary_type_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2604,7 +2565,7 @@ public class STParser extends Parser {
 
 	public final Elementary_type_nameContext elementary_type_name() throws RecognitionException {
 		Elementary_type_nameContext _localctx = new Elementary_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_elementary_type_name);
+		enterRule(_localctx, 54, RULE_elementary_type_name);
 		try {
 			setState(333);
 			_errHandler.sync(this);
@@ -2613,38 +2574,45 @@ public class STParser extends Parser {
 			case RES_INT:
 			case RES_DINT:
 			case RES_LINT:
-			case REAL:
-			case LREAL:
-			case USINT:
-			case UINT:
-			case UDINT:
-			case ULINT:
+			case RES_REAL:
+			case RES_LREAL:
+			case RES_USINT:
+			case RES_UINT:
+			case RES_UDINT:
+			case RES_ULINT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(330);
+				setState(329);
 				numeric_type_name();
 				}
 				break;
-			case DATE:
-			case TIME_OF_DAY:
-			case TOD:
-			case DATE_AND_TIME:
-			case DT:
+			case RES_DATE:
+			case RES_TIME_OF_DAY:
+			case RES_TOD:
+			case RES_DATE_AND_TIME:
+			case RES_DT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(331);
+				setState(330);
 				date_type_name();
 				}
 				break;
 			case RES_BOOL:
-			case BYTE:
-			case WORD:
-			case DWORD:
-			case LWORD:
+			case RES_BYTE:
+			case RES_WORD:
+			case RES_DWORD:
+			case RES_LWORD:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(332);
+				setState(331);
 				bit_string_type_name();
+				}
+				break;
+			case RES_STRING:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(332);
+				string_type_name();
 				}
 				break;
 			default:
@@ -2690,7 +2658,7 @@ public class STParser extends Parser {
 
 	public final Numeric_type_nameContext numeric_type_name() throws RecognitionException {
 		Numeric_type_nameContext _localctx = new Numeric_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_numeric_type_name);
+		enterRule(_localctx, 56, RULE_numeric_type_name);
 		try {
 			setState(337);
 			_errHandler.sync(this);
@@ -2699,18 +2667,18 @@ public class STParser extends Parser {
 			case RES_INT:
 			case RES_DINT:
 			case RES_LINT:
-			case USINT:
-			case UINT:
-			case UDINT:
-			case ULINT:
+			case RES_USINT:
+			case RES_UINT:
+			case RES_UDINT:
+			case RES_ULINT:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(335);
 				integer_type_name();
 				}
 				break;
-			case REAL:
-			case LREAL:
+			case RES_REAL:
+			case RES_LREAL:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(336);
@@ -2760,7 +2728,7 @@ public class STParser extends Parser {
 
 	public final Integer_type_nameContext integer_type_name() throws RecognitionException {
 		Integer_type_nameContext _localctx = new Integer_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_integer_type_name);
+		enterRule(_localctx, 58, RULE_integer_type_name);
 		try {
 			setState(341);
 			_errHandler.sync(this);
@@ -2775,10 +2743,10 @@ public class STParser extends Parser {
 				signed_integer_type_name();
 				}
 				break;
-			case USINT:
-			case UINT:
-			case UDINT:
-			case ULINT:
+			case RES_USINT:
+			case RES_UINT:
+			case RES_UDINT:
+			case RES_ULINT:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(340);
@@ -2826,7 +2794,7 @@ public class STParser extends Parser {
 
 	public final Signed_integer_type_nameContext signed_integer_type_name() throws RecognitionException {
 		Signed_integer_type_nameContext _localctx = new Signed_integer_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_signed_integer_type_name);
+		enterRule(_localctx, 60, RULE_signed_integer_type_name);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2855,10 +2823,10 @@ public class STParser extends Parser {
 	}
 
 	public static class Unsigned_integer_type_nameContext extends ParserRuleContext {
-		public TerminalNode USINT() { return getToken(STParser.USINT, 0); }
-		public TerminalNode UINT() { return getToken(STParser.UINT, 0); }
-		public TerminalNode UDINT() { return getToken(STParser.UDINT, 0); }
-		public TerminalNode ULINT() { return getToken(STParser.ULINT, 0); }
+		public TerminalNode RES_USINT() { return getToken(STParser.RES_USINT, 0); }
+		public TerminalNode RES_UINT() { return getToken(STParser.RES_UINT, 0); }
+		public TerminalNode RES_UDINT() { return getToken(STParser.RES_UDINT, 0); }
+		public TerminalNode RES_ULINT() { return getToken(STParser.RES_ULINT, 0); }
 		public Unsigned_integer_type_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2880,14 +2848,14 @@ public class STParser extends Parser {
 
 	public final Unsigned_integer_type_nameContext unsigned_integer_type_name() throws RecognitionException {
 		Unsigned_integer_type_nameContext _localctx = new Unsigned_integer_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_unsigned_integer_type_name);
+		enterRule(_localctx, 62, RULE_unsigned_integer_type_name);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(345);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << USINT) | (1L << UINT) | (1L << UDINT) | (1L << ULINT))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << RES_USINT) | (1L << RES_UINT) | (1L << RES_UDINT) | (1L << RES_ULINT))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2909,8 +2877,8 @@ public class STParser extends Parser {
 	}
 
 	public static class Real_type_nameContext extends ParserRuleContext {
-		public TerminalNode REAL() { return getToken(STParser.REAL, 0); }
-		public TerminalNode LREAL() { return getToken(STParser.LREAL, 0); }
+		public TerminalNode RES_REAL() { return getToken(STParser.RES_REAL, 0); }
+		public TerminalNode RES_LREAL() { return getToken(STParser.RES_LREAL, 0); }
 		public Real_type_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2932,14 +2900,14 @@ public class STParser extends Parser {
 
 	public final Real_type_nameContext real_type_name() throws RecognitionException {
 		Real_type_nameContext _localctx = new Real_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_real_type_name);
+		enterRule(_localctx, 64, RULE_real_type_name);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(347);
 			_la = _input.LA(1);
-			if ( !(_la==REAL || _la==LREAL) ) {
+			if ( !(_la==RES_REAL || _la==RES_LREAL) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2961,11 +2929,11 @@ public class STParser extends Parser {
 	}
 
 	public static class Date_type_nameContext extends ParserRuleContext {
-		public TerminalNode DATE() { return getToken(STParser.DATE, 0); }
-		public TerminalNode TIME_OF_DAY() { return getToken(STParser.TIME_OF_DAY, 0); }
-		public TerminalNode TOD() { return getToken(STParser.TOD, 0); }
-		public TerminalNode DATE_AND_TIME() { return getToken(STParser.DATE_AND_TIME, 0); }
-		public TerminalNode DT() { return getToken(STParser.DT, 0); }
+		public TerminalNode RES_DATE() { return getToken(STParser.RES_DATE, 0); }
+		public TerminalNode RES_TIME_OF_DAY() { return getToken(STParser.RES_TIME_OF_DAY, 0); }
+		public TerminalNode RES_TOD() { return getToken(STParser.RES_TOD, 0); }
+		public TerminalNode RES_DATE_AND_TIME() { return getToken(STParser.RES_DATE_AND_TIME, 0); }
+		public TerminalNode RES_DT() { return getToken(STParser.RES_DT, 0); }
 		public Date_type_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2987,14 +2955,14 @@ public class STParser extends Parser {
 
 	public final Date_type_nameContext date_type_name() throws RecognitionException {
 		Date_type_nameContext _localctx = new Date_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_date_type_name);
+		enterRule(_localctx, 66, RULE_date_type_name);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(349);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DATE) | (1L << TIME_OF_DAY) | (1L << TOD) | (1L << DATE_AND_TIME) | (1L << DT))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << RES_DATE) | (1L << RES_TIME_OF_DAY) | (1L << RES_TOD) | (1L << RES_DATE_AND_TIME) | (1L << RES_DT))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3017,10 +2985,10 @@ public class STParser extends Parser {
 
 	public static class Bit_string_type_nameContext extends ParserRuleContext {
 		public TerminalNode RES_BOOL() { return getToken(STParser.RES_BOOL, 0); }
-		public TerminalNode BYTE() { return getToken(STParser.BYTE, 0); }
-		public TerminalNode WORD() { return getToken(STParser.WORD, 0); }
-		public TerminalNode DWORD() { return getToken(STParser.DWORD, 0); }
-		public TerminalNode LWORD() { return getToken(STParser.LWORD, 0); }
+		public TerminalNode RES_BYTE() { return getToken(STParser.RES_BYTE, 0); }
+		public TerminalNode RES_WORD() { return getToken(STParser.RES_WORD, 0); }
+		public TerminalNode RES_DWORD() { return getToken(STParser.RES_DWORD, 0); }
+		public TerminalNode RES_LWORD() { return getToken(STParser.RES_LWORD, 0); }
 		public Bit_string_type_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3042,14 +3010,14 @@ public class STParser extends Parser {
 
 	public final Bit_string_type_nameContext bit_string_type_name() throws RecognitionException {
 		Bit_string_type_nameContext _localctx = new Bit_string_type_nameContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_bit_string_type_name);
+		enterRule(_localctx, 68, RULE_bit_string_type_name);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(351);
 			_la = _input.LA(1);
-			if ( !(((((_la - 45)) & ~0x3f) == 0 && ((1L << (_la - 45)) & ((1L << (RES_BOOL - 45)) | (1L << (BYTE - 45)) | (1L << (WORD - 45)) | (1L << (DWORD - 45)) | (1L << (LWORD - 45)))) != 0)) ) {
+			if ( !(((((_la - 45)) & ~0x3f) == 0 && ((1L << (_la - 45)) & ((1L << (RES_BOOL - 45)) | (1L << (RES_BYTE - 45)) | (1L << (RES_WORD - 45)) | (1L << (RES_DWORD - 45)) | (1L << (RES_LWORD - 45)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3057,6 +3025,48 @@ public class STParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class String_type_nameContext extends ParserRuleContext {
+		public TerminalNode RES_STRING() { return getToken(STParser.RES_STRING, 0); }
+		public String_type_nameContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_string_type_name; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof STParserListener ) ((STParserListener)listener).enterString_type_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof STParserListener ) ((STParserListener)listener).exitString_type_name(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof STParserVisitor ) return ((STParserVisitor<? extends T>)visitor).visitString_type_name(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final String_type_nameContext string_type_name() throws RecognitionException {
+		String_type_nameContext _localctx = new String_type_nameContext(_ctx, getState());
+		enterRule(_localctx, 70, RULE_string_type_name);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(353);
+			match(RES_STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3100,7 +3110,7 @@ public class STParser extends Parser {
 		Variable_initializerContext _localctx = new Variable_initializerContext(_ctx, getState());
 		enterRule(_localctx, 72, RULE_variable_initializer);
 		try {
-			setState(355);
+			setState(357);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case SUB_OP:
@@ -3114,14 +3124,14 @@ public class STParser extends Parser {
 			case Static_string_literal:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(353);
+				setState(355);
 				constant();
 				}
 				break;
 			case L_SQUARE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(354);
+				setState(356);
 				array_initialization();
 				}
 				break;
@@ -3179,29 +3189,29 @@ public class STParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(357);
+			setState(359);
 			match(L_SQUARE);
-			setState(363);
+			setState(365);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,28,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(358);
+					setState(360);
 					constant();
-					setState(359);
+					setState(361);
 					match(COMMA);
 					}
 					} 
 				}
-				setState(365);
+				setState(367);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,28,_ctx);
 			}
-			setState(366);
+			setState(368);
 			constant();
-			setState(367);
+			setState(369);
 			match(R_SQUARE);
 			}
 		}
@@ -3247,7 +3257,7 @@ public class STParser extends Parser {
 		ConstantContext _localctx = new ConstantContext(_ctx, getState());
 		enterRule(_localctx, 76, RULE_constant);
 		try {
-			setState(372);
+			setState(374);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case SUB_OP:
@@ -3259,21 +3269,21 @@ public class STParser extends Parser {
 			case Floating_point_literal:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(369);
+				setState(371);
 				numeric_literal();
 				}
 				break;
 			case Static_string_literal:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(370);
+				setState(372);
 				string_literal();
 				}
 				break;
 			case BOOL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(371);
+				setState(373);
 				match(BOOL);
 				}
 				break;
@@ -3322,40 +3332,40 @@ public class STParser extends Parser {
 		enterRule(_localctx, 78, RULE_numeric_literal);
 		int _la;
 		try {
-			setState(382);
+			setState(384);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(375);
+				setState(377);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SUB_OP) {
 					{
-					setState(374);
+					setState(376);
 					match(SUB_OP);
 					}
 				}
 
-				setState(377);
+				setState(379);
 				integer_literal();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(379);
+				setState(381);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SUB_OP) {
 					{
-					setState(378);
+					setState(380);
 					match(SUB_OP);
 					}
 				}
 
-				setState(381);
+				setState(383);
 				match(Floating_point_literal);
 				}
 				break;
@@ -3404,9 +3414,9 @@ public class STParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(384);
+			setState(386);
 			_la = _input.LA(1);
-			if ( !(((((_la - 78)) & ~0x3f) == 0 && ((1L << (_la - 78)) & ((1L << (Binary_literal - 78)) | (1L << (Octal_literal - 78)) | (1L << (Decimal_literal - 78)) | (1L << (Pure_decimal_digits - 78)) | (1L << (Hexadecimal_literal - 78)))) != 0)) ) {
+			if ( !(((((_la - 79)) & ~0x3f) == 0 && ((1L << (_la - 79)) & ((1L << (Binary_literal - 79)) | (1L << (Octal_literal - 79)) | (1L << (Decimal_literal - 79)) | (1L << (Pure_decimal_digits - 79)) | (1L << (Hexadecimal_literal - 79)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3454,7 +3464,7 @@ public class STParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(386);
+			setState(388);
 			match(Static_string_literal);
 			}
 		}
@@ -3491,7 +3501,7 @@ public class STParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3Y\u0187\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3Z\u0189\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3514,67 +3524,67 @@ public class STParser extends Parser {
 		"\5\27\u0114\n\27\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\6\30\u011f"+
 		"\n\30\r\30\16\30\u0120\5\30\u0123\n\30\3\31\3\31\7\31\u0127\n\31\f\31"+
 		"\16\31\u012a\13\31\3\31\3\31\3\32\3\32\3\32\7\32\u0131\n\32\f\32\16\32"+
-		"\u0134\13\32\3\32\3\32\3\32\3\32\5\32\u013a\n\32\3\32\3\32\3\33\3\33\5"+
-		"\33\u0140\n\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\35\3\35\3\35\3\35"+
-		"\3\36\3\36\3\36\5\36\u0150\n\36\3\37\3\37\5\37\u0154\n\37\3 \3 \5 \u0158"+
-		"\n \3!\3!\3\"\3\"\3#\3#\3$\3$\3%\3%\3&\3&\5&\u0166\n&\3\'\3\'\3\'\3\'"+
-		"\7\'\u016c\n\'\f\'\16\'\u016f\13\'\3\'\3\'\3\'\3(\3(\3(\5(\u0177\n(\3"+
-		")\5)\u017a\n)\3)\3)\5)\u017e\n)\3)\5)\u0181\n)\3*\3*\3+\3+\3+\2\3*,\2"+
-		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJL"+
-		"NPRT\2\r\3\2\r\22\3\2\23\26\3\2\27\30\3\2\31\33\4\2ILNN\3\2\60\63\3\2"+
-		"\669\3\2\64\65\3\2:>\4\2//?B\3\2PT\2\u018d\2W\3\2\2\2\4^\3\2\2\2\6`\3"+
-		"\2\2\2\bk\3\2\2\2\nv\3\2\2\2\f\u0083\3\2\2\2\16\u0092\3\2\2\2\20\u0094"+
-		"\3\2\2\2\22\u0099\3\2\2\2\24\u009d\3\2\2\2\26\u00a2\3\2\2\2\30\u00ab\3"+
-		"\2\2\2\32\u00b5\3\2\2\2\34\u00ba\3\2\2\2\36\u00bf\3\2\2\2 \u00c2\3\2\2"+
-		"\2\"\u00cb\3\2\2\2$\u00d2\3\2\2\2&\u00d9\3\2\2\2(\u00f1\3\2\2\2*\u00fd"+
-		"\3\2\2\2,\u0113\3\2\2\2.\u0122\3\2\2\2\60\u0124\3\2\2\2\62\u012d\3\2\2"+
-		"\2\64\u013f\3\2\2\2\66\u0141\3\2\2\28\u0148\3\2\2\2:\u014f\3\2\2\2<\u0153"+
-		"\3\2\2\2>\u0157\3\2\2\2@\u0159\3\2\2\2B\u015b\3\2\2\2D\u015d\3\2\2\2F"+
-		"\u015f\3\2\2\2H\u0161\3\2\2\2J\u0165\3\2\2\2L\u0167\3\2\2\2N\u0176\3\2"+
-		"\2\2P\u0180\3\2\2\2R\u0182\3\2\2\2T\u0184\3\2\2\2VX\5\4\3\2WV\3\2\2\2"+
-		"XY\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\3\3\2\2\2[_\5\6\4\2\\_\5\b\5\2]_\5\n\6"+
-		"\2^[\3\2\2\2^\\\3\2\2\2^]\3\2\2\2_\5\3\2\2\2`a\7C\2\2ae\7W\2\2bd\5\60"+
-		"\31\2cb\3\2\2\2dg\3\2\2\2ec\3\2\2\2ef\3\2\2\2fh\3\2\2\2ge\3\2\2\2hi\5"+
-		"\f\7\2ij\7D\2\2j\7\3\2\2\2kl\7E\2\2lp\7W\2\2mo\5\60\31\2nm\3\2\2\2or\3"+
-		"\2\2\2pn\3\2\2\2pq\3\2\2\2qs\3\2\2\2rp\3\2\2\2st\5\f\7\2tu\7F\2\2u\t\3"+
-		"\2\2\2vw\7G\2\2wx\7W\2\2xy\7\13\2\2y}\5\64\33\2z|\5\60\31\2{z\3\2\2\2"+
-		"|\177\3\2\2\2}{\3\2\2\2}~\3\2\2\2~\u0080\3\2\2\2\177}\3\2\2\2\u0080\u0081"+
-		"\5\f\7\2\u0081\u0082\7H\2\2\u0082\13\3\2\2\2\u0083\u0087\5\16\b\2\u0084"+
-		"\u0086\5\16\b\2\u0085\u0084\3\2\2\2\u0086\u0089\3\2\2\2\u0087\u0085\3"+
-		"\2\2\2\u0087\u0088\3\2\2\2\u0088\r\3\2\2\2\u0089\u0087\3\2\2\2\u008a\u0093"+
-		"\5\20\t\2\u008b\u0093\5\22\n\2\u008c\u0093\5\24\13\2\u008d\u0093\5\26"+
-		"\f\2\u008e\u0093\5\30\r\2\u008f\u0093\5 \21\2\u0090\u0093\5$\23\2\u0091"+
-		"\u0093\5&\24\2\u0092\u008a\3\2\2\2\u0092\u008b\3\2\2\2\u0092\u008c\3\2"+
-		"\2\2\u0092\u008d\3\2\2\2\u0092\u008e\3\2\2\2\u0092\u008f\3\2\2\2\u0092"+
-		"\u0090\3\2\2\2\u0092\u0091\3\2\2\2\u0093\17\3\2\2\2\u0094\u0095\5.\30"+
-		"\2\u0095\u0096\7\35\2\2\u0096\u0097\5*\26\2\u0097\u0098\7\n\2\2\u0098"+
-		"\21\3\2\2\2\u0099\u009a\5\32\16\2\u009a\u009b\7*\2\2\u009b\u009c\7\n\2"+
-		"\2\u009c\23\3\2\2\2\u009d\u009e\5\32\16\2\u009e\u009f\5\36\20\2\u009f"+
-		"\u00a0\7*\2\2\u00a0\u00a1\7\n\2\2\u00a1\25\3\2\2\2\u00a2\u00a4\5\32\16"+
-		"\2\u00a3\u00a5\5\34\17\2\u00a4\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6"+
-		"\u00a4\3\2\2\2\u00a6\u00a7\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00a9\7*"+
-		"\2\2\u00a9\u00aa\7\n\2\2\u00aa\27\3\2\2\2\u00ab\u00ad\5\32\16\2\u00ac"+
+		"\u0134\13\32\3\32\3\32\3\32\3\32\5\32\u013a\n\32\3\32\3\32\3\33\3\33\3"+
+		"\33\3\33\3\33\3\33\3\33\3\33\5\33\u0146\n\33\3\34\3\34\3\34\3\34\3\35"+
+		"\3\35\3\35\3\35\5\35\u0150\n\35\3\36\3\36\5\36\u0154\n\36\3\37\3\37\5"+
+		"\37\u0158\n\37\3 \3 \3!\3!\3\"\3\"\3#\3#\3$\3$\3%\3%\3&\3&\5&\u0168\n"+
+		"&\3\'\3\'\3\'\3\'\7\'\u016e\n\'\f\'\16\'\u0171\13\'\3\'\3\'\3\'\3(\3("+
+		"\3(\5(\u0179\n(\3)\5)\u017c\n)\3)\3)\5)\u0180\n)\3)\5)\u0183\n)\3*\3*"+
+		"\3+\3+\3+\2\3*,\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62"+
+		"\64\668:<>@BDFHJLNPRT\2\r\3\2\r\22\3\2\23\26\3\2\27\30\3\2\31\33\4\2J"+
+		"MOO\3\2\61\64\3\2\67:\3\2\65\66\3\2;?\4\2//@C\3\2QU\2\u0190\2W\3\2\2\2"+
+		"\4^\3\2\2\2\6`\3\2\2\2\bk\3\2\2\2\nv\3\2\2\2\f\u0083\3\2\2\2\16\u0092"+
+		"\3\2\2\2\20\u0094\3\2\2\2\22\u0099\3\2\2\2\24\u009d\3\2\2\2\26\u00a2\3"+
+		"\2\2\2\30\u00ab\3\2\2\2\32\u00b5\3\2\2\2\34\u00ba\3\2\2\2\36\u00bf\3\2"+
+		"\2\2 \u00c2\3\2\2\2\"\u00cb\3\2\2\2$\u00d2\3\2\2\2&\u00d9\3\2\2\2(\u00f1"+
+		"\3\2\2\2*\u00fd\3\2\2\2,\u0113\3\2\2\2.\u0122\3\2\2\2\60\u0124\3\2\2\2"+
+		"\62\u012d\3\2\2\2\64\u0145\3\2\2\2\66\u0147\3\2\2\28\u014f\3\2\2\2:\u0153"+
+		"\3\2\2\2<\u0157\3\2\2\2>\u0159\3\2\2\2@\u015b\3\2\2\2B\u015d\3\2\2\2D"+
+		"\u015f\3\2\2\2F\u0161\3\2\2\2H\u0163\3\2\2\2J\u0167\3\2\2\2L\u0169\3\2"+
+		"\2\2N\u0178\3\2\2\2P\u0182\3\2\2\2R\u0184\3\2\2\2T\u0186\3\2\2\2VX\5\4"+
+		"\3\2WV\3\2\2\2XY\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\3\3\2\2\2[_\5\6\4\2\\_\5"+
+		"\b\5\2]_\5\n\6\2^[\3\2\2\2^\\\3\2\2\2^]\3\2\2\2_\5\3\2\2\2`a\7D\2\2ae"+
+		"\7X\2\2bd\5\60\31\2cb\3\2\2\2dg\3\2\2\2ec\3\2\2\2ef\3\2\2\2fh\3\2\2\2"+
+		"ge\3\2\2\2hi\5\f\7\2ij\7E\2\2j\7\3\2\2\2kl\7F\2\2lp\7X\2\2mo\5\60\31\2"+
+		"nm\3\2\2\2or\3\2\2\2pn\3\2\2\2pq\3\2\2\2qs\3\2\2\2rp\3\2\2\2st\5\f\7\2"+
+		"tu\7G\2\2u\t\3\2\2\2vw\7H\2\2wx\7X\2\2xy\7\13\2\2y}\5\64\33\2z|\5\60\31"+
+		"\2{z\3\2\2\2|\177\3\2\2\2}{\3\2\2\2}~\3\2\2\2~\u0080\3\2\2\2\177}\3\2"+
+		"\2\2\u0080\u0081\5\f\7\2\u0081\u0082\7I\2\2\u0082\13\3\2\2\2\u0083\u0087"+
+		"\5\16\b\2\u0084\u0086\5\16\b\2\u0085\u0084\3\2\2\2\u0086\u0089\3\2\2\2"+
+		"\u0087\u0085\3\2\2\2\u0087\u0088\3\2\2\2\u0088\r\3\2\2\2\u0089\u0087\3"+
+		"\2\2\2\u008a\u0093\5\20\t\2\u008b\u0093\5\22\n\2\u008c\u0093\5\24\13\2"+
+		"\u008d\u0093\5\26\f\2\u008e\u0093\5\30\r\2\u008f\u0093\5 \21\2\u0090\u0093"+
+		"\5$\23\2\u0091\u0093\5&\24\2\u0092\u008a\3\2\2\2\u0092\u008b\3\2\2\2\u0092"+
+		"\u008c\3\2\2\2\u0092\u008d\3\2\2\2\u0092\u008e\3\2\2\2\u0092\u008f\3\2"+
+		"\2\2\u0092\u0090\3\2\2\2\u0092\u0091\3\2\2\2\u0093\17\3\2\2\2\u0094\u0095"+
+		"\5.\30\2\u0095\u0096\7\35\2\2\u0096\u0097\5*\26\2\u0097\u0098\7\n\2\2"+
+		"\u0098\21\3\2\2\2\u0099\u009a\5\32\16\2\u009a\u009b\7*\2\2\u009b\u009c"+
+		"\7\n\2\2\u009c\23\3\2\2\2\u009d\u009e\5\32\16\2\u009e\u009f\5\36\20\2"+
+		"\u009f\u00a0\7*\2\2\u00a0\u00a1\7\n\2\2\u00a1\25\3\2\2\2\u00a2\u00a4\5"+
+		"\32\16\2\u00a3\u00a5\5\34\17\2\u00a4\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2"+
+		"\u00a6\u00a4\3\2\2\2\u00a6\u00a7\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00a9"+
+		"\7*\2\2\u00a9\u00aa\7\n\2\2\u00aa\27\3\2\2\2\u00ab\u00ad\5\32\16\2\u00ac"+
 		"\u00ae\5\34\17\2\u00ad\u00ac\3\2\2\2\u00ae\u00af\3\2\2\2\u00af\u00ad\3"+
 		"\2\2\2\u00af\u00b0\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\5\36\20\2\u00b2"+
 		"\u00b3\7*\2\2\u00b3\u00b4\7\n\2\2\u00b4\31\3\2\2\2\u00b5\u00b6\7&\2\2"+
 		"\u00b6\u00b7\5*\26\2\u00b7\u00b8\7\'\2\2\u00b8\u00b9\5\f\7\2\u00b9\33"+
 		"\3\2\2\2\u00ba\u00bb\7)\2\2\u00bb\u00bc\5*\26\2\u00bc\u00bd\7\'\2\2\u00bd"+
 		"\u00be\5\f\7\2\u00be\35\3\2\2\2\u00bf\u00c0\7(\2\2\u00c0\u00c1\5\f\7\2"+
-		"\u00c1\37\3\2\2\2\u00c2\u00c3\7\37\2\2\u00c3\u00c4\7W\2\2\u00c4\u00c5"+
+		"\u00c1\37\3\2\2\2\u00c2\u00c3\7\37\2\2\u00c3\u00c4\7X\2\2\u00c4\u00c5"+
 		"\7\35\2\2\u00c5\u00c6\5\"\22\2\u00c6\u00c7\7 \2\2\u00c7\u00c8\5\f\7\2"+
 		"\u00c8\u00c9\7!\2\2\u00c9\u00ca\7\n\2\2\u00ca!\3\2\2\2\u00cb\u00cc\5*"+
 		"\26\2\u00cc\u00cd\7\"\2\2\u00cd\u00d0\5*\26\2\u00ce\u00cf\7#\2\2\u00cf"+
 		"\u00d1\5*\26\2\u00d0\u00ce\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1#\3\2\2\2"+
 		"\u00d2\u00d3\7$\2\2\u00d3\u00d4\5*\26\2\u00d4\u00d5\7 \2\2\u00d5\u00d6"+
 		"\5\f\7\2\u00d6\u00d7\7%\2\2\u00d7\u00d8\7\n\2\2\u00d8%\3\2\2\2\u00d9\u00da"+
-		"\7W\2\2\u00da\u00e3\7\5\2\2\u00db\u00e0\5(\25\2\u00dc\u00dd\7\t\2\2\u00dd"+
+		"\7X\2\2\u00da\u00e3\7\5\2\2\u00db\u00e0\5(\25\2\u00dc\u00dd\7\t\2\2\u00dd"+
 		"\u00df\5(\25\2\u00de\u00dc\3\2\2\2\u00df\u00e2\3\2\2\2\u00e0\u00de\3\2"+
 		"\2\2\u00e0\u00e1\3\2\2\2\u00e1\u00e4\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e3"+
 		"\u00db\3\2\2\2\u00e3\u00e4\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5\u00e6\7\6"+
-		"\2\2\u00e6\'\3\2\2\2\u00e7\u00f2\5*\26\2\u00e8\u00e9\7W\2\2\u00e9\u00ea"+
+		"\2\2\u00e6\'\3\2\2\2\u00e7\u00f2\5*\26\2\u00e8\u00e9\7X\2\2\u00e9\u00ea"+
 		"\7\35\2\2\u00ea\u00f2\5*\26\2\u00eb\u00ed\7\34\2\2\u00ec\u00eb\3\2\2\2"+
-		"\u00ec\u00ed\3\2\2\2\u00ed\u00ee\3\2\2\2\u00ee\u00ef\7W\2\2\u00ef\u00f0"+
-		"\7\36\2\2\u00f0\u00f2\7W\2\2\u00f1\u00e7\3\2\2\2\u00f1\u00e8\3\2\2\2\u00f1"+
+		"\u00ec\u00ed\3\2\2\2\u00ed\u00ee\3\2\2\2\u00ee\u00ef\7X\2\2\u00ef\u00f0"+
+		"\7\36\2\2\u00f0\u00f2\7X\2\2\u00f1\u00e7\3\2\2\2\u00f1\u00e8\3\2\2\2\u00f1"+
 		"\u00ec\3\2\2\2\u00f2)\3\2\2\2\u00f3\u00f4\b\26\1\2\u00f4\u00fe\5,\27\2"+
 		"\u00f5\u00f6\7\34\2\2\u00f6\u00fe\5*\26\t\u00f7\u00f8\7\16\2\2\u00f8\u00fe"+
 		"\5*\26\b\u00f9\u00fa\7\5\2\2\u00fa\u00fb\5*\26\2\u00fb\u00fc\7\6\2\2\u00fc"+
@@ -3587,44 +3597,45 @@ public class STParser extends Parser {
 		"\u0108\3\2\2\2\u010c\u010f\3\2\2\2\u010d\u010b\3\2\2\2\u010d\u010e\3\2"+
 		"\2\2\u010e+\3\2\2\2\u010f\u010d\3\2\2\2\u0110\u0114\5N(\2\u0111\u0114"+
 		"\5.\30\2\u0112\u0114\5&\24\2\u0113\u0110\3\2\2\2\u0113\u0111\3\2\2\2\u0113"+
-		"\u0112\3\2\2\2\u0114-\3\2\2\2\u0115\u0123\7W\2\2\u0116\u0117\7W\2\2\u0117"+
+		"\u0112\3\2\2\2\u0114-\3\2\2\2\u0115\u0123\7X\2\2\u0116\u0117\7X\2\2\u0117"+
 		"\u0118\7\3\2\2\u0118\u0119\5*\26\2\u0119\u011a\7\4\2\2\u011a\u0123\3\2"+
-		"\2\2\u011b\u011e\7W\2\2\u011c\u011d\7\f\2\2\u011d\u011f\7W\2\2\u011e\u011c"+
+		"\2\2\u011b\u011e\7X\2\2\u011c\u011d\7\f\2\2\u011d\u011f\7X\2\2\u011e\u011c"+
 		"\3\2\2\2\u011f\u0120\3\2\2\2\u0120\u011e\3\2\2\2\u0120\u0121\3\2\2\2\u0121"+
 		"\u0123\3\2\2\2\u0122\u0115\3\2\2\2\u0122\u0116\3\2\2\2\u0122\u011b\3\2"+
 		"\2\2\u0123/\3\2\2\2\u0124\u0128\t\6\2\2\u0125\u0127\5\62\32\2\u0126\u0125"+
 		"\3\2\2\2\u0127\u012a\3\2\2\2\u0128\u0126\3\2\2\2\u0128\u0129\3\2\2\2\u0129"+
-		"\u012b\3\2\2\2\u012a\u0128\3\2\2\2\u012b\u012c\7M\2\2\u012c\61\3\2\2\2"+
-		"\u012d\u0132\7W\2\2\u012e\u012f\7\t\2\2\u012f\u0131\7W\2\2\u0130\u012e"+
+		"\u012b\3\2\2\2\u012a\u0128\3\2\2\2\u012b\u012c\7N\2\2\u012c\61\3\2\2\2"+
+		"\u012d\u0132\7X\2\2\u012e\u012f\7\t\2\2\u012f\u0131\7X\2\2\u0130\u012e"+
 		"\3\2\2\2\u0131\u0134\3\2\2\2\u0132\u0130\3\2\2\2\u0132\u0133\3\2\2\2\u0133"+
 		"\u0135\3\2\2\2\u0134\u0132\3\2\2\2\u0135\u0136\7\13\2\2\u0136\u0139\5"+
 		"\64\33\2\u0137\u0138\7\35\2\2\u0138\u013a\5J&\2\u0139\u0137\3\2\2\2\u0139"+
 		"\u013a\3\2\2\2\u013a\u013b\3\2\2\2\u013b\u013c\7\n\2\2\u013c\63\3\2\2"+
-		"\2\u013d\u0140\5:\36\2\u013e\u0140\5\66\34\2\u013f\u013d\3\2\2\2\u013f"+
-		"\u013e\3\2\2\2\u0140\65\3\2\2\2\u0141\u0142\7,\2\2\u0142\u0143\7\3\2\2"+
-		"\u0143\u0144\58\35\2\u0144\u0145\7\4\2\2\u0145\u0146\7.\2\2\u0146\u0147"+
-		"\5:\36\2\u0147\67\3\2\2\2\u0148\u0149\5R*\2\u0149\u014a\7-\2\2\u014a\u014b"+
-		"\5R*\2\u014b9\3\2\2\2\u014c\u0150\5<\37\2\u014d\u0150\5F$\2\u014e\u0150"+
-		"\5H%\2\u014f\u014c\3\2\2\2\u014f\u014d\3\2\2\2\u014f\u014e\3\2\2\2\u0150"+
-		";\3\2\2\2\u0151\u0154\5> \2\u0152\u0154\5D#\2\u0153\u0151\3\2\2\2\u0153"+
-		"\u0152\3\2\2\2\u0154=\3\2\2\2\u0155\u0158\5@!\2\u0156\u0158\5B\"\2\u0157"+
-		"\u0155\3\2\2\2\u0157\u0156\3\2\2\2\u0158?\3\2\2\2\u0159\u015a\t\7\2\2"+
-		"\u015aA\3\2\2\2\u015b\u015c\t\b\2\2\u015cC\3\2\2\2\u015d\u015e\t\t\2\2"+
-		"\u015eE\3\2\2\2\u015f\u0160\t\n\2\2\u0160G\3\2\2\2\u0161\u0162\t\13\2"+
-		"\2\u0162I\3\2\2\2\u0163\u0166\5N(\2\u0164\u0166\5L\'\2\u0165\u0163\3\2"+
-		"\2\2\u0165\u0164\3\2\2\2\u0166K\3\2\2\2\u0167\u016d\7\3\2\2\u0168\u0169"+
-		"\5N(\2\u0169\u016a\7\t\2\2\u016a\u016c\3\2\2\2\u016b\u0168\3\2\2\2\u016c"+
-		"\u016f\3\2\2\2\u016d\u016b\3\2\2\2\u016d\u016e\3\2\2\2\u016e\u0170\3\2"+
-		"\2\2\u016f\u016d\3\2\2\2\u0170\u0171\5N(\2\u0171\u0172\7\4\2\2\u0172M"+
-		"\3\2\2\2\u0173\u0177\5P)\2\u0174\u0177\5T+\2\u0175\u0177\7O\2\2\u0176"+
-		"\u0173\3\2\2\2\u0176\u0174\3\2\2\2\u0176\u0175\3\2\2\2\u0177O\3\2\2\2"+
-		"\u0178\u017a\7\16\2\2\u0179\u0178\3\2\2\2\u0179\u017a\3\2\2\2\u017a\u017b"+
-		"\3\2\2\2\u017b\u0181\5R*\2\u017c\u017e\7\16\2\2\u017d\u017c\3\2\2\2\u017d"+
-		"\u017e\3\2\2\2\u017e\u017f\3\2\2\2\u017f\u0181\7U\2\2\u0180\u0179\3\2"+
-		"\2\2\u0180\u017d\3\2\2\2\u0181Q\3\2\2\2\u0182\u0183\t\f\2\2\u0183S\3\2"+
-		"\2\2\u0184\u0185\7V\2\2\u0185U\3\2\2\2#Y^ep}\u0087\u0092\u00a6\u00af\u00d0"+
-		"\u00e0\u00e3\u00ec\u00f1\u00fd\u010b\u010d\u0113\u0120\u0122\u0128\u0132"+
-		"\u0139\u013f\u014f\u0153\u0157\u0165\u016d\u0176\u0179\u017d\u0180";
+		"\2\u013d\u0146\58\35\2\u013e\u013f\7,\2\2\u013f\u0140\7\3\2\2\u0140\u0141"+
+		"\5\66\34\2\u0141\u0142\7\4\2\2\u0142\u0143\7.\2\2\u0143\u0144\58\35\2"+
+		"\u0144\u0146\3\2\2\2\u0145\u013d\3\2\2\2\u0145\u013e\3\2\2\2\u0146\65"+
+		"\3\2\2\2\u0147\u0148\5R*\2\u0148\u0149\7-\2\2\u0149\u014a\5R*\2\u014a"+
+		"\67\3\2\2\2\u014b\u0150\5:\36\2\u014c\u0150\5D#\2\u014d\u0150\5F$\2\u014e"+
+		"\u0150\5H%\2\u014f\u014b\3\2\2\2\u014f\u014c\3\2\2\2\u014f\u014d\3\2\2"+
+		"\2\u014f\u014e\3\2\2\2\u01509\3\2\2\2\u0151\u0154\5<\37\2\u0152\u0154"+
+		"\5B\"\2\u0153\u0151\3\2\2\2\u0153\u0152\3\2\2\2\u0154;\3\2\2\2\u0155\u0158"+
+		"\5> \2\u0156\u0158\5@!\2\u0157\u0155\3\2\2\2\u0157\u0156\3\2\2\2\u0158"+
+		"=\3\2\2\2\u0159\u015a\t\7\2\2\u015a?\3\2\2\2\u015b\u015c\t\b\2\2\u015c"+
+		"A\3\2\2\2\u015d\u015e\t\t\2\2\u015eC\3\2\2\2\u015f\u0160\t\n\2\2\u0160"+
+		"E\3\2\2\2\u0161\u0162\t\13\2\2\u0162G\3\2\2\2\u0163\u0164\7\60\2\2\u0164"+
+		"I\3\2\2\2\u0165\u0168\5N(\2\u0166\u0168\5L\'\2\u0167\u0165\3\2\2\2\u0167"+
+		"\u0166\3\2\2\2\u0168K\3\2\2\2\u0169\u016f\7\3\2\2\u016a\u016b\5N(\2\u016b"+
+		"\u016c\7\t\2\2\u016c\u016e\3\2\2\2\u016d\u016a\3\2\2\2\u016e\u0171\3\2"+
+		"\2\2\u016f\u016d\3\2\2\2\u016f\u0170\3\2\2\2\u0170\u0172\3\2\2\2\u0171"+
+		"\u016f\3\2\2\2\u0172\u0173\5N(\2\u0173\u0174\7\4\2\2\u0174M\3\2\2\2\u0175"+
+		"\u0179\5P)\2\u0176\u0179\5T+\2\u0177\u0179\7P\2\2\u0178\u0175\3\2\2\2"+
+		"\u0178\u0176\3\2\2\2\u0178\u0177\3\2\2\2\u0179O\3\2\2\2\u017a\u017c\7"+
+		"\16\2\2\u017b\u017a\3\2\2\2\u017b\u017c\3\2\2\2\u017c\u017d\3\2\2\2\u017d"+
+		"\u0183\5R*\2\u017e\u0180\7\16\2\2\u017f\u017e\3\2\2\2\u017f\u0180\3\2"+
+		"\2\2\u0180\u0181\3\2\2\2\u0181\u0183\7V\2\2\u0182\u017b\3\2\2\2\u0182"+
+		"\u017f\3\2\2\2\u0183Q\3\2\2\2\u0184\u0185\t\f\2\2\u0185S\3\2\2\2\u0186"+
+		"\u0187\7W\2\2\u0187U\3\2\2\2#Y^ep}\u0087\u0092\u00a6\u00af\u00d0\u00e0"+
+		"\u00e3\u00ec\u00f1\u00fd\u010b\u010d\u0113\u0120\u0122\u0128\u0132\u0139"+
+		"\u0145\u014f\u0153\u0157\u0167\u016f\u0178\u017b\u017f\u0182";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

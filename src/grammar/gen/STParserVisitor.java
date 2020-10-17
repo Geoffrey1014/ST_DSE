@@ -250,12 +250,6 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayType(STParser.ArrayTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link STParser#array_type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArray_type(STParser.Array_typeContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link STParser#range}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -309,6 +303,12 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBit_string_type_name(STParser.Bit_string_type_nameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link STParser#string_type_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString_type_name(STParser.String_type_nameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link STParser#variable_initializer}.
 	 * @param ctx the parse tree

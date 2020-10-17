@@ -1,20 +1,18 @@
 package ir.Literal;
 
-import ir.IrType;
-import ir.IrTypeBool;
-import ir.IrTypeInt;
+import ir.VarTypeEnum;
 
 public class IrBoolLiteral extends IrLiteral {
-    private final boolean value;
+    private final Boolean value;
 
-    public IrBoolLiteral(boolean value, int lineNumber, int colNumber) {
+    public IrBoolLiteral(Boolean value, int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
         this.value = value;
     }
 
     @Override
-    public IrType getExpressionType() {
-        return  new IrTypeBool(this.getLineNumber(), this.getColNumber()) ;
+    public VarTypeEnum getExpressionType() {
+        return  VarTypeEnum.RES_BOOL ;
 
     }
 }

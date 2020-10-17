@@ -1,6 +1,4 @@
-package ir.VARBlockDecl;
-
-import ir.Ir;
+package ir;
 
 public enum VarTypeEnum implements Ir {
     RES_BOOL("BOOL"),
@@ -9,7 +7,8 @@ public enum VarTypeEnum implements Ir {
     RES_USINT("USINT"), RES_UINT("UINT"), RES_UDINT("UDINT"), RES_ULINT("ULINT"),
     RES_DATE("DATE"), RES_TIME_OF_DAY("TIME_OF_DAY"), RES_TOD("TOD"), DRES_ATE_AND_TIME("DATE_AND_TIME"), RES_DT("DT"),
     RES_BYTE("BYTE"),
-    RES_WORD("WORD"),  RES_DWORD("DWORD"), RES_LWORD("LWORD");
+    RES_WORD("WORD"),  RES_DWORD("DWORD"), RES_LWORD("LWORD"),
+    RES_STRING("STRING");
 
     private  String typeName;
     private  int lineNumber;
