@@ -1,24 +1,11 @@
 package ir;
 
-public abstract class IrMemberDecl implements Where {
+public abstract class IrMemberDecl extends Ir {
     private final IrIdent name;
-    private final int lineNumber;
-    private final int colNumber;
 
     public IrMemberDecl(IrIdent name, int lineNumber, int colNumber) {
-        this.lineNumber = lineNumber;
-        this.colNumber = colNumber;
+        super(lineNumber, colNumber);
         this.name = name;
-    }
-
-    @Override
-    public int getLineNumber() {
-        return lineNumber;
-    }
-
-    @Override
-    public int getColNumber() {
-        return colNumber;
     }
 
 

@@ -1,12 +1,10 @@
 package ir;
 
-public abstract class IrExpr implements Where {
-    private final int lineNumber;
-    private final int colNumber;
+public abstract class IrExpr extends Ir {
+
 
     public IrExpr(int lineNumber, int colNumber){
-        this.lineNumber = lineNumber;
-        this.colNumber = colNumber;
+        super(lineNumber, colNumber);
     }
 
     public static IrExpr canonicalizeExpr(IrExpr Operand) {
@@ -19,14 +17,6 @@ public abstract class IrExpr implements Where {
         return "IrExpr";
     }
 
-    @Override
-    public int getLineNumber() {
-        return lineNumber;
-    }
 
-    @Override
-    public int getColNumber() {
-        return colNumber;
-    }
 
 }

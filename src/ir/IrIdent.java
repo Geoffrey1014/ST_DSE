@@ -2,21 +2,19 @@ package ir;
 
 import java.util.ArrayList;
 
-public class IrIdent implements Where {
-    private final int lineNumber;
-    private final int colNumber;
+public class IrIdent extends Ir {
 
     private final String name;
 
     public IrIdent(String name, int lineNumber, int colNumber){
-        this.lineNumber = lineNumber;
-        this.colNumber = colNumber;
+        super(lineNumber, colNumber);
         this.name = name;
     }
 
     public IrIdent(ArrayList<String> arrayListName, int lineNumber, int colNumber){
-        this.lineNumber = lineNumber;
-        this.colNumber = colNumber;
+
+
+        super(lineNumber, colNumber);
         String name = "";
         for (String s : arrayListName){
             name += s;
@@ -27,13 +25,5 @@ public class IrIdent implements Where {
     public String getName() {
         return name;
     }
-    @Override
-    public int getLineNumber() {
-        return lineNumber;
-    }
 
-    @Override
-    public int getColNumber() {
-        return colNumber;
-    }
 }

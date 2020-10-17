@@ -1,23 +1,12 @@
 package ir.Arg;
 
+import ir.Ir;
 import ir.Where;
 
-public abstract class IrArg implements Where {
-    private final int lineNumber;
-    private final int colNumber;
+public abstract class IrArg extends Ir {
 
     public IrArg(int lineNumber, int colNumber) {
-        this.lineNumber = lineNumber;
-        this.colNumber = colNumber;
+        super(lineNumber, colNumber);
     }
 
-    @Override
-    public int getLineNumber() {
-        return lineNumber;
-    }
-
-    @Override
-    public int getColNumber() {
-        return colNumber;
-    }
 }

@@ -1,20 +1,18 @@
 package ir.VARBlockDecl;
 
+import ir.Ir;
 import ir.Where;
 
 import java.util.List;
 
 
 
-public abstract class IrVARBlockDecl implements Where {
-    private final int lineNumber;
-    private final int colNumber;
+public abstract class IrVARBlockDecl extends Ir {
 
     private final List<IrVarDecl> VarList;
     private final VarAccessTypeEnum accessType;
     public IrVARBlockDecl(int lineNumber, int colNumber, List<IrVarDecl> varList, VarAccessTypeEnum accessType) {
-        this.lineNumber = lineNumber;
-        this.colNumber = colNumber;
+        super(lineNumber, colNumber);
         this.VarList = varList;
         this.accessType = accessType;
     }
@@ -23,13 +21,5 @@ public abstract class IrVARBlockDecl implements Where {
         return accessType;
     }
 
-    @Override
-    public int getLineNumber() {
-        return lineNumber;
-    }
 
-    @Override
-    public int getColNumber() {
-        return colNumber;
-    }
 }
