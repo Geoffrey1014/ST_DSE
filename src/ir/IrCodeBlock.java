@@ -2,10 +2,23 @@ package ir;
 
 import java.util.List;
 
-public class IrCodeBlock extends Ir {
+public class IrCodeBlock implements Ir {
+    private final int lineNumber;
+    private final int colNumber;
+
     private final List<IrStmt> StmtList;
     public IrCodeBlock(int lineNumber, int colNumber, List<IrStmt> statList) {
-        super(lineNumber, colNumber);
+        this.lineNumber = lineNumber;
+        this.colNumber = colNumber;
         this.StmtList = statList;
+    }
+    @Override
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    @Override
+    public int getColNumber() {
+        return colNumber;
     }
 }

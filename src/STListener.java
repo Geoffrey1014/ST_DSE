@@ -728,10 +728,10 @@ public class STListener extends STParserBaseListener {
             System.out.println("Hexadecimal_literal");
         }
         if (ctx.Decimal_literal() != null){
-            literal = new IrIntLiteral(Long.valueOf(ctx.getText().replaceAll("_", "")),l.line, l.col );
+            literal = new IrIntLiteral(valueOfDecimalLiteral(ctx.getText()),l.line, l.col );
         }
         if (ctx.Pure_decimal_digits() != null){
-            literal = new IrIntLiteral(Long.valueOf(ctx.getText()),l.line, l.col );
+            literal = new IrIntLiteral(valueOfDecimalLiteral(ctx.getText()),l.line, l.col );
         }
         setASTNode(ctx, literal);
     }
@@ -754,6 +754,9 @@ public class STListener extends STParserBaseListener {
 
     public void setASTNode(ParseTree parseTreeNode, Ir ASTNode){this.ASTNodes.put(parseTreeNode, ASTNode);}
     public Ir getASTNode(ParseTree parseTreeNode){ return this.ASTNodes.get(parseTreeNode);}
+    public Long valueOfDecimalLiteral(String literal){
+        return Long.valueOf(literal.replaceAll("_", ""));
+    }
 
     static class ProgramLocation {
         public final int line;
