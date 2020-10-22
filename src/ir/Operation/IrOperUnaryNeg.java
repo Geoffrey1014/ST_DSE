@@ -2,6 +2,7 @@ package ir.Operation;
 
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.VarTypeEnum;
 
@@ -45,6 +46,11 @@ public class IrOperUnaryNeg extends IrOperUnary {
         prettyString += this.operand.prettyPrint("  " + indentSpace);
 
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrOperUnaryNeg(this);
     }
 
 }

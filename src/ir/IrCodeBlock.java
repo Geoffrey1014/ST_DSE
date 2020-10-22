@@ -1,5 +1,7 @@
 package ir;
 
+import SymbolTable.SymTable;
+
 import java.util.List;
 
 public class IrCodeBlock extends Ir {
@@ -11,4 +13,18 @@ public class IrCodeBlock extends Ir {
         this.StmtList = statList;
     }
 
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return null;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrCodeBlock(this);
+    }
 }

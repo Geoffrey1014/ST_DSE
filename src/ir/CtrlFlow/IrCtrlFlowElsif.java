@@ -1,5 +1,6 @@
 package ir.CtrlFlow;
 
+import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrExpr;
 
@@ -8,6 +9,9 @@ public class IrCtrlFlowElsif extends IrCtrlFlowIf {
         super(condExpr, stmtBody);
 
     }
-
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrCtrlFlowElsif(this);
+    }
 
 }

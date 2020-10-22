@@ -1,6 +1,7 @@
 package ir.VARBlockDecl;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.Ir;
 import ir.IrIdent;
 
@@ -55,6 +56,11 @@ public class IrVarDecl extends Ir {
             prettyString += this.getValue().prettyPrint("  " + indentSpace);
         }
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrVarDecl(this);
     }
 
     public String getName() {

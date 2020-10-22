@@ -25,5 +25,5 @@ public abstract class Ir implements Where {
 
     public abstract String prettyPrint(String indentSpace);
 
-    public abstract String visit(BaseVisitor<String> visitor);
+    public abstract void visit(BaseVisitor<Void> visitor);
 }

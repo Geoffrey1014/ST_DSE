@@ -2,6 +2,7 @@ package ir.Operation;
 
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.VarTypeEnum;
 
@@ -55,4 +56,10 @@ public class IrOperBinaryLogic extends IrOperBinary {
         return prettyString;
 
     }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrOperBinaryLogic(this);
+    }
+
 }

@@ -1,6 +1,7 @@
 package ir.VARBlockDecl;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.Literal.IrIntLiteral;
 import ir.VarTypeEnum;
 
@@ -38,6 +39,12 @@ public class IrTypeArray extends IrType {
         prettyString += indentSpace +  "|--size: " + this.low.getValue().toString() + " to " + this.high.getValue().toString();
         return prettyString;
     }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrTypeArray(this);
+    }
+
     public int getArraySize(){
         return this.size;
     }

@@ -1,6 +1,7 @@
 package ir.VARBlockDecl;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.Literal.IrLiteral;
 import ir.VarTypeEnum;
 
@@ -32,5 +33,10 @@ public class IrValueSimple extends IrValue {
     @Override
     public VarTypeEnum getType() {
         return type;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrValueSimple(this);
     }
 }

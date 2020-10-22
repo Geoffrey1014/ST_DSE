@@ -1,6 +1,7 @@
 package ir.Operation;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.VarTypeEnum;
 
@@ -81,5 +82,10 @@ public class IrOperBinaryArith extends IrOperBinary {
         prettyString += this.rightOperand.prettyPrint("    " + indentSpace);
 
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrOperBinaryArith(this);
     }
 }

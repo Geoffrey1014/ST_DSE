@@ -1,6 +1,7 @@
 package ir.Arg;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrIdent;
 
 public class IrArgOutputAssign extends IrArg {
@@ -20,5 +21,10 @@ public class IrArgOutputAssign extends IrArg {
     @Override
     public String prettyPrint(String indentSpace) {
         return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.IrArgOutputAssign(this);
     }
 }

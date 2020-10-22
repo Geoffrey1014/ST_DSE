@@ -1,10 +1,7 @@
 package ir.Location;
 
 import SymbolTable.SymTable;
-import ir.Ir;
-import ir.IrExpr;
-import ir.IrIdent;
-import ir.VarTypeEnum;
+import ir.*;
 
 public class IrFbStLocation extends IrExpr {
     // TODO ；  这里比较复杂，因为引用的是其他POU内声明的变量，并且一定是 VAR_OUTPUT or VAR_INPUT_OUTPUT 类型
@@ -49,5 +46,10 @@ public class IrFbStLocation extends IrExpr {
     public String prettyPrint(String indentSpace) {
 
         return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrFbStLocation(this);
     }
 }

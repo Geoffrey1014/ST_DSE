@@ -64,6 +64,8 @@ public interface BaseVisitor<T> {
     public abstract T visitIrFunctionCallExpr(IrFunctionCallExpr node);
 
     public abstract T visitIrPousDecl(IrPousDecl node);
+
+    public abstract T visitIrIdent(IrIdent irIdent);
 //
 //    public abstract T visit( node);
 //    public abstract T visit( node);

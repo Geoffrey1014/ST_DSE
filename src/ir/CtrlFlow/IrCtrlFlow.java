@@ -4,7 +4,7 @@ import ir.IrCodeBlock;
 import ir.IrExpr;
 import ir.IrStmt;
 
-public class IrCtrlFlow extends IrStmt {
+public abstract class IrCtrlFlow extends IrStmt {
     final IrExpr condExpr;
     final IrCodeBlock stmtBody;
 

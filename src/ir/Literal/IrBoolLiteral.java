@@ -1,6 +1,7 @@
 package ir.Literal;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.VarTypeEnum;
 
 public class IrBoolLiteral extends IrLiteral {
@@ -32,5 +33,10 @@ public class IrBoolLiteral extends IrLiteral {
         String prettyPrint = indentSpace + "|--boolLiteral\n";
         prettyPrint += "  " + indentSpace + "|--value: " + this.value + "\n";
         return prettyPrint;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrBoolLiteral(this);
     }
 }

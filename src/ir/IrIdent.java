@@ -38,4 +38,9 @@ public class IrIdent extends Ir {
     public String prettyPrint(String indentSpace) {
         return "";
     }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrIdent(this);
+    }
 }

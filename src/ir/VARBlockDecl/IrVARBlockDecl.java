@@ -1,6 +1,7 @@
 package ir.VARBlockDecl;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.Ir;
 
 import java.util.ArrayList;
@@ -53,5 +54,10 @@ public class IrVARBlockDecl extends Ir {
         }
 
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrVARBlockDecl(this);
     }
 }

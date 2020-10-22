@@ -1,5 +1,7 @@
 package ir.POUDecl;
 
+import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrVARBlockDecl;
@@ -15,4 +17,18 @@ public class IrProgramDecl extends IrPouDecl {
     }
 
 
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return null;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrProgramDecl(this);
+    }
 }

@@ -1,7 +1,8 @@
 package ir.CtrlFlow;
 
+import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.Ir;
-import ir.Where;
 import ir.IrExpr;
 
 public class IrCtrlFlowForRange extends Ir {
@@ -20,4 +21,18 @@ public class IrCtrlFlowForRange extends Ir {
         this.step = step;
     }
 
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return null;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrCtrlFlowForRange(this);
+    }
 }

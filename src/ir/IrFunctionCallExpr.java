@@ -1,5 +1,6 @@
 package ir;
 
+import SymbolTable.SymTable;
 import ir.Arg.IrArg;
 
 import java.util.List;
@@ -23,4 +24,18 @@ public class IrFunctionCallExpr extends IrExpr {
         return this.methodName + "(" + this.argsList.toString() + ")";
     }
 
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return null;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrFunctionCallExpr(this);
+    }
 }

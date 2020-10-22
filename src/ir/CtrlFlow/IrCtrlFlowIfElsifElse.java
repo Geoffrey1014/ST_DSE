@@ -1,5 +1,6 @@
 package ir.CtrlFlow;
 
+import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrExpr;
 
@@ -21,5 +22,10 @@ public class IrCtrlFlowIfElsifElse extends IrCtrlFlowIf {
 
     public ArrayList<IrCtrlFlowElsif> getElsifArrayList() {
         return elsifArrayList;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrCtrlFlowIfElsifElse(this);
     }
 }

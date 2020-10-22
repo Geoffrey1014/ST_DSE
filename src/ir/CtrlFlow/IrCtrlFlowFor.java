@@ -1,9 +1,9 @@
 package ir.CtrlFlow;
 
-import ir.Ir;
-import ir.IrStmt;
-import ir.Where;
+import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrCodeBlock;
+import ir.IrStmt;
 import ir.Location.IrLocationVar;
 
 public class IrCtrlFlowFor extends IrStmt {
@@ -20,4 +20,18 @@ public class IrCtrlFlowFor extends IrStmt {
         this.codeBlock = codeBlock;
     }
 
+    @Override
+    public String semanticCheck(SymTable symTable) {
+        return null;
+    }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        return null;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrCtrlFlowFor(this);
+    }
 }

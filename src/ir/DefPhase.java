@@ -202,4 +202,9 @@ public class DefPhase implements BaseVisitor<Void> {
     public Void visitIrPousDecl(IrPousDecl node) {
         return null;
     }
+
+    @Override
+    public Void visitIrIdent(IrIdent irIdent) {
+        return null;
+    }
 }

@@ -2,6 +2,7 @@ package ir.Location;
 
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.Ir;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrTypeArray;
@@ -91,5 +92,10 @@ public class IrLocationVar extends IrLocation {
         prettyString +=  "  " +  "|--type: " + indentSpace + this.varType +"\n";
 
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrLocationVar(this);
     }
 }

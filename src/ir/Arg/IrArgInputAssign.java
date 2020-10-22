@@ -1,6 +1,7 @@
 package ir.Arg;
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.Location.IrLocation;
 import ir.Location.IrLocationVar;
@@ -67,6 +68,11 @@ public class IrArgInputAssign extends IrArgExpr {
 
     public IrLocation getStoreLocation() {
         return this.storeLocation;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrArgInputAssign(this);
     }
 
 }

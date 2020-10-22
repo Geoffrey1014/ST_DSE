@@ -2,12 +2,8 @@ package ir.Location;
 
 
 import SymbolTable.SymTable;
-import ir.Ir;
-import ir.IrExpr;
-import ir.IrIdent;
+import ir.*;
 import ir.VARBlockDecl.IrTypeArray;
-import ir.VARBlockDecl.IrVarDecl;
-import ir.VarTypeEnum;
 
 /**
  * Created by geo on 2020/10/13.
@@ -51,10 +47,10 @@ public class IrLocationArray extends IrLocation {
                         " line: " + this.elementIndex.getLineNumber() + " col: " + this.elementIndex.getColNumber() + "\n";
             }
             else {
-                IrVarDecl array = (IrVarDecl) object;
+                IrTypeArray array = (IrTypeArray) object;
 
                 // IMPORTANT: set the IrType of the IrLocationArray
-                this.setLocationType(array.getType().getTypeEnum());
+                this.setLocationType(array.getTypeEnum());
             }
         } else {
             errorMessage += "Array variable used before declared" +
@@ -81,5 +77,10 @@ public class IrLocationArray extends IrLocation {
         prettyString +=  "  " + indentSpace +  "|--type: " + this.varType +"\n";
 
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+        visitor.visitIrLocationArray(this);
     }
 }

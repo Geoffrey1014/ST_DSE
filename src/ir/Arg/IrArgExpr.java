@@ -2,6 +2,7 @@ package ir.Arg;
 
 
 import SymbolTable.SymTable;
+import ir.BaseVisitor;
 import ir.IrExpr;
 
 public class IrArgExpr extends IrArg {
@@ -38,5 +39,10 @@ public class IrArgExpr extends IrArg {
         prettyString += ((IrExpr) this.getArgValue()).prettyPrint("  " + indentSpace);
 
         return prettyString;
+    }
+
+    @Override
+    public void visit(BaseVisitor<Void> visitor) {
+         visitor.visitIrArgExpr(this);
     }
 }
