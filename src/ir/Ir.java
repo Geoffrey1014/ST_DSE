@@ -23,6 +23,7 @@ public abstract class Ir implements Where {
 
     public abstract  String semanticCheck(SymTable symTable);
 
-
     public abstract String prettyPrint(String indentSpace);
+
+    public abstract String visit(BaseVisitor<String> visitor);
 }

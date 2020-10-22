@@ -31,7 +31,7 @@ public class IrVARBlockDecl extends Ir {
 
         // 1) check that no identifiers declared twice in same scope
         for (IrVarDecl varDecl : this.VarList) {
-            if (symTable.checkIfSymbolExistsAtCurrentScope(varDecl.getName())) {
+            if (symTable.checkIfSymbolExistsAtAnyScope(varDecl.getName())) {
                 errorMessage += "Duplicate declaration in same scope __filename__" +
                         " line: " + varDecl.getLineNumber() + " col: " + varDecl.getColNumber() + "\n";
             }
