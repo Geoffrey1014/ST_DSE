@@ -1,5 +1,7 @@
 package ir;
 
+
+import SymbolTable.SymTable;
 import ir.Arg.IrArgExpr;
 import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
@@ -17,7 +19,10 @@ import ir.POUDecl.IrFunctionDecl;
 import ir.POUDecl.IrProgramDecl;
 import ir.VARBlockDecl.*;
 
-public class DefPhase implements BaseVisitor<Void> {
+public class SematicCheckVisitor implements BaseVisitor<Void> {
+    SymTable symTable = null;
+    String erroMessage = "";
+
     @Override
     public Void visitIrArgExpr(IrArgExpr node) {
         return null;
