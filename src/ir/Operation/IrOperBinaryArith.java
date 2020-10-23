@@ -11,7 +11,7 @@ import ir.VarTypeEnum;
 public class IrOperBinaryArith extends IrOperBinary {
     /**TODO: 目前不可以做自动的类型转化，比如int 不能和 float 相加
      */
-    VarTypeEnum exprType;
+    private VarTypeEnum exprType;
 
     public IrOperBinaryArith(OperKeyWordEnum operation, IrExpr leftOperand, IrExpr rightOperand) {
         super(operation, leftOperand, rightOperand);
@@ -20,6 +20,9 @@ public class IrOperBinaryArith extends IrOperBinary {
     @Override
     public VarTypeEnum getExpressionType() {
         return this.exprType;
+    }
+    public void setExpressionType(VarTypeEnum typeEnum) {
+        this.exprType = typeEnum;
     }
 
     @Override

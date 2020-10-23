@@ -16,7 +16,7 @@ public class IrOperUnaryNeg extends IrOperUnary {
 
     @Override
     public VarTypeEnum getExpressionType() {
-        return VarTypeEnum.RES_INT; //TODO: 这里暂时这么些，是很粗糙的。真的要实现所有的类型检查很麻烦
+        return this.operand.getExpressionType(); //返回下层的 IrExpr 即可
 
     }
 

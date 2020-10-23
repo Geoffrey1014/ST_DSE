@@ -1,9 +1,9 @@
 package ir.Location;
 
-import ir.Where;
 import ir.IrExpr;
 import ir.IrIdent;
 import ir.VarTypeEnum;
+import ir.Where;
 
 /**
  * Created by geo on 2020/10/13.
@@ -25,7 +25,7 @@ public abstract class IrLocation extends IrExpr {
         return this.varType;
     }
 
-    protected void setLocationType(VarTypeEnum type) {
+    public void setLocationType(VarTypeEnum type) {
         this.varType = type;
     }
 
@@ -45,4 +45,6 @@ public abstract class IrLocation extends IrExpr {
     public int hashCode() {
         return this.varName.hashCode() * this.varType.hashCode();
     }
+
+
 }

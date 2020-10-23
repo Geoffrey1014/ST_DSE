@@ -8,7 +8,7 @@ import ir.VarTypeEnum;
 import java.util.ArrayList;
 
 public class IrValueArray extends IrValue {
-    private final ArrayList<IrLiteral>  valueList;
+    public final ArrayList<IrLiteral>  valueList;
     private VarTypeEnum type;
 
     public IrValueArray(int lineNumber, int colNumber, ArrayList<IrLiteral>  valueList) {
@@ -46,7 +46,7 @@ public class IrValueArray extends IrValue {
     }
 
     @Override
-    public Object getValue() {
+    public ArrayList<IrLiteral> getValue() {
         return this.valueList;
     }
 

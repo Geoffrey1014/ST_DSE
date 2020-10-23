@@ -3,6 +3,7 @@ import grammar.gen.STParserBaseListener;
 import ir.Arg.IrArg;
 import ir.Arg.IrArgExpr;
 import ir.Arg.IrArgInputAssign;
+import ir.Arg.IrArgOutputAssign;
 import ir.CtrlFlow.*;
 import ir.*;
 import ir.Literal.*;
@@ -20,25 +21,31 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import tools.MyPrint;
 
 import java.util.ArrayList;
 
 public class STListener extends STParserBaseListener {
-    MyPrint myPrint = new MyPrint(0);
+    /**
+     * 这里的myprint  的初始化会不会对打印产生影响？
+     */
+    public static MyPrint myPrint = new MyPrint(0);
 
     public IrPousDecl pous;
     ParseTreeProperty<Where> ASTNodes = new ParseTreeProperty<>();
 
+
+    /**
+     * 需要在其他监听的动作中完成 其他AST中间结构的构建
+     * 可以用stack来传递ASTNode，或者可以将这些数据结构挂在具体语法树上
+     * */
     @Override public void exitPous(STParser.PousContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
 
         ArrayList<IrProgramDecl> programDeclsArrayList = new ArrayList<>();
         ArrayList<IrFunctionBlockDecl> functionBlockDeclsArrayList = new ArrayList<>();
         ArrayList<IrFunctionDecl> functionDeclArrayList = new ArrayList<>();
-        /**
-         * 需要在其他监听的动作中完成 其他AST中间结构的构建
-         * 可以用stack来传递ASTNode，或者可以将这些数据结构挂在具体语法树上
-         * */
+
         for(ParseTree node :ctx.children){
             Where AstNode = ASTNodes.get(node);
            if ( AstNode instanceof IrProgramDecl){
@@ -57,8 +64,10 @@ public class STListener extends STParserBaseListener {
 
     @Override public void enterPou(STParser.PouContext ctx) {}
 
+    /**
+     * 把子节点的ASTcopy一下就行了
+     */
     @Override public void exitPou(STParser.PouContext ctx) {
-        /** 把子节点的ASTcopy一下就行了*/
         Where pou = getASTNode(ctx.getChild(0));
         setASTNode(ctx, pou);
 //         = getASTNode(ctx.program());
@@ -320,13 +329,13 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFor_range(STParser.For_rangeContext ctx) {
         IrExpr low = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr high = (IrExpr) getASTNode(ctx.expression(1));
-        myPrint.LevelOne.print("=====");
+        MyPrint.LevelOne.print("=====");
         Integer step = null;
         if (ctx.step != null){
             step = Integer.valueOf(ctx.step.getText());
         }
 
-        myPrint.LevelOne.print("=====");
+        MyPrint.LevelOne.print("=====");
         IrCtrlFlowForRange range = new IrCtrlFlowForRange(low, high, step);
         setASTNode(ctx, range);
     }
@@ -387,6 +396,8 @@ public class STListener extends STParserBaseListener {
         IrIdent fbOutput = new IrIdent(ctx.ID(0).getText(), l.line, l.col); //TODO: 这里可以尝试一下 l.line, l.col 和 ctx.ID(1)
         TerminalNode node = ctx.ID(1);
         IrIdent acceptLocation = new IrIdent(node.getText(), node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() );
+        IrArgOutputAssign argOutputAssign = new IrArgOutputAssign(l.line, l.col, fbOutput, acceptLocation);
+        setASTNode(ctx, argOutputAssign);
     }
 
     @Override public void enterNotExpr(STParser.NotExprContext ctx) { }
@@ -408,7 +419,12 @@ public class STListener extends STParserBaseListener {
         IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
         IrOperBinaryArith operBinaryArith = null;
-        myPrint.levelTwo.print(ctx.op.getText());
+
+        /*
+          there is a print
+         */
+        MyPrint.levelTwo.print(ctx.op.getText());
+
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -448,7 +464,10 @@ public class STListener extends STParserBaseListener {
         IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
         IrOperBinaryRel operBinaryCond = null;
-        myPrint.levelTwo.print(ctx.op.getText());
+        /*
+          there is a print
+         */
+        MyPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -488,7 +507,11 @@ public class STListener extends STParserBaseListener {
         IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
         IrOperBinaryEq operBinaryCond = null;
-        myPrint.levelTwo.print(ctx.op.getText());
+
+        /*
+          there is a print
+         */
+        MyPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -512,11 +535,15 @@ public class STListener extends STParserBaseListener {
 
     @Override public void enterLogic(STParser.LogicContext ctx) { }
 
+
     @Override public void exitLogic(STParser.LogicContext ctx) {
         IrExpr left = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr right = (IrExpr) getASTNode(ctx.expression(1));
         IrOperBinaryLogic operBinaryCond = null;
-        myPrint.levelTwo.print(ctx.op.getText());
+        /*
+        there is a print
+         */
+        MyPrint.levelTwo.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -611,14 +638,25 @@ public class STListener extends STParserBaseListener {
 
         ArrayList<IrVarDecl> varDeclArrayList = new ArrayList<>();
         for (ParseTree node : ctx.variable_declaration()){
-              varDeclArrayList.add( (IrVarDecl) getASTNode(node));
+
+            IrVarsDecl varsDecl = (IrVarsDecl) getASTNode(node);
+            // 将 getNameArrayList 中的多个变量拆分成单个 IrVarDecl, 他们的值都相同
+
+            for ( int i = 0; i < varsDecl.getNameArrayList().size(); i++){
+                IrIdent irIdent =  varsDecl.getNameArrayList().get(i);
+
+                IrVarDecl varDecl= new IrVarDecl(varsDecl.getLineNumber(),
+                                                 varsDecl.getColNumber(), irIdent, varsDecl.getType(),varsDecl.getValues() );
+                varDeclArrayList.add(varDecl);
+            }
+
         }
 
         VarAccessTypeEnum type = VarAccessTypeEnum.fromVarAccessType(ctx.var_acc_type.getText());
         if (type == null){
             System.err.println("There is no such operation: " + ctx.getText());
         }
-        IrVARBlockDecl varBlockDecl = new IrVARBlockDecl(l.line,l.col,varDeclArrayList,type);
+        IrVARBlockDecl varBlockDecl = new IrVARBlockDecl(l.line,l.col, varDeclArrayList,type);
         setASTNode(ctx, varBlockDecl);
     }
 
@@ -631,9 +669,8 @@ public class STListener extends STParserBaseListener {
             nameArrayList.add(new IrIdent(node.getText(),node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() ));
         }
         IrType type = (IrType) getASTNode(ctx.type_rule());
-        IrValue value = null;
-        value = (IrValue) getASTNode(ctx.variable_initializer());
-        IrVarDecl varDecl = new IrVarDecl(l.line, l.col, nameArrayList, type, value);
+        IrValue value = (IrValue) getASTNode(ctx.variable_initializer());
+        IrVarsDecl varDecl = new IrVarsDecl(l.line, l.col, nameArrayList, type, value);
         setASTNode(ctx, varDecl);
 
 

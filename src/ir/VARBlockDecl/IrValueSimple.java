@@ -6,8 +6,8 @@ import ir.Literal.IrLiteral;
 import ir.VarTypeEnum;
 
 public class IrValueSimple extends IrValue {
-    private final IrLiteral value;
-    private VarTypeEnum type;
+    public final IrLiteral value;
+    public VarTypeEnum type;
     public IrValueSimple( IrLiteral value) {
         super(value.getLineNumber(), value.getColNumber());
         this.value = value;

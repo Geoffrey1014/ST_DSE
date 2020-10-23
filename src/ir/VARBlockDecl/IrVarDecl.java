@@ -8,12 +8,14 @@ import ir.IrIdent;
 import java.util.ArrayList;
 
 public class IrVarDecl extends Ir {
-    private final ArrayList<IrIdent> nameArrayList;
-    private final IrType type;
-    private final IrValue value;
-    public IrVarDecl(int lineNumber, int colNumber, ArrayList<IrIdent> name, IrType type, IrValue value) {
+    public final IrType type;
+    public final IrValue value;
+    public IrIdent name;
+    public VarAccessTypeEnum accessType;
+
+    public IrVarDecl(int lineNumber, int colNumber, IrIdent name, IrType type, IrValue value) {
         super(lineNumber, colNumber);
-        this.nameArrayList = name;
+        this.name = name;
         this.type = type;
         this.value = value;
     }
@@ -64,12 +66,8 @@ public class IrVarDecl extends Ir {
     }
 
     public String getName() {
-        String names = "";
-        for (IrIdent id : this.nameArrayList){
-            names += id.getValue();
-            names += ", ";
-        }
-        return names;
+
+        return name.getValue();
     }
 
     public IrType getType(){

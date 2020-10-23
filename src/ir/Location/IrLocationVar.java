@@ -7,7 +7,7 @@ import ir.Ir;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrTypeArray;
 import ir.VARBlockDecl.IrTypeSimple;
-import ir.VARBlockDecl.IrVarDecl;
+import ir.VARBlockDecl.IrVarsDecl;
 import ir.VarTypeEnum;
 
 /**
@@ -20,7 +20,7 @@ public class IrLocationVar extends IrLocation {
         super(varName);
     }
 
-    protected void setIrDecl(Ir irDeclObject) {
+    public void setIrDecl(Ir irDeclObject) {
         this.irDeclObject = irDeclObject;
     }
 
@@ -43,8 +43,8 @@ public class IrLocationVar extends IrLocation {
             Ir object = symTable.getSymbol(this.getLocationName().getValue());
 
             // make sure that the identifier is a var, not a method or array
-            if (object instanceof IrVarDecl) {
-                IrVarDecl var = (IrVarDecl) object;
+            if (object instanceof IrVarsDecl) {
+                IrVarsDecl var = (IrVarsDecl) object;
 
                 if (var.getType() instanceof IrTypeSimple){
                     // IMPORTANT: set the typeEnum of the IrLocationVar

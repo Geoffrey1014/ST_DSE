@@ -27,4 +27,8 @@ public class IrCodeBlock extends Ir {
     public void visit(BaseVisitor<Void> visitor) {
         visitor.visitIrCodeBlock(this);
     }
+
+    public List<IrStmt> getStmtList() {
+        return StmtList;
+    }
 }

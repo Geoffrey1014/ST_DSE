@@ -1,23 +1,18 @@
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
-import org.antlr.v4.gui.Trees;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import tools.CLI;
 import tools.CLI.Action;
+import tools.MyPrint;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Mian {
-    public static MyPrint myprint  = new MyPrint(0);
-
-
+//    public static MyPrint myprint  = new MyPrint(0);
 
     public static void run(String[] args ){
         try {
@@ -107,9 +102,9 @@ public class Mian {
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
 
-            myprint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
-            myprint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
-            myprint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
+            MyPrint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
+            MyPrint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
+            MyPrint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
 
         }
         catch (IOException e){
@@ -118,7 +113,7 @@ public class Mian {
     }
 
     public static void main(String[] args) throws IOException {
-        myprint.levelZero.print(System.getProperty("user.home"));
+        MyPrint.levelZero.print(System.getProperty("user.home"));
         walkTree(args);
 
 

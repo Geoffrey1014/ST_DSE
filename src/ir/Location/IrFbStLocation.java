@@ -2,9 +2,15 @@ package ir.Location;
 
 import SymbolTable.SymTable;
 import ir.*;
+import ir.VARBlockDecl.IrVarDecl;
 
 public class IrFbStLocation extends IrExpr {
     // TODO ；  这里比较复杂，因为引用的是其他POU内声明的变量，并且一定是 VAR_OUTPUT or VAR_INPUT_OUTPUT 类型
+
+    protected Ir irDeclPou; // IrVarDecl
+    protected Ir irDeclObject; // IrVarDecl
+
+
     protected IrIdent varNameFirst;
     protected IrIdent varNameLast;
     protected VarTypeEnum varType;
@@ -15,15 +21,18 @@ public class IrFbStLocation extends IrExpr {
         this.varNameLast = varName2;
     }
 
-    public IrIdent getLocationName() {
+    public IrIdent getFirstLocationName() {
         return this.varNameFirst;
+    }
+    public IrIdent getLastLocationName() {
+        return this.varNameLast;
     }
 
     public VarTypeEnum getLocationType() {
         return this.varType;
     }
 
-    protected void setLocationType(VarTypeEnum type) {
+    public void setLocationType(VarTypeEnum type) {
         this.varType = type;
     }
     @Override
@@ -35,9 +44,9 @@ public class IrFbStLocation extends IrExpr {
     public String semanticCheck(SymTable symTable) {
         String errorMessage = "";
         // 1) make sure the variable has been declared already  TODO: 其实只分成global 和 local scope 两个，所以 FbStLocation 会比较麻烦
-        if (symTable.checkIfSymbolExistsAtAnyScope(this.getLocationName().getValue())) {
+        if (symTable.checkIfSymbolExistsAtAnyScope(this.getFirstLocationName().getValue())) {
             // 3) make sure that var is an array (and not a method or non-array)
-            Ir object = symTable.getSymbol(this.getLocationName().getValue());
+            Ir object = symTable.getSymbol(this.getFirstLocationName().getValue());
         }
         return null;
     }
@@ -51,5 +60,10 @@ public class IrFbStLocation extends IrExpr {
     @Override
     public void visit(BaseVisitor<Void> visitor) {
         visitor.visitIrFbStLocation(this);
+    }
+
+    public void setIrDecl(Ir pou, IrVarDecl var) {
+        this.irDeclPou = pou;
+        this.irDeclObject = var;
     }
 }

@@ -57,6 +57,7 @@ public interface BaseVisitor<T> {
     public abstract T visitIrValueArray(IrValueArray node);
     public abstract T visitIrValueSimple(IrValueSimple node);
     public abstract T visitIrVARBlockDecl(IrVARBlockDecl node);
+    public abstract T visitIrVarsDecl(IrVarsDecl node);
     public abstract T visitIrVarDecl(IrVarDecl node);
 
     public abstract T visitIrAssignStmtEq(IrAssignStmtEq node);

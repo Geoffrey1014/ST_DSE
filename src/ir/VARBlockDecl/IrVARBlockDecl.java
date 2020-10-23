@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 public class IrVARBlockDecl extends Ir {
 
-    private final ArrayList<IrVarDecl> VarList;
-    private final VarAccessTypeEnum accessType;
+    public final ArrayList<IrVarDecl> VarList;
+    public final VarAccessTypeEnum accessType;
     public IrVARBlockDecl(int lineNumber, int colNumber, ArrayList<IrVarDecl> varList, VarAccessTypeEnum accessType) {
         super(lineNumber, colNumber);
         this.VarList = varList;
         this.accessType = accessType;
+        for (IrVarDecl varDecl : varList){
+            varDecl.accessType = this.accessType;
+        }
     }
 
     public VarAccessTypeEnum getAccessType() {

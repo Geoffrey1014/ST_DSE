@@ -29,9 +29,12 @@ public abstract class BaseScope implements Scope {
         return null; // not found
     }
 
+    /**
+     * 将符号放入当前 scope 的 map 中
+     */
     public void define(String name , Ir sym) {
         symbols.put(name, sym);
-//        sym.scope = this; // track the scope in each symbol
+        sym.scope = this; // 这个记录的是这个 AST 节点 在那个 scope 中
     }
 
     public Scope getEnclosingScope() { return enclosingScope; }

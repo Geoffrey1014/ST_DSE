@@ -16,7 +16,7 @@ public class IrOperUnaryNot extends IrOperUnary {
 
     @Override
     public VarTypeEnum getExpressionType() {
-        return VarTypeEnum.RES_BOOL;
+        return this.operand.getExpressionType(); //返回下层的 IrExpr 即可
     }
 
     @Override

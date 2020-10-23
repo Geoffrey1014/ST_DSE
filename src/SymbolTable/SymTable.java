@@ -7,9 +7,9 @@ import ir.Ir;
  */
 public class SymTable {
 
-    public static AbsTreeProperty<Scope> treeProperty = new AbsTreeProperty<Scope>();
-    static Scope currentScope; // define symbols in this scope
-    static GlobalScope globals;
+    public  AbsTreeProperty<Scope> treeProperty = new AbsTreeProperty<Scope>();
+    public  Scope currentScope; // define symbols in this scope
+    public  GlobalScope globals;
 
     public void addObjectToCurrentScope(String id, Ir object) {
         currentScope.define(id, object);
@@ -22,7 +22,10 @@ public class SymTable {
         return currentScope.resolve(id);
     }
 
-    void saveScope(Ir node, Scope s) { treeProperty.put(node, s); }
+    /**
+     * 将scope s  标注在 AST 上
+     */
+    public void saveScope(Ir node, Scope s) { treeProperty.put(node, s); }
 
 }
 
