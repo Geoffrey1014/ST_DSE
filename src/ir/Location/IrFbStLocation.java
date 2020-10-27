@@ -7,13 +7,13 @@ import ir.VARBlockDecl.IrVarDecl;
 public class IrFbStLocation extends IrExpr {
     // TODO ；  这里比较复杂，因为引用的是其他POU内声明的变量，并且一定是 VAR_OUTPUT or VAR_INPUT_OUTPUT 类型
 
-    protected Ir irDeclPou; // IrVarDecl
-    protected Ir irDeclObject; // IrVarDecl
+    public Ir irDeclPou; // IrVarDecl
+    public Ir irDeclObject; // IrVarDecl
 
 
-    protected IrIdent varNameFirst;
-    protected IrIdent varNameLast;
-    protected VarTypeEnum varType;
+    public IrIdent varNameFirst;
+    public IrIdent varNameLast;
+    public VarTypeEnum varType;
 
     public IrFbStLocation(IrIdent varName1, IrIdent varName2) {
         super(varName1.getLineNumber(), varName2.getColNumber());

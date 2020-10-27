@@ -102,7 +102,7 @@ primary_expression : constant
                     ;
 //enumerated_value: ' ';
 location:
-    ID   #VarLocation
+    ID   # VarLocation
     | ID L_SQUARE expression R_SQUARE  # ArrayLocation
     | ID DOT ID #FbLcation  //TODO: 这个比较麻烦, 不考虑多层
     ;

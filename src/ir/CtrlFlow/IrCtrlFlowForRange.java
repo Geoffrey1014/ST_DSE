@@ -8,12 +8,13 @@ import ir.IrExpr;
 public class IrCtrlFlowForRange extends Ir {
     private final IrExpr low;
     private final IrExpr high;
-    private final Integer step;
+    private final IrExpr step;
+    public Integer stepNum;
 
     // TODO : 这里应该是被我复杂化了，一般情况下IrCtrlFlowForRange 只能是两个数值
 
 
-    public IrCtrlFlowForRange( IrExpr low, IrExpr high, Integer step) {
+    public IrCtrlFlowForRange( IrExpr low, IrExpr high, IrExpr step) {
 
         super( low.getLineNumber(), low.getColNumber());
         this.low = low;
@@ -34,5 +35,17 @@ public class IrCtrlFlowForRange extends Ir {
     @Override
     public void visit(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowForRange(this);
+    }
+
+    public IrExpr getLow() {
+        return low;
+    }
+
+    public IrExpr getHigh() {
+        return high;
+    }
+
+    public IrExpr getStep() {
+        return step;
     }
 }

@@ -25,4 +25,8 @@ public class IrAssignStmtEq extends IrAssignStmt {
     public void visit(BaseVisitor<Void> visitor) {
         visitor.visitIrAssignStmtEq(this);
     }
+
+    public IrExpr getExpr() {
+        return expr;
+    }
 }

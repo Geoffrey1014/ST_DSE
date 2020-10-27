@@ -8,4 +8,8 @@ public abstract class IrAssignStmt extends IrStmt {
         super(lineNumber, colNumber);
         this.storeLocation = storeLocation;
     }
+
+    public IrLocation getStoreLocation() {
+        return storeLocation;
+    }
 }

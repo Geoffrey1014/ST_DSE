@@ -9,7 +9,7 @@ import ir.VARBlockDecl.IrTypeArray;
  * Created by geo on 2020/10/13.
  */
 public class IrLocationArray extends IrLocation {
-    protected Ir irDeclObject; // IrVarDecl
+    public Ir irDeclObject; // IrVarDecl
     private IrExpr elementIndex;
 
     public IrExpr getElementIndex() {

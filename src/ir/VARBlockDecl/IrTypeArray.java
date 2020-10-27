@@ -8,15 +8,15 @@ import ir.VarTypeEnum;
 public class IrTypeArray extends IrType {
     public final IrIntLiteral low;
     public final IrIntLiteral high;
-    public final VarTypeEnum type;
+
     public int size;
 
 
     public IrTypeArray(int lineNumber, int colNumber, IrIntLiteral low, IrIntLiteral high, VarTypeEnum type) {
-        super(lineNumber, colNumber);
+        super(lineNumber, colNumber, type);
         this.low = low;
         this.high = high;
-        this.type = type;
+
     }
 
     @Override
@@ -49,8 +49,5 @@ public class IrTypeArray extends IrType {
         return this.size;
     }
 
-    @Override
-    public VarTypeEnum getTypeEnum() {
-        return this.type;
-    }
+
 }

@@ -10,7 +10,7 @@ import ir.VARBlockDecl.IrVARBlockDecl;
 
 public class IrFunctionDecl extends IrPouDecl {
 
-    private final IrType type;
+    private final IrType type;  // TODO 目前function的返回类型不能是 array
     public IrFunctionDecl(IrIdent name, IrType type,
                           IrVARBlockDecl varBlockVAR, IrVARBlockDecl varBlockVAR_input, IrVARBlockDecl varBlockVAR_output,
                           IrVARBlockDecl varBlockVAR_input_output, IrVARBlockDecl varBlockVAR_temp, IrCodeBlock codeBlock) {

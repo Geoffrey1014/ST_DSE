@@ -9,7 +9,7 @@ import ir.Where;
  * Created by geo on 2020/10/13.
  */
 public abstract class IrLocation extends IrExpr {
-    protected IrIdent varName;
+    public IrIdent varName;
     protected VarTypeEnum varType;
 
     public IrLocation(IrIdent varName) {

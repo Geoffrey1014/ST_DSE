@@ -34,4 +34,16 @@ public class IrCtrlFlowFor extends IrStmt {
     public void visit(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowFor(this);
     }
+
+    public IrLocationVar getCounter() {
+        return counter;
+    }
+
+    public IrCtrlFlowForRange getRange() {
+        return range;
+    }
+
+    public IrCodeBlock getCodeBlock() {
+        return codeBlock;
+    }
 }

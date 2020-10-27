@@ -165,9 +165,14 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         return null;
     }
 
+    /**
+     * if theere is a var has been declared twice, give out the error message
+     * when meet the array type, visit this child node
+     * @param node
+     * @return
+     */
     @Override
     public Void visitIrVARBlockDecl(IrVARBlockDecl node) {
-        // 不管是何种类型d的 VAR 都是相同的处理
         for (IrVarDecl varDecl : node.getVarList()){
             symTable.currentScope.define(varDecl.getName(), varDecl);
         }
@@ -198,6 +203,11 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrFunctionCallExpr(IrFunctionCallExpr node) {
+        return null;
+    }
+
+    @Override
+    public Void visitIrFunctionCallStmt(IrFunctionCallStmt node) {
         return null;
     }
 

@@ -4,9 +4,10 @@ package ir.Arg;
 import SymbolTable.SymTable;
 import ir.BaseVisitor;
 import ir.IrExpr;
+import ir.VarTypeEnum;
 
 public class IrArgExpr extends IrArg {
-    private final IrExpr argValue;
+    public final IrExpr argValue;
 
     public IrArgExpr(IrExpr argValue, int lineNum, int colNum) {
         super(lineNum, colNum);
@@ -22,6 +23,10 @@ public class IrArgExpr extends IrArg {
 
     public IrExpr getArgValue() {
         return argValue;
+    }
+
+    public VarTypeEnum getArgumentType() {
+        return ((IrExpr) this.getArgValue()).getExpressionType();
     }
 
     @Override

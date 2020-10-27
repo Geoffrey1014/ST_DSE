@@ -5,10 +5,9 @@ import ir.BaseVisitor;
 import ir.VarTypeEnum;
 
 public class IrTypeSimple extends IrType {
-    private final VarTypeEnum type;
+
     public IrTypeSimple(VarTypeEnum type) {
-        super(type.getLineNumber(), type.getColNumber());
-        this.type = type;
+        super(type.getLineNumber(), type.getColNumber(), type);
 
     }
 
@@ -25,11 +24,6 @@ public class IrTypeSimple extends IrType {
     @Override
     public int getArraySize() {
         return 1;
-    }
-
-    @Override
-    public VarTypeEnum getTypeEnum() {
-        return this.type;
     }
 
     @Override

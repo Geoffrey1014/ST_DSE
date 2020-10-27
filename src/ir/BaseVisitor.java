@@ -63,6 +63,7 @@ public interface BaseVisitor<T> {
     public abstract T visitIrAssignStmtEq(IrAssignStmtEq node);
     public abstract T visitIrCodeBlock(IrCodeBlock node);
     public abstract T visitIrFunctionCallExpr(IrFunctionCallExpr node);
+    public abstract T visitIrFunctionCallStmt(IrFunctionCallStmt node);
 
     public abstract T visitIrPousDecl(IrPousDecl node);
 

@@ -3,22 +3,26 @@ package ir;
 
 import SymbolTable.Scope;
 import SymbolTable.SymTable;
+import ir.Arg.IrArg;
 import ir.Arg.IrArgExpr;
 import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
 import ir.CtrlFlow.*;
 import ir.Literal.*;
 import ir.Location.IrFbStLocation;
+import ir.Location.IrLocation;
 import ir.Location.IrLocationArray;
 import ir.Location.IrLocationVar;
 import ir.Operation.*;
 import ir.POUDecl.IrFunctionBlockDecl;
 import ir.POUDecl.IrFunctionDecl;
+import ir.POUDecl.IrPouDecl;
 import ir.POUDecl.IrProgramDecl;
 import ir.VARBlockDecl.*;
 import tools.MyPrint;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SematicCheckVisitor implements BaseVisitor<Void> {
     SymTable symTable = null;
@@ -28,68 +32,10 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
         this.symTable = symTable;
     }
 
-    /**
-     * arguments
-     */
     @Override
-    public Void visitIrArgExpr(IrArgExpr node) {
+    public Void visitIrIdent(IrIdent irIdent) {
         return null;
     }
-
-    @Override
-    public Void visitIrArgInputAssign(IrArgInputAssign node) {
-        return null;
-    }
-
-    @Override
-    public Void IrArgOutputAssign(IrArgOutputAssign node) {
-        return null;
-    }
-
-
-    /**
-     * control flow
-     */
-    @Override
-    public Void visitIrCtrlFlowIf(IrCtrlFlowIf node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowElsif(IrCtrlFlowElsif node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowFor(IrCtrlFlowFor node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrCtrlFlowWhile(IrCtrlFlowWhile node) {
-        return null;
-    }
-
 
     /**
      *Literal
@@ -118,6 +64,501 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
         return null;
     }
 
+    /***
+     * 1. check whether the function has be declared
+     * 2. check whether it is not functionBlock
+     * 3. check the the number of arguments
+     * 3.1 if the arguments are IrArgExpr type:
+     *      check that the IrArgExpr is semantically correct
+     *      check that each argument and param types match
+     *      check that the argument is not an array_location
+     *
+     * 3.2 if the arguments are IrArgInputAssin type.
+     *      check the child node
+     * 4 we allow that funtions have output_var
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrFunctionCallExpr(IrFunctionCallExpr node) {
+        // 1) check that the function has already been declared
+        if (symTable.checkIfSymbolExistsAtAnyScope(node.functionName.getValue())) {
+            Ir pouDecl = symTable.getSymbol(node.functionName.getValue());
+
+            // for normal POU_Decl
+            if (pouDecl instanceof IrFunctionDecl) {
+                IrFunctionDecl functionDecl = (IrFunctionDecl) pouDecl;
+
+                // 2) check for same number of params
+                List<IrVarDecl> varInputs = functionDecl.VarBlockVAR_INPUT.VarList;
+                if (varInputs.size() == node.argsList.size()) {
+
+                    // 分 IrArgExpr 和 IrArgInputAssign 两种
+                    if (varInputs.size() != 0  && node.argsList.get(0) instanceof IrArgExpr){
+
+                        for (int i = 0; i < varInputs.size(); i++) {
+                            IrVarDecl param = varInputs.get(i);
+                            Object unsafeArg = node.argsList.get(i);
+
+                            if (unsafeArg instanceof IrArgExpr) {
+                                IrArgExpr safeArg = (IrArgExpr) unsafeArg;
+
+                                // check that the IrArgExpr is semantically correct
+                                safeArg.visit(this);
+
+                                // 3) check that each argument and param types match
+                                if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
+
+                                    errorMessage.append("Argument and parameter types don't match" + " line: ").
+                                            append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+
+                                }
+
+                                // 4) check that the argument is not an array_location
+                                if (safeArg.getArgValue() instanceof IrLocation) {
+                                    IrLocation locArg = (IrLocation) safeArg.getArgValue();
+                                    IrVarDecl possibleArray = (IrVarDecl) symTable.getSymbol(locArg.getLocationName().getValue());
+
+                                    if (possibleArray.getType() instanceof IrTypeArray) {
+                                        errorMessage.append("Argument cannot be an array location " + " line: ")
+                                                .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+                                    }
+                                }
+                            }
+                            else {
+                                errorMessage.append("Arguments are not all ArgExpr type " + " line: ").append(node.getLineNumber()).append(" col: ")
+                                        .append(node.getColNumber()).append("\n");
+                            }
+                        }
+                    }
+                    else if (varInputs.size() != 0  && node.argsList.get(0) instanceof IrArgInputAssign){
+                        ArrayList<IrArg> argInputAssignList = (ArrayList<IrArg>) node.argsList;
+                        for (IrArg argInputAssign : argInputAssignList){
+
+                            // 将 当前的 functionDecl 赋值给 argInputAssign.irDeclPou  再检查子节点
+                            ((IrArgInputAssign) argInputAssign).irDeclPou = functionDecl;
+                            argInputAssign.visit(this);
+                        }
+
+                    }
+
+
+                } else {
+                    errorMessage.append("Wrong number of arguments passed to function" + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+
+                if (node.assignOutputList != null){
+                    errorMessage.append("can not call function block  in expression. ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+
+                // IMPORTANT: set the IrType of the IrFunctionCallExpr
+                node.functionType = functionDecl.getType();
+
+            }
+            // for an extern method_decl TODO 应该内置 ADD  SUB ABS 等基础函数
+//
+            else {
+                errorMessage.append("Non-Function identifier being called as a method" + " line: ")
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+            }
+        } else {
+            errorMessage.append("Function called before declared" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        return null;
+    }
+
+    /**
+     * 把每个函数的功能写清楚
+     * 1。FB要被声明过， 且是 IrFunctionBlockDecl 类型
+     * 2。VAR_INPUT and Arg 要对得上  分为 ArgExpr  和 ArgInputAssign
+     * 2。1 ArgExpr : TypeEnum 要一致
+     * 2。2 ArgInputAssign 和 FB 的 VAR_INPUT 名字 以及 TypeEnum 匹配
+     * 3。 ArgOutputAssign  要和 Var_OUTPUT  匹配
+     * 3.1  ArgOutputAssign.fbOutput 对应一个 IrFbStLocation。 functionBlockName 就是 IrFbStLocation.varNameFirst， IrFbStLocation 检查
+     * 3.2  ArgOutputAssign.acceptLocation 是个 IrLocationVar 类型，IrLocationVar.irDeclObject 应该 被赋值 IrFbStLocation， IrLocationVar 检查
+     * 3.3  acceptLocation 的类型和 IrFbStLocation 是否一致
+     *
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrFunctionCallStmt(IrFunctionCallStmt node) {
+        // 1) check that the method has already been declared
+        if (symTable.checkIfSymbolExistsAtAnyScope(node.functionBlockName.getValue())) {
+            Ir object = symTable.getSymbol(node.functionBlockName.getValue());
+
+            // for normal POU_Decl
+            if (object instanceof IrFunctionBlockDecl) {
+                IrFunctionBlockDecl functionBlockDecl = (IrFunctionBlockDecl) object;
+
+                // 2) check for same number of params
+                List<IrVarDecl> varInputs = functionBlockDecl.VarBlockVAR_INPUT.VarList;
+                if (varInputs.size() == node.argsList.size()) {
+
+                    // 分 IrArgExpr 和 IrArgInputAssign 两种
+                    if (varInputs.size() != 0  && node.argsList.get(0) instanceof IrArgExpr){
+
+                        for (int i = 0; i < varInputs.size(); i++) {
+                            IrVarDecl param = varInputs.get(i);
+                            Object unsafeArg = node.argsList.get(i); // i.e. a INT
+
+                            if (unsafeArg instanceof IrArgExpr) {
+                                IrArgExpr safeArg = (IrArgExpr) unsafeArg;
+
+                                // check that the IrArgExpr is semantically correct
+                                safeArg.visit(this);
+
+                                // 3) check that each argument and param types match
+                                if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
+
+                                    errorMessage.append("Argument and parameter types don't match" + " line: ").
+                                            append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+
+                                }
+
+                                // 4) check that the argument is not an array_location
+                                if (safeArg.getArgValue() instanceof IrLocation) {
+                                    IrLocation locArg = (IrLocation) safeArg.getArgValue();
+                                    IrVarDecl possibleArray = (IrVarDecl) symTable.getSymbol(locArg.getLocationName().getValue());
+
+                                    if (possibleArray.getType() instanceof IrTypeArray) {
+                                        errorMessage.append("Argument cannot be an array location " + " line: ")
+                                                .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+                                    }
+                                }
+                            }
+                            else {
+                                errorMessage.append("Arguments are not all ArgExpr type " + " line: ").append(node.getLineNumber()).append(" col: ")
+                                        .append(node.getColNumber()).append("\n");
+                            }
+                        }
+                    }
+                    else if (varInputs.size() != 0  && node.argsList.get(0) instanceof IrArgInputAssign){
+                        ArrayList<IrArg> argInputAssignList = (ArrayList<IrArg>) node.argsList;
+                        for (IrArg argInputAssign : argInputAssignList){
+
+                            // 将 当前的 functionDecl 赋值给 argInputAssign.irDeclPou  再检查子节点
+                            ((IrArgInputAssign) argInputAssign).irDeclPou = functionBlockDecl;
+                            argInputAssign.visit(this);
+                        }
+
+                    }
+                } else {
+                    errorMessage.append("Wrong number of arguments passed to function" + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+
+                // 2) 检查 output   是否正确, 支持只输出输出部分 VAR_OUTPUT
+                List<IrArgOutputAssign>  argOutputAssigns = node.assignOutputList;
+                for (IrArgOutputAssign argOutputAssign : argOutputAssigns){
+                    argOutputAssign.irDeclPou = (IrPouDecl) object;
+                    argOutputAssign.visit(this);
+                }
+
+                // IMPORTANT: IrFunctionCallStmt  是没有 type  的
+//                node.functionType = functionDecl.getType();
+
+            }
+            // for an extern method_decl TODO 应该内置一些基础的 FB
+            // for non-method identifiers
+            else {
+                errorMessage.append("Non-FunctionBlock identifier being called as a FunctionBlock" + " line: ")
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+            }
+        } else {
+            errorMessage.append("FunctionBlock called before declared" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        return null;
+    }
+
+
+    /**
+     * arguments
+     */
+    @Override
+    public Void visitIrArgExpr(IrArgExpr node) {
+
+        node.getArgValue().visit(this);
+        return null;
+    }
+
+    /**
+     * IrArgInputAssign 中包含 IrPouDecl irDeclPou;
+     * 检查 irDeclPou 生成的 scope 中是否有 storeLocationName 的定义， 如果存在定义，则赋值给 irDeclObject
+     * 判断 irDeclObject 的类型是否和 IrExpr argValue 一致
+     *
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrArgInputAssign(IrArgInputAssign node) {
+        Scope locals = symTable.treeProperty.get(node.irDeclPou);
+        if (locals.resolve(node.storeLocationName.getValue()) != null){
+            node.irDeclVar = (IrVarDecl) locals.resolve(node.storeLocationName.getValue());
+
+            node.argValue.visit(this); // 检查子节点 argValue
+
+            //判断 irDeclObject 的类型是否和 IrExpr argValue 一致
+            if (node.irDeclVar.getType().getTypeEnum() == node.argValue.getExpressionType()){
+
+                // check that the argument is not an array_location
+                if (node.irDeclVar.type  instanceof IrTypeArray) {
+                    errorMessage.append("Argument cannot be an array location " + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+
+            }
+            else {
+                errorMessage.append(" the argValue's type does not match parameter's : ").append(node.argValue.getExpressionType())
+                        .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
+                        .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                        .append(node.getColNumber()).append("\n");
+            }
+
+        }
+        else {
+            errorMessage.append(" Can not find such name parameter : ").append(node.storeLocationName.getValue()).append(" In ")
+                    .append(node.irDeclPou.getIdentName().getValue())
+                    .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                    .append(node.getColNumber()).append("\n");
+        }
+
+        return null;
+    }
+
+    /**
+     *如果是在这里进行语意检查的话，
+     *  *     * 3。 ArgOutputAssign  要和 Var_OUTPUT  匹配
+     *  *      * 3.1  ArgOutputAssign.fbOutput 对应一个 IrFbStLocation。 functionBlockName 就是 IrFbStLocation.varNameFirst， IrFbStLocation 检查
+     *  *      * 3.2  ArgOutputAssign.acceptLocation 是个 IrLocationVar 类型，IrLocationVar.irDeclObject 应该 被赋值 IrFbStLocation， IrLocationVar 检查
+     *  *      * 3.3  acceptLocation 的类型和 IrFbStLocation 是否一致
+     *  *      *
+     *  * IrArgOutputAssign 中需要 携带 被 call function 的 信息
+     * @param node
+     * @return
+     */
+    @Override
+    public Void IrArgOutputAssign(IrArgOutputAssign node) {
+        Scope locals = symTable.treeProperty.get(node.irDeclPou);
+
+        if (locals.resolve(node.fbOutput.getValue()) != null){
+            node.irDeclVar = (IrVarDecl) locals.resolve(node.fbOutput.getValue());
+
+            node.acceptLocation.visit(this); // 检查子节点 acceptLocation
+
+            //判断 acceptLocation 的 TypeEnum 类型是否和  IrVarDecl irDeclVar一致
+            if (node.irDeclVar.getType().getTypeEnum() == node.acceptLocation.getExpressionType()){
+
+                // 判断是否都是 array 或者 simple 类型
+                boolean bothSimple = (node.irDeclVar.type instanceof IrTypeSimple  && node.acceptLocation.irDeclObject.type instanceof IrTypeSimple);
+                boolean bothArray = (node.irDeclVar.type instanceof IrTypeArray  && node.acceptLocation.irDeclObject.type instanceof IrTypeArray);
+
+                if ( !bothArray && ! bothSimple ) {
+                    errorMessage.append("fbOutput and acceptLocation are not both array ot simple  " + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+
+            }
+            else {
+                errorMessage.append(" the acceptLocation's type does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
+                        .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
+                        .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                        .append(node.getColNumber()).append("\n");
+            }
+
+        }
+        else {
+            errorMessage.append(" Can not find such name parameter : ").append(node.fbOutput.getValue()).append(" In ")
+                    .append(node.irDeclPou.getIdentName().getValue())
+                    .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                    .append(node.getColNumber()).append("\n");
+        }
+
+        return null;
+    }
+
+
+    /**
+     * control flow
+     */
+    /** 1. 检查子节点 condition Expr
+     *  2. 判断 condition 是否 是bool 型
+     *  3. 检查子节点 getStmtBody()
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrCtrlFlowIf(IrCtrlFlowIf node) {
+        node.getCondExpr().visit(this);
+
+        if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
+            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        node.getStmtBody().visit(this);
+        return null;
+    }
+
+    /**
+     *  it is the same as the above one visitIrCtrlFlowIf
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrCtrlFlowElsif(IrCtrlFlowElsif node) {
+        node.getCondExpr().visit(this);
+
+        if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
+            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        node.getStmtBody().visit(this);
+
+        return null;
+    }
+
+    /**
+     *  1. 检查子节点 condition Expr
+     *  2. 判断 condition 是否 是bool 型
+     *  3. 检查子节点 getStmtBody()
+     *  4. 检查子节点 getElseBlock（）
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node) {
+        node.getCondExpr().visit(this);
+
+        if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
+            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        node.getStmtBody().visit(this);
+        node.getElseBlock().visit(this);
+        return null;
+    }
+
+    /**
+     * 1. 检查子节点 condition Expr
+     * 2. 判断 condition 是否 是bool 型
+     * 3. 检查子节点 list elsifArrayList
+     * 4。 检查子节点 getElseBlock（）
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node) {
+        node.getCondExpr().visit(this);
+
+        if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
+            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        node.getStmtBody().visit(this);
+
+        for ( IrCtrlFlowElsif ctrlFlowElsif: node.getElsifArrayList()){
+            ctrlFlowElsif.visit(this);
+        }
+
+        node.getElseBlock().visit(this);
+        return null;
+    }
+
+    @Override
+    public Void visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node) {
+        node.getCondExpr().visit(this);
+
+        if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
+            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        node.getStmtBody().visit(this);
+
+        for ( IrCtrlFlowElsif ctrlFlowElsif: node.getElsifArrayList()){
+            ctrlFlowElsif.visit(this);
+        }
+
+        return null;
+    }
+
+    /**
+     * 1. visit child node counter
+     * 2. make sure counter be int and not array
+     * 3. visit child node Range
+     * 4. visit child node CodeBlock
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrCtrlFlowFor(IrCtrlFlowFor node) {
+        node.getCounter().visit(this);
+        if (node.getCounter().getExpressionType() == VarTypeEnum.RES_INT){
+            if (node.getCounter().getIrDecl() instanceof  IrTypeArray){
+                errorMessage.append("counter shoud not be array-type location " + " line: ")
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+            }
+        }
+        else {
+            errorMessage.append("counter shoud be int" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+        node.getRange().visit(this);
+        node.getCodeBlock().visit(this);
+        return null;
+    }
+
+    /**
+     * make sure the low bound, high bound and step be int
+     * @param node
+     * @return
+     */
+    @Override
+    public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
+        if (node.getLow().getExpressionType() != VarTypeEnum.RES_INT){
+            errorMessage.append(" the  low boundary shoud be int ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+        if (node.getHigh().getExpressionType() != VarTypeEnum.RES_INT){
+            errorMessage.append(" the  high boundary shoud be int ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+        if (node.getStep() == null){
+            node.stepNum = 1;
+        }
+        else if (node.getStep().getExpressionType() != VarTypeEnum.RES_INT){
+            errorMessage.append(" the  low boundary shoud be int ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+
+        }
+
+        return null;
+    }
+
+    @Override
+    public Void visitIrCtrlFlowWhile(IrCtrlFlowWhile node) {
+        node.getCondExpr().visit(this);
+
+        if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
+            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        node.getStmtBody().visit(this);
+        return null;
+    }
+
+
     /**
      * Location
      */
@@ -143,7 +584,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
                 // IMPORTANT: set the TypeEnum of the IrLocation
                 node.setLocationType(var.getType().getTypeEnum());
 
-                // IMPORTANT: set the IrDecl of the IrLocation  TODO 要不要把 POU 的 IrDecl 也加上？
+                // IMPORTANT: set the IrDecl of the IrFbStLocation
                 node.setIrDecl(pou ,var);
 
             }
@@ -207,22 +648,22 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
             Ir object = symTable.getSymbol(node.getLocationName().getValue());
 
             // make sure that the identifier is a var, not a method or array
-            if (object instanceof IrVarsDecl) {
-                IrVarsDecl var = (IrVarsDecl) object;
+            if (object instanceof IrVarDecl) {
+                IrVarDecl var = (IrVarDecl) object;
 
                 if (var.getType() instanceof IrTypeSimple){
                     // IMPORTANT: set the typeEnum of the IrLocationVar
                     node.setLocationType(var.getType().getTypeEnum());
 
                     // TODO : IMPORTANT: set the IrDecl of the IrLocationVar
-                    node.setIrDecl(object);
+                    node.setIrDecl(var);
                 }
                 else if (var.getType() instanceof IrTypeArray){
                     // IMPORTANT: set the TypeEnum of the IrLocationVar
                     node.setLocationType(var.getType().getTypeEnum());
 
                     // IMPORTANT: set the IrDecl of the IrLocationVar
-                    node.setIrDecl(object);
+                    node.setIrDecl(var);
 
                     errorMessage.append("Invalid array assignment" + " line: ")
                             .append(node.getLocationName().getLineNumber())
@@ -379,24 +820,6 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     }
 
 
-    /**
-     * POU
-     */
-    @Override
-    public Void visitIrFunctionDecl(IrFunctionDecl node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrFunctionBlockDecl(IrFunctionBlockDecl node) {
-        return null;
-    }
-
-    @Override
-    public Void visitIrProgramDecl(IrProgramDecl node) {
-        return null;
-    }
-
 
     /**
      * Type
@@ -497,26 +920,83 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrAssignStmtEq(IrAssignStmtEq node) {
+        // 1) verify that the storeLocation is semantically correct
+        node.getStoreLocation().visit(this);
+
+        if (node.getStoreLocation() instanceof IrLocationVar) {
+
+//             2) check to make sure the var isn't a lone array var
+            if (symTable.checkIfSymbolExistsAtAnyScope(node.getStoreLocation().getLocationName().getValue())) {
+                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
+
+                if (object.getType() instanceof IrTypeArray) {
+                    errorMessage.append("Can't re-assign an array to an expression" + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+            }
+        }
+
+
+        // 3) verify that the expr is semantically correct
+        node.getExpr().visit(this);
+
+
+        // 4) make sure that the IrExpr and IrLocation are the same VarTypeEnum
+        boolean bothAreInts = (node.getExpr().getExpressionType() == VarTypeEnum.RES_INT)
+                && (node.getStoreLocation().getExpressionType() == VarTypeEnum.RES_INT);
+        boolean bothAreBools = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_BOOL )
+                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_BOOL);
+        boolean bothAreReals = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_REAL )
+                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
+        if (!bothAreBools && !bothAreInts && !bothAreReals) {
+            errorMessage.append("The variable to be assigned and expression must both be of type int, real,  or of type bool" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
         return null;
     }
 
     @Override
     public Void visitIrCodeBlock(IrCodeBlock node) {
+
+        // check that each statement is valid
+        for (IrStmt stmt : node.stmtsList) {
+
+            stmt.visit(this);
+        }
+        return null;
+    }
+
+
+    /**
+     * POU
+     */
+    @Override
+    public Void visitIrFunctionDecl(IrFunctionDecl node) {
+
         return null;
     }
 
     @Override
-    public Void visitIrFunctionCallExpr(IrFunctionCallExpr node) {
+    public Void visitIrFunctionBlockDecl(IrFunctionBlockDecl node) {
         return null;
     }
 
+    @Override
+    public Void visitIrProgramDecl(IrProgramDecl node) {
+        return null;
+    }
+
+    /**1. check it have one and only one ProgramDecl
+     * 2. check there is no pou has been declared twice
+     * 3. check child nodes
+     *
+     * @param node
+     * @return
+     */
     @Override
     public Void visitIrPousDecl(IrPousDecl node) {
         return null;
     }
 
-    @Override
-    public Void visitIrIdent(IrIdent irIdent) {
-        return null;
-    }
+
 }

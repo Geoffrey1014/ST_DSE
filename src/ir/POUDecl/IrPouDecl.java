@@ -7,12 +7,12 @@ import ir.VARBlockDecl.IrVARBlockDecl;
 
 
 public abstract class IrPouDecl extends IrMemberDecl {
-    private final IrVARBlockDecl VarBlockVAR;
-    private final IrVARBlockDecl VarBlockVAR_INPUT;
-    private final IrVARBlockDecl VarBlockVAR_OUTPUT;
-    private final IrVARBlockDecl varBlockVAR_INPUT_OUTPUT;
-    private final IrVARBlockDecl varBlockVAR_TEMP;
-    private final IrCodeBlock CodeBlock;
+    public final IrVARBlockDecl VarBlockVAR;
+    public final IrVARBlockDecl VarBlockVAR_INPUT;
+    public final IrVARBlockDecl VarBlockVAR_OUTPUT;
+    public final IrVARBlockDecl varBlockVAR_INPUT_OUTPUT;
+    public final IrVARBlockDecl varBlockVAR_TEMP;
+    public final IrCodeBlock CodeBlock;
 
     public IrPouDecl(IrIdent name, IrVARBlockDecl varBlockVAR, IrVARBlockDecl varBlockVAR_input, IrVARBlockDecl varBlockVAR_output,
                      IrVARBlockDecl varBlockVAR_input_output, IrVARBlockDecl varBlockVAR_temp, IrCodeBlock codeBlock) {

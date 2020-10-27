@@ -7,10 +7,10 @@ import java.util.List;
 public class IrCodeBlock extends Ir {
 
 
-    private final List<IrStmt> StmtList;
+    public final List<IrStmt> stmtsList;
     public IrCodeBlock(int lineNumber, int colNumber, List<IrStmt> statList) {
         super(lineNumber, colNumber);
-        this.StmtList = statList;
+        this.stmtsList = statList;
     }
 
     @Override
@@ -20,7 +20,15 @@ public class IrCodeBlock extends Ir {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+
+        StringBuilder prettyString = new StringBuilder(indentSpace + "|--codeBlock:\n");
+
+        // pretty print statement
+        for (IrStmt statement : this.stmtsList) {
+            prettyString.append(statement.prettyPrint("  " + indentSpace));
+        }
+
+        return prettyString.toString();
     }
 
     @Override
@@ -28,7 +36,7 @@ public class IrCodeBlock extends Ir {
         visitor.visitIrCodeBlock(this);
     }
 
-    public List<IrStmt> getStmtList() {
-        return StmtList;
+    public List<IrStmt> getStmtsList() {
+        return stmtsList;
     }
 }

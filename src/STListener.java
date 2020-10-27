@@ -227,8 +227,11 @@ public class STListener extends STParserBaseListener {
     @Override public void enterStat(STParser.StatContext ctx) { }
 
     @Override public void exitStat(STParser.StatContext ctx) {
-        Where pou = getASTNode(ctx.getChild(0));
-        setASTNode(ctx, pou);
+        Where stmt = getASTNode(ctx.getChild(0));
+        if (stmt instanceof IrFunctionCallExpr){
+            stmt = new IrFunctionCallStmt(((IrFunctionCallExpr) stmt).functionName, ((IrFunctionCallExpr) stmt).argsList, ((IrFunctionCallExpr) stmt).assignOutputList);
+        }
+        setASTNode(ctx, stmt);
     }
 
     @Override public void enterAssign_stat(STParser.Assign_statContext ctx) { }
@@ -330,9 +333,13 @@ public class STListener extends STParserBaseListener {
         IrExpr low = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr high = (IrExpr) getASTNode(ctx.expression(1));
         MyPrint.LevelOne.print("=====");
-        Integer step = null;
-        if (ctx.step != null){
-            step = Integer.valueOf(ctx.step.getText());
+//        Integer step = null;
+//        if (ctx.step != null){
+//            step = Integer.valueOf(ctx.step.getText());
+//        }
+        IrExpr step = null;
+        if (getASTNode(ctx.expression(2)) != null){
+            step = (IrExpr) getASTNode(ctx.expression(2));
         }
 
         MyPrint.LevelOne.print("=====");
@@ -355,11 +362,18 @@ public class STListener extends STParserBaseListener {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent fbName = new IrIdent(ctx.ID().getText(), l.line, l.col);
         ArrayList<IrArg> argArrayList = new ArrayList<>();
+        ArrayList<IrArgOutputAssign> assignOutputArrayList = new ArrayList<>();
         for (ParseTree node : ctx.param_assignment()){
-            argArrayList.add((IrArg) getASTNode(node));
-        }
-        setASTNode(ctx, new IrFunctionCallExpr(fbName, argArrayList));
+            IrArg arg = (IrArg) getASTNode(node);
+            if (arg instanceof IrArgInputAssign){
+                assignOutputArrayList.add((IrArgOutputAssign) arg);
+            }
+            else {
+                argArrayList.add(arg);
+            }
 
+        }
+        setASTNode(ctx, new IrFunctionCallExpr(fbName, argArrayList, assignOutputArrayList));
     }
 
     @Override public void enterExternArg(STParser.ExternArgContext ctx) { }
@@ -374,9 +388,9 @@ public class STListener extends STParserBaseListener {
     @Override public void exitAssignParam(STParser.AssignParamContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent argName = new IrIdent(ctx.ID().getText(), l.line, l.col);
-        IrLocation location = new IrLocationVar(argName);
+
         IrExpr value = (IrExpr) getASTNode(ctx.expression());
-        IrArgInputAssign argInputAssign = new IrArgInputAssign(value,location);
+        IrArgInputAssign argInputAssign = new IrArgInputAssign(value,argName);
         setASTNode(ctx, argInputAssign);
 
     }
@@ -393,9 +407,13 @@ public class STListener extends STParserBaseListener {
      */
     @Override public void exitAssignOutput(STParser.AssignOutputContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
-        IrIdent fbOutput = new IrIdent(ctx.ID(0).getText(), l.line, l.col); //TODO: 这里可以尝试一下 l.line, l.col 和 ctx.ID(1)
+        IrIdent fbOutput = new IrIdent(ctx.ID(0).getText(), l.line, l.col);
+
+
         TerminalNode node = ctx.ID(1);
-        IrIdent acceptLocation = new IrIdent(node.getText(), node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() );
+        IrIdent id = new IrIdent(node.getText(), node.getSymbol().getLine(), node.getSymbol().getCharPositionInLine() );
+        IrLocationVar acceptLocation = new IrLocationVar(id);
+
         IrArgOutputAssign argOutputAssign = new IrArgOutputAssign(l.line, l.col, fbOutput, acceptLocation);
         setASTNode(ctx, argOutputAssign);
     }
@@ -622,8 +640,8 @@ public class STListener extends STParserBaseListener {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
 //        ArrayList<IrIdent> names = new ArrayList<>();
 //        for (ParseTree node : ctx.ID()){
-            IrIdent id1 = new IrIdent(ctx.ID(0).getText(),l.line, l.col);
-        IrIdent id2 = new IrIdent(ctx.ID(2).getText(),l.line, l.col);
+        IrIdent id1 = new IrIdent(ctx.ID(0).getText(),l.line, l.col);
+        IrIdent id2 = new IrIdent(ctx.ID(1).getText(),l.line, l.col);
 
 //        }
 
