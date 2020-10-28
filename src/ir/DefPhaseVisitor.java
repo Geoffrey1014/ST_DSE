@@ -23,7 +23,7 @@ import tools.MyPrint;
 
 public class DefPhaseVisitor implements BaseVisitor<Void> {
     SymTable symTable = new SymTable();
-
+    StringBuilder errorMessage = new StringBuilder();
 
     @Override
     public Void visitIrArgExpr(IrArgExpr node) {
@@ -167,14 +167,19 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     /**
      * if theere is a var has been declared twice, give out the error message
-     * when meet the array type, visit this child node
+     * when meet the array type, visit it's child node
      * @param node
      * @return
      */
     @Override
     public Void visitIrVARBlockDecl(IrVARBlockDecl node) {
         for (IrVarDecl varDecl : node.getVarList()){
+            if (   symTable.checkIfSymbolExistsAtCurrentScope(varDecl.getName()) ){
+                errorMessage.append("the symbol has already been declared: ").append(varDecl.getName())
+                        .append(" line: ").append(varDecl.getLineNumber()).append(" col: ").append(varDecl.getColNumber());
+            }
             symTable.currentScope.define(varDecl.getName(), varDecl);
+
         }
         return null;
     }
@@ -213,26 +218,27 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrFunctionDecl(IrFunctionDecl node) {
+        symTable.currentScope = new LocalScope(symTable.currentScope);
         symTable.saveScope(node, symTable.currentScope);
 
         if (node.getVarBlockVAR() != null){
-            node.getVarBlockVAR().visit(this);
+            node.getVarBlockVAR().accept(this);
         }
 
         if (node.getVarBlockVAR_INPUT() != null){
-            node.getVarBlockVAR_INPUT().visit(this);
+            node.getVarBlockVAR_INPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_OUTPUT() != null){
-            node.getVarBlockVAR_OUTPUT().visit(this);
+            node.getVarBlockVAR_OUTPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
-            node.getVarBlockVAR_INPUT_OUTPUT().visit(this);
+            node.getVarBlockVAR_INPUT_OUTPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_TEMP() != null){
-            node.getVarBlockVAR_TEMP().visit(this);
+            node.getVarBlockVAR_TEMP().accept(this);
         }
 
         MyPrint.levelTwo.print("current scope : " + node.getName() );
@@ -244,26 +250,27 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrFunctionBlockDecl(IrFunctionBlockDecl node) {
+        symTable.currentScope = new LocalScope(symTable.currentScope);
         symTable.saveScope(node, symTable.currentScope);
 
         if (node.getVarBlockVAR() != null){
-            node.getVarBlockVAR().visit(this);
+            node.getVarBlockVAR().accept(this);
         }
 
         if (node.getVarBlockVAR_INPUT() != null){
-            node.getVarBlockVAR_INPUT().visit(this);
+            node.getVarBlockVAR_INPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_OUTPUT() != null){
-            node.getVarBlockVAR_OUTPUT().visit(this);
+            node.getVarBlockVAR_OUTPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
-            node.getVarBlockVAR_INPUT_OUTPUT().visit(this);
+            node.getVarBlockVAR_INPUT_OUTPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_TEMP() != null){
-            node.getVarBlockVAR_TEMP().visit(this);
+            node.getVarBlockVAR_TEMP().accept(this);
         }
         MyPrint.levelTwo.print("current scope : " + node.getName() );
         MyPrint.levelTwo.print(symTable.currentScope);
@@ -273,8 +280,8 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
     }
 
     /**
-     * 进入 program， 生成一个local scope
-     * 再进入 varDecalration 和 vodeBlock
+     * 进入 PROGRAM， 生成一个local scope
+     * 再进入 varDeclaration 和 codeBlock
      */
     @Override
     public Void visitIrProgramDecl(IrProgramDecl node) {
@@ -282,23 +289,23 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         symTable.saveScope(node, symTable.currentScope);
 
         if (node.getVarBlockVAR() != null){
-            node.getVarBlockVAR().visit(this);
+            node.getVarBlockVAR().accept(this);
         }
 
         if (node.getVarBlockVAR_INPUT() != null){
-            node.getVarBlockVAR_INPUT().visit(this);
+            node.getVarBlockVAR_INPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_OUTPUT() != null){
-            node.getVarBlockVAR_OUTPUT().visit(this);
+            node.getVarBlockVAR_OUTPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
-            node.getVarBlockVAR_INPUT_OUTPUT().visit(this);
+            node.getVarBlockVAR_INPUT_OUTPUT().accept(this);
         }
 
         if (node.getVarBlockVAR_TEMP() != null){
-            node.getVarBlockVAR_TEMP().visit(this);
+            node.getVarBlockVAR_TEMP().accept(this);
         }
         MyPrint.levelTwo.print("current scope : " + node.getName() );
         MyPrint.levelTwo.print(symTable.currentScope);
@@ -310,6 +317,9 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     /**
      * POUS， 产生global scope，
+     * 应该在此处检查：
+     * 1。 POU的名字只被定义一次
+     * 2。PROGRAM 只能有一个
      * 然后进入下面不同对子节点寻找符号对定义
      */
     @Override
@@ -320,22 +330,56 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         symTable.globals = new GlobalScope(null);
         symTable.currentScope =  symTable.globals;
 
-
+        // check it has not been declare, then visit it's child nodes
         for (IrFunctionDecl functionDecl : node.getFunctionDeclArrayList()){
-            symTable.currentScope.define(functionDecl.getName(), functionDecl);
-            functionDecl.visit(this);
-        }
-        for (IrFunctionBlockDecl functionBlockDecl : node.getFunctionBlockDeclsArrayList()){
-            symTable.currentScope.define(functionBlockDecl.getName(), functionBlockDecl);
-            functionBlockDecl.visit(this);
-        }
-        for (IrProgramDecl programDecl : node.getProgramDeclsArrayList()){
-            symTable.currentScope.define(programDecl.getName(), programDecl);
-            programDecl.visit(this);
+            if ( symTable.currentScope.resolve(functionDecl.getName()) != null){
+                errorMessage.append("the symbol has already been declared: ").append(functionDecl.getName())
+                        .append(" line: ").append(functionDecl.getLineNumber()).append(" col: ").append(functionDecl.getColNumber());
+            }
+            else {
+                symTable.currentScope.define(functionDecl.getName(), functionDecl);
+                functionDecl.accept(this);
+            }
         }
 
-        // 出 该即诶单
-        MyPrint.levelTwo.print("global scope : " );
+        // check it has not been declare, then visit it's child nodes
+        for (IrFunctionBlockDecl functionBlockDecl : node.getFunctionBlockDeclsArrayList()){
+            if ( symTable.currentScope.resolve(functionBlockDecl.getName()) != null){
+                errorMessage.append("the symbol has already been declared: ").append(functionBlockDecl.getName())
+                        .append(" line: ").append(functionBlockDecl.getLineNumber()).append(" col: ").append(functionBlockDecl.getColNumber());
+            }
+            else {
+                symTable.currentScope.define(functionBlockDecl.getName(), functionBlockDecl);
+                functionBlockDecl.accept(this);
+            }
+        }
+
+        // check there is noly one PROGRAM
+        // check PROGRAM's name has not been declared
+        if (node.getProgramDeclsArrayList().size() > 1){
+            errorMessage.append("too many Program POU ")
+                    .append(" line: ").append(node.getLineNumber()).append(" col: ").append(node.getColNumber());
+        }
+        else if (node.getProgramDeclsArrayList().size() == 0){
+            errorMessage.append("there is no Program POU ")
+                    .append(" line: ").append(node.getLineNumber()).append(" col: ").append(node.getColNumber());
+        }
+        else {
+            IrProgramDecl programDecl = node.getProgramDeclsArrayList().get(0);
+            if ( symTable.currentScope.resolve(programDecl.getName()) != null) {
+                errorMessage.append("the symbol has already been declared: ").append(programDecl.getName())
+                        .append(" line: ").append(programDecl.getLineNumber()).append(" col: ").append(programDecl.getColNumber());
+
+                symTable.currentScope.define(programDecl.getName(), programDecl);
+                programDecl.accept(this);
+            }
+
+        }
+
+        // 出 该节点
+        MyPrint.levelTwo.print("current scope : " + symTable.currentScope.getScopeName() ); // 应该输出locals
+
+        MyPrint.levelTwo.print("global scope : " +symTable.currentScope.getScopeName()); // 应该输出 globals
         MyPrint.levelTwo.print(symTable.globals);
 
         return null;

@@ -104,7 +104,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
                                 IrArgExpr safeArg = (IrArgExpr) unsafeArg;
 
                                 // check that the IrArgExpr is semantically correct
-                                safeArg.visit(this);
+                                safeArg.accept(this);
 
                                 // 3) check that each argument and param types match
                                 if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
@@ -137,7 +137,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
 
                             // 将 当前的 functionDecl 赋值给 argInputAssign.irDeclPou  再检查子节点
                             ((IrArgInputAssign) argInputAssign).irDeclPou = functionDecl;
-                            argInputAssign.visit(this);
+                            argInputAssign.accept(this);
                         }
 
                     }
@@ -210,7 +210,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
                                 IrArgExpr safeArg = (IrArgExpr) unsafeArg;
 
                                 // check that the IrArgExpr is semantically correct
-                                safeArg.visit(this);
+                                safeArg.accept(this);
 
                                 // 3) check that each argument and param types match
                                 if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
@@ -243,7 +243,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
 
                             // 将 当前的 functionDecl 赋值给 argInputAssign.irDeclPou  再检查子节点
                             ((IrArgInputAssign) argInputAssign).irDeclPou = functionBlockDecl;
-                            argInputAssign.visit(this);
+                            argInputAssign.accept(this);
                         }
 
                     }
@@ -256,7 +256,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
                 List<IrArgOutputAssign>  argOutputAssigns = node.assignOutputList;
                 for (IrArgOutputAssign argOutputAssign : argOutputAssigns){
                     argOutputAssign.irDeclPou = (IrPouDecl) object;
-                    argOutputAssign.visit(this);
+                    argOutputAssign.accept(this);
                 }
 
                 // IMPORTANT: IrFunctionCallStmt  是没有 type  的
@@ -284,7 +284,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrArgExpr(IrArgExpr node) {
 
-        node.getArgValue().visit(this);
+        node.getArgValue().accept(this);
         return null;
     }
 
@@ -302,7 +302,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
         if (locals.resolve(node.storeLocationName.getValue()) != null){
             node.irDeclVar = (IrVarDecl) locals.resolve(node.storeLocationName.getValue());
 
-            node.argValue.visit(this); // 检查子节点 argValue
+            node.argValue.accept(this); // 检查子节点 argValue
 
             //判断 irDeclObject 的类型是否和 IrExpr argValue 一致
             if (node.irDeclVar.getType().getTypeEnum() == node.argValue.getExpressionType()){
@@ -350,7 +350,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
         if (locals.resolve(node.fbOutput.getValue()) != null){
             node.irDeclVar = (IrVarDecl) locals.resolve(node.fbOutput.getValue());
 
-            node.acceptLocation.visit(this); // 检查子节点 acceptLocation
+            node.acceptLocation.accept(this); // 检查子节点 acceptLocation
 
             //判断 acceptLocation 的 TypeEnum 类型是否和  IrVarDecl irDeclVar一致
             if (node.irDeclVar.getType().getTypeEnum() == node.acceptLocation.getExpressionType()){
@@ -395,14 +395,14 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowIf(IrCtrlFlowIf node) {
-        node.getCondExpr().visit(this);
+        node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
 
-        node.getStmtBody().visit(this);
+        node.getStmtBody().accept(this);
         return null;
     }
 
@@ -413,14 +413,14 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowElsif(IrCtrlFlowElsif node) {
-        node.getCondExpr().visit(this);
+        node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
 
-        node.getStmtBody().visit(this);
+        node.getStmtBody().accept(this);
 
         return null;
     }
@@ -435,15 +435,15 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node) {
-        node.getCondExpr().visit(this);
+        node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
 
-        node.getStmtBody().visit(this);
-        node.getElseBlock().visit(this);
+        node.getStmtBody().accept(this);
+        node.getElseBlock().accept(this);
         return null;
     }
 
@@ -457,36 +457,36 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node) {
-        node.getCondExpr().visit(this);
+        node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
 
-        node.getStmtBody().visit(this);
+        node.getStmtBody().accept(this);
 
         for ( IrCtrlFlowElsif ctrlFlowElsif: node.getElsifArrayList()){
-            ctrlFlowElsif.visit(this);
+            ctrlFlowElsif.accept(this);
         }
 
-        node.getElseBlock().visit(this);
+        node.getElseBlock().accept(this);
         return null;
     }
 
     @Override
     public Void visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node) {
-        node.getCondExpr().visit(this);
+        node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
 
-        node.getStmtBody().visit(this);
+        node.getStmtBody().accept(this);
 
         for ( IrCtrlFlowElsif ctrlFlowElsif: node.getElsifArrayList()){
-            ctrlFlowElsif.visit(this);
+            ctrlFlowElsif.accept(this);
         }
 
         return null;
@@ -502,7 +502,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowFor(IrCtrlFlowFor node) {
-        node.getCounter().visit(this);
+        node.getCounter().accept(this);
         if (node.getCounter().getExpressionType() == VarTypeEnum.RES_INT){
             if (node.getCounter().getIrDecl() instanceof  IrTypeArray){
                 errorMessage.append("counter shoud not be array-type location " + " line: ")
@@ -513,8 +513,8 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append("counter shoud be int" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
-        node.getRange().visit(this);
-        node.getCodeBlock().visit(this);
+        node.getRange().accept(this);
+        node.getCodeBlock().accept(this);
         return null;
     }
 
@@ -547,14 +547,14 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrCtrlFlowWhile(IrCtrlFlowWhile node) {
-        node.getCondExpr().visit(this);
+        node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
 
-        node.getStmtBody().visit(this);
+        node.getStmtBody().accept(this);
         return null;
     }
 
@@ -605,7 +605,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrLocationArray(IrLocationArray node) {
         // 1) verify that the IrExpr is semantically correct
-        node.getElementIndex().visit(this);
+        node.getElementIndex().accept(this);
 
         // 2) make sure the array has been declared already
         if (symTable.checkIfSymbolExistsAtAnyScope(node.getLocationName().getValue())) {
@@ -694,8 +694,8 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrOperBinaryEq(IrOperBinaryEq node) {
         // 1) check that rhs and lhs are valid
-        node.leftOperand.visit(this);
-        node.rightOperand.visit(this);
+        node.leftOperand.accept(this);
+        node.rightOperand.accept(this);
 
         // 2) verify that both lhs and rhs are either bool, int or real
         boolean bothAreBools = (node.rightOperand.getExpressionType() == VarTypeEnum.RES_BOOL)
@@ -717,8 +717,8 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrOperBinaryArith(IrOperBinaryArith node) {
         // 1) check that rhs and lhs are valid
-        node.leftOperand.visit(this);
-        node.rightOperand.visit(this);
+        node.leftOperand.accept(this);
+        node.rightOperand.accept(this);
 
         if (node.operation == OperKeyWordEnum.POWER_OP){
             if (node.rightOperand.getExpressionType() != VarTypeEnum.RES_INT){
@@ -759,7 +759,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrOperUnaryNeg(IrOperUnaryNeg node) {
         // 1) check that the operand is valid
-        node.operand.visit(this);
+        node.operand.accept(this);
 
         // 2) verify that the operand is int or real
         if (!(node.operand.getExpressionType() == VarTypeEnum.RES_INT) && !(node.operand.getExpressionType() == VarTypeEnum.RES_REAL)) {
@@ -773,7 +773,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrOperUnaryNot(IrOperUnaryNot node) {
         // 1) check that the operand is valid
-        node.operand.visit(this);
+        node.operand.accept(this);
 
         // 2) verify that the operand is int or real
         if (!(node.operand.getExpressionType() == VarTypeEnum.RES_BOOL)) {
@@ -786,8 +786,8 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrOperBinaryRel(IrOperBinaryRel node) {
         // 1) check that rhs and lhs are valid
-        node.leftOperand.visit(this);
-        node.rightOperand.visit(this);
+        node.leftOperand.accept(this);
+        node.rightOperand.accept(this);
 
         // 2) verify that both lhs and rhs are int or real
         boolean bothAreReals = (node.rightOperand.getExpressionType() == VarTypeEnum.RES_REAL)
@@ -806,8 +806,8 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrOperBinaryLogic(IrOperBinaryLogic node) {
         // 1) check that rhs and lhs are valid
-        node.leftOperand.visit(this);
-        node.rightOperand.visit(this);
+        node.leftOperand.accept(this);
+        node.rightOperand.accept(this);
 
         // 2) verify that both lhs and rhs are  boo;
         if (!((node.rightOperand.getExpressionType() == VarTypeEnum.RES_BOOL)
@@ -819,6 +819,41 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visitIrAssignStmtEq(IrAssignStmtEq node) {
+        // 1) verify that the storeLocation is semantically correct
+        node.getStoreLocation().accept(this);
+
+        if (node.getStoreLocation() instanceof IrLocationVar) {
+
+//             2) check to make sure the var isn't a lone array var
+            if (symTable.checkIfSymbolExistsAtAnyScope(node.getStoreLocation().getLocationName().getValue())) {
+                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
+
+                if (object.getType() instanceof IrTypeArray) {
+                    errorMessage.append("Can't re-assign an array to an expression" + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                }
+            }
+        }
+
+
+        // 3) verify that the expr is semantically correct
+        node.getExpr().accept(this);
+
+        // 4) make sure that the IrExpr and IrLocation are the same VarTypeEnum
+        boolean bothAreInts = (node.getExpr().getExpressionType() == VarTypeEnum.RES_INT)
+                && (node.getStoreLocation().getExpressionType() == VarTypeEnum.RES_INT);
+        boolean bothAreBools = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_BOOL )
+                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_BOOL);
+        boolean bothAreReals = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_REAL )
+                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
+        if (!bothAreBools && !bothAreInts && !bothAreReals) {
+            errorMessage.append("The variable to be assigned and expression must both be of type int, real,  or of type bool" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+        return null;
+    }
 
 
     /**
@@ -836,12 +871,13 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrTypeSimple(IrTypeSimple node) {
+
         return null;
     }
 
 
     /**
-     * Type
+     * value
      */
     @Override
     public Void visitIrValueArray(IrValueArray node) {
@@ -870,16 +906,16 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrVARBlockDecl(IrVARBlockDecl node) {
-        // 1) check that no identifiers declared twice in same scope
+        // 1) check that no identifiers declared twice in same scope  has been done in  DefPhase
         for (IrVarDecl varDecl : node.VarList) {
-            if (symTable.checkIfSymbolExistsAtAnyScope(varDecl.getName())) {
-                errorMessage.append("Duplicate declaration in same scope __filename__" + " line: ")
-                        .append(varDecl.getLineNumber()).append(" col: ").append(varDecl.getColNumber()).append("\n");
-            }
-            symTable.addObjectToCurrentScope(varDecl.getName(), varDecl);
+//            if (symTable.checkIfSymbolExistsAtAnyScope(varDecl.getName())) {
+//                errorMessage.append("Duplicate declaration in same scope __filename__" + " line: ")
+//                        .append(varDecl.getLineNumber()).append(" col: ").append(varDecl.getColNumber()).append("\n");
+//            }
+//            symTable.addObjectToCurrentScope(varDecl.getName(), varDecl);
 
             // make sure each vardDecl is correct
-            varDecl.visit(this);
+            varDecl.accept(this);
         }
         return null;
     }
@@ -892,12 +928,12 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrVarDecl(IrVarDecl node) {
 
-        node.type.visit(this);
+        node.type.accept(this);
 
-        // 1) keep the type of Irvalue and Irtype are the same
+        // 1)  make sure the type of Irvalue and Irtype are the same
         // 2） if this is a array declaration, the size of nameArrayList is the same with it's values'.
         if (node.value != null){
-            node.value.visit(this);
+            node.value.accept(this);
 
             if ( node.type.getTypeEnum() != node.value.getType() ){
                 errorMessage.append("the type of Irvalue and Irtype should be the same " + " line: ")
@@ -918,50 +954,18 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
     }
 
 
-    @Override
-    public Void visitIrAssignStmtEq(IrAssignStmtEq node) {
-        // 1) verify that the storeLocation is semantically correct
-        node.getStoreLocation().visit(this);
-
-        if (node.getStoreLocation() instanceof IrLocationVar) {
-
-//             2) check to make sure the var isn't a lone array var
-            if (symTable.checkIfSymbolExistsAtAnyScope(node.getStoreLocation().getLocationName().getValue())) {
-                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
-
-                if (object.getType() instanceof IrTypeArray) {
-                    errorMessage.append("Can't re-assign an array to an expression" + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
-                }
-            }
-        }
-
-
-        // 3) verify that the expr is semantically correct
-        node.getExpr().visit(this);
-
-
-        // 4) make sure that the IrExpr and IrLocation are the same VarTypeEnum
-        boolean bothAreInts = (node.getExpr().getExpressionType() == VarTypeEnum.RES_INT)
-                && (node.getStoreLocation().getExpressionType() == VarTypeEnum.RES_INT);
-        boolean bothAreBools = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_BOOL )
-                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_BOOL);
-        boolean bothAreReals = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_REAL )
-                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
-        if (!bothAreBools && !bothAreInts && !bothAreReals) {
-            errorMessage.append("The variable to be assigned and expression must both be of type int, real,  or of type bool" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
-        }
-        return null;
-    }
 
     @Override
     public Void visitIrCodeBlock(IrCodeBlock node) {
+        if (node.stmtsList.size() == 0 ){
+            errorMessage.append("CodeBlock is empty : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
 
         // check that each statement is valid
         for (IrStmt stmt : node.stmtsList) {
 
-            stmt.visit(this);
+            stmt.accept(this);
         }
         return null;
     }
@@ -972,29 +976,138 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrFunctionDecl(IrFunctionDecl node) {
+        if (node.getVarBlockVAR() != null){
+            node.getVarBlockVAR().accept(this);
+        }
 
+        if (node.getVarBlockVAR_INPUT() != null){
+            node.getVarBlockVAR_INPUT().accept(this);
+        }
+        else {
+            errorMessage.append("there is no VAR_INPUT in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        if (node.getVarBlockVAR_OUTPUT() != null){
+            node.getVarBlockVAR_OUTPUT().accept(this);
+        }
+
+        if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
+            node.getVarBlockVAR_INPUT_OUTPUT().accept(this);
+        }
+
+        if (node.getVarBlockVAR_TEMP() != null){
+            node.getVarBlockVAR_TEMP().accept(this);
+        }
+        if (node.getCodeBlock() != null){
+            node.getCodeBlock().accept(this);
+        }
+        else {
+            errorMessage.append("there is no code block in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
         return null;
     }
 
     @Override
     public Void visitIrFunctionBlockDecl(IrFunctionBlockDecl node) {
+        if (node.getVarBlockVAR() != null){
+            node.getVarBlockVAR().accept(this);
+        }
+
+        if (node.getVarBlockVAR_INPUT() != null){
+            node.getVarBlockVAR_INPUT().accept(this);
+        }
+        else {
+            errorMessage.append("there is no VAR_INPUT in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        if (node.getVarBlockVAR_OUTPUT() != null){
+            node.getVarBlockVAR_OUTPUT().accept(this);
+        }
+        else {
+            errorMessage.append("there is no VAR_OUTPUT in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
+            node.getVarBlockVAR_INPUT_OUTPUT().accept(this);
+        }
+
+        if (node.getVarBlockVAR_TEMP() != null){
+            node.getVarBlockVAR_TEMP().accept(this);
+        }
+        if (node.getCodeBlock() != null){
+            node.getCodeBlock().accept(this);
+        }
+        else {
+            errorMessage.append("there is no code block in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
         return null;
     }
 
     @Override
     public Void visitIrProgramDecl(IrProgramDecl node) {
+        if (node.getVarBlockVAR() != null){
+            node.getVarBlockVAR().accept(this);
+        }
+
+        if (node.getVarBlockVAR_INPUT() != null){
+            node.getVarBlockVAR_INPUT().accept(this);
+        }
+        else {
+            errorMessage.append("there is no VAR_INPUT in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        if (node.getVarBlockVAR_OUTPUT() != null){
+            node.getVarBlockVAR_OUTPUT().accept(this);
+        }
+        else {
+            errorMessage.append("there is no VAR_OUTPUT in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
+        if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
+            node.getVarBlockVAR_INPUT_OUTPUT().accept(this);
+        }
+
+        if (node.getVarBlockVAR_TEMP() != null){
+            node.getVarBlockVAR_TEMP().accept(this);
+        }
+        if (node.getCodeBlock() != null){
+            node.getCodeBlock().accept(this);
+        }
+        else {
+            errorMessage.append("there is no code block in this POU : " + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+        }
+
         return null;
     }
 
-    /**1. check it have one and only one ProgramDecl
-     * 2. check there is no pou has been declared twice
+    /**1. check it have one and only one ProgramDecl (done in defPhase)
+     * 2. check there is no pou has been declared twice (done in defPhase)
      * 3. check child nodes
-     *
      * @param node
      * @return
      */
     @Override
     public Void visitIrPousDecl(IrPousDecl node) {
+        for (IrProgramDecl programDecl: node.getProgramDeclsArrayList()){
+            programDecl.accept(this);
+        }
+
+        for (IrFunctionBlockDecl functionBlockDecl : node.getFunctionBlockDeclsArrayList()){
+            functionBlockDecl.accept(this);
+        }
+
+        for (IrFunctionDecl functionDecl : node.getFunctionDeclArrayList()){
+            functionDecl.accept(this);
+        }
+
         return null;
     }
 

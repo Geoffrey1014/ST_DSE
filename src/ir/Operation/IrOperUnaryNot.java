@@ -46,7 +46,7 @@ public class IrOperUnaryNot extends IrOperUnary {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrOperUnaryNot(this);
     }
 

@@ -25,7 +25,7 @@ public class IrCtrlFlowIfElsifElse extends IrCtrlFlowIf {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowIfElsifElse(this);
     }
 }

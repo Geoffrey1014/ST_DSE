@@ -28,7 +28,7 @@ public class IrCtrlFlowIf extends IrCtrlFlow {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowIf(this);
     }
 }

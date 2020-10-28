@@ -41,7 +41,7 @@ public class IrTypeArray extends IrType {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrTypeArray(this);
     }
 

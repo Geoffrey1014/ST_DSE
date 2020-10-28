@@ -37,6 +37,10 @@ public abstract class BaseScope implements Scope {
         sym.scope = this; // 这个记录的是这个 AST 节点 在那个 scope 中
     }
 
+    public Ir getSymbolAtCurrentScope(String name){
+        return symbols.get(name);
+    }
+
     public Scope getEnclosingScope() { return enclosingScope; }
 
     public String toString() { return getScopeName()+":"+symbols.keySet().toString(); }

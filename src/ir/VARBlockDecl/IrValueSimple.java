@@ -36,7 +36,7 @@ public class IrValueSimple extends IrValue {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrValueSimple(this);
     }
 }

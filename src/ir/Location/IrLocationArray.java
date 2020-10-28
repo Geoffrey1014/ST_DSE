@@ -84,7 +84,7 @@ public class IrLocationArray extends IrLocation {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrLocationArray(this);
     }
 }

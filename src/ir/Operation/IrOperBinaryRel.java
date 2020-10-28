@@ -61,7 +61,7 @@ public class IrOperBinaryRel extends IrOperBinary {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrOperBinaryRel(this);
     }
 

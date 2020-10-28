@@ -58,7 +58,7 @@ public class IrOperBinaryLogic extends IrOperBinary {
     }
 
     @Override
-    public void visit(BaseVisitor<Void> visitor) {
+    public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrOperBinaryLogic(this);
     }
 

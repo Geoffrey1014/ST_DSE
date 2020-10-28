@@ -18,6 +18,9 @@ public class SymTable {
     public boolean checkIfSymbolExistsAtAnyScope(String id) {
         return currentScope.resolve(id) != null;
     }
+    public boolean checkIfSymbolExistsAtCurrentScope(String id){
+        return currentScope.getSymbolAtCurrentScope(id) != null;
+    }
     public Ir getSymbol(String id) {
         return currentScope.resolve(id);
     }

@@ -1,5 +1,6 @@
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
+import ir.DefPhaseVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -12,7 +13,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class Mian {
-//    public static MyPrint myprint  = new MyPrint(0);
+    public static MyPrint myprint  = new MyPrint(2);
 
     public static void run(String[] args ){
         try {
@@ -99,6 +100,11 @@ public class Mian {
             ParseTreeWalker walker = new ParseTreeWalker();
             STListener listener = new STListener();
             walker.walk(listener,tree);
+
+
+            DefPhaseVisitor defPhaseVisitor = new DefPhaseVisitor();
+            listener.pous.accept(defPhaseVisitor);
+
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
 
@@ -112,7 +118,7 @@ public class Mian {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         walkTree(args);
 

@@ -21,4 +21,6 @@ public interface Scope {
 
     /** Look up name in this scope or in enclosing scope if not here */
     public Ir resolve(String name);
+
+    public Ir getSymbolAtCurrentScope(String name);
 }

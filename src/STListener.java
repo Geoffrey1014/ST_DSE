@@ -29,7 +29,8 @@ public class STListener extends STParserBaseListener {
     /**
      * 这里的myprint  的初始化会不会对打印产生影响？
      */
-    public static MyPrint myPrint = new MyPrint(0);
+    
+//    public static MyPrint myPrint = new MyPrint(0);
 
     public IrPousDecl pous;
     ParseTreeProperty<Where> ASTNodes = new ParseTreeProperty<>();

@@ -18,56 +18,56 @@ import ir.POUDecl.IrProgramDecl;
 import ir.VARBlockDecl.*;
 
 public interface BaseVisitor<T> {
-    public abstract T visitIrArgExpr(IrArgExpr node);
-    public abstract T visitIrArgInputAssign(IrArgInputAssign node);
-    public abstract T IrArgOutputAssign(IrArgOutputAssign node);
+    T visitIrArgExpr(IrArgExpr node);
+    T visitIrArgInputAssign(IrArgInputAssign node);
+    T IrArgOutputAssign(IrArgOutputAssign node);
 
-    public abstract T visitIrCtrlFlowIf(IrCtrlFlowIf node);
-    public abstract T visitIrCtrlFlowElsif(IrCtrlFlowElsif node);
-    public abstract T visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node);
-    public abstract T visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node);
-    public abstract T visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node);
+    T visitIrCtrlFlowIf(IrCtrlFlowIf node);
+    T visitIrCtrlFlowElsif(IrCtrlFlowElsif node);
+    T visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node);
+    T visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node);
+    T visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node);
 
-    public abstract T visitIrCtrlFlowFor(IrCtrlFlowFor node);
-    public abstract T visitIrCtrlFlowForRange(IrCtrlFlowForRange node);
-    public abstract T visitIrCtrlFlowWhile(IrCtrlFlowWhile node);
+    T visitIrCtrlFlowFor(IrCtrlFlowFor node);
+    T visitIrCtrlFlowForRange(IrCtrlFlowForRange node);
+    T visitIrCtrlFlowWhile(IrCtrlFlowWhile node);
 
-    public abstract T visitIrBoolLiteral(IrBoolLiteral node);
-    public abstract T visitIrFloatLiteral(IrFloatLiteral node);
-    public abstract T visitIrIntLiteral(IrIntLiteral node);
-    public abstract T visitIrStringLiteral(IrStringLiteral node);
+    T visitIrBoolLiteral(IrBoolLiteral node);
+    T visitIrFloatLiteral(IrFloatLiteral node);
+    T visitIrIntLiteral(IrIntLiteral node);
+    T visitIrStringLiteral(IrStringLiteral node);
 
-    public abstract T visitIrFbStLocation(IrFbStLocation node);
-    public abstract T visitIrLocationArray(IrLocationArray node);
-    public abstract T visitIrLocationVar(IrLocationVar node);
+    T visitIrFbStLocation(IrFbStLocation node);
+    T visitIrLocationArray(IrLocationArray node);
+    T visitIrLocationVar(IrLocationVar node);
 
-    public abstract T visitIrOperBinaryEq(IrOperBinaryEq node);
-    public abstract T visitIrOperBinaryArith(IrOperBinaryArith node);
-    public abstract T visitIrOperUnaryNeg(IrOperUnaryNeg node);
-    public abstract T visitIrOperUnaryNot(IrOperUnaryNot node);
-    public abstract T visitIrOperBinaryRel(IrOperBinaryRel node);
-    public abstract T visitIrOperBinaryLogic(IrOperBinaryLogic node);
+    T visitIrOperBinaryEq(IrOperBinaryEq node);
+    T visitIrOperBinaryArith(IrOperBinaryArith node);
+    T visitIrOperUnaryNeg(IrOperUnaryNeg node);
+    T visitIrOperUnaryNot(IrOperUnaryNot node);
+    T visitIrOperBinaryRel(IrOperBinaryRel node);
+    T visitIrOperBinaryLogic(IrOperBinaryLogic node);
 
-    public abstract T visitIrFunctionDecl(IrFunctionDecl node);
-    public abstract T visitIrFunctionBlockDecl(IrFunctionBlockDecl node);
-    public abstract T visitIrProgramDecl(IrProgramDecl node);
+    T visitIrFunctionDecl(IrFunctionDecl node);
+    T visitIrFunctionBlockDecl(IrFunctionBlockDecl node);
+    T visitIrProgramDecl(IrProgramDecl node);
 
-    public abstract T visitIrTypeArray(IrTypeArray node);
-    public abstract T visitIrTypeSimple(IrTypeSimple node);
-    public abstract T visitIrValueArray(IrValueArray node);
-    public abstract T visitIrValueSimple(IrValueSimple node);
-    public abstract T visitIrVARBlockDecl(IrVARBlockDecl node);
-    public abstract T visitIrVarsDecl(IrVarsDecl node);
-    public abstract T visitIrVarDecl(IrVarDecl node);
+    T visitIrTypeArray(IrTypeArray node);
+    T visitIrTypeSimple(IrTypeSimple node);
+    T visitIrValueArray(IrValueArray node);
+    T visitIrValueSimple(IrValueSimple node);
+    T visitIrVARBlockDecl(IrVARBlockDecl node);
+    T visitIrVarsDecl(IrVarsDecl node);
+    T visitIrVarDecl(IrVarDecl node);
 
-    public abstract T visitIrAssignStmtEq(IrAssignStmtEq node);
-    public abstract T visitIrCodeBlock(IrCodeBlock node);
-    public abstract T visitIrFunctionCallExpr(IrFunctionCallExpr node);
-    public abstract T visitIrFunctionCallStmt(IrFunctionCallStmt node);
+    T visitIrAssignStmtEq(IrAssignStmtEq node);
+    T visitIrCodeBlock(IrCodeBlock node);
+    T visitIrFunctionCallExpr(IrFunctionCallExpr node);
+    T visitIrFunctionCallStmt(IrFunctionCallStmt node);
 
-    public abstract T visitIrPousDecl(IrPousDecl node);
+    T visitIrPousDecl(IrPousDecl node);
 
-    public abstract T visitIrIdent(IrIdent irIdent);
+    T visitIrIdent(IrIdent irIdent);
 //
 //    public abstract T visit( node);
 //    public abstract T visit( node);
