@@ -1,3 +1,4 @@
+
 FUNCTION COMPENSATION_PT : REAL
 
 VAR_INPUT (* 输 人变 量声 明段*)

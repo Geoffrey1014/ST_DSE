@@ -86,7 +86,7 @@ public class STListener extends STParserBaseListener {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
 //        System.out.println(ctx.name);
-        System.err.println(ctx.ID().getSymbol());
+//        System.err.println(ctx.ID().getSymbol());
 
         IrVARBlockDecl varBlockVAR = null;
         IrVARBlockDecl varBlockVAR_INPUT = null;
@@ -442,7 +442,7 @@ public class STListener extends STParserBaseListener {
         /*
           there is a print
          */
-        MyPrint.levelTwo.print(ctx.op.getText());
+        MyPrint.LevelOne.print(ctx.op.getText());
 
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
@@ -486,7 +486,7 @@ public class STListener extends STParserBaseListener {
         /*
           there is a print
          */
-        MyPrint.levelTwo.print(ctx.op.getText());
+        MyPrint.LevelOne.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -530,7 +530,7 @@ public class STListener extends STParserBaseListener {
         /*
           there is a print
          */
-        MyPrint.levelTwo.print(ctx.op.getText());
+        MyPrint.LevelOne.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -562,7 +562,7 @@ public class STListener extends STParserBaseListener {
         /*
         there is a print
          */
-        MyPrint.levelTwo.print(ctx.op.getText());
+        MyPrint.LevelOne.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){

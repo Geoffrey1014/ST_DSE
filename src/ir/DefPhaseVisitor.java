@@ -23,7 +23,7 @@ import tools.MyPrint;
 
 public class DefPhaseVisitor implements BaseVisitor<Void> {
     SymTable symTable = new SymTable();
-    StringBuilder errorMessage = new StringBuilder();
+    public StringBuilder errorMessage = new StringBuilder();
 
     @Override
     public Void visitIrArgExpr(IrArgExpr node) {
@@ -366,12 +366,14 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         }
         else {
             IrProgramDecl programDecl = node.getProgramDeclsArrayList().get(0);
-            if ( symTable.currentScope.resolve(programDecl.getName()) != null) {
+            if ( symTable.currentScope.resolve(programDecl.getName()) == null) {
+                symTable.currentScope.define(programDecl.getName(), programDecl);
+                programDecl.accept(this);
+            }
+            else {
                 errorMessage.append("the symbol has already been declared: ").append(programDecl.getName())
                         .append(" line: ").append(programDecl.getLineNumber()).append(" col: ").append(programDecl.getColNumber());
 
-                symTable.currentScope.define(programDecl.getName(), programDecl);
-                programDecl.accept(this);
             }
 
         }

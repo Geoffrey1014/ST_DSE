@@ -105,6 +105,9 @@ public class Mian {
             DefPhaseVisitor defPhaseVisitor = new DefPhaseVisitor();
             listener.pous.accept(defPhaseVisitor);
 
+            System.err.println("error message:");
+            System.err.println(defPhaseVisitor.errorMessage);
+
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
 
