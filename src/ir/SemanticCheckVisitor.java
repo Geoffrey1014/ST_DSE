@@ -24,11 +24,11 @@ import tools.MyPrint;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SematicCheckVisitor implements BaseVisitor<Void> {
+public class SemanticCheckVisitor implements BaseVisitor<Void> {
     SymTable symTable = null;
-    StringBuilder errorMessage = new StringBuilder();
+    public StringBuilder errorMessage = new StringBuilder();
 
-    public  SematicCheckVisitor(SymTable symTable){
+    public SemanticCheckVisitor(SymTable symTable){
         this.symTable = symTable;
     }
 
@@ -154,7 +154,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
                 }
 
                 // IMPORTANT: set the IrType of the IrFunctionCallExpr
-                node.functionType = functionDecl.getType();
+                node.functionType = functionDecl.getReturnType();
 
             }
             // for an extern method_decl TODO 应该内置 ADD  SUB ABS 等基础函数
@@ -826,8 +826,9 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getStoreLocation() instanceof IrLocationVar) {
 
-//             2) check to make sure the var isn't a lone array var
-            if (symTable.checkIfSymbolExistsAtAnyScope(node.getStoreLocation().getLocationName().getValue())) {
+//        2) check to make sure the var isn't a lone array var
+            String name = node.getStoreLocation().getLocationName().getValue();
+            if (symTable.checkIfSymbolExistsAtAnyScope(name)) {
                 IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
 
                 if (object.getType() instanceof IrTypeArray) {
@@ -849,7 +850,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
         boolean bothAreReals = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_REAL )
                 && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
         if (!bothAreBools && !bothAreInts && !bothAreReals) {
-            errorMessage.append("The variable to be assigned and expression must both be of type int, real,  or of type bool" + " line: ")
+            errorMessage.append("The variable to be assigned and the expression must both be of type int, real,  or of type bool" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
         return null;
@@ -976,6 +977,9 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrFunctionDecl(IrFunctionDecl node) {
+        // change to the accordding scope
+        symTable.currentScope = symTable.treeProperty.get(node);
+
         if (node.getVarBlockVAR() != null){
             node.getVarBlockVAR().accept(this);
         }
@@ -1006,11 +1010,16 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append("there is no code block in this POU : " + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
+
+        symTable.currentScope = symTable.currentScope.getEnclosingScope();
         return null;
     }
 
     @Override
     public Void visitIrFunctionBlockDecl(IrFunctionBlockDecl node) {
+        // change to the accordding scope
+        symTable.currentScope = symTable.treeProperty.get(node);
+
         if (node.getVarBlockVAR() != null){
             node.getVarBlockVAR().accept(this);
         }
@@ -1045,11 +1054,15 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append("there is no code block in this POU : " + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
+        symTable.currentScope = symTable.currentScope.getEnclosingScope();
         return null;
     }
 
     @Override
     public Void visitIrProgramDecl(IrProgramDecl node) {
+        // change to the accordding scope
+        symTable.currentScope = symTable.treeProperty.get(node);
+
         if (node.getVarBlockVAR() != null){
             node.getVarBlockVAR().accept(this);
         }
@@ -1084,7 +1097,7 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append("there is no code block in this POU : " + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
-
+        symTable.currentScope = symTable.currentScope.getEnclosingScope();
         return null;
     }
 
@@ -1096,6 +1109,8 @@ public class SematicCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrPousDecl(IrPousDecl node) {
+        symTable.currentScope = symTable.globals;
+
         for (IrProgramDecl programDecl: node.getProgramDeclsArrayList()){
             programDecl.accept(this);
         }

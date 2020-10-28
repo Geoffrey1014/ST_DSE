@@ -18,24 +18,15 @@ import ir.POUDecl.IrProgramDecl;
 import ir.VARBlockDecl.*;
 
 public interface BaseVisitor<T> {
-    T visitIrArgExpr(IrArgExpr node);
-    T visitIrArgInputAssign(IrArgInputAssign node);
-    T IrArgOutputAssign(IrArgOutputAssign node);
-
-    T visitIrCtrlFlowIf(IrCtrlFlowIf node);
-    T visitIrCtrlFlowElsif(IrCtrlFlowElsif node);
-    T visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node);
-    T visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node);
-    T visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node);
-
-    T visitIrCtrlFlowFor(IrCtrlFlowFor node);
-    T visitIrCtrlFlowForRange(IrCtrlFlowForRange node);
-    T visitIrCtrlFlowWhile(IrCtrlFlowWhile node);
-
+    T visitIrIdent(IrIdent irIdent);
     T visitIrBoolLiteral(IrBoolLiteral node);
     T visitIrFloatLiteral(IrFloatLiteral node);
     T visitIrIntLiteral(IrIntLiteral node);
     T visitIrStringLiteral(IrStringLiteral node);
+
+    T visitIrArgExpr(IrArgExpr node);
+    T visitIrArgInputAssign(IrArgInputAssign node);
+    T IrArgOutputAssign(IrArgOutputAssign node);
 
     T visitIrFbStLocation(IrFbStLocation node);
     T visitIrLocationArray(IrLocationArray node);
@@ -48,9 +39,23 @@ public interface BaseVisitor<T> {
     T visitIrOperBinaryRel(IrOperBinaryRel node);
     T visitIrOperBinaryLogic(IrOperBinaryLogic node);
 
-    T visitIrFunctionDecl(IrFunctionDecl node);
-    T visitIrFunctionBlockDecl(IrFunctionBlockDecl node);
-    T visitIrProgramDecl(IrProgramDecl node);
+
+    T visitIrFunctionCallExpr(IrFunctionCallExpr node);
+
+    T visitIrFunctionCallStmt(IrFunctionCallStmt node);
+    T visitIrAssignStmtEq(IrAssignStmtEq node);
+
+    T visitIrCtrlFlowIf(IrCtrlFlowIf node);
+    T visitIrCtrlFlowElsif(IrCtrlFlowElsif node);
+    T visitIrCtrlFlowIfElse(IrCtrlFlowIfElse node);
+    T visitIrCtrlFlowIfElsifElse(IrCtrlFlowIfElsifElse node);
+    T visitIrCtrlFlowIfElsif(IrCtrlFlowIfElsif node);
+
+    T visitIrCtrlFlowFor(IrCtrlFlowFor node);
+    T visitIrCtrlFlowForRange(IrCtrlFlowForRange node);
+    T visitIrCtrlFlowWhile(IrCtrlFlowWhile node);
+
+    T visitIrCodeBlock(IrCodeBlock node);
 
     T visitIrTypeArray(IrTypeArray node);
     T visitIrTypeSimple(IrTypeSimple node);
@@ -60,15 +65,11 @@ public interface BaseVisitor<T> {
     T visitIrVarsDecl(IrVarsDecl node);
     T visitIrVarDecl(IrVarDecl node);
 
-    T visitIrAssignStmtEq(IrAssignStmtEq node);
-    T visitIrCodeBlock(IrCodeBlock node);
-    T visitIrFunctionCallExpr(IrFunctionCallExpr node);
-    T visitIrFunctionCallStmt(IrFunctionCallStmt node);
-
+    T visitIrFunctionDecl(IrFunctionDecl node);
+    T visitIrFunctionBlockDecl(IrFunctionBlockDecl node);
+    T visitIrProgramDecl(IrProgramDecl node);
     T visitIrPousDecl(IrPousDecl node);
 
-    T visitIrIdent(IrIdent irIdent);
-//
 //    public abstract T visit( node);
 //    public abstract T visit( node);
 //    public abstract T visit( node);

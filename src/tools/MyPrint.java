@@ -6,16 +6,18 @@ public class MyPrint {
      * control = 0 表示全都打印，数字越大表示打印的要求越严格，打印的东西越少
      * */
     public static SubMyPrint levelZero;
-    public static SubMyPrint LevelOne ;
+    public static SubMyPrint levelOne ;
     public static SubMyPrint levelTwo;
+    public static SubMyPrint levelThree;
     Integer control = 0 ;
 
     public MyPrint(Integer control ){
 
         this.control = control;
         levelZero = new SubMyPrint(0, control);
-        LevelOne = new SubMyPrint(1, control);
+        levelOne = new SubMyPrint(1, control);
         levelTwo = new SubMyPrint(2, control);
+        levelThree = new SubMyPrint(3, control);
 
     }
 

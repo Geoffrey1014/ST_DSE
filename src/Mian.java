@@ -1,6 +1,7 @@
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
 import ir.DefPhaseVisitor;
+import ir.SemanticCheckVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -13,7 +14,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class Mian {
-    public static MyPrint myprint  = new MyPrint(2);
+    public static MyPrint myprint  = new MyPrint(1);
 
     public static void run(String[] args ){
         try {
@@ -87,7 +88,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/";
-        String inputFile = prefix + "01_a_test.txt";
+        String inputFile = prefix + "illegal/01_a_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -105,15 +106,18 @@ public class Mian {
             DefPhaseVisitor defPhaseVisitor = new DefPhaseVisitor();
             listener.pous.accept(defPhaseVisitor);
 
-            System.err.println("error message:");
-            System.err.println(defPhaseVisitor.errorMessage);
+            SemanticCheckVisitor semanticCheckVisitor = new SemanticCheckVisitor(defPhaseVisitor.symTable);
+            listener.pous.accept(semanticCheckVisitor);
+
+            System.err.println("semantic check error message:");
+            System.err.println(semanticCheckVisitor.errorMessage);
 
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
 
-            MyPrint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
-            MyPrint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
-            MyPrint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
+//            MyPrint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
+//            MyPrint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
+//            MyPrint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
 
         }
         catch (IOException e){

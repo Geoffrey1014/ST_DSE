@@ -172,8 +172,9 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFunction(STParser.FunctionContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrType type = (IrType) getASTNode(ctx.type_rule());
-
         IrIdent name = new IrIdent(ctx.ID().getText(), l.line, l.col);
+        IrVarDecl returnVar = new IrVarDecl(l.line, l.col, name, type, null);
+
         IrVARBlockDecl varBlockVAR = null;
         IrVARBlockDecl varBlockVAR_INPUT = null;
         IrVARBlockDecl varBlockVAR_OUTPUT = null;
@@ -207,7 +208,7 @@ public class STListener extends STParserBaseListener {
         }
         IrFunctionDecl function = new IrFunctionDecl(name,type,
                 varBlockVAR, varBlockVAR_INPUT, varBlockVAR_OUTPUT,
-                varBlockVAR_INPUT_OUTPUT, varBlockVAR_TEMP,codeBlock);
+                varBlockVAR_INPUT_OUTPUT, varBlockVAR_TEMP,codeBlock, returnVar);
         setASTNode(ctx,function);
 
     }
@@ -333,7 +334,7 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFor_range(STParser.For_rangeContext ctx) {
         IrExpr low = (IrExpr) getASTNode(ctx.expression(0));
         IrExpr high = (IrExpr) getASTNode(ctx.expression(1));
-        MyPrint.LevelOne.print("=====");
+        MyPrint.levelZero.print("=====");
 //        Integer step = null;
 //        if (ctx.step != null){
 //            step = Integer.valueOf(ctx.step.getText());
@@ -343,7 +344,7 @@ public class STListener extends STParserBaseListener {
             step = (IrExpr) getASTNode(ctx.expression(2));
         }
 
-        MyPrint.LevelOne.print("=====");
+        MyPrint.levelZero.print("=====");
         IrCtrlFlowForRange range = new IrCtrlFlowForRange(low, high, step);
         setASTNode(ctx, range);
     }
@@ -442,7 +443,7 @@ public class STListener extends STParserBaseListener {
         /*
           there is a print
          */
-        MyPrint.LevelOne.print(ctx.op.getText());
+        MyPrint.levelZero.print(ctx.op.getText());
 
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
@@ -486,7 +487,7 @@ public class STListener extends STParserBaseListener {
         /*
           there is a print
          */
-        MyPrint.LevelOne.print(ctx.op.getText());
+        MyPrint.levelZero.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -530,7 +531,7 @@ public class STListener extends STParserBaseListener {
         /*
           there is a print
          */
-        MyPrint.LevelOne.print(ctx.op.getText());
+        MyPrint.levelZero.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){
@@ -562,7 +563,7 @@ public class STListener extends STParserBaseListener {
         /*
         there is a print
          */
-        MyPrint.LevelOne.print(ctx.op.getText());
+        MyPrint.levelZero.print(ctx.op.getText());
         String op = ctx.op.getText();
         OperKeyWordEnum type = OperKeyWordEnum.fromOperTpye(op);
         if (type == null){

@@ -1,4 +1,5 @@
 
+
 FUNCTION COMPENSATION_PT : REAL
 
 VAR_INPUT (* 输 人变 量声 明段*)
@@ -9,10 +10,10 @@ VAR
     CP, CT : REAL ;
 END_VAR
 
-CT := DIV( ADD( (T0) +273.15) ,  ADD(T1 - 273.15)) ;
-CP := DIV( ADD( P1 * 103.32) , ADD(PO / 103.32)) ;
+CT :=  (T0 + 273.15) / (T1 - 273.15) ;
+CP :=  (P1 * 103.32) / (PO / 103.32) ;
 
-COMPENSATION_PT := MUL(CT, CP);
+COMPENSATION_PT := CT * CP;
 
 END_FUNCTION
 

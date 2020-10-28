@@ -22,7 +22,7 @@ import ir.VARBlockDecl.*;
 import tools.MyPrint;
 
 public class DefPhaseVisitor implements BaseVisitor<Void> {
-    SymTable symTable = new SymTable();
+    public SymTable symTable = new SymTable();
     public StringBuilder errorMessage = new StringBuilder();
 
     @Override
@@ -220,6 +220,7 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
     public Void visitIrFunctionDecl(IrFunctionDecl node) {
         symTable.currentScope = new LocalScope(symTable.currentScope);
         symTable.saveScope(node, symTable.currentScope);
+        symTable.currentScope.define(node.returnVar.getName(), node.returnVar);
 
         if (node.getVarBlockVAR() != null){
             node.getVarBlockVAR().accept(this);
@@ -241,8 +242,8 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
             node.getVarBlockVAR_TEMP().accept(this);
         }
 
-        MyPrint.levelTwo.print("current scope : " + node.getName() );
-        MyPrint.levelTwo.print(symTable.currentScope);
+        MyPrint.levelOne.print("current scope : " + node.getName() );
+        MyPrint.levelOne.print(symTable.currentScope);
         symTable.currentScope = symTable.currentScope.getEnclosingScope(); // pop scope
 
         return null;
@@ -272,8 +273,8 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         if (node.getVarBlockVAR_TEMP() != null){
             node.getVarBlockVAR_TEMP().accept(this);
         }
-        MyPrint.levelTwo.print("current scope : " + node.getName() );
-        MyPrint.levelTwo.print(symTable.currentScope);
+        MyPrint.levelOne.print("current scope : " + node.getName() );
+        MyPrint.levelOne.print(symTable.currentScope);
         symTable.currentScope = symTable.currentScope.getEnclosingScope(); // pop scope
 
         return null;
@@ -307,8 +308,8 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         if (node.getVarBlockVAR_TEMP() != null){
             node.getVarBlockVAR_TEMP().accept(this);
         }
-        MyPrint.levelTwo.print("current scope : " + node.getName() );
-        MyPrint.levelTwo.print(symTable.currentScope);
+        MyPrint.levelOne.print("current scope : " + node.getName() );
+        MyPrint.levelOne.print(symTable.currentScope);
         symTable.currentScope = symTable.currentScope.getEnclosingScope(); // pop scope
 
         return null;
@@ -379,10 +380,10 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         }
 
         // 出 该节点
-        MyPrint.levelTwo.print("current scope : " + symTable.currentScope.getScopeName() ); // 应该输出locals
+        MyPrint.levelOne.print("current scope : " + symTable.currentScope.getScopeName() ); // 应该输出locals
 
-        MyPrint.levelTwo.print("global scope : " +symTable.currentScope.getScopeName()); // 应该输出 globals
-        MyPrint.levelTwo.print(symTable.globals);
+        MyPrint.levelOne.print("global scope : " +symTable.currentScope.getScopeName()); // 应该输出 globals
+        MyPrint.levelOne.print(symTable.globals);
 
         return null;
 
