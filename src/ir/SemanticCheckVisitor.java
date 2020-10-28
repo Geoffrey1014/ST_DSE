@@ -609,21 +609,21 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         // 2) make sure the array has been declared already
         if (symTable.checkIfSymbolExistsAtAnyScope(node.getLocationName().getValue())) {
-            Ir object = symTable.getSymbol(node.getLocationName().getValue());
+            IrVarDecl varDecl = (IrVarDecl) symTable.getSymbol(node.getLocationName().getValue());
             // 3) make sure that var is an array (and not a method or non-array)
 
-            if (! (object instanceof IrTypeArray) ) {
+            if (! (varDecl.type instanceof IrTypeArray) ) {
                 errorMessage.append("Non-array variable be accessed as an array" + " line: ")
                         .append(node.getElementIndex().getLineNumber()).append(" col: ")
                         .append(node.getElementIndex().getColNumber()).append("\n");
             }
             else {
-                IrTypeArray array = (IrTypeArray) object;
+//                IrTypeArray array = (IrTypeArray) object;
 
                 // IMPORTANT: set the TypeEnum of the IrLocationArray
                 // IMPORTANT: set the IrDecl of the IrLocationVar
-                node.setIrDecl(object);
-                node.setLocationType(array.getTypeEnum());
+                node.setIrDecl(varDecl);
+                node.setLocationType(varDecl.type.getTypeEnum());
             }
         } else {
             errorMessage.append("Array variable used before declared" + " line: ").
@@ -698,17 +698,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         node.rightOperand.accept(this);
 
         // 2) verify that both lhs and rhs are either bool, int or real
-        boolean bothAreBools = (node.rightOperand.getExpressionType() == VarTypeEnum.RES_BOOL)
-                && (node.leftOperand.getExpressionType() == VarTypeEnum.RES_BOOL );
-        boolean bothAreInts = (node.rightOperand.getExpressionType()  == VarTypeEnum.RES_INT)
-                && (node.leftOperand.getExpressionType() == VarTypeEnum.RES_INT );
-        boolean bothAreReals = (node.rightOperand.getExpressionType() == VarTypeEnum.RES_REAL)
-                && (node.leftOperand.getExpressionType() == VarTypeEnum.RES_REAL );
-
-        if (!bothAreBools && !bothAreInts && !bothAreReals) {
-            errorMessage.append("The lhs and rhs of an equator operation must the same type of bool , int ,or real " + " line: ")
+        if (node.leftOperand.getExpressionType() != node.rightOperand.getExpressionType()){
+            errorMessage
+                    .append("The lhs and rhs of an equator operation must the same type of bool , int ,or real " + " line: ")
                     .append(node.getLineNumber()).
-                    append(" col: ").append(node.getColNumber()).append("\n");
+                    append(" col: ").append(node.getColNumber()).append("\n")
+                    .append("leftOperand type : ").append(node.leftOperand.getExpressionType())
+                    .append("rightOperand type : ").append(node.rightOperand.getExpressionType()).append("\n\n");
         }
 
         return null;
@@ -726,15 +722,16 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                         .append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n");
             }
+            node.setExpressionType(node.leftOperand.getExpressionType());
         }
-        else if (node.operation == OperKeyWordEnum.DIV_OP){
+//        else if (node.operation == OperKeyWordEnum.DIV_OP){
             // TODO : verify divisor can not be zero
 //            if (this.rightOperand){
 //                errorMessage += "In the power operation, the rhs of an arithmetic expression must be of type int" +
 //                        " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
 //            }
 
-        }
+//        }
         else{
             // 3) verify that both lhs and rhs are  int or real
             boolean bothAreReals = (node.rightOperand.getExpressionType() == VarTypeEnum.RES_REAL)
@@ -796,8 +793,12 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 && (node.leftOperand.getExpressionType() == VarTypeEnum.RES_INT );
 
         if (! bothAreInts  && !bothAreReals) {
-            errorMessage.append("The lhs and rhs of a relational expression must be of type int or real" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+            errorMessage
+                    .append("The lhs and rhs of a relational expression must be of type int or real" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber())
+                    .append("\n\tleftOperand type : ").append(node.leftOperand.getExpressionType())
+                    .append("  rightOperand type : "+node.rightOperand.getExpressionType()).append("\n")
+                    ;
         }
 
         return null;
@@ -819,50 +820,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         return null;
     }
 
-    @Override
-    public Void visitIrAssignStmtEq(IrAssignStmtEq node) {
-        // 1) verify that the storeLocation is semantically correct
-        node.getStoreLocation().accept(this);
-
-        if (node.getStoreLocation() instanceof IrLocationVar) {
-
-//        2) check to make sure the var isn't a lone array var
-            String name = node.getStoreLocation().getLocationName().getValue();
-            if (symTable.checkIfSymbolExistsAtAnyScope(name)) {
-                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
-
-                if (object.getType() instanceof IrTypeArray) {
-                    errorMessage.append("Can't re-assign an array to an expression" + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
-                }
-            }
-        }
-
-
-        // 3) verify that the expr is semantically correct
-        node.getExpr().accept(this);
-
-        // 4) make sure that the IrExpr and IrLocation are the same VarTypeEnum
-        boolean bothAreInts = (node.getExpr().getExpressionType() == VarTypeEnum.RES_INT)
-                && (node.getStoreLocation().getExpressionType() == VarTypeEnum.RES_INT);
-        boolean bothAreBools = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_BOOL )
-                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_BOOL);
-        boolean bothAreReals = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_REAL )
-                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
-        if (!bothAreBools && !bothAreInts && !bothAreReals) {
-            errorMessage.append("The variable to be assigned and the expression must both be of type int, real,  or of type bool" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
-        }
-        return null;
-    }
-
 
     /**
      * Type
      */
     @Override
     public Void visitIrTypeArray(IrTypeArray node) {
-        node.size = (int) (node.high.getValue() - node.low.getValue());
+        node.size = (int) (node.high.getValue() - node.low.getValue()) + 1;
         if (node.size <= 0) {
             errorMessage.append("Array size must be a non-zero positive integer" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber());
@@ -875,7 +839,6 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         return null;
     }
-
 
     /**
      * value
@@ -900,7 +863,6 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         node.type = node.value.getExpressionType();
         return null;
     }
-
 
     /**
      * VarDecalration
@@ -954,6 +916,50 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visitIrAssignStmtEq(IrAssignStmtEq node) {
+        // 1) verify that the storeLocation is semantically correct
+        node.getStoreLocation().accept(this);
+
+        if (node.getStoreLocation() instanceof IrLocationVar) {
+
+//        2) check to make sure the var isn't a lone array var
+            String name = node.getStoreLocation().getLocationName().getValue();
+            if (symTable.checkIfSymbolExistsAtAnyScope(name)) {
+                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
+
+                if (object.getType() instanceof IrTypeArray) {
+                    errorMessage.append("Can't re-assign an array to an expression" + " line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+                }
+            }
+        }
+
+
+        // 3) verify that the expr is semantically correct
+        node.getExpr().accept(this);
+
+        // 4) make sure that the IrExpr and IrLocation are the same VarTypeEnum
+        if(node.getExpr().getExpressionType() != node.getStoreLocation().getExpressionType()){
+
+            errorMessage.append("The variable to be assigned and the expression must both be of type int, real,  or of type bool" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber())
+                    .append("\n\tExpr type : ").append(node.getExpr().getExpressionType())
+                    .append("  StoreLocation type : ").append(node.getStoreLocation().getExpressionType()).append("\n\n")
+            ;
+        }
+//        boolean bothAreInts = (node.getExpr().getExpressionType() == VarTypeEnum.RES_INT)
+//                && (node.getStoreLocation().getExpressionType() == VarTypeEnum.RES_INT);
+//        boolean bothAreBools = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_BOOL )
+//                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_BOOL);
+//        boolean bothAreReals = (node.getExpr().getExpressionType()  == VarTypeEnum.RES_REAL )
+//                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
+//        if (!bothAreBools && !bothAreInts && !bothAreReals) {
+//            errorMessage.append("The variable to be assigned and the expression must both be of type int, real,  or of type bool" + " line: ")
+//                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+//        }
+        return null;
+    }
 
 
     @Override
@@ -962,12 +968,15 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append("CodeBlock is empty : " + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
         }
+        else {
+            // check that each statement is valid
+            for (IrStmt stmt : node.stmtsList) {
 
-        // check that each statement is valid
-        for (IrStmt stmt : node.stmtsList) {
-
-            stmt.accept(this);
+                stmt.accept(this);
+            }
         }
+
+
         return null;
     }
 

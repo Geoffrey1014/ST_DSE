@@ -358,11 +358,11 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
         // check there is noly one PROGRAM
         // check PROGRAM's name has not been declared
         if (node.getProgramDeclsArrayList().size() > 1){
-            errorMessage.append("too many Program POU ")
+            errorMessage.append("too many PROGRAM POU ")
                     .append(" line: ").append(node.getLineNumber()).append(" col: ").append(node.getColNumber());
         }
         else if (node.getProgramDeclsArrayList().size() == 0){
-            errorMessage.append("there is no Program POU ")
+            errorMessage.append("there is no PROGRAM POU ")
                     .append(" line: ").append(node.getLineNumber()).append(" col: ").append(node.getColNumber());
         }
         else {

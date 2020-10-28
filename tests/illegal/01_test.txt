@@ -1,0 +1,47 @@
+(*
+DefPhase check error message:
+the symbol has already been declared: LOAD line: 20 col: 1
+
+ semantic check error message:
+the type of Irvalue and Irtype should be the same  line: 19 col: 1
+there is no VAR_OUTPUT in this POU :  line: 6 col: 0
+The lhs and rhs of an arithmetic expression must be of type bool line: 26 col: 10
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 29 col: 8
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 32 col: 4
+Variable used before declared line: 33 col: 4
+The lhs and rhs of an arithmetic expression must be of type int or real line: 33 col: 12
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 33 col: 4
+*)
+
+PROGRAM Main
+VAR
+	IS_LEAD_EDGE: BOOL;
+	PREV_LOAD: BOOL;
+	OUT_1 : BOOL;
+END_VAR
+
+
+VAR_INPUT
+	TLOAD: BOOL;
+	RESET: BOOL;
+	LOAD: BOOL;
+	IN_1: BOOL;
+	IN_2 : INT := 123.5;
+	LOAD : INT;
+END_VAR
+
+    IS_LEAD_EDGE := (NOT PREV_LOAD) AND TLOAD;
+    IF RESET THEN
+        OUT_1 := TRUE;
+    ELSIF LOAD OR (IS_LEAD_EDGE) THEN
+        OUT_1 := IN_1;
+    ELSE
+        LOAD := FALSE;
+    END_IF;
+    PREV_LOAD := TLOAD;
+    IN_2 := IN_1;
+    IN_3 := IN_1 + IN_2;
+    LOAD := IN_2 + 10086;
+
+END_PROGRAM
+

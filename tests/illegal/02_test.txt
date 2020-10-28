@@ -1,0 +1,29 @@
+(*
+semantic check error message:
+The negation '-' operand must be used on an int or real line: 8 col: 10
+The not 'NOT' operand must be used on an bool line: 9 col: 13
+In the power operation, the rhs of an arithmetic expression must be of type int line: 12 col: 17
+The lhs and rhs of an equator operation must the same type of bool , int ,or real  line: 14 col: 7
+leftOperand type : RES_INTrightOperand type : RES_REAL
+
+The lhs and rhs of an arithmetic expression must be of type bool line: 17 col: 9
+*)
+FUNCTION ADD : INT
+VAR_INPUT
+    x : INT;
+    y : INT := 1;
+    z : BOOL := TRUE;
+    a : BOOL;
+END_VAR
+    z := -z;
+    y := NOT y;
+    x := y + 2;
+    IF y > x THEN
+            x := y ** 2.2;
+    END_IF;
+    IF y <> 2.2 THEN
+            x := y + 2;
+    END_IF;
+    z := y & FALSE;
+
+END_FUNCTION

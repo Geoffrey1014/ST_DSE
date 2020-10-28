@@ -88,7 +88,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/";
-        String inputFile = prefix + "illegal/01_a_test.txt";
+        String inputFile = prefix + "illegal/02_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -105,11 +105,13 @@ public class Mian {
 
             DefPhaseVisitor defPhaseVisitor = new DefPhaseVisitor();
             listener.pous.accept(defPhaseVisitor);
+//            System.err.println("DefPhase check error message:");
+//            System.err.println(defPhaseVisitor.errorMessage);
 
             SemanticCheckVisitor semanticCheckVisitor = new SemanticCheckVisitor(defPhaseVisitor.symTable);
             listener.pous.accept(semanticCheckVisitor);
 
-            System.err.println("semantic check error message:");
+            System.err.println("\n semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
 //            ArrayList<String> ruleNames = new ArrayList<>();

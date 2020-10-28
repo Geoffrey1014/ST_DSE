@@ -38,7 +38,7 @@ function: RES_FUNCTION ID COLON type_rule
     RES_END_FUNCTION
     ;
 
-stat_list : stat (stat)*;
+stat_list : stat* ;
 
 stat
     : assign_stat

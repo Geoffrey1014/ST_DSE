@@ -218,10 +218,13 @@ public class STListener extends STParserBaseListener {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
 
         ArrayList<IrStmt> stmts = new ArrayList<>();
-        for(ParseTree node :ctx.children){
-            Where AstNode = ASTNodes.get(node);
-            stmts.add((IrStmt) AstNode);
+        if (ctx.children != null){
+            for(ParseTree node :ctx.children){
+                Where AstNode = ASTNodes.get(node);
+                stmts.add((IrStmt) AstNode);
+            }
         }
+
         IrCodeBlock codeBlock = new IrCodeBlock(l.line,l.col,stmts);
         setASTNode(ctx, codeBlock);
     }
