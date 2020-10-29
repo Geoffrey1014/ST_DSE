@@ -249,7 +249,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                     }
                 } else {
-                    errorMessage.append("Wrong number of arguments passed to function" + " line: ")
+                    errorMessage.append("Wrong number of arguments passed to function block" + " line: ")
                             .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
@@ -359,7 +359,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             node.irDeclVar = (IrVarDecl) locals.resolve(node.fbOutput.getValue());
 
             if (node.irDeclVar.accessType != VarAccessTypeEnum.VAR_INPUT_OUTPUT && node.irDeclVar.accessType != VarAccessTypeEnum.VAR_OUTPUT){
-                errorMessage.append(" it is not a VAR_OUTPUT variable : ").append(node.fbOutput.getValue()).append(" In ")
+                errorMessage.append(" the var is not a VAR_OUTPUT variable : ").append(node.fbOutput.getValue()).append(" In ")
                         .append(node.irDeclPou.getIdentName().getValue())
                         .append( " line: ").append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n\n");
@@ -387,7 +387,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
             }
             else {
-                errorMessage.append(" the acceptLocation's typEnum does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
+                errorMessage.append(" the acceptLocation's typeEnum does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
                         .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
                         .append( " line: ").append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n\n");

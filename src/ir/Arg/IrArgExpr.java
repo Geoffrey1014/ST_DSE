@@ -32,7 +32,6 @@ public class IrArgExpr extends IrArg {
     @Override
     public  String semanticCheck(SymTable symTable) {
         String errorMessage = ((IrExpr) this.getArgValue()).semanticCheck(symTable);
-
         return errorMessage;
     }
 

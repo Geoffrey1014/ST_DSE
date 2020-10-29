@@ -41,6 +41,7 @@ public class IrArgInputAssign extends IrArg {
         prettyString += this.argValue.prettyPrint("    " + indentSpace);
 
         return prettyString;
+
     }
 
 

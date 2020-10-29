@@ -28,7 +28,22 @@ public class IrCtrlFlowIfElse extends IrCtrlFlow {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+
+
+        String prettyString = indentSpace + "|--ifStmt\n";
+
+        // print the condition expr
+        prettyString += ("  " + indentSpace + "|--condExpr\n");
+        prettyString += (this.condExpr.prettyPrint("    " + indentSpace));
+
+        // print the if loop body
+        prettyString += "  " + indentSpace + "|--body\n";
+        prettyString += this.stmtBody.prettyPrint("    " + indentSpace);
+        // print the else body
+        prettyString += indentSpace + "|--elseBody\n";
+        prettyString += this.elseBlock.prettyPrint("  " + indentSpace);
+
+        return prettyString;
     }
 
     @Override

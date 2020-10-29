@@ -40,7 +40,19 @@ public class IrArgOutputAssign extends IrArg {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+
+        String prettyString = indentSpace + "|--assignStmtEquals\n";
+
+        // pretty print the lhs
+        prettyString += ("  " + indentSpace + "|--lhs\n");
+        prettyString += this.acceptLocation.prettyPrint("    " + indentSpace);
+
+        // print the rhs
+        prettyString += ("  " + indentSpace + "|--rhs\n");
+        prettyString += this.fbOutput.prettyPrint("    " + indentSpace);
+
+        return prettyString;
+
     }
 
     @Override
