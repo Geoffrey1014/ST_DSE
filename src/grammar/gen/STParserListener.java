@@ -80,6 +80,16 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitStat(STParser.StatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link STParser#invoc_stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvoc_stat(STParser.Invoc_statContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link STParser#invoc_stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvoc_stat(STParser.Invoc_statContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link STParser#assign_stat}.
 	 * @param ctx the parse tree
 	 */
@@ -190,15 +200,15 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitWhile_stat(STParser.While_statContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link STParser#invoc_stat}.
+	 * Enter a parse tree produced by {@link STParser#invoc_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterInvoc_stat(STParser.Invoc_statContext ctx);
+	void enterInvoc_expr(STParser.Invoc_exprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link STParser#invoc_stat}.
+	 * Exit a parse tree produced by {@link STParser#invoc_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitInvoc_stat(STParser.Invoc_statContext ctx);
+	void exitInvoc_expr(STParser.Invoc_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ExternArg}
 	 * labeled alternative in {@link STParser#param_assignment}.

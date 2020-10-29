@@ -102,6 +102,18 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInvoc_stat(STParser.Invoc_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInvoc_stat(STParser.Invoc_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAssign_stat(STParser.Assign_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -234,13 +246,13 @@ public class STParserBaseListener implements STParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInvoc_stat(STParser.Invoc_statContext ctx) { }
+	@Override public void enterInvoc_expr(STParser.Invoc_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInvoc_stat(STParser.Invoc_statContext ctx) { }
+	@Override public void exitInvoc_expr(STParser.Invoc_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

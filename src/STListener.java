@@ -233,9 +233,21 @@ public class STListener extends STParserBaseListener {
 
     @Override public void exitStat(STParser.StatContext ctx) {
         Where stmt = getASTNode(ctx.getChild(0));
-        if (stmt instanceof IrFunctionCallExpr){
-            stmt = new IrFunctionCallStmt(((IrFunctionCallExpr) stmt).functionName, ((IrFunctionCallExpr) stmt).argsList, ((IrFunctionCallExpr) stmt).assignOutputList);
-        }
+//        if (stmt instanceof IrFunctionCallExpr){
+//            stmt = new IrFunctionCallStmt(((IrFunctionCallExpr) stmt).functionName, ((IrFunctionCallExpr) stmt).argsList, ((IrFunctionCallExpr) stmt).assignOutputList);
+//        }
+        setASTNode(ctx, stmt);
+    }
+
+    @Override public void enterInvoc_stat(STParser.Invoc_statContext ctx) { }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override public void exitInvoc_stat(STParser.Invoc_statContext ctx) {
+        Where stmt = getASTNode(ctx.invoc_expr());
+        stmt = new IrFunctionCallStmt(((IrFunctionCallExpr) stmt).functionName, ((IrFunctionCallExpr) stmt).argsList, ((IrFunctionCallExpr) stmt).assignOutputList);
         setASTNode(ctx, stmt);
     }
 
@@ -354,17 +366,17 @@ public class STListener extends STParserBaseListener {
 
 
     @Override public void enterWhile_stat(STParser.While_statContext ctx) { }
+
+    @Override public void exitWhile_stat(STParser.While_statContext ctx) { }
+
+
+    @Override public void enterInvoc_expr(STParser.Invoc_exprContext ctx) {    }
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitWhile_stat(STParser.While_statContext ctx) { }
-
-    @Override public void enterInvoc_stat(STParser.Invoc_statContext ctx) { }
-
-    @Override public void exitInvoc_stat(STParser.Invoc_statContext ctx) {
-        STListener.ProgramLocation l = new ProgramLocation(ctx);
+    @Override public void exitInvoc_expr(STParser.Invoc_exprContext ctx) {  STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent fbName = new IrIdent(ctx.ID().getText(), l.line, l.col);
         ArrayList<IrArg> argArrayList = new ArrayList<>();
         ArrayList<IrArgOutputAssign> assignOutputArrayList = new ArrayList<>();
@@ -380,6 +392,7 @@ public class STListener extends STParserBaseListener {
         }
         setASTNode(ctx, new IrFunctionCallExpr(fbName, argArrayList, assignOutputArrayList));
     }
+
 
     @Override public void enterExternArg(STParser.ExternArgContext ctx) { }
 

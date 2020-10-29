@@ -55,6 +55,12 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStat(STParser.StatContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link STParser#invoc_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvoc_stat(STParser.Invoc_statContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link STParser#assign_stat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -121,11 +127,11 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile_stat(STParser.While_statContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link STParser#invoc_stat}.
+	 * Visit a parse tree produced by {@link STParser#invoc_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInvoc_stat(STParser.Invoc_statContext ctx);
+	T visitInvoc_expr(STParser.Invoc_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ExternArg}
 	 * labeled alternative in {@link STParser#param_assignment}.

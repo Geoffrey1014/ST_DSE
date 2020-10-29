@@ -50,8 +50,10 @@ stat
     | for_stat
     | while_stat
 //    | repeat_stat
-    | invoc_stat SEMI_COL
+    | invoc_stat
     ;
+
+invoc_stat : invoc_expr SEMI_COL ;
 assign_stat : location AS_OP expression SEMI_COL;
 
 //if_stat : RES_IF expression RES_THEN stat_list (RES_ELSIF expression RES_THEN stat_list)* (RES_ELSE stat_list)? RES_END_IF SEMI_COL ;
@@ -76,7 +78,7 @@ while_stat : RES_WHILE expression RES_DO stat_list RES_END_WHILE SEMI_COL ;
 //exit_stat : RES_EXIT ;
 
 
-invoc_stat : fb_name=ID L_PAREN (param_assignment (COMMA param_assignment)* ) ? R_PAREN ;
+invoc_expr : fb_name=ID L_PAREN (param_assignment (COMMA param_assignment)* ) ? R_PAREN ;
 param_assignment :
     expression # ExternArg
     | ID AS_OP expression # AssignParam
@@ -98,7 +100,7 @@ expression
 primary_expression : constant
 //                    | enumerated_value
                     | location
-                    | invoc_stat
+                    | invoc_expr
                     ;
 //enumerated_value: ' ';
 location:
