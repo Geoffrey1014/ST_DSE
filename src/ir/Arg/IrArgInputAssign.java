@@ -7,15 +7,17 @@ import ir.IrIdent;
 import ir.POUDecl.IrPouDecl;
 import ir.VARBlockDecl.IrVarDecl;
 
-public class IrArgInputAssign extends IrArgExpr {
+public class IrArgInputAssign extends IrArg {
     public final IrIdent storeLocationName;
+    public final IrExpr argValue;
 
     public IrPouDecl irDeclPou;
     public IrVarDecl irDeclVar; // IrVarDecl
 
     public IrArgInputAssign(IrExpr argValue, IrIdent argName) {
-        super(argValue, argName.getLineNumber(), argName.getLineNumber());
+        super(argName.getLineNumber(), argName.getLineNumber());
         this.storeLocationName = argName;
+        this.argValue = argValue;
     }
 
 
@@ -36,7 +38,7 @@ public class IrArgInputAssign extends IrArgExpr {
 
         // print the rhs
         prettyString += ("  " + indentSpace + "|--rhs\n");
-        prettyString += this.getArgValue().prettyPrint("    " + indentSpace);
+        prettyString += this.argValue.prettyPrint("    " + indentSpace);
 
         return prettyString;
     }

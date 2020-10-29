@@ -1,9 +1,18 @@
 (*
+semantic check error message:
+ Can not find such name variable : y In max_pou line: 41 col: 15
+
+ it is not a VAR_OUTPUT variable : x In max_pou line: 42 col: 15
+
+ the acceptLocation's typEnum does not match Output_VAR's : RES_INT compared with RES_BOOL line: 43 col: 15
+
+fbOutput and acceptLocation are not both array ot simple   line: 44 col: 15
+
 *)
 
 FUNCTION_BLOCK max_pou
 VAR
-    big :  ARRAY[1 .. 5] OF INT;
+
     count : INT ;
     lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
 END_VAR
@@ -12,6 +21,8 @@ VAR_INPUT
 END_VAR
 VAR_OUTPUT
     max : INT := 0;
+    flag : BOOL;
+     big :  ARRAY[1 .. 5] OF INT;
 END_VAR
 
     FOR count := 1 TO 5 DO
@@ -19,8 +30,6 @@ END_VAR
             max := lst[count];
         END_IF;
     END_FOR;
-    big := lst[6];
-    big[1] := count[2];
 
 END_FUNCTION_BLOCK
 
@@ -38,8 +47,10 @@ VAR
     y : BOOL;
 END_VAR
 
-    max_pou(5) ;
-    x := max_pou.min;
-    x := min_pou.max;
-    x := max_pou.big;
+    max_pou(5, y => out) ;
+    max_pou(5, x => out) ;
+    max_pou(5, flag => out) ;
+    max_pou(5, big => out) ;
+
+
 END_PROGRAM

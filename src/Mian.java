@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class Mian {
-    public static MyPrint myprint  = new MyPrint(1);
+    public static MyPrint myprint  = new MyPrint(3);
 
     public static void run(String[] args ){
         try {
@@ -88,7 +88,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/";
-        String inputFile = prefix + "illegal/04_test.txt";
+        String inputFile = prefix + "illegal/06_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);

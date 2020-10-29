@@ -386,7 +386,7 @@ public class STListener extends STParserBaseListener {
         ArrayList<IrArgOutputAssign> assignOutputArrayList = new ArrayList<>();
         for (ParseTree node : ctx.param_assignment()){
             IrArg arg = (IrArg) getASTNode(node);
-            if (arg instanceof IrArgInputAssign){
+            if (arg instanceof IrArgOutputAssign){
                 assignOutputArrayList.add((IrArgOutputAssign) arg);
             }
             else {

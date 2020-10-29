@@ -1,0 +1,67 @@
+(*
+line 46:27 extraneous input '[' expecting {'(', '-', 'NOT', BOOL, Binary_literal, Octal_literal, Decimal_literal, Pure_decimal_digits, Hexadecimal_literal, Static_string_literal, ID}
+line 46:37 no viable alternative at input '5]'
+
+ semantic check error message:
+ it is not a VAR_INPUT variable : count in max_pou; line: 43 col: 43
+
+Argument cannot be an array location , line: 43 col: 43
+
+ the argValue's type does not match parameter's : RES_REAL compared with RES_INT, line: 44 col: 44
+
+Argument cannot be an array location , line: 44 col: 44
+
+ Can not find such name variable : y In max_pou, line: 45 col: 45
+
+Argument cannot be an array location , line: 45 col: 45
+
+Wrong number of arguments passed to function line: 46 col: 4
+
+
+*)
+
+FUNCTION_BLOCK max_pou
+VAR
+
+    count : INT ;
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+VAR_INPUT
+    x : INT;
+    big :  ARRAY[1 .. 5] OF INT;
+END_VAR
+VAR_OUTPUT
+    max : INT := 0;
+    flag : BOOL;
+
+END_VAR
+
+    FOR count := 1 TO 5 DO
+        IF lst[count] > max THEN
+            max := lst[count];
+        END_IF;
+    END_FOR;
+
+END_FUNCTION_BLOCK
+
+PROGRAM main
+
+VAR_INPUT
+    x : BOOL;
+END_VAR
+
+VAR_OUTPUT
+    out : INT;
+END_VAR
+
+VAR
+    y : BOOL;
+END_VAR
+
+    max_pou(count := 5, big := 1) ;
+    max_pou(x := 5.5 , big := 1) ;
+    max_pou(y := 1 , big := 1) ;
+    max_pou(x := 5, big := [1,2,3,4,5])  ;
+
+
+END_PROGRAM

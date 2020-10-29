@@ -143,7 +143,8 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                     }
 
 
-                } else {
+                }
+                else {
                     errorMessage.append("Wrong number of arguments passed to function" + " line: ")
                             .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
@@ -302,14 +303,21 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         if (locals.resolve(node.storeLocationName.getValue()) != null){
             node.irDeclVar = (IrVarDecl) locals.resolve(node.storeLocationName.getValue());
 
+            if (node.irDeclVar.accessType != VarAccessTypeEnum.VAR_INPUT_OUTPUT && node.irDeclVar.accessType != VarAccessTypeEnum.VAR_INPUT){
+                errorMessage.append(" it is not a VAR_INPUT variable : ").append(node.storeLocationName.getValue()).append(" in ")
+                        .append(node.irDeclPou.getIdentName().getValue())
+                        .append( "; line: ").append(node.getLineNumber()).append(" col: ")
+                        .append(node.getColNumber()).append("\n\n");
+            }
+
             node.argValue.accept(this); // 检查子节点 argValue
 
             //判断 irDeclObject 的类型是否和 IrExpr argValue 一致
             if (node.irDeclVar.getType().getTypeEnum() == node.argValue.getExpressionType()){
 
-                // check that the argument is not an array_location
+                // check that the argument is not an array_location  TODO: 目前语法就不支持，后续看能不能加上
                 if (node.irDeclVar.type  instanceof IrTypeArray) {
-                    errorMessage.append("Argument cannot be an array location " + " line: ")
+                    errorMessage.append("Argument cannot be an array location " + ", line: ")
                             .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
@@ -317,15 +325,15 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             else {
                 errorMessage.append(" the argValue's type does not match parameter's : ").append(node.argValue.getExpressionType())
                         .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
-                        .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                        .append( ", line: ").append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n\n");
             }
 
         }
         else {
-            errorMessage.append(" Can not find such name parameter : ").append(node.storeLocationName.getValue()).append(" In ")
+            errorMessage.append(" Can not find such name variable : ").append(node.storeLocationName.getValue()).append(" In ")
                     .append(node.irDeclPou.getIdentName().getValue())
-                    .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                    .append( ", line: ").append(node.getLineNumber()).append(" col: ")
                     .append(node.getColNumber()).append("\n\n");
         }
 
@@ -350,10 +358,23 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         if (locals.resolve(node.fbOutput.getValue()) != null){
             node.irDeclVar = (IrVarDecl) locals.resolve(node.fbOutput.getValue());
 
+            if (node.irDeclVar.accessType != VarAccessTypeEnum.VAR_INPUT_OUTPUT && node.irDeclVar.accessType != VarAccessTypeEnum.VAR_OUTPUT){
+                errorMessage.append(" it is not a VAR_OUTPUT variable : ").append(node.fbOutput.getValue()).append(" In ")
+                        .append(node.irDeclPou.getIdentName().getValue())
+                        .append( " line: ").append(node.getLineNumber()).append(" col: ")
+                        .append(node.getColNumber()).append("\n\n");
+            }
+
             node.acceptLocation.accept(this); // 检查子节点 acceptLocation
 
             //判断 acceptLocation 的 TypeEnum 类型是否和  IrVarDecl irDeclVar一致
             if (node.irDeclVar.getType().getTypeEnum() == node.acceptLocation.getExpressionType()){
+
+                // check that the argument is not an array_location  TODO: 目前语法就不支持，后续看能不能加上
+                if (node.irDeclVar.type  instanceof IrTypeArray) {
+                    errorMessage.append("Argument cannot be an array location " + ", line: ")
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+                }
 
                 // 判断是否都是 array 或者 simple 类型
                 boolean bothSimple = (node.irDeclVar.type instanceof IrTypeSimple  && node.acceptLocation.irDeclObject.type instanceof IrTypeSimple);
@@ -366,7 +387,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
             }
             else {
-                errorMessage.append(" the acceptLocation's type does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
+                errorMessage.append(" the acceptLocation's typEnum does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
                         .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
                         .append( " line: ").append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n\n");
@@ -374,7 +395,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         }
         else {
-            errorMessage.append(" Can not find such name parameter : ").append(node.fbOutput.getValue()).append(" In ")
+            errorMessage.append(" Can not find such name variable : ").append(node.fbOutput.getValue()).append(" In ")
                     .append(node.irDeclPou.getIdentName().getValue())
                     .append( " line: ").append(node.getLineNumber()).append(" col: ")
                     .append(node.getColNumber()).append("\n\n");
