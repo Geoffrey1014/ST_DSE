@@ -21,7 +21,12 @@ public class IrFunctionCallExpr extends IrExpr {
     }
 
     public VarTypeEnum getExpressionType() {
-        return this.functionType.type;
+        if (this.functionType != null){
+            // 考虑到 the situation of that funciont block is used as function
+            return this.functionType.type;
+        }
+        else return null;
+
     }
 
     public String toString() {

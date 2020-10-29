@@ -88,7 +88,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/";
-        String inputFile = prefix + "illegal/06_test.txt";
+        String inputFile = prefix + "illegal/07_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);

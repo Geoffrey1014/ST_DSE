@@ -114,7 +114,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                                 }
 
-                                // 4) check that the argument is not an array_location
+                                // 4) check that the argument is not an array_location  TODO: 但是应该允许的才对 （这个语法是实现了的）
                                 if (safeArg.getArgValue() instanceof IrLocation) {
                                     IrLocation locArg = (IrLocation) safeArg.getArgValue();
                                     IrVarDecl possibleArray = (IrVarDecl) symTable.getSymbol(locArg.getLocationName().getValue());
@@ -161,7 +161,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             // for an extern method_decl TODO 应该内置 ADD  SUB ABS 等基础函数
 //
             else {
-                errorMessage.append("Non-Function identifier being called as a method" + " line: ")
+                errorMessage.append("Non-Function identifier being called as a function "  + " line: ")
                         .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
         } else {
@@ -221,7 +221,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                                 }
 
-                                // 4) check that the argument is not an array_location
+                                // 4) check that the argument is not an array_location TODO: 但是应该允许的才对 （这个语法是实现了的）
                                 if (safeArg.getArgValue() instanceof IrLocation) {
                                     IrLocation locArg = (IrLocation) safeArg.getArgValue();
                                     IrVarDecl possibleArray = (IrVarDecl) symTable.getSymbol(locArg.getLocationName().getValue());
@@ -977,7 +977,11 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         node.getExpr().accept(this);
 
         // 4) make sure that the IrExpr and IrLocation are the same VarTypeEnum
-        if(node.getExpr().getExpressionType() != node.getStoreLocation().getExpressionType()){
+        if (node.getExpr().getExpressionType() == null){
+            errorMessage.append("funciont block should not be used as function, line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+        }
+        else if(node.getExpr().getExpressionType() != node.getStoreLocation().getExpressionType()){
 
             errorMessage.append("The variable to be assigned and the expression must both be of type int, real,  or of type bool" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber())

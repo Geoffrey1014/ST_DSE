@@ -1,0 +1,90 @@
+(*
+ semantic check error message:
+FunctionBlock called before declared line: 77 col: 4
+
+Non-FunctionBlock identifier being called as a FunctionBlock line: 78 col: 4
+
+Wrong number of arguments passed to function line: 79 col: 4
+
+Arguments are not all ArgExpr type  line: 80 col: 4
+
+Argument and parameter types don't match line: 81 col: 13
+
+Argument cannot be an array location  line: 82 col: 16
+
+Non-Function identifier being called as a function  line: 83 col: 9
+
+funciont block should not be used as function, line: 83 col: 4
+
+
+*)
+
+FUNCTION add_pou : INT
+VAR
+    count : INT ;
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+VAR_INPUT
+    x : INT;
+END_VAR
+
+VAR_OUTPUT
+    max : INT := 0;
+    flag : BOOL;
+END_VAR
+
+    x :=  x + 1;
+
+END_FUNCTION
+
+FUNCTION_BLOCK max_pou
+VAR
+
+    count : INT ;
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+VAR_INPUT
+    x : INT;
+    big :  ARRAY[1 .. 5] OF INT;
+END_VAR
+
+VAR_OUTPUT
+    max : INT := 0;
+    flag : BOOL;
+
+END_VAR
+
+    FOR count := 1 TO 5 DO
+        IF lst[count] > max THEN
+            max := lst[count];
+        END_IF;
+    END_FOR;
+
+END_FUNCTION_BLOCK
+
+PROGRAM main
+
+VAR_INPUT
+    x : BOOL;
+END_VAR
+
+VAR_OUTPUT
+    out : INT;
+END_VAR
+
+VAR
+    y : BOOL;
+     lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+    min_pou( x := 1);
+    add_pou(1);
+    max_pou(1);
+    max_pou( 2 + 1, x :=2);
+    max_pou( 2.2 + 1.0, 2);
+    max_pou( 2, lst[2] );
+    y := max_pou(1, 2);
+
+END_PROGRAM

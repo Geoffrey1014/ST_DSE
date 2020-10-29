@@ -13,7 +13,7 @@ public class IrFunctionCallStmt extends IrStmt{
     public final List<IrArg> argsList;
     public final List<IrArgOutputAssign> assignOutputList;
     public List<IrFbStLocation> fbStLocationList; // 和 assignOutputList 是一一对应的，顺序也是一一对应的
-//    public IrType functionType;
+//    public IrType functionType = null; // 永远 为 null
 
     public IrFunctionCallStmt(IrIdent functionBlockName, List<IrArg> argsList, List<IrArgOutputAssign> assignOutputList) {
         super(functionBlockName.getLineNumber(), functionBlockName.getColNumber());
