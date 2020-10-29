@@ -1,0 +1,77 @@
+(*
+semantic check error message:
+Condition for while-statement must be a boolean line: 18 col: 10
+
+the type of Irvalue and Irtype should be the same  line: 30 col: 4
+
+there is no VAR_OUTPUT in this POU :  line: 25 col: 0
+
+counter shoud be int line: 36 col: 8
+
+ the  high boundary shoud be int:  line:36 col: 17
+
+Element offset must be of type int line: 37 col: 15
+
+Invalid assignment to a array name, line: 42 col: 8
+*)
+PROGRAM main
+
+VAR_INPUT
+    x : INT;
+    y : INT;
+    z : INT;
+END_VAR
+
+VAR_OUTPUT
+END_VAR
+
+VAR
+END_VAR
+
+    WHILE x * 10 DO
+        y := y+1;
+    END_WHILE;
+
+END_PROGRAM
+
+
+FUNCTION_BLOCK max_pou
+VAR
+    max : INT := 0;
+    count : REAL ;
+    x : INT := 1;
+    y : REAL := 2;
+END_VAR
+VAR_INPUT
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+    FOR count := x TO (y / 3.0) BY 2  DO
+        IF lst[count] > max THEN
+            max := lst[max];
+        END_IF;
+    END_FOR;
+
+    FOR lst := 1 TO 3   DO
+           x := x +1;
+    END_FOR;
+
+END_FUNCTION_BLOCK
+
+
+
+END_FUNCTION_BLOCK
+
+FUNCTION add :INT
+VAR
+
+END_VAR
+VAR_INPUT
+
+END_VAR
+VAR_OUTPUT
+
+END_VAR
+
+
+END_FUNCTION

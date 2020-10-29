@@ -504,6 +504,8 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
     public Void visitIrCtrlFlowFor(IrCtrlFlowFor node) {
         node.getCounter().accept(this);
         if (node.getCounter().getExpressionType() == VarTypeEnum.RES_INT){
+
+            //下面这个其实用不上，因为语法就不通过
             if (node.getCounter().getIrDecl() instanceof  IrTypeArray){
                 errorMessage.append("counter shoud not be array-type location " + " line: ")
                         .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
@@ -525,22 +527,28 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
+        node.getLow().accept(this);
         if (node.getLow().getExpressionType() != VarTypeEnum.RES_INT){
-            errorMessage.append(" the  low boundary shoud be int ")
+            errorMessage.append(" the  low boundary shoud be int: ").append(" line:")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
+        node.getHigh().accept(this);
         if (node.getHigh().getExpressionType() != VarTypeEnum.RES_INT){
-            errorMessage.append(" the  high boundary shoud be int ")
+            errorMessage.append(" the  high boundary shoud be int: ").append(" line:")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
-        if (node.getStep() == null){
+        if (node.getStep() != null){
+            node.getStep().accept(this);
+            if (node.getStep().getExpressionType() != VarTypeEnum.RES_INT){
+                errorMessage.append(" the  low boundary shoud be int: ").append(" line:")
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+
+            }
+        }
+        else {
             node.stepNum = 1;
         }
-        else if (node.getStep().getExpressionType() != VarTypeEnum.RES_INT){
-            errorMessage.append(" the  low boundary shoud be int ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
 
-        }
 
         return null;
     }
@@ -550,7 +558,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         node.getCondExpr().accept(this);
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
-            errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
+            errorMessage.append("Condition for while-statement must be a boolean" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 

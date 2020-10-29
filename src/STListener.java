@@ -367,7 +367,11 @@ public class STListener extends STParserBaseListener {
 
     @Override public void enterWhile_stat(STParser.While_statContext ctx) { }
 
-    @Override public void exitWhile_stat(STParser.While_statContext ctx) { }
+    @Override public void exitWhile_stat(STParser.While_statContext ctx) {
+        IrExpr expr = (IrExpr) getASTNode(ctx.expression());
+        IrCodeBlock codeBlock = (IrCodeBlock) getASTNode(ctx.stat_list());
+        setASTNode(ctx, new IrCtrlFlowWhile(expr, codeBlock));
+    }
 
 
     @Override public void enterInvoc_expr(STParser.Invoc_exprContext ctx) {    }
