@@ -50,7 +50,7 @@ stat
     | for_stat
     | while_stat
 //    | repeat_stat
-    | invoc_stat
+    | invoc_stat SEMI_COL
     ;
 assign_stat : location AS_OP expression SEMI_COL;
 
@@ -86,7 +86,7 @@ param_assignment :
 
 expression
     : primary_expression # PrimaryExpr
-    | NOT_OP expression #NotExpr
+    | NOT_OP expression # NotExpr
     | SUB_OP expression # NegateExpr
     | left=expression op=(MUL_OP| DIV_OP| MOD_OP | ADD_OP| SUB_OP | POWER_OP) right=expression #ArithExpr
     | left=expression op=(LT_OP | GT_OP | LEQ_OP | GEQ_OP) right=expression # Comparison

@@ -1,0 +1,69 @@
+(*
+semantic check error message:
+Invalid lastLocationName line: 60 col: 9
+
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 60 col: 4
+	Expr type : null  StoreLocation type : RES_BOOL
+
+Invalid firstLocationName line: 61 col: 9
+
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 61 col: 4
+	Expr type : null  StoreLocation type : RES_BOOL
+
+VarAccessTypeEnum of lastLocationName is not right line: 62 col: 9
+
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 62 col: 4
+	Expr type : RES_INT  StoreLocation type : RES_BOOL
+
+Invalid assignment to a array name, line: 40 col: 4
+
+Non-array variable be accessed as an array line: 41 col: 20
+
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 41 col: 4
+	Expr type : null  StoreLocation type : RES_INT
+
+
+*)
+
+FUNCTION_BLOCK max_pou
+VAR
+    big :  ARRAY[1 .. 5] OF INT;
+    count : INT ;
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+VAR_INPUT
+    x : INT;
+END_VAR
+VAR_OUTPUT
+    max : INT := 0;
+END_VAR
+
+    FOR count := 1 TO 5 DO
+        IF lst[count] > max THEN
+            max := lst[count];
+        END_IF;
+    END_FOR;
+    big := lst[6];
+    big[1] := count[2];
+
+END_FUNCTION_BLOCK
+
+PROGRAM main
+
+VAR_INPUT
+    x : BOOL;
+END_VAR
+
+VAR_OUTPUT
+    out : INT;
+END_VAR
+
+VAR
+    y : BOOL;
+END_VAR
+
+    max_pou(5) ;
+    x := max_pou.min;
+    x := min_pou.max;
+    x := max_pou.big;
+END_PROGRAM

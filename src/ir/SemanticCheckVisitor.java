@@ -110,7 +110,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                                 if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
 
                                     errorMessage.append("Argument and parameter types don't match" + " line: ").
-                                            append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+                                            append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
 
                                 }
 
@@ -121,13 +121,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                                     if (possibleArray.getType() instanceof IrTypeArray) {
                                         errorMessage.append("Argument cannot be an array location " + " line: ")
-                                                .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+                                                .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
                                     }
                                 }
                             }
                             else {
                                 errorMessage.append("Arguments are not all ArgExpr type " + " line: ").append(node.getLineNumber()).append(" col: ")
-                                        .append(node.getColNumber()).append("\n");
+                                        .append(node.getColNumber()).append("\n\n");
                             }
                         }
                     }
@@ -145,12 +145,12 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                 } else {
                     errorMessage.append("Wrong number of arguments passed to function" + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
                 if (node.assignOutputList != null){
                     errorMessage.append("can not call function block  in expression. ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
                 // IMPORTANT: set the IrType of the IrFunctionCallExpr
@@ -161,11 +161,11 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 //
             else {
                 errorMessage.append("Non-Function identifier being called as a method" + " line: ")
-                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
         } else {
             errorMessage.append("Function called before declared" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         return null;
@@ -216,7 +216,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                                 if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
 
                                     errorMessage.append("Argument and parameter types don't match" + " line: ").
-                                            append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+                                            append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
 
                                 }
 
@@ -227,13 +227,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                                     if (possibleArray.getType() instanceof IrTypeArray) {
                                         errorMessage.append("Argument cannot be an array location " + " line: ")
-                                                .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n");
+                                                .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
                                     }
                                 }
                             }
                             else {
                                 errorMessage.append("Arguments are not all ArgExpr type " + " line: ").append(node.getLineNumber()).append(" col: ")
-                                        .append(node.getColNumber()).append("\n");
+                                        .append(node.getColNumber()).append("\n\n");
                             }
                         }
                     }
@@ -249,7 +249,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                     }
                 } else {
                     errorMessage.append("Wrong number of arguments passed to function" + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
                 // 2) 检查 output   是否正确, 支持只输出输出部分 VAR_OUTPUT
@@ -267,11 +267,11 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             // for non-method identifiers
             else {
                 errorMessage.append("Non-FunctionBlock identifier being called as a FunctionBlock" + " line: ")
-                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
         } else {
             errorMessage.append("FunctionBlock called before declared" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         return null;
@@ -310,7 +310,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 // check that the argument is not an array_location
                 if (node.irDeclVar.type  instanceof IrTypeArray) {
                     errorMessage.append("Argument cannot be an array location " + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
             }
@@ -318,7 +318,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 errorMessage.append(" the argValue's type does not match parameter's : ").append(node.argValue.getExpressionType())
                         .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
                         .append( " line: ").append(node.getLineNumber()).append(" col: ")
-                        .append(node.getColNumber()).append("\n");
+                        .append(node.getColNumber()).append("\n\n");
             }
 
         }
@@ -326,7 +326,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append(" Can not find such name parameter : ").append(node.storeLocationName.getValue()).append(" In ")
                     .append(node.irDeclPou.getIdentName().getValue())
                     .append( " line: ").append(node.getLineNumber()).append(" col: ")
-                    .append(node.getColNumber()).append("\n");
+                    .append(node.getColNumber()).append("\n\n");
         }
 
         return null;
@@ -361,7 +361,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
                 if ( !bothArray && ! bothSimple ) {
                     errorMessage.append("fbOutput and acceptLocation are not both array ot simple  " + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
             }
@@ -369,7 +369,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 errorMessage.append(" the acceptLocation's type does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
                         .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
                         .append( " line: ").append(node.getLineNumber()).append(" col: ")
-                        .append(node.getColNumber()).append("\n");
+                        .append(node.getColNumber()).append("\n\n");
             }
 
         }
@@ -377,7 +377,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             errorMessage.append(" Can not find such name parameter : ").append(node.fbOutput.getValue()).append(" In ")
                     .append(node.irDeclPou.getIdentName().getValue())
                     .append( " line: ").append(node.getLineNumber()).append(" col: ")
-                    .append(node.getColNumber()).append("\n");
+                    .append(node.getColNumber()).append("\n\n");
         }
 
         return null;
@@ -399,7 +399,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         node.getStmtBody().accept(this);
@@ -417,7 +417,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         node.getStmtBody().accept(this);
@@ -439,7 +439,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         node.getStmtBody().accept(this);
@@ -461,7 +461,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         node.getStmtBody().accept(this);
@@ -480,7 +480,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         node.getStmtBody().accept(this);
@@ -506,12 +506,12 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         if (node.getCounter().getExpressionType() == VarTypeEnum.RES_INT){
             if (node.getCounter().getIrDecl() instanceof  IrTypeArray){
                 errorMessage.append("counter shoud not be array-type location " + " line: ")
-                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
         }
         else {
             errorMessage.append("counter shoud be int" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         node.getRange().accept(this);
         node.getCodeBlock().accept(this);
@@ -527,18 +527,18 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
     public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
         if (node.getLow().getExpressionType() != VarTypeEnum.RES_INT){
             errorMessage.append(" the  low boundary shoud be int ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         if (node.getHigh().getExpressionType() != VarTypeEnum.RES_INT){
             errorMessage.append(" the  high boundary shoud be int ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         if (node.getStep() == null){
             node.stepNum = 1;
         }
         else if (node.getStep().getExpressionType() != VarTypeEnum.RES_INT){
             errorMessage.append(" the  low boundary shoud be int ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
 
         }
 
@@ -551,7 +551,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
         if (node.getCondExpr().getExpressionType() != VarTypeEnum.RES_BOOL){
             errorMessage.append("Condition for if-statement must be a boolean" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         node.getStmtBody().accept(this);
@@ -564,12 +564,14 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrFbStLocation(IrFbStLocation node) {
-        // 1) make sure the FirstLocationName variable has been declared already  TODO:  FbStLocation 会比较麻烦
+        // 1) make sure the FirstLocationName variable has been declared already
         if (symTable.checkIfSymbolExistsAtAnyScope(node.getFirstLocationName().getValue())) {
             Ir pou = symTable.getSymbol(node.getFirstLocationName().getValue());
 
             // 2）  make sure the LastLocationName variable has been declared already
-            MyPrint.levelTwo.print(pou.scope.getScopeName()); // 应该打印出 locals
+            MyPrint.levelTwo.print("FbStLocation, " + node.getFirstLocationName().getValue() +
+                    "." + node.getLastLocationName().getValue()
+                    + ", should be in the scope :" + pou.scope.getScopeName()); // 应该打印出 locals
             Scope local = symTable.treeProperty.get(pou);
             if ( local.resolve(node.getLastLocationName().getValue()) != null){
                 IrVarDecl var = (IrVarDecl) local.resolve(node.getLastLocationName().getValue());
@@ -578,7 +580,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 if ((var.accessType != VarAccessTypeEnum.VAR_OUTPUT)  && (var.accessType != VarAccessTypeEnum.VAR_INPUT_OUTPUT) ){
                     errorMessage.append("VarAccessTypeEnum of lastLocationName is not right" + " line: ")
                             .append(node.getFirstLocationName().getLineNumber()).append(" col: ")
-                            .append(node.getFirstLocationName().getColNumber()).append("\n");
+                            .append(node.getFirstLocationName().getColNumber()).append("\n\n");
                 }
 
                 // IMPORTANT: set the TypeEnum of the IrLocation
@@ -591,13 +593,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             else {
                 errorMessage.append("Invalid lastLocationName" + " line: ")
                         .append(node.getFirstLocationName().getLineNumber())
-                        .append(" col: ").append(node.getFirstLocationName().getColNumber()).append("\n");
+                        .append(" col: ").append(node.getFirstLocationName().getColNumber()).append("\n\n");
             }
         }
         else {
             errorMessage.append("Invalid firstLocationName" + " line: ")
                     .append(node.getFirstLocationName().getLineNumber())
-                    .append(" col: ").append(node.getFirstLocationName().getColNumber()).append("\n");
+                    .append(" col: ").append(node.getFirstLocationName().getColNumber()).append("\n\n");
         }
         return null;
     }
@@ -605,7 +607,9 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrLocationArray(IrLocationArray node) {
         // 1) verify that the IrExpr is semantically correct
+        // TODO : check it is not out of boudary
         node.getElementIndex().accept(this);
+
 
         // 2) make sure the array has been declared already
         if (symTable.checkIfSymbolExistsAtAnyScope(node.getLocationName().getValue())) {
@@ -615,7 +619,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             if (! (varDecl.type instanceof IrTypeArray) ) {
                 errorMessage.append("Non-array variable be accessed as an array" + " line: ")
                         .append(node.getElementIndex().getLineNumber()).append(" col: ")
-                        .append(node.getElementIndex().getColNumber()).append("\n");
+                        .append(node.getElementIndex().getColNumber()).append("\n\n");
             }
             else {
 //                IrTypeArray array = (IrTypeArray) object;
@@ -628,14 +632,14 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         } else {
             errorMessage.append("Array variable used before declared" + " line: ").
                     append(node.getElementIndex().getLineNumber()).append(" col: ").
-                    append(node.getElementIndex().getColNumber()).append("\n");
+                    append(node.getElementIndex().getColNumber()).append("\n\n");
         }
 
         // 4) make sure that the IrExpr offset is an IrTypeInt
         if (!(node.getElementIndex().getExpressionType() == VarTypeEnum.RES_INT)) {
             errorMessage.append("Element offset must be of type int" + " line: ")
                     .append(node.getElementIndex().getLineNumber()).append(" col: ")
-                    .append(node.getElementIndex().getColNumber()).append("\n");
+                    .append(node.getElementIndex().getColNumber()).append("\n\n");
         }
 
         return null;
@@ -643,37 +647,42 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrLocationVar(IrLocationVar node) {
-        // 1) make sure the variable has been declared already  TODO: 其实只分成global 和 local scope 两个
+        // 1) make sure the variable has been declared already
         if (symTable.checkIfSymbolExistsAtAnyScope(node.getLocationName().getValue())) {
             Ir object = symTable.getSymbol(node.getLocationName().getValue());
+
 
             // make sure that the identifier is a var, not a method or array
             if (object instanceof IrVarDecl) {
                 IrVarDecl var = (IrVarDecl) object;
 
                 if (var.getType() instanceof IrTypeSimple){
+//                    MyPrint.levelTwo.print("IrTypeSimple :" + var.name.getValue());
+
                     // IMPORTANT: set the typeEnum of the IrLocationVar
                     node.setLocationType(var.getType().getTypeEnum());
 
-                    // TODO : IMPORTANT: set the IrDecl of the IrLocationVar
+                    // IMPORTANT: set the IrDecl of the IrLocationVar
                     node.setIrDecl(var);
                 }
                 else if (var.getType() instanceof IrTypeArray){
+
+                    MyPrint.levelTwo.print("IrTypeArray :" + var.name.getValue());
                     // IMPORTANT: set the TypeEnum of the IrLocationVar
                     node.setLocationType(var.getType().getTypeEnum());
 
                     // IMPORTANT: set the IrDecl of the IrLocationVar
                     node.setIrDecl(var);
 
-                    errorMessage.append("Invalid array assignment" + " line: ")
+                    errorMessage.append("Invalid assignment to a array name," + " line: ")
                             .append(node.getLocationName().getLineNumber())
-                            .append(" col: ").append(node.getLocationName().getColNumber()).append("\n");
+                            .append(" col: ").append(node.getLocationName().getColNumber()).append("\n\n");
                 }
                 else{
                     // this branch should be a POU declaration
-                    errorMessage.append("Invalid assignment to a POU" + " line: ")
+                    errorMessage.append("Invalid assignment to a POU name," + " line: ")
                             .append(node.getLocationName().getLineNumber()).append(" col: ")
-                            .append(node.getLocationName().getColNumber()).append("\n");
+                            .append(node.getLocationName().getColNumber()).append("\n\n");
                 }
 
             }
@@ -682,7 +691,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         else {
             errorMessage.append("Variable used before declared" + " line: ")
                     .append(node.getLocationName().getLineNumber())
-                    .append(" col: ").append(node.getLocationName().getColNumber()).append("\n");
+                    .append(" col: ").append(node.getLocationName().getColNumber()).append("\n\n");
         }
         return null;
     }
@@ -702,7 +711,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             errorMessage
                     .append("The lhs and rhs of an equator operation must the same type of bool , int ,or real " + " line: ")
                     .append(node.getLineNumber()).
-                    append(" col: ").append(node.getColNumber()).append("\n")
+                    append(" col: ").append(node.getColNumber()).append("\n\n")
                     .append("leftOperand type : ").append(node.leftOperand.getExpressionType())
                     .append("rightOperand type : ").append(node.rightOperand.getExpressionType()).append("\n\n");
         }
@@ -720,7 +729,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             if (node.rightOperand.getExpressionType() != VarTypeEnum.RES_INT){
                 errorMessage.append("In the power operation, the rhs of an arithmetic expression must be of type int" + " line: ")
                         .append(node.getLineNumber()).append(" col: ")
-                        .append(node.getColNumber()).append("\n");
+                        .append(node.getColNumber()).append("\n\n");
             }
             node.setExpressionType(node.leftOperand.getExpressionType());
         }
@@ -728,7 +737,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             // TODO : verify divisor can not be zero
 //            if (this.rightOperand){
 //                errorMessage += "In the power operation, the rhs of an arithmetic expression must be of type int" +
-//                        " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
+//                        " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n\n";
 //            }
 
 //        }
@@ -747,7 +756,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             }
             else {
                 errorMessage.append("The lhs and rhs of an arithmetic expression must be of type int or real" + " line: ")
-                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
         }
         return null;
@@ -761,7 +770,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         // 2) verify that the operand is int or real
         if (!(node.operand.getExpressionType() == VarTypeEnum.RES_INT) && !(node.operand.getExpressionType() == VarTypeEnum.RES_REAL)) {
             errorMessage.append("The negation '-' operand must be used on an int or real" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         return null;
@@ -775,7 +784,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         // 2) verify that the operand is int or real
         if (!(node.operand.getExpressionType() == VarTypeEnum.RES_BOOL)) {
             errorMessage.append("The not 'NOT' operand must be used on an bool" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         return null;
     }
@@ -797,7 +806,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                     .append("The lhs and rhs of a relational expression must be of type int or real" + " line: ")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber())
                     .append("\n\tleftOperand type : ").append(node.leftOperand.getExpressionType())
-                    .append("  rightOperand type : "+node.rightOperand.getExpressionType()).append("\n")
+                    .append("  rightOperand type : "+node.rightOperand.getExpressionType()).append("\n\n")
                     ;
         }
 
@@ -814,7 +823,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         if (!((node.rightOperand.getExpressionType() == VarTypeEnum.RES_BOOL)
                 && (node.leftOperand.getExpressionType()  == VarTypeEnum.RES_BOOL))) {
             errorMessage.append("The lhs and rhs of an arithmetic expression must be of type bool" + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         return null;
@@ -851,7 +860,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             for (IrLiteral v : node.valueList){
                 if (type != v.getExpressionType()){
                     errorMessage.append("the type of array value are not the same " + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
             }
         }
@@ -873,7 +882,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         for (IrVarDecl varDecl : node.VarList) {
 //            if (symTable.checkIfSymbolExistsAtAnyScope(varDecl.getName())) {
 //                errorMessage.append("Duplicate declaration in same scope __filename__" + " line: ")
-//                        .append(varDecl.getLineNumber()).append(" col: ").append(varDecl.getColNumber()).append("\n");
+//                        .append(varDecl.getLineNumber()).append(" col: ").append(varDecl.getColNumber()).append("\n\n");
 //            }
 //            symTable.addObjectToCurrentScope(varDecl.getName(), varDecl);
 
@@ -900,13 +909,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
             if ( node.type.getTypeEnum() != node.value.getType() ){
                 errorMessage.append("the type of Irvalue and Irtype should be the same " + " line: ")
-                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                        .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
 
             if (node.type instanceof IrTypeArray){
                 if ( ((ArrayList) ( node.value.getValue() ) ).size() != node.type.getArraySize() ){
                     errorMessage.append("the size of nameArrayList should be the same with values " + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
             }
@@ -921,19 +930,18 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         // 1) verify that the storeLocation is semantically correct
         node.getStoreLocation().accept(this);
 
-        if (node.getStoreLocation() instanceof IrLocationVar) {
-
-//        2) check to make sure the var isn't a lone array var
-            String name = node.getStoreLocation().getLocationName().getValue();
-            if (symTable.checkIfSymbolExistsAtAnyScope(name)) {
-                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
-
-                if (object.getType() instanceof IrTypeArray) {
-                    errorMessage.append("Can't re-assign an array to an expression" + " line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
-                }
-            }
-        }
+//        if (node.getStoreLocation() instanceof IrLocationVar) {
+////        2) check to make sure the var isn't a lone array var
+//            String name = node.getStoreLocation().getLocationName().getValue();
+//            if (symTable.checkIfSymbolExistsAtAnyScope(name)) {
+//                IrVarDecl object = (IrVarDecl) symTable.getSymbol(node.getStoreLocation().getLocationName().getValue());
+//
+//                if (object.getType() instanceof IrTypeArray) {
+//                    errorMessage.append("Can't assign an expression to array" + " line: ")
+//                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+//                }
+//            }
+//        }
 
 
         // 3) verify that the expr is semantically correct
@@ -956,7 +964,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 //                && (node.getStoreLocation().getExpressionType()  == VarTypeEnum.RES_REAL);
 //        if (!bothAreBools && !bothAreInts && !bothAreReals) {
 //            errorMessage.append("The variable to be assigned and the expression must both be of type int, real,  or of type bool" + " line: ")
-//                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+//                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
 //        }
         return null;
     }
@@ -966,7 +974,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
     public Void visitIrCodeBlock(IrCodeBlock node) {
         if (node.stmtsList.size() == 0 ){
             errorMessage.append("CodeBlock is empty : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         else {
             // check that each statement is valid
@@ -998,7 +1006,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no VAR_INPUT in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         if (node.getVarBlockVAR_OUTPUT() != null){
@@ -1017,7 +1025,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no code block in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         symTable.currentScope = symTable.currentScope.getEnclosingScope();
@@ -1038,7 +1046,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no VAR_INPUT in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         if (node.getVarBlockVAR_OUTPUT() != null){
@@ -1046,7 +1054,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no VAR_OUTPUT in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
@@ -1061,7 +1069,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no code block in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         symTable.currentScope = symTable.currentScope.getEnclosingScope();
         return null;
@@ -1081,7 +1089,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no VAR_INPUT in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         if (node.getVarBlockVAR_OUTPUT() != null){
@@ -1089,7 +1097,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no VAR_OUTPUT in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
 
         if (node.getVarBlockVAR_INPUT_OUTPUT() != null){
@@ -1104,7 +1112,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
         else {
             errorMessage.append("there is no code block in this POU : " + " line: ")
-                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n");
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
         symTable.currentScope = symTable.currentScope.getEnclosingScope();
         return null;
