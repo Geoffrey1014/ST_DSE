@@ -41,7 +41,7 @@ public class IrFunctionCallExpr extends IrExpr {
     @Override
     public String prettyPrint(String indentSpace) {
 
-        StringBuilder prettyString = new StringBuilder(indentSpace + "|--methodCallExpr\n");
+        StringBuilder prettyString = new StringBuilder(indentSpace + "|--functionCallExpr\n");
 
         // print the method name
         prettyString.append("  ").append(indentSpace).append("|--name: ").append(this.functionName.getValue()).append("\n");

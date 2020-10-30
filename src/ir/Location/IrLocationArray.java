@@ -72,13 +72,16 @@ public class IrLocationArray extends IrLocation {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        String prettyString = indentSpace + "|__arrayAccess\n";
+        String prettyString = indentSpace + "|--arrayAccess\n";
 
         // print the name
-        prettyString += ("  " + indentSpace + "|__name: " + this.varName.getValue() + "\n");
+        prettyString += ("  " + indentSpace + "|--name: " + this.varName.getValue() + "\n");
 
         // print the type
         prettyString +=  "  " + indentSpace +  "|--type: " + this.varType +"\n";
+
+        prettyString +=  "  " + indentSpace +  "|--index:\n";
+        prettyString += this.elementIndex.prettyPrint("    " + indentSpace);
 
         return prettyString;
     }

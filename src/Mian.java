@@ -114,6 +114,9 @@ public class Mian {
             System.err.println("\n semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
+            System.out.println("\n pretty print:\n");
+            System.out.println(listener.pous.prettyPrint(""));
+
 //            ArrayList<String> ruleNames = new ArrayList<>();
 //            ruleNames.add("program");
 

@@ -14,4 +14,19 @@ public class IrCtrlFlowElsif extends IrCtrlFlowIf {
         visitor.visitIrCtrlFlowElsif(this);
     }
 
+    @Override
+    public String prettyPrint(String indentSpace) {
+        String prettyString = indentSpace + "|--elsifStmt\n";
+
+        // print the condition expr
+        prettyString += ("  " + indentSpace + "|--condExpr\n");
+        prettyString += (this.condExpr.prettyPrint("    " + indentSpace));
+
+        // print the if loop body
+        prettyString += "  " + indentSpace + "|--body\n";
+        prettyString += this.stmtBody.prettyPrint("    " + indentSpace);
+
+        return prettyString;
+    }
+
 }

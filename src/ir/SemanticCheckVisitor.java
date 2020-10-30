@@ -90,7 +90,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 IrFunctionDecl functionDecl = (IrFunctionDecl) pouDecl;
 
                 // 2) check for same number of params
-                List<IrVarDecl> varInputs = functionDecl.VarBlockVAR_INPUT.VarList;
+                List<IrVarDecl> varInputs = functionDecl.varBlockVAR_INPUT.VarList;
                 if (varInputs.size() == node.argsList.size()) {
 
                     // 分 IrArgExpr 和 IrArgInputAssign 两种
@@ -197,7 +197,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 IrFunctionBlockDecl functionBlockDecl = (IrFunctionBlockDecl) object;
 
                 // 2) check for same number of params
-                List<IrVarDecl> varInputs = functionBlockDecl.VarBlockVAR_INPUT.VarList;
+                List<IrVarDecl> varInputs = functionBlockDecl.varBlockVAR_INPUT.VarList;
                 if (varInputs.size() == node.argsList.size()) {
 
                     // 分 IrArgExpr 和 IrArgInputAssign 两种

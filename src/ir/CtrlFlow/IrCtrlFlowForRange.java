@@ -29,7 +29,21 @@ public class IrCtrlFlowForRange extends Ir {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+        String prettyString = indentSpace + "|--range\n";
+
+        prettyString += ("  " + indentSpace + "|--lowBoundary");
+        prettyString += (this.low.prettyPrint("    " + indentSpace));
+
+        prettyString += ("  " + indentSpace + "|--highBoundary");
+        prettyString += (this.high.prettyPrint("    " + indentSpace));
+
+        if (this.step != null){
+            prettyString += ("  " + indentSpace + "|--step");
+            prettyString += (this.step.prettyPrint("    " + indentSpace));
+        }
+        return prettyString;
+
+
     }
 
     @Override

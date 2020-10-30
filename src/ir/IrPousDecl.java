@@ -32,25 +32,16 @@ public class IrPousDecl extends Ir {
         return functionDeclArrayList;
     }
 
-    public void setFunctionDeclArrayList(ArrayList<IrFunctionDecl> functionDeclArrayList) {
-        this.functionDeclArrayList = functionDeclArrayList;
-    }
 
     public ArrayList<IrFunctionBlockDecl> getFunctionBlockDeclsArrayList() {
         return functionBlockDeclsArrayList;
     }
 
-    public void setFunctionBlockDeclsArrayList(ArrayList<IrFunctionBlockDecl> functionBlockDeclsArrayList) {
-        this.functionBlockDeclsArrayList = functionBlockDeclsArrayList;
-    }
 
     public ArrayList<IrProgramDecl> getProgramDeclsArrayList() {
         return programDeclsArrayList;
     }
 
-    public void setProgramDeclsArrayList(ArrayList<IrProgramDecl> programDeclsArrayList) {
-        this.programDeclsArrayList = programDeclsArrayList;
-    }
 
     @Override
     public String semanticCheck(SymTable symTable) {
@@ -59,7 +50,31 @@ public class IrPousDecl extends Ir {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+        StringBuilder prettyString = new StringBuilder(indentSpace + "|--POUS\n");
+
+        if (this.programDeclsArrayList.size() != 0){
+            for (IrProgramDecl pou : this.programDeclsArrayList){
+                prettyString.append("  ").append("|--PROGRAM\n");
+                prettyString.append(pou.prettyPrint("    " + indentSpace));
+            }
+        }
+
+
+        if (this.functionBlockDeclsArrayList.size() != 0){
+            for (IrFunctionBlockDecl pou : this.functionBlockDeclsArrayList){
+                prettyString.append("  ").append("|--FunctionBlock\n");
+                prettyString.append(pou.prettyPrint("    " + indentSpace));
+            }
+        }
+
+        if (this.functionDeclArrayList.size() != 0){
+            for (IrFunctionDecl pou : this.functionDeclArrayList){
+                prettyString.append("  ").append("|--Function\n");
+                prettyString.append(pou.prettyPrint("    " + indentSpace));
+            }
+        }
+
+        return prettyString.toString();
     }
 
     @Override

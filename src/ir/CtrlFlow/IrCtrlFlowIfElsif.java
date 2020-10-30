@@ -21,4 +21,25 @@ public class IrCtrlFlowIfElsif extends  IrCtrlFlowIf{
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowIfElsif(this);
     }
+
+    @Override
+    public String prettyPrint(String indentSpace) {
+        StringBuilder prettyString = new StringBuilder(indentSpace + "|--ifStmt\n");
+
+        // print the condition expr
+        prettyString.append("  ").append(indentSpace).append("|--condExpr\n");
+        prettyString.append(this.condExpr.prettyPrint("    " + indentSpace));
+
+        // print the if loop body
+        prettyString.append("  ").append(indentSpace).append("|--body\n");
+        prettyString.append(this.stmtBody.prettyPrint("    " + indentSpace));
+
+        // print elsif list
+        for (IrCtrlFlowElsif ctrlFlowElsif : this.elsifArrayList){
+            prettyString.append("  ").append(indentSpace).append("|--elsif\n");
+            prettyString.append(ctrlFlowElsif.prettyPrint("    " + indentSpace));
+        }
+
+        return prettyString.toString();
+    }
 }

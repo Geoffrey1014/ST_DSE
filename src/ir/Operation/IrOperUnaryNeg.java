@@ -43,7 +43,7 @@ public class IrOperUnaryNeg extends IrOperUnary {
         String prettyString = indentSpace + "|--unaryNegateOp\n";
 
         // pretty print the operand
-        prettyString += this.operand.prettyPrint("  " + indentSpace);
+        prettyString += this.operand.prettyPrint("     " + indentSpace);
 
         return prettyString;
     }

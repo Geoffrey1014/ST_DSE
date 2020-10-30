@@ -7,6 +7,9 @@ import ir.IrIdent;
 
 import java.util.ArrayList;
 
+/**
+ * 这个类不在AST中，只在由CST到AST到转换中临时出现，过度用的
+ */
 public class IrVarsDecl extends Ir {
     private final ArrayList<IrIdent> nameArrayList;
     private final IrType type;
@@ -58,9 +61,9 @@ public class IrVarsDecl extends Ir {
     public String prettyPrint(String indentSpace) {
         String prettyString = indentSpace + "|--varDecl\n";
         prettyString += ("  " + indentSpace + "|--name: " + this.getName() + "\n");
-        prettyString += this.getType().prettyPrint("  " + indentSpace);
+        prettyString += this.getType().prettyPrint("     " + indentSpace);
         if (values != null){
-            prettyString += this.getValues().prettyPrint("  " + indentSpace);
+            prettyString += this.getValues().prettyPrint("    " + indentSpace);
         }
         return prettyString;
     }

@@ -18,7 +18,18 @@ public class IrAssignStmtEq extends IrAssignStmt {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+
+        String prettyString = indentSpace + "|--assignStmtEquals\n";
+
+        // pretty print the lhs
+        prettyString += ("  " + indentSpace + "|--lhs\n");
+        prettyString += this.getStoreLocation().prettyPrint("    " + indentSpace);
+
+        // print the rhs
+        prettyString += ("  " + indentSpace + "|--rhs\n");
+        prettyString += this.expr.prettyPrint("    " + indentSpace);
+
+        return prettyString;
     }
 
     @Override

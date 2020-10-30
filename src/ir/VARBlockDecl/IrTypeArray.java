@@ -36,7 +36,7 @@ public class IrTypeArray extends IrType {
     @Override
     public String prettyPrint(String indentSpace) {
         String prettyString  = indentSpace + "|--array type: " + this.type.toString() + "\n";
-        prettyString += indentSpace +  "|--size: " + this.low.getValue().toString() + " to " + this.high.getValue().toString();
+        prettyString += indentSpace +  "|--size: " + this.low.getValue().toString() + " to " + this.high.getValue().toString() + "\n";
         return prettyString;
     }
 

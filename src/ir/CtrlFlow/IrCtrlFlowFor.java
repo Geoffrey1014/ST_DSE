@@ -27,7 +27,21 @@ public class IrCtrlFlowFor extends IrStmt {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+
+        String prettyString = indentSpace + "|--forLoop\n";
+
+        // print the counter and range stmt
+        prettyString += ("  " + indentSpace + "|--counter\n");
+        prettyString += (this.counter.prettyPrint("    " + indentSpace));
+        prettyString += ("    " + indentSpace + "|--range\n");
+        prettyString += (this.range.prettyPrint("    " + indentSpace));
+
+
+        // print the for loop body
+        prettyString += "  " + indentSpace + "|--body\n";
+        prettyString += this.codeBlock.prettyPrint("    " + indentSpace);
+
+        return prettyString;
     }
 
     @Override

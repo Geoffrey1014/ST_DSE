@@ -53,9 +53,9 @@ public class IrVarDecl extends Ir {
     public String prettyPrint(String indentSpace) {
         String prettyString = indentSpace + "|--varDecl\n";
         prettyString += ("  " + indentSpace + "|--name: " + this.getName() + "\n");
-        prettyString += this.getType().prettyPrint("  " + indentSpace);
+        prettyString += this.getType().prettyPrint("    " + indentSpace);
         if (value != null){
-            prettyString += this.getValue().prettyPrint("  " + indentSpace);
+            prettyString += this.getValue().prettyPrint("    " + indentSpace);
         }
         return prettyString;
     }

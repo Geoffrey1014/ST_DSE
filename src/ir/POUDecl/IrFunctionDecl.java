@@ -32,7 +32,44 @@ public class IrFunctionDecl extends IrPouDecl {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        return null;
+
+        String prettyString = indentSpace + "|--Function\n";
+        prettyString += "  " + indentSpace + "|--name: " + this.getName() + "\n";
+        prettyString += "  " + indentSpace + "|--type: " + this.returnType.type + "\n";
+
+        if (this.varBlockVAR != null){
+            prettyString += "  " + indentSpace + "|--varBlockVAR" + "\n";
+            prettyString += this.varBlockVAR.prettyPrint("    " + indentSpace);
+
+        }
+        if (this.varBlockVAR_INPUT != null){
+            prettyString += "  " + indentSpace + "|--varBlockVAR_input" + "\n";
+            prettyString += this.varBlockVAR_INPUT.prettyPrint("    " + indentSpace);
+
+        }
+
+        if (this.varBlockVAR_OUTPUT != null){
+            prettyString += "  " + indentSpace + "|--varBlockVAR_OUTPUT" + "\n";
+            prettyString += this.varBlockVAR_OUTPUT.prettyPrint("    " + indentSpace);
+
+        }
+
+        if (this.varBlockVAR_INPUT_OUTPUT != null){
+            prettyString += "  " + indentSpace + "|--varBlockVAR_INPUT_OUTPUT" + "\n";
+            prettyString += this.varBlockVAR_INPUT_OUTPUT.prettyPrint("    " + indentSpace);
+
+        }
+
+        if (this.varBlockVAR_TEMP != null){
+            prettyString += "  " + indentSpace + "|--varBlockVAR_TEMP" + "\n";
+            prettyString += this.varBlockVAR_TEMP.prettyPrint("    " + indentSpace);
+
+        }
+
+        prettyString += "  " + indentSpace + "|--CodeBlock" + "\n";
+        prettyString += this.CodeBlock.prettyPrint("    " + indentSpace);
+
+        return prettyString;
     }
 
     @Override

@@ -49,14 +49,15 @@ public class IrVARBlockDecl extends Ir {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        String prettyString = indentSpace + "|--codeBlock:\n";
+        StringBuilder prettyString = new StringBuilder(indentSpace + "|--VARBlock:\n");
+        prettyString.append("  ").append(indentSpace).append("|--accessType: ").append(this.accessType).append("\n");
 
         // pretty print statement
         for (IrVarDecl varDecl : this.VarList) {
-            prettyString += varDecl.prettyPrint("  " + indentSpace);
+            prettyString.append(varDecl.prettyPrint("    " + indentSpace));
         }
 
-        return prettyString;
+        return prettyString.toString();
     }
 
     @Override

@@ -47,7 +47,7 @@ public class IrLocationVar extends IrLocation {
         prettyString += "  " + indentSpace + "|--name: " + this.varName.getValue() + "\n";
 
         // pretty print the type
-        prettyString +=  "  " +  "|--type: " + indentSpace + this.varType +"\n";
+        prettyString +=  "  " +  indentSpace  + "|--type: "  + this.varType +"\n";
 
         return prettyString;
     }
