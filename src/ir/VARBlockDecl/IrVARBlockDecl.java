@@ -54,7 +54,7 @@ public class IrVARBlockDecl extends Ir {
 
         // pretty print statement
         for (IrVarDecl varDecl : this.VarList) {
-            prettyString.append(varDecl.prettyPrint("    " + indentSpace));
+            prettyString.append(varDecl.prettyPrint("  " + indentSpace));
         }
 
         return prettyString.toString();

@@ -127,6 +127,12 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile_stat(STParser.While_statContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link STParser#exit_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExit_stat(STParser.Exit_statContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link STParser#invoc_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

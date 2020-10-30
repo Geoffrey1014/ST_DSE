@@ -54,23 +54,20 @@ public class IrPousDecl extends Ir {
 
         if (this.programDeclsArrayList.size() != 0){
             for (IrProgramDecl pou : this.programDeclsArrayList){
-                prettyString.append("  ").append("|--PROGRAM\n");
-                prettyString.append(pou.prettyPrint("    " + indentSpace));
+                prettyString.append(pou.prettyPrint("  " + indentSpace));
             }
         }
 
 
         if (this.functionBlockDeclsArrayList.size() != 0){
             for (IrFunctionBlockDecl pou : this.functionBlockDeclsArrayList){
-                prettyString.append("  ").append("|--FunctionBlock\n");
-                prettyString.append(pou.prettyPrint("    " + indentSpace));
+                prettyString.append(pou.prettyPrint("  " + indentSpace));
             }
         }
 
         if (this.functionDeclArrayList.size() != 0){
             for (IrFunctionDecl pou : this.functionDeclArrayList){
-                prettyString.append("  ").append("|--Function\n");
-                prettyString.append(pou.prettyPrint("    " + indentSpace));
+                prettyString.append(pou.prettyPrint("  " + indentSpace));
             }
         }
 

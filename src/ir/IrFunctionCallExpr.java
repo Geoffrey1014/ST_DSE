@@ -47,7 +47,7 @@ public class IrFunctionCallExpr extends IrExpr {
         prettyString.append("  ").append(indentSpace).append("|--name: ").append(this.functionName.getValue()).append("\n");
 
         // print the method type
-        prettyString.append("  ").append(indentSpace).append("|--type: ").append(this.functionType);
+        prettyString.append("  ").append(indentSpace).append("|--type: ").append(this.functionType).append("\n");
 
         // print the method args_list
         prettyString.append("  ").append(indentSpace).append("|--argsList:\n");
