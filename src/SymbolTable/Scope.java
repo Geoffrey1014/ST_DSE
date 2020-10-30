@@ -23,4 +23,6 @@ public interface Scope {
     public Ir resolve(String name);
 
     public Ir getSymbolAtCurrentScope(String name);
+
+    public boolean isScopeForALoop();
 }

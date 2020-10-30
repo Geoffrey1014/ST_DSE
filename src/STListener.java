@@ -373,13 +373,23 @@ public class STListener extends STParserBaseListener {
         setASTNode(ctx, new IrCtrlFlowWhile(expr, codeBlock));
     }
 
+    @Override public void enterExit_stat(STParser.Exit_statContext ctx) { }
+
+    @Override public void exitExit_stat(STParser.Exit_statContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        setASTNode(ctx, new IrStmtExit(l.line, l.col));
+
+    }
+    @Override public void enterReturn_stat(STParser.Return_statContext ctx) { }
+
+    @Override public void exitReturn_stat(STParser.Return_statContext ctx) {
+        STListener.ProgramLocation l = new ProgramLocation(ctx);
+        setASTNode(ctx, new IrStmtReturn(l.line, l.col));
+
+    }
 
     @Override public void enterInvoc_expr(STParser.Invoc_exprContext ctx) {    }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+
     @Override public void exitInvoc_expr(STParser.Invoc_exprContext ctx) {  STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrIdent fbName = new IrIdent(ctx.ID().getText(), l.line, l.col);
         ArrayList<IrArg> argArrayList = new ArrayList<>();
@@ -940,6 +950,8 @@ public class STListener extends STParserBaseListener {
     @Override public void exitInteger_literal(STParser.Integer_literalContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrLiteral literal = null;
+
+        //TODO Octal_literal Binary_literal 等，待实现
 
         if (ctx.Binary_literal() != null){
             System.out.println("Binary_literal");

@@ -55,6 +55,9 @@ public interface BaseVisitor<T> {
     T visitIrCtrlFlowForRange(IrCtrlFlowForRange node);
     T visitIrCtrlFlowWhile(IrCtrlFlowWhile node);
 
+    T visitIrStmtExit(IrStmtExit node);
+    T visitIrStmtReturn(IrStmtReturn node);
+
     T visitIrCodeBlock(IrCodeBlock node);
 
     T visitIrTypeArray(IrTypeArray node);

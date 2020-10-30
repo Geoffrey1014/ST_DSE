@@ -1,6 +1,7 @@
 package ir;
 
 
+import SymbolTable.GlobalScope;
 import SymbolTable.Scope;
 import SymbolTable.SymTable;
 import ir.Arg.IrArg;
@@ -584,6 +585,26 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         }
 
         node.getStmtBody().accept(this);
+        return null;
+    }
+
+    @Override
+    public Void visitIrStmtExit(IrStmtExit node) {
+        // make sure it is in a loop
+       if (!symTable.currentScope.isScopeForALoop()){
+           errorMessage.append("Exit statement cannot be used outside of a for or while loop" + " line: ")
+                   .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+       }
+        return null;
+    }
+
+    @Override
+    public Void visitIrStmtReturn(IrStmtReturn node) {
+        // make sure it is not in a PROGREAM POU
+        if (symTable.currentScope instanceof GlobalScope){
+            errorMessage.append("RETURN statement cannot be used outside of a function or FB" + " line: ")
+                    .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+        }
         return null;
     }
 

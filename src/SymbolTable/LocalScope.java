@@ -9,7 +9,8 @@ package SymbolTable;
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr2 for more book information.
 ***/
 public class LocalScope extends BaseScope {
-    public  LocalScope(Scope parent) { super(parent); }
+
+    public  LocalScope(BaseScope parent) { super(parent); }
     public String getScopeName() { return "locals"; }
 
 

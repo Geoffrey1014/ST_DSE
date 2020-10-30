@@ -133,6 +133,12 @@ public interface STParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExit_stat(STParser.Exit_statContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link STParser#return_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturn_stat(STParser.Return_statContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link STParser#invoc_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

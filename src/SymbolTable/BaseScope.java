@@ -12,10 +12,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public abstract class BaseScope implements Scope {
-    Scope enclosingScope; // null if global (outermost) scope
+    BaseScope enclosingScope; // null if global (outermost) scope
     Map<String, Ir> symbols = new LinkedHashMap<String, Ir>();
+    public boolean inLoop = false;
 
-    public BaseScope(Scope enclosingScope) {
+    public BaseScope(BaseScope enclosingScope) {
         this.enclosingScope = enclosingScope;
     }
 
@@ -41,7 +42,10 @@ public abstract class BaseScope implements Scope {
         return symbols.get(name);
     }
 
-    public Scope getEnclosingScope() { return enclosingScope; }
+    public BaseScope getEnclosingScope() { return enclosingScope; }
+    public boolean isScopeForALoop(){
+        return this.inLoop;
+    }
 
     public String toString() { return getScopeName()+":"+symbols.keySet().toString(); }
 }

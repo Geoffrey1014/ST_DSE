@@ -210,6 +210,16 @@ public interface STParserListener extends ParseTreeListener {
 	 */
 	void exitExit_stat(STParser.Exit_statContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link STParser#return_stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturn_stat(STParser.Return_statContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link STParser#return_stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturn_stat(STParser.Return_statContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link STParser#invoc_expr}.
 	 * @param ctx the parse tree
 	 */

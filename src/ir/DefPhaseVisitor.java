@@ -67,16 +67,33 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrCtrlFlowFor(IrCtrlFlowFor node) {
+        // create a new scope
+        symTable.currentScope = new LocalScope(symTable.currentScope);
+        symTable.currentScope.inLoop = true;
         return null;
     }
 
     @Override
     public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
+
         return null;
     }
 
     @Override
     public Void visitIrCtrlFlowWhile(IrCtrlFlowWhile node) {
+        // create a new scope
+        symTable.currentScope = new LocalScope(symTable.currentScope);
+        symTable.currentScope.inLoop = true;
+        return null;
+    }
+
+    @Override
+    public Void visitIrStmtExit(IrStmtExit node) {
+        return null;
+    }
+
+    @Override
+    public Void visitIrStmtReturn(IrStmtReturn node) {
         return null;
     }
 

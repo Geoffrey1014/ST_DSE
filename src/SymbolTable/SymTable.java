@@ -7,8 +7,8 @@ import ir.Ir;
  */
 public class SymTable {
 
-    public  AbsTreeProperty<Scope> treeProperty = new AbsTreeProperty<Scope>();
-    public  Scope currentScope; // define symbols in this scope
+    public  AbsTreeProperty<BaseScope> treeProperty = new AbsTreeProperty<>();
+    public  BaseScope currentScope; // define symbols in this scope
     public  GlobalScope globals;
 
     public void addObjectToCurrentScope(String id, Ir object) {
@@ -28,7 +28,7 @@ public class SymTable {
     /**
      * 将scope s  标注在 AST 上
      */
-    public void saveScope(Ir node, Scope s) { treeProperty.put(node, s); }
+    public void saveScope(Ir node, BaseScope s) { treeProperty.put(node, s); }
 
 }
 
