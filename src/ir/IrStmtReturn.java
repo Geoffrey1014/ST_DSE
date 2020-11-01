@@ -1,16 +1,11 @@
 package ir;
 
 
-import SymbolTable.SymTable;
+import visitor.BaseVisitor;
 
 public class IrStmtReturn extends IrStmt {
     public IrStmtReturn(int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
-    }
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
     }
 
 

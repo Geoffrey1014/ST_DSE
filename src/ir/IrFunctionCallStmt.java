@@ -1,8 +1,8 @@
 package ir;
 
-import SymbolTable.SymTable;
 import ir.Arg.IrArg;
 import ir.Arg.IrArgOutputAssign;
+import visitor.BaseVisitor;
 
 import java.util.List;
 
@@ -29,11 +29,6 @@ public class IrFunctionCallStmt extends IrStmt{
         return this.functionBlockName + "(" + this.argsList.toString() + ")";
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

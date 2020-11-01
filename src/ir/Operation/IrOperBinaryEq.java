@@ -1,10 +1,9 @@
 package ir.Operation;
 
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrOperBinaryEq extends IrOperBinary {
 
@@ -16,31 +15,6 @@ public class IrOperBinaryEq extends IrOperBinary {
     public VarTypeEnum getExpressionType() {
         return VarTypeEnum.RES_BOOL;
     }
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        String errorMessage = "";
-
-        // 1) check that rhs and lhs are valid
-        errorMessage += this.rightOperand.semanticCheck(symTable);
-        errorMessage += this.leftOperand.semanticCheck(symTable);
-
-        // 2) verify that both lhs and rhs are either bool, int or real
-        boolean bothAreBools = (this.rightOperand.getExpressionType() == VarTypeEnum.RES_BOOL)
-                && (this.leftOperand.getExpressionType() == VarTypeEnum.RES_BOOL );
-        boolean bothAreInts = (this.rightOperand.getExpressionType()  == VarTypeEnum.RES_INT)
-                && (this.leftOperand.getExpressionType() == VarTypeEnum.RES_INT );
-        boolean bothAreReals = (this.rightOperand.getExpressionType() == VarTypeEnum.RES_REAL)
-                && (this.leftOperand.getExpressionType() == VarTypeEnum.RES_REAL );
-
-        if (!bothAreBools && !bothAreInts && !bothAreReals) {
-            errorMessage += "The lhs and rhs of an equator operation must the same type of bool , int ,or real " +
-                    " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
-        }
-
-        return errorMessage;
-    }
-
 
 
     @Override

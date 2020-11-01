@@ -1,10 +1,9 @@
 package ir.POUDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrVARBlockDecl;
+import visitor.BaseVisitor;
 
 
 public class IrProgramDecl extends IrPouDecl {
@@ -17,10 +16,7 @@ public class IrProgramDecl extends IrPouDecl {
     }
 
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
+
 
     @Override
     public String prettyPrint(String indentSpace) {

@@ -1,10 +1,9 @@
 package ir.Arg;
 
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrArgExpr extends IrArg {
     public final IrExpr argValue;
@@ -27,12 +26,6 @@ public class IrArgExpr extends IrArg {
 
     public VarTypeEnum getArgumentType() {
         return ((IrExpr) this.getArgValue()).getExpressionType();
-    }
-
-    @Override
-    public  String semanticCheck(SymTable symTable) {
-        String errorMessage = ((IrExpr) this.getArgValue()).semanticCheck(symTable);
-        return errorMessage;
     }
 
     @Override

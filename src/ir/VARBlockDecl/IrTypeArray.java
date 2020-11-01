@@ -1,9 +1,8 @@
 package ir.VARBlockDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.Literal.IrIntLiteral;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrTypeArray extends IrType {
     public final IrIntLiteral low;
@@ -19,19 +18,6 @@ public class IrTypeArray extends IrType {
 
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        String errorMessage = "";
-
-        // make sure that the array size is greater than 0
-        this.size = (int) (this.high.getValue() - this.low.getValue());
-        if (this.size <= 0) {
-            errorMessage += "Array size must be a non-zero positive integer" +
-                    " line: " + this.getLineNumber() + " col: " + this.getColNumber();
-        }
-
-        return errorMessage;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

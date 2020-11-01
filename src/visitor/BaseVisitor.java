@@ -1,9 +1,10 @@
-package ir;
+package visitor;
 
 import ir.Arg.IrArgExpr;
 import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
 import ir.CtrlFlow.*;
+import ir.*;
 import ir.Literal.IrBoolLiteral;
 import ir.Literal.IrFloatLiteral;
 import ir.Literal.IrIntLiteral;

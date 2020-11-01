@@ -1,8 +1,7 @@
 package ir.Literal;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrFloatLiteral extends IrLiteral {
     private final Double value;
@@ -19,11 +18,6 @@ public class IrFloatLiteral extends IrLiteral {
 
     public Double getValue() {
         return value;
-    }
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return "";
     }
 
     @Override

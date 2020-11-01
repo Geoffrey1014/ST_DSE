@@ -1,12 +1,11 @@
 package ir.Location;
 
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.Ir;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrVarDecl;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 /**
  * Created by geo on 2020/10/13.
@@ -32,12 +31,6 @@ public class IrLocationVar extends IrLocation {
     }
 
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        String errorMessage = "";
-        return errorMessage;
-
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

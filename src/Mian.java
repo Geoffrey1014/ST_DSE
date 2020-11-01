@@ -1,13 +1,13 @@
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
-import ir.DefPhaseVisitor;
-import ir.SemanticCheckVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import tools.CLI;
 import tools.CLI.Action;
 import tools.MyPrint;
+import visitor.DefPhaseVisitor;
+import visitor.SemanticCheckVisitor;
 
 import java.io.IOException;
 import java.io.InputStream;

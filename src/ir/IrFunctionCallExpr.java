@@ -1,9 +1,9 @@
 package ir;
 
-import SymbolTable.SymTable;
 import ir.Arg.IrArg;
 import ir.Arg.IrArgOutputAssign;
 import ir.VARBlockDecl.IrType;
+import visitor.BaseVisitor;
 
 import java.util.List;
 
@@ -33,10 +33,7 @@ public class IrFunctionCallExpr extends IrExpr {
         return this.functionName + "(" + this.argsList.toString() + ")";
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
+
 
     @Override
     public String prettyPrint(String indentSpace) {

@@ -1,11 +1,8 @@
 package ir.VARBlockDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.Ir;
 import ir.IrIdent;
-
-import java.util.ArrayList;
+import visitor.BaseVisitor;
 
 public class IrVarDecl extends Ir {
     public final IrType type;
@@ -20,34 +17,6 @@ public class IrVarDecl extends Ir {
         this.value = value;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        String errorMessage = "";
-        errorMessage += this.type.semanticCheck(symTable);
-
-
-        // 1) keep the type of Irvalue and Irtype are the same
-        // 2） if this is a array declaration, the size of nameArrayList is the same with it's values'.
-        if (value != null){
-            errorMessage += this.value.semanticCheck(symTable);
-
-            if ( this.type.getTypeEnum() != this.value.getType() ){
-                errorMessage += "the type of Irvalue and Irtype should be the same " +
-                        " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
-            }
-
-            if (type instanceof IrTypeArray){
-                if ( ((ArrayList)value.getValue()).size() != this.type.getArraySize() ){
-                    errorMessage += "the size of nameArrayList should be the same with values " +
-                            " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
-                }
-
-            }
-
-
-        }
-        return errorMessage;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

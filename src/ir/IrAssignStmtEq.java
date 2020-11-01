@@ -1,7 +1,8 @@
 package ir;
 
-import SymbolTable.SymTable;
+
 import ir.Location.IrLocation;
+import visitor.BaseVisitor;
 
 public class IrAssignStmtEq extends IrAssignStmt {
     private final IrExpr expr;
@@ -11,10 +12,6 @@ public class IrAssignStmtEq extends IrAssignStmt {
         this.expr = newValue;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

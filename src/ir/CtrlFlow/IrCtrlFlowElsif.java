@@ -1,8 +1,8 @@
 package ir.CtrlFlow;
 
-import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrExpr;
+import visitor.BaseVisitor;
 
 public class IrCtrlFlowElsif extends IrCtrlFlowIf {
     public IrCtrlFlowElsif(IrExpr condExpr, IrCodeBlock stmtBody) {

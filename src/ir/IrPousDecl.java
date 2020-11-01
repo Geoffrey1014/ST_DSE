@@ -1,9 +1,9 @@
 package ir;
 
-import SymbolTable.SymTable;
 import ir.POUDecl.IrFunctionBlockDecl;
 import ir.POUDecl.IrFunctionDecl;
 import ir.POUDecl.IrProgramDecl;
+import visitor.BaseVisitor;
 
 import java.util.ArrayList;
 
@@ -43,10 +43,6 @@ public class IrPousDecl extends Ir {
     }
 
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

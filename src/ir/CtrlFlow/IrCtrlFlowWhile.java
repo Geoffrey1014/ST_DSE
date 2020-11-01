@@ -1,9 +1,8 @@
 package ir.CtrlFlow;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrExpr;
+import visitor.BaseVisitor;
 
 /**
  */
@@ -12,10 +11,6 @@ public class IrCtrlFlowWhile extends IrCtrlFlow {
         super(condExpr, stmtBody);
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
 
     @Override
     public void accept(BaseVisitor<Void> visitor) {

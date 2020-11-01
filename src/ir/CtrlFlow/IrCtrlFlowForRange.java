@@ -1,9 +1,8 @@
 package ir.CtrlFlow;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.Ir;
 import ir.IrExpr;
+import visitor.BaseVisitor;
 
 public class IrCtrlFlowForRange extends Ir {
     private final IrExpr low;
@@ -22,10 +21,6 @@ public class IrCtrlFlowForRange extends Ir {
         this.step = step;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

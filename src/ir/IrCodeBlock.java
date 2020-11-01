@@ -1,6 +1,6 @@
 package ir;
 
-import SymbolTable.SymTable;
+import visitor.BaseVisitor;
 
 import java.util.List;
 
@@ -11,11 +11,6 @@ public class IrCodeBlock extends Ir {
     public IrCodeBlock(int lineNumber, int colNumber, List<IrStmt> statList) {
         super(lineNumber, colNumber);
         this.stmtsList = statList;
-    }
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
     }
 
     @Override

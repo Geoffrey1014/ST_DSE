@@ -1,9 +1,8 @@
 package ir.VARBlockDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.Literal.IrLiteral;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrValueSimple extends IrValue {
     public final IrLiteral value;
@@ -14,11 +13,6 @@ public class IrValueSimple extends IrValue {
 
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        this.type = value.getExpressionType();
-        return "";
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

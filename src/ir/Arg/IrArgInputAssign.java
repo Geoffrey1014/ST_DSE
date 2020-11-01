@@ -1,11 +1,10 @@
 package ir.Arg;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrExpr;
 import ir.IrIdent;
 import ir.POUDecl.IrPouDecl;
 import ir.VARBlockDecl.IrVarDecl;
+import visitor.BaseVisitor;
 
 public class IrArgInputAssign extends IrArg {
     public final IrIdent storeLocationName;
@@ -20,13 +19,6 @@ public class IrArgInputAssign extends IrArg {
         this.argValue = argValue;
     }
 
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        String errorMessage = "";
-
-        return errorMessage;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

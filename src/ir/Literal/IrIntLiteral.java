@@ -1,8 +1,7 @@
 package ir.Literal;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrIntLiteral extends IrLiteral {
     private final Long value;
@@ -21,10 +20,6 @@ public class IrIntLiteral extends IrLiteral {
         return value;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return "";
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

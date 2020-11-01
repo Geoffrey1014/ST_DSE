@@ -1,9 +1,11 @@
 package ir.Location;
 
 
-import SymbolTable.SymTable;
-import ir.*;
-import ir.VARBlockDecl.IrTypeArray;
+import ir.Ir;
+import ir.IrExpr;
+import ir.IrIdent;
+import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 /**
  * Created by geo on 2020/10/13.
@@ -33,42 +35,6 @@ public class IrLocationArray extends IrLocation {
         return this.varType;
     }
 
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        String errorMessage = "";
-
-        // 1) verify that the IrExpr is semantically correct
-        errorMessage += this.elementIndex.semanticCheck(symTable);
-
-        // 2) make sure the array has been declared already
-        if (symTable.checkIfSymbolExistsAtAnyScope(this.getLocationName().getValue())) {
-            Ir object = symTable.getSymbol(this.getLocationName().getValue());
-            // 3) make sure that var is an array (and not a method or non-array)
-
-            if (! (object instanceof IrTypeArray) ) {
-                errorMessage += "Non-array variable be accessed as an array" +
-                        " line: " + this.elementIndex.getLineNumber() + " col: " + this.elementIndex.getColNumber() + "\n";
-            }
-            else {
-                IrTypeArray array = (IrTypeArray) object;
-
-                // IMPORTANT: set the IrType of the IrLocationArray
-                this.setLocationType(array.getTypeEnum());
-            }
-        } else {
-            errorMessage += "Array variable used before declared" +
-                    " line: " + this.elementIndex.getLineNumber() + " col: " + this.elementIndex.getColNumber() + "\n";
-        }
-
-        // 4) make sure that the IrExpr offset is an IrTypeInt
-        if (!(this.elementIndex.getExpressionType() == VarTypeEnum.RES_INT)) {
-            errorMessage += "Element offset must be of type int" +
-                    " line: " + this.elementIndex.getLineNumber() + " col: " + this.elementIndex.getColNumber() + "\n";
-        }
-
-        return errorMessage;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

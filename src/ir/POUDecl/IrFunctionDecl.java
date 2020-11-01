@@ -1,12 +1,11 @@
 package ir.POUDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrType;
 import ir.VARBlockDecl.IrVARBlockDecl;
 import ir.VARBlockDecl.IrVarDecl;
+import visitor.BaseVisitor;
 
 
 public class IrFunctionDecl extends IrPouDecl {
@@ -25,10 +24,7 @@ public class IrFunctionDecl extends IrPouDecl {
         return returnType;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
+
 
     @Override
     public String prettyPrint(String indentSpace) {

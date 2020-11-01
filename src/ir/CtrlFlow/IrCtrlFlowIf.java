@@ -1,9 +1,8 @@
 package ir.CtrlFlow;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrExpr;
+import visitor.BaseVisitor;
 
 public class IrCtrlFlowIf extends IrCtrlFlow {
     public IrCtrlFlowIf(IrExpr condExpr, IrCodeBlock stmtBody) {
@@ -17,10 +16,6 @@ public class IrCtrlFlowIf extends IrCtrlFlow {
         return this.stmtBody;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

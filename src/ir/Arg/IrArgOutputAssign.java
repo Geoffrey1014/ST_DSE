@@ -1,11 +1,10 @@
 package ir.Arg;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrIdent;
 import ir.Location.IrLocationVar;
 import ir.POUDecl.IrPouDecl;
 import ir.VARBlockDecl.IrVarDecl;
+import visitor.BaseVisitor;
 
 /**
  * 如果是在这里进行语意检查的话，
@@ -31,12 +30,6 @@ public class IrArgOutputAssign extends IrArg {
         this.acceptLocation = acceptLocation;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-
-
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

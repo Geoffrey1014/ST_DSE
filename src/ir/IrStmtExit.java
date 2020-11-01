@@ -1,18 +1,13 @@
 package ir;
 
 
-import SymbolTable.SymTable;
+import visitor.BaseVisitor;
 
 /**
  */
 public class IrStmtExit extends IrStmt {
     public IrStmtExit(int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
-    }
-
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
     }
 
 

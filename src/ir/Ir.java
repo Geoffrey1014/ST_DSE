@@ -1,7 +1,7 @@
 package ir;
 
 import SymbolTable.Scope;
-import SymbolTable.SymTable;
+import visitor.BaseVisitor;
 
 public abstract class Ir implements Where {
     private final int lineNumber;
@@ -23,8 +23,6 @@ public abstract class Ir implements Where {
         return colNumber;
     }
 
-
-    public abstract  String semanticCheck(SymTable symTable);
 
     public abstract String prettyPrint(String indentSpace);
 

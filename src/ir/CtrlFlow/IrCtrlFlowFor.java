@@ -1,10 +1,9 @@
 package ir.CtrlFlow;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.IrCodeBlock;
 import ir.IrStmt;
 import ir.Location.IrLocationVar;
+import visitor.BaseVisitor;
 
 public class IrCtrlFlowFor extends IrStmt {
     private final IrLocationVar counter;
@@ -20,10 +19,6 @@ public class IrCtrlFlowFor extends IrStmt {
         this.codeBlock = codeBlock;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return null;
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

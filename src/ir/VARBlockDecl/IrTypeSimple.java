@@ -1,8 +1,7 @@
 package ir.VARBlockDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 public class IrTypeSimple extends IrType {
 
@@ -11,10 +10,6 @@ public class IrTypeSimple extends IrType {
 
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return "";
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

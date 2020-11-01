@@ -1,4 +1,4 @@
-package ir;
+package visitor;
 
 
 import SymbolTable.GlobalScope;
@@ -9,6 +9,7 @@ import ir.Arg.IrArgExpr;
 import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
 import ir.CtrlFlow.*;
+import ir.*;
 import ir.Literal.*;
 import ir.Location.IrFbStLocation;
 import ir.Location.IrLocation;

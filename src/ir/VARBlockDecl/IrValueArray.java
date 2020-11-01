@@ -1,9 +1,8 @@
 package ir.VARBlockDecl;
 
-import SymbolTable.SymTable;
-import ir.BaseVisitor;
 import ir.Literal.IrLiteral;
 import ir.VarTypeEnum;
+import visitor.BaseVisitor;
 
 import java.util.ArrayList;
 
@@ -16,23 +15,6 @@ public class IrValueArray extends IrValue {
         this.valueList = valueList;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        //  所有多数值类型一致
-        String errorMessage = "";
-        if (valueList != null){
-            VarTypeEnum type = valueList.get(0).getExpressionType();
-            setType(type);
-            for (IrLiteral v : valueList){
-                if (type != v.getExpressionType()){
-                    errorMessage += "the type of array value are not the same " +
-                            " line: " + this.getLineNumber() + " col: " + this.getColNumber() + "\n";
-                }
-            }
-        }
-        return errorMessage;
-
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {

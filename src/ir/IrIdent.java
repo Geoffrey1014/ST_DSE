@@ -1,6 +1,6 @@
 package ir;
 
-import SymbolTable.SymTable;
+import visitor.BaseVisitor;
 
 import java.util.ArrayList;
 
@@ -29,10 +29,6 @@ public class IrIdent extends Ir {
         return name;
     }
 
-    @Override
-    public String semanticCheck(SymTable symTable) {
-        return "";
-    }
 
     @Override
     public String prettyPrint(String indentSpace) {
