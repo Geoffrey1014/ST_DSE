@@ -1,24 +1,3 @@
-(*
- semantic check error message:
-FunctionBlock called before declared line: 77 col: 4
-
-Non-FunctionBlock identifier being called as a FunctionBlock line: 78 col: 4
-
-Wrong number of arguments passed to function line: 79 col: 4
-
-Arguments are not all ArgExpr type  line: 80 col: 4
-
-Argument and parameter types don't match line: 81 col: 13
-
-Argument cannot be an array location  line: 82 col: 16
-
-Non-Function identifier being called as a function  line: 83 col: 9
-
-funciont block should not be used as function, line: 83 col: 4
-
-
-*)
-
 FUNCTION add_pou : INT
 VAR
     count : INT ;
@@ -88,3 +67,26 @@ END_VAR
     y := max_pou(1, 2);
 
 END_PROGRAM
+
+
+(*
+  semantic check error message:
+ FunctionBlock called before declared line: 61 col: 4
+
+ Non-FunctionBlock identifier being called as a FunctionBlock line: 62 col: 4
+
+ Wrong number of arguments passed to function block line: 63 col: 4
+
+ Arguments are not all ArgExpr type  line: 64 col: 4
+
+ Argument and parameter types don't match line: 65 col: 13
+
+ Argument cannot be an array location  line: 66 col: 16
+
+ Non-Function identifier being called as a function  line: 67 col: 9
+
+ funciont block should not be used as function, line: 67 col: 4
+
+
+
+*)

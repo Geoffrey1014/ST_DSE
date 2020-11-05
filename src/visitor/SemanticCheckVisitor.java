@@ -317,11 +317,11 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             //判断 irDeclObject 的类型是否和 IrExpr argValue 一致
             if (node.irDeclVar.getType().getTypeEnum() == node.argValue.getExpressionType()){
 
-                // check that the argument is not an array_location  TODO: 目前语法就不支持，后续看能不能加上
-                if (node.irDeclVar.type  instanceof IrTypeArray) {
-                    errorMessage.append("Argument cannot be an array location " + ", line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
-                }
+                // check that the argument is not an array_location
+//                if (node.irDeclVar.type  instanceof IrTypeArray) {
+//                    errorMessage.append("Argument cannot be an array location " + ", line: ")
+//                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+//                }
 
             }
             else {
@@ -372,11 +372,11 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             //判断 acceptLocation 的 TypeEnum 类型是否和  IrVarDecl irDeclVar一致
             if (node.irDeclVar.getType().getTypeEnum() == node.acceptLocation.getExpressionType()){
 
-                // check that the argument is not an array_location  TODO: 目前语法就不支持，后续看能不能加上
-                if (node.irDeclVar.type  instanceof IrTypeArray) {
-                    errorMessage.append("Argument cannot be an array location " + ", line: ")
-                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
-                }
+                // check that the argument is not an array_location  TODO: 允许在 rgOutputAssign 中 整个 array 传递
+//                if (node.irDeclVar.type  instanceof IrTypeArray) {
+//                    errorMessage.append("Argument cannot be an array location " + ", line: ")
+//                            .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
+//                }
 
                 // 判断是否都是 array 或者 simple 类型
                 boolean bothSimple = (node.irDeclVar.type instanceof IrTypeSimple  && node.acceptLocation.irDeclObject.type instanceof IrTypeSimple);
@@ -545,6 +545,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 
     /**
      * make sure the low bound, high bound and step be int
+     * TODO  应该要能判断 high > low  才对
      * @param node
      * @return
      */
@@ -563,12 +564,12 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
         if (node.getStep() != null){
             node.getStep().accept(this);
             if (node.getStep().getExpressionType() != VarTypeEnum.RES_INT){
-                errorMessage.append(" the  low boundary shoud be int: ").append(" line:")
+                errorMessage.append(" the step shoud be int: ").append(" line:")
                         .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
-
             }
         }
         else {
+            // step 的缺省值是 1
             node.stepNum = 1;
         }
 

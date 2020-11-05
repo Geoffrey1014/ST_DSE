@@ -85,7 +85,7 @@ invoc_expr : fb_name=ID L_PAREN (param_assignment (COMMA param_assignment)* ) ? 
 param_assignment :
     expression # ExternArg
     | ID AS_OP expression # AssignParam
-    | (NOT_OP ? ID RT_AS_OP ID) # AssignOutput
+    | (NOT_OP ? ID RT_AS_OP ID) # AssignOutput  //TODO  这个可以更加复杂一点
     ;
 
 

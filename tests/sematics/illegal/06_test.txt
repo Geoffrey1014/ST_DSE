@@ -1,25 +1,3 @@
-(*
-line 46:27 extraneous input '[' expecting {'(', '-', 'NOT', BOOL, Binary_literal, Octal_literal, Decimal_literal, Pure_decimal_digits, Hexadecimal_literal, Static_string_literal, ID}
-line 46:37 no viable alternative at input '5]'
-
- semantic check error message:
- it is not a VAR_INPUT variable : count in max_pou; line: 43 col: 43
-
-Argument cannot be an array location , line: 43 col: 43
-
- the argValue's type does not match parameter's : RES_REAL compared with RES_INT, line: 44 col: 44
-
-Argument cannot be an array location , line: 44 col: 44
-
- Can not find such name variable : y In max_pou, line: 45 col: 45
-
-Argument cannot be an array location , line: 45 col: 45
-
-Wrong number of arguments passed to function line: 46 col: 4
-
-
-*)
-
 FUNCTION_BLOCK max_pou
 VAR
 
@@ -28,7 +6,7 @@ VAR
 END_VAR
 VAR_INPUT
     x : INT;
-    big :  ARRAY[1 .. 5] OF INT;
+    big :   INT;
 END_VAR
 VAR_OUTPUT
     max : INT := 0;
@@ -65,3 +43,18 @@ END_VAR
 
 
 END_PROGRAM
+
+(*
+line 42:27 extraneous input '[' expecting {'(', '-', 'NOT', BOOL, Binary_literal, Octal_literal, Decimal_literal, Pure_decimal_digits, Hexadecimal_literal, Static_string_literal, ID}
+line 42:37 no viable alternative at input '5]'
+
+ semantic check error message:
+ it is not a VAR_INPUT variable : count in max_pou; line: 39 col: 39
+
+ the argValue's type does not match parameter's : RES_REAL compared with RES_INT, line: 40 col: 40
+
+ Can not find such name variable : y In max_pou, line: 41 col: 41
+
+Wrong number of arguments passed to function block line: 42 col: 4
+
+*)

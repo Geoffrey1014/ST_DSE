@@ -32,9 +32,9 @@ public class LlMethodCallStmt extends LlStatement {
 
     @Override
     public String toString() {
-        String argsString = "";
+        StringBuilder argsString = new StringBuilder();
         for (LlComponent arg : argsList) {
-            argsString += arg.toString() + ",";
+            argsString.append(arg.toString()).append(",");
         }
         return this.returnLocation.toString() + " = " + this.methodName + "(" + argsString + ")";
     }

@@ -1,0 +1,76 @@
+(*  这个测试的例子会报错，但是不应该报错的，是应该都要实现的。
+function and Fb 都应该可以参数传递整个数组或者一个 location of an array
+*)
+FUNCTION_BLOCK max_pou
+VAR
+
+    count : INT ;
+
+END_VAR
+VAR_INPUT
+    x : INT;
+    big :  ARRAY[1 .. 5] OF INT;
+END_VAR
+VAR_OUTPUT
+    max : INT := 0;
+    flag : BOOL;
+    lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+    FOR count := 1 TO 5 DO
+        IF lst[count] > max THEN
+            max := lst[count];
+        END_IF;
+    END_FOR;
+
+END_FUNCTION_BLOCK
+
+PROGRAM main
+
+VAR_INPUT
+    x : BOOL;
+END_VAR
+
+VAR_OUTPUT
+    out : INT;
+END_VAR
+
+VAR
+    y : BOOL;
+    lst2 : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+    max_pou(x := 5, big := [1,2,3,4,5])  ;  (*语法不支持*)
+
+    max_pou(x := lst2[2], big := 3)  ; (*  现在可以传递某个 数组location 过去 *)
+
+    max_pou(x := lst2[2], big := 3, max => lst2[10])  ;  (* 语法 AssignOutput 部分  语法不支持 *)
+
+    (*   max_pou(big[3] := lst2[2], big := 3) ;    "big[3]" 在参数中，语法不支持， 会报错 *)
+
+    max_pou(x := 5, big := 3, lst => lst2)  ;  (* 语法 AssignOutput 部分  语法不支持 ， 将lst2 识别成 varLocation*)
+
+    lst2 := max_pou.lst;  (* 语法 不允许  lst2 不是 location* )
+
+    （要想完全实现 array的话，得实现 指针）
+
+
+
+END_PROGRAM
+
+(*
+line 43:27 extraneous input '[' expecting {'(', '-', 'NOT', BOOL, Binary_literal, Octal_literal, Decimal_literal, Pure_decimal_digits, Hexadecimal_literal, Static_string_literal, ID}
+line 43:37 no viable alternative at input '5]'
+line 47:47 extraneous input '[' expecting {')', ','}
+
+ semantic check error message:
+Wrong number of arguments passed to function block line: 43 col: 4
+
+Invalid assignment to a array name, line: 47 col: 43
+
+fbOutput and acceptLocation are not both array ot simple   line: 47 col: 36
+
+Invalid assignment to a array name, line: 51 col: 37
+Invalid assignment to a array name, line: 53 col: 4
+
+*)

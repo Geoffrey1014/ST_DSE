@@ -1,16 +1,22 @@
 (*
-DefPhase check error message:
-the symbol has already been declared: LOAD line: 20 col: 1
+he type of Irvalue and Irtype should be the same  line: 29 col: 1
 
- semantic check error message:
-the type of Irvalue and Irtype should be the same  line: 19 col: 1
-there is no VAR_OUTPUT in this POU :  line: 6 col: 0
-The lhs and rhs of an arithmetic expression must be of type bool line: 26 col: 10
-The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 29 col: 8
-The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 32 col: 4
-Variable used before declared line: 33 col: 4
-The lhs and rhs of an arithmetic expression must be of type int or real line: 33 col: 12
-The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 33 col: 4
+there is no VAR_OUTPUT in this POU :  line: 16 col: 0
+
+The lhs and rhs of an arithmetic expression must be of type bool line: 36 col: 10
+
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 39 col: 8
+	Expr type : RES_BOOL  StoreLocation type : RES_INT
+
+The variable to be assigned and the expression must both be of type int, real,  or of type bool line: 42 col: 4
+	Expr type : RES_BOOL  StoreLocation type : RES_INT
+
+Variable used before declared line: 43 col: 4
+
+The lhs and rhs of an arithmetic expression must be of type int or real line: 43 col: 12
+
+funciont block should not be used as function, line: 43 col: 4
+
 *)
 
 PROGRAM Main
