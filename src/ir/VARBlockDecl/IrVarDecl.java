@@ -1,7 +1,10 @@
 package ir.VARBlockDecl;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrIdent;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrVarDecl extends Ir {
@@ -32,6 +35,11 @@ public class IrVarDecl extends Ir {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrVarDecl(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 
     public String getName() {

@@ -49,7 +49,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
     }
 
     @Override
-    public Void visitIrFloatLiteral(IrFloatLiteral node) {
+    public Void visitIrFloatLiteral(IrRealLiteral node) {
 //        errorMessage += "";
         return null;
     }

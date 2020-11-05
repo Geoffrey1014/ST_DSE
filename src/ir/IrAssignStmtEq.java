@@ -1,7 +1,13 @@
 package ir;
 
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Location.IrLocation;
+import ir.Location.IrLocationArray;
+import ll.assignStmt.LlAssignStmtRegular;
+import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 public class IrAssignStmtEq extends IrAssignStmt {
@@ -32,6 +38,22 @@ public class IrAssignStmtEq extends IrAssignStmt {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrAssignStmtEq(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        LlLocation tempVal = expr.generateLlIr(builder, symbolTable);
+
+        if(this.getStoreLocation() instanceof IrLocationArray){
+            LlLocation arrayLocation = ((IrLocationArray) this.getStoreLocation()).generateLlIr(builder, symbolTable);
+            LlAssignStmtRegular regularAssignment = new LlAssignStmtRegular(arrayLocation, tempVal);
+            builder.appendStatement(regularAssignment);
+        }
+        else {
+            LlAssignStmtRegular regularAssignment = new LlAssignStmtRegular(new LlLocationVar(this.getStoreLocation().getLocationName().getValue()), tempVal);
+            builder.appendStatement(regularAssignment);
+        }
+        return null;
     }
 
     public IrExpr getExpr() {

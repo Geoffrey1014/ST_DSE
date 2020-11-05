@@ -1,8 +1,11 @@
 package ir.POUDecl;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrCodeBlock;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrVARBlockDecl;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 
@@ -57,5 +60,10 @@ public class IrFunctionBlockDecl extends IrPouDecl {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrFunctionBlockDecl(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 }

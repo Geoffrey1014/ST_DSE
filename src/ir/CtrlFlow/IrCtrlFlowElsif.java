@@ -1,7 +1,13 @@
 package ir.CtrlFlow;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrCodeBlock;
 import ir.IrExpr;
+import ll.LlEmptyStmt;
+import ll.jump.LlJumpConditional;
+import ll.jump.LlJumpUnconditional;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrCtrlFlowElsif extends IrCtrlFlowIf {
@@ -27,6 +33,41 @@ public class IrCtrlFlowElsif extends IrCtrlFlowIf {
         prettyString += this.stmtBody.prettyPrint("    " + indentSpace);
 
         return prettyString;
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        // condition goto(label)
+        // if not go to end of the if block
+        String elsifBlockLabel = "ELSIF_" + builder.generateLabel();
+        String endIfLabel = "END_" + elsifBlockLabel;
+
+        // Generate the conditional statement.
+        LlLocation conditionalTemp = this.condExpr.generateLlIr(builder, symbolTable);
+        LlJumpConditional conditionalJump = new LlJumpConditional(elsifBlockLabel, conditionalTemp);
+        builder.appendStatement(conditionalJump);
+
+        // if the conditional doesnt work, jump to the end of the block.
+        LlJumpUnconditional unconditionalJump = new LlJumpUnconditional(endIfLabel);
+        builder.appendStatement(unconditionalJump);
+
+        // add the label to the if body block
+        LlEmptyStmt emptyStmt = new LlEmptyStmt();
+        builder.appendStatement(elsifBlockLabel, emptyStmt);
+
+        //  finally generate the if statement body itself
+        this.stmtBody.generateLlIr(builder, symbolTable);
+
+        // after the elsif block is executed, jump to the end of the if-elsif block.
+        String endBlock = "END_" + builder.getCurrentBlock();
+        LlJumpUnconditional unconditionalJumpEndIf = new LlJumpUnconditional(endBlock);
+        builder.appendStatement(unconditionalJumpEndIf);
+
+        // append end if label
+        LlEmptyStmt endIfEmptyStmt = new LlEmptyStmt();
+        builder.appendStatement(endIfLabel, endIfEmptyStmt);
+
+        return null;
     }
 
 }

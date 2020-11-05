@@ -1,7 +1,13 @@
 package ir.CtrlFlow;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrCodeBlock;
 import ir.IrExpr;
+import ll.LlEmptyStmt;
+import ll.jump.LlJumpConditional;
+import ll.jump.LlJumpUnconditional;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrCtrlFlowIf extends IrCtrlFlow {
@@ -35,5 +41,36 @@ public class IrCtrlFlowIf extends IrCtrlFlow {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowIf(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        // condition goto(label)
+        // if not go to end of the if block
+        String ifBlockLabel = "IF_" + builder.generateLabel();
+        String endIfLabel = "END_" + ifBlockLabel;
+
+        // Generate the conditional statement.
+        LlLocation conditionalTemp = this.condExpr.generateLlIr(builder, symbolTable);
+        LlJumpConditional conditionalJump = new LlJumpConditional(ifBlockLabel, conditionalTemp);
+        builder.appendStatement(conditionalJump);
+
+        // if the conditional doesnt work, jump to the end of the block.
+        LlJumpUnconditional unconditionalJump = new LlJumpUnconditional(endIfLabel);
+        builder.appendStatement(unconditionalJump);
+
+        // add the label to the if body block
+        LlEmptyStmt emptyStmt = new LlEmptyStmt();
+        builder.appendStatement(ifBlockLabel, emptyStmt);
+
+        //  finally generate the if statement body itself
+        this.stmtBody.generateLlIr(builder, symbolTable);
+
+        // append end if label
+        LlEmptyStmt endIfEmptyStmt = new LlEmptyStmt();
+        builder.appendStatement(endIfLabel, endIfEmptyStmt);
+
+        // return the last known ...
+        return null;
     }
 }

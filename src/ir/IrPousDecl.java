@@ -1,8 +1,12 @@
 package ir;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.POUDecl.IrFunctionBlockDecl;
 import ir.POUDecl.IrFunctionDecl;
+import ir.POUDecl.IrPouDecl;
 import ir.POUDecl.IrProgramDecl;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 import java.util.ArrayList;
@@ -16,6 +20,7 @@ public class IrPousDecl extends Ir {
     private ArrayList<IrProgramDecl> programDeclsArrayList;
     private ArrayList<IrFunctionBlockDecl> functionBlockDeclsArrayList;
     private ArrayList<IrFunctionDecl> functionDeclArrayList;
+    private ArrayList<LlBuilder> llBuilderArrayList;
 
 
     public IrPousDecl(ArrayList<IrProgramDecl> programDeclsArrayList, ArrayList<IrFunctionBlockDecl> functionBlockDeclsArrayList,
@@ -73,5 +78,37 @@ public class IrPousDecl extends Ir {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrPousDecl(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
+    }
+
+    public ArrayList<LlBuilder> getBuilderList() {
+        ArrayList<LlBuilder> buildersList = new ArrayList<>();
+
+        for (IrPouDecl program: this.programDeclsArrayList) {
+            LlBuilder llBuilder = new LlBuilder();
+            LlSymbolTable llSymbolTable = new LlSymbolTable();
+            program.generateLlIr(llBuilder, llSymbolTable);
+            buildersList.add(llBuilder);
+        }
+
+        for (IrPouDecl fbDecl: this.functionBlockDeclsArrayList) {
+            LlBuilder llBuilder = new LlBuilder();
+            LlSymbolTable llSymbolTable = new LlSymbolTable();
+            fbDecl.generateLlIr(llBuilder, llSymbolTable);
+
+            buildersList.add(llBuilder);
+        }
+        for (IrPouDecl functionDecl: this.functionDeclArrayList) {
+            LlBuilder llBuilder = new LlBuilder();
+            LlSymbolTable llSymbolTable = new LlSymbolTable();
+            functionDecl.generateLlIr(llBuilder, llSymbolTable);
+            buildersList.add(llBuilder);
+        }
+
+        return buildersList;
     }
 }

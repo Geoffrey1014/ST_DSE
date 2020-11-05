@@ -1,8 +1,13 @@
 package ir.Operation;
 
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrExpr;
 import ir.VarTypeEnum;
+import ll.assignStmt.LlAssignStmtUnaryOp;
+import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 /**
@@ -34,6 +39,16 @@ public class IrOperUnaryNeg extends IrOperUnary {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrOperUnaryNeg(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        LlLocation operandTemp = this.operand.generateLlIr(builder, symbolTable);
+
+        LlLocationVar returnTemp = builder.generateTemp();
+        LlAssignStmtUnaryOp unaryOp = new LlAssignStmtUnaryOp(returnTemp, operandTemp, "-");
+        builder.appendStatement(unaryOp);
+        return returnTemp;
     }
 
 }

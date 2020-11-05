@@ -1,6 +1,9 @@
 package ir;
 
 import SymbolTable.Scope;
+import helper.LlBuilder;
+import helper.LlSymbolTable;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public abstract class Ir implements Where {
@@ -27,4 +30,6 @@ public abstract class Ir implements Where {
     public abstract String prettyPrint(String indentSpace);
 
     public abstract void accept(BaseVisitor<Void> visitor);
+
+    public abstract LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable);
 }

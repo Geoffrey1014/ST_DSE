@@ -1,9 +1,9 @@
 package ll.literal;
 
-public class LiLiteralReal extends LlLiteral {
+public class LlLiteralReal extends LlLiteral {
     private final double realValue;
 
-    public LiLiteralReal(double intValue) {
+    public LlLiteralReal(double intValue) {
         this.realValue = intValue;
     }
 
@@ -21,10 +21,10 @@ public class LiLiteralReal extends LlLiteral {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof LiLiteralReal)) {
+        if (!(obj instanceof LlLiteralReal)) {
             return false;
         }
-        return ((LiLiteralReal) obj).realValue == this.realValue;
+        return ((LlLiteralReal) obj).realValue == this.realValue;
 
     }
 

@@ -1,10 +1,14 @@
 package ir.Location;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrExpr;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrVarDecl;
 import ir.VarTypeEnum;
+import ll.location.LlFbStLocation;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrFbStLocation extends IrExpr {
@@ -56,6 +60,14 @@ public class IrFbStLocation extends IrExpr {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrFbStLocation(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        // TODO ： i don't know how to handle this for now
+//        LlLocationVar locationTempLasr = new LlLocationVar(this.varNameLast.getValue());
+//        LlLocationVar locationTempFirst = new LlLocationVar(this.varNameFirst.getValue());
+        return new LlFbStLocation(this.varNameLast.getValue(), this.varNameLast.getValue());
     }
 
     public void setIrDecl(Ir pou, IrVarDecl var) {

@@ -1,8 +1,13 @@
 package ir.Operation;
 
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrExpr;
 import ir.VarTypeEnum;
+import ll.assignStmt.LlAssignStmtBinaryOp;
+import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 /**
@@ -41,6 +46,16 @@ public class IrOperBinaryRel extends IrOperBinary {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrOperBinaryRel(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        LlLocation rightTemp = this.rightOperand.generateLlIr(builder, symbolTable);
+        LlLocation leftTemp = this.leftOperand.generateLlIr(builder, symbolTable);
+        LlLocationVar returnTemp = builder.generateTemp();
+        LlAssignStmtBinaryOp assignStmtBinaryOp = new LlAssignStmtBinaryOp(returnTemp, leftTemp, this.getOperation() ,rightTemp);
+        builder.appendStatement(assignStmtBinaryOp);
+        return returnTemp;
     }
 
 }

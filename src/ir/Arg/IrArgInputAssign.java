@@ -1,9 +1,12 @@
 package ir.Arg;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrExpr;
 import ir.IrIdent;
 import ir.POUDecl.IrPouDecl;
 import ir.VARBlockDecl.IrVarDecl;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrArgInputAssign extends IrArg {
@@ -40,6 +43,11 @@ public class IrArgInputAssign extends IrArg {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrArgInputAssign(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 
 }

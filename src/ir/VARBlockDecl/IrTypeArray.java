@@ -1,7 +1,10 @@
 package ir.VARBlockDecl;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Literal.IrIntLiteral;
 import ir.VarTypeEnum;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrTypeArray extends IrType {
@@ -29,6 +32,11 @@ public class IrTypeArray extends IrType {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrTypeArray(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 
     public int getArraySize(){

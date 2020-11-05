@@ -1,10 +1,14 @@
 package ir.Location;
 
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrIdent;
 import ir.VARBlockDecl.IrVarDecl;
 import ir.VarTypeEnum;
+import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 /**
@@ -48,5 +52,11 @@ public class IrLocationVar extends IrLocation {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrLocationVar(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        LlLocationVar locationTemp = new LlLocationVar(this.varName.getValue());
+        return locationTemp;
     }
 }

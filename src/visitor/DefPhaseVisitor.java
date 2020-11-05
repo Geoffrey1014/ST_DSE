@@ -9,8 +9,8 @@ import ir.Arg.IrArgOutputAssign;
 import ir.CtrlFlow.*;
 import ir.*;
 import ir.Literal.IrBoolLiteral;
-import ir.Literal.IrFloatLiteral;
 import ir.Literal.IrIntLiteral;
+import ir.Literal.IrRealLiteral;
 import ir.Literal.IrStringLiteral;
 import ir.Location.IrFbStLocation;
 import ir.Location.IrLocationArray;
@@ -104,7 +104,7 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
     }
 
     @Override
-    public Void visitIrFloatLiteral(IrFloatLiteral node) {
+    public Void visitIrFloatLiteral(IrRealLiteral node) {
         return null;
     }
 

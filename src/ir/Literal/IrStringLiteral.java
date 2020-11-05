@@ -1,6 +1,9 @@
 package ir.Literal;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.VarTypeEnum;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 /**
@@ -33,5 +36,10 @@ public class IrStringLiteral extends IrLiteral {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrStringLiteral(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 }

@@ -1,5 +1,7 @@
+import cfg.CFG;
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
+import helper.LlBuilder;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -87,8 +89,8 @@ public class Mian {
     }
 
     public static void walkTree(String[] args){
-        String prefix = "tests/";
-        String inputFile = prefix + "illegal/07_test.txt";
+        String prefix = "tests/sematics/";
+        String inputFile = prefix + "legal/01_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -114,15 +116,16 @@ public class Mian {
             System.err.println("\n semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
-            System.out.println("\n pretty print:\n");
-            System.out.println(listener.pous.prettyPrint(""));
+//            System.out.println("\n pretty print:\n");
+//            System.out.println(listener.pous.prettyPrint(""));
 
-//            ArrayList<String> ruleNames = new ArrayList<>();
-//            ruleNames.add("program");
+            System.out.println("\n low level IR\n");
+            for (LlBuilder builder : listener.pous.getBuilderList()) {
+                CFG cfg = new CFG(builder);
+                System.out.println(cfg.toString());
+            }
 
-//            MyPrint.levelZero.print(listener.pous.getProgramDeclsArrayList().get(0).getName());
-//            MyPrint.levelZero.print(listener.pous.getFunctionBlockDeclsArrayList().get(0).getName());
-//            MyPrint.levelZero.print(listener.pous.getFunctionDeclArrayList().get(0).getName());
+//
 
         }
         catch (IOException e){

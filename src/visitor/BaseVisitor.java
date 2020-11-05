@@ -6,8 +6,8 @@ import ir.Arg.IrArgOutputAssign;
 import ir.CtrlFlow.*;
 import ir.*;
 import ir.Literal.IrBoolLiteral;
-import ir.Literal.IrFloatLiteral;
 import ir.Literal.IrIntLiteral;
+import ir.Literal.IrRealLiteral;
 import ir.Literal.IrStringLiteral;
 import ir.Location.IrFbStLocation;
 import ir.Location.IrLocationArray;
@@ -21,7 +21,7 @@ import ir.VARBlockDecl.*;
 public interface BaseVisitor<T> {
     T visitIrIdent(IrIdent irIdent);
     T visitIrBoolLiteral(IrBoolLiteral node);
-    T visitIrFloatLiteral(IrFloatLiteral node);
+    T visitIrFloatLiteral(IrRealLiteral node);
     T visitIrIntLiteral(IrIntLiteral node);
     T visitIrStringLiteral(IrStringLiteral node);
 

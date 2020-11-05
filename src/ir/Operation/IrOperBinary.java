@@ -25,8 +25,8 @@ public abstract class IrOperBinary extends IrOper {
         return this.rightOperand;
     }
 
-    public OperKeyWordEnum getOperation() {
-        return this.operation;
+    public String getOperation() {
+        return this.operation.toString();
     }
 
     public String toString() {

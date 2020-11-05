@@ -1,8 +1,11 @@
 package ir.CtrlFlow;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.IrCodeBlock;
 import ir.IrStmt;
 import ir.Location.IrLocationVar;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrCtrlFlowFor extends IrStmt {
@@ -42,6 +45,11 @@ public class IrCtrlFlowFor extends IrStmt {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowFor(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 
     public IrLocationVar getCounter() {

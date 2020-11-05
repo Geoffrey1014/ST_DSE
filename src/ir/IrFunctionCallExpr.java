@@ -1,10 +1,17 @@
 package ir;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Arg.IrArg;
 import ir.Arg.IrArgOutputAssign;
 import ir.VARBlockDecl.IrType;
+import ll.LlComponent;
+import ll.LlMethodCallStmt;
+import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IrFunctionCallExpr extends IrExpr {
@@ -58,5 +65,18 @@ public class IrFunctionCallExpr extends IrExpr {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrFunctionCallExpr(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        List<LlComponent> argsList = new ArrayList<>();
+        for(IrArg arg : this.argsList){
+            argsList.add(arg.generateLlIr(builder, symbolTable));
+        }
+        // TODO List<IrArgOutputAssign> assignOutputList  后面再处理
+        LlLocationVar returnLocation = builder.generateTemp();
+        LlMethodCallStmt methodCallStmt = new LlMethodCallStmt(this.functionName.getValue(), argsList, returnLocation);
+        builder.appendStatement(methodCallStmt);
+        return returnLocation;
     }
 }

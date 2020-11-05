@@ -1,7 +1,10 @@
 package ir.CtrlFlow;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrExpr;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrCtrlFlowForRange extends Ir {
@@ -44,6 +47,11 @@ public class IrCtrlFlowForRange extends Ir {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrCtrlFlowForRange(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 
     public IrExpr getLow() {

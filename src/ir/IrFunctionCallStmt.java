@@ -1,7 +1,10 @@
 package ir;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Arg.IrArg;
 import ir.Arg.IrArgOutputAssign;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 import java.util.List;
@@ -55,5 +58,10 @@ public class IrFunctionCallStmt extends IrStmt{
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrFunctionCallStmt(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 }

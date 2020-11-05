@@ -1,6 +1,9 @@
 package ir.VARBlockDecl;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.VarTypeEnum;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrTypeSimple extends IrType {
@@ -24,5 +27,10 @@ public class IrTypeSimple extends IrType {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrTypeSimple(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 }

@@ -1,6 +1,9 @@
 package ir;
 
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrStmtReturn extends IrStmt {
@@ -18,5 +21,10 @@ public class IrStmtReturn extends IrStmt {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
 
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 }

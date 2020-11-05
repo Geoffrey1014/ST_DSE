@@ -1,6 +1,9 @@
 package ir.VARBlockDecl;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Ir;
+import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 import java.util.ArrayList;
@@ -45,5 +48,10 @@ public class IrVARBlockDecl extends Ir {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrVARBlockDecl(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        return null;
     }
 }

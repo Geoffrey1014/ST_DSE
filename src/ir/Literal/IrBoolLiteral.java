@@ -1,6 +1,12 @@
 package ir.Literal;
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.VarTypeEnum;
+import ll.assignStmt.LlAssignStmtRegular;
+import ll.literal.LlLiteralBool;
+import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 public class IrBoolLiteral extends IrLiteral {
@@ -32,5 +38,14 @@ public class IrBoolLiteral extends IrLiteral {
     @Override
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrBoolLiteral(this);
+    }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        LlLiteralBool llLiteralBool = new LlLiteralBool(this.value);
+        LlLocationVar var = builder.generateTemp();
+        LlAssignStmtRegular regularAssignment = new LlAssignStmtRegular(var, llLiteralBool);
+        builder.appendStatement(regularAssignment);
+        return var;
     }
 }

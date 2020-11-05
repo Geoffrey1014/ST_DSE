@@ -1,10 +1,15 @@
 package ir.Location;
 
 
+import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrExpr;
 import ir.IrIdent;
 import ir.VarTypeEnum;
+import ll.location.LlLocation;
+import ll.location.LlLocationArray;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 /**
@@ -56,4 +61,13 @@ public class IrLocationArray extends IrLocation {
     public void accept(BaseVisitor<Void> visitor) {
         visitor.visitIrLocationArray(this);
     }
+
+    @Override
+    public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        LlLocation indexExpressionTemp = this.elementIndex.generateLlIr(builder, symbolTable);
+        LlLocationArray locationArray = new LlLocationArray(this.varName.getValue(), ((LlLocationVar)indexExpressionTemp));
+        return locationArray;
+    }
+
+
 }
