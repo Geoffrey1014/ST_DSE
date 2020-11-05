@@ -13,9 +13,9 @@ VAR_INPUT
 END_VAR
 
 FOR count := 1 TO 5 DO
-    IF lst[count] > max THEN
+
         max := lst[max];
-    END_IF;
+
 END_FOR;
 
 

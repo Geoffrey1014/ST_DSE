@@ -48,6 +48,6 @@ public class IrArgExpr extends IrArg {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
-        return null;
+        return this.getArgValue().generateLlIr(builder, symbolTable);
     }
 }
