@@ -62,12 +62,17 @@ public class IrFbStLocation extends IrExpr {
         visitor.visitIrFbStLocation(this);
     }
 
+    /**
+     * 这个有部分面向对象特征啊，怎么搞？
+     * 总之没有指针，那么就不能生成FB的不同对象。
+     * LlFbStLocation 应该保存那些信息？
+     * 运行时，应该做什么动作？内存状态怎么变化？
+     * 可以先简化一下，因为FB只有一个 实体对象。
+     */
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
-        // TODO ： i don't know how to handle this for now
-//        LlLocationVar locationTempLasr = new LlLocationVar(this.varNameLast.getValue());
-//        LlLocationVar locationTempFirst = new LlLocationVar(this.varNameFirst.getValue());
-        return new LlFbStLocation(this.varNameLast.getValue(), this.varNameLast.getValue());
+        // TODO ： 目前只是简单的把名字穿进去，后续需要更多信息再加吧
+        return new LlFbStLocation(this.varNameLast.getValue(), this.varNameFirst.getValue());
     }
 
     public void setIrDecl(Ir pou, IrVarDecl var) {

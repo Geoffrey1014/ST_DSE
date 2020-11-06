@@ -5,14 +5,23 @@ import helper.LlSymbolTable;
 import ir.Arg.IrArg;
 import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
+import ir.POUDecl.IrPouDecl;
+import ll.LlComponent;
+import ll.LlMethodCallStmt;
+import ll.assignStmt.LlAssignStmtRegular;
+import ll.location.LlFbStLocation;
 import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IrFunctionCallStmt extends IrStmt{
 
     public final IrIdent functionBlockName;
+    public IrPouDecl functionBlock;
+
     public final List<IrArg> argsList;
     public final List<IrArgOutputAssign> assignOutputList;
     public List<IrArgInputAssign> argInputAssignsList = null; // 如果是 null, 代表 IrArg 类型不是 IrArgInputAssign
@@ -64,6 +73,32 @@ public class IrFunctionCallStmt extends IrStmt{
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+
+        List<LlComponent> argsList = new ArrayList<>();
+        if (this.argInputAssignsList != null && this.argInputAssignsList.size() != 0){
+            for (IrArgInputAssign argInputAssign : this.argInputAssignsList){
+                argsList.add(argInputAssign.generateLlIr(builder,symbolTable));
+            }
+        }
+        else {
+            for(IrArg arg : this.argsList){
+                argsList.add(arg.generateLlIr(builder, symbolTable));
+            }
+        }
+        LlMethodCallStmt methodCallStmt = new LlMethodCallStmt(this.functionBlockName.getValue(), argsList);
+        builder.appendStatement(methodCallStmt);
+
+        // TODO List<IrArgOutputAssign> assignOutputList  也是要把顺序对上才行 怎么办呢
+        // 生成 LlFbStLocation, 交给 LlFbStLocation 处理 , 目前是很粗糙的，传递的信息很少
+        for(IrArgOutputAssign arg : this.assignOutputList){
+            LlFbStLocation llFbStLocation = new LlFbStLocation(arg.fbOutput.getValue(), this.functionBlockName.getValue());
+            LlLocationVar var = new LlLocationVar(arg.acceptLocation.varName.getValue());
+            builder.appendStatement(new LlAssignStmtRegular(var, llFbStLocation));
+
+        }
+
+
         return null;
+
     }
 }

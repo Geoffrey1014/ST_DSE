@@ -56,8 +56,15 @@ public class IrArgOutputAssign extends IrArg {
         visitor.IrArgOutputAssign(this);
     }
 
+    /**
+     *  outputAssign  是作为参数传给 function的
+     *  callee 结束后要 return 这几个值
+     *  caller 用相应的location去接收
+     *  所以生成相应的代码，在 callee 结束后，跳转到这段代码
+     */
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+
         return null;
     }
 }

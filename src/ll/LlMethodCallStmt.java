@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LlMethodCallStmt extends LlStatement {
 
-    private final LlLocation returnLocation;
+    private  LlLocation returnLocation = null;
     private final String methodName;
     private final List<LlComponent> argsList;
 
@@ -16,6 +16,10 @@ public class LlMethodCallStmt extends LlStatement {
         this.methodName = methodName;
         this.argsList = argsList;
         this.returnLocation = returnLocation;
+    }
+    public LlMethodCallStmt(String methodName, List<LlComponent> argsList) {
+        this.methodName = methodName;
+        this.argsList = argsList;
     }
 
     public String getMethodName() {
@@ -36,7 +40,13 @@ public class LlMethodCallStmt extends LlStatement {
         for (LlComponent arg : argsList) {
             argsString.append(arg.toString()).append(",");
         }
-        return this.returnLocation.toString() + " = " + this.methodName + "(" + argsString + ")";
+        if (this.returnLocation != null){
+            return this.returnLocation.toString() + " = " + this.methodName + "(" + argsString + ")";
+        }
+        else {
+            return  this.methodName + "(" + argsString + ")";
+        }
+
     }
 
     @Override
@@ -47,9 +57,17 @@ public class LlMethodCallStmt extends LlStatement {
         if (!(obj instanceof LlMethodCallStmt)) {
             return false;
         }
-        return ((LlMethodCallStmt) obj).returnLocation.equals(this.returnLocation)
-                && ((LlMethodCallStmt) obj).methodName.equals(this.methodName)
-                && ((LlMethodCallStmt) obj).argsList.equals(this.argsList);
+        if (this.returnLocation == null){
+            return ((LlMethodCallStmt) obj).methodName.equals(this.methodName)
+                    && ((LlMethodCallStmt) obj).argsList.equals(this.argsList);
+
+        }
+        else {
+            return ((LlMethodCallStmt) obj).returnLocation.equals(this.returnLocation)
+                    && ((LlMethodCallStmt) obj).methodName.equals(this.methodName)
+                    && ((LlMethodCallStmt) obj).argsList.equals(this.argsList);
+
+        }
 
     }
 

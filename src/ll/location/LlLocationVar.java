@@ -8,7 +8,7 @@ public class LlLocationVar extends LlLocation {
 
     @Override
     public String toString() {
-        return this.getVarName().toString();
+        return this.getVarName();
     }
 
     @Override

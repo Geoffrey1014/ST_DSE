@@ -210,6 +210,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             // for normal POU_Decl
             if (object instanceof IrFunctionBlockDecl) {
                 IrFunctionBlockDecl functionBlockDecl = (IrFunctionBlockDecl) object;
+                node.functionBlock = (IrPouDecl) object;
 
                 // 2) check for same number of params
                 List<IrVarDecl> varInputs = functionBlockDecl.varBlockVAR_INPUT.VarList;
@@ -261,6 +262,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                             ((IrArgInputAssign) argInputAssign).irDeclPou = functionBlockDecl;
                             argInputAssign.accept(this);
                         }
+                        // TODO 其实这里要保证 上面的参数没有错的情况下才能做，不然下面做的人有可能是错的
                         // ArgInputAssign 检查完毕后，把顺序排成和 VAR_INPUT 一致
                         // 1。 兴建一个 ArgInputAssign 队列
                         // 2。 for each VAR_INOUT， find corresponding  ArgInputAssign

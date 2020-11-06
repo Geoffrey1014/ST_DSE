@@ -78,8 +78,8 @@ public class IrFunctionCallExpr extends IrExpr {
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
         LlLocationVar returnLocation = builder.generateTemp();
         List<LlComponent> argsList = new ArrayList<>();
-        // TODO List<IrArgOutputAssign> assignOutputList  也是要把顺序对上才行
-        if (this.assignOutputList != null){
+
+        if (this.argInputAssignsList != null && this.argInputAssignsList.size() != 0){
             for (IrArgInputAssign argInputAssign : this.argInputAssignsList){
                 argsList.add(argInputAssign.generateLlIr(builder,symbolTable));
             }

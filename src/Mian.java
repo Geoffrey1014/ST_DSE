@@ -90,7 +90,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/sematics/";
-        String inputFile = prefix + "legal/02_test.txt";
+        String inputFile = prefix + "legal/03_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
