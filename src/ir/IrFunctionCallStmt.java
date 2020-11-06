@@ -3,6 +3,7 @@ package ir;
 import helper.LlBuilder;
 import helper.LlSymbolTable;
 import ir.Arg.IrArg;
+import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
 import ll.location.LlLocation;
 import visitor.BaseVisitor;
@@ -14,6 +15,7 @@ public class IrFunctionCallStmt extends IrStmt{
     public final IrIdent functionBlockName;
     public final List<IrArg> argsList;
     public final List<IrArgOutputAssign> assignOutputList;
+    public List<IrArgInputAssign> argInputAssignsList = null; // 如果是 null, 代表 IrArg 类型不是 IrArgInputAssign
 //    public List<IrFbStLocation> fbStLocationList; // 和 assignOutputList 是一一对应的，顺序也是一一对应的
 //    public IrType functionType = null; // 永远 为 null
 

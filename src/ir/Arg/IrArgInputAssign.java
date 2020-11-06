@@ -47,7 +47,8 @@ public class IrArgInputAssign extends IrArg {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
-        return null;
+
+        return this.argValue.generateLlIr(builder, symbolTable);
     }
 
 }

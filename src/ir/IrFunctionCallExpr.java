@@ -3,6 +3,7 @@ package ir;
 import helper.LlBuilder;
 import helper.LlSymbolTable;
 import ir.Arg.IrArg;
+import ir.Arg.IrArgInputAssign;
 import ir.Arg.IrArgOutputAssign;
 import ir.VARBlockDecl.IrType;
 import ll.LlComponent;
@@ -18,6 +19,8 @@ public class IrFunctionCallExpr extends IrExpr {
     public final IrIdent functionName;
     public final List<IrArg> argsList;
     public final List<IrArgOutputAssign> assignOutputList;
+    public List<IrArgInputAssign> argInputAssignsList = null; // 如果是 null, 代表 IrArg 类型不是 IrArgInputAssign
+
     public IrType functionType;
 
     public IrFunctionCallExpr(IrIdent functionName, List<IrArg> argsList, List<IrArgOutputAssign> assignOutputList) {
@@ -67,14 +70,27 @@ public class IrFunctionCallExpr extends IrExpr {
         visitor.visitIrFunctionCallExpr(this);
     }
 
+    /**
+     * function call  只是要实现call 这个过程的LLIR 形式而已
+     * LLIR 再翻译成堆栈的形式
+     */
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
-        List<LlComponent> argsList = new ArrayList<>();
-        for(IrArg arg : this.argsList){
-            argsList.add(arg.generateLlIr(builder, symbolTable));
-        }
-        // TODO List<IrArgOutputAssign> assignOutputList  后面再处理
         LlLocationVar returnLocation = builder.generateTemp();
+        List<LlComponent> argsList = new ArrayList<>();
+        // TODO List<IrArgOutputAssign> assignOutputList  也是要把顺序对上才行
+        if (this.assignOutputList != null){
+            for (IrArgInputAssign argInputAssign : this.argInputAssignsList){
+                argsList.add(argInputAssign.generateLlIr(builder,symbolTable));
+            }
+        }
+        else {
+            for(IrArg arg : this.argsList){
+                argsList.add(arg.generateLlIr(builder, symbolTable));
+            }
+        }
+
+
         LlMethodCallStmt methodCallStmt = new LlMethodCallStmt(this.functionName.getValue(), argsList, returnLocation);
         builder.appendStatement(methodCallStmt);
         return returnLocation;

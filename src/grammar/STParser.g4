@@ -77,8 +77,8 @@ for_range : expression RES_TO expression (RES_BY step=expression)? ;
 
 while_stat : RES_WHILE expression RES_DO stat_list RES_END_WHILE SEMI_COL ;
 //repeat_stat : 'REPEAT' stat_list 'UNTIL' expression 'END_REPEAT' ';' ;
-exit_stat : RES_EXIT ;
-return_stat : RES_RETURN;
+exit_stat : RES_EXIT SEMI_COL;
+return_stat : RES_RETURN SEMI_COL;
 
 
 invoc_expr : fb_name=ID L_PAREN (param_assignment (COMMA param_assignment)* ) ? R_PAREN ;

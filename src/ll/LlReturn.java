@@ -3,10 +3,12 @@ package ll;
 
 public class LlReturn extends LlStatement {
 
-    private final LlComponent returnValue;
+    private LlComponent returnValue = null;
 
     public LlReturn(LlComponent returnValue) {
         this.returnValue = returnValue;
+    }
+    public LlReturn() {
     }
 
     public LlComponent getReturnValue() {

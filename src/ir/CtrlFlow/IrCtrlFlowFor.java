@@ -61,9 +61,6 @@ public class IrCtrlFlowFor extends IrStmt {
      * 3）计算循环体
      * 4）counter 加上 step， 返回 2）
      *
-     * @param builder
-     * @param symbolTable
-     * @return
      */
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
@@ -104,6 +101,7 @@ public class IrCtrlFlowFor extends IrStmt {
             builder.appendStatement(new LlAssignStmtBinaryOp(llCounter, llCounter, "+", llStep));
         }
 
+        // 添加结束标签
         builder.appendStatement(new LlJumpUnconditional(loopCondition));
         builder.appendStatement(endLoopLabel, new LlEmptyStmt());
 

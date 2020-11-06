@@ -3,7 +3,10 @@ package ir.Literal;
 import helper.LlBuilder;
 import helper.LlSymbolTable;
 import ir.VarTypeEnum;
+import ll.assignStmt.LlAssignStmtRegular;
+import ll.literal.LlLiteralString;
 import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 /**
@@ -40,6 +43,11 @@ public class IrStringLiteral extends IrLiteral {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
-        return null;
+
+        LlLiteralString llLiteral = new LlLiteralString(this.value);
+        LlLocationVar var = builder.generateTemp();
+        LlAssignStmtRegular regularAssignment = new LlAssignStmtRegular(var, llLiteral);
+        builder.appendStatement(regularAssignment);
+        return var;
     }
 }

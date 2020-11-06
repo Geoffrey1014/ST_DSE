@@ -78,8 +78,6 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
      * 3.2 if the arguments are IrArgInputAssin type.
      *      check the child node
      * 4 we allow that funtions have output_var
-     * @param node
-     * @return
      */
     @Override
     public Void visitIrFunctionCallExpr(IrFunctionCallExpr node) {
@@ -142,6 +140,20 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                             argInputAssign.accept(this);
                         }
 
+                        // ArgInputAssign 检查完毕后，把顺序排成和 VAR_INPUT 一致
+                        // 1。 兴建一个 ArgInputAssign 队列
+                        // 2。 for each VAR_INOUT， find corresponding  ArgInputAssign
+                        ArrayList<IrArgInputAssign>  sortedArgInputAssignList = new ArrayList<>();
+                        for (IrVarDecl varDecl : varInputs){
+                            for (IrArg argInputAssign : argInputAssignList){
+                                if (((IrArgInputAssign) argInputAssign).irDeclVar.equals(varDecl) ){
+                                    sortedArgInputAssignList.add((IrArgInputAssign) argInputAssign);
+                                }
+                            }
+
+                        }
+                        node.argInputAssignsList = sortedArgInputAssignList;
+
                     }
 
 
@@ -180,6 +192,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
      * 2。VAR_INPUT and Arg 要对得上  分为 ArgExpr  和 ArgInputAssign
      * 2。1 ArgExpr : TypeEnum 要一致
      * 2。2 ArgInputAssign 和 FB 的 VAR_INPUT 名字 以及 TypeEnum 匹配
+     * 2。3  ArgInputAssign 检查完毕后，把顺序排成和 VAR_INPUT 一致
      * 3。 ArgOutputAssign  要和 Var_OUTPUT  匹配
      * 3.1  ArgOutputAssign.fbOutput 对应一个 IrFbStLocation。 functionBlockName 就是 IrFbStLocation.varNameFirst， IrFbStLocation 检查
      * 3.2  ArgOutputAssign.acceptLocation 是个 IrLocationVar 类型，IrLocationVar.irDeclObject 应该 被赋值 IrFbStLocation， IrLocationVar 检查
@@ -248,6 +261,19 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                             ((IrArgInputAssign) argInputAssign).irDeclPou = functionBlockDecl;
                             argInputAssign.accept(this);
                         }
+                        // ArgInputAssign 检查完毕后，把顺序排成和 VAR_INPUT 一致
+                        // 1。 兴建一个 ArgInputAssign 队列
+                        // 2。 for each VAR_INOUT， find corresponding  ArgInputAssign
+                        ArrayList<IrArgInputAssign>  sortedArgInputAssignList = new ArrayList<>();
+                        for (IrVarDecl varDecl : varInputs){
+                            for (IrArg argInputAssign : argInputAssignList){
+                                if (((IrArgInputAssign) argInputAssign).irDeclVar.equals(varDecl) ){
+                                    sortedArgInputAssignList.add((IrArgInputAssign) argInputAssign);
+                                }
+                            }
+
+                        }
+                        node.argInputAssignsList = sortedArgInputAssignList;
 
                     }
                 } else {
