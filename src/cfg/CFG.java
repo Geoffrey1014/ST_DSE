@@ -21,9 +21,6 @@ public class CFG {
         }
         System.err.println("LlBuilder statement list  end");
 
-
-        // TODO： 1. 怎么由LlBuilder 中一条一条的语句生成 CFG  2。怎么由AST生成一条一条的LLIR，每个节点对应怎样的语句。
-
         // cache the Labels => Stmts map and extract the labels list
         LinkedHashMap<String, LlStatement> labelStmtsMap = new LinkedHashMap<>(builder.getStatementTable());
         ArrayList<String> labelsList = new ArrayList<>(labelStmtsMap.keySet());
@@ -99,7 +96,7 @@ public class CFG {
                 if (lastStmtOfCurrentBB instanceof LlJump) {
                     String targetLabel = ((LlJump) lastStmtOfCurrentBB).getJumpToLabel();
                     BasicBlock targetBB = leadersToBBMap.get(targetLabel);
-                    bb.setAlternativeBranch(targetBB); // TODO setAlternativeBranch
+                    bb.setAlternativeBranch(targetBB); //  setAlternativeBranch
                 }
 
                 // C immediately follows B and B does not end in an unconditional jump
@@ -107,7 +104,7 @@ public class CFG {
                 if (!(lastStmtOfCurrentBB instanceof LlJumpUnconditional) && (i < orderedLeadersList.size() - 1)) {
                     String nextBBLeaderLabel = orderedLeadersList.get(i + 1);
                     BasicBlock nextBB = leadersToBBMap.get(nextBBLeaderLabel);
-                    bb.setDefaultBranch(nextBB); //TODO setDefaultBranch
+                    bb.setDefaultBranch(nextBB); // setDefaultBranch
                 }
             }
 

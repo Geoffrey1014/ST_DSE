@@ -64,6 +64,7 @@ public class IrFunctionBlockDecl extends IrPouDecl {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        this.CodeBlock.generateLlIr(builder, symbolTable);
         return null;
     }
 }

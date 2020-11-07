@@ -26,7 +26,7 @@ public abstract class IrOperBinary extends IrOper {
     }
 
     public String getOperation() {
-        return this.operation.toString();
+        return this.operation.getTypeName();
     }
 
     public String toString() {
