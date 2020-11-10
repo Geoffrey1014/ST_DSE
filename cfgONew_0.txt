@@ -5,13 +5,20 @@ CFG:
              L1 :  c = #_t0
              L2 :  #_t1 = 0
              L3 :  d = #_t1
-             L4 :  #_t2 = a + b
-             L5 :  #_t3 = #_t2
-             L6 :  #_t4 = #_t3 * #_t2
-             L7 :  c = #_t4
-             L8 :  #_t5 = #_t2
-             L9 :  #_t6 = #_t2
-            L10 :  #_t7 = #_t6 * #_t5
-            L11 :  d = #_t7
+             L4 :  #_t6 = a + b
+            L14 :  #_t5 = #_t6
+            L13 :  #_t2 = #_t5
+             L5 :  c = #_t2
+             L7 :  if tmp goto IF_L6
+
+             L8 :  goto END_IF_L6
+
+          IF_L6 :  EMPTY_STATEMENT
+             L9 :  #_t3 = #_t5
+            L10 :  d = #_t3
+
+      END_IF_L6 :  EMPTY_STATEMENT
+            L11 :  #_t4 = #_t6
+            L12 :  x = #_t4
 
            exit :  EMPTY_STATEMENT

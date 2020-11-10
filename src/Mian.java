@@ -114,7 +114,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/sematics/";
-        String inputFile = prefix + "legal/04_test.txt";
+        String inputFile = prefix + "legal/07_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -153,7 +153,7 @@ public class Mian {
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
-                writeFile(cfg, "cfgONew_" +  cfgCounter +".txt");
+                writeFile(cfg, "cfgNew_" +  cfgCounter +".txt");
                 cfgCounter ++;
             }
 

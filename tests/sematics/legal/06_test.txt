@@ -1,0 +1,20 @@
+PROGRAM Main
+VAR
+    tmp : INT;
+END_VAR
+VAR_INPUT
+    a : INT := 48;
+    b : INT := 35;
+END_VAR
+VAR_OUTPUT
+    c : INT;
+    d : INT;
+END_VAR
+    c := 0;
+    d := 0;
+    IF tmp THEN
+        c := a + b;
+    END_IF;
+    d := ( a + b ) ;
+
+END_PROGRAM
