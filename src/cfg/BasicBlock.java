@@ -1,21 +1,27 @@
 package cfg;
 
+import helper.LlBuilder;
 import ll.LlStatement;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class BasicBlock {
     private LinkedHashMap<String, LlStatement> labelsToStmtsMap;
     private BasicBlock defaultBranch;
     private BasicBlock alternativeBranch;
+    private final LlBuilder builder;
+    private final HashSet<BasicBlock> predecessors;
 
-    public BasicBlock(LinkedHashMap<String, LlStatement> labelsToStmtsMap) {
+    public BasicBlock(LinkedHashMap<String, LlStatement> labelsToStmtsMap, LlBuilder builder) {
         this.labelsToStmtsMap = new LinkedHashMap<>(labelsToStmtsMap);
+        this.builder = builder;
+        this.predecessors = new HashSet<>();
     }
 
     public LinkedHashMap<String, LlStatement> getLabelsToStmtsMap() {
-        return new LinkedHashMap<>(getLabelsToStmtsMap());
+        return this.labelsToStmtsMap;
     }
 
     public ArrayList<LlStatement> getStmtsList() {
@@ -50,12 +56,27 @@ public class BasicBlock {
     @Override
     public String toString() {
         String str = "";
-        str += "++++++ new block +++++++\n";
+//        str += "++++++ new block +++++++\n";
         for(String label : this.labelsToStmtsMap.keySet()){
             str += String.format("%1$15s :  ", label);
             str += this.labelsToStmtsMap.get(label) + "\n";
 
         }
         return str;
+    }
+
+    public LlBuilder getBuilder() {
+        return builder;
+    }
+
+    public HashSet<BasicBlock> getPredecessors() {
+        return predecessors;
+    }
+
+    protected void addPredecessorNode(BasicBlock parent) {
+        this.predecessors.add(parent);
+    }
+    public void setLabelsToStmtsMap(LinkedHashMap<String, LlStatement> labelsToStmtsMap) {
+        this.labelsToStmtsMap = labelsToStmtsMap;
     }
 }

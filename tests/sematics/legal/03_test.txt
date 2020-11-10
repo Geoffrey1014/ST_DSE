@@ -18,7 +18,7 @@ END_VAR
 
     END_FOR;
 
-    max := 0;
+    max := 3+5/2;
     add(y:=100, x := 2, a => OUT_1);
     max := add.z;
 

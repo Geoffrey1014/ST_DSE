@@ -1,6 +1,7 @@
 package cfg;
 
 import helper.LlBuilder;
+import ll.LlEmptyStmt;
 import ll.LlStatement;
 import ll.jump.LlJump;
 import ll.jump.LlJumpUnconditional;
@@ -10,7 +11,8 @@ import java.util.*;
 public class CFG {
     private final LlBuilder builder;
     private final ArrayList<BasicBlock> basicBlocks;
-
+    LinkedHashMap<String, BasicBlock> leadersToBBMap;
+    ArrayList<String> orderedLeadersList;
     public CFG(LlBuilder builder) {
 
         this.builder = builder;
@@ -52,10 +54,10 @@ public class CFG {
             }
 
             // 2) create basic blocks from LlStatements
-            LinkedHashMap<String, BasicBlock> leadersToBBMap = new LinkedHashMap<>();
+            leadersToBBMap = new LinkedHashMap<>();
             HashSet<String> tempLeadersSet = new HashSet<>(leadersSet);
             LinkedList<String> labelsQueue = new LinkedList<>(labelsList);
-            ArrayList<String> orderedLeadersList = new ArrayList<>();
+            orderedLeadersList = new ArrayList<>();
             do {
                 LinkedHashMap<String, LlStatement> bbLabelsToStmtsMap = new LinkedHashMap<>();
 
@@ -79,7 +81,7 @@ public class CFG {
                 }
 
                 // create the actual BasicBlock and it to the LinkedHashMap
-                BasicBlock bb = new BasicBlock(bbLabelsToStmtsMap);
+                BasicBlock bb = new BasicBlock(bbLabelsToStmtsMap, builder);
                 leadersToBBMap.put(leaderLabel, bb);
 
             } while (labelsQueue.size() > 0);
@@ -94,19 +96,59 @@ public class CFG {
 
                 // connect if there is a jump from the end of B to the beginning of C
                 if (lastStmtOfCurrentBB instanceof LlJump) {
+                    // set forward edge B --> C
                     String targetLabel = ((LlJump) lastStmtOfCurrentBB).getJumpToLabel();
-                    BasicBlock targetBB = leadersToBBMap.get(targetLabel);
-                    bb.setAlternativeBranch(targetBB); //  setAlternativeBranch
+                    BasicBlock targetBB = this.leadersToBBMap.get(targetLabel);
+                    bb.setAlternativeBranch(targetBB);
+
+                    // set reverse edge B <-- C
+                    targetBB.addPredecessorNode(bb);
                 }
 
                 // C immediately follows B and B does not end in an unconditional jump
                 // (this only holds if B is not the last block))
                 if (!(lastStmtOfCurrentBB instanceof LlJumpUnconditional) && (i < orderedLeadersList.size() - 1)) {
-                    String nextBBLeaderLabel = orderedLeadersList.get(i + 1);
-                    BasicBlock nextBB = leadersToBBMap.get(nextBBLeaderLabel);
-                    bb.setDefaultBranch(nextBB); // setDefaultBranch
+
+                    // set forward edge B --> C
+                    String nextBBLeaderLabel = this.orderedLeadersList.get(i + 1);
+                    BasicBlock nextBB = this.leadersToBBMap.get(nextBBLeaderLabel);
+                    bb.setDefaultBranch(nextBB);
+
+                    // set reverse edge B --> C
+                    nextBB.addPredecessorNode(bb);
                 }
             }
+
+            // add an empty BasicBlock as the entry node and
+            // connect it and the orignal first BB to each other
+            String trueFirstBBLabel = this.orderedLeadersList.get(0);
+            BasicBlock trueFirstBB = this.leadersToBBMap.get(trueFirstBBLabel);
+
+            String entryBBLabel = "entry";
+            this.orderedLeadersList.add(0, entryBBLabel);
+            LinkedHashMap<String, LlStatement> entryBBStmtsList = new LinkedHashMap<>();
+            entryBBStmtsList.put(entryBBLabel, new LlEmptyStmt());
+            BasicBlock entryBB = new BasicBlock(entryBBStmtsList, builder);
+            this.leadersToBBMap.put(entryBBLabel, entryBB);
+
+            entryBB.setDefaultBranch(trueFirstBB);
+            trueFirstBB.addPredecessorNode(entryBB);
+
+            // add an empty BasicBlock as the exit node and
+            // connect it and the orignal last BB to each other
+            String trueLastBBLabel = this.orderedLeadersList.get(this.orderedLeadersList.size() - 1);
+            BasicBlock trueLastBB = this.leadersToBBMap.get(trueLastBBLabel);
+
+            String exitBBLabel = "exit";
+            this.orderedLeadersList.add(exitBBLabel);
+            LinkedHashMap<String, LlStatement> exitBBStmtsList = new LinkedHashMap<>();
+            exitBBStmtsList.put(exitBBLabel, new LlEmptyStmt());
+            BasicBlock exitBB = new BasicBlock(exitBBStmtsList, builder);
+            this.leadersToBBMap.put(exitBBLabel, exitBB);
+
+            trueLastBB.setDefaultBranch(exitBB);
+            exitBB.addPredecessorNode(trueLastBB);
+
 
             // 4) assign the list of basic blocks as a field of THIS object
             ArrayList<BasicBlock> basicBlocks = new ArrayList<>();
@@ -130,5 +172,32 @@ public class CFG {
         }
         str = str.substring(0, str.length() - 1);
         return str;
+    }
+
+    public ArrayList<BasicBlock> getBasicBlocks() {
+        return this.basicBlocks;
+    }
+
+    /**
+     *  每当一种 OPT 完成后， 调用此函数，更新 basic block
+     * @return 返回 此 CFG 的 LlBuilder
+     */
+    public LlBuilder getBuilder() {
+
+        // in case any optimizations have occurred, make sure to update
+        // the LlBuilder's statementsTable in case some optimizations have occurred
+        LinkedHashMap<String, LlStatement> updatedMap = new LinkedHashMap<>();
+
+        // loop through the BasicBlocks in their linear order, and for
+        // each LlStatement, add it to the updatedMap
+        for (BasicBlock bb : this.basicBlocks) {
+            for (String label : bb.getLabelsToStmtsMap().keySet()) {
+                LlStatement stmt = bb.getLabelsToStmtsMap().get(label);
+                updatedMap.put(label, stmt);
+            }
+        }
+        this.builder.setStatementTable(updatedMap);
+
+        return this.builder;
     }
 }

@@ -97,4 +97,8 @@ public class LlBuilder {
         }
         return st;
     }
+
+    public void setStatementTable(LinkedHashMap<String, LlStatement> updatedMap) {
+        this.statementTable = updatedMap;
+    }
 }

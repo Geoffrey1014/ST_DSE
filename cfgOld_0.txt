@@ -1,0 +1,17 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+             L0 :  #_t0 = 0
+             L1 :  c = #_t0
+             L2 :  #_t1 = 0
+             L3 :  d = #_t1
+             L4 :  #_t2 = a + b
+             L5 :  #_t3 = a + b
+             L6 :  #_t4 = #_t3 * #_t2
+             L7 :  c = #_t4
+             L8 :  #_t5 = a + b
+             L9 :  #_t6 = a + b
+            L10 :  #_t7 = #_t6 * #_t5
+            L11 :  d = #_t7
+
+           exit :  EMPTY_STATEMENT

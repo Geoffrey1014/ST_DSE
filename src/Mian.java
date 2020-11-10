@@ -1,7 +1,9 @@
 import cfg.CFG;
+import cfg.GlobalCSE;
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
 import helper.LlBuilder;
+import ll.location.LlLocation;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -11,9 +13,8 @@ import tools.MyPrint;
 import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.util.HashSet;
 
 public class Mian {
     public static MyPrint myprint  = new MyPrint(3);
@@ -88,9 +89,32 @@ public class Mian {
 
     }
 
+    public static void writeFile(CFG cfg, String pathName){
+
+        try {
+
+            String content = cfg.toString();
+
+            File file = new File(pathName);
+
+            if (file.exists()) {
+                file = new File(pathName);
+//                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void walkTree(String[] args){
         String prefix = "tests/sematics/";
-        String inputFile = prefix + "legal/03_test.txt";
+        String inputFile = prefix + "legal/04_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -118,14 +142,22 @@ public class Mian {
 
 //            System.out.println("\n pretty print:\n");
 //            System.out.println(listener.pous.prettyPrint(""));
-
+            int cfgCounter = 0;
             System.out.println("\n low level IR\n");
             for (LlBuilder builder : listener.pous.getBuilderList()) {
                 CFG cfg = new CFG(builder);
                 System.out.println(cfg.toString());
+
+                System.out.println("_______________________ ");
+                writeFile(cfg, "cfgOld_" +  cfgCounter +".txt");
+
+                HashSet<LlLocation> globalVArs = new HashSet<>();
+                GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
+                writeFile(cfg, "cfgONew_" +  cfgCounter +".txt");
+                cfgCounter ++;
             }
 
-//
+
 
         }
         catch (IOException e){
