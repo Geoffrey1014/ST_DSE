@@ -1,4 +1,5 @@
 import cfg.CFG;
+import cfg.GlobalCP;
 import cfg.GlobalCSE;
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
@@ -149,11 +150,14 @@ public class Mian {
                 System.out.println(cfg.toString());
 
                 System.out.println("_______________________ ");
-                writeFile(cfg, "cfgOld_" +  cfgCounter +".txt");
+                writeFile(cfg, "origin_" +  cfgCounter +".txt");
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
-                writeFile(cfg, "cfgNew_" +  cfgCounter +".txt");
+                writeFile(cfg, "new_"+ "CSE_" +  cfgCounter +".txt");
+
+                GlobalCP.performGlobalCP(cfg, globalVArs);
+                writeFile(cfg, "new_"+ "CP_" +  cfgCounter +".txt");
                 cfgCounter ++;
             }
 
