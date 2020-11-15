@@ -89,21 +89,22 @@ public class IrPousDecl extends Ir {
         ArrayList<LlBuilder> buildersList = new ArrayList<>();
 
         for (IrPouDecl program: this.programDeclsArrayList) {
-            LlBuilder llBuilder = new LlBuilder();
+
+            LlBuilder llBuilder = new LlBuilder(program.getName());
             LlSymbolTable llSymbolTable = new LlSymbolTable();
             program.generateLlIr(llBuilder, llSymbolTable);
             buildersList.add(llBuilder);
         }
 
         for (IrPouDecl fbDecl: this.functionBlockDeclsArrayList) {
-            LlBuilder llBuilder = new LlBuilder();
+            LlBuilder llBuilder = new LlBuilder(fbDecl.getName());
             LlSymbolTable llSymbolTable = new LlSymbolTable();
             fbDecl.generateLlIr(llBuilder, llSymbolTable);
 
             buildersList.add(llBuilder);
         }
         for (IrPouDecl functionDecl: this.functionDeclArrayList) {
-            LlBuilder llBuilder = new LlBuilder();
+            LlBuilder llBuilder = new LlBuilder(functionDecl.getName());
             LlSymbolTable llSymbolTable = new LlSymbolTable();
             functionDecl.generateLlIr(llBuilder, llSymbolTable);
             buildersList.add(llBuilder);

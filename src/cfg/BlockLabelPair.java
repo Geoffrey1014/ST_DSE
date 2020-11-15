@@ -29,6 +29,12 @@ public class BlockLabelPair {
 
     @Override
     public int hashCode() {
-        return this.basicBlock.hashCode() * this.label.hashCode();
+
+        if (this.basicBlock != null){
+            return this.basicBlock.hashCode() * this.label.hashCode();
+        }
+        else {
+            return this.label.hashCode();
+        }
     }
 }

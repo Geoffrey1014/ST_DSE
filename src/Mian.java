@@ -1,6 +1,4 @@
-import cfg.CFG;
-import cfg.GlobalCP;
-import cfg.GlobalCSE;
+import cfg.*;
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
 import helper.LlBuilder;
@@ -19,6 +17,7 @@ import java.util.HashSet;
 
 public class Mian {
     public static MyPrint myprint  = new MyPrint(3);
+
 
     public static void run(String[] args ){
         try {
@@ -158,6 +157,17 @@ public class Mian {
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
                 writeFile(cfg, "new_"+ "CP_" +  cfgCounter +".txt");
+
+                GlobalDCE.performGlobalDeadCodeElimination(cfg);
+                writeFile(cfg, "new_"+ "DSE_" +  cfgCounter +".txt");
+
+
+                GlobalCF.performGlobalCodeFolding(cfg);
+                writeFile(cfg, "new_"+ "CF_" +  cfgCounter +".txt");
+
+                GlobalURE.performGlobalURE(cfg);
+                AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
+
                 cfgCounter ++;
             }
 

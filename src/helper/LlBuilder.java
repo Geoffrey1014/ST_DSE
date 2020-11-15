@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Stack;
 
 public class LlBuilder {
-
+    private final String name;
     private LinkedHashMap<String, LlStatement> statementTable;
     private int labelCounter = 0;
     private int tempCounter = 0;
@@ -17,7 +17,8 @@ public class LlBuilder {
 
     private Object pocket;
 
-    public LlBuilder(){
+    public LlBuilder(String name){
+        this.name = name;
         this.statementTable = new LinkedHashMap<>();
     }
 
@@ -100,5 +101,9 @@ public class LlBuilder {
 
     public void setStatementTable(LinkedHashMap<String, LlStatement> updatedMap) {
         this.statementTable = updatedMap;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

@@ -10,6 +10,7 @@ import ll.location.LlLocationVar;
 
 import java.util.*;
 
+
 public class LivenessAnalysis {
     private final HashSet<BlockLabelPair> universalRequiredDefs = new HashSet<>();
     private final HashMap<BasicBlock, HashSet<BlockLabelPair>> requiredDefsIN = new HashMap<>();
@@ -17,12 +18,28 @@ public class LivenessAnalysis {
     private final HashMap<CFG.SymbolDef, HashSet<BlockLabelPair>> defsForUses;
     private final CFG cfg;
 
+    /**
+     * 和书上的 活跃变量分析的算法思路整个是反过来的。不采用书上的方法的原因可能是，对变量进行分析可能比对语句更复杂，需要对变量编码
+     * USE[n] ： Bb 中定值后会被使用的语句
+     * DEF[n] : Bb 中所有定值语句
+     * OUT[n] : 出口处所需要的定值语句的集合  requiredDefsOUT （变量名已经暗示了）
+     * IN[n] ： 入口处所需要的定值语句的集合 requiredDefsIN
+     * OUT[n] = OUT[n] intersect IN[s] for all s in successors
+     * IN[n] = USE[n] U (OUT[n]-DEF[n])
+     * @param cfg
+     */
     private LivenessAnalysis(CFG cfg) {
         this.cfg = cfg;
-        this.defsForUses = this.cfg.getDefsForUseAsBlockLabelPairs();
+        this.defsForUses = this.cfg.getDefsForUseAsBlockLabelPairs(); //获得 use ： def 对
+//
+//        for (CFG.SymbolDef defForUse : this.defsForUses.keySet()){
+//            System.out.println(defForUse+ ":");
+//            System.out.println(this.defsForUses.get(defForUse));
+//        }
+
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
 
-        // OUT[n] = EmptySet for all nodes
+        // IN[n] = EmptySet for all nodes
         for (BasicBlock bb : bbList) {
             this.requiredDefsIN.put(bb, new HashSet<>());
         }
@@ -44,6 +61,8 @@ public class LivenessAnalysis {
             HashSet<BlockLabelPair> oldIN = this.requiredDefsIN.get(node);
 
             // OUT[n] = OUT[n] intersect IN[s] for all s in successors
+            // TODO 我觉得应该是并集 （不，应该是交，因为 IN[s] 向上传递的信息包含USE[n]，定值后会被使用的语句集合，并不是变量在此引用但之前没有定值）
+
             HashSet<BlockLabelPair> OUT = new HashSet<>(); // OUT[n] = EmptySet
             if (node.getAlternativeBranch() != null) {
                 OUT.retainAll(this.requiredDefsIN.get(node.getAlternativeBranch()));
@@ -77,6 +96,7 @@ public class LivenessAnalysis {
         }
     }
 
+    // DEF[s] - (OUT[n] union USE[n]) , 在Bb 中 的定值语句，去除 定值后被使用的语句，再去除 出口处活跃的 定值语句
     // returns the set of (block, labels) that are dead code. That is,
     // this function returns DEF[s] - (OUT[n] union USE[n])
     public static HashMap<BasicBlock, HashSet<BlockLabelPair>> getLivenessAnalysisForCFG(CFG cfg) {
@@ -93,6 +113,14 @@ public class LivenessAnalysis {
         return bbToTuplesMap;
     }
 
+    /**
+     * 收集当前 Bb 中， 定值前未被引用的变量
+     * 因为在此阶段，LLIR 中引入了大量的 零时变量，所以不存在 定值前 已经被引用的变量，
+     * 所以作者采用的是取巧的方法，直接将所有的 复制语句的 location 算作 定值前未被引用的变量
+     * （   上面说得不对     2020-11-14 17:48:22）
+     * @param bb
+     * @return 返回所有定值语句，这些定值 在后边 可能会被引用
+     */
     // returns the set of (block, label) pairs that represent LlAssignStmts
     // where the storeLocation has been DEFined and may now be used below
     private HashSet<BlockLabelPair> DEF(BasicBlock bb) {
@@ -111,9 +139,14 @@ public class LivenessAnalysis {
     }
 
 
-    // returns the set of (block, label) pairs that represent LlAssignStmts
-    // where the storeLocation has a USE somewhere in the BasicBlock
-    private HashSet<BlockLabelPair> USE(BasicBlock bb) {
+    /**
+     * returns the set of (block, label) pairs that represent LlAssignStmts
+     * where the storeLocation has a USE somewhere in the BasicBlock
+     * 重点是 ： the storeLocation has a USE somewhere in the BasicBlock
+     * @param bb
+     * @return 返回 一个定值语句的位置的集合，这些定值语句 在 后面 被 引用
+     */
+     private HashSet<BlockLabelPair> USE(BasicBlock bb) {
         HashSet<BlockLabelPair> setOfNeededDefs = new HashSet<BlockLabelPair>();
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
 
@@ -183,7 +216,7 @@ public class LivenessAnalysis {
         }
 
         // return the HashSet of BlockLabelPairs associated with the SymbolDef
-        CFG.SymbolDef symbolDef = this.cfg.new SymbolDef(var, this.cfg.new Tuple(blockLeader, label));
+        CFG.SymbolDef symbolDef = this.cfg.new SymbolDef(var, this.cfg.new defBlockLocationTuple(blockLeader, label));
         return this.defsForUses.get(symbolDef);
     }
 

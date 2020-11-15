@@ -110,10 +110,17 @@ public class CopyAssignments {
         return bbToCopyTableMap;
     }
 
-    // returns the set of quadruples (u, v, block, pos) such
-    // that u <-- v is a copy assignment and pos is the position
-    // in the block where the copy assignment occurs AND
-    // neither u nor v is assigned to later in the block
+
+
+    /**
+     *  returns the set of quadruples (u, v, block, pos) such
+     *  that u <-- v is a copy assignment and pos is the position
+     *  in the block where the copy assignment occurs AND
+     *  neither u nor v is assigned to later in the block
+     *  函数功能就是：找到每个Bb 中 的复制语句
+     * @param bb
+     * @return
+     */
     private HashSet<Quadruple> COPY(BasicBlock bb) {
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
         HashSet<Quadruple> copyAssignCandidates = new HashSet<>();

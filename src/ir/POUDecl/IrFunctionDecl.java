@@ -7,6 +7,7 @@ import ir.IrIdent;
 import ir.VARBlockDecl.IrType;
 import ir.VARBlockDecl.IrVARBlockDecl;
 import ir.VARBlockDecl.IrVarDecl;
+import ll.LlEmptyStmt;
 import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
@@ -78,6 +79,10 @@ public class IrFunctionDecl extends IrPouDecl {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        String name = this.getName();
+        LlEmptyStmt emptyStmt = new LlEmptyStmt();
+        builder.appendStatement(name, emptyStmt);
+
         this.CodeBlock.generateLlIr(builder, symbolTable);
         return null;
     }

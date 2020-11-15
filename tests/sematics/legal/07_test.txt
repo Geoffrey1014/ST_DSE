@@ -10,6 +10,7 @@ VAR_OUTPUT
     c, d : INT;
     x : INT;
 END_VAR
+    tmp := TRUE;
     c := 0;
     d := 0;
     c := a + b;

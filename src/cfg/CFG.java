@@ -14,6 +14,8 @@ import ll.location.LlLocationArray;
 import ll.location.LlLocationVar;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CFG {
     private final LlBuilder builder;
@@ -22,27 +24,176 @@ public class CFG {
     private final ArrayList<String> orderedLeadersList;
     private  LinkedHashMap<BasicBlock, String> blockLabels;
 
-    public CFG(LlBuilder builder) {
+//    public CFG(LlBuilder builder) {
+//
+//        this.builder = builder;
+//
+//        System.err.println("LlBuilder statement list:");
+//        for (String s : this.builder.getStatementTable().keySet()){
+//            System.out.println(s + " : " + this.builder.getStatementTable().get(s));
+//        }
+//        System.err.println("LlBuilder statement list  end");
+//
+//        // cache the Labels => Stmts map and extract the labels list
+//        LinkedHashMap<String, LlStatement> labelStmtsMap = new LinkedHashMap<>(builder.getStatementTable());
+//        ArrayList<String> labelsList = new ArrayList<>(labelStmtsMap.keySet());
+//
+//        if (labelsList.size() == 0) {
+//            this.basicBlocks = new ArrayList<>();
+//            this.orderedLeadersList = new ArrayList<>();
+//            this.leadersToBBMap = new LinkedHashMap<>();
+//            this.blockLabels = new LinkedHashMap<>();
+//        }
+//        else {
+//            // 1) determine the leaders in the LLIR
+//            HashSet<String> leadersSet = new HashSet<>();
+//
+//            // the first instruction in the LLIR is a leader
+//            leadersSet.add(labelsList.get(0));
+//
+//            for (int i = 1; i < labelsList.size(); i++) {
+//                String label = labelsList.get(i);
+//                LlStatement stmt = labelStmtsMap.get(label);
+//
+//                if (stmt instanceof LlJump) {
+//
+//                    // the TARGET of the jumpStmt is a leader
+//                    String jmpTolabel = ((LlJump) stmt).getJumpToLabel();
+//                    leadersSet.add(jmpTolabel);
+//
+//                    // the stmt FOLLOWING the jumpStmt is a leader
+//                    String nextStmtLabel = labelsList.get(i + 1);
+//                    leadersSet.add(nextStmtLabel);
+//                }
+//            }
+//
+//            // 2) create basic blocks from LlStatements
+//            leadersToBBMap = new LinkedHashMap<>();
+//            HashSet<String> tempLeadersSet = new HashSet<>(leadersSet);
+//            LinkedList<String> labelsQueue = new LinkedList<>(labelsList);
+//            orderedLeadersList = new ArrayList<>();
+//            do {
+//                LinkedHashMap<String, LlStatement> bbLabelsToStmtsMap = new LinkedHashMap<>();
+//
+//                // basic blocks start with the leader
+//                String leaderLabel = labelsQueue.pop();
+//                LlStatement leaderStmt = labelStmtsMap.get(leaderLabel);
+//                bbLabelsToStmtsMap.put(leaderLabel, leaderStmt);
+//
+//                // remove this leader from the leadersSet and add it
+//                // to the leadersList
+//                tempLeadersSet.remove(leaderLabel);
+//                orderedLeadersList.add(leaderLabel);
+//
+//                // keep adding LlStatments until you get to the next leader
+//                while (labelsQueue.size() > 0 && !tempLeadersSet.contains(labelsQueue.peek())) {
+//
+//                    // keep adding stmts to the currentBBStmtList
+//                    String label = labelsQueue.pop();
+//                    LlStatement stmt = labelStmtsMap.get(label);
+//                    bbLabelsToStmtsMap.put(label, stmt);
+//                }
+//
+//                // create the actual BasicBlock and it to the LinkedHashMap
+//                BasicBlock bb = new BasicBlock(bbLabelsToStmtsMap, builder);
+//                leadersToBBMap.put(leaderLabel, bb);
+//
+//            } while (labelsQueue.size() > 0);
+//
+//            // 3) appropriately connect the basic blocks
+//            for (int i = 0; i < orderedLeadersList.size(); i++) { // loop through the leaders in the order of the linear order of the basic blocks
+//                String leaderLabel = orderedLeadersList.get(i);
+//                BasicBlock bb = leadersToBBMap.get(leaderLabel);
+//
+//                List<LlStatement> bbStmtsList = bb.getStmtsList();
+//                LlStatement lastStmtOfCurrentBB = bbStmtsList.get(bbStmtsList.size() - 1);
+//
+//                // connect if there is a jump from the end of B to the beginning of C
+//                if (lastStmtOfCurrentBB instanceof LlJump) {
+//                    // set forward edge B --> C
+//                    String targetLabel = ((LlJump) lastStmtOfCurrentBB).getJumpToLabel();
+//                    BasicBlock targetBB = this.leadersToBBMap.get(targetLabel);
+//                    bb.setAlternativeBranch(targetBB);
+//
+//                    // set reverse edge B <-- C
+//                    targetBB.addPredecessorNode(bb);
+//                }
+//
+//                // C immediately follows B and B does not end in an unconditional jump
+//                // (this only holds if B is not the last block))
+//                if (!(lastStmtOfCurrentBB instanceof LlJumpUnconditional) && (i < orderedLeadersList.size() - 1)) {
+//
+//                    // set forward edge B --> C
+//                    String nextBBLeaderLabel = this.orderedLeadersList.get(i + 1);
+//                    BasicBlock nextBB = this.leadersToBBMap.get(nextBBLeaderLabel);
+//                    bb.setDefaultBranch(nextBB);
+//
+//                    // set reverse edge B --> C
+//                    nextBB.addPredecessorNode(bb);
+//                }
+//            }
+//
+//            // add an empty BasicBlock as the entry node and
+//            // connect it and the orignal first BB to each other
+//            String trueFirstBBLabel = this.orderedLeadersList.get(0);
+//            BasicBlock trueFirstBB = this.leadersToBBMap.get(trueFirstBBLabel);
+//
+//            String entryBBLabel = "entry";
+//            this.orderedLeadersList.add(0, entryBBLabel);
+//            LinkedHashMap<String, LlStatement> entryBBStmtsList = new LinkedHashMap<>();
+//            entryBBStmtsList.put(entryBBLabel, new LlEmptyStmt());
+//            BasicBlock entryBB = new BasicBlock(entryBBStmtsList, builder);
+//            this.leadersToBBMap.put(entryBBLabel, entryBB);
+//
+//            entryBB.setDefaultBranch(trueFirstBB);
+//            trueFirstBB.addPredecessorNode(entryBB);
+//
+//            // add an empty BasicBlock as the exit node and
+//            // connect it and the orignal last BB to each other
+//            String trueLastBBLabel = this.orderedLeadersList.get(this.orderedLeadersList.size() - 1);
+//            BasicBlock trueLastBB = this.leadersToBBMap.get(trueLastBBLabel);
+//
+//            String exitBBLabel = "exit";
+//            this.orderedLeadersList.add(exitBBLabel);
+//            LinkedHashMap<String, LlStatement> exitBBStmtsList = new LinkedHashMap<>();
+//            exitBBStmtsList.put(exitBBLabel, new LlEmptyStmt());
+//            BasicBlock exitBB = new BasicBlock(exitBBStmtsList, builder);
+//            this.leadersToBBMap.put(exitBBLabel, exitBB);
+//
+//            trueLastBB.setDefaultBranch(exitBB);
+//            exitBB.addPredecessorNode(trueLastBB);
+//
+//
+//            // 4) assign the list of basic blocks as a field of THIS object
+//            ArrayList<BasicBlock> basicBlocks = new ArrayList<>();
+//            for (String leaderLabel : orderedLeadersList) {
+//                basicBlocks.add(leadersToBBMap.get(leaderLabel));
+//            }
+//
+//            this.basicBlocks = basicBlocks;
+//        }
+//    }
 
+    public CFG(LlBuilder builder) {
         this.builder = builder;
 
-        System.err.println("LlBuilder statement list:");
+        System.out.println("LlBuilder statement list:");
         for (String s : this.builder.getStatementTable().keySet()){
             System.out.println(s + " : " + this.builder.getStatementTable().get(s));
         }
-        System.err.println("LlBuilder statement list  end");
+        System.out.println("LlBuilder statement list  end");
 
+//        this.paramsList = builder.params;
         // cache the Labels => Stmts map and extract the labels list
         LinkedHashMap<String, LlStatement> labelStmtsMap = new LinkedHashMap<>(builder.getStatementTable());
         ArrayList<String> labelsList = new ArrayList<>(labelStmtsMap.keySet());
 
         if (labelsList.size() == 0) {
-            this.basicBlocks = new ArrayList<>();
+            this.basicBlocks = new ArrayList<BasicBlock>();
             this.orderedLeadersList = new ArrayList<>();
             this.leadersToBBMap = new LinkedHashMap<>();
             this.blockLabels = new LinkedHashMap<>();
-        }
-        else {
+        } else {
             // 1) determine the leaders in the LLIR
             HashSet<String> leadersSet = new HashSet<>();
 
@@ -66,10 +217,10 @@ public class CFG {
             }
 
             // 2) create basic blocks from LlStatements
-            leadersToBBMap = new LinkedHashMap<>();
+            this.leadersToBBMap = new LinkedHashMap<>();
             HashSet<String> tempLeadersSet = new HashSet<>(leadersSet);
             LinkedList<String> labelsQueue = new LinkedList<>(labelsList);
-            orderedLeadersList = new ArrayList<>();
+            this.orderedLeadersList = new ArrayList<>();
             do {
                 LinkedHashMap<String, LlStatement> bbLabelsToStmtsMap = new LinkedHashMap<>();
 
@@ -81,7 +232,7 @@ public class CFG {
                 // remove this leader from the leadersSet and add it
                 // to the leadersList
                 tempLeadersSet.remove(leaderLabel);
-                orderedLeadersList.add(leaderLabel);
+                this.orderedLeadersList.add(leaderLabel);
 
                 // keep adding LlStatments until you get to the next leader
                 while (labelsQueue.size() > 0 && !tempLeadersSet.contains(labelsQueue.peek())) {
@@ -94,20 +245,21 @@ public class CFG {
 
                 // create the actual BasicBlock and it to the LinkedHashMap
                 BasicBlock bb = new BasicBlock(bbLabelsToStmtsMap, builder);
-                leadersToBBMap.put(leaderLabel, bb);
+                this.leadersToBBMap.put(leaderLabel, bb);
 
             } while (labelsQueue.size() > 0);
 
             // 3) appropriately connect the basic blocks
-            for (int i = 0; i < orderedLeadersList.size(); i++) { // loop through the leaders in the order of the linear order of the basic blocks
-                String leaderLabel = orderedLeadersList.get(i);
-                BasicBlock bb = leadersToBBMap.get(leaderLabel);
+            for (int i = 0; i < this.orderedLeadersList.size(); i++) { // loop through the leaders in the order of the linear order of the basic blocks
+                String leaderLabel = this.orderedLeadersList.get(i);
+                BasicBlock bb = this.leadersToBBMap.get(leaderLabel);
 
                 List<LlStatement> bbStmtsList = bb.getStmtsList();
                 LlStatement lastStmtOfCurrentBB = bbStmtsList.get(bbStmtsList.size() - 1);
 
                 // connect if there is a jump from the end of B to the beginning of C
                 if (lastStmtOfCurrentBB instanceof LlJump) {
+
                     // set forward edge B --> C
                     String targetLabel = ((LlJump) lastStmtOfCurrentBB).getJumpToLabel();
                     BasicBlock targetBB = this.leadersToBBMap.get(targetLabel);
@@ -119,7 +271,7 @@ public class CFG {
 
                 // C immediately follows B and B does not end in an unconditional jump
                 // (this only holds if B is not the last block))
-                if (!(lastStmtOfCurrentBB instanceof LlJumpUnconditional) && (i < orderedLeadersList.size() - 1)) {
+                if (!(lastStmtOfCurrentBB instanceof LlJumpUnconditional) && (i < this.orderedLeadersList.size() - 1)) {
 
                     // set forward edge B --> C
                     String nextBBLeaderLabel = this.orderedLeadersList.get(i + 1);
@@ -161,16 +313,16 @@ public class CFG {
             trueLastBB.setDefaultBranch(exitBB);
             exitBB.addPredecessorNode(trueLastBB);
 
-
-            // 4) assign the list of basic blocks as a field of THIS object
+            // 5) assign the list of basic blocks as a field of THIS object
             ArrayList<BasicBlock> basicBlocks = new ArrayList<>();
-            for (String leaderLabel : orderedLeadersList) {
-                basicBlocks.add(leadersToBBMap.get(leaderLabel));
+            for (String leaderLabel : this.orderedLeadersList) {
+                basicBlocks.add(this.leadersToBBMap.get(leaderLabel));
             }
-
+            this.blockLabels = new LinkedHashMap<>(reverse(leadersToBBMap));
             this.basicBlocks = basicBlocks;
         }
     }
+
 
     public BasicBlock getRootBasicBlock() {
         return this.basicBlocks.get(0);
@@ -212,30 +364,66 @@ public class CFG {
 
         return this.builder;
     }
+    private static HashMap<BasicBlock, String> reverse(Map<String, BasicBlock> map) {
+        HashMap<BasicBlock, String> rev = new HashMap<BasicBlock, String>();
+        for (Map.Entry<String, BasicBlock> entry : map.entrySet())
+            rev.put(entry.getValue(), entry.getKey());
+        return rev;
+    }
+
+    public LlBuilder reorderLables() {
+        int counter = 0;
+        Hashtable<String, String> oldToNew = new Hashtable<>();
+        LlBuilder currentBuilder = this.getBuilder();
+        LlBuilder newBuilder = new LlBuilder(currentBuilder.getName());
+        for (String lable : currentBuilder.getStatementTable().keySet()) {
+            String newLabel = lable;
+            Pattern p = Pattern.compile("[\\d]+");
+
+            // get a matcher object
+            Matcher m = p.matcher(lable);
+            newLabel = m.replaceAll(Integer.toString(counter++));
+            oldToNew.put(lable, newLabel);
+            newBuilder.appendStatement(newLabel, currentBuilder.getStatementTable().get(lable));
+        }
+        for (String newLabel : newBuilder.getStatementTable().keySet()) {
+            LlStatement currentStatement = newBuilder.getStatementTable().get(newLabel);
+            if (currentStatement instanceof LlJumpUnconditional) {
+                String newl = oldToNew.get(((LlJumpUnconditional) currentStatement).getJumpToLabel());
+                newBuilder.getStatementTable().replace(newLabel, new LlJumpUnconditional(newl));
+
+            }
+            if (newBuilder.getStatementTable().get(newLabel) instanceof LlJumpConditional) {
+                String newl = oldToNew.get(((LlJumpConditional) currentStatement).getJumpToLabel());
+                newBuilder.getStatementTable().replace(newLabel, new LlJumpConditional(newl, ((LlJumpConditional) currentStatement).getCondition()));
+            }
+        }
+        return newBuilder;
+    }
 
 
     // ================= Tuple =================
 
-    private final Tuple noDefTuple = new Tuple("NO_DEF_1010", "NO_DEF_1010");
+    private final defBlockLocationTuple noDefTuple = new defBlockLocationTuple("NO_DEF_1010", "NO_DEF_1010");
 
-    public Tuple getNoDefTuple() {
+    public defBlockLocationTuple getNoDefTuple() {
         return this.noDefTuple;
     }
 
-    public class Tuple {
+    public class defBlockLocationTuple {
         public String blockName;
 
         public String label;
 
-        public Tuple(String x, String y) {
+        public defBlockLocationTuple(String x, String y) {
             this.blockName = x;
             this.label = y;
         }
 
         @Override
         public boolean equals(Object o) {
-            return (o instanceof Tuple) && (((Tuple) o).blockName.equals(this.blockName)) &&
-                    (((Tuple) o).label.equals(this.label));
+            return (o instanceof defBlockLocationTuple) && (((defBlockLocationTuple) o).blockName.equals(this.blockName)) &&
+                    (((defBlockLocationTuple) o).label.equals(this.label));
         }
 
         @Override
@@ -253,9 +441,9 @@ public class CFG {
     public class SymbolDef {
         public LlLocation symbol;
 
-        public Tuple useDef;
+        public defBlockLocationTuple useDef;
 
-        public SymbolDef(LlLocation symbol, Tuple useDef) {
+        public SymbolDef(LlLocation symbol, defBlockLocationTuple useDef) {
             this.useDef = useDef;
             this.symbol = symbol;
         }
@@ -279,12 +467,12 @@ public class CFG {
     }
 
     // ================= USE-DEF Chain =================
-    private HashMap<SymbolDef, ArrayList<Tuple>> defUseChain = new HashMap<>();
-    private HashMap<SymbolDef, ArrayList<Tuple>> useDefChain = new HashMap<>();
+    private HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> defUseChain = new HashMap<>();
+    private HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> useDefChain = new HashMap<>();
     private HashSet<Edge> isVisited = new HashSet<>();
 
     //Mark use of arg at currentUseDefLocation in defUseChain using recentDef
-    private void addUseArg(HashMap<LlLocation, Tuple> recentDef, LlComponent arg, Tuple currentUseDefLocation) {
+    private void addUseArg(HashMap<LlLocation, defBlockLocationTuple> recentDef, LlComponent arg, defBlockLocationTuple currentUseDefLocation) {
         if (arg instanceof LlLocation) {
 
             //Default value (0) being used in arg
@@ -294,8 +482,8 @@ public class CFG {
             }
 
             //Add use to ArrayList of uses corresponding to recent def of LlLocation arg
-            Tuple latestDef = recentDef.get(arg);
-            ArrayList<Tuple> useList = this.defUseChain.get(new SymbolDef((LlLocation) arg, latestDef));
+            defBlockLocationTuple latestDef = recentDef.get(arg);
+            ArrayList<defBlockLocationTuple> useList = this.defUseChain.get(new SymbolDef((LlLocation) arg, latestDef));
             useList.add(currentUseDefLocation);
         }
 
@@ -311,7 +499,7 @@ public class CFG {
 
 
     //Recursively (DFS) build defUseChains
-    private void buildDefUseRecursive(BasicBlock head, HashMap<LlLocation, Tuple> recentDef) {
+    private void buildDefUseRecursive(BasicBlock head, HashMap<LlLocation, defBlockLocationTuple> recentDef) {
         //Add def-use chains of basic block head
         if (head == null) {
             return;
@@ -322,7 +510,7 @@ public class CFG {
 
             //Tuple corresponding to location (blockName, label) of current statement
             //All uses and defs in statement happen at this location
-            Tuple currentUseDefLocation = new Tuple(blockLabels.get(head), label);
+            defBlockLocationTuple currentUseDefLocation = new defBlockLocationTuple(blockLabels.get(head), label);
 
             //Method call statements
             if (statement instanceof LlMethodCallStmt) {
@@ -422,19 +610,19 @@ public class CFG {
     // =================== transform to BlockLabelPairs ==================
 
     public HashMap<SymbolDef, HashSet<BlockLabelPair>> getDefsForUseAsBlockLabelPairs() {
-        HashMap<SymbolDef, ArrayList<Tuple>> useDefsWithTuples = this.buildUseDefChains();
+        HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> useDefsWithTuples = this.buildUseDefChains();
         HashMap<SymbolDef, HashSet<BlockLabelPair>> useDefsAsBlockLabelPairs = new HashMap<>();
 
         // loop through each symbol used
         for (SymbolDef symbolDef : useDefsWithTuples.keySet()) {
-            ArrayList<Tuple> defsArrayList = useDefsWithTuples.get(symbolDef);
+            ArrayList<defBlockLocationTuple> defsArrayList = useDefsWithTuples.get(symbolDef);
             useDefsAsBlockLabelPairs.put(symbolDef, new HashSet<>());
 
             // add each def that corresponds that that symbol's use to that
             // the BlockLabelPair HashSet
-            for (Tuple tuple : defsArrayList) {
-                BasicBlock bb = this.getLeadersToBBMap().get(tuple.blockName);
-                BlockLabelPair blockLabelPair = new BlockLabelPair(bb, tuple.label);
+            for (defBlockLocationTuple defBlockLocationTuple : defsArrayList) {
+                BasicBlock bb = this.getLeadersToBBMap().get(defBlockLocationTuple.blockName);
+                BlockLabelPair blockLabelPair = new BlockLabelPair(bb, defBlockLocationTuple.label);
                 useDefsAsBlockLabelPairs.get(symbolDef).add(blockLabelPair);
             }
         }
@@ -442,10 +630,10 @@ public class CFG {
     }
 
     //Build def-use chains for each symbol from updated/changed LlBuilder
-    public HashMap<SymbolDef, ArrayList<Tuple>> buildDefUseChains() {
+    public HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> buildDefUseChains() {
         this.defUseChain = new HashMap<>();
         BasicBlock head = basicBlocks.get(0);
-        HashMap<LlLocation, Tuple> recentDef = new HashMap<>();
+        HashMap<LlLocation, defBlockLocationTuple> recentDef = new HashMap<>();
         buildDefUseRecursive(head, recentDef);
 
         //All uses and defs in statement happen at this location
@@ -459,23 +647,23 @@ public class CFG {
 
 //        //Print statements for useDefChains
 
-        return new HashMap<SymbolDef, ArrayList<Tuple>>(this.defUseChain);
+        return new HashMap<SymbolDef, ArrayList<defBlockLocationTuple>>(this.defUseChain);
     }
 
     //Build use-def chains for each symbol from updated/changed LlBuilder
-    public HashMap<SymbolDef, ArrayList<Tuple>> buildUseDefChains() {
+    public HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> buildUseDefChains() {
         this.buildDefUseChains();
         this.useDefChain = new HashMap<>();
-        for (Map.Entry<SymbolDef, ArrayList<Tuple>> duChain : this.defUseChain.entrySet()) {
-            ArrayList<Tuple> useList = duChain.getValue();
+        for (Map.Entry<SymbolDef, ArrayList<defBlockLocationTuple>> duChain : this.defUseChain.entrySet()) {
+            ArrayList<defBlockLocationTuple> useList = duChain.getValue();
             LlLocation symbol = duChain.getKey().symbol;
-            Tuple defLocation = duChain.getKey().useDef;
+            defBlockLocationTuple defLocation = duChain.getKey().useDef;
 
             //Add reaching defs for each corresponding use to useDefChain
-            for (Tuple useLocation : useList) {
+            for (defBlockLocationTuple useLocation : useList) {
                 SymbolDef currentUseSymbol = new SymbolDef(symbol, useLocation);
                 if (!this.useDefChain.containsKey(currentUseSymbol)) {
-                    ArrayList<Tuple> defList = new ArrayList<>();
+                    ArrayList<defBlockLocationTuple> defList = new ArrayList<>();
                     defList.add(defLocation);
                     this.useDefChain.put(currentUseSymbol, defList);
                 } else {

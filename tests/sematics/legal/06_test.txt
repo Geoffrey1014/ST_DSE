@@ -12,6 +12,7 @@ VAR_OUTPUT
 END_VAR
     c := 0;
     d := 0;
+    tmp := TRUE;
     IF tmp THEN
         c := a + b;
     END_IF;
