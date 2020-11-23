@@ -4,7 +4,9 @@ import helper.LlBuilder;
 import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrIdent;
+import ll.assignStmt.LlAssignStmtRegular;
 import ll.location.LlLocation;
+import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 public class IrVarDecl extends Ir {
@@ -39,6 +41,13 @@ public class IrVarDecl extends Ir {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        if (value != null){
+            LlLocation tempVal = this.value.generateLlIr(builder, symbolTable);
+
+            LlAssignStmtRegular regularAssignment = new LlAssignStmtRegular(new LlLocationVar(this.name.getValue()), tempVal);
+            builder.appendStatement(regularAssignment);
+
+        }
         return null;
     }
 

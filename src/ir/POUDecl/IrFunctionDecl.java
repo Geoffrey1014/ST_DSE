@@ -82,6 +82,21 @@ public class IrFunctionDecl extends IrPouDecl {
         String name = this.getName();
         LlEmptyStmt emptyStmt = new LlEmptyStmt();
         builder.appendStatement(name, emptyStmt);
+        if(this.varBlockVAR != null){
+            this.varBlockVAR.generateLlIr(builder, symbolTable);
+        }
+        if (this.varBlockVAR_INPUT != null){
+            this.varBlockVAR_INPUT.generateLlIr(builder, symbolTable);
+        }
+        if (this.varBlockVAR_OUTPUT != null){
+            this.varBlockVAR_OUTPUT.generateLlIr(builder, symbolTable);
+        }
+        if (this.varBlockVAR_TEMP != null){
+            this.varBlockVAR_TEMP.generateLlIr(builder, symbolTable);
+        }
+        if (this.varBlockVAR_INPUT_OUTPUT != null){
+            this.varBlockVAR_INPUT_OUTPUT.generateLlIr(builder, symbolTable);
+        }
 
         this.CodeBlock.generateLlIr(builder, symbolTable);
         return null;

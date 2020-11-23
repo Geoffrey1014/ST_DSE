@@ -114,7 +114,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/sematics/";
-        String inputFile = prefix + "legal/07_test.txt";
+        String inputFile = prefix + "legal/06_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -140,8 +140,9 @@ public class Mian {
             System.err.println("\n semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
-//            System.out.println("\n pretty print:\n");
-//            System.out.println(listener.pous.prettyPrint(""));
+            System.out.println("\n pretty print:\n");
+            System.out.println(listener.pous.prettyPrint(""));
+
             int cfgCounter = 0;
             System.out.println("\n low level IR\n");
             for (LlBuilder builder : listener.pous.getBuilderList()) {
@@ -166,7 +167,10 @@ public class Mian {
                 writeFile(cfg, "new_"+ "CF_" +  cfgCounter +".txt");
 
                 GlobalURE.performGlobalURE(cfg);
+                writeFile(cfg, "new_"+ "URE_" +  cfgCounter +".txt");
+
                 AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
+                writeFile(cfg, "new_"+ "AS_" +  cfgCounter +".txt");
 
                 cfgCounter ++;
             }

@@ -18,7 +18,8 @@ public class LlAssignStmtRegular extends LlAssignStmt {
 
     @Override
     public String toString() {
-        return this.storeLocation.toString() + " = " + this.operand.toString();
+        String s = this.storeLocation.toString();
+        return s + " = " + this.operand.toString();
     }
 
     @Override

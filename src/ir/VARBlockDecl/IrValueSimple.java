@@ -39,6 +39,7 @@ public class IrValueSimple extends IrValue {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
-        return null;
+
+        return this.value.generateLlIr(builder, symbolTable);
     }
 }

@@ -1,6 +1,6 @@
 PROGRAM Main
 VAR
-    tmp : INT;
+    tmp : BOOL;
 END_VAR
 VAR_INPUT
     a : INT := 48;

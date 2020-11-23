@@ -52,6 +52,9 @@ public class IrVARBlockDecl extends Ir {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        for (IrVarDecl varDecl : this.VarList){
+            varDecl.generateLlIr(builder, symbolTable);
+        }
         return null;
     }
 }
