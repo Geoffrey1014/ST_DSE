@@ -13,6 +13,7 @@ import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Mian {
@@ -114,7 +115,7 @@ public class Mian {
 
     public static void walkTree(String[] args){
         String prefix = "tests/sematics/";
-        String inputFile = prefix + "legal/06_test.txt";
+        String inputFile = prefix + "legal/07_test.txt";
 
         try{
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -151,6 +152,15 @@ public class Mian {
 
                 System.out.println("_______________________ ");
                 writeFile(cfg, "origin_" +  cfgCounter +".txt");
+
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
+                System.out.println("dominatorsMap------------");
+                for(BasicBlock bb :dominatorsMap.keySet()){
+                    System.out.println(bb.getLabelsToStmtsMap().entrySet().iterator().next() + "--------------dominators:");
+                    for (BasicBlock b : dominatorsMap.get(bb)) {
+                        System.out.println(b.getLabelsToStmtsMap().entrySet().iterator().next());
+                    }
+                }
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);

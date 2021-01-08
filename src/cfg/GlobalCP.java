@@ -84,7 +84,7 @@ public class GlobalCP {
                 stmtsToLabelsMap.put(label, optStmt);
 
                 // add LHS definitions to the copyTable
-                // TODO: Figure out how to make this work for a[i] (i.e. arrays)
+                // TODO: Figure out how to make this work for a[i] (i.e. arrays)   A：只是做了 index 的CP
                 if (stmtRegular.getStoreLocation() instanceof LlLocationVar
                         && !(stmtRegular.getOperand() instanceof LlLocationArray)
                         && !globalVars.contains(stmtRegular.getStoreLocation())) { // <-- this means it works for constants of vars
@@ -161,6 +161,7 @@ public class GlobalCP {
         return optimizedVar;
     }
 
+    //TODO  这个有没有问题？
     private LlReturn swapVariableForReturnStmt(LlReturn rtnStmt) {
         LlComponent optimizedReturnVal = rtnStmt.getReturnValue();
 

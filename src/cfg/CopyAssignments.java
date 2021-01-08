@@ -28,7 +28,6 @@ public class CopyAssignments {
         }
 
         // 2) perform the worklist algorithm
-
         // IN[n] = E for all nodes,  OUT[n] = empty for all nodes
         for (BasicBlock bb : bbList) {
             this.availCopyIN.put(

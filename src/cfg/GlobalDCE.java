@@ -18,12 +18,15 @@ public class GlobalDCE {
         HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = LivenessAnalysis.getLivenessAnalysisForCFG(cfg);
 
         // TODO: Make sure that you do not remove assignment stmts for variables from other scopes
-        // for example, i = 5 might look like dead code but it's not if i was declared in the scope
-        // above
+        // for example, i = 5 might look like dead code but it's not if i was declared in the scope above
+        System.out.println("----before clobal DSE----deadCodeMap------");
         for (BasicBlock bb : deadCodeMap.keySet()) {
-
-            System.out.println(deadCodeMap.get(bb));
+            HashSet<BlockLabelPair> blockLabelPairs= deadCodeMap.get(bb);
+            for(BlockLabelPair tuple : blockLabelPairs){
+                System.out.println(tuple);
+            }
         }
+        System.out.println("----before clobal DSE----deadCodeMap------");
 
         // iterate through each basic block where there is dead code
         for (BasicBlock bb : deadCodeMap.keySet()) {

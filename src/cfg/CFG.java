@@ -181,7 +181,7 @@ public class CFG {
         for (String s : this.builder.getStatementTable().keySet()){
             System.out.println(s + " : " + this.builder.getStatementTable().get(s));
         }
-        System.out.println("LlBuilder statement list  end");
+        System.out.println("LlBuilder statement list  end\n");
 
 //        this.paramsList = builder.params;
         // cache the Labels => Stmts map and extract the labels list

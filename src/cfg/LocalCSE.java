@@ -15,8 +15,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 
+/**
+ * 这里并没有按照PPT上给的使用符号执行的算法，用的是暴力算法：
+ * 将所有的 a=b+c , a += x 这样的 expression 用map记录下来
+ * 当有新的计算结果时，将无效的expression从map中去除
+ * 这种算法的时间复杂度是 O(n*n)
+ */
 public class LocalCSE {
-    //    private final HashSet<ExprObject> computedExpressions = new HashSet<>();
     private final HashMap<ExprObject, LlLocationVar> tempsForExpressions = new HashMap<>();
     private final LlBuilder builder;
 
@@ -37,6 +42,7 @@ public class LocalCSE {
                 LlAssignStmtUnaryOp unaryOp = (LlAssignStmtUnaryOp) stmt;
 
                 // we only store computations if they are variables (we don't do this for a[i]'s)
+                //TODO： 为什么不对数组 a[i] 做呢？ 因为 i 是不确定的， a[i] 的符号值不能确定
                 if (unaryOp.getStoreLocation() instanceof LlLocationVar
                         && !(unaryOp.getOperand() instanceof LlLocationArray)) {
 

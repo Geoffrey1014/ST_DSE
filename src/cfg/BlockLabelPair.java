@@ -37,4 +37,12 @@ public class BlockLabelPair {
             return this.label.hashCode();
         }
     }
+
+    @Override
+    public String toString() {
+        return "BlockLabelPair{" +
+                "basicBlock=" + basicBlock.getLabelsToStmtsMap().keySet().iterator().next() +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }
