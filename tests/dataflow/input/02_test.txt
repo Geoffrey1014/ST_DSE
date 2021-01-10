@@ -1,0 +1,41 @@
+PROGRAM Main
+VAR
+	lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+END_VAR
+
+VAR_OUTPUT
+	OUT_1: BOOL;
+END_VAR
+
+VAR_INPUT
+	max: INT;
+	count : INT;
+END_VAR
+
+    FOR count := 1 TO 5 DO
+
+            max := lst[max];
+
+    END_FOR;
+
+    max := 0;
+    max := add(y:=100, x := 2);
+
+    RETURN;
+END_PROGRAM
+
+FUNCTION add : INT
+VAR
+    tmp : INT;
+END_VAR
+VAR_INPUT
+    x : INT := 48;
+    y : INT := 35;
+END_VAR
+VAR_OUTPUT
+    z : INT;
+END_VAR
+    z := x + y;
+    add := z;
+
+END_FUNCTION

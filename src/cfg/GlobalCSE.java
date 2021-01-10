@@ -28,9 +28,9 @@ public class GlobalCSE {
         }
 
 
-        System.out.println("\nafter localCSE:\n");
-        System.out.println(cfg.toString());
-        System.out.println("\nend localCSE:\n");
+//        System.out.println("\nafter localCSE:\n");
+//        System.out.println(cfg.toString());
+//        System.out.println("\nend localCSE:\n");
 
         // get available expression for each BasicBlock in the CFG
         HashMap<BasicBlock, HashSet<Computation>> availExprIN

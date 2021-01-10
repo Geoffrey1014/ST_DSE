@@ -467,8 +467,8 @@ public class CFG {
     }
 
     // ================= USE-DEF Chain =================
-    private HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> defUseChain = new HashMap<>();
-    private HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> useDefChain = new HashMap<>();
+    public HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> defUseChain = new HashMap<>();
+    public HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> useDefChain = new HashMap<>();
     private HashSet<Edge> isVisited = new HashSet<>();
 
     //Mark use of arg at currentUseDefLocation in defUseChain using recentDef
@@ -632,6 +632,7 @@ public class CFG {
     //Build def-use chains for each symbol from updated/changed LlBuilder
     public HashMap<SymbolDef, ArrayList<defBlockLocationTuple>> buildDefUseChains() {
         this.defUseChain = new HashMap<>();
+        this.isVisited = new HashSet<>();
         BasicBlock head = basicBlocks.get(0);
         HashMap<LlLocation, defBlockLocationTuple> recentDef = new HashMap<>();
         buildDefUseRecursive(head, recentDef);

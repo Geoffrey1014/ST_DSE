@@ -17,10 +17,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Mian {
-    public static MyPrint myprint  = new MyPrint(3);
+    public static MyPrint myprint = new MyPrint(3);
 
 
-    public static void run(String[] args ){
+    public static void run(String[] args) {
         try {
             CLI.parse(args, new String[0]);
             InputStream inputStream = args.length == 0 ?
@@ -60,10 +60,10 @@ public class Mian {
                                     type = " IDENTIFIER";
                                     break;
                             }
-                            outputStream.println(token.getLine()  + type + " " + text);
+                            outputStream.println(token.getLine() + type + " " + text);
                         }
                         done = true;
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         // print the error:
                         System.err.println(CLI.infile + " " + e);
 //            scanner.consume();
@@ -83,14 +83,14 @@ public class Mian {
                     System.exit(1);
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             // print the error:
-            System.err.println(CLI.infile+" "+e);
+            System.err.println(CLI.infile + " " + e);
         }
 
     }
 
-    public static void writeFile(CFG cfg, String pathName){
+    public static void writeFile(CFG cfg, String pathName) {
 
         try {
 
@@ -113,11 +113,11 @@ public class Mian {
         }
     }
 
-    public static void walkTree(String[] args){
-        String prefix = "tests/sematics/";
-        String inputFile = prefix + "legal/07_test.txt";
+    public static void walkTree(String[] args) {
+        String prefix = "tests/dataflow/";
+        String inputFile = prefix + "input/07_test.txt";
 
-        try{
+        try {
             CharStream stream = CharStreams.fromFileName(inputFile);
             STScanner lexer = new STScanner(stream);
             TokenStream tokens = new CommonTokenStream(lexer);
@@ -127,7 +127,7 @@ public class Mian {
 
             ParseTreeWalker walker = new ParseTreeWalker();
             STListener listener = new STListener();
-            walker.walk(listener,tree);
+            walker.walk(listener, tree);
 
 
             DefPhaseVisitor defPhaseVisitor = new DefPhaseVisitor();
@@ -151,44 +151,73 @@ public class Mian {
                 System.out.println(cfg.toString());
 
                 System.out.println("_______________________ ");
-                writeFile(cfg, "origin_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "origin_" + cfgCounter + ".txt");
 
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
                 System.out.println("dominatorsMap------------");
-                for(BasicBlock bb :dominatorsMap.keySet()){
+                for (BasicBlock bb : dominatorsMap.keySet()) {
                     System.out.println(bb.getLabelsToStmtsMap().entrySet().iterator().next() + "--------------dominators:");
                     for (BasicBlock b : dominatorsMap.get(bb)) {
                         System.out.println(b.getLabelsToStmtsMap().entrySet().iterator().next());
                     }
                 }
 
+                cfg.buildDefUseChains();
+                System.out.println("defUseChain1--------------------");
+                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
+                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
+                }
+                System.out.println("defUseChain1--------------------");
+
+
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
-                writeFile(cfg, "new_"+ "CSE_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "new_" + "CSE_" + cfgCounter + ".txt");
+                System.out.println("\nafterCSE---------------------\n");
+
+                cfg.buildDefUseChains();
+                System.out.println("defUseChain2--------------------");
+                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
+                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
+                }
+                System.out.println("defUseChain2--------------------");
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
-                writeFile(cfg, "new_"+ "CP_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "new_" + "CP_" + cfgCounter + ".txt");
+                System.out.println("\nafterCP---------------------\n");
+
+                cfg.buildDefUseChains();
+                System.out.println("defUseChain3--------------------");
+                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
+                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
+                }
+                System.out.println("defUseChain3--------------------");
 
                 GlobalDCE.performGlobalDeadCodeElimination(cfg);
-                writeFile(cfg, "new_"+ "DSE_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "new_" + "DSE_" + cfgCounter + ".txt");
+                System.out.println("\nafterDSE---------------------\n");
 
+                cfg.buildDefUseChains();
+                System.out.println("defUseChain4--------------------");
+                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
+                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
+                }
+                System.out.println("defUseChain4--------------------");
 
                 GlobalCF.performGlobalCodeFolding(cfg);
-                writeFile(cfg, "new_"+ "CF_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "new_" + "CF_" + cfgCounter + ".txt");
 
                 GlobalURE.performGlobalURE(cfg);
-                writeFile(cfg, "new_"+ "URE_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "new_" + "URE_" + cfgCounter + ".txt");
 
                 AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
-                writeFile(cfg, "new_"+ "AS_" +  cfgCounter +".txt");
+                writeFile(cfg, prefix + "new_" + "AS_" + cfgCounter + ".txt");
 
-                cfgCounter ++;
+                cfgCounter++;
             }
 
 
-
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println("There was an error:\n" + e);
         }
     }
@@ -196,7 +225,6 @@ public class Mian {
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         walkTree(args);
-
 
 
     }
