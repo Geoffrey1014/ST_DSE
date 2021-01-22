@@ -4,6 +4,8 @@ package ll.assignStmt;
 import ll.LlComponent;
 import ll.location.LlLocation;
 
+import java.util.HashMap;
+
 public class LlAssignStmtBinaryOp extends LlAssignStmt {
 
     private final LlComponent leftOperand;
@@ -54,6 +56,63 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
                 * this.leftOperand.hashCode()
                 * this.operation.hashCode()
                 * this.storeLocation.hashCode();
+    }
+
+
+    private boolean isComparison(String operation){
+        String opers = "< <= > >= == !=";
+        return opers.contains(operation);
+    }
+
+    /**
+     * 这里有个问题，leftOperand 和 rightOperand 不知道是什么类型，我该怎么让他们进行运算？
+     * 前面的语义检查保证了类型的一致，所以不必担心。但我需要知道是两个整数相加还是两个浮点数相加吧！！
+     * @param memory
+     */
+    public void exe(HashMap<LlComponent, Integer> memory){
+
+
+        switch (operation){
+            case "+":
+
+                break;
+            case "-":
+
+                break;
+            case "*":
+                break;
+            case "%":
+
+                break;
+            case ">":
+
+                break;
+            case "<":
+
+                break;
+            case ">=":
+
+                break;
+            case "<=":
+
+                break;
+            case "!=":
+
+                break;
+            case "||":
+
+                break;
+            case "&&":
+
+                break;
+            case "==":
+
+                break;
+            default:
+                System.err.println("Runtime Error: Unrecognized Operation");
+                System.err.println(operation);
+                break;
+        }
     }
 
 

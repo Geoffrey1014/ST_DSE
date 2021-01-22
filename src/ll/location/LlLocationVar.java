@@ -31,4 +31,5 @@ public class LlLocationVar extends LlLocation {
         return this.getVarName().contains("str");
     }
 
+
 }
