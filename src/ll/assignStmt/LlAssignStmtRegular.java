@@ -1,5 +1,6 @@
 package ll.assignStmt;
 
+import cfg.BasicTypeEnum;
 import cfg.LlStatementVisitor;
 import cfg.Memory;
 import cfg.ValueOfDiffType;
@@ -61,12 +62,12 @@ public class LlAssignStmtRegular extends LlAssignStmt {
         return null;
     }
 
-    private ValueOfDiffType genLocationValue(int type, ValueOfDiffType value) {
+    private ValueOfDiffType genLocationValue(BasicTypeEnum type, ValueOfDiffType value) {
         switch (type) {
-            case 0:
+            case INTEGER:
                 return new ValueOfDiffType(value.getvInteger());
 
-            case 1:
+            case FLOAT:
                 return new ValueOfDiffType(value.getvFloat());
         }
         return null;

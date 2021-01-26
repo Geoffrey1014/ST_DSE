@@ -5,27 +5,27 @@ public class ValueOfDiffType {
     private Integer vInteger;
     private Float vFloat;
     private String vString;
-    private int type;  // 0: bool, 1: int, 2:float, 3: String
+    private BasicTypeEnum type;  // 0: bool, 1: int, 2:float, 3: String
 
     public ValueOfDiffType(Boolean value){
         this.vBoolean = value;
-        this.type = 0;
+        this.type = BasicTypeEnum.BOOLEAN;
     }
     public ValueOfDiffType(Integer value){
         this.vInteger = value;
-        this.type = 1;
+        this.type = BasicTypeEnum.INTEGER;
     }
 
     public ValueOfDiffType(Float value){
         this.vFloat = value;
-        this.type = 2;
+        this.type = BasicTypeEnum.FLOAT;
     }
     public ValueOfDiffType(String value){
         this.vString = value;
-        this.type = 3;
+        this.type = BasicTypeEnum.STRING;
     }
 
-    public int getType(){
+    public BasicTypeEnum getType(){
         return this.type;
     }
 

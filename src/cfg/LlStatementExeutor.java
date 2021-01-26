@@ -14,7 +14,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlAssignStmtBinaryOp llAssignStmtBinaryOp, Memory memory) {
 
-        System.out.println("exe" + llAssignStmtBinaryOp);
+        System.out.println("exe\t" + llAssignStmtBinaryOp);
         ValueOfDiffType left, right;
         if (llAssignStmtBinaryOp.getLeftOperand() instanceof LlLiteral) {
             left = getLlLiteralValue((LlLiteral) llAssignStmtBinaryOp.getLeftOperand());
@@ -34,18 +34,22 @@ public class LlStatementExeutor implements LlStatementVisitor {
         switch (llAssignStmtBinaryOp.getOperation()) {
             case "+":
                 assert left != null;
-                result = operationOfSimulor.addOper(left, right);
+                result = operationOfSimulor.add(left, right);
                 break;
             case "-":
+                assert left != null;
                 result = operationOfSimulor.sub(left, right);
                 break;
             case "*":
+                assert left != null;
                 result = operationOfSimulor.mul(left, right);
                 break;
             case "/":
+                assert left != null;
                 result = operationOfSimulor.devide(left, right);
                 break;
             case "%":
+                assert left != null;
                 result = operationOfSimulor.mod(left, right);
                 break;
             case ">":
@@ -53,24 +57,31 @@ public class LlStatementExeutor implements LlStatementVisitor {
                 result = operationOfSimulor.GT(left, right);
                 break;
             case "<":
+                assert left != null;
                 result = operationOfSimulor.LT(left, right);
                 break;
             case ">=":
+                assert left != null;
                 result = operationOfSimulor.EGT(left, right);
                 break;
             case "<=":
+                assert left != null;
                 result = operationOfSimulor.ELT(left, right);
                 break;
             case "==":
+                assert left != null;
                 result = operationOfSimulor.equal(left, right);
                 break;
             case "!=":
+                assert left != null;
                 result = operationOfSimulor.notEqual(left, right);
                 break;
             case "||":
+                assert left != null;
                 result = operationOfSimulor.or(left, right);
                 break;
             case "&&":
+                assert left != null;
                 result = operationOfSimulor.and(left, right);
                 break;
             default:
@@ -104,22 +115,23 @@ public class LlStatementExeutor implements LlStatementVisitor {
 
     @Override
     public void visitor(LlJumpConditional llJumpConditional, Memory memory) {
-        System.out.println("exe" + llJumpConditional);
+        System.out.println("exe\t" + llJumpConditional);
+
     }
 
     @Override
     public void visitor(LlJumpUnconditional llJumpUnconditional, Memory memory) {
-        System.out.println("exe" + llJumpUnconditional);
+        System.out.println("exe\t" + llJumpUnconditional);
     }
 
     @Override
     public void visitor(LlEmptyStmt llEmptyStmt, Memory memory) {
-        System.out.println("exe" + llEmptyStmt);
+        System.out.println("exe\t" + llEmptyStmt);
     }
 
     @Override
     public void visitor(LlMethodCallStmt llMethodCallStmt, Memory memory) {
-        System.out.println("exe" + llMethodCallStmt);
+        System.out.println("exe\t" + llMethodCallStmt);
     }
 
     @Override
@@ -127,7 +139,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
         System.out.println("exe" + llReturn);
     }
 
-    private ValueOfDiffType getLlLiteralValue(LlLiteral operand) {
+    public ValueOfDiffType getLlLiteralValue(LlLiteral operand) {
         if (operand instanceof LlLiteralBool) {
             return new ValueOfDiffType(((LlLiteralBool) operand).getBoolValue());
         } else if (operand instanceof LlLiteralInt) {
@@ -140,15 +152,19 @@ public class LlStatementExeutor implements LlStatementVisitor {
         return null;
     }
 
-    private ValueOfDiffType genLocationValue(int type, ValueOfDiffType value) {
+    public ValueOfDiffType genLocationValue(BasicTypeEnum type, ValueOfDiffType value) {
         switch (type) {
-            case 0:
+            case BOOLEAN:
                 return new ValueOfDiffType(value.getvBoolean());
-
-            case 1:
+            case INTEGER:
                 return new ValueOfDiffType(value.getvInteger());
-            case 2:
+            case FLOAT:
                 return new ValueOfDiffType(value.getvFloat());
+            case STRING:
+                return new ValueOfDiffType(value.getvString());
+            default:
+                System.err.println("Runtime Error: Unrecognized BasicTypeEnum");
+                break;
         }
         return null;
     }

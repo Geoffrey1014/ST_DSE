@@ -148,14 +148,10 @@ public class Mian {
             System.out.println("\n low level IR\n");
             for (LlBuilder builder : listener.pous.getBuilderList()) {
                 CFG cfg = new CFG(builder);
-                System.out.println(cfg.toString());
+//                System.out.println(cfg.toString());
 
                 System.out.println("_______________________ ");
                 writeFile(cfg, prefix + "origin_" + cfgCounter + ".txt");
-
-                System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
-                simulator.execute();
 
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
                 System.out.println("dominatorsMap------------");
@@ -207,6 +203,10 @@ public class Mian {
                     System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
                 }
                 System.out.println("defUseChain4--------------------");
+
+                System.out.println("simulator.execute();------------");
+                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
+                simulator.execute();
 
                 GlobalCF.performGlobalCodeFolding(cfg);
                 writeFile(cfg, prefix + "new_" + "CF_" + cfgCounter + ".txt");

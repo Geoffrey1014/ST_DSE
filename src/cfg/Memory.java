@@ -19,7 +19,7 @@ public class Memory {
         return this.locationTable.get(location);
     }
 
-    public int getLocationType(LlComponent location) {
+    public BasicTypeEnum getLocationType(LlComponent location) {
         return this.locationTable.get(location).getType();
     }
 

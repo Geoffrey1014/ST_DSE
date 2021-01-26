@@ -6,14 +6,14 @@ public class Operation {
     }
 
     //TODO: i have not finish up the complete version
-    // it seems not necessary to judge consistancy of types
-    public ValueOfDiffType addOper(ValueOfDiffType left, ValueOfDiffType right){
+    // it seems not necessary to judge consistency of types
+    public ValueOfDiffType add(ValueOfDiffType left, ValueOfDiffType right){
 
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Integer v = left.getvInteger() + right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Float v =left.getvFloat() + right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -22,11 +22,11 @@ public class Operation {
 
     public ValueOfDiffType sub(ValueOfDiffType left, ValueOfDiffType right){
 
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Integer v = left.getvInteger() - right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Float v =left.getvFloat() - right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -35,11 +35,11 @@ public class Operation {
 
     public ValueOfDiffType mul(ValueOfDiffType left, ValueOfDiffType right){
 
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Integer v = left.getvInteger() * right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Float v =left.getvFloat() * right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -48,11 +48,11 @@ public class Operation {
 
     public ValueOfDiffType devide(ValueOfDiffType left, ValueOfDiffType right){
 
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Integer v = left.getvInteger() / right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Float v =left.getvFloat() / right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -61,11 +61,11 @@ public class Operation {
 
     public ValueOfDiffType mod(ValueOfDiffType left, ValueOfDiffType right){
 
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Integer v = left.getvInteger() % right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Float v =left.getvFloat() % right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -73,22 +73,22 @@ public class Operation {
     }
 
     public ValueOfDiffType GT(ValueOfDiffType left, ValueOfDiffType right){
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Boolean v = left.getvInteger() > right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Boolean v =left.getvFloat() > right.getvFloat();
             return new ValueOfDiffType(v);
         }
         return null;
     }
     public ValueOfDiffType EGT(ValueOfDiffType left, ValueOfDiffType right){
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Boolean v = left.getvInteger() >= right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Boolean v =left.getvFloat() >= right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -96,11 +96,11 @@ public class Operation {
     }
 
     public ValueOfDiffType LT(ValueOfDiffType left, ValueOfDiffType right){
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Boolean v = left.getvInteger() < right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Boolean v =left.getvFloat() < right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -108,11 +108,11 @@ public class Operation {
     }
 
     public ValueOfDiffType ELT(ValueOfDiffType left, ValueOfDiffType right){
-        if (left.getType() == 1){
+        if (left.getType() == BasicTypeEnum.INTEGER){
             Boolean v = left.getvInteger() <= right.getvInteger();
             return new ValueOfDiffType(v);
         }
-        else if(left.getType() == 2){
+        else if(left.getType() == BasicTypeEnum.FLOAT){
             Boolean v =left.getvFloat() <= right.getvFloat();
             return new ValueOfDiffType(v);
         }
@@ -120,15 +120,15 @@ public class Operation {
     }
 
     public ValueOfDiffType equal(ValueOfDiffType left, ValueOfDiffType right){
-        int type = left.getType();
+        BasicTypeEnum type = left.getType();
         switch (type){
-            case 0:
+            case BOOLEAN:
                 return new ValueOfDiffType(left.getvBoolean() == right.getvBoolean());
-            case 1:
+            case INTEGER:
                 return new ValueOfDiffType(left.getvInteger().equals(right.getvInteger()));
-            case 2:
+            case FLOAT:
                 return new ValueOfDiffType(left.getvFloat().equals(right.getvFloat()));
-            case 3:
+            case STRING:
                 return new ValueOfDiffType(left.getvString().equals(right.getvString()));
             default:
                 return null;
@@ -136,15 +136,15 @@ public class Operation {
     }
 
     public ValueOfDiffType notEqual(ValueOfDiffType left, ValueOfDiffType right){
-        int type = left.getType();
+        BasicTypeEnum type = left.getType();
         switch (type){
-            case 0:
+            case BOOLEAN:
                 return new ValueOfDiffType(left.getvBoolean() != right.getvBoolean());
-            case 1:
+            case INTEGER:
                 return new ValueOfDiffType(!left.getvInteger().equals(right.getvInteger()));
-            case 2:
+            case FLOAT:
                 return new ValueOfDiffType(!left.getvFloat().equals(right.getvFloat()));
-            case 3:
+            case STRING:
                 return new ValueOfDiffType(!left.getvString().equals(right.getvString()));
             default:
                 return null;

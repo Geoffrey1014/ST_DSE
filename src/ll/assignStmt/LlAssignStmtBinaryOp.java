@@ -1,10 +1,7 @@
 package ll.assignStmt;
 
 
-import cfg.LlStatementVisitor;
-import cfg.Memory;
-import cfg.Operation;
-import cfg.ValueOfDiffType;
+import cfg.*;
 import ll.LlComponent;
 import ll.literal.*;
 import ll.location.LlLocation;
@@ -80,12 +77,12 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
         return null;
     }
 
-    private ValueOfDiffType genLocationValue(int type, ValueOfDiffType value) {
+    private ValueOfDiffType genLocationValue(BasicTypeEnum type, ValueOfDiffType value) {
         switch (type) {
-            case 0:
+            case INTEGER:
                 return new ValueOfDiffType(value.getvInteger());
 
-            case 1:
+            case FLOAT:
                 return new ValueOfDiffType(value.getvFloat());
         }
         return null;
@@ -117,7 +114,7 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
         ValueOfDiffType result = null;// after get the result, put it in the memory
         switch (operation) {
             case "+":
-                result = operationOfSimulor.addOper(left, right);
+                result = operationOfSimulor.add(left, right);
                 break;
             case "-":
                 result = operationOfSimulor.sub(left, right);
