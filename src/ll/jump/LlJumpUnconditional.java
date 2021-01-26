@@ -1,6 +1,8 @@
 package ll.jump;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
 
 public class LlJumpUnconditional extends LlJump {
     public LlJumpUnconditional(String jumpToLabel) {
@@ -30,4 +32,13 @@ public class LlJumpUnconditional extends LlJump {
     }
 
 
+    @Override
+    public void exe(Memory memory){
+
+    }
+
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
+        llStatementVisitor.visitor(this,memory);
+    }
 }

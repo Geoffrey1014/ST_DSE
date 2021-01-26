@@ -1,6 +1,8 @@
 package ll;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
 import ll.location.LlLocation;
 
 import java.util.ArrayList;
@@ -76,4 +78,13 @@ public class LlMethodCallStmt extends LlStatement {
         return this.returnLocation.hashCode() * this.methodName.hashCode() * this.argsList.hashCode();
     }
 
+    @Override
+    public void exe(Memory memory){
+
+    }
+
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
+        llStatementVisitor.visitor(this,memory);
+    }
 }

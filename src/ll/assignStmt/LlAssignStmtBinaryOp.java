@@ -1,10 +1,13 @@
 package ll.assignStmt;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
+import cfg.Operation;
+import cfg.ValueOfDiffType;
 import ll.LlComponent;
+import ll.literal.*;
 import ll.location.LlLocation;
-
-import java.util.HashMap;
 
 public class LlAssignStmtBinaryOp extends LlAssignStmt {
 
@@ -59,62 +62,115 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
     }
 
 
-    private boolean isComparison(String operation){
-        String opers = "< <= > >= == !=";
+    private boolean isComparisonORLogic(String operation) {
+        String opers = "< <= > >= == != || &&";
         return opers.contains(operation);
+    }
+
+    private ValueOfDiffType getLlLiteralValue(LlLiteral operand) {
+        if (operand instanceof LlLiteralBool) {
+            return new ValueOfDiffType(((LlLiteralBool) operand).getBoolValue());
+        } else if (operand instanceof LlLiteralInt) {
+            return new ValueOfDiffType((int) ((LlLiteralInt) operand).getIntValue());
+        } else if (operand instanceof LlLiteralReal) {
+            return new ValueOfDiffType((float) ((LlLiteralReal) operand).getRealValue());
+        } else if (operand instanceof LlLiteralString) {
+            return new ValueOfDiffType(((LlLiteralString) operand).getStringValue());
+        }
+        return null;
+    }
+
+    private ValueOfDiffType genLocationValue(int type, ValueOfDiffType value) {
+        switch (type) {
+            case 0:
+                return new ValueOfDiffType(value.getvInteger());
+
+            case 1:
+                return new ValueOfDiffType(value.getvFloat());
+        }
+        return null;
     }
 
     /**
      * 这里有个问题，leftOperand 和 rightOperand 不知道是什么类型，我该怎么让他们进行运算？
      * 前面的语义检查保证了类型的一致，所以不必担心。但我需要知道是两个整数相加还是两个浮点数相加吧！！
+     *
      * @param memory
      */
-    public void exe(HashMap<LlComponent, Integer> memory){
+    @Override
+    public void exe(Memory memory) {
+        ValueOfDiffType left, right;
+        if (this.leftOperand instanceof LlLiteral) {
+            left = getLlLiteralValue((LlLiteral) this.leftOperand);
+        } else {
+            ValueOfDiffType leftValue = memory.getLocationvalue(this.leftOperand);
+            left = genLocationValue(leftValue.getType(), leftValue);
+        }
 
-
-        switch (operation){
+        if (this.rightOperand instanceof LlLiteral) {
+            right = getLlLiteralValue((LlLiteral) this.rightOperand);
+        } else {
+            ValueOfDiffType rightValue = memory.getLocationvalue(this.rightOperand);
+            right = genLocationValue(rightValue.getType(), rightValue);
+        }
+        Operation operationOfSimulor = new Operation();
+        ValueOfDiffType result = null;// after get the result, put it in the memory
+        switch (operation) {
             case "+":
-
+                result = operationOfSimulor.addOper(left, right);
                 break;
             case "-":
-
+                result = operationOfSimulor.sub(left, right);
                 break;
             case "*":
+                result = operationOfSimulor.mul(left, right);
+                break;
+            case "/":
+                result = operationOfSimulor.devide(left, right);
                 break;
             case "%":
-
+                result = operationOfSimulor.mod(left, right);
                 break;
             case ">":
-
+                assert left != null; // is it possible that left is null??
+                result = operationOfSimulor.GT(left, right);
                 break;
             case "<":
-
+                result = operationOfSimulor.LT(left, right);
                 break;
             case ">=":
-
+                result = operationOfSimulor.EGT(left, right);
                 break;
             case "<=":
-
-                break;
-            case "!=":
-
-                break;
-            case "||":
-
-                break;
-            case "&&":
-
+                result = operationOfSimulor.ELT(left, right);
                 break;
             case "==":
-
+                result = operationOfSimulor.equal(left, right);
+                break;
+            case "!=":
+                result = operationOfSimulor.notEqual(left, right);
+                break;
+            case "||":
+                result = operationOfSimulor.or(left, right);
+                break;
+            case "&&":
+                result = operationOfSimulor.and(left, right);
                 break;
             default:
                 System.err.println("Runtime Error: Unrecognized Operation");
                 System.err.println(operation);
                 break;
         }
+        
+        memory.put(this.storeLocation, result);
+
+
     }
 
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
+        llStatementVisitor.visitor(this,memory);
+    }
 
 
 }

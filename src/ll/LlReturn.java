@@ -1,6 +1,9 @@
 package ll;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
+
 public class LlReturn extends LlStatement {
 
     private LlComponent returnValue = null;
@@ -42,5 +45,13 @@ public class LlReturn extends LlStatement {
         return this.returnValue.hashCode();
     }
 
+    @Override
+    public void exe(Memory memory){
 
+    }
+
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor,Memory memory) {
+        llStatementVisitor.visitor(this, memory);
+    }
 }

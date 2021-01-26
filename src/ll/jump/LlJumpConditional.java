@@ -1,11 +1,13 @@
 package ll.jump;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
 import ll.LlComponent;
 
 public class LlJumpConditional extends LlJump {
 
-    private final LlComponent condition;
+    private final LlComponent condition; // condition should all be boolean
 
     public LlJumpConditional(String jumpToLabel, LlComponent condition) {
         super(jumpToLabel);
@@ -37,4 +39,13 @@ public class LlJumpConditional extends LlJump {
         return this.jumpToLabel.hashCode();
     }
 
+    @Override
+    public void exe(Memory memory){
+
+    }
+
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
+        llStatementVisitor.visitor(this,memory);
+    }
 }

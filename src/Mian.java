@@ -153,6 +153,10 @@ public class Mian {
                 System.out.println("_______________________ ");
                 writeFile(cfg, prefix + "origin_" + cfgCounter + ".txt");
 
+                System.out.println("simulator.execute();------------");
+                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
+                simulator.execute();
+
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
                 System.out.println("dominatorsMap------------");
                 for (BasicBlock bb : dominatorsMap.keySet()) {

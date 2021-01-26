@@ -1,6 +1,9 @@
 package ll;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
+
 public class LlEmptyStmt extends LlStatement {
     @Override
     public String toString() {
@@ -15,5 +18,15 @@ public class LlEmptyStmt extends LlStatement {
     @Override
     public int hashCode() {
         return 17; // some arbitrary prime;
+    }
+
+    @Override
+    public void exe(Memory memory){
+
+    }
+
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
+        llStatementVisitor.visitor(this,memory);
     }
 }

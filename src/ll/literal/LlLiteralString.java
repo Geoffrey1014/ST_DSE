@@ -9,7 +9,7 @@ public class LlLiteralString extends LlLiteral{
         this.stringValue = stringValue;
     }
 
-    public String getRealValue() {
+    public String getStringValue() {
         return this.stringValue;
     }
 

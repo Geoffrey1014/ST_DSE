@@ -58,14 +58,14 @@ public class BasicBlock {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
 //        str += "++++++ new block +++++++\n";
         for(String label : this.labelsToStmtsMap.keySet()){
-            str += String.format("%1$15s :  ", label);
-            str += this.labelsToStmtsMap.get(label) + "\n";
+            str.append(String.format("%1$15s :  ", label));
+            str.append(this.labelsToStmtsMap.get(label)).append("\n");
 
         }
-        return str;
+        return str.toString();
     }
 
     public LlBuilder getBuilder() {

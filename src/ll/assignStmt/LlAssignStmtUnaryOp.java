@@ -1,6 +1,8 @@
 package ll.assignStmt;
 
 
+import cfg.LlStatementVisitor;
+import cfg.Memory;
 import ll.LlComponent;
 import ll.location.LlLocation;
 
@@ -47,10 +49,17 @@ public class LlAssignStmtUnaryOp extends LlAssignStmt {
         return this.operator.hashCode() * this.operand.hashCode() * this.storeLocation.hashCode();
     }
 
-    private boolean isRegister(String loc) {
-        String r = "%r12 %r13 %r14 %r15 %rbx";
-        return r.contains(loc);
+    /**
+     * i have not encounter this, so i can be dealed with later
+     * @param memory
+     */
+    @Override
+    public void exe(Memory memory){
 
     }
 
+    @Override
+    public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
+        llStatementVisitor.visitor(this,memory);
+    }
 }
