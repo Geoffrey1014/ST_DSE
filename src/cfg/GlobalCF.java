@@ -84,7 +84,7 @@ public class GlobalCF {
                     if (binaryOp.getLeftOperand() instanceof LlLiteralInt
                             && binaryOp.getRightOperand() instanceof LlLiteralInt) {
                         long op1 = ((LlLiteralInt) binaryOp.getLeftOperand()).getIntValue();
-                        long op2 = ((LlLiteralInt) binaryOp.getLeftOperand()).getIntValue();
+                        long op2 = ((LlLiteralInt) binaryOp.getRightOperand()).getIntValue();
 
                         // don't let a Divide-by-Zero error happen
                         if (!binaryOp.getOperation().equals("/") && op2 != 0) {

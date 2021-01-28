@@ -65,10 +65,10 @@ public class LivenessAnalysis {
             // the algorithm is not implemented rightly 这里的OUT是新建的，retainAll 之后永远是空集
             HashSet<BlockLabelPair> OUT = new HashSet<>(); // OUT[n] = EmptySet
             if (node.getAlternativeBranch() != null) {
-                OUT.retainAll(this.requiredDefsIN.get(node.getAlternativeBranch()));
+                OUT.addAll(this.requiredDefsIN.get(node.getAlternativeBranch()));
             }
             if (node.getDefaultBranch() != null) {
-                OUT.retainAll(this.requiredDefsIN.get(node.getDefaultBranch()));
+                OUT.addAll(this.requiredDefsIN.get(node.getDefaultBranch()));
             }
             if (node.getDefaultBranch() == null && node.getAlternativeBranch() == null) {
                 this.requiredDefsOUT.put(node, new HashSet<>());

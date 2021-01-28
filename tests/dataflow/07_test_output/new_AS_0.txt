@@ -2,7 +2,7 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-            L10 :  #_t9 = 96
+            L10 :  #_t9 = 83
             L13 :  if true goto IF_L12
 
             L14 :  goto END_IF_L12

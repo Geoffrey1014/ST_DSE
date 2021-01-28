@@ -2,12 +2,14 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
+             L1 :  a = 48
             L10 :  #_t9 = 48 + 35
             L13 :  if true goto IF_L12
 
             L14 :  goto END_IF_L12
 
          IF_L12 :  EMPTY_STATEMENT
+            L18 :  a = 1
 
      END_IF_L12 :  EMPTY_STATEMENT
             L19 :  #_t8 = a + 35
