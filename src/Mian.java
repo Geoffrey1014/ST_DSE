@@ -113,9 +113,36 @@ public class Mian {
         }
     }
 
+    public static void printDUchain(CFG cfg, int counter){
+        cfg.buildDefUseChains();
+        System.out.println("defUseChain--------------------"+ String.valueOf(counter));
+        for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
+            System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
+        }
+        System.out.println("defUseChain--------------------"+ String.valueOf(counter));
+    }
+
+    public static void printDominatorMap(CFG cfg){
+        HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
+        System.out.println("dominatorsMap------------");
+        for (BasicBlock bb : dominatorsMap.keySet()) {
+            System.out.println(bb.getLabelsToStmtsMap().entrySet().iterator().next() + "--------------dominators:");
+            for (BasicBlock b : dominatorsMap.get(bb)) {
+                System.out.println(b.getLabelsToStmtsMap().entrySet().iterator().next());
+            }
+        }
+    }
+
     public static void walkTree(String[] args) {
         String prefix = "tests/dataflow/";
-        String inputFile = prefix + "input/07_test.txt";
+        String inputFileName = "09_test.txt";
+
+        String inputFile = prefix + "input/" + inputFileName;
+        String outPutDir = prefix +   inputFileName.substring(0,7)+  "_output/" ;
+        File dir = new File(outPutDir);
+        if (!dir.exists()) {// 判断目录是否存在
+            dir.mkdir();
+        }
 
         try {
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -151,71 +178,46 @@ public class Mian {
 //                System.out.println(cfg.toString());
 
                 System.out.println("_______________________ ");
-                writeFile(cfg, prefix + "origin_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "origin_" + cfgCounter + ".txt");
 
-                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
-                System.out.println("dominatorsMap------------");
-                for (BasicBlock bb : dominatorsMap.keySet()) {
-                    System.out.println(bb.getLabelsToStmtsMap().entrySet().iterator().next() + "--------------dominators:");
-                    for (BasicBlock b : dominatorsMap.get(bb)) {
-                        System.out.println(b.getLabelsToStmtsMap().entrySet().iterator().next());
-                    }
-                }
+//                printDominatorMap(cfg);
 
-                cfg.buildDefUseChains();
-                System.out.println("defUseChain1--------------------");
-                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
-                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
-                }
-                System.out.println("defUseChain1--------------------");
-
+//                printDUchain(cfg, 1);
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
-                writeFile(cfg, prefix + "new_" + "CSE_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterCSE---------------------\n");
 
-                cfg.buildDefUseChains();
-                System.out.println("defUseChain2--------------------");
-                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
-                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
-                }
-                System.out.println("defUseChain2--------------------");
+//                printDUchain(cfg, 2);
+
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
-                writeFile(cfg, prefix + "new_" + "CP_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
                 System.out.println("\nafterCP---------------------\n");
 
-                cfg.buildDefUseChains();
-                System.out.println("defUseChain3--------------------");
-                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
-                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
-                }
-                System.out.println("defUseChain3--------------------");
+//                printDUchain(cfg, 3);
+
 
                 GlobalDCE.performGlobalDeadCodeElimination(cfg);
-                writeFile(cfg, prefix + "new_" + "DSE_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterDSE---------------------\n");
 
-                cfg.buildDefUseChains();
-                System.out.println("defUseChain4--------------------");
-                for (CFG.SymbolDef symbolDef : cfg.defUseChain.keySet()) {
-                    System.out.println(symbolDef + " : " + cfg.defUseChain.get(symbolDef));
-                }
-                System.out.println("defUseChain4--------------------");
+//                printDUchain(cfg, 4);
+
 
                 System.out.println("simulator.execute();------------");
                 Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
                 simulator.execute();
 
                 GlobalCF.performGlobalCodeFolding(cfg);
-                writeFile(cfg, prefix + "new_" + "CF_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "new_" + "CF_" + cfgCounter + ".txt");
 
                 GlobalURE.performGlobalURE(cfg);
-                writeFile(cfg, prefix + "new_" + "URE_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "new_" + "URE_" + cfgCounter + ".txt");
 
                 AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
-                writeFile(cfg, prefix + "new_" + "AS_" + cfgCounter + ".txt");
+                writeFile(cfg, outPutDir + "new_" + "AS_" + cfgCounter + ".txt");
 
                 cfgCounter++;
             }
@@ -229,6 +231,8 @@ public class Mian {
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         walkTree(args);
+        // 我需要打开一个文件夹，把所有文件都执行一边，把结果输出
+        // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
 
     }

@@ -32,10 +32,10 @@ public class LivenessAnalysis {
         this.cfg = cfg;
         this.defsForUses = this.cfg.getDefsForUseAsBlockLabelPairs(); //获得 use ： def 对
 
-//        for (CFG.SymbolDef defForUse : this.defsForUses.keySet()){
-//            System.out.println(defForUse+ ":");
-//            System.out.println(this.defsForUses.get(defForUse));
-//        }
+        for (CFG.SymbolDef defForUse : this.defsForUses.keySet()){
+            System.out.println("use:\t"+ defForUse+ ":");
+            System.out.println("def:\t"+this.defsForUses.get(defForUse));
+        }
 
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
 
@@ -62,7 +62,7 @@ public class LivenessAnalysis {
 
             // OUT[n] = OUT[n] intersect IN[s] for all s in successors
             // TODO 我觉得应该是并集 （不，应该是交，因为 IN[s] 向上传递的信息包含USE[n]，定值后会被使用的语句集合，并不是变量在此引用但之前没有定值）
-
+            // the algorithm is not implemented rightly 这里的OUT是新建的，retainAll 之后永远是空集
             HashSet<BlockLabelPair> OUT = new HashSet<>(); // OUT[n] = EmptySet
             if (node.getAlternativeBranch() != null) {
                 OUT.retainAll(this.requiredDefsIN.get(node.getAlternativeBranch()));
@@ -144,7 +144,7 @@ public class LivenessAnalysis {
      * where the storeLocation has a USE somewhere in the BasicBlock
      * 重点是 ： the storeLocation has a USE somewhere in the BasicBlock
      * @param bb
-     * @return 返回 一个定值语句的位置的集合，这些定值语句 在 后面 被 引用
+     * @return 返回 一个定值语句的位置的集合，被定值的location在相同 或者不同 的BasicBlock中定其他位置被使用
      */
      private HashSet<BlockLabelPair> USE(BasicBlock bb) {
         HashSet<BlockLabelPair> setOfNeededDefs = new HashSet<BlockLabelPair>();

@@ -1,0 +1,31 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L0 :  #_t0 = 48
+             L1 :  a = #_t0
+             L2 :  #_t1 = 35
+             L3 :  b = #_t1
+             L4 :  #_t2 = true
+             L5 :  tmp = #_t2
+             L6 :  #_t3 = 0
+             L7 :  c = #_t3
+             L8 :  #_t4 = 0
+             L9 :  d = #_t4
+            L10 :  #_t5 = a + b
+            L11 :  c = #_t5
+            L13 :  if tmp goto IF_L12
+
+            L14 :  goto END_IF_L12
+
+         IF_L12 :  EMPTY_STATEMENT
+            L15 :  #_t6 = a + b
+            L16 :  d = #_t6
+            L17 :  #_t7 = 1
+            L18 :  a = #_t7
+
+     END_IF_L12 :  EMPTY_STATEMENT
+            L19 :  #_t8 = a + b
+            L20 :  x = #_t8
+
+           exit :  EMPTY_STATEMENT
