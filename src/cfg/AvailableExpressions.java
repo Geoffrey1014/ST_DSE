@@ -13,6 +13,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 
+/**
+ * •  Each basic block has
+ * –  IN - set of expressions available at start of block
+ * –  OUT - set of expressions available at end of block
+ * –  GEN - set of expressions computed in block
+ * –  KILL - set of expressions killed in in block
+ * •  GEN[x=z;b=x+y]=1000
+ * •  KILL[x=z;b=x+y]=1001
+ * •  Compiler scans each basic block to derive GEN and KILL sets
+ */
 public class AvailableExpressions {
     HashSet<Computation> universalSet;
     private final HashMap<BasicBlock, HashSet<Computation>> availExprIN = new HashMap<>();

@@ -1,0 +1,9 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L8 :  #_t4 = 83
+            L10 :  #_t6 = #_t4 * #_t4
+            L14 :  #_t9 = #_t4 * #_t4
+
+           exit :  EMPTY_STATEMENT

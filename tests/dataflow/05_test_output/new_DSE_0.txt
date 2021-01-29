@@ -1,0 +1,8 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L8 :  #_t4 = 48 + 35
+            L12 :  #_t6 = 1 + 35
+
+           exit :  EMPTY_STATEMENT

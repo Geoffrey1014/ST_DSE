@@ -17,7 +17,7 @@ END_VAR
     IF tmp THEN
         c := a + b;
     ELSE
-        d := a + b:
+        d := a + b;
     END_IF;
     x :=  a + b ;
 

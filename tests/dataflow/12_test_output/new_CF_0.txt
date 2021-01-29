@@ -1,0 +1,20 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L3 :  b = 35
+            L10 :  #_t11 = 83
+            L14 :  if true goto IF_L12
+
+            L15 :  goto ELSE_L13
+
+       ELSE_L13 :  EMPTY_STATEMENT
+            L19 :  b = 1
+            L20 :  goto END_IF_L12
+
+         IF_L12 :  EMPTY_STATEMENT
+
+     END_IF_L12 :  EMPTY_STATEMENT
+            L23 :  #_t9 = 48 + b
+
+           exit :  EMPTY_STATEMENT

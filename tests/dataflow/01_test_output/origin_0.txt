@@ -1,0 +1,44 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L0 :  #_t0 = NOT PREV_LOAD
+             L1 :  #_t1 = #_t0 AND TLOAD
+             L2 :  IS_LEAD_EDGE = #_t1
+             L4 :  if RESET goto IF_L3
+
+             L6 :  goto START_ELSIF_L5
+
+          IF_L3 :  EMPTY_STATEMENT
+             L7 :  #_t2 = true
+             L8 :  OUT_1 = #_t2
+             L9 :  goto END_IF_L3
+
+ START_ELSIF_L5 :  EMPTY_STATEMENT
+            L11 :  #_t3 = LOAD OR IS_LEAD_EDGE
+            L12 :  if #_t3 goto ELSIF_L10
+
+            L13 :  goto END_ELSIF_L10
+
+      ELSIF_L10 :  EMPTY_STATEMENT
+            L14 :  OUT_1 = IN_1
+            L15 :  goto END_IF_L3
+
+  END_ELSIF_L10 :  EMPTY_STATEMENT
+            L17 :  if IN_1 goto ELSIF_L16
+
+            L18 :  goto END_ELSIF_L16
+
+      ELSIF_L16 :  EMPTY_STATEMENT
+            L19 :  OUT_1 = IN_1
+            L20 :  goto END_IF_L3
+
+  END_ELSIF_L16 :  EMPTY_STATEMENT
+       ELSE_L21 :  EMPTY_STATEMENT
+            L22 :  #_t4 = false
+            L23 :  LOAD = #_t4
+
+      END_IF_L3 :  EMPTY_STATEMENT
+            L24 :  PREV_LOAD = TLOAD
+
+           exit :  EMPTY_STATEMENT

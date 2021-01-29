@@ -1,0 +1,18 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+            L10 :  #_t10 = 83
+            L14 :  if true goto IF_L12
+
+            L15 :  goto ELSE_L13
+
+       ELSE_L13 :  EMPTY_STATEMENT
+            L16 :  #_t6 = 1680
+            L18 :  goto END_IF_L12
+
+         IF_L12 :  EMPTY_STATEMENT
+
+     END_IF_L12 :  EMPTY_STATEMENT
+
+           exit :  EMPTY_STATEMENT
