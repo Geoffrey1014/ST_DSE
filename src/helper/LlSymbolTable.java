@@ -1,23 +1,139 @@
 package helper;
 
+import cfg.CFG;
+import cfg.ValueOfDiffType;
 import ll.LlComponent;
+import ll.location.LlLocationVar;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 public class LlSymbolTable {
-    //TODO 注意，这个肯定很重要，我不是要生成汇编代码的，是要模拟执行的，那么LLIR的符号表应该是很重要的。对我来说，是要在LLIR模拟执行，所以LLIR应该包括更多信息
-    // 处理先声明但是还没有赋值的情况
-    public Hashtable<LlComponent, String> llTable;
+    /**
+     * store variables declared in VARBlock and initialize them
+     */
+    private final String methodName;
+    public Hashtable<LlComponent, String> llStringTable;
+    public Hashtable<LlLocationVar, String> paramTable;
+    public Hashtable<LlLocationVar, Integer> arrayTable;
+    public HashMap<CFG.SymbolDef, ArrayList<CFG.defBlockLocationTuple>> useDef;
+    public Hashtable<LlLocationVar, Integer> globalArrays;
+    public ArrayList<LlLocationVar> globalVars;
 
-    public LlSymbolTable(){
-        llTable = new Hashtable<>();
+    public Hashtable<LlComponent, ValueOfDiffType>  varInput;
+    public Hashtable<LlComponent, ValueOfDiffType> varNonInput;
+    public Hashtable<LlComponent, ArrayList<ValueOfDiffType>>  varInputArray;
+    public Hashtable<LlComponent, ArrayList<ValueOfDiffType>> varNonInputArray;
+
+
+    public LlSymbolTable(String methodName) {
+        this.llStringTable = new Hashtable<>();
+        this.paramTable = new Hashtable<>();
+        this.arrayTable = new Hashtable<>();
+        this.useDef = new HashMap<>();
+        this.globalArrays = new Hashtable<>();
+        this.globalVars = new ArrayList<>();
+        this.methodName = methodName;
+
+        this.varInput = new Hashtable<>();
+        this.varNonInput = new Hashtable<>();
+        this.varInputArray = new Hashtable<>();
+        this.varNonInputArray = new Hashtable<>(); // 这个应该不支持，用不上
     }
 
-    public void put(LlComponent key, String value){
-        this.llTable.put(key, value);
+    public String getMethodName() {
+        return this.methodName;
     }
 
-    public String get(LlComponent key){
-        return this.llTable.get(key);
+    public void putOnStringTable(LlComponent key, String value) {
+        this.llStringTable.put(key, value);
+    }
+
+    public String getFromStringTable(LlComponent key) {
+        return this.llStringTable.get(key);
+    }
+
+    public Hashtable<LlComponent, String> getLlStringTable() {
+        return this.llStringTable;
+    }
+
+    public void putOnParamTable(LlLocationVar key, String value) {
+        this.paramTable.put(key, value);
+    }
+
+    public String getFromParamTable(LlLocationVar key) {
+        for (LlLocationVar loc : this.paramTable.keySet()) {
+            if (key.equals(loc)) {
+                return this.paramTable.get(loc);
+            }
+
+        }
+        return null;
+    }
+
+    public Hashtable<LlLocationVar, String> getParamTable() {
+        return this.paramTable;
+    }
+
+    public void setUseDef(HashMap<CFG.SymbolDef, ArrayList<CFG.defBlockLocationTuple>> useDef) {
+        this.useDef = useDef;
+    }
+
+    public HashMap<CFG.SymbolDef, ArrayList<CFG.defBlockLocationTuple>> getUseDef() {
+        return this.useDef;
+    }
+
+    public void putOnArrayTable(LlLocationVar key, int val) {
+        this.arrayTable.put(key, val);
+    }
+
+    public Integer getFromArrayTable(LlLocationVar key) {
+        for (LlLocationVar loc : this.arrayTable.keySet()) {
+            if (key.equals(loc)) {
+                return this.arrayTable.get(loc);
+            }
+
+        }
+        return null;
+    }
+
+    public Hashtable<LlLocationVar, Integer> getArrayTable() {
+        return this.arrayTable;
+    }
+
+
+    public void addToGlobalArrays(LlLocationVar var, int size) {
+        this.globalArrays.put(var, size);
+    }
+
+    public Hashtable<LlLocationVar, Integer> getGlobalArrays() {
+        return this.globalArrays;
+    }
+
+    public void addToGlobalVars(LlLocationVar var) {
+        this.globalVars.add(var);
+    }
+
+    public ArrayList<LlLocationVar> getGlobalVars() {
+        return this.globalVars;
+    }
+
+    public boolean isInGlobalArraysTable(LlLocationVar var) {
+        for (LlLocationVar locationVar : this.globalArrays.keySet()) {
+            if (locationVar.equals(var)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isInGlobalVarsTable(LlLocationVar var) {
+        for (LlLocationVar locationVar : this.globalVars) {
+            if (locationVar.equals(var)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

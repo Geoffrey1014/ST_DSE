@@ -7,5 +7,6 @@ public abstract class IrLiteral extends IrExpr {
     public IrLiteral(int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
     }
+
     public abstract Object getValue();
 }

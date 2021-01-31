@@ -135,7 +135,7 @@ public class Mian {
 
     public static void walkTree(String[] args) {
         String prefix = "tests/dataflow/";
-        String inputFileName = "13_test.txt";
+        String inputFileName = "03_test.txt";
 
         String inputFile = prefix + "input/" + inputFileName;
         String outPutDir = prefix +   inputFileName.substring(0,7)+  "_output/" ;

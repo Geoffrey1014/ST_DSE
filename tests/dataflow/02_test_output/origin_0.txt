@@ -1,0 +1,29 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L2 :  #_t0 = 1
+             L3 :  count = #_t0
+
+    FOR_COND_L0 :  EMPTY_STATEMENT
+             L4 :  #_t1 = 5
+             L5 :  #_t2 = count < #_t1
+             L6 :  if #_t2 goto FOR_L1
+
+             L7 :  goto END_FOR_L1
+
+         FOR_L1 :  EMPTY_STATEMENT
+             L8 :  max = lst[max] 
+             L9 :  count = count + 1
+            L10 :  goto FOR_COND_L0
+
+     END_FOR_L1 :  EMPTY_STATEMENT
+            L11 :  #_t3 = 0
+            L12 :  max = #_t3
+            L13 :  #_t5 = 2
+            L14 :  #_t6 = 100
+            L15 :  #_t4 = add(#_t5,#_t6,)
+            L16 :  max = #_t4
+            L17 :  return 
+
+           exit :  EMPTY_STATEMENT

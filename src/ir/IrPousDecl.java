@@ -91,21 +91,21 @@ public class IrPousDecl extends Ir {
         for (IrPouDecl program: this.programDeclsArrayList) {
 
             LlBuilder llBuilder = new LlBuilder(program.getName());
-            LlSymbolTable llSymbolTable = new LlSymbolTable();
+            LlSymbolTable llSymbolTable = new LlSymbolTable(program.getName());
             program.generateLlIr(llBuilder, llSymbolTable);
             buildersList.add(llBuilder);
         }
 
         for (IrPouDecl fbDecl: this.functionBlockDeclsArrayList) {
             LlBuilder llBuilder = new LlBuilder(fbDecl.getName());
-            LlSymbolTable llSymbolTable = new LlSymbolTable();
+            LlSymbolTable llSymbolTable = new LlSymbolTable(fbDecl.getName());
             fbDecl.generateLlIr(llBuilder, llSymbolTable);
 
             buildersList.add(llBuilder);
         }
         for (IrPouDecl functionDecl: this.functionDeclArrayList) {
             LlBuilder llBuilder = new LlBuilder(functionDecl.getName());
-            LlSymbolTable llSymbolTable = new LlSymbolTable();
+            LlSymbolTable llSymbolTable = new LlSymbolTable(functionDecl.getName());
             functionDecl.generateLlIr(llBuilder, llSymbolTable);
             buildersList.add(llBuilder);
         }

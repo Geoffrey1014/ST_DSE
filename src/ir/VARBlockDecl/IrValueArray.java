@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class IrValueArray extends IrValue {
     public final ArrayList<IrLiteral>  valueList;
-    private VarTypeEnum type;
+    public VarTypeEnum type;
 
     public IrValueArray(int lineNumber, int colNumber, ArrayList<IrLiteral>  valueList) {
         super(lineNumber, colNumber);
@@ -51,6 +51,7 @@ public class IrValueArray extends IrValue {
 
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
+        // TODO： 因为这里没做处理，所以 test2 test3 报错
         return null;
     }
 }

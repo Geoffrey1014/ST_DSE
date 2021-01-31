@@ -10,9 +10,9 @@ import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 public class IrRealLiteral extends IrLiteral {
-    private final Double value;
+    private final Float value;
 
-    public IrRealLiteral(Double value, int lineNumber, int colNumber) {
+    public IrRealLiteral(Float value, int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
         this.value = value;
     }
@@ -22,7 +22,7 @@ public class IrRealLiteral extends IrLiteral {
         return  VarTypeEnum.RES_REAL;
     }
 
-    public Double getValue() {
+    public Float getValue() {
         return value;
     }
 

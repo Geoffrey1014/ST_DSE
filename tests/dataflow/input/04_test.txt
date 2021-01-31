@@ -12,7 +12,16 @@ VAR_OUTPUT
 END_VAR
     c := 0;
     d := 0;
+    a := get_int(1);
+    b := get_int(2);
     c := ( a + b ) * ( a + b );
     d := ( a + b ) * ( a + b );
 
 END_PROGRAM
+
+FUNCTION get_int : INT
+VAR_INPUT
+    x : INT := 48;
+END_VAR
+    get_int := x;
+END_FUNCTION

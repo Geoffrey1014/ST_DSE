@@ -900,7 +900,7 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFloating_point_literal(STParser.Floating_point_literalContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrRealLiteral floatLiteral = (IrRealLiteral) getASTNode(ctx.floating_point_fraction());
-        Long exponent = 1L;
+        Integer exponent = 1;
         if (ctx.decimal_exponent() != null){
             IrIntLiteral irIntLiteral = (IrIntLiteral) getASTNode(ctx.decimal_exponent());
             exponent = irIntLiteral.getValue();
@@ -908,7 +908,7 @@ public class STListener extends STParserBaseListener {
 
 //        System.out.println(floatLiteral.getValue());
 
-        floatLiteral = new IrRealLiteral(floatLiteral.getValue() * Math.pow(10, exponent) , l.line, l.col);
+        floatLiteral = new IrRealLiteral((float) (floatLiteral.getValue() * Math.pow(10, exponent)), l.line, l.col);
         setASTNode(ctx, floatLiteral);
 
 
@@ -928,7 +928,7 @@ public class STListener extends STParserBaseListener {
 //        }
         String s = ctx.getText();
 
-        setASTNode(ctx, new IrRealLiteral(Double.valueOf(s.replaceAll("_", "")),l.line, l.col ));
+        setASTNode(ctx, new IrRealLiteral(Float.valueOf(s.replaceAll("_", "")),l.line, l.col ));
     }
 
     @Override public void enterDecimal_exponent(STParser.Decimal_exponentContext ctx) { }
@@ -989,8 +989,8 @@ public class STListener extends STParserBaseListener {
 
     public void setASTNode(ParseTree parseTreeNode, Where ASTNode){this.ASTNodes.put(parseTreeNode, ASTNode);}
     public Where getASTNode(ParseTree parseTreeNode){ return this.ASTNodes.get(parseTreeNode);}
-    public Long valueOfDecimalLiteral(String literal){
-        return Long.valueOf(literal.replaceAll("_", ""));
+    public Integer valueOfDecimalLiteral(String literal){
+        return Integer.valueOf(literal.replaceAll("_", ""));
     }
 
     static class ProgramLocation {

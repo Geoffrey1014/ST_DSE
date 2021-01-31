@@ -10,9 +10,9 @@ import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 public class IrIntLiteral extends IrLiteral {
-    private final Long value;
+    private final Integer value;
 
-    public IrIntLiteral(Long value, int lineNumber, int colNumber) {
+    public IrIntLiteral(Integer value, int lineNumber, int colNumber) {
         super(lineNumber, colNumber);
         this.value = value;
     }
@@ -22,7 +22,7 @@ public class IrIntLiteral extends IrLiteral {
         return  VarTypeEnum.RES_INT;
     }
 
-    public Long getValue() {
+    public Integer getValue() {
         return value;
     }
 

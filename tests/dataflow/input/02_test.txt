@@ -1,6 +1,7 @@
 PROGRAM Main
 VAR
 	lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+	(* does not consider pointer, so can no assign a array to a variable except in the declaration *)
 END_VAR
 
 VAR_OUTPUT

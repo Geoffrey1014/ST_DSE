@@ -60,9 +60,8 @@ public class LivenessAnalysis {
             BasicBlock node = activeNodes.removeLast();
             HashSet<BlockLabelPair> oldIN = this.requiredDefsIN.get(node);
 
-            // OUT[n] = OUT[n] intersect IN[s] for all s in successors
-            // TODO 我觉得应该是并集 （不，应该是交，因为 IN[s] 向上传递的信息包含USE[n]，定值后会被使用的语句集合，并不是变量在此引用但之前没有定值）
-            // the algorithm is not implemented rightly 这里的OUT是新建的，retainAll 之后永远是空集
+            // OUT[n] = OUT[n] U IN[s] for all s in successors
+
             HashSet<BlockLabelPair> OUT = new HashSet<>(); // OUT[n] = EmptySet
             if (node.getAlternativeBranch() != null) {
                 OUT.addAll(this.requiredDefsIN.get(node.getAlternativeBranch()));
@@ -144,12 +143,24 @@ public class LivenessAnalysis {
      * where the storeLocation has a USE somewhere in the BasicBlock
      * 重点是 ： the storeLocation has a USE somewhere in the BasicBlock
      * @param bb
-     * @return 返回 一个定值语句的位置的集合，被定值的location在相同 或者不同 的BasicBlock中定其他位置被使用
+     * @return 返回 一个定值语句的位置的集合，变量是在此Bb或者其他Bb被 DEF，在此Bb USE，
      */
      private HashSet<BlockLabelPair> USE(BasicBlock bb) {
         HashSet<BlockLabelPair> setOfNeededDefs = new HashSet<BlockLabelPair>();
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
-
+//         String blockLeader =getblockLeaderLabel(bb);
+//         if(blockLeader.equals("exit")){
+//            // get the needed defs for non-input vars
+//             // this part is only used once ,so can be brought out of this function
+//             LlLocationVar c = new LlLocationVar("c");
+//             HashSet<BlockLabelPair> defsForUse = GET_DEFS_FOR_USE(bb, "L11", c);
+//             setOfNeededDefs.addAll(defsForUse);
+//             LlLocationVar d = new LlLocationVar("d");
+//             defsForUse = GET_DEFS_FOR_USE(bb, "L15", d);
+//             setOfNeededDefs.addAll(defsForUse);
+//             return setOfNeededDefs;
+//
+//         }
 
         // loop through each stmt in the BasicBlock
         for (String label : labelsToStmtsMap.keySet()) {
@@ -208,16 +219,21 @@ public class LivenessAnalysis {
 
     private HashSet<BlockLabelPair> GET_DEFS_FOR_USE(BasicBlock bb, String label, LlLocationVar var) {
 
+
+        String blockLeader =getblockLeaderLabel(bb);
+        // return the HashSet of BlockLabelPairs associated with the SymbolDef
+        CFG.SymbolDef symbolDef = this.cfg.new SymbolDef(var, this.cfg.new defBlockLocationTuple(blockLeader, label));
+        return this.defsForUses.get(symbolDef);
+    }
+
+    private String getblockLeaderLabel(BasicBlock bb){
         // hacky way to get the first element from the keySet() of labels
         String blockLeader = "";
         for (String leader : bb.getLabelsToStmtsMap().keySet()) {
             blockLeader = leader;
             break;
         }
-
-        // return the HashSet of BlockLabelPairs associated with the SymbolDef
-        CFG.SymbolDef symbolDef = this.cfg.new SymbolDef(var, this.cfg.new defBlockLocationTuple(blockLeader, label));
-        return this.defsForUses.get(symbolDef);
+        return blockLeader;
     }
 
 }

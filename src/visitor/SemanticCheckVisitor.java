@@ -107,7 +107,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                                 safeArg.accept(this);
 
                                 // 3) check that each argument and param types match
-                                if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
+                                if (param.getIrType().getTypeEnum() !=  safeArg.getArgumentType() ) {
 
                                     errorMessage.append("Argument and parameter types don't match" + " line: ").
                                             append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
@@ -119,7 +119,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                                     IrLocation locArg = (IrLocation) safeArg.getArgValue();
                                     IrVarDecl possibleArray = (IrVarDecl) symTable.getSymbol(locArg.getLocationName().getValue());
 
-                                    if (possibleArray.getType() instanceof IrTypeArray) {
+                                    if (possibleArray.getIrType() instanceof IrTypeArray) {
                                         errorMessage.append("Argument cannot be an array location " + " line: ")
                                                 .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
                                     }
@@ -163,7 +163,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                             .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
 
-                if (node.assignOutputList != null){
+                if (node.assignOutputList != null && node.assignOutputList.size() > 0){
                     errorMessage.append("can not call function block  in expression. ")
                             .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
@@ -230,7 +230,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                                 safeArg.accept(this);
 
                                 // 3) check that each argument and param types match
-                                if (param.getType().getTypeEnum() !=  safeArg.getArgumentType() ) {
+                                if (param.getIrType().getTypeEnum() !=  safeArg.getArgumentType() ) {
 
                                     errorMessage.append("Argument and parameter types don't match" + " line: ").
                                             append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
@@ -242,7 +242,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                                     IrLocation locArg = (IrLocation) safeArg.getArgValue();
                                     IrVarDecl possibleArray = (IrVarDecl) symTable.getSymbol(locArg.getLocationName().getValue());
 
-                                    if (possibleArray.getType() instanceof IrTypeArray) {
+                                    if (possibleArray.getIrType() instanceof IrTypeArray) {
                                         errorMessage.append("Argument cannot be an array location " + " line: ")
                                                 .append(safeArg.getLineNumber()).append(" col: ").append(safeArg.getColNumber()).append("\n\n");
                                     }
@@ -343,7 +343,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             node.argValue.accept(this); // 检查子节点 argValue
 
             //判断 irDeclObject 的类型是否和 IrExpr argValue 一致
-            if (node.irDeclVar.getType().getTypeEnum() == node.argValue.getExpressionType()){
+            if (node.irDeclVar.getIrType().getTypeEnum() == node.argValue.getExpressionType()){
 
                 // check that the argument is not an array_location
 //                if (node.irDeclVar.type  instanceof IrTypeArray) {
@@ -354,7 +354,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             }
             else {
                 errorMessage.append(" the argValue's type does not match parameter's : ").append(node.argValue.getExpressionType())
-                        .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
+                        .append(" compared with ").append(node.irDeclVar.irType.getTypeEnum())
                         .append( ", line: ").append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n\n");
             }
@@ -398,7 +398,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             node.acceptLocation.accept(this); // 检查子节点 acceptLocation
 
             //判断 acceptLocation 的 TypeEnum 类型是否和  IrVarDecl irDeclVar一致
-            if (node.irDeclVar.getType().getTypeEnum() == node.acceptLocation.getExpressionType()){
+            if (node.irDeclVar.getIrType().getTypeEnum() == node.acceptLocation.getExpressionType()){
 
                 // check that the argument is not an array_location  TODO: 允许在 rgOutputAssign 中 整个 array 传递
 //                if (node.irDeclVar.type  instanceof IrTypeArray) {
@@ -407,8 +407,8 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
 //                }
 
                 // 判断是否都是 array 或者 simple 类型
-                boolean bothSimple = (node.irDeclVar.type instanceof IrTypeSimple  && node.acceptLocation.irDeclObject.type instanceof IrTypeSimple);
-                boolean bothArray = (node.irDeclVar.type instanceof IrTypeArray  && node.acceptLocation.irDeclObject.type instanceof IrTypeArray);
+                boolean bothSimple = (node.irDeclVar.irType instanceof IrTypeSimple  && node.acceptLocation.irDeclObject.irType instanceof IrTypeSimple);
+                boolean bothArray = (node.irDeclVar.irType instanceof IrTypeArray  && node.acceptLocation.irDeclObject.irType instanceof IrTypeArray);
 
                 if ( !bothArray && ! bothSimple ) {
                     errorMessage.append("fbOutput and acceptLocation are not both array ot simple  " + " line: ")
@@ -418,7 +418,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             }
             else {
                 errorMessage.append(" the acceptLocation's typeEnum does not match Output_VAR's : ").append(node.acceptLocation.getExpressionType())
-                        .append(" compared with ").append(node.irDeclVar.type.getTypeEnum())
+                        .append(" compared with ").append(node.irDeclVar.irType.getTypeEnum())
                         .append( " line: ").append(node.getLineNumber()).append(" col: ")
                         .append(node.getColNumber()).append("\n\n");
             }
@@ -664,7 +664,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 }
 
                 // IMPORTANT: set the TypeEnum of the IrLocation
-                node.setLocationType(var.getType().getTypeEnum());
+                node.setLocationType(var.getIrType().getTypeEnum());
 
                 // IMPORTANT: set the IrDecl of the IrFbStLocation
                 node.setIrDecl(pou ,var);
@@ -696,7 +696,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             IrVarDecl varDecl = (IrVarDecl) symTable.getSymbol(node.getLocationName().getValue());
             // 3) make sure that var is an array (and not a method or non-array)
 
-            if (! (varDecl.type instanceof IrTypeArray) ) {
+            if (! (varDecl.irType instanceof IrTypeArray) ) {
                 errorMessage.append("Non-array variable be accessed as an array" + " line: ")
                         .append(node.getElementIndex().getLineNumber()).append(" col: ")
                         .append(node.getElementIndex().getColNumber()).append("\n\n");
@@ -707,7 +707,7 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
                 // IMPORTANT: set the TypeEnum of the IrLocationArray
                 // IMPORTANT: set the IrDecl of the IrLocationVar
                 node.setIrDecl(varDecl);
-                node.setLocationType(varDecl.type.getTypeEnum());
+                node.setLocationType(varDecl.irType.getTypeEnum());
             }
         } else {
             errorMessage.append("Array variable used before declared" + " line: ").
@@ -736,20 +736,20 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
             if (object instanceof IrVarDecl) {
                 IrVarDecl var = (IrVarDecl) object;
 
-                if (var.getType() instanceof IrTypeSimple){
+                if (var.getIrType() instanceof IrTypeSimple){
 //                    MyPrint.levelTwo.print("IrTypeSimple :" + var.name.getValue());
 
                     // IMPORTANT: set the typeEnum of the IrLocationVar
-                    node.setLocationType(var.getType().getTypeEnum());
+                    node.setLocationType(var.getIrType().getTypeEnum());
 
                     // IMPORTANT: set the IrDecl of the IrLocationVar
                     node.setIrDecl(var);
                 }
-                else if (var.getType() instanceof IrTypeArray){
+                else if (var.getIrType() instanceof IrTypeArray){
 
                     MyPrint.levelTwo.print("IrTypeArray :" + var.name.getValue());
                     // IMPORTANT: set the TypeEnum of the IrLocationVar
-                    node.setLocationType(var.getType().getTypeEnum());
+                    node.setLocationType(var.getIrType().getTypeEnum());
 
                     // IMPORTANT: set the IrDecl of the IrLocationVar
                     node.setIrDecl(var);
@@ -980,20 +980,20 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
     @Override
     public Void visitIrVarDecl(IrVarDecl node) {
 
-        node.type.accept(this);
+        node.irType.accept(this);
 
         // 1)  make sure the type of Irvalue and Irtype are the same
         // 2） if this is a array declaration, the size of nameArrayList is the same with it's values'.
-        if (node.value != null){
-            node.value.accept(this);
+        if (node.irValue != null){
+            node.irValue.accept(this);
 
-            if ( node.type.getTypeEnum() != node.value.getType() ){
+            if ( node.irType.getTypeEnum() != node.irValue.getType() ){
                 errorMessage.append("the type of Irvalue and Irtype should be the same " + " line: ")
                         .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
             }
 
-            if (node.type instanceof IrTypeArray){
-                if ( ((ArrayList) ( node.value.getValue() ) ).size() != node.type.getArraySize() ){
+            if (node.irType instanceof IrTypeArray){
+                if ( ((ArrayList) ( node.irValue.getValue() ) ).size() != node.irType.getArraySize() ){
                     errorMessage.append("the size of nameArrayList should be the same with values " + " line: ")
                             .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
                 }
