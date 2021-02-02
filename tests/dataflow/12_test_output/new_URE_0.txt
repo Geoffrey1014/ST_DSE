@@ -2,19 +2,18 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-             L3 :  b = 35
-            L10 :  #_t11 = 83
-            L14 :  if true goto IF_L12
+             L6 :  #_t9 = a + b
+            L10 :  if true goto IF_L8
 
-            L15 :  goto ELSE_L13
+            L11 :  goto ELSE_L9
 
-       ELSE_L13 :  EMPTY_STATEMENT
-            L19 :  b = 1
-            L20 :  goto END_IF_L12
+        ELSE_L9 :  EMPTY_STATEMENT
+            L15 :  b = 1
+            L16 :  goto END_IF_L8
 
-         IF_L12 :  EMPTY_STATEMENT
+          IF_L8 :  EMPTY_STATEMENT
 
-     END_IF_L12 :  EMPTY_STATEMENT
-            L23 :  #_t9 = 48 + b
+      END_IF_L8 :  EMPTY_STATEMENT
+            L19 :  #_t7 = a + b
 
            exit :  EMPTY_STATEMENT

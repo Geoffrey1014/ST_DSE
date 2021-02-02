@@ -33,9 +33,22 @@ public class LivenessAnalysis {
         this.defsForUses = this.cfg.getDefsForUseAsBlockLabelPairs(); //获得 use ： def 对
 
         for (CFG.SymbolDef defForUse : this.defsForUses.keySet()){
-            System.out.println("use:\t"+ defForUse+ ":");
-            System.out.println("def:\t"+this.defsForUses.get(defForUse));
+            System.out.println("\nuse:\t"+ defForUse);
+            HashSet<BlockLabelPair> defs = this.defsForUses.get(defForUse);
+            Iterator iterator = defs.iterator();
+            System.out.println("defs:");
+            while (iterator.hasNext()){
+                BlockLabelPair blockLabelPair = (BlockLabelPair) iterator.next();
+                if (blockLabelPair.getLabel().equals("NO_DEF_1010")){
+                    System.out.println(" there is no defs, must be some problems.");
+                }
+                else{
+                    System.out.println(blockLabelPair);
+                }
+            }
         }
+
+        System.out.println("-----end of defsForUses-------");
 
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
 
@@ -175,6 +188,10 @@ public class LivenessAnalysis {
                     // to the set of needed defs
                     LlLocationVar var = (LlLocationVar) regular.getOperand();
                     HashSet<BlockLabelPair> defsForUse = GET_DEFS_FOR_USE(bb, label, var);
+                    if(defsForUse == null){
+                        System.out.println("null");
+                    }
+//                    System.out.println(defsForUse);
                     setOfNeededDefs.addAll(defsForUse);
                 }
             }
@@ -220,20 +237,10 @@ public class LivenessAnalysis {
     private HashSet<BlockLabelPair> GET_DEFS_FOR_USE(BasicBlock bb, String label, LlLocationVar var) {
 
 
-        String blockLeader =getblockLeaderLabel(bb);
+        String blockLeader =CFG.getblockLeaderLabel(bb);
         // return the HashSet of BlockLabelPairs associated with the SymbolDef
         CFG.SymbolDef symbolDef = this.cfg.new SymbolDef(var, this.cfg.new defBlockLocationTuple(blockLeader, label));
         return this.defsForUses.get(symbolDef);
-    }
-
-    private String getblockLeaderLabel(BasicBlock bb){
-        // hacky way to get the first element from the keySet() of labels
-        String blockLeader = "";
-        for (String leader : bb.getLabelsToStmtsMap().keySet()) {
-            blockLeader = leader;
-            break;
-        }
-        return blockLeader;
     }
 
 }

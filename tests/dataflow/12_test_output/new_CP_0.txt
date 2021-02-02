@@ -2,37 +2,33 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = 48
-             L1 :  a = 48
-             L2 :  #_t1 = 35
-             L3 :  b = 35
-             L4 :  #_t2 = true
-             L5 :  tmp = true
-             L6 :  #_t3 = 0
-             L7 :  c = 0
-             L8 :  #_t4 = 0
-             L9 :  d = 0
-            L10 :  #_t11 = 48 + 35
-            L26 :  #_t10 = #_t11
-            L25 :  #_t5 = #_t11
-            L11 :  c = #_t11
-            L14 :  if true goto IF_L12
+             L0 :  #_t0 = true
+             L1 :  tmp = true
+             L2 :  #_t1 = 0
+             L3 :  c = 0
+             L4 :  #_t2 = 0
+             L5 :  d = 0
+             L6 :  #_t9 = a + b
+            L22 :  #_t8 = #_t9
+            L21 :  #_t3 = #_t9
+             L7 :  c = #_t9
+            L10 :  if true goto IF_L8
 
-            L15 :  goto ELSE_L13
+            L11 :  goto ELSE_L9
 
-       ELSE_L13 :  EMPTY_STATEMENT
-            L16 :  #_t6 = #_t11
-            L17 :  d = #_t11
-            L18 :  #_t7 = 1
-            L19 :  b = 1
-            L20 :  goto END_IF_L12
+        ELSE_L9 :  EMPTY_STATEMENT
+            L12 :  #_t4 = #_t9
+            L13 :  d = #_t9
+            L14 :  #_t5 = 1
+            L15 :  b = 1
+            L16 :  goto END_IF_L8
 
-         IF_L12 :  EMPTY_STATEMENT
-            L21 :  #_t8 = #_t11
-            L22 :  c = #_t11
+          IF_L8 :  EMPTY_STATEMENT
+            L17 :  #_t6 = #_t9
+            L18 :  c = #_t9
 
-     END_IF_L12 :  EMPTY_STATEMENT
-            L23 :  #_t9 = 48 + b
-            L24 :  x = #_t9
+      END_IF_L8 :  EMPTY_STATEMENT
+            L19 :  #_t7 = a + b
+            L20 :  x = #_t7
 
            exit :  EMPTY_STATEMENT

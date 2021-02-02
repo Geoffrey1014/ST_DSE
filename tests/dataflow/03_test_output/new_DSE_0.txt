@@ -1,0 +1,23 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+           Main :  EMPTY_STATEMENT
+             L3 :  count = 1
+
+    FOR_COND_L0 :  EMPTY_STATEMENT
+             L5 :  #_t2 = count < 5
+             L6 :  if #_t2 goto FOR_L1
+
+             L7 :  goto END_FOR_L1
+
+         FOR_L1 :  EMPTY_STATEMENT
+             L9 :  count = count + 1
+            L10 :  goto FOR_COND_L0
+
+     END_FOR_L1 :  EMPTY_STATEMENT
+            L14 :  #_t6 = 3 + 5
+            L15 :  #_t7 = #_t6 / 2
+            L19 :  add(2,100,)
+            L22 :  return 
+
+           exit :  EMPTY_STATEMENT

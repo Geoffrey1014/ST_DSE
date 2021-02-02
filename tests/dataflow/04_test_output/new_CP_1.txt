@@ -1,0 +1,7 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+        get_int :  EMPTY_STATEMENT
+             L0 :  get_int = x
+
+           exit :  EMPTY_STATEMENT

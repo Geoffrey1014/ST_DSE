@@ -25,17 +25,18 @@ CFG:
             L15 :  goto END_IF_L3
 
   END_ELSIF_L10 :  EMPTY_STATEMENT
-            L17 :  if IN1 goto ELSIF_L16
+            L17 :  if IN_1 goto ELSIF_L16
 
             L18 :  goto END_ELSIF_L16
 
       ELSIF_L16 :  EMPTY_STATEMENT
-            L19 :  OUT_1 = IN_1
-            L20 :  goto END_IF_L3
+            L19 :  #_t4 = false
+            L20 :  OUT_1 = false
+            L21 :  goto END_IF_L3
 
   END_ELSIF_L16 :  EMPTY_STATEMENT
 
       END_IF_L3 :  EMPTY_STATEMENT
-            L21 :  PREV_LOAD = TLOAD
+            L22 :  PREV_LOAD = TLOAD
 
            exit :  EMPTY_STATEMENT

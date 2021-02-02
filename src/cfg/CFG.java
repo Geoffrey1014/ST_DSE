@@ -23,6 +23,7 @@ public class CFG {
     private final LinkedHashMap<String, BasicBlock> leadersToBBMap;
     private final ArrayList<String> orderedLeadersList;
     private  LinkedHashMap<BasicBlock, String> blockLabels;
+    private GraphViz graphViz;
 
     public CFG(LlBuilder builder) {
         this.builder = builder;
@@ -93,7 +94,7 @@ public class CFG {
                     bbLabelsToStmtsMap.put(label, stmt);
                 }
 
-                // create the actual BasicBlock and it to the LinkedHashMap
+                // create the actual BasicBlock and add it to the LinkedHashMap
                 BasicBlock bb = new BasicBlock(bbLabelsToStmtsMap, builder);
                 this.leadersToBBMap.put(leaderLabel, bb);
 
@@ -173,9 +174,36 @@ public class CFG {
         }
     }
 
+    public static String getblockLeaderLabel(BasicBlock bb){
+        // hacky way to get the first element from the keySet() of labels
+        String blockLeader = "";
+        for (String leader : bb.getLabelsToStmtsMap().keySet()) {
+            blockLeader = leader;
+            break;
+        }
+        return blockLeader;
+    }
 
     public BasicBlock getRootBasicBlock() {
         return this.basicBlocks.get(0);
+    }
+
+    public String toGraphviz(){
+        this.graphViz  = new GraphViz(); // 这里重新new一个，会不会太浪费资源？？
+        for (BasicBlock bb : this.basicBlocks) {
+//            String label = getblockLeaderLabel(bb);
+            String label = bb.toString();
+            this.graphViz.nodes.add(label);
+            if (bb.getDefaultBranch() != null){
+//                this.graphViz.edges.map(label, getblockLeaderLabel(bb.getDefaultBranch()));
+                this.graphViz.edges.map(label,bb.getDefaultBranch().toString() +",default");
+            }
+            if(bb.getAlternativeBranch() != null){
+//                this.graphViz.edges.map(label,getblockLeaderLabel(bb.getAlternativeBranch()));
+                this.graphViz.edges.map(label,bb.getAlternativeBranch().toString()+ ",alter");
+            }
+        }
+        return this.graphViz.toDOT();
     }
 
     @Override
@@ -211,9 +239,9 @@ public class CFG {
             }
         }
         this.builder.setStatementTable(updatedMap);
-
         return this.builder;
     }
+
     private static HashMap<BasicBlock, String> reverse(Map<String, BasicBlock> map) {
         HashMap<BasicBlock, String> rev = new HashMap<BasicBlock, String>();
         for (Map.Entry<String, BasicBlock> entry : map.entrySet())

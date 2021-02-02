@@ -22,7 +22,8 @@ public class BlockLabelPair {
     public boolean equals(Object obj) {
         if (obj instanceof BlockLabelPair) {
             BlockLabelPair that = (BlockLabelPair) obj;
-            return this.basicBlock.equals(that.basicBlock) && this.label.equals(that.label);
+            if(that.label.equals("NO_DEF_1010")) return false;
+            return  this.label.equals(that.label) && this.basicBlock.equals(that.basicBlock);
         }
         return false;
     }

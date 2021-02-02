@@ -1,0 +1,9 @@
+CFG:
+          entry :  EMPTY_STATEMENT
+
+            add :  EMPTY_STATEMENT
+             L0 :  #_t0 = x + y
+             L1 :  z = #_t0
+             L2 :  add = #_t0
+
+           exit :  EMPTY_STATEMENT

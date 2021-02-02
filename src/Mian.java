@@ -97,11 +97,10 @@ public class Mian {
             String content = cfg.toString();
 
             File file = new File(pathName);
-
-            if (file.exists()) {
-                file = new File(pathName);
-//                file.createNewFile();
-            }
+            file.createNewFile();
+//            if (file.exists()) {
+//                file = new File(pathName);
+//            }
 
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
@@ -132,10 +131,29 @@ public class Mian {
             }
         }
     }
+    public static void genGraphViz(int cfgCounter, CFG cfg,String outPutDir )  {
+        String graphVizFilename = outPutDir + "Graph"+cfgCounter+".dot";
+        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
+        try{
+            writename.createNewFile();
+
+            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+            out.write(cfg.toGraphviz()); // \r\n即为换行
+            out.flush(); // 把缓存区内容压入文件
+            out.close(); // 最后记得关闭文件
+            Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_img"+cfgCounter+".pdf").waitFor();
+        }
+        catch (IOException | InterruptedException e) {
+            System.err.println("There was an error:\n" + e);
+        }
+
+
+        System.out.println("to Graphviz finish!");
+    }
 
     public static void walkTree(String[] args) {
         String prefix = "tests/dataflow/";
-        String inputFileName = "03_test.txt";
+        String inputFileName = "01_test.txt";
 
         String inputFile = prefix + "input/" + inputFileName;
         String outPutDir = prefix +   inputFileName.substring(0,7)+  "_output/" ;
@@ -156,7 +174,6 @@ public class Mian {
             STListener listener = new STListener();
             walker.walk(listener, tree);
 
-
             DefPhaseVisitor defPhaseVisitor = new DefPhaseVisitor();
             listener.pous.accept(defPhaseVisitor);
 //            System.err.println("DefPhase check error message:");
@@ -176,11 +193,15 @@ public class Mian {
             for (LlBuilder builder : listener.pous.getBuilderList()) {
                 CFG cfg = new CFG(builder);
 //                System.out.println(cfg.toString());
+//                System.out.println(cfg.toGraphviz());
+
+                genGraphViz(cfgCounter,cfg,outPutDir);
+
 
                 System.out.println("_______________________ ");
                 writeFile(cfg, outPutDir + "origin_" + cfgCounter + ".txt");
 
-//                printDominatorMap(cfg);
+                printDominatorMap(cfg);
 
 //                printDUchain(cfg, 1);
 
@@ -206,9 +227,9 @@ public class Mian {
 //                printDUchain(cfg, 4);
 
 
-                System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
-                simulator.execute();
+//                System.out.println("simulator.execute();------------");
+//                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
+//                simulator.execute();
 
                 GlobalCF.performGlobalCodeFolding(cfg);
                 writeFile(cfg, outPutDir + "new_" + "CF_" + cfgCounter + ".txt");

@@ -2,30 +2,26 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = 48
-             L1 :  a = 48
-             L2 :  #_t1 = 35
-             L3 :  b = 35
-             L4 :  #_t2 = true
-             L5 :  tmp = true
-             L6 :  #_t3 = 0
-             L7 :  c = 0
-             L8 :  #_t4 = 0
-             L9 :  d = 0
-            L10 :  #_t9 = 48 + 35
-            L20 :  #_t8 = #_t9
-            L19 :  #_t5 = #_t9
-            L11 :  c = #_t9
-            L13 :  if true goto IF_L12
+             L0 :  #_t0 = true
+             L1 :  tmp = true
+             L2 :  #_t1 = 0
+             L3 :  c = 0
+             L4 :  #_t2 = 0
+             L5 :  d = 0
+             L6 :  #_t7 = a + b
+            L16 :  #_t6 = #_t7
+            L15 :  #_t3 = #_t7
+             L7 :  c = #_t7
+             L9 :  if true goto IF_L8
 
-            L14 :  goto END_IF_L12
+            L10 :  goto END_IF_L8
 
-         IF_L12 :  EMPTY_STATEMENT
-            L15 :  #_t6 = #_t9
-            L16 :  d = #_t9
+          IF_L8 :  EMPTY_STATEMENT
+            L11 :  #_t4 = #_t7
+            L12 :  d = #_t7
 
-     END_IF_L12 :  EMPTY_STATEMENT
-            L17 :  #_t7 = #_t9
-            L18 :  x = #_t9
+      END_IF_L8 :  EMPTY_STATEMENT
+            L13 :  #_t5 = #_t7
+            L14 :  x = #_t7
 
            exit :  EMPTY_STATEMENT

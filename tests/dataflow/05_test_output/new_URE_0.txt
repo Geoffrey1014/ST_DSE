@@ -2,7 +2,7 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-             L8 :  #_t4 = 83
-            L12 :  #_t6 = 36
+             L4 :  #_t2 = a + b
+             L8 :  #_t4 = 1 + b
 
            exit :  EMPTY_STATEMENT

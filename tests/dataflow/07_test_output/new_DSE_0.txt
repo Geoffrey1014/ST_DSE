@@ -2,13 +2,13 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-            L10 :  #_t9 = 48 + 35
-            L13 :  if true goto IF_L12
+             L6 :  #_t7 = a + b
+             L9 :  if true goto IF_L8
 
-            L14 :  goto END_IF_L12
+            L10 :  goto END_IF_L8
 
-         IF_L12 :  EMPTY_STATEMENT
+          IF_L8 :  EMPTY_STATEMENT
 
-     END_IF_L12 :  EMPTY_STATEMENT
+      END_IF_L8 :  EMPTY_STATEMENT
 
            exit :  EMPTY_STATEMENT
