@@ -1,8 +1,8 @@
 package helper;
 
 import cfg.CFG;
-import cfg.ValueOfDiffType;
 import ll.LlComponent;
+import ll.literal.LlLiteral;
 import ll.location.LlLocationVar;
 
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ public class LlSymbolTable {
     public Hashtable<LlLocationVar, Integer> globalArrays;
     public ArrayList<LlLocationVar> globalVars;
 
-    public Hashtable<LlComponent, ValueOfDiffType>  varInput;
-    public Hashtable<LlComponent, ValueOfDiffType> varNonInput;
-    public Hashtable<LlComponent, ArrayList<ValueOfDiffType>>  varInputArray;
-    public Hashtable<LlComponent, ArrayList<ValueOfDiffType>> varNonInputArray;
+    public Hashtable<LlComponent, LlLiteral>  varInput;
+    public Hashtable<LlComponent, LlLiteral> varNonInput;
+    public Hashtable<LlComponent, ArrayList<LlLiteral>>  varInputArray;
+    public Hashtable<LlComponent, ArrayList<LlLiteral>> varNonInputArray;
 
 
     public LlSymbolTable(String methodName) {

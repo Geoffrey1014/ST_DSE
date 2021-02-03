@@ -1,29 +1,49 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = true
-             L1 :  tmp = true
-             L2 :  #_t1 = 0
+
+           Init :  EMPTY_STATEMENT
+             L0 :  tmp = false
+             L1 :  a = 48
+             L2 :  b = 35
              L3 :  c = 0
-             L4 :  #_t2 = 0
-             L5 :  d = 0
-             L6 :  #_t7 = a + b
-            L18 :  #_t3 = #_t7
-             L7 :  c = #_t7
-             L9 :  if true goto IF_L8
+             L4 :  d = 0
+             L5 :  x = 0
 
-            L10 :  goto END_IF_L8
+           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = true
+             L7 :  tmp = true
+             L8 :  #_t1 = 0
+             L9 :  c = 0
+            L10 :  #_t2 = 0
+            L11 :  d = 0
+            L12 :  #_t7 = a + b
+            L30 :  #_t3 = #_t7
+            L13 :  c = #_t7
+            L15 :  if true goto IF_L14
 
-          IF_L8 :  EMPTY_STATEMENT
-            L11 :  #_t4 = 1
-            L12 :  a = 1
-            L13 :  #_t7 = 1 + b
-            L17 :  #_t5 = #_t7
-            L14 :  d = #_t7
+            L16 :  goto END_IF_L14
 
-      END_IF_L8 :  EMPTY_STATEMENT
-            L15 :  #_t6 = #_t7
-            L16 :  x = #_t7
+         IF_L14 :  EMPTY_STATEMENT
+            L17 :  #_t4 = 1
+            L18 :  a = 1
+            L19 :  #_t7 = 1 + b
+            L29 :  #_t5 = #_t7
+            L20 :  d = #_t7
 
-           exit :  EMPTY_STATEMENT
+     END_IF_L14 :  EMPTY_STATEMENT
+            L21 :  #_t6 = #_t7
+            L22 :  x = #_t7
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L23 :  print(#_t7,)
+            L24 :  print(true,)
+            L25 :  print(d,)
+            L26 :  print(#_t3,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()

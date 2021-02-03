@@ -1,6 +1,7 @@
 package ir;
 
 import helper.LlBuilder;
+import helper.LlBuildersList;
 import helper.LlSymbolTable;
 import ir.POUDecl.IrFunctionBlockDecl;
 import ir.POUDecl.IrFunctionDecl;
@@ -85,31 +86,34 @@ public class IrPousDecl extends Ir {
         return null;
     }
 
-    public ArrayList<LlBuilder> getBuilderList() {
+    public LlBuildersList getBuilderList() {
         ArrayList<LlBuilder> buildersList = new ArrayList<>();
+        LlBuildersList llBuildersList = new LlBuildersList();
 
         for (IrPouDecl program: this.programDeclsArrayList) {
 
             LlBuilder llBuilder = new LlBuilder(program.getName());
             LlSymbolTable llSymbolTable = new LlSymbolTable(program.getName());
             program.generateLlIr(llBuilder, llSymbolTable);
-            buildersList.add(llBuilder);
+            llBuildersList.addBuilder(llBuilder);
+            llBuildersList.addSymbolTable(llSymbolTable);
         }
 
         for (IrPouDecl fbDecl: this.functionBlockDeclsArrayList) {
             LlBuilder llBuilder = new LlBuilder(fbDecl.getName());
             LlSymbolTable llSymbolTable = new LlSymbolTable(fbDecl.getName());
             fbDecl.generateLlIr(llBuilder, llSymbolTable);
-
-            buildersList.add(llBuilder);
+            llBuildersList.addBuilder(llBuilder);
+            llBuildersList.addSymbolTable(llSymbolTable);
         }
         for (IrPouDecl functionDecl: this.functionDeclArrayList) {
             LlBuilder llBuilder = new LlBuilder(functionDecl.getName());
             LlSymbolTable llSymbolTable = new LlSymbolTable(functionDecl.getName());
             functionDecl.generateLlIr(llBuilder, llSymbolTable);
-            buildersList.add(llBuilder);
+            llBuildersList.addBuilder(llBuilder);
+            llBuildersList.addSymbolTable(llSymbolTable);
         }
 
-        return buildersList;
+        return llBuildersList;
     }
 }

@@ -1,18 +1,18 @@
 package ir.VARBlockDecl;
 
-import cfg.ValueOfDiffType;
 import helper.LlBuilder;
 import helper.LlSymbolTable;
 import ir.Ir;
 import ir.IrIdent;
 import ir.Literal.IrLiteral;
 import ir.VarTypeEnum;
+import ll.assignStmt.LlAssignStmtRegular;
+import ll.literal.*;
 import ll.location.LlLocation;
 import ll.location.LlLocationVar;
 import visitor.BaseVisitor;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class IrVarDecl extends Ir {
     public final IrType irType;
@@ -45,74 +45,74 @@ public class IrVarDecl extends Ir {
         visitor.visitIrVarDecl(this);
     }
 
-    private ValueOfDiffType getIrValueSimple(IrValueSimple irValue) {
+    private LlLiteral getIrValueSimple(IrValueSimple irValue) {
         if (irValue.type == VarTypeEnum.RES_BOOL) {
-            return new ValueOfDiffType((Boolean) irValue.value.getValue());
+            return new LlLiteralBool((Boolean) irValue.value.getValue());
         } else if (irValue.type == VarTypeEnum.RES_INT) {
-            return new ValueOfDiffType((Integer) irValue.value.getValue());
+            return new LlLiteralInt((Integer) irValue.value.getValue());
         } else if (irValue.type == VarTypeEnum.RES_REAL) {
-            return new ValueOfDiffType((Float) irValue.value.getValue());
+            return new LlLiteralReal((Float) irValue.value.getValue());
         } else if (irValue.type == VarTypeEnum.RES_STRING) {
-            return new ValueOfDiffType((String) irValue.value.getValue());
+            return new LlLiteralString((String) irValue.value.getValue());
         }
         return null;
     }
 
-    private ValueOfDiffType initIrValueSimple(IrTypeSimple irType) {
+    private LlLiteral initIrValueSimple(IrTypeSimple irType) {
         if (irType.type == VarTypeEnum.RES_BOOL) {
-            return new ValueOfDiffType(false);
+            return new LlLiteralBool(false);
         } else if (irType.type == VarTypeEnum.RES_INT) {
-            return new ValueOfDiffType(0);
+            return new LlLiteralInt(0);
         } else if (irType.type == VarTypeEnum.RES_REAL) {
-            return new ValueOfDiffType((float) 0.0);
+            return new LlLiteralReal((float) 0.0);
         } else if (irType.type == VarTypeEnum.RES_STRING) {
-            return new ValueOfDiffType("");
+            return new LlLiteralString("");
         }
         return null;
     }
 
-    private ArrayList<ValueOfDiffType> getIrValueArray(IrValueArray irValueArray) {
-        ArrayList<ValueOfDiffType> valueOfDiffTypeArrayList = new ArrayList<>();
+    private ArrayList<LlLiteral> getIrValueArray(IrValueArray irValueArray) {
+        ArrayList<LlLiteral> llLiteralArrayList = new ArrayList<>();
         if (irValueArray.type == VarTypeEnum.RES_BOOL) {
             for (IrLiteral irLiteral : irValueArray.valueList) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType((Boolean) irLiteral.getValue()));
+                llLiteralArrayList.add(new LlLiteralBool((Boolean) irLiteral.getValue()));
             }
         } else if (irValueArray.type == VarTypeEnum.RES_INT) {
             for (IrLiteral irLiteral : irValueArray.valueList) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType((Integer) irLiteral.getValue()));
+                llLiteralArrayList.add(new LlLiteralInt((Integer) irLiteral.getValue()));
             }
         } else if (irValueArray.type == VarTypeEnum.RES_REAL) {
             for (IrLiteral irLiteral : irValueArray.valueList) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType((Float) irLiteral.getValue()));
+                llLiteralArrayList.add(new LlLiteralReal((Float) irLiteral.getValue()));
             }
         } else if (irValueArray.type == VarTypeEnum.RES_STRING) {
             for (IrLiteral irLiteral : irValueArray.valueList) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType((String) irLiteral.getValue()));
+                llLiteralArrayList.add(new LlLiteralString((String) irLiteral.getValue()));
             }
         }
-        return valueOfDiffTypeArrayList;
+        return llLiteralArrayList;
     }
 
-    private ArrayList<ValueOfDiffType> initIrValueArray(IrTypeArray irTypeArray) {
-        ArrayList<ValueOfDiffType> valueOfDiffTypeArrayList = new ArrayList<>();
+    private ArrayList<LlLiteral> initIrValueArray(IrTypeArray irTypeArray) {
+        ArrayList<LlLiteral> llLiteralArrayList = new ArrayList<>();
         if (irTypeArray.type == VarTypeEnum.RES_BOOL) {
             for (int i = 0; i < irTypeArray.size; i++) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType((Boolean) false));
+                llLiteralArrayList.add(new LlLiteralBool((Boolean) false));
             }
         } else if (irTypeArray.type == VarTypeEnum.RES_INT) {
             for (int i = 0; i < irTypeArray.size; i++) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType(0));
+                llLiteralArrayList.add(new LlLiteralInt(0));
             }
         } else if (irTypeArray.type == VarTypeEnum.RES_REAL) {
             for (int i = 0; i < irTypeArray.size; i++) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType((float)0.0));
+                llLiteralArrayList.add(new LlLiteralReal((float)0.0));
             }
         } else if (irTypeArray.type == VarTypeEnum.RES_STRING) {
             for (int i = 0; i < irTypeArray.size; i++) {
-                valueOfDiffTypeArrayList.add(new ValueOfDiffType(""));
+                llLiteralArrayList.add(new LlLiteralString(""));
             }
         }
-        return valueOfDiffTypeArrayList;
+        return llLiteralArrayList;
     }
 
     @Override
@@ -124,18 +124,21 @@ public class IrVarDecl extends Ir {
         if (this.accessType == VarAccessTypeEnum.VAR_INPUT) {
             if (this.irValue != null) {
                 if (this.irValue instanceof IrValueSimple) {
-                    ValueOfDiffType v = getIrValueSimple((IrValueSimple) this.irValue);
+                    LlLiteral v = getIrValueSimple((IrValueSimple) this.irValue);
                     assert v != null;
                     symbolTable.varInput.put(locationVar, v);
+                    builder.appendStatement(new LlAssignStmtRegular(locationVar, v));
 
-                } else { //array
+                } else { //array TODO need to be handled
                     symbolTable.varInputArray.put(locationVar,
                             getIrValueArray((IrValueArray) this.irValue));
                 }
             } else { // without initialization
                 if (this.irType instanceof IrTypeSimple) {
-                    symbolTable.varInput.put(locationVar,
-                            Objects.requireNonNull(initIrValueSimple((IrTypeSimple) this.irType)));
+                    LlLiteral v = initIrValueSimple((IrTypeSimple) this.irType);
+                    assert v != null;
+                    symbolTable.varInput.put(locationVar, v);
+                    builder.appendStatement(new LlAssignStmtRegular(locationVar, v));
                 } else {
                     symbolTable.varInputArray.put(locationVar, initIrValueArray((IrTypeArray) this.irType));
                 }
@@ -144,32 +147,26 @@ public class IrVarDecl extends Ir {
         } else { // Non_INPUT
             if (this.irValue != null) {
                 if (this.irValue instanceof IrValueSimple) {
-                    ValueOfDiffType v = getIrValueSimple((IrValueSimple) this.irValue);
+                    LlLiteral v = getIrValueSimple((IrValueSimple) this.irValue);
                     assert v != null;
                     symbolTable.varNonInput.put(locationVar, v);
-
+                    builder.appendStatement(new LlAssignStmtRegular(locationVar, v));
                 } else { //array
                     symbolTable.varNonInputArray.put(locationVar,
                             getIrValueArray((IrValueArray) this.irValue));
                 }
             } else {// without initialization
                 if (this.irType instanceof IrTypeSimple) {
-                    symbolTable.varNonInput.put(locationVar,
-                            Objects.requireNonNull(initIrValueSimple((IrTypeSimple) this.irType)));
+                    LlLiteral v = initIrValueSimple((IrTypeSimple) this.irType);
+                    assert v != null;
+                    symbolTable.varNonInput.put(locationVar, v);
+                    builder.appendStatement(new LlAssignStmtRegular(locationVar, v));
                 } else {
                     symbolTable.varNonInputArray.put(locationVar,initIrValueArray((IrTypeArray)this.irType));
                 }
             }
-
         }
-        // 下面这段代码在 value是array的情况下是错误的
-//        if (value != null){
-//            LlLocation tempVal = this.value.generateLlIr(builder, symbolTable);
-//
-//            LlAssignStmtRegular regularAssignment = new LlAssignStmtRegular(new LlLocationVar(this.name.getValue()), tempVal);
-//            builder.appendStatement(regularAssignment);
-//
-//        }
+
         return null;
     }
 

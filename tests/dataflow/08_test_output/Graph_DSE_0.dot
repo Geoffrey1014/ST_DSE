@@ -1,0 +1,91 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "           Main :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+"; "           Body :  EMPTY_STATEMENT
+            L12 :  #_t7 = a + b
+            L15 :  if true goto IF_L14
+"; "            L16 :  goto END_IF_L14
+"; "         IF_L14 :  EMPTY_STATEMENT
+            L19 :  #_t7 = 1 + b
+"; "     END_IF_L14 :  EMPTY_STATEMENT
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+            L23 :  print(#_t7,)
+            L24 :  print(true,)
+            L25 :  print(d,)
+            L26 :  print(#_t3,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()
+"; 
+  "           Main :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+" -> "           Body :  EMPTY_STATEMENT
+            L12 :  #_t7 = a + b
+            L15 :  if true goto IF_L14
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+            L12 :  #_t7 = a + b
+            L15 :  if true goto IF_L14
+" -> "            L16 :  goto END_IF_L14
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+            L12 :  #_t7 = a + b
+            L15 :  if true goto IF_L14
+" -> "         IF_L14 :  EMPTY_STATEMENT
+            L19 :  #_t7 = 1 + b
+"  [label="alter"];
+  "            L16 :  goto END_IF_L14
+" -> "     END_IF_L14 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "         IF_L14 :  EMPTY_STATEMENT
+            L19 :  #_t7 = 1 + b
+" -> "     END_IF_L14 :  EMPTY_STATEMENT
+"  [label="default"];
+  "     END_IF_L14 :  EMPTY_STATEMENT
+" -> "            End :  EMPTY_STATEMENT
+            L23 :  print(#_t7,)
+            L24 :  print(true,)
+            L25 :  print(d,)
+            L26 :  print(#_t3,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "           Main :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L23 :  print(#_t7,)
+            L24 :  print(true,)
+            L25 :  print(d,)
+            L26 :  print(#_t3,)
+" -> "           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L23 :  print(#_t7,)
+            L24 :  print(true,)
+            L25 :  print(d,)
+            L26 :  print(#_t3,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()
+" -> "           Body :  EMPTY_STATEMENT
+            L12 :  #_t7 = a + b
+            L15 :  if true goto IF_L14
+"  [label="default"];
+}

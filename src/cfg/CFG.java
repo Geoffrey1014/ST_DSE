@@ -1,6 +1,7 @@
 package cfg;
 
 import helper.LlBuilder;
+import helper.LlSymbolTable;
 import ll.*;
 import ll.assignStmt.LlAssignStmt;
 import ll.assignStmt.LlAssignStmtBinaryOp;
@@ -25,7 +26,7 @@ public class CFG {
     private  LinkedHashMap<BasicBlock, String> blockLabels;
     private GraphViz graphViz;
 
-    public CFG(LlBuilder builder) {
+    public CFG(LlBuilder builder, LlSymbolTable llSymbolTable) {
         this.builder = builder;
 
         System.out.println("LlBuilder statement list:");
@@ -40,7 +41,7 @@ public class CFG {
         ArrayList<String> labelsList = new ArrayList<>(labelStmtsMap.keySet());
 
         if (labelsList.size() == 0) {
-            this.basicBlocks = new ArrayList<BasicBlock>();
+            this.basicBlocks = new ArrayList<>();
             this.orderedLeadersList = new ArrayList<>();
             this.leadersToBBMap = new LinkedHashMap<>();
             this.blockLabels = new LinkedHashMap<>();
@@ -50,9 +51,15 @@ public class CFG {
 
             // the first instruction in the LLIR is a leader
             leadersSet.add(labelsList.get(0));
+            leadersSet.add("Init");
+            leadersSet.add("Body");
+
 
             for (int i = 1; i < labelsList.size(); i++) {
                 String label = labelsList.get(i);
+//                if(label.equals("Init")){
+//                    leadersSet.add(label)
+//                }
                 LlStatement stmt = labelStmtsMap.get(label);
 
                 if (stmt instanceof LlJump) {
@@ -138,31 +145,35 @@ public class CFG {
             // connect it and the orignal first BB to each other
             String trueFirstBBLabel = this.orderedLeadersList.get(0);
             BasicBlock trueFirstBB = this.leadersToBBMap.get(trueFirstBBLabel);
-
-            String entryBBLabel = "entry";
-            this.orderedLeadersList.add(0, entryBBLabel);
-            LinkedHashMap<String, LlStatement> entryBBStmtsList = new LinkedHashMap<>();
-            entryBBStmtsList.put(entryBBLabel, new LlEmptyStmt());
-            BasicBlock entryBB = new BasicBlock(entryBBStmtsList, builder);
-            this.leadersToBBMap.put(entryBBLabel, entryBB);
-
+//            BasicBlock initBB = trueFirstBB.getDefaultBranch().getDefaultBranch();
+            String trueLastBBLabel = this.orderedLeadersList.get(this.orderedLeadersList.size() - 1);
+            BasicBlock trueLastBB = this.leadersToBBMap.get(trueLastBBLabel);
+            // after add Entry, End, Exit and Read block, trueLastBB is the Fifth from last
+            BasicBlock entryBB = createEmptyBB("Entry");
             entryBB.setDefaultBranch(trueFirstBB);
             trueFirstBB.addPredecessorNode(entryBB);
 
+
+            BasicBlock endBB = createReadOrPrintBB("End",llSymbolTable);
+            this.leadersToBBMap.put("End", endBB);
+            trueLastBB.setDefaultBranch(endBB);
+            endBB.addPredecessorNode(trueLastBB);
+
             // add an empty BasicBlock as the exit node and
             // connect it and the orignal last BB to each other
-            String trueLastBBLabel = this.orderedLeadersList.get(this.orderedLeadersList.size() - 1);
-            BasicBlock trueLastBB = this.leadersToBBMap.get(trueLastBBLabel);
+            BasicBlock exitBB = createEmptyBB("Exit");
+            endBB.setAlternativeBranch(exitBB);
+            exitBB.addPredecessorNode(endBB);
 
-            String exitBBLabel = "exit";
-            this.orderedLeadersList.add(exitBBLabel);
-            LinkedHashMap<String, LlStatement> exitBBStmtsList = new LinkedHashMap<>();
-            exitBBStmtsList.put(exitBBLabel, new LlEmptyStmt());
-            BasicBlock exitBB = new BasicBlock(exitBBStmtsList, builder);
-            this.leadersToBBMap.put(exitBBLabel, exitBB);
-
-            trueLastBB.setDefaultBranch(exitBB);
-            exitBB.addPredecessorNode(trueLastBB);
+            // add read input block
+            String readInputBBLabel = "Read";
+            BasicBlock readBB = createReadOrPrintBB(readInputBBLabel, llSymbolTable);
+            this.leadersToBBMap.put(readInputBBLabel,readBB);
+            endBB.setDefaultBranch(readBB);
+            readBB.addPredecessorNode(endBB);
+            BasicBlock body = this.leadersToBBMap.get("Body");
+            readBB.setDefaultBranch(body);
+            body.addPredecessorNode(readBB);
 
             // 5) assign the list of basic blocks as a field of THIS object
             ArrayList<BasicBlock> basicBlocks = new ArrayList<>();
@@ -172,6 +183,32 @@ public class CFG {
             this.blockLabels = new LinkedHashMap<>(reverse(leadersToBBMap));
             this.basicBlocks = basicBlocks;
         }
+    }
+    private BasicBlock createEmptyBB(String label){
+        this.orderedLeadersList.add(label);
+        LinkedHashMap<String, LlStatement> bBStmtsList = new LinkedHashMap<>();
+        bBStmtsList.put(label, new LlEmptyStmt());
+        BasicBlock bb = new BasicBlock(bBStmtsList, builder);
+        this.leadersToBBMap.put(label, bb);
+        return bb;
+    }
+    private BasicBlock createReadOrPrintBB(String label, LlSymbolTable llSymbolTable){
+        this.orderedLeadersList.add(label);
+        LinkedHashMap<String, LlStatement> bBStmtsList = new LinkedHashMap<>();
+        bBStmtsList.put(label, new LlEmptyStmt());
+        if(label.equals("Read")){
+            for (LlComponent llComponent : llSymbolTable.varInput.keySet()) {
+                bBStmtsList.put(this.builder.generateLabel(), new LlMethodCallStmt("read", new ArrayList<>(), (LlLocation) llComponent));
+            }
+        }
+        else{
+            for (LlComponent llComponent : llSymbolTable.varNonInput.keySet()) {
+                ArrayList<LlComponent> args = new ArrayList<>();
+                args.add(llComponent);
+                bBStmtsList.put(this.builder.generateLabel(), new LlMethodCallStmt("print", args));
+            }
+        }
+        return new BasicBlock(bBStmtsList, builder);
     }
 
     public static String getblockLeaderLabel(BasicBlock bb){
@@ -196,11 +233,11 @@ public class CFG {
             this.graphViz.nodes.add(label);
             if (bb.getDefaultBranch() != null){
 //                this.graphViz.edges.map(label, getblockLeaderLabel(bb.getDefaultBranch()));
-                this.graphViz.edges.map(label,bb.getDefaultBranch().toString() +",default");
+                this.graphViz.edges.map(label,bb.getDefaultBranch().toString() +"-default");
             }
             if(bb.getAlternativeBranch() != null){
 //                this.graphViz.edges.map(label,getblockLeaderLabel(bb.getAlternativeBranch()));
-                this.graphViz.edges.map(label,bb.getAlternativeBranch().toString()+ ",alter");
+                this.graphViz.edges.map(label,bb.getAlternativeBranch().toString()+ "-alter");
             }
         }
         return this.graphViz.toDOT();
@@ -382,6 +419,11 @@ public class CFG {
         if (head == null) {
             return;
         }
+        Edge left = head.getLeft();
+        Edge right = head.getRight();
+        if(isVisited.contains(left) && isVisited.contains(right)){
+            return;
+        }
         for (Map.Entry<String, LlStatement> statementRow : head.getLabelsToStmtsMap().entrySet()) {
             String label = statementRow.getKey();
             LlStatement statement = statementRow.getValue();
@@ -471,8 +513,7 @@ public class CFG {
         }
 
         //Visit default and alternate branches to continue depth first search
-        Edge left = head.getLeft();
-        Edge right = head.getRight();
+
 
         if (left != null && !isVisited.contains(left)) {
             isVisited.add(head.getLeft());

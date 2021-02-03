@@ -1,0 +1,67 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "           Main :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+"; "           Body :  EMPTY_STATEMENT
+             L9 :  #_t2 = a + b
+            L13 :  #_t4 = 1 + b
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+            L15 :  print(tmp,)
+            L16 :  print(#_t4,)
+            L17 :  print(#_t2,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+            L18 :  b = read()
+            L19 :  a = read()
+"; 
+  "           Main :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+" -> "           Body :  EMPTY_STATEMENT
+             L9 :  #_t2 = a + b
+            L13 :  #_t4 = 1 + b
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L9 :  #_t2 = a + b
+            L13 :  #_t4 = 1 + b
+" -> "            End :  EMPTY_STATEMENT
+            L15 :  print(tmp,)
+            L16 :  print(#_t4,)
+            L17 :  print(#_t2,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "           Main :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L15 :  print(tmp,)
+            L16 :  print(#_t4,)
+            L17 :  print(#_t2,)
+" -> "           Read :  EMPTY_STATEMENT
+            L18 :  b = read()
+            L19 :  a = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L15 :  print(tmp,)
+            L16 :  print(#_t4,)
+            L17 :  print(#_t2,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+            L18 :  b = read()
+            L19 :  a = read()
+" -> "           Body :  EMPTY_STATEMENT
+             L9 :  #_t2 = a + b
+            L13 :  #_t4 = 1 + b
+"  [label="default"];
+}

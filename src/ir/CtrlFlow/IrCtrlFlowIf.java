@@ -46,7 +46,7 @@ public class IrCtrlFlowIf extends IrCtrlFlow {
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
         // condition goto(label)
-        // if not go to end of the if block
+        // if not, go to end of the if block
         String ifBlockLabel = "IF_" + builder.generateLabel();
         String endIfLabel = "END_" + ifBlockLabel;
 

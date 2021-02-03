@@ -1,8 +1,23 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L4 :  #_t2 = a + b
-             L8 :  #_t4 = 1 + b
 
-           exit :  EMPTY_STATEMENT
+           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
+
+           Body :  EMPTY_STATEMENT
+             L9 :  #_t2 = a + b
+            L13 :  #_t4 = 1 + b
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L15 :  print(tmp,)
+            L16 :  print(#_t4,)
+            L17 :  print(#_t2,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L18 :  b = read()
+            L19 :  a = read()

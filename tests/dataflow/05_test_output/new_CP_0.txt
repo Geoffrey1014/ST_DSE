@@ -1,16 +1,34 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = 0
-             L1 :  c = 0
-             L2 :  #_t1 = 0
-             L3 :  d = 0
-             L4 :  #_t2 = a + b
-             L5 :  c = #_t2
-             L6 :  #_t3 = 1
-             L7 :  a = 1
-             L8 :  #_t4 = 1 + b
-             L9 :  d = #_t4
 
-           exit :  EMPTY_STATEMENT
+           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
+             L1 :  a = 48
+             L2 :  b = 35
+             L3 :  c = 0
+             L4 :  d = 0
+
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = 0
+             L6 :  c = 0
+             L7 :  #_t1 = 0
+             L8 :  d = 0
+             L9 :  #_t2 = a + b
+            L10 :  c = #_t2
+            L11 :  #_t3 = 1
+            L12 :  a = 1
+            L13 :  #_t4 = 1 + b
+            L14 :  d = #_t4
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L15 :  print(tmp,)
+            L16 :  print(#_t4,)
+            L17 :  print(#_t2,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L18 :  b = read()
+            L19 :  a = read()

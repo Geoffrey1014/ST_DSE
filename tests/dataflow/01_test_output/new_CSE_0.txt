@@ -1,44 +1,66 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = NOT PREV_LOAD
-             L1 :  #_t1 = #_t0 AND TLOAD
-             L2 :  IS_LEAD_EDGE = #_t1
-             L4 :  if RESET goto IF_L3
 
-             L6 :  goto START_ELSIF_L5
+           Init :  EMPTY_STATEMENT
+             L0 :  IS_LEAD_EDGE = false
+             L1 :  PREV_LOAD = false
+             L2 :  TLOAD = false
+             L3 :  RESET = false
+             L4 :  LOAD = false
+             L5 :  IN_1 = false
+             L6 :  OUT_1 = false
 
-          IF_L3 :  EMPTY_STATEMENT
-             L7 :  #_t2 = true
-             L8 :  OUT_1 = #_t2
-             L9 :  goto END_IF_L3
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+             L9 :  IS_LEAD_EDGE = #_t1
+            L11 :  if RESET goto IF_L10
 
- START_ELSIF_L5 :  EMPTY_STATEMENT
-            L11 :  #_t3 = LOAD OR IS_LEAD_EDGE
-            L12 :  if #_t3 goto ELSIF_L10
+            L13 :  goto START_ELSIF_L12
 
-            L13 :  goto END_ELSIF_L10
+         IF_L10 :  EMPTY_STATEMENT
+            L14 :  #_t2 = true
+            L15 :  OUT_1 = #_t2
+            L16 :  goto END_IF_L10
 
-      ELSIF_L10 :  EMPTY_STATEMENT
-            L14 :  OUT_1 = IN_1
-            L15 :  goto END_IF_L3
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR IS_LEAD_EDGE
+            L19 :  if #_t3 goto ELSIF_L17
 
-  END_ELSIF_L10 :  EMPTY_STATEMENT
-            L17 :  if IN_1 goto ELSIF_L16
+            L20 :  goto END_ELSIF_L17
 
-            L18 :  goto END_ELSIF_L16
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
+            L22 :  goto END_IF_L10
 
-      ELSIF_L16 :  EMPTY_STATEMENT
-            L19 :  OUT_1 = IN_1
-            L20 :  goto END_IF_L3
+  END_ELSIF_L17 :  EMPTY_STATEMENT
+            L24 :  if IN_1 goto ELSIF_L23
 
-  END_ELSIF_L16 :  EMPTY_STATEMENT
-       ELSE_L21 :  EMPTY_STATEMENT
-            L22 :  #_t4 = false
-            L23 :  LOAD = #_t4
+            L25 :  goto END_ELSIF_L23
 
-      END_IF_L3 :  EMPTY_STATEMENT
-            L24 :  PREV_LOAD = TLOAD
+      ELSIF_L23 :  EMPTY_STATEMENT
+            L26 :  OUT_1 = IN_1
+            L27 :  goto END_IF_L10
 
-           exit :  EMPTY_STATEMENT
+  END_ELSIF_L23 :  EMPTY_STATEMENT
+       ELSE_L28 :  EMPTY_STATEMENT
+            L29 :  #_t4 = false
+            L30 :  LOAD = #_t4
+
+     END_IF_L10 :  EMPTY_STATEMENT
+            L31 :  PREV_LOAD = TLOAD
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L32 :  print(OUT_1,)
+            L33 :  print(PREV_LOAD,)
+            L34 :  print(IS_LEAD_EDGE,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L35 :  LOAD = read()
+            L36 :  IN_1 = read()
+            L37 :  RESET = read()
+            L38 :  TLOAD = read()

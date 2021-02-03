@@ -2,6 +2,8 @@ import cfg.*;
 import grammar.gen.STParser;
 import grammar.gen.STScanner;
 import helper.LlBuilder;
+import helper.LlBuildersList;
+import helper.LlSymbolTable;
 import ll.location.LlLocation;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -13,8 +15,10 @@ import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Mian {
     public static MyPrint myprint = new MyPrint(3);
@@ -131,8 +135,8 @@ public class Mian {
             }
         }
     }
-    public static void genGraphViz(int cfgCounter, CFG cfg,String outPutDir )  {
-        String graphVizFilename = outPutDir + "Graph"+cfgCounter+".dot";
+    public static void genGraphViz(String cfgCounter, CFG cfg,String outPutDir )  {
+        String graphVizFilename = outPutDir + "Graph_"+cfgCounter+".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
         try{
             writename.createNewFile();
@@ -141,7 +145,7 @@ public class Mian {
             out.write(cfg.toGraphviz()); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件
-            Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_img"+cfgCounter+".pdf").waitFor();
+            Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_"+cfgCounter+".pdf").waitFor();
         }
         catch (IOException | InterruptedException e) {
             System.err.println("There was an error:\n" + e);
@@ -153,7 +157,7 @@ public class Mian {
 
     public static void walkTree(String[] args) {
         String prefix = "tests/dataflow/";
-        String inputFileName = "01_test.txt";
+        String inputFileName = "00_test.txt";
 
         String inputFile = prefix + "input/" + inputFileName;
         String outPutDir = prefix +   inputFileName.substring(0,7)+  "_output/" ;
@@ -190,12 +194,18 @@ public class Mian {
 
             int cfgCounter = 0;
             System.out.println("\n low level IR\n");
-            for (LlBuilder builder : listener.pous.getBuilderList()) {
-                CFG cfg = new CFG(builder);
+
+            LlBuildersList llBuilderList = listener.pous.getBuilderList();
+            ArrayList<LlSymbolTable> llSymbolTables = llBuilderList.getSymbolTables();
+            ArrayList<LlBuilder> llBuilders = llBuilderList.getBuilders();
+
+            Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
+            for (Iterator<LlBuilder> llBuilderIterator = llBuilders.iterator(); llBuilderIterator.hasNext();) {
+                CFG cfg = new CFG(llBuilderIterator.next(), llSymbolTableIterator.next());
 //                System.out.println(cfg.toString());
 //                System.out.println(cfg.toGraphviz());
 
-                genGraphViz(cfgCounter,cfg,outPutDir);
+                genGraphViz( "origin_" + cfgCounter,cfg,outPutDir);
 
 
                 System.out.println("_______________________ ");
@@ -209,7 +219,7 @@ public class Mian {
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
                 writeFile(cfg, outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterCSE---------------------\n");
-
+                genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
 //                printDUchain(cfg, 2);
 
 
@@ -218,12 +228,12 @@ public class Mian {
                 System.out.println("\nafterCP---------------------\n");
 
 //                printDUchain(cfg, 3);
-
+                genGraphViz( "CP_"+cfgCounter,cfg,outPutDir);
 
                 GlobalDCE.performGlobalDeadCodeElimination(cfg);
                 writeFile(cfg, outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterDSE---------------------\n");
-
+                genGraphViz( "DSE_"+cfgCounter,cfg,outPutDir);
 //                printDUchain(cfg, 4);
 
 

@@ -2,35 +2,39 @@ CFG:
           entry :  EMPTY_STATEMENT
 
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = NOT PREV_LOAD
-             L1 :  #_t1 = #_t0 AND TLOAD
-             L4 :  if RESET goto IF_L3
 
-             L6 :  goto START_ELSIF_L5
+           Init :  EMPTY_STATEMENT
 
-          IF_L3 :  EMPTY_STATEMENT
-             L9 :  goto END_IF_L3
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = true
+             L8 :  #_t1 = #_t0 AND false
+            L11 :  if false goto IF_L10
 
- START_ELSIF_L5 :  EMPTY_STATEMENT
-            L11 :  #_t3 = LOAD OR #_t1
-            L12 :  if #_t3 goto ELSIF_L10
+            L13 :  goto START_ELSIF_L12
 
-            L13 :  goto END_ELSIF_L10
+         IF_L10 :  EMPTY_STATEMENT
+            L16 :  goto END_IF_L10
 
-      ELSIF_L10 :  EMPTY_STATEMENT
-            L15 :  goto END_IF_L3
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = false OR #_t1
+            L19 :  if #_t3 goto ELSIF_L17
 
-  END_ELSIF_L10 :  EMPTY_STATEMENT
-            L17 :  if IN_1 goto ELSIF_L16
+            L20 :  goto END_ELSIF_L17
 
-            L18 :  goto END_ELSIF_L16
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L22 :  goto END_IF_L10
 
-      ELSIF_L16 :  EMPTY_STATEMENT
-            L20 :  goto END_IF_L3
+  END_ELSIF_L17 :  EMPTY_STATEMENT
+            L24 :  if false goto ELSIF_L23
 
-  END_ELSIF_L16 :  EMPTY_STATEMENT
-       ELSE_L21 :  EMPTY_STATEMENT
+            L25 :  goto END_ELSIF_L23
 
-      END_IF_L3 :  EMPTY_STATEMENT
+      ELSIF_L23 :  EMPTY_STATEMENT
+            L27 :  goto END_IF_L10
+
+  END_ELSIF_L23 :  EMPTY_STATEMENT
+       ELSE_L28 :  EMPTY_STATEMENT
+
+     END_IF_L10 :  EMPTY_STATEMENT
 
            exit :  EMPTY_STATEMENT
