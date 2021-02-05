@@ -76,7 +76,6 @@ public class DefPhaseVisitor implements BaseVisitor<Void> {
 
     @Override
     public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
-
         return null;
     }
 

@@ -2,8 +2,8 @@ package ll;
 
 
 import cfg.LlStatementVisitor;
-import cfg.Memory;
 import ll.location.LlLocation;
+import simulation.Memory;
 
 import java.util.ArrayList;
 import java.util.List;

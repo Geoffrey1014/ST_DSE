@@ -161,19 +161,6 @@ public class LivenessAnalysis {
      private HashSet<BlockLabelPair> USE(BasicBlock bb) {
         HashSet<BlockLabelPair> setOfNeededDefs = new HashSet<BlockLabelPair>();
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
-//         String blockLeader =getblockLeaderLabel(bb);
-//         if(blockLeader.equals("exit")){
-//            // get the needed defs for non-input vars
-//             // this part is only used once ,so can be brought out of this function
-//             LlLocationVar c = new LlLocationVar("c");
-//             HashSet<BlockLabelPair> defsForUse = GET_DEFS_FOR_USE(bb, "L11", c);
-//             setOfNeededDefs.addAll(defsForUse);
-//             LlLocationVar d = new LlLocationVar("d");
-//             defsForUse = GET_DEFS_FOR_USE(bb, "L15", d);
-//             setOfNeededDefs.addAll(defsForUse);
-//             return setOfNeededDefs;
-//
-//         }
 
         // loop through each stmt in the BasicBlock
         for (String label : labelsToStmtsMap.keySet()) {

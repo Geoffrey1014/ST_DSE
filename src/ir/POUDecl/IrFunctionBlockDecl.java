@@ -20,7 +20,7 @@ public class IrFunctionBlockDecl extends IrPouDecl {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        String prettyString = indentSpace + "|--FunctionBlock\n";
+        String prettyString = "\n\n"+ indentSpace + "|--FunctionBlock\n";
         prettyString += "  " + indentSpace + "|--name: " + this.getName() + "\n";
 
         if (this.varBlockVAR != null){

@@ -1,10 +1,14 @@
 package ll.assignStmt;
 
 
-import cfg.*;
+import cfg.LlStatementVisitor;
 import ll.LlComponent;
 import ll.literal.*;
 import ll.location.LlLocation;
+import simulation.BasicTypeEnum;
+import simulation.Memory;
+import simulation.Operation;
+import simulation.ValueOfDiffType;
 
 public class LlAssignStmtBinaryOp extends LlAssignStmt {
 

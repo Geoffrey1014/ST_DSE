@@ -29,11 +29,11 @@ public class CFG {
     public CFG(LlBuilder builder, LlSymbolTable llSymbolTable) {
         this.builder = builder;
 
-        System.out.println("LlBuilder statement list:");
-        for (String s : this.builder.getStatementTable().keySet()){
-            System.out.println(s + " : " + this.builder.getStatementTable().get(s));
-        }
-        System.out.println("LlBuilder statement list  end\n");
+//        System.out.println("LlBuilder statement list:");
+//        for (String s : this.builder.getStatementTable().keySet()){
+//            System.out.println(s + " : " + this.builder.getStatementTable().get(s));
+//        }
+//        System.out.println("LlBuilder statement list  end\n");
 
 //        this.paramsList = builder.params;
         // cache the Labels => Stmts map and extract the labels list
@@ -57,9 +57,6 @@ public class CFG {
 
             for (int i = 1; i < labelsList.size(); i++) {
                 String label = labelsList.get(i);
-//                if(label.equals("Init")){
-//                    leadersSet.add(label)
-//                }
                 LlStatement stmt = labelStmtsMap.get(label);
 
                 if (stmt instanceof LlJump) {
@@ -145,10 +142,10 @@ public class CFG {
             // connect it and the orignal first BB to each other
             String trueFirstBBLabel = this.orderedLeadersList.get(0);
             BasicBlock trueFirstBB = this.leadersToBBMap.get(trueFirstBBLabel);
-//            BasicBlock initBB = trueFirstBB.getDefaultBranch().getDefaultBranch();
             String trueLastBBLabel = this.orderedLeadersList.get(this.orderedLeadersList.size() - 1);
             BasicBlock trueLastBB = this.leadersToBBMap.get(trueLastBBLabel);
             // after add Entry, End, Exit and Read block, trueLastBB is the Fifth from last
+
             BasicBlock entryBB = createEmptyBB("Entry");
             entryBB.setDefaultBranch(trueFirstBB);
             trueFirstBB.addPredecessorNode(entryBB);
@@ -226,6 +223,7 @@ public class CFG {
     }
 
     public String toGraphviz(){
+        //  TODO: move this function out of CFG class
         this.graphViz  = new GraphViz(); // 这里重新new一个，会不会太浪费资源？？
         for (BasicBlock bb : this.basicBlocks) {
 //            String label = getblockLeaderLabel(bb);

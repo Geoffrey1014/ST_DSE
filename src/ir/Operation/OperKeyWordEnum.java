@@ -25,6 +25,9 @@ public enum OperKeyWordEnum implements Where {
     }
 
     public String getTypeName() {
+        if(this.typeName.equals("=")){
+            return "==";
+        }
         return this.typeName;
     }
 

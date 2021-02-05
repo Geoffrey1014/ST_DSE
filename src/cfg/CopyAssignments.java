@@ -169,7 +169,7 @@ public class CopyAssignments {
         // 2) Create a quadruple for each u <-- v and add it to the candidates set
         // 3) any time you see an IrAssignStmt, check each Quadruple in the candidates set to see if the
         // storeLocation is the u or v in (u, v, i, pos). if it is, remove that Quadruple from the candidates set
-        // 4) all candidates that did not get reassigned, constitue the COPY(i) set
+        // 4) all candidates that did not get reassigned, constitute the COPY(i) set
     }
 
     // returns the set of Quadruples (u, v, block, pos) of copy

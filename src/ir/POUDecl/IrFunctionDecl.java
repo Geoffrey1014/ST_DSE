@@ -33,7 +33,7 @@ public class IrFunctionDecl extends IrPouDecl {
     @Override
     public String prettyPrint(String indentSpace) {
 
-        String prettyString = indentSpace + "|--Function\n";
+        String prettyString = "\n\n"+ indentSpace + "|--Function\n";
         prettyString += "  " + indentSpace + "|--name: " + this.getName() + "\n";
         prettyString += "  " + indentSpace + "|--type: " + this.returnType.type + "\n";
 

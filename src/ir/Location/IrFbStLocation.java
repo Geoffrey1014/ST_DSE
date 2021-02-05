@@ -50,7 +50,7 @@ public class IrFbStLocation extends IrExpr {
 
     @Override
     public String prettyPrint(String indentSpace) {
-        String pretttString = indentSpace + "|--FbStLocation";
+        String pretttString = indentSpace + "|--FbStLocation\n";
         pretttString += "  " + indentSpace + "|--name: " + this.varNameFirst.getValue() + "." +this.varNameLast.getValue() + "\n";
         pretttString += "  " + indentSpace + "|--type: " + this.varType + "\n";
 

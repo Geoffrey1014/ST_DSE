@@ -1,7 +1,7 @@
 package ll;
 
 import cfg.LlStatementVisitor;
-import cfg.Memory;
+import simulation.Memory;
 
 /**
  * Created by geo 2020-11-01 13:29:50

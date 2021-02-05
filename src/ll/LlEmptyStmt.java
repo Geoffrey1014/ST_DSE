@@ -2,7 +2,7 @@ package ll;
 
 
 import cfg.LlStatementVisitor;
-import cfg.Memory;
+import simulation.Memory;
 
 public class LlEmptyStmt extends LlStatement {
     @Override

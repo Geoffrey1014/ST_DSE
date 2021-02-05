@@ -2,7 +2,7 @@ package ll.jump;
 
 
 import cfg.LlStatementVisitor;
-import cfg.Memory;
+import simulation.Memory;
 
 public class LlJumpUnconditional extends LlJump {
     public LlJumpUnconditional(String jumpToLabel) {

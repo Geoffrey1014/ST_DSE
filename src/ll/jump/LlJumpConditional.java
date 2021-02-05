@@ -2,8 +2,8 @@ package ll.jump;
 
 
 import cfg.LlStatementVisitor;
-import cfg.Memory;
 import ll.LlComponent;
+import simulation.Memory;
 
 public class LlJumpConditional extends LlJump {
 

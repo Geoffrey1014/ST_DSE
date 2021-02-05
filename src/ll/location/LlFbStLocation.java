@@ -7,10 +7,15 @@ package ll.location;
  * 运行时，应该做什么动作？内存状态怎么变化？
  */
 public class LlFbStLocation extends LlLocation {
+
     private final String pouName;
     public LlFbStLocation(String varName, String pouName) {
         super(varName);
         this.pouName = pouName;
+    }
+
+    public String getPouName() {
+        return pouName;
     }
 
     @Override
@@ -20,5 +25,16 @@ public class LlFbStLocation extends LlLocation {
         s += this.getVarName();
 
         return s;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof LlLocationVar)) {
+            return false;
+        }
+        return ((LlFbStLocation) obj).getVarName().equals(this.getVarName())
+                && ((LlFbStLocation) obj).getPouName().equals(this.pouName);
     }
 }

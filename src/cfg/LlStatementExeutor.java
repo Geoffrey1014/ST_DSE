@@ -9,6 +9,10 @@ import ll.assignStmt.LlAssignStmtUnaryOp;
 import ll.jump.LlJumpConditional;
 import ll.jump.LlJumpUnconditional;
 import ll.literal.*;
+import simulation.BasicTypeEnum;
+import simulation.Memory;
+import simulation.Operation;
+import simulation.ValueOfDiffType;
 
 public class LlStatementExeutor implements LlStatementVisitor {
     @Override

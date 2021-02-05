@@ -13,7 +13,6 @@ public class IrValueSimple extends IrValue {
     public IrValueSimple( IrLiteral value) {
         super(value.getLineNumber(), value.getColNumber());
         this.value = value;
-
     }
 
 

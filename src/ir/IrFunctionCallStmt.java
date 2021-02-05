@@ -46,7 +46,7 @@ public class IrFunctionCallStmt extends IrStmt{
 
     @Override
     public String prettyPrint(String indentSpace) {
-        StringBuilder prettyString = new StringBuilder(indentSpace + "|--functionCallExpr\n");
+        StringBuilder prettyString = new StringBuilder(indentSpace + "|--functionCallStmt\n");
 
         // print the method name
         prettyString.append("  ").append(indentSpace).append("|--name: ").append(this.functionBlockName.getValue()).append("\n");
