@@ -1,0 +1,95 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "           Body :  s = 0
+             L0 :  a = 4
+             L1 :  i = 0
+             L2 :  t1 = k == 0
+             L3 :  if t1 goto IF
+"; "             IF :  b = 1
+             L4 :  goto END_IF
+"; "             L5 :  b = 2
+"; "         END_IF :  t2 = i < n
+             L6 :  if t2 goto WHILE
+"; "          WHILE :  t3 = a * b
+             L7 :  s = s + t3
+             L8 :  i = i + 1
+             L9 :  goto END_IF
+"; "            L10 :  s = 100
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+"; 
+  "           Body :  s = 0
+             L0 :  a = 4
+             L1 :  i = 0
+             L2 :  t1 = k == 0
+             L3 :  if t1 goto IF
+" -> "             IF :  b = 1
+             L4 :  goto END_IF
+"  [label="default"];
+  "           Body :  s = 0
+             L0 :  a = 4
+             L1 :  i = 0
+             L2 :  t1 = k == 0
+             L3 :  if t1 goto IF
+" -> "             IF :  b = 1
+             L4 :  goto END_IF
+"  [label="alter"];
+  "             IF :  b = 1
+             L4 :  goto END_IF
+" -> "         END_IF :  t2 = i < n
+             L6 :  if t2 goto WHILE
+"  [label="alter"];
+  "             L5 :  b = 2
+" -> "         END_IF :  t2 = i < n
+             L6 :  if t2 goto WHILE
+"  [label="default"];
+  "         END_IF :  t2 = i < n
+             L6 :  if t2 goto WHILE
+" -> "          WHILE :  t3 = a * b
+             L7 :  s = s + t3
+             L8 :  i = i + 1
+             L9 :  goto END_IF
+"  [label="default"];
+  "         END_IF :  t2 = i < n
+             L6 :  if t2 goto WHILE
+" -> "          WHILE :  t3 = a * b
+             L7 :  s = s + t3
+             L8 :  i = i + 1
+             L9 :  goto END_IF
+"  [label="alter"];
+  "          WHILE :  t3 = a * b
+             L7 :  s = s + t3
+             L8 :  i = i + 1
+             L9 :  goto END_IF
+" -> "         END_IF :  t2 = i < n
+             L6 :  if t2 goto WHILE
+"  [label="alter"];
+  "            L10 :  s = 100
+" -> "            End :  EMPTY_STATEMENT
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "           Body :  s = 0
+             L0 :  a = 4
+             L1 :  i = 0
+             L2 :  t1 = k == 0
+             L3 :  if t1 goto IF
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+" -> "           Read :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+" -> "           Body :  s = 0
+             L0 :  a = 4
+             L1 :  i = 0
+             L2 :  t1 = k == 0
+             L3 :  if t1 goto IF
+"  [label="default"];
+}
