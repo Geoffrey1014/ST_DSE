@@ -19,7 +19,7 @@ digraph G {
             L10 :  #_t2 = 0
             L11 :  d = #_t2
             L12 :  #_t9 = a + b
-            L33 :  #_t3 = #_t9
+            L31 :  #_t3 = #_t9
             L13 :  c = #_t3
             L15 :  if tmp goto IF_L14
 "; "            L16 :  goto END_IF_L14
@@ -27,7 +27,7 @@ digraph G {
             L17 :  #_t4 = 1
             L18 :  a = #_t4
             L19 :  #_t9 = a + b
-            L32 :  #_t5 = #_t9
+            L30 :  #_t5 = #_t9
             L20 :  d = #_t5
 "; "     END_IF_L14 :  EMPTY_STATEMENT
             L21 :  #_t6 = #_t9
@@ -41,10 +41,6 @@ digraph G {
             L27 :  print(tmp,)
             L28 :  print(d,)
             L29 :  print(c,)
-"; "           Exit :  EMPTY_STATEMENT
-"; "           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()
 "; 
   "           Main :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
@@ -70,7 +66,7 @@ digraph G {
             L10 :  #_t2 = 0
             L11 :  d = #_t2
             L12 :  #_t9 = a + b
-            L33 :  #_t3 = #_t9
+            L31 :  #_t3 = #_t9
             L13 :  c = #_t3
             L15 :  if tmp goto IF_L14
 "  [label="default"];
@@ -82,7 +78,7 @@ digraph G {
             L10 :  #_t2 = 0
             L11 :  d = #_t2
             L12 :  #_t9 = a + b
-            L33 :  #_t3 = #_t9
+            L31 :  #_t3 = #_t9
             L13 :  c = #_t3
             L15 :  if tmp goto IF_L14
 " -> "            L16 :  goto END_IF_L14
@@ -95,14 +91,14 @@ digraph G {
             L10 :  #_t2 = 0
             L11 :  d = #_t2
             L12 :  #_t9 = a + b
-            L33 :  #_t3 = #_t9
+            L31 :  #_t3 = #_t9
             L13 :  c = #_t3
             L15 :  if tmp goto IF_L14
 " -> "         IF_L14 :  EMPTY_STATEMENT
             L17 :  #_t4 = 1
             L18 :  a = #_t4
             L19 :  #_t9 = a + b
-            L32 :  #_t5 = #_t9
+            L30 :  #_t5 = #_t9
             L20 :  d = #_t5
 "  [label="alter"];
   "            L16 :  goto END_IF_L14
@@ -117,7 +113,7 @@ digraph G {
             L17 :  #_t4 = 1
             L18 :  a = #_t4
             L19 :  #_t9 = a + b
-            L32 :  #_t5 = #_t9
+            L30 :  #_t5 = #_t9
             L20 :  d = #_t5
 " -> "     END_IF_L14 :  EMPTY_STATEMENT
             L21 :  #_t6 = #_t9
@@ -140,36 +136,5 @@ digraph G {
 "  [label="default"];
   "          Entry :  EMPTY_STATEMENT
 " -> "           Main :  EMPTY_STATEMENT
-"  [label="default"];
-  "            End :  EMPTY_STATEMENT
-            L26 :  print(x,)
-            L27 :  print(tmp,)
-            L28 :  print(d,)
-            L29 :  print(c,)
-" -> "           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()
-"  [label="default"];
-  "            End :  EMPTY_STATEMENT
-            L26 :  print(x,)
-            L27 :  print(tmp,)
-            L28 :  print(d,)
-            L29 :  print(c,)
-" -> "           Exit :  EMPTY_STATEMENT
-"  [label="alter"];
-  "           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()
-" -> "           Body :  EMPTY_STATEMENT
-             L6 :  #_t0 = true
-             L7 :  tmp = #_t0
-             L8 :  #_t1 = 0
-             L9 :  c = #_t1
-            L10 :  #_t2 = 0
-            L11 :  d = #_t2
-            L12 :  #_t9 = a + b
-            L33 :  #_t3 = #_t9
-            L13 :  c = #_t3
-            L15 :  if tmp goto IF_L14
 "  [label="default"];
 }

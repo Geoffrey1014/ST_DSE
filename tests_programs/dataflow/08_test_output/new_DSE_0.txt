@@ -2,17 +2,15 @@ CFG:
            Main :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
-             L1 :  a = 48
-             L2 :  b = 35
 
            Body :  EMPTY_STATEMENT
-            L12 :  #_t9 = a + b
+            L12 :  #_t9 = 48 + 35
             L15 :  if true goto IF_L14
 
             L16 :  goto END_IF_L14
 
          IF_L14 :  EMPTY_STATEMENT
-            L19 :  #_t9 = 1 + b
+            L19 :  #_t9 = 1 + 35
 
      END_IF_L14 :  EMPTY_STATEMENT
             L24 :  #_t8 = #_t9 + 2
@@ -24,9 +22,3 @@ CFG:
             L27 :  print(true,)
             L28 :  print(d,)
             L29 :  print(#_t3,)
-
-           Exit :  EMPTY_STATEMENT
-
-           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()

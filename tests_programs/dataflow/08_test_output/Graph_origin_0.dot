@@ -39,10 +39,6 @@ digraph G {
             L27 :  print(tmp,)
             L28 :  print(d,)
             L29 :  print(c,)
-"; "           Exit :  EMPTY_STATEMENT
-"; "           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()
 "; 
   "           Main :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
@@ -133,35 +129,5 @@ digraph G {
 "  [label="default"];
   "          Entry :  EMPTY_STATEMENT
 " -> "           Main :  EMPTY_STATEMENT
-"  [label="default"];
-  "            End :  EMPTY_STATEMENT
-            L26 :  print(x,)
-            L27 :  print(tmp,)
-            L28 :  print(d,)
-            L29 :  print(c,)
-" -> "           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()
-"  [label="default"];
-  "            End :  EMPTY_STATEMENT
-            L26 :  print(x,)
-            L27 :  print(tmp,)
-            L28 :  print(d,)
-            L29 :  print(c,)
-" -> "           Exit :  EMPTY_STATEMENT
-"  [label="alter"];
-  "           Read :  EMPTY_STATEMENT
-            L30 :  b = read()
-            L31 :  a = read()
-" -> "           Body :  EMPTY_STATEMENT
-             L6 :  #_t0 = true
-             L7 :  tmp = #_t0
-             L8 :  #_t1 = 0
-             L9 :  c = #_t1
-            L10 :  #_t2 = 0
-            L11 :  d = #_t2
-            L12 :  #_t3 = a + b
-            L13 :  c = #_t3
-            L15 :  if tmp goto IF_L14
 "  [label="default"];
 }

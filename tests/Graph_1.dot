@@ -3,93 +3,106 @@ digraph G {
   edge [arrowsize=.5]
   node [shape=rectangle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
-  "           Body :  s = 0
-             L0 :  a = 4
-             L1 :  i = 0
-             L2 :  t1 = k == 0
-             L3 :  if t1 goto IF
-"; "             IF :  b = 1
-             L4 :  goto END_IF
-"; "             L5 :  b = 2
-"; "         END_IF :  t2 = i < n
-             L6 :  if t2 goto WHILE
-"; "          WHILE :  t3 = a * b
-             L7 :  s = s + t3
-             L8 :  i = i + 1
-             L9 :  goto END_IF
-"; "            L10 :  s = 100
+  "           Body :  EMPTY_STATEMENT
+             L0 :  s = 0
+             L1 :  a = 4
+             L2 :  i = 0
+             L3 :  t1 = k == 0
+             L4 :  if t1 goto IF
+"; "             L5 :  goto ELSE
+"; "             IF :  EMPTY_STATEMENT
+             L6 :  b = 1
+             L7 :  goto END_IF
+"; "           ELSE :  EMPTY_STATEMENT
+             L8 :  b = 2
+"; "         END_IF :  EMPTY_STATEMENT
+             L9 :  t2 = i < n
+            L10 :  if t2 goto WHILE
+"; "            L11 :  goto END_WHILE
+"; "          WHILE :  EMPTY_STATEMENT
+            L12 :  t3 = a * b
+            L13 :  s = s + t3
+            L14 :  i = i + 1
+            L15 :  goto END_IF
+"; "      END_WHILE :  EMPTY_STATEMENT
+            L16 :  s = 100
 "; "          Entry :  EMPTY_STATEMENT
 "; "            End :  EMPTY_STATEMENT
-"; "           Exit :  EMPTY_STATEMENT
-"; "           Read :  EMPTY_STATEMENT
+            L17 :  print(a,)
 "; 
-  "           Body :  s = 0
-             L0 :  a = 4
-             L1 :  i = 0
-             L2 :  t1 = k == 0
-             L3 :  if t1 goto IF
-" -> "             IF :  b = 1
-             L4 :  goto END_IF
+  "           Body :  EMPTY_STATEMENT
+             L0 :  s = 0
+             L1 :  a = 4
+             L2 :  i = 0
+             L3 :  t1 = k == 0
+             L4 :  if t1 goto IF
+" -> "             L5 :  goto ELSE
 "  [label="default"];
-  "           Body :  s = 0
-             L0 :  a = 4
-             L1 :  i = 0
-             L2 :  t1 = k == 0
-             L3 :  if t1 goto IF
-" -> "             IF :  b = 1
-             L4 :  goto END_IF
+  "           Body :  EMPTY_STATEMENT
+             L0 :  s = 0
+             L1 :  a = 4
+             L2 :  i = 0
+             L3 :  t1 = k == 0
+             L4 :  if t1 goto IF
+" -> "             IF :  EMPTY_STATEMENT
+             L6 :  b = 1
+             L7 :  goto END_IF
 "  [label="alter"];
-  "             IF :  b = 1
-             L4 :  goto END_IF
-" -> "         END_IF :  t2 = i < n
-             L6 :  if t2 goto WHILE
+  "             L5 :  goto ELSE
+" -> "           ELSE :  EMPTY_STATEMENT
+             L8 :  b = 2
 "  [label="alter"];
-  "             L5 :  b = 2
-" -> "         END_IF :  t2 = i < n
-             L6 :  if t2 goto WHILE
+  "             IF :  EMPTY_STATEMENT
+             L6 :  b = 1
+             L7 :  goto END_IF
+" -> "         END_IF :  EMPTY_STATEMENT
+             L9 :  t2 = i < n
+            L10 :  if t2 goto WHILE
+"  [label="alter"];
+  "           ELSE :  EMPTY_STATEMENT
+             L8 :  b = 2
+" -> "         END_IF :  EMPTY_STATEMENT
+             L9 :  t2 = i < n
+            L10 :  if t2 goto WHILE
 "  [label="default"];
-  "         END_IF :  t2 = i < n
-             L6 :  if t2 goto WHILE
-" -> "          WHILE :  t3 = a * b
-             L7 :  s = s + t3
-             L8 :  i = i + 1
-             L9 :  goto END_IF
+  "         END_IF :  EMPTY_STATEMENT
+             L9 :  t2 = i < n
+            L10 :  if t2 goto WHILE
+" -> "            L11 :  goto END_WHILE
 "  [label="default"];
-  "         END_IF :  t2 = i < n
-             L6 :  if t2 goto WHILE
-" -> "          WHILE :  t3 = a * b
-             L7 :  s = s + t3
-             L8 :  i = i + 1
-             L9 :  goto END_IF
+  "         END_IF :  EMPTY_STATEMENT
+             L9 :  t2 = i < n
+            L10 :  if t2 goto WHILE
+" -> "          WHILE :  EMPTY_STATEMENT
+            L12 :  t3 = a * b
+            L13 :  s = s + t3
+            L14 :  i = i + 1
+            L15 :  goto END_IF
 "  [label="alter"];
-  "          WHILE :  t3 = a * b
-             L7 :  s = s + t3
-             L8 :  i = i + 1
-             L9 :  goto END_IF
-" -> "         END_IF :  t2 = i < n
-             L6 :  if t2 goto WHILE
+  "            L11 :  goto END_WHILE
+" -> "      END_WHILE :  EMPTY_STATEMENT
+            L16 :  s = 100
 "  [label="alter"];
-  "            L10 :  s = 100
+  "          WHILE :  EMPTY_STATEMENT
+            L12 :  t3 = a * b
+            L13 :  s = s + t3
+            L14 :  i = i + 1
+            L15 :  goto END_IF
+" -> "         END_IF :  EMPTY_STATEMENT
+             L9 :  t2 = i < n
+            L10 :  if t2 goto WHILE
+"  [label="alter"];
+  "      END_WHILE :  EMPTY_STATEMENT
+            L16 :  s = 100
 " -> "            End :  EMPTY_STATEMENT
+            L17 :  print(a,)
 "  [label="default"];
   "          Entry :  EMPTY_STATEMENT
-" -> "           Body :  s = 0
-             L0 :  a = 4
-             L1 :  i = 0
-             L2 :  t1 = k == 0
-             L3 :  if t1 goto IF
-"  [label="default"];
-  "            End :  EMPTY_STATEMENT
-" -> "           Read :  EMPTY_STATEMENT
-"  [label="default"];
-  "            End :  EMPTY_STATEMENT
-" -> "           Exit :  EMPTY_STATEMENT
-"  [label="alter"];
-  "           Read :  EMPTY_STATEMENT
-" -> "           Body :  s = 0
-             L0 :  a = 4
-             L1 :  i = 0
-             L2 :  t1 = k == 0
-             L3 :  if t1 goto IF
+" -> "           Body :  EMPTY_STATEMENT
+             L0 :  s = 0
+             L1 :  a = 4
+             L2 :  i = 0
+             L3 :  t1 = k == 0
+             L4 :  if t1 goto IF
 "  [label="default"];
 }

@@ -40,8 +40,8 @@ public class GraphViz {
                 buf.append("  ");
                 buf.append("\"").append(src).append("\"");
                 buf.append(" -> ");
-                buf.append("\"").append(trg.split("-")[0]).append("\"");
-                buf.append("  [label=").append("\"").append(trg.split("-")[1]).append("\"]");
+                buf.append("\"").append(trg.split("---")[0]).append("\"");
+                buf.append("  [label=").append("\"").append(trg.split("---")[1]).append("\"]");
                 buf.append(";\n");
             }
         }
