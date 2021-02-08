@@ -75,7 +75,13 @@ public class LlMethodCallStmt extends LlStatement {
 
     @Override
     public int hashCode() {
-        return this.returnLocation.hashCode() * this.methodName.hashCode() * this.argsList.hashCode();
+        if (this.returnLocation == null){
+            return  this.methodName.hashCode() * this.argsList.hashCode();
+        }
+        else {
+            return this.returnLocation.hashCode() * this.methodName.hashCode() * this.argsList.hashCode();
+        }
+
     }
 
     @Override

@@ -28,7 +28,7 @@ public class LivenessAnalysis {
      * IN[n] = USE[n] U (OUT[n]-DEF[n])
      * @param cfg
      */
-    private LivenessAnalysis(CFG cfg) {
+    public LivenessAnalysis(CFG cfg) {
         this.cfg = cfg;
         this.defsForUses = this.cfg.getDefsForUseAsBlockLabelPairs(); //获得 use ： def 对
 

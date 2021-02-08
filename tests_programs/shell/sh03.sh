@@ -8,7 +8,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 # 1. 让使用者输入文件名称，并取得 fileuser 这个变量；
-echo -e "I will use 'touch' command to create 3 files." # 纯粹显示资讯
+echo -e "I will useAndStmt 'touch' command to create 3 files." # 纯粹显示资讯
 read -p "Please input your filename: " fileuser         # 提示使用者输入
 
 # 2. 为了避免使用者随意按 Enter ，利用变量功能分析档名是否有配置？

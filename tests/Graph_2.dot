@@ -19,7 +19,6 @@ digraph G {
              L9 :  goto LOOP
 "; "          Entry :  EMPTY_STATEMENT
 "; "            End :  EMPTY_STATEMENT
-            L10 :  print(a,)
 "; 
   "           Body :  EMPTY_STATEMENT
              L0 :  i = m - 1
@@ -58,7 +57,6 @@ digraph G {
              L8 :  i = u3
              L9 :  goto LOOP
 " -> "            End :  EMPTY_STATEMENT
-            L10 :  print(a,)
 "  [label="default"];
   "         END_IF :  EMPTY_STATEMENT
              L8 :  i = u3

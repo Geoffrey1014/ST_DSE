@@ -46,21 +46,21 @@ public class ReachingDefinitionAnalysis {
      * for all nodes s in successors(n)
      * Changed = Changed U { s };
      */
-    private final HashMap<BasicBlock, HashSet<Def>> defsReachIN = new HashMap<>();
-    private final HashMap<BasicBlock, HashSet<Def>> defsReachOUT = new HashMap<>();
-    private final HashMap<BasicBlock, HashSet<Def>> bb2Gens = new HashMap<>();
-    private final HashMap<BasicBlock, HashSet<Def>> bb2Kills = new HashMap<>();
-    HashMap<Use, HashSet<Def>> useDefsChains;
-    private HashMap<LlLocation, HashSet<Def>> universalMap;
+    private final HashMap<BasicBlock, HashSet<DefStmt>> defsReachIN = new HashMap<>();
+    private final HashMap<BasicBlock, HashSet<DefStmt>> defsReachOUT = new HashMap<>();
+    private final HashMap<BasicBlock, HashSet<DefStmt>> bb2Gens = new HashMap<>();
+    private final HashMap<BasicBlock, HashSet<DefStmt>> bb2Kills = new HashMap<>();
+    HashMap<UseAndStmt, HashSet<DefStmt>> useDefsChains;
+    private HashMap<LlLocation, HashSet<DefStmt>> universalMap;
     private CFG cfg;
 
     public void printUseDefsChains(){
-        for(Use use: useDefsChains.keySet()){
-            System.out.println("\nuse: "+use.locationUsage.toString() + " @ " + use.stmtLabel);
+        for(UseAndStmt useAndStmt : useDefsChains.keySet()){
+            System.out.println("\nuse: "+ useAndStmt.locationUsage.toString() + " @ " + useAndStmt.stmtLabel);
             System.out.println("defs:");
-            HashSet<Def> defs = useDefsChains.get(use);
-            for(Def def : defs){
-                System.out.println(def.statement.toString() + " @ " + def.stmtLabel);
+            HashSet<DefStmt> defStmts = useDefsChains.get(useAndStmt);
+            for(DefStmt defStmt : defStmts){
+                System.out.println(defStmt.statement.toString() + " @ " + defStmt.stmtLabel);
             }
         }
     }
@@ -70,23 +70,12 @@ public class ReachingDefinitionAnalysis {
         ArrayList<BasicBlock> bbList = cfg.getBasicBlocks();
 
         // 1) initial allExpressions with the union of all EVAL(bb)'s
-        HashSet<Def> universalSet = new HashSet<>();
+        HashSet<DefStmt> universalSet = new HashSet<>();
         for (BasicBlock bb : bbList) {
             universalSet.addAll(GEN(bb));
         }
 
-//        for(Def def: this.universalSet){
-//            if(this.universalMap.get(def.location) == null){
-//                HashSet<Def> set = new HashSet<>();
-//                set.add(def);
-//                this.universalMap.put(def.location, set );
-//            }
-//            else{
-//                this.universalMap.get(def.location).add(def);
-//            }
-//        }
         this.universalMap = defSet2MapOfVar2Defs(universalSet);
-
 
         // 2) perform the worklist algorithm
         //for all nodes n in N
@@ -112,9 +101,9 @@ public class ReachingDefinitionAnalysis {
             // get a node and remove it from active nodes
             BasicBlock node = activeNodes.get(0);
             activeNodes.remove(0);
-            HashSet<Def> oldOUT = this.defsReachOUT.get(node);
+            HashSet<DefStmt> oldOUT = this.defsReachOUT.get(node);
 
-            HashSet<Def> IN = new HashSet<>(); // IN[n] = empty
+            HashSet<DefStmt> IN = new HashSet<>(); // IN[n] = empty
             // IN[n] = IN[n] intersect OUT[p] for all p in predecessors
             for (BasicBlock pred : node.getPredecessors()) {
                 IN.addAll(this.defsReachOUT.get(pred));
@@ -123,14 +112,14 @@ public class ReachingDefinitionAnalysis {
             this.defsReachIN.put(node, IN);
 
             // KILL[n]
-            HashSet<Def> kills = KILL(node, new HashSet<>(universalSet));
+            HashSet<DefStmt> kills = KILL(node);
 
             // (IN[n]-KILL[n])
-            HashSet<Def> INminusKILL = new HashSet<>(this.defsReachIN.get(node)); // make separate copy of IN
+            HashSet<DefStmt> INminusKILL = new HashSet<>(this.defsReachIN.get(node)); // make separate copy of IN
             INminusKILL.removeAll(kills);
 
             // OUT[n] = GEN[n] U (IN[n]-KILL[n])
-            HashSet<Def> GENplusINminusKILL = GEN(node);
+            HashSet<DefStmt> GENplusINminusKILL = GEN(node);
             GENplusINminusKILL.addAll(INminusKILL);
             this.defsReachOUT.put(node, GENplusINminusKILL);
 
@@ -154,16 +143,16 @@ public class ReachingDefinitionAnalysis {
         for (BasicBlock bb : bbList) {
 
             //the last definition of certain var in a block
-            HashMap<LlLocation, Def> lastDefInBlock = new HashMap<>();
+            HashMap<LlLocation, DefStmt> lastDefInBlock = new HashMap<>();
 
-            HashSet<Def> curDefsReachIN = this.defsReachIN.get(bb);
-            HashMap<LlLocation, HashSet<Def>> curDefsReachINMap = defSet2MapOfVar2Defs(curDefsReachIN);
+            HashSet<DefStmt> curDefsReachIN = this.defsReachIN.get(bb);
+            HashMap<LlLocation, HashSet<DefStmt>> curDefsReachINMap = defSet2MapOfVar2Defs(curDefsReachIN);
             LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
 
             // loop through each stmt in the BasicBlock
             for (String label : labelsToStmtsMap.keySet()) {
                 LlStatement stmt = labelsToStmtsMap.get(label);
-                Def curStmtDef;
+                DefStmt curStmtDef;
                 LlLocation curStmtLeftValue = null;
 
                 // AssignStmtsRegular
@@ -201,7 +190,7 @@ public class ReachingDefinitionAnalysis {
                         createUseDefChainsForLocationUsage(arg, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                     }
                 }
-                curStmtDef = new Def(curStmtLeftValue,stmt,bb,label);
+                curStmtDef = new DefStmt(curStmtLeftValue,stmt,bb,label);
 
                 // 3) define the left value
                 lastDefInBlock.put(curStmtLeftValue,curStmtDef);
@@ -212,24 +201,24 @@ public class ReachingDefinitionAnalysis {
 
 
     private void createUseDefChainsForLocationUsage(LlComponent operand, LlStatement stmt, BasicBlock bb, String label,
-                                                    HashMap<LlLocation, Def> lastDefInBlock, HashMap<LlLocation, HashSet<Def>> curDefsReachINMap) {
+                                                    HashMap<LlLocation, DefStmt> lastDefInBlock, HashMap<LlLocation, HashSet<DefStmt>> curDefsReachINMap) {
         if (operand instanceof LlLocation) {
             LlLocation locationUsage = (LlLocation) operand;
-            Use use = new Use(locationUsage, stmt, bb, label);
+            UseAndStmt useAndStmt = new UseAndStmt(locationUsage, stmt, bb, label);
 
 
             if (lastDefInBlock.get(locationUsage) != null) {
                 // 1) the used var is defined in front of this BB
-                addUseDefToUseDefChains(use, lastDefInBlock.get(locationUsage));
+                addUseDefToUseDefChains(useAndStmt, lastDefInBlock.get(locationUsage));
             } else {
                 // 2) the used var is not defined in front of this BB
-                HashSet<Def> defs = curDefsReachINMap.get(locationUsage);
-                if(defs == null){
+                HashSet<DefStmt> defStmts = curDefsReachINMap.get(locationUsage);
+                if(defStmts == null){
                     System.err.println("no definition for " + locationUsage.toString() + " @ " + label);
                 }
                 else{
-                    for (Def def : defs){
-                        addUseDefToUseDefChains(use, def);
+                    for (DefStmt defStmt : defStmts){
+                        addUseDefToUseDefChains(useAndStmt, defStmt);
                     }
                 }
 
@@ -238,26 +227,26 @@ public class ReachingDefinitionAnalysis {
         }
     }
 
-    private void addUseDefToUseDefChains(Use use, Def def) {
+    private void addUseDefToUseDefChains(UseAndStmt useAndStmt, DefStmt defStmt) {
 
-        if (useDefsChains.get(use) == null) {
-            HashSet<Def> defsForUse = new HashSet<>();
-            defsForUse.add(def);
-            useDefsChains.put(use, defsForUse);
+        if (useDefsChains.get(useAndStmt) == null) {
+            HashSet<DefStmt> defsForUse = new HashSet<>();
+            defsForUse.add(defStmt);
+            useDefsChains.put(useAndStmt, defsForUse);
         } else {
-            useDefsChains.get(use).add(def);
+            useDefsChains.get(useAndStmt).add(defStmt);
         }
     }
 
-    private HashMap<LlLocation, HashSet<Def>> defSet2MapOfVar2Defs(HashSet<Def> defSet) {
-        HashMap<LlLocation, HashSet<Def>> mapOfVar2Defs = new HashMap<>();
-        for (Def def : defSet) {
-            if (mapOfVar2Defs.get(def.location) == null) {
-                HashSet<Def> set = new HashSet<>();
-                set.add(def);
-                mapOfVar2Defs.put(def.location, set);
+    private HashMap<LlLocation, HashSet<DefStmt>> defSet2MapOfVar2Defs(HashSet<DefStmt> defStmtSet) {
+        HashMap<LlLocation, HashSet<DefStmt>> mapOfVar2Defs = new HashMap<>();
+        for (DefStmt defStmt : defStmtSet) {
+            if (mapOfVar2Defs.get(defStmt.location) == null) {
+                HashSet<DefStmt> set = new HashSet<>();
+                set.add(defStmt);
+                mapOfVar2Defs.put(defStmt.location, set);
             } else {
-                mapOfVar2Defs.get(def.location).add(def);
+                mapOfVar2Defs.get(defStmt.location).add(defStmt);
             }
         }
         return mapOfVar2Defs;
@@ -268,10 +257,10 @@ public class ReachingDefinitionAnalysis {
         for (BasicBlock bb : this.defsReachIN.keySet()) {
             String leaderLabel = CFG.getblockLeaderLabel(bb);
             System.out.println("\n\n" + leaderLabel + ":");
-            ArrayList<Def> defs = new ArrayList<Def>(this.defsReachIN.get(bb));
-            Collections.sort(defs);
-            for (Def def : defs) {
-                System.out.println(def);
+            ArrayList<DefStmt> defStmts = new ArrayList<DefStmt>(this.defsReachIN.get(bb));
+            Collections.sort(defStmts);
+            for (DefStmt defStmt : defStmts) {
+                System.out.println(defStmt);
             }
         }
 
@@ -279,10 +268,10 @@ public class ReachingDefinitionAnalysis {
         for (BasicBlock bb : this.defsReachOUT.keySet()) {
             String leaderLabel = CFG.getblockLeaderLabel(bb);
             System.out.println("\n\n" + leaderLabel + ":");
-            ArrayList<Def> defs = new ArrayList<Def>(this.defsReachOUT.get(bb));
-            Collections.sort(defs);
-            for (Def def : defs) {
-                System.out.println(def);
+            ArrayList<DefStmt> defStmts = new ArrayList<DefStmt>(this.defsReachOUT.get(bb));
+            Collections.sort(defStmts);
+            for (DefStmt defStmt : defStmts) {
+                System.out.println(defStmt);
             }
         }
 
@@ -296,12 +285,12 @@ public class ReachingDefinitionAnalysis {
      * •  KILL[s = s + a*b; i = i + 1;] = 1010000
      * •  Compiler scans each basic block to derive GEN and KILL sets
      */
-    private HashSet<Def> GEN(BasicBlock bb) {
+    private HashSet<DefStmt> GEN(BasicBlock bb) {
         if (this.bb2Gens.get(bb) != null) {
             return this.bb2Gens.get(bb);
         }
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
-        HashSet<Def> defCandidates = new HashSet<>();
+        HashSet<DefStmt> defStmtCandidates = new HashSet<>();
 
         // loop through each stmt in the BasicBlock
         for (String label : labelsToStmtsMap.keySet()) {
@@ -310,20 +299,20 @@ public class ReachingDefinitionAnalysis {
             // AssignStmts
             if (stmt instanceof LlAssignStmt) {
                 LlLocation llLocation = ((LlAssignStmt) stmt).getStoreLocation();
-                defCandidates.add(new Def(llLocation, stmt, bb, label));
+                defStmtCandidates.add(new DefStmt(llLocation, stmt, bb, label));
             }
             //LlMethodCallStmt
             else if (stmt instanceof LlMethodCallStmt) {
                 if (((LlMethodCallStmt) stmt).getReturnLocation() != null) {
                     LlLocation llLocation = ((LlMethodCallStmt) stmt).getReturnLocation();
-                    defCandidates.add(new Def(llLocation, stmt, bb, label));
+                    defStmtCandidates.add(new DefStmt(llLocation, stmt, bb, label));
                 }
 
             }
 
         }
-        this.bb2Gens.put(bb, defCandidates);
-        return defCandidates;
+        this.bb2Gens.put(bb, defStmtCandidates);
+        return defStmtCandidates;
     }
 
     /**
@@ -334,12 +323,12 @@ public class ReachingDefinitionAnalysis {
      * •  KILL[s = s + a*b; i = i + 1;] = 1010000
      * •  Compiler scans each basic block to derive GEN and KILL sets
      */
-    private HashSet<Def> KILL(BasicBlock bb, HashSet<Def> superSet) {
+    private HashSet<DefStmt> KILL(BasicBlock bb) {
         if (this.bb2Kills.get(bb) != null) {
             return this.bb2Kills.get(bb);
         }
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
-        HashSet<Def> killedDefCandidates = new HashSet<>();
+        HashSet<DefStmt> killedDefStmtCandidates = new HashSet<>();
 
         // loop through each stmt in the BasicBlock
         for (String label : labelsToStmtsMap.keySet()) {
@@ -357,34 +346,29 @@ public class ReachingDefinitionAnalysis {
                 }
 
             }
-//            for (Def def : superSet) { // 可以用哈希表进行优化
-//                if (def.location.equals(location) &&
-//                        !def.stmtLabel.equals(label)) {
-//                    killedDefCandidates.add(def);
-//                }
-//            }
+//
             if (location != null) {
-                HashSet<Def> defSet = this.universalMap.get(location);
-                HashSet<Def> killedDefSet = (HashSet<Def>) defSet.clone();
-                killedDefSet.remove(new Def(location, stmt, bb, label));
-                killedDefCandidates.addAll(killedDefSet);
+                HashSet<DefStmt> defStmtSet = this.universalMap.get(location);
+                HashSet<DefStmt> killedDefStmtSet = (HashSet<DefStmt>) defStmtSet.clone();
+                killedDefStmtSet.remove(new DefStmt(location, stmt, bb, label));
+                killedDefStmtCandidates.addAll(killedDefStmtSet);
             }
 
 
         }
-        this.bb2Kills.put(bb, killedDefCandidates);
-        return killedDefCandidates;
+        this.bb2Kills.put(bb, killedDefStmtCandidates);
+        return killedDefStmtCandidates;
     }
 
-    public class Use {
-        public final String stmtLabel;
+    private class UseAndStmt {
+        private final LlLocation locationUsage;
         // the quadruple is of the form
         // (locationVar, statement, i, pos) which represents LlLocationVar  and LlStatement; @ instruction pos in block i
-        private final LlLocation locationUsage;
+        public final String stmtLabel;
         private final LlStatement statement;
         private final BasicBlock block;
 
-        public Use(LlLocation locationUsage, LlStatement statement, BasicBlock block, String stmtLabel) {
+        public UseAndStmt(LlLocation locationUsage, LlStatement statement, BasicBlock block, String stmtLabel) {
             this.locationUsage = locationUsage;
             this.statement = statement;
             this.block = block;
@@ -410,8 +394,8 @@ public class ReachingDefinitionAnalysis {
 
         @Override
         public boolean equals(Object obj) {
-            if (obj instanceof Def) {
-                Def that = (Def) obj;
+            if (obj instanceof DefStmt) {
+                DefStmt that = (DefStmt) obj;
                 // two quadruples will be equal if they have equivalent locationUsage,block and stmtLabel
                 return this.locationUsage.equals(that.location)
                         && this.block.equals(that.block) && that.stmtLabel.equals(that.stmtLabel);
@@ -426,15 +410,15 @@ public class ReachingDefinitionAnalysis {
 
     }
 
-    public class Def implements Comparable<Def> {
-        public final String stmtLabel;
+    private class DefStmt implements Comparable<DefStmt> {
+        private final LlLocation location;
         // the def is of the form
         // (locationVar, statement, i, pos) which represents LlLocationVar  and LlStatement; @ instruction pos in block i
-        private final LlLocation location;
+        public final String stmtLabel;
         private final LlStatement statement;
         private final BasicBlock block;
 
-        public Def(LlLocation location, LlStatement statement, BasicBlock block, String stmtLabel) {
+        public DefStmt(LlLocation location, LlStatement statement, BasicBlock block, String stmtLabel) {
             this.location = location;
             this.statement = statement;
             this.block = block;
@@ -464,8 +448,8 @@ public class ReachingDefinitionAnalysis {
 
         @Override
         public boolean equals(Object obj) {
-            if (obj instanceof Def) {
-                Def that = (Def) obj;
+            if (obj instanceof DefStmt) {
+                DefStmt that = (DefStmt) obj;
                 // two defs will be equal if they have equivalent block, stmtLabel and statement
                 return this.block.equals(that.block) && that.stmtLabel.equals(that.stmtLabel)
                         && this.statement.equals(that.statement);
@@ -478,7 +462,7 @@ public class ReachingDefinitionAnalysis {
             return this.block.hashCode() * this.stmtLabel.hashCode() * this.statement.hashCode();
         }
 
-        public int compareTo(Def o) {
+        public int compareTo(DefStmt o) {
             return Integer.parseInt(this.stmtLabel.substring(1)) - Integer.parseInt(o.stmtLabel.substring(1));
         }
     }

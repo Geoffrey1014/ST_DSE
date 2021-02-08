@@ -1,0 +1,67 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "           Body :  EMPTY_STATEMENT
+             L0 :  a = x + y
+             L1 :  t = a
+             L2 :  c = a + x
+             L3 :  t1 = x == 0
+             L4 :  if t1 goto IF
+"; "             L5 :  goto END_IF
+"; "             IF :  EMPTY_STATEMENT
+             L6 :  b = t + z
+             L7 :  goto END_IF
+"; "         END_IF :  EMPTY_STATEMENT
+             L8 :  c = y + 1
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+             L9 :  print(b,)
+            L10 :  print(a,)
+            L11 :  print(c,)
+"; 
+  "           Body :  EMPTY_STATEMENT
+             L0 :  a = x + y
+             L1 :  t = a
+             L2 :  c = a + x
+             L3 :  t1 = x == 0
+             L4 :  if t1 goto IF
+" -> "             L5 :  goto END_IF
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L0 :  a = x + y
+             L1 :  t = a
+             L2 :  c = a + x
+             L3 :  t1 = x == 0
+             L4 :  if t1 goto IF
+" -> "             IF :  EMPTY_STATEMENT
+             L6 :  b = t + z
+             L7 :  goto END_IF
+"  [label="alter"];
+  "             L5 :  goto END_IF
+" -> "         END_IF :  EMPTY_STATEMENT
+             L8 :  c = y + 1
+"  [label="alter"];
+  "             IF :  EMPTY_STATEMENT
+             L6 :  b = t + z
+             L7 :  goto END_IF
+" -> "         END_IF :  EMPTY_STATEMENT
+             L8 :  c = y + 1
+"  [label="alter"];
+  "         END_IF :  EMPTY_STATEMENT
+             L8 :  c = y + 1
+" -> "            End :  EMPTY_STATEMENT
+             L9 :  print(b,)
+            L10 :  print(a,)
+            L11 :  print(c,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "           Body :  EMPTY_STATEMENT
+             L0 :  a = x + y
+             L1 :  t = a
+             L2 :  c = a + x
+             L3 :  t1 = x == 0
+             L4 :  if t1 goto IF
+"  [label="default"];
+}
