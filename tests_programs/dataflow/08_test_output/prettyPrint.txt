@@ -115,18 +115,3 @@
                 |--locationVar
                   |--name: b
                   |--type: RES_INT
-        |--assignStmtEquals
-          |--lhs
-            |--locationVar
-              |--name: x
-              |--type: RES_INT
-          |--rhs
-            |--binaryArithOper
-              |--lhs
-                |--locationVar
-                  |--name: x
-                  |--type: RES_INT
-              |--op: ADD_OP
-              |--rhs
-                |--IntLiteral
-                  |--value: 2

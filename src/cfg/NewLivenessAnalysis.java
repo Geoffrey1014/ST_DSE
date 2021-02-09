@@ -21,15 +21,7 @@ public class NewLivenessAnalysis {
      * •  USE[x=z;x=x+1;]={z}(xnotinUSE)
      * •  DEF[x=z;x=x+1;y=1;]={x,y}
      * •  Compiler scans each basic block to derive USE and DEF sets
-     */
-
-    private final CFG cfg;
-    public final HashMap<BasicBlock, HashSet<LlLocation>> livenessIN = new HashMap<>();
-    public final HashMap<BasicBlock, HashSet<LlLocation>> livenessOUT = new HashMap<>();
-    private final HashMap<BasicBlock, HashMap<LlLocation, HashSet<UseAndStmt>>> bb2Uses = new HashMap<>();
-    private final HashMap<BasicBlock, HashMap<LlLocation, HashSet<DefAndStmt>>> bb2Defs = new HashMap<>();
-
-    /**
+     *
      * for all nodes n in N - { Exit }
      * IN[n] = emptyset;
      * OUT[Exit] = emptyset;
@@ -46,8 +38,53 @@ public class NewLivenessAnalysis {
      * for all nodes p in predecessors(n)
      * Changed = Changed U { p };
      *
-     * @param cfg
+     * @param
      */
+    private final CFG cfg;
+    public final HashMap<BasicBlock, HashSet<LlLocation>> livenessIN = new HashMap<>();
+    public final HashMap<BasicBlock, HashSet<LlLocation>> livenessOUT = new HashMap<>();
+    private final HashMap<BasicBlock, HashMap<LlLocation, HashSet<UseAndStmt>>> bb2Uses = new HashMap<>();
+    private final HashMap<BasicBlock, HashMap<LlLocation, HashSet<DefAndStmt>>> bb2Defs = new HashMap<>();
+
+    public void calculateDefinitionUseChain(){
+        //   模拟执行 或这在计算活跃变量上添加一些操作
+    }
+    public HashMap<BasicBlock, HashSet<BlockLabelPair>> calculateDeadCode(){
+        ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
+        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = new HashMap<>();
+        for(BasicBlock bb: bbList){
+            LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
+            HashSet<LlLocation> livenessVars = livenessOUT.get(bb);
+            HashSet<BlockLabelPair> deadCode= new HashSet<>();
+            for (String label : labelsToStmtsMap.keySet()) {
+                LlStatement stmt = labelsToStmtsMap.get(label);
+                LlLocation locationDef = null;
+
+                if (stmt instanceof LlAssignStmtRegular) {
+                    locationDef = ((LlAssignStmtRegular) stmt).getStoreLocation();
+                }
+                else if (stmt instanceof LlAssignStmtUnaryOp) {
+                    locationDef = ((LlAssignStmtUnaryOp) stmt).getStoreLocation();
+                }
+                else if (stmt instanceof LlAssignStmtBinaryOp) {
+                    locationDef = ((LlAssignStmtBinaryOp) stmt).getStoreLocation();
+
+                }
+                else if (stmt instanceof LlMethodCallStmt) {
+                    locationDef = ((LlMethodCallStmt) stmt).getReturnLocation();
+                }
+                else{
+                    continue;
+                }
+                if(!livenessVars.contains(locationDef)){
+                    deadCode.add(new BlockLabelPair(bb,label));
+                }
+            }
+            deadCodeMap.put(bb,deadCode);
+        }
+        return deadCodeMap;
+    }
+
     public NewLivenessAnalysis(CFG cfg) {
         this.cfg = cfg;
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
@@ -111,29 +148,31 @@ public class NewLivenessAnalysis {
 
     }
     // USE - set of variables with upwards exposed uses in block
-    // USE[x = z; x = x+1;] = { z } (x not in USE)
     private HashSet<LlLocation> USE(BasicBlock bb) {
         HashMap<LlLocation, HashSet<UseAndStmt>> uses = this.bb2Uses.get(bb);
         return new HashSet<>(uses.keySet());
     }
 
     // DEF - set of variables defined in block
-    // DEF[x = z; x = x+1;y = 1;] = {x, y}
     private HashSet<LlLocation> DEF(BasicBlock bb) {
         HashMap<LlLocation, HashSet<DefAndStmt>> defs = this.bb2Defs.get(bb);
         return new HashSet<>(defs.keySet());
     }
 
 
-
+    /**
+     * –  USE - set of variables with upwards exposed uses in block
+     * –  DEF - set of variables defined in block
+     * •  USE[x=z;x=x+1;]={z}(xnotinUSE)
+     * •  DEF[x=z;x=x+1;y=1;]={x,y}
+     * •  Compiler scans each basic block to derive USE and DEF sets
+     */
     private void calculateDEFAndUSE(BasicBlock bb,HashMap<LlLocation, HashSet<DefAndStmt>> varDef2DefAndStmt,
                                     HashMap<LlLocation, HashSet<UseAndStmt>> varUse2UseAndStmt) {
+
         LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
-
-
         for (String label : labelsToStmtsMap.keySet()) {
             LlStatement stmt = labelsToStmtsMap.get(label);
-            DefAndStmt curStmtDefAndStmt;
             LlLocation locationDef = null;
 
             // AssignStmtsRegular

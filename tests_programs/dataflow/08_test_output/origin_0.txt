@@ -31,14 +31,17 @@ CFG:
      END_IF_L14 :  EMPTY_STATEMENT
             L21 :  #_t6 = a + b
             L22 :  x = #_t6
-            L23 :  #_t7 = 2
-            L24 :  #_t8 = x + #_t7
-            L25 :  x = #_t8
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L26 :  print(x,)
-            L27 :  print(tmp,)
-            L28 :  print(d,)
-            L29 :  print(c,)
+            L23 :  print(x,)
+            L24 :  print(tmp,)
+            L25 :  print(d,)
+            L26 :  print(c,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()

@@ -26,7 +26,7 @@ public class CFG {
     private  LinkedHashMap<BasicBlock, String> blockLabels;
     private GraphViz graphViz;
 
-    public CFG(LlBuilder builder, LlSymbolTable llSymbolTable) {
+    public CFG(LlBuilder builder, LlSymbolTable llSymbolTable, Boolean addLoop) {
         this.builder = builder;
 
 //        System.out.println("LlBuilder statement list:");
@@ -159,21 +159,24 @@ public class CFG {
             trueLastBB.setDefaultBranch(endBB);
             endBB.addPredecessorNode(trueLastBB);
 
-//            // add an empty BasicBlock as the exit node and
-//            // connect it and the orignal last BB to each other
-//            BasicBlock exitBB = createEmptyBB("Exit");
-//            endBB.setAlternativeBranch(exitBB);
-//            exitBB.addPredecessorNode(endBB);
-//
-//            // add read input block
-//            String readInputBBLabel = "Read";
-//            BasicBlock readBB = createReadOrPrintBB(readInputBBLabel, llSymbolTable);
-//            this.leadersToBBMap.put(readInputBBLabel,readBB);
-//            endBB.setDefaultBranch(readBB);
-//            readBB.addPredecessorNode(endBB);
-//            BasicBlock body = this.leadersToBBMap.get("Body");
-//            readBB.setDefaultBranch(body);
-//            body.addPredecessorNode(readBB);
+            if(addLoop){
+                // add an empty BasicBlock as the exit node and
+                // connect it and the orignal last BB to each other
+                BasicBlock exitBB = createEmptyBB("Exit");
+                endBB.setAlternativeBranch(exitBB);
+                exitBB.addPredecessorNode(endBB);
+
+                // add read input block
+                String readInputBBLabel = "Read";
+                BasicBlock readBB = createReadOrPrintBB(readInputBBLabel, llSymbolTable);
+                this.leadersToBBMap.put(readInputBBLabel,readBB);
+                endBB.setDefaultBranch(readBB);
+                readBB.addPredecessorNode(endBB);
+                BasicBlock body = this.leadersToBBMap.get("Body");
+                readBB.setDefaultBranch(body);
+                body.addPredecessorNode(readBB);
+            }
+
 
             // 5) assign the list of basic blocks as a field of THIS object
             ArrayList<BasicBlock> basicBlocks = new ArrayList<>();

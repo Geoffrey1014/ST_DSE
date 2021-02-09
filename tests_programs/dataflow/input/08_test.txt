@@ -19,6 +19,6 @@ END_VAR
         d := a + b;
     END_IF;
     x :=  a + b ;
-    x := x +2;
+
 
 END_PROGRAM

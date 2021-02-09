@@ -16,8 +16,8 @@ CFG:
              L9 :  c = #_t1
             L10 :  #_t2 = 0
             L11 :  d = #_t2
-            L12 :  #_t9 = a + b
-            L31 :  #_t3 = #_t9
+            L12 :  #_t7 = a + b
+            L30 :  #_t3 = #_t7
             L13 :  c = #_t3
             L15 :  if tmp goto IF_L14
 
@@ -26,21 +26,24 @@ CFG:
          IF_L14 :  EMPTY_STATEMENT
             L17 :  #_t4 = 1
             L18 :  a = #_t4
-            L19 :  #_t9 = a + b
-            L30 :  #_t5 = #_t9
+            L19 :  #_t7 = a + b
+            L29 :  #_t5 = #_t7
             L20 :  d = #_t5
 
      END_IF_L14 :  EMPTY_STATEMENT
-            L21 :  #_t6 = #_t9
+            L21 :  #_t6 = #_t7
             L22 :  x = #_t6
-            L23 :  #_t7 = 2
-            L24 :  #_t8 = x + #_t7
-            L25 :  x = #_t8
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L26 :  print(x,)
-            L27 :  print(tmp,)
-            L28 :  print(d,)
-            L29 :  print(c,)
+            L23 :  print(x,)
+            L24 :  print(tmp,)
+            L25 :  print(d,)
+            L26 :  print(c,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()

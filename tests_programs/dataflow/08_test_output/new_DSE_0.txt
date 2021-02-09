@@ -2,23 +2,33 @@ CFG:
            Main :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
 
            Body :  EMPTY_STATEMENT
-            L12 :  #_t9 = 48 + 35
+            L11 :  d = 0
+            L12 :  #_t7 = a + b
+            L30 :  #_t3 = #_t7
             L15 :  if true goto IF_L14
 
             L16 :  goto END_IF_L14
 
          IF_L14 :  EMPTY_STATEMENT
-            L19 :  #_t9 = 1 + 35
+            L19 :  #_t7 = 1 + b
+            L20 :  d = #_t7
 
      END_IF_L14 :  EMPTY_STATEMENT
-            L24 :  #_t8 = #_t9 + 2
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L26 :  print(#_t8,)
-            L27 :  print(true,)
-            L28 :  print(d,)
-            L29 :  print(#_t3,)
+            L23 :  print(#_t7,)
+            L24 :  print(true,)
+            L25 :  print(d,)
+            L26 :  print(#_t3,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L27 :  b = read()
+            L28 :  a = read()

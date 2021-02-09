@@ -138,7 +138,7 @@ public class Main {
 
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
             for (Iterator<LlBuilder> llBuilderIterator = llBuilders.iterator(); llBuilderIterator.hasNext();) {
-                CFG cfg = new CFG(llBuilderIterator.next(), llSymbolTableIterator.next());
+                CFG cfg = new CFG(llBuilderIterator.next(), llSymbolTableIterator.next(),true);
 //                System.out.println(cfg.toString());
 //                System.out.println(cfg.toGraphviz());
 
