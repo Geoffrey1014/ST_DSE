@@ -2,6 +2,7 @@ package cfg;
 
 
 import ll.LlComponent;
+import ll.LlMethodCallStmt;
 import ll.LlStatement;
 import ll.assignStmt.LlAssignStmtBinaryOp;
 import ll.assignStmt.LlAssignStmtRegular;
@@ -16,8 +17,9 @@ public class GlobalDCE {
     // mutates the CFG by performing Global Dead Code Elimination
     public static void performGlobalDeadCodeElimination(CFG cfg) {
 //        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = LivenessAnalysis.getLivenessAnalysisForCFG(cfg);
-        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap =new NewLivenessAnalysis(cfg).calculateDeadCode();
-
+        NewLivenessAnalysis livenessAnalysts =new NewLivenessAnalysis(cfg);
+        livenessAnalysts.livenessAnalysis();
+        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = livenessAnalysts.calculateDeadCode();
         // TODO: Make sure that you do not remove assignment stmts for variables from other scopes
         // for example, i = 5 might look like dead code but it's not if i was declared in the scope above
         System.out.println("----before global DSE----deadCodeMap------");
@@ -64,6 +66,9 @@ public class GlobalDCE {
                             continue;
                         }
                     }
+                }
+                if(stmt instanceof LlMethodCallStmt){
+                    labelsToStmtsMap.remove(label);
                 }
             }
     }

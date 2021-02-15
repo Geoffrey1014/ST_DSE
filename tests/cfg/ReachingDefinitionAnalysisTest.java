@@ -15,12 +15,14 @@ public class ReachingDefinitionAnalysisTest {
         testHelper helper = new testHelper();
         this.llBuilder = new LlBuilder("test");
         this.llSymbolTable  = new LlSymbolTable("test");
-        helper.createLlBuilderAndLlSymbolTable1(llBuilder,llSymbolTable);
+        helper.createLlBuilderAndLlSymbolTableMITRechingDef(llBuilder,llSymbolTable);
         CFG cfg = new CFG(this.llBuilder, this.llSymbolTable,false);
         genGraphViz("1",cfg,"tests/");
         ReachingDefinitionAnalysis rdAnalysis = new ReachingDefinitionAnalysis(cfg);
+        System.out.println("printDefsReachINAndOUT-------------");
         rdAnalysis.printDefsReachINAndOUT();
         rdAnalysis.genUseDefinitionChains();
+        System.out.println("printUseDefsChains----------------");
         rdAnalysis.printUseDefsChains();
 
     }

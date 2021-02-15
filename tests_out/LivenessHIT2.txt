@@ -1,0 +1,35 @@
+
+
+basicBlock=END_IF:
+[a, i, j, u2, u3]
+{a=[L10: print(a,) @a], i=[L3: i = i + 1 @i], j=[L5: if j goto IF @j, L4: j = j - 1 @j], u2=[L7: a = u2 @u2], u3=[L8: i = u3 @u3]}
+
+
+basicBlock=Body:
+[a, i, j, u2, u3]
+{a=[L10: print(a,) @a], i=[L3: i = i + 1 @i], j=[L5: if j goto IF @j, L4: j = j - 1 @j], u2=[L7: a = u2 @u2], u3=[L8: i = u3 @u3]}
+
+
+basicBlock=End:
+[]
+{}
+
+
+basicBlock=Entry:
+[u1, u2, m, u3, n]
+{u1=[L2: a = u1 @u1], u2=[L7: a = u2 @u2], m=[L0: i = m - 1 @m], u3=[L8: i = u3 @u3], n=[L1: j = n @n]}
+
+
+basicBlock=IF:
+[a, j, u2, u3]
+{a=[L10: print(a,) @a], j=[L5: if j goto IF @j, L4: j = j - 1 @j], u2=[L7: a = u2 @u2], u3=[L8: i = u3 @u3]}
+
+
+basicBlock=L6:
+[a, j, u2, u3]
+{a=[L10: print(a,) @a], j=[L5: if j goto IF @j, L4: j = j - 1 @j], u2=[L7: a = u2 @u2], u3=[L8: i = u3 @u3]}
+
+
+basicBlock=LOOP:
+[a, j, u2, u3]
+{a=[L10: print(a,) @a], j=[L5: if j goto IF @j, L4: j = j - 1 @j], u2=[L7: a = u2 @u2], u3=[L8: i = u3 @u3]}

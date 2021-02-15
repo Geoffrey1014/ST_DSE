@@ -159,6 +159,8 @@ public class Main {
                 genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
 //                printDUchain(cfg, 2);
 
+                GlobalCP.performGlobalCP(cfg, globalVArs);
+                GlobalDCE.performGlobalDeadCodeElimination(cfg);
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");

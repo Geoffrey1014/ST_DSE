@@ -62,7 +62,7 @@ public class testHelper {
         llBuilder.appendStatement(createLlAssignStmtRegular(i, u3) );
         llBuilder.appendStatement(createLlJumpUnconditional("LOOP"));
     }
-    public void createLlBuilderAndLlSymbolTable1(LlBuilder llBuilder, LlSymbolTable llSymbolTable){
+    public void createLlBuilderAndLlSymbolTableMITRechingDef(LlBuilder llBuilder, LlSymbolTable llSymbolTable){
         // MIT reaching definition example
 
         llSymbolTable.varInput.put(this.i, new LlLiteralInt(1));

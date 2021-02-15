@@ -7,6 +7,7 @@ import ll.assignStmt.LlAssignStmt;
 import ll.assignStmt.LlAssignStmtBinaryOp;
 import ll.assignStmt.LlAssignStmtRegular;
 import ll.assignStmt.LlAssignStmtUnaryOp;
+import ll.jump.LlJumpConditional;
 import ll.location.LlLocation;
 import ll.location.LlLocationVar;
 
@@ -181,6 +182,11 @@ public class ReachingDefinitionAnalysis {
                     createUseDefChainsForLocationUsage(left, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                     createUseDefChainsForLocationUsage(right, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                 }
+                // LlJumpConditional
+                else if(stmt instanceof LlJumpConditional){
+                    LlComponent condition = ((LlJumpConditional) stmt).getCondition();
+                    createUseDefChainsForLocationUsage(condition, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
+                }
                 //LlMethodCallStmt
                 else if (stmt instanceof LlMethodCallStmt) {
                     curStmtLeftValue = ((LlMethodCallStmt) stmt).getReturnLocation();
@@ -190,10 +196,15 @@ public class ReachingDefinitionAnalysis {
                         createUseDefChainsForLocationUsage(arg, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                     }
                 }
-                curStmtDef = new DefStmt(curStmtLeftValue,stmt,bb,label);
+                if(curStmtLeftValue == null){
+//                    System.out.println("----no curStmtLeftValue----");
+                }
+                else{
+                    curStmtDef = new DefStmt(curStmtLeftValue,stmt,bb,label);
+                    // 3) define the left value
+                    lastDefInBlock.put(curStmtLeftValue,curStmtDef);
+                }
 
-                // 3) define the left value
-                lastDefInBlock.put(curStmtLeftValue,curStmtDef);
             }
         }
     }
@@ -346,10 +357,11 @@ public class ReachingDefinitionAnalysis {
                 }
 
             }
-//
+
             if (location != null) {
                 HashSet<DefStmt> defStmtSet = this.universalMap.get(location);
-                HashSet<DefStmt> killedDefStmtSet = (HashSet<DefStmt>) defStmtSet.clone();
+//                HashSet<DefStmt> killedDefStmtSet = (HashSet<DefStmt>) defStmtSet.clone();
+                HashSet<DefStmt> killedDefStmtSet = new HashSet<>(defStmtSet);
                 killedDefStmtSet.remove(new DefStmt(location, stmt, bb, label));
                 killedDefStmtCandidates.addAll(killedDefStmtSet);
             }
