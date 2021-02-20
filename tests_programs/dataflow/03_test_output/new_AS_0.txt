@@ -1,23 +1,46 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L3 :  count = 1
 
-    FOR_COND_L0 :  EMPTY_STATEMENT
-             L5 :  #_t2 = count < 5
-             L6 :  if #_t2 goto FOR_L1
+           Init :  EMPTY_STATEMENT
+             L1 :  up_bound = 0
+             L3 :  max = 0
 
-             L7 :  goto END_FOR_L1
+           Body :  EMPTY_STATEMENT
+             L9 :  #_t2 = up_bound > 5
+            L10 :  if #_t2 goto IF_L7
 
-         FOR_L1 :  EMPTY_STATEMENT
-             L9 :  count = count + 1
-            L10 :  goto FOR_COND_L0
+            L11 :  goto END_IF_L7
 
-     END_FOR_L1 :  EMPTY_STATEMENT
-            L14 :  #_t6 = 8
-            L15 :  #_t7 = #_t6 / 2
-            L19 :  add(2,100,)
-            L22 :  return 
+          IF_L7 :  EMPTY_STATEMENT
+            L13 :  up_bound = 5
 
-           exit :  EMPTY_STATEMENT
+      END_IF_L7 :  EMPTY_STATEMENT
+            L17 :  count = 1
+
+   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
+
+            L20 :  goto END_FOR_L15
+
+        FOR_L15 :  EMPTY_STATEMENT
+            L21 :  max = lst[max] 
+            L22 :  count = count + 1
+            L23 :  goto FOR_COND_L14
+
+    END_FOR_L15 :  EMPTY_STATEMENT
+            L26 :  add(2,100,)
+            L29 :  return 
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L30 :  print(add.z,)
+            L31 :  print(max,)
+            L32 :  print(add.a,)
+            L33 :  print(count,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L34 :  up_bound = read()

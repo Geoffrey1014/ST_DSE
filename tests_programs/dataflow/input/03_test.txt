@@ -1,26 +1,28 @@
 PROGRAM Main
 VAR
 	lst : ARRAY[1 .. 5] OF INT := [9,2,8,4,7];
+	count : INT;
 END_VAR
 
 VAR_OUTPUT
 	OUT_1: INT;
+	max: INT;
+	OUT_2: INT;
 END_VAR
 
 VAR_INPUT
-	max: INT;
-	count : INT;
+	up_bound : INT;
 END_VAR
-
-    FOR count := 1 TO 5 DO
-
+    OUT_2 := 100;
+    IF up_bound > 5 THEN
+            up_bound := 5;
+    END_IF;
+    FOR count := 1 TO up_bound DO
             max := lst[max];
-
     END_FOR;
 
-    max := 3+5/2;
     add(y:=100, x := 2, a => OUT_1);
-    max := add.z;
+    OUT_2 := add.z;
     RETURN;
 END_PROGRAM
 

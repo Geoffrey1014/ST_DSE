@@ -1,7 +1,17 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
         get_int :  EMPTY_STATEMENT
-             L0 :  get_int = x
 
-           exit :  EMPTY_STATEMENT
+           Init :  EMPTY_STATEMENT
+             L0 :  x = 48
+
+           Body :  EMPTY_STATEMENT
+             L1 :  get_int = x
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+             L2 :  x = read()

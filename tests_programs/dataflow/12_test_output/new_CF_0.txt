@@ -1,19 +1,40 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L6 :  #_t9 = a + b
-            L10 :  if true goto IF_L8
 
-            L11 :  goto ELSE_L9
+           Init :  EMPTY_STATEMENT
+             L1 :  a = 48
+             L2 :  b = 35
 
-        ELSE_L9 :  EMPTY_STATEMENT
-            L15 :  b = 1
-            L16 :  goto END_IF_L8
+           Body :  EMPTY_STATEMENT
+             L9 :  c = 0
+            L11 :  d = 0
+            L12 :  #_t9 = a + b
+            L13 :  c = #_t9
+            L16 :  if true goto IF_L14
 
-          IF_L8 :  EMPTY_STATEMENT
+            L17 :  goto ELSE_L15
 
-      END_IF_L8 :  EMPTY_STATEMENT
-            L19 :  #_t7 = a + b
+       ELSE_L15 :  EMPTY_STATEMENT
+            L19 :  d = #_t9
+            L21 :  b = 1
+            L22 :  goto END_IF_L14
 
-           exit :  EMPTY_STATEMENT
+         IF_L14 :  EMPTY_STATEMENT
+            L24 :  c = #_t9
+
+     END_IF_L14 :  EMPTY_STATEMENT
+            L25 :  #_t7 = a + b
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L27 :  print(#_t7,)
+            L28 :  print(true,)
+            L29 :  print(d,)
+            L30 :  print(c,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L31 :  b = read()
+            L32 :  a = read()

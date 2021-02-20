@@ -1,0 +1,66 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "            add :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
+             L1 :  x = 48
+             L2 :  y = 35
+"; "           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = x + y
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+             L8 :  print(#_t0,)
+             L9 :  print(tmp,)
+            L10 :  print(#_t0,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+            L11 :  x = read()
+            L12 :  y = read()
+"; 
+  "            add :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
+             L1 :  x = 48
+             L2 :  y = 35
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
+             L1 :  x = 48
+             L2 :  y = 35
+" -> "           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = x + y
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = x + y
+" -> "            End :  EMPTY_STATEMENT
+             L8 :  print(#_t0,)
+             L9 :  print(tmp,)
+            L10 :  print(#_t0,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "            add :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+             L8 :  print(#_t0,)
+             L9 :  print(tmp,)
+            L10 :  print(#_t0,)
+" -> "           Read :  EMPTY_STATEMENT
+            L11 :  x = read()
+            L12 :  y = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+             L8 :  print(#_t0,)
+             L9 :  print(tmp,)
+            L10 :  print(#_t0,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+            L11 :  x = read()
+            L12 :  y = read()
+" -> "           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = x + y
+"  [label="default"];
+}

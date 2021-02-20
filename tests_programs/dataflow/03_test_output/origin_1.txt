@@ -1,9 +1,27 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
             add :  EMPTY_STATEMENT
-             L0 :  #_t0 = x + y
-             L1 :  z = #_t0
-             L2 :  a = z
 
-           exit :  EMPTY_STATEMENT
+           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
+             L1 :  x = 48
+             L2 :  y = 35
+             L3 :  z = 0
+             L4 :  a = 0
+
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = x + y
+             L6 :  z = #_t0
+             L7 :  a = z
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+             L8 :  print(a,)
+             L9 :  print(tmp,)
+            L10 :  print(z,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L11 :  x = read()
+            L12 :  y = read()

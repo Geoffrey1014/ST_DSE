@@ -2,47 +2,57 @@ CFG:
            Main :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
-             L0 :  max = 0
-             L1 :  count = 0
+             L0 :  count = 0
+             L1 :  up_bound = 0
              L2 :  OUT_1 = 0
+             L3 :  max = 0
+             L4 :  OUT_2 = 0
 
            Body :  EMPTY_STATEMENT
-             L5 :  #_t0 = 1
-             L6 :  count = 1
+             L5 :  #_t0 = 100
+             L6 :  OUT_2 = 100
+             L8 :  #_t1 = 5
+             L9 :  #_t2 = up_bound > 5
+            L10 :  if #_t2 goto IF_L7
 
-    FOR_COND_L3 :  EMPTY_STATEMENT
-             L7 :  #_t1 = 5
-             L8 :  #_t2 = count < 5
-             L9 :  if #_t2 goto FOR_L4
+            L11 :  goto END_IF_L7
 
-            L10 :  goto END_FOR_L4
+          IF_L7 :  EMPTY_STATEMENT
+            L12 :  #_t3 = 5
+            L13 :  up_bound = 5
 
-         FOR_L4 :  EMPTY_STATEMENT
-            L11 :  max = lst[max] 
-            L12 :  count = count + 1
-            L13 :  goto FOR_COND_L3
+      END_IF_L7 :  EMPTY_STATEMENT
+            L16 :  #_t4 = 1
+            L17 :  count = 1
 
-     END_FOR_L4 :  EMPTY_STATEMENT
-            L14 :  #_t3 = 2
-            L15 :  #_t4 = 5
-            L16 :  #_t5 = 3
-            L17 :  #_t6 = 3 + 5
-            L18 :  #_t7 = #_t6 / 2
-            L19 :  max = #_t7
-            L20 :  #_t8 = 2
-            L21 :  #_t9 = 100
-            L22 :  add(2,100,)
-            L23 :  OUT_1 = add.a
-            L24 :  max = add.z
-            L25 :  return 
+   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
+
+            L20 :  goto END_FOR_L15
+
+        FOR_L15 :  EMPTY_STATEMENT
+            L21 :  max = lst[max] 
+            L22 :  count = count + 1
+            L23 :  goto FOR_COND_L14
+
+    END_FOR_L15 :  EMPTY_STATEMENT
+            L24 :  #_t6 = 2
+            L25 :  #_t7 = 100
+            L26 :  add(2,100,)
+            L27 :  OUT_1 = add.a
+            L28 :  OUT_2 = add.z
+            L29 :  return 
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L26 :  print(add.a,)
+            L30 :  print(add.z,)
+            L31 :  print(max,)
+            L32 :  print(add.a,)
+            L33 :  print(count,)
 
            Exit :  EMPTY_STATEMENT
 
            Read :  EMPTY_STATEMENT
-            L27 :  max = read()
-            L28 :  count = read()
+            L34 :  up_bound = read()

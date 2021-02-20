@@ -1,40 +1,61 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
+             L1 :  PREV_LOAD = false
+             L2 :  TLOAD = false
+             L3 :  RESET = false
+             L4 :  LOAD = false
+             L5 :  IN_1 = false
+             L6 :  OUT_1 = false
 
            Body :  EMPTY_STATEMENT
-             L7 :  #_t0 = true
-             L8 :  #_t1 = #_t0 AND false
-            L11 :  if false goto IF_L10
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+            L11 :  if RESET goto IF_L10
 
             L13 :  goto START_ELSIF_L12
 
          IF_L10 :  EMPTY_STATEMENT
+            L15 :  OUT_1 = true
             L16 :  goto END_IF_L10
 
 START_ELSIF_L12 :  EMPTY_STATEMENT
-            L18 :  #_t3 = false OR #_t1
+            L18 :  #_t3 = LOAD OR #_t1
             L19 :  if #_t3 goto ELSIF_L17
 
             L20 :  goto END_ELSIF_L17
 
       ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
             L22 :  goto END_IF_L10
 
   END_ELSIF_L17 :  EMPTY_STATEMENT
-            L24 :  if false goto ELSIF_L23
+            L24 :  if IN_1 goto ELSIF_L23
 
             L25 :  goto END_ELSIF_L23
 
       ELSIF_L23 :  EMPTY_STATEMENT
+            L26 :  OUT_1 = IN_1
             L27 :  goto END_IF_L10
 
   END_ELSIF_L23 :  EMPTY_STATEMENT
        ELSE_L28 :  EMPTY_STATEMENT
 
      END_IF_L10 :  EMPTY_STATEMENT
+            L31 :  PREV_LOAD = TLOAD
 
-           exit :  EMPTY_STATEMENT
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L32 :  print(OUT_1,)
+            L33 :  print(TLOAD,)
+            L34 :  print(#_t1,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L35 :  LOAD = read()
+            L36 :  IN_1 = read()
+            L37 :  RESET = read()
+            L38 :  TLOAD = read()

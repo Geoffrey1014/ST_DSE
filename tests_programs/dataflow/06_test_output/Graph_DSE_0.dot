@@ -8,10 +8,12 @@ digraph G {
              L1 :  a = 48
              L2 :  b = 35
 "; "           Body :  EMPTY_STATEMENT
+             L6 :  c = 0
             L12 :  if true goto IF_L11
 "; "            L13 :  goto END_IF_L11
 "; "         IF_L11 :  EMPTY_STATEMENT
             L14 :  #_t3 = a + b
+            L15 :  c = #_t3
 "; "     END_IF_L11 :  EMPTY_STATEMENT
             L16 :  #_t4 = a + b
 "; "          Entry :  EMPTY_STATEMENT
@@ -33,16 +35,20 @@ digraph G {
              L1 :  a = 48
              L2 :  b = 35
 " -> "           Body :  EMPTY_STATEMENT
+             L6 :  c = 0
             L12 :  if true goto IF_L11
 "  [label="default"];
   "           Body :  EMPTY_STATEMENT
+             L6 :  c = 0
             L12 :  if true goto IF_L11
 " -> "            L13 :  goto END_IF_L11
 "  [label="default"];
   "           Body :  EMPTY_STATEMENT
+             L6 :  c = 0
             L12 :  if true goto IF_L11
 " -> "         IF_L11 :  EMPTY_STATEMENT
             L14 :  #_t3 = a + b
+            L15 :  c = #_t3
 "  [label="alter"];
   "            L13 :  goto END_IF_L11
 " -> "     END_IF_L11 :  EMPTY_STATEMENT
@@ -50,6 +56,7 @@ digraph G {
 "  [label="alter"];
   "         IF_L11 :  EMPTY_STATEMENT
             L14 :  #_t3 = a + b
+            L15 :  c = #_t3
 " -> "     END_IF_L11 :  EMPTY_STATEMENT
             L16 :  #_t4 = a + b
 "  [label="default"];
@@ -81,6 +88,7 @@ digraph G {
             L21 :  b = read()
             L22 :  a = read()
 " -> "           Body :  EMPTY_STATEMENT
+             L6 :  c = 0
             L12 :  if true goto IF_L11
 "  [label="default"];
 }

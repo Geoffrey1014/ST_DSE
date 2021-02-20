@@ -2,6 +2,7 @@ CFG:
            Main :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
              L1 :  a = 48
              L2 :  b = 35
 

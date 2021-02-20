@@ -5,137 +5,175 @@ digraph G {
         fontsize=12,  height=1.2];
   "           Main :  EMPTY_STATEMENT
 "; "           Init :  EMPTY_STATEMENT
-             L0 :  max = 0
-             L1 :  count = 0
+             L0 :  count = 0
+             L1 :  up_bound = 0
              L2 :  OUT_1 = 0
+             L3 :  max = 0
+             L4 :  OUT_2 = 0
 "; "           Body :  EMPTY_STATEMENT
-             L5 :  #_t0 = 1
-             L6 :  count = #_t0
-"; "    FOR_COND_L3 :  EMPTY_STATEMENT
-             L7 :  #_t1 = 5
-             L8 :  #_t2 = count < #_t1
-             L9 :  if #_t2 goto FOR_L4
-"; "            L10 :  goto END_FOR_L4
-"; "         FOR_L4 :  EMPTY_STATEMENT
-            L11 :  max = lst[max] 
-            L12 :  count = count + 1
-            L13 :  goto FOR_COND_L3
-"; "     END_FOR_L4 :  EMPTY_STATEMENT
-            L14 :  #_t3 = 2
-            L15 :  #_t4 = 5
-            L16 :  #_t5 = 3
-            L17 :  #_t6 = #_t5 + #_t4
-            L18 :  #_t7 = #_t6 / #_t3
-            L19 :  max = #_t7
-            L20 :  #_t8 = 2
-            L21 :  #_t9 = 100
-            L22 :  add(#_t8,#_t9,)
-            L23 :  OUT_1 = add.a
-            L24 :  max = add.z
-            L25 :  return 
+             L5 :  #_t0 = 100
+             L6 :  OUT_2 = #_t0
+             L8 :  #_t1 = 5
+             L9 :  #_t2 = up_bound > #_t1
+            L10 :  if #_t2 goto IF_L7
+"; "            L11 :  goto END_IF_L7
+"; "          IF_L7 :  EMPTY_STATEMENT
+            L12 :  #_t3 = 5
+            L13 :  up_bound = #_t3
+"; "      END_IF_L7 :  EMPTY_STATEMENT
+            L16 :  #_t4 = 1
+            L17 :  count = #_t4
+"; "   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
+"; "            L20 :  goto END_FOR_L15
+"; "        FOR_L15 :  EMPTY_STATEMENT
+            L21 :  max = lst[max] 
+            L22 :  count = count + 1
+            L23 :  goto FOR_COND_L14
+"; "    END_FOR_L15 :  EMPTY_STATEMENT
+            L24 :  #_t6 = 2
+            L25 :  #_t7 = 100
+            L26 :  add(#_t6,#_t7,)
+            L27 :  OUT_1 = add.a
+            L28 :  OUT_2 = add.z
+            L29 :  return 
 "; "          Entry :  EMPTY_STATEMENT
 "; "            End :  EMPTY_STATEMENT
-            L26 :  print(OUT_1,)
+            L30 :  print(OUT_2,)
+            L31 :  print(max,)
+            L32 :  print(OUT_1,)
+            L33 :  print(count,)
 "; "           Exit :  EMPTY_STATEMENT
 "; "           Read :  EMPTY_STATEMENT
-            L27 :  max = read()
-            L28 :  count = read()
+            L34 :  up_bound = read()
 "; 
   "           Main :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
-             L0 :  max = 0
-             L1 :  count = 0
+             L0 :  count = 0
+             L1 :  up_bound = 0
              L2 :  OUT_1 = 0
+             L3 :  max = 0
+             L4 :  OUT_2 = 0
 "  [label="default"];
   "           Init :  EMPTY_STATEMENT
-             L0 :  max = 0
-             L1 :  count = 0
+             L0 :  count = 0
+             L1 :  up_bound = 0
              L2 :  OUT_1 = 0
+             L3 :  max = 0
+             L4 :  OUT_2 = 0
 " -> "           Body :  EMPTY_STATEMENT
-             L5 :  #_t0 = 1
-             L6 :  count = #_t0
+             L5 :  #_t0 = 100
+             L6 :  OUT_2 = #_t0
+             L8 :  #_t1 = 5
+             L9 :  #_t2 = up_bound > #_t1
+            L10 :  if #_t2 goto IF_L7
 "  [label="default"];
   "           Body :  EMPTY_STATEMENT
-             L5 :  #_t0 = 1
-             L6 :  count = #_t0
-" -> "    FOR_COND_L3 :  EMPTY_STATEMENT
-             L7 :  #_t1 = 5
-             L8 :  #_t2 = count < #_t1
-             L9 :  if #_t2 goto FOR_L4
+             L5 :  #_t0 = 100
+             L6 :  OUT_2 = #_t0
+             L8 :  #_t1 = 5
+             L9 :  #_t2 = up_bound > #_t1
+            L10 :  if #_t2 goto IF_L7
+" -> "            L11 :  goto END_IF_L7
 "  [label="default"];
-  "    FOR_COND_L3 :  EMPTY_STATEMENT
-             L7 :  #_t1 = 5
-             L8 :  #_t2 = count < #_t1
-             L9 :  if #_t2 goto FOR_L4
-" -> "            L10 :  goto END_FOR_L4
+  "           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = 100
+             L6 :  OUT_2 = #_t0
+             L8 :  #_t1 = 5
+             L9 :  #_t2 = up_bound > #_t1
+            L10 :  if #_t2 goto IF_L7
+" -> "          IF_L7 :  EMPTY_STATEMENT
+            L12 :  #_t3 = 5
+            L13 :  up_bound = #_t3
+"  [label="alter"];
+  "            L11 :  goto END_IF_L7
+" -> "      END_IF_L7 :  EMPTY_STATEMENT
+            L16 :  #_t4 = 1
+            L17 :  count = #_t4
+"  [label="alter"];
+  "          IF_L7 :  EMPTY_STATEMENT
+            L12 :  #_t3 = 5
+            L13 :  up_bound = #_t3
+" -> "      END_IF_L7 :  EMPTY_STATEMENT
+            L16 :  #_t4 = 1
+            L17 :  count = #_t4
 "  [label="default"];
-  "    FOR_COND_L3 :  EMPTY_STATEMENT
-             L7 :  #_t1 = 5
-             L8 :  #_t2 = count < #_t1
-             L9 :  if #_t2 goto FOR_L4
-" -> "         FOR_L4 :  EMPTY_STATEMENT
-            L11 :  max = lst[max] 
-            L12 :  count = count + 1
-            L13 :  goto FOR_COND_L3
+  "      END_IF_L7 :  EMPTY_STATEMENT
+            L16 :  #_t4 = 1
+            L17 :  count = #_t4
+" -> "   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
+"  [label="default"];
+  "   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
+" -> "            L20 :  goto END_FOR_L15
+"  [label="default"];
+  "   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
+" -> "        FOR_L15 :  EMPTY_STATEMENT
+            L21 :  max = lst[max] 
+            L22 :  count = count + 1
+            L23 :  goto FOR_COND_L14
 "  [label="alter"];
-  "            L10 :  goto END_FOR_L4
-" -> "     END_FOR_L4 :  EMPTY_STATEMENT
-            L14 :  #_t3 = 2
-            L15 :  #_t4 = 5
-            L16 :  #_t5 = 3
-            L17 :  #_t6 = #_t5 + #_t4
-            L18 :  #_t7 = #_t6 / #_t3
-            L19 :  max = #_t7
-            L20 :  #_t8 = 2
-            L21 :  #_t9 = 100
-            L22 :  add(#_t8,#_t9,)
-            L23 :  OUT_1 = add.a
-            L24 :  max = add.z
-            L25 :  return 
+  "            L20 :  goto END_FOR_L15
+" -> "    END_FOR_L15 :  EMPTY_STATEMENT
+            L24 :  #_t6 = 2
+            L25 :  #_t7 = 100
+            L26 :  add(#_t6,#_t7,)
+            L27 :  OUT_1 = add.a
+            L28 :  OUT_2 = add.z
+            L29 :  return 
 "  [label="alter"];
-  "         FOR_L4 :  EMPTY_STATEMENT
-            L11 :  max = lst[max] 
-            L12 :  count = count + 1
-            L13 :  goto FOR_COND_L3
-" -> "    FOR_COND_L3 :  EMPTY_STATEMENT
-             L7 :  #_t1 = 5
-             L8 :  #_t2 = count < #_t1
-             L9 :  if #_t2 goto FOR_L4
+  "        FOR_L15 :  EMPTY_STATEMENT
+            L21 :  max = lst[max] 
+            L22 :  count = count + 1
+            L23 :  goto FOR_COND_L14
+" -> "   FOR_COND_L14 :  EMPTY_STATEMENT
+            L18 :  #_t5 = count < up_bound
+            L19 :  if #_t5 goto FOR_L15
 "  [label="alter"];
-  "     END_FOR_L4 :  EMPTY_STATEMENT
-            L14 :  #_t3 = 2
-            L15 :  #_t4 = 5
-            L16 :  #_t5 = 3
-            L17 :  #_t6 = #_t5 + #_t4
-            L18 :  #_t7 = #_t6 / #_t3
-            L19 :  max = #_t7
-            L20 :  #_t8 = 2
-            L21 :  #_t9 = 100
-            L22 :  add(#_t8,#_t9,)
-            L23 :  OUT_1 = add.a
-            L24 :  max = add.z
-            L25 :  return 
+  "    END_FOR_L15 :  EMPTY_STATEMENT
+            L24 :  #_t6 = 2
+            L25 :  #_t7 = 100
+            L26 :  add(#_t6,#_t7,)
+            L27 :  OUT_1 = add.a
+            L28 :  OUT_2 = add.z
+            L29 :  return 
 " -> "            End :  EMPTY_STATEMENT
-            L26 :  print(OUT_1,)
+            L30 :  print(OUT_2,)
+            L31 :  print(max,)
+            L32 :  print(OUT_1,)
+            L33 :  print(count,)
 "  [label="default"];
   "          Entry :  EMPTY_STATEMENT
 " -> "           Main :  EMPTY_STATEMENT
 "  [label="default"];
   "            End :  EMPTY_STATEMENT
-            L26 :  print(OUT_1,)
+            L30 :  print(OUT_2,)
+            L31 :  print(max,)
+            L32 :  print(OUT_1,)
+            L33 :  print(count,)
 " -> "           Read :  EMPTY_STATEMENT
-            L27 :  max = read()
-            L28 :  count = read()
+            L34 :  up_bound = read()
 "  [label="default"];
   "            End :  EMPTY_STATEMENT
-            L26 :  print(OUT_1,)
+            L30 :  print(OUT_2,)
+            L31 :  print(max,)
+            L32 :  print(OUT_1,)
+            L33 :  print(count,)
 " -> "           Exit :  EMPTY_STATEMENT
 "  [label="alter"];
   "           Read :  EMPTY_STATEMENT
-            L27 :  max = read()
-            L28 :  count = read()
+            L34 :  up_bound = read()
 " -> "           Body :  EMPTY_STATEMENT
-             L5 :  #_t0 = 1
-             L6 :  count = #_t0
+             L5 :  #_t0 = 100
+             L6 :  OUT_2 = #_t0
+             L8 :  #_t1 = 5
+             L9 :  #_t2 = up_bound > #_t1
+            L10 :  if #_t2 goto IF_L7
 "  [label="default"];
 }

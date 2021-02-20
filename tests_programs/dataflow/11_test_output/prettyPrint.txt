@@ -1,0 +1,135 @@
+|--POUS
+  |--PROGRAM
+    |--name: Main
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: tmp
+            |--type: RES_BOOL
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: a
+            |--type: RES_INT
+        |--value: 48
+        |--varDecl
+          |--name: b
+            |--type: RES_INT
+        |--value: 35
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: c
+            |--type: RES_INT
+        |--varDecl
+          |--name: d
+            |--type: RES_INT
+        |--varDecl
+          |--name: x
+            |--type: RES_INT
+      |--codeBlock:
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: tmp
+              |--type: RES_BOOL
+          |--rhs
+            |--boolLiteral
+              |--value: true
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: c
+              |--type: RES_INT
+          |--rhs
+            |--IntLiteral
+              |--value: 0
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: d
+              |--type: RES_INT
+          |--rhs
+            |--IntLiteral
+              |--value: 0
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: c
+              |--type: RES_INT
+          |--rhs
+            |--binaryArithOper
+              |--lhs
+                |--locationVar
+                  |--name: a
+                  |--type: RES_INT
+              |--op: ADD_OP
+              |--rhs
+                |--locationVar
+                  |--name: b
+                  |--type: RES_INT
+        |--ifStmt
+          |--condExpr
+            |--locationVar
+              |--name: tmp
+              |--type: RES_BOOL
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: b
+                    |--type: RES_INT
+                |--rhs
+                  |--IntLiteral
+                    |--value: 1
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: c
+                    |--type: RES_INT
+                |--rhs
+                  |--binaryArithOper
+                    |--lhs
+                      |--locationVar
+                        |--name: a
+                        |--type: RES_INT
+                    |--op: ADD_OP
+                    |--rhs
+                      |--locationVar
+                        |--name: b
+                        |--type: RES_INT
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: d
+                  |--type: RES_INT
+              |--rhs
+                |--binaryArithOper
+                  |--lhs
+                    |--locationVar
+                      |--name: a
+                      |--type: RES_INT
+                  |--op: ADD_OP
+                  |--rhs
+                    |--locationVar
+                      |--name: b
+                      |--type: RES_INT
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: x
+              |--type: RES_INT
+          |--rhs
+            |--binaryArithOper
+              |--lhs
+                |--locationVar
+                  |--name: a
+                  |--type: RES_INT
+              |--op: ADD_OP
+              |--rhs
+                |--locationVar
+                  |--name: b
+                  |--type: RES_INT

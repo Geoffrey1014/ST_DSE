@@ -18,8 +18,9 @@ public class GlobalDCE {
     public static void performGlobalDeadCodeElimination(CFG cfg) {
 //        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = LivenessAnalysis.getLivenessAnalysisForCFG(cfg);
         NewLivenessAnalysis livenessAnalysts =new NewLivenessAnalysis(cfg);
-        livenessAnalysts.livenessAnalysis();
+        livenessAnalysts.livenessAnalysis2();
         HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = livenessAnalysts.calculateDeadCode();
+
         // TODO: Make sure that you do not remove assignment stmts for variables from other scopes
         // for example, i = 5 might look like dead code but it's not if i was declared in the scope above
         System.out.println("----before global DSE----deadCodeMap------");

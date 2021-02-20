@@ -295,14 +295,18 @@ public class NewLivenessAnalysis {
 
     }
 
+
+
     public HashMap<BasicBlock, HashSet<BlockLabelPair>> calculateDeadCode() {
         //loop through the bb, find stmt which is not active in OUT
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
         HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = new HashMap<>();
         for (BasicBlock bb : bbList) {
             LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
-            HashSet<LlLocation> livenessVars = livenessOUT.get(bb);
+            HashSet<LlLocation> livenessVars = new HashSet<> (livenessOUT2.get(bb).keySet()) ;
             HashSet<BlockLabelPair> deadCode = new HashSet<>();
+
+            HashSet<BlockLabelPair> bBInnerLiveCode = liveCodeInBb(bb);
             for (String label : labelsToStmtsMap.keySet()) {
                 LlStatement stmt = labelsToStmtsMap.get(label);
                 LlLocation locationDef = null;
@@ -319,8 +323,12 @@ public class NewLivenessAnalysis {
                 } else {
                     continue;
                 }
-                if (locationDef!= null && !livenessVars.contains(locationDef)) {
-                    deadCode.add(new BlockLabelPair(bb, label));
+                if (locationDef!= null && !livenessVars.contains(locationDef) ) {
+                    BlockLabelPair notAliveOutsied = new BlockLabelPair(bb, label);
+                    if(!bBInnerLiveCode.contains(notAliveOutsied)){
+                        deadCode.add(notAliveOutsied);
+                    }
+
                 }
             }
             deadCodeMap.put(bb, deadCode);
@@ -328,6 +336,81 @@ public class NewLivenessAnalysis {
         return deadCodeMap;
     }
 
+    public HashSet<BlockLabelPair> liveCodeInBb(BasicBlock bb){
+        LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
+        HashMap<LlLocation,BlockLabelPair> lastVar2DefStmtInBasicBlock = new HashMap<>();
+        HashSet<BlockLabelPair> liveCode = new HashSet<>();
+        for (String label : labelsToStmtsMap.keySet()) {
+            LlStatement stmt = labelsToStmtsMap.get(label);
+            LlLocation locationDef = null;
+
+            if (stmt instanceof LlAssignStmtRegular) {
+                locationDef = ((LlAssignStmtRegular) stmt).getStoreLocation();
+                LlComponent operand = ((LlAssignStmtRegular) stmt).getOperand();
+
+                if (operand instanceof LlLocation) {
+                    LlLocation locationUsage = (LlLocation) operand;
+                    if(lastVar2DefStmtInBasicBlock.get(locationUsage) != null){
+                        liveCode.add(lastVar2DefStmtInBasicBlock.get(locationUsage));
+                    }
+                }
+            } else if (stmt instanceof LlAssignStmtUnaryOp) {
+                locationDef = ((LlAssignStmtUnaryOp) stmt).getStoreLocation();
+                LlComponent operand = ((LlAssignStmtUnaryOp) stmt).getOperand();
+
+                if (operand instanceof LlLocation) {
+                    LlLocation locationUsage = (LlLocation) operand;
+                    //
+                    if (lastVar2DefStmtInBasicBlock.get(locationUsage) != null) {
+                        liveCode.add(lastVar2DefStmtInBasicBlock.get(locationUsage));
+                    }
+                }
+
+            } else if (stmt instanceof LlAssignStmtBinaryOp) {
+                locationDef = ((LlAssignStmtBinaryOp) stmt).getStoreLocation();
+                LlComponent left = ((LlAssignStmtBinaryOp) stmt).getLeftOperand();
+                LlComponent right = ((LlAssignStmtBinaryOp) stmt).getRightOperand();
+
+                if (left instanceof LlLocation) {
+                    LlLocation locationUsage = (LlLocation) left;
+                    if (lastVar2DefStmtInBasicBlock.get(locationUsage) != null) {
+                        liveCode.add(lastVar2DefStmtInBasicBlock.get(locationUsage));
+                    }
+                }
+                if (right instanceof LlLocation) {
+                    LlLocation locationUsage = (LlLocation) right;
+                    if (lastVar2DefStmtInBasicBlock.get(locationUsage) != null) {
+                        liveCode.add(lastVar2DefStmtInBasicBlock.get(locationUsage));
+                    }
+                }
+            }
+            else if(stmt instanceof LlJumpConditional){
+                LlComponent condition = ((LlJumpConditional) stmt).getCondition();
+                if(condition instanceof LlLocation){
+                    LlLocation locationUsage = (LlLocation) condition;
+                    if (lastVar2DefStmtInBasicBlock.get(locationUsage) != null) {
+                        liveCode.add(lastVar2DefStmtInBasicBlock.get(locationUsage));
+                    }
+                }
+            }
+            else if (stmt instanceof LlMethodCallStmt) {
+                locationDef = ((LlMethodCallStmt) stmt).getReturnLocation();
+                List<LlComponent> args = ((LlMethodCallStmt) stmt).getArgsList();
+                for (LlComponent arg : args) {
+                    if (arg instanceof LlLocation) {
+                        LlLocation locationUsage = (LlLocation) arg;
+                        if (lastVar2DefStmtInBasicBlock.get(locationUsage) != null) {
+                            liveCode.add(lastVar2DefStmtInBasicBlock.get(locationUsage));
+                        }
+                    }
+                }
+            } else {
+                continue;
+            }
+            lastVar2DefStmtInBasicBlock.put(locationDef, new BlockLabelPair(bb, label));
+        }
+        return liveCode;
+    }
     // USE - set of variables with upwards exposed uses in block
     private HashSet<LlLocation> USE(BasicBlock bb) {
         HashMap<LlLocation, HashSet<VarAndStmt>> uses = this.bb2Uses.get(bb);

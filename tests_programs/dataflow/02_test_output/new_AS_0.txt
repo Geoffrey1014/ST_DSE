@@ -1,21 +1,31 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L3 :  count = 1
 
-    FOR_COND_L0 :  EMPTY_STATEMENT
-             L5 :  #_t2 = count < 5
-             L6 :  if #_t2 goto FOR_L1
+           Init :  EMPTY_STATEMENT
+             L2 :  OUT_1 = false
 
-             L7 :  goto END_FOR_L1
+           Body :  EMPTY_STATEMENT
+             L6 :  count = 1
 
-         FOR_L1 :  EMPTY_STATEMENT
-             L9 :  count = count + 1
-            L10 :  goto FOR_COND_L0
+    FOR_COND_L3 :  EMPTY_STATEMENT
+             L8 :  #_t2 = count < 5
+             L9 :  if #_t2 goto FOR_L4
 
-     END_FOR_L1 :  EMPTY_STATEMENT
-            L15 :  #_t4 = add(2,100,)
-            L17 :  return 
+            L10 :  goto END_FOR_L4
 
-           exit :  EMPTY_STATEMENT
+         FOR_L4 :  EMPTY_STATEMENT
+            L12 :  count = count + 1
+            L13 :  goto FOR_COND_L3
+
+     END_FOR_L4 :  EMPTY_STATEMENT
+            L18 :  #_t4 = add(2,100,)
+            L20 :  return 
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L21 :  print(OUT_1,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT

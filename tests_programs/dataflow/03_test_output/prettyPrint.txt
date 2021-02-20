@@ -1,0 +1,169 @@
+|--POUS
+  |--PROGRAM
+    |--name: Main
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: lst
+            |--array type: RES_INT
+            |--size: 1 to 5
+        |--valuse: [9, 2, 8, 4, 7, ]
+        |--varDecl
+          |--name: count
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: up_bound
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: OUT_1
+            |--type: RES_INT
+        |--varDecl
+          |--name: max
+            |--type: RES_INT
+        |--varDecl
+          |--name: OUT_2
+            |--type: RES_INT
+      |--codeBlock:
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: OUT_2
+              |--type: RES_INT
+          |--rhs
+            |--IntLiteral
+              |--value: 100
+        |--ifStmt
+          |--condExpr
+            |__binaryRelOper
+              |__lhs
+                |--locationVar
+                  |--name: up_bound
+                  |--type: RES_INT
+              |__op: GT_OP
+              |__rhs
+                |--IntLiteral
+                  |--value: 5
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: up_bound
+                    |--type: RES_INT
+                |--rhs
+                  |--IntLiteral
+                    |--value: 5
+        |--forLoop
+          |--counter
+            |--locationVar
+              |--name: count
+              |--type: RES_INT
+            |--range
+            |--range
+              |--lowBoundary
+                |--IntLiteral
+                  |--value: 1
+              |--highBoundary
+                |--locationVar
+                  |--name: up_bound
+                  |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: max
+                    |--type: RES_INT
+                |--rhs
+                  |--arrayLocation
+                    |--name: lst
+                    |--type: RES_INT
+                    |--index:
+                      |--locationVar
+                        |--name: max
+                        |--type: RES_INT
+        |--functionCallStmt
+          |--name: add
+          |--argsList:
+            |--assignStmtEquals
+              |--lhs
+              |--rhs
+                |--IntLiteral
+                  |--value: 100
+            |--assignStmtEquals
+              |--lhs
+              |--rhs
+                |--IntLiteral
+                  |--value: 2
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: OUT_1
+                  |--type: RES_INT
+              |--rhs
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: OUT_2
+              |--type: RES_INT
+          |--rhs
+            |--FbStLocation
+              |--name: add.z
+              |--type: RES_INT
+        |--returnStmt
+
+  |--FunctionBlock
+    |--name: add
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: tmp
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: x
+            |--type: RES_INT
+        |--value: 48
+        |--varDecl
+          |--name: y
+            |--type: RES_INT
+        |--value: 35
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: z
+            |--type: RES_INT
+        |--varDecl
+          |--name: a
+            |--type: RES_INT
+      |--codeBlock:
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: z
+              |--type: RES_INT
+          |--rhs
+            |--binaryArithOper
+              |--lhs
+                |--locationVar
+                  |--name: x
+                  |--type: RES_INT
+              |--op: ADD_OP
+              |--rhs
+                |--locationVar
+                  |--name: y
+                  |--type: RES_INT
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: a
+              |--type: RES_INT
+          |--rhs
+            |--locationVar
+              |--name: z
+              |--type: RES_INT

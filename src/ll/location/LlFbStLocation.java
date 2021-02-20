@@ -31,7 +31,7 @@ public class LlFbStLocation extends LlLocation {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof LlLocationVar)) {
+        if (!(obj instanceof LlFbStLocation)) {
             return false;
         }
         return ((LlFbStLocation) obj).getVarName().equals(this.getVarName())

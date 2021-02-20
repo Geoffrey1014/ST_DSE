@@ -68,6 +68,9 @@ public class IrFunctionBlockDecl extends IrPouDecl {
         String name = this.getName();
         LlEmptyStmt emptyStmt = new LlEmptyStmt();
         builder.appendStatement(name, emptyStmt);
+        LlEmptyStmt emptyStmtInit = new LlEmptyStmt();
+        builder.appendStatement("Init", emptyStmtInit);
+
         if(this.varBlockVAR != null){
             this.varBlockVAR.generateLlIr(builder, symbolTable);
         }
@@ -84,6 +87,8 @@ public class IrFunctionBlockDecl extends IrPouDecl {
             this.varBlockVAR_INPUT_OUTPUT.generateLlIr(builder, symbolTable);
         }
 
+        LlEmptyStmt emptyStmtBody = new LlEmptyStmt();
+        builder.appendStatement("Body", emptyStmtBody);
         this.CodeBlock.generateLlIr(builder, symbolTable);
         return null;
     }

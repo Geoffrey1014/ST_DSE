@@ -135,8 +135,8 @@ public class Main {
             LlBuildersList llBuilderList = listener.pous.getBuilderList();
             ArrayList<LlSymbolTable> llSymbolTables = llBuilderList.getSymbolTables();
             ArrayList<LlBuilder> llBuilders = llBuilderList.getBuilders();
-
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
+
             for (Iterator<LlBuilder> llBuilderIterator = llBuilders.iterator(); llBuilderIterator.hasNext();) {
                 CFG cfg = new CFG(llBuilderIterator.next(), llSymbolTableIterator.next(),true);
 //                System.out.println(cfg.toString());
@@ -159,8 +159,8 @@ public class Main {
                 genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
 //                printDUchain(cfg, 2);
 
-                GlobalCP.performGlobalCP(cfg, globalVArs);
-                GlobalDCE.performGlobalDeadCodeElimination(cfg);
+//                GlobalCP.performGlobalCP(cfg, globalVArs);
+//                GlobalDCE.performGlobalDeadCodeElimination(cfg);
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
@@ -201,12 +201,12 @@ public class Main {
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
-        String file = "08_test.txt";
-        walkTree(inputDir+file);
+//        String file = "04_test.txt";
+//        walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
     public static void runDirFiles(String path){

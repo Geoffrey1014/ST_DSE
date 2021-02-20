@@ -1,0 +1,172 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "           Main :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = false
+             L1 :  a = 48
+             L2 :  b = 35
+             L3 :  c = 0
+             L4 :  d = 0
+             L5 :  x = 0
+"; "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = true
+             L7 :  tmp = true
+             L8 :  #_t1 = 0
+             L9 :  c = 0
+            L10 :  #_t2 = 0
+            L11 :  d = 0
+            L12 :  #_t8 = a + b
+            L32 :  #_t7 = #_t8
+            L31 :  #_t3 = #_t8
+            L13 :  c = #_t8
+            L16 :  if true goto IF_L14
+"; "            L17 :  goto ELSE_L15
+"; "       ELSE_L15 :  EMPTY_STATEMENT
+            L18 :  #_t4 = a * b
+            L19 :  d = #_t4
+            L20 :  goto END_IF_L14
+"; "         IF_L14 :  EMPTY_STATEMENT
+            L21 :  #_t5 = #_t8
+            L22 :  c = #_t8
+"; "     END_IF_L14 :  EMPTY_STATEMENT
+            L23 :  #_t6 = #_t8
+            L24 :  x = #_t8
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+            L25 :  print(#_t8,)
+            L26 :  print(true,)
+            L27 :  print(d,)
+            L28 :  print(c,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+            L29 :  b = read()
+            L30 :  a = read()
+"; 
+  "           Main :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = false
+             L1 :  a = 48
+             L2 :  b = 35
+             L3 :  c = 0
+             L4 :  d = 0
+             L5 :  x = 0
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = false
+             L1 :  a = 48
+             L2 :  b = 35
+             L3 :  c = 0
+             L4 :  d = 0
+             L5 :  x = 0
+" -> "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = true
+             L7 :  tmp = true
+             L8 :  #_t1 = 0
+             L9 :  c = 0
+            L10 :  #_t2 = 0
+            L11 :  d = 0
+            L12 :  #_t8 = a + b
+            L32 :  #_t7 = #_t8
+            L31 :  #_t3 = #_t8
+            L13 :  c = #_t8
+            L16 :  if true goto IF_L14
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = true
+             L7 :  tmp = true
+             L8 :  #_t1 = 0
+             L9 :  c = 0
+            L10 :  #_t2 = 0
+            L11 :  d = 0
+            L12 :  #_t8 = a + b
+            L32 :  #_t7 = #_t8
+            L31 :  #_t3 = #_t8
+            L13 :  c = #_t8
+            L16 :  if true goto IF_L14
+" -> "            L17 :  goto ELSE_L15
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = true
+             L7 :  tmp = true
+             L8 :  #_t1 = 0
+             L9 :  c = 0
+            L10 :  #_t2 = 0
+            L11 :  d = 0
+            L12 :  #_t8 = a + b
+            L32 :  #_t7 = #_t8
+            L31 :  #_t3 = #_t8
+            L13 :  c = #_t8
+            L16 :  if true goto IF_L14
+" -> "         IF_L14 :  EMPTY_STATEMENT
+            L21 :  #_t5 = #_t8
+            L22 :  c = #_t8
+"  [label="alter"];
+  "            L17 :  goto ELSE_L15
+" -> "       ELSE_L15 :  EMPTY_STATEMENT
+            L18 :  #_t4 = a * b
+            L19 :  d = #_t4
+            L20 :  goto END_IF_L14
+"  [label="alter"];
+  "       ELSE_L15 :  EMPTY_STATEMENT
+            L18 :  #_t4 = a * b
+            L19 :  d = #_t4
+            L20 :  goto END_IF_L14
+" -> "     END_IF_L14 :  EMPTY_STATEMENT
+            L23 :  #_t6 = #_t8
+            L24 :  x = #_t8
+"  [label="alter"];
+  "         IF_L14 :  EMPTY_STATEMENT
+            L21 :  #_t5 = #_t8
+            L22 :  c = #_t8
+" -> "     END_IF_L14 :  EMPTY_STATEMENT
+            L23 :  #_t6 = #_t8
+            L24 :  x = #_t8
+"  [label="default"];
+  "     END_IF_L14 :  EMPTY_STATEMENT
+            L23 :  #_t6 = #_t8
+            L24 :  x = #_t8
+" -> "            End :  EMPTY_STATEMENT
+            L25 :  print(#_t8,)
+            L26 :  print(true,)
+            L27 :  print(d,)
+            L28 :  print(c,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "           Main :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L25 :  print(#_t8,)
+            L26 :  print(true,)
+            L27 :  print(d,)
+            L28 :  print(c,)
+" -> "           Read :  EMPTY_STATEMENT
+            L29 :  b = read()
+            L30 :  a = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L25 :  print(#_t8,)
+            L26 :  print(true,)
+            L27 :  print(d,)
+            L28 :  print(c,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+            L29 :  b = read()
+            L30 :  a = read()
+" -> "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = true
+             L7 :  tmp = true
+             L8 :  #_t1 = 0
+             L9 :  c = 0
+            L10 :  #_t2 = 0
+            L11 :  d = 0
+            L12 :  #_t8 = a + b
+            L32 :  #_t7 = #_t8
+            L31 :  #_t3 = #_t8
+            L13 :  c = #_t8
+            L16 :  if true goto IF_L14
+"  [label="default"];
+}

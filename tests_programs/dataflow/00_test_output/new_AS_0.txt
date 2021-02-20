@@ -1,35 +1,60 @@
 CFG:
-          entry :  EMPTY_STATEMENT
-
            Main :  EMPTY_STATEMENT
-             L0 :  #_t0 = NOT PREV_LOAD
-             L1 :  #_t1 = #_t0 AND TLOAD
-             L4 :  if RESET goto IF_L3
 
-             L6 :  goto START_ELSIF_L5
+           Init :  EMPTY_STATEMENT
+             L1 :  PREV_LOAD = false
+             L2 :  TLOAD = false
+             L3 :  RESET = false
+             L4 :  LOAD = false
+             L5 :  IN_1 = false
+             L6 :  OUT_1 = false
 
-          IF_L3 :  EMPTY_STATEMENT
-             L9 :  goto END_IF_L3
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+            L11 :  if RESET goto IF_L10
 
- START_ELSIF_L5 :  EMPTY_STATEMENT
-            L11 :  #_t3 = LOAD OR #_t1
-            L12 :  if #_t3 goto ELSIF_L10
+            L13 :  goto START_ELSIF_L12
 
-            L13 :  goto END_ELSIF_L10
+         IF_L10 :  EMPTY_STATEMENT
+            L15 :  OUT_1 = true
+            L16 :  goto END_IF_L10
 
-      ELSIF_L10 :  EMPTY_STATEMENT
-            L15 :  goto END_IF_L3
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR #_t1
+            L19 :  if #_t3 goto ELSIF_L17
 
-  END_ELSIF_L10 :  EMPTY_STATEMENT
-            L17 :  if IN_1 goto ELSIF_L16
+            L20 :  goto END_ELSIF_L17
 
-            L18 :  goto END_ELSIF_L16
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
+            L22 :  goto END_IF_L10
 
-      ELSIF_L16 :  EMPTY_STATEMENT
-            L21 :  goto END_IF_L3
+  END_ELSIF_L17 :  EMPTY_STATEMENT
+            L24 :  if IN_1 goto ELSIF_L23
 
-  END_ELSIF_L16 :  EMPTY_STATEMENT
+            L25 :  goto END_ELSIF_L23
 
-      END_IF_L3 :  EMPTY_STATEMENT
+      ELSIF_L23 :  EMPTY_STATEMENT
+            L27 :  OUT_1 = false
+            L28 :  goto END_IF_L10
 
-           exit :  EMPTY_STATEMENT
+  END_ELSIF_L23 :  EMPTY_STATEMENT
+
+     END_IF_L10 :  EMPTY_STATEMENT
+            L29 :  PREV_LOAD = TLOAD
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L30 :  print(OUT_1,)
+            L31 :  print(TLOAD,)
+            L32 :  print(#_t1,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L33 :  LOAD = read()
+            L34 :  IN_1 = read()
+            L35 :  RESET = read()
+            L36 :  TLOAD = read()

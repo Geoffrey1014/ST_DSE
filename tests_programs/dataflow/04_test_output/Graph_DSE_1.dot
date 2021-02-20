@@ -1,0 +1,41 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "        get_int :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  x = 48
+"; "           Body :  EMPTY_STATEMENT
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+             L2 :  x = read()
+"; 
+  "        get_int :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  x = 48
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  x = 48
+" -> "           Body :  EMPTY_STATEMENT
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+" -> "            End :  EMPTY_STATEMENT
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "        get_int :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+" -> "           Read :  EMPTY_STATEMENT
+             L2 :  x = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+             L2 :  x = read()
+" -> "           Body :  EMPTY_STATEMENT
+"  [label="default"];
+}

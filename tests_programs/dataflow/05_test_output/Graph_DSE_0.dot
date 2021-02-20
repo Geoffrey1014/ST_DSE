@@ -5,6 +5,7 @@ digraph G {
         fontsize=12,  height=1.2];
   "           Main :  EMPTY_STATEMENT
 "; "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
              L1 :  a = 48
              L2 :  b = 35
 "; "           Body :  EMPTY_STATEMENT
@@ -22,10 +23,12 @@ digraph G {
 "; 
   "           Main :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
              L1 :  a = 48
              L2 :  b = 35
 "  [label="default"];
   "           Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
              L1 :  a = 48
              L2 :  b = 35
 " -> "           Body :  EMPTY_STATEMENT

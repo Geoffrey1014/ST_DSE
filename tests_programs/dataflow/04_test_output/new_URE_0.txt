@@ -2,6 +2,7 @@ CFG:
            Main :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
+             L0 :  tmp = 0
 
            Body :  EMPTY_STATEMENT
             L10 :  #_t2 = get_int(1,)
@@ -20,5 +21,3 @@ CFG:
            Exit :  EMPTY_STATEMENT
 
            Read :  EMPTY_STATEMENT
-            L26 :  b = read()
-            L27 :  a = read()
