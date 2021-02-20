@@ -1,0 +1,60 @@
+CFG:
+      FB_G4LTL2 :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate_46 = 0
+             L1 :  x_0 = false
+             L2 :  x_1 = false
+             L3 :  y_0 = false
+
+           Body :  EMPTY_STATEMENT
+             L6 :  #_t1 = cstate_46 == 0
+             L7 :  if #_t1 goto IF_L4
+
+             L8 :  goto END_IF_L4
+
+          IF_L4 :  EMPTY_STATEMENT
+            L10 :  #_t16 = NOT x_1
+            L11 :  #_t3 = x_0 AND #_t16
+            L12 :  #_t17 = NOT x_0
+            L13 :  #_t5 = #_t17 AND x_1
+            L14 :  #_t6 = #_t5 OR #_t3
+            L15 :  if #_t6 goto IF_L9
+
+            L17 :  goto START_ELSIF_L16
+
+          IF_L9 :  EMPTY_STATEMENT
+            L19 :  cstate_46 = 0
+            L21 :  y_0 = false
+            L22 :  goto END_IF_L9
+
+START_ELSIF_L16 :  EMPTY_STATEMENT
+            L24 :  #_t9 = x_0 AND x_1
+            L27 :  #_t12 = #_t17 AND #_t16
+            L28 :  #_t13 = #_t12 OR #_t9
+            L29 :  if #_t13 goto ELSIF_L23
+
+            L30 :  goto END_ELSIF_L23
+
+      ELSIF_L23 :  EMPTY_STATEMENT
+            L32 :  cstate_46 = 0
+            L34 :  y_0 = true
+            L35 :  goto END_IF_L9
+
+  END_ELSIF_L23 :  EMPTY_STATEMENT
+
+      END_IF_L9 :  EMPTY_STATEMENT
+
+      END_IF_L4 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L36 :  print(cstate_46,)
+            L37 :  print(y_0,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L38 :  x_1 = read()
+            L39 :  x_0 = read()

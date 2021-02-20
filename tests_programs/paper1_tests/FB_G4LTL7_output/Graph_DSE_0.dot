@@ -1,0 +1,1379 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "      FB_G4LTL7 :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  cstate78 = 0
+             L1 :  t_reset = false
+             L2 :  t_up = false
+             L3 :  t_start = false
+             L4 :  count = 0
+             L5 :  q = false
+             L6 :  T_VALUE = 5
+             L7 :  x_1 = false
+             L8 :  y_1 = false
+"; "           Body :  EMPTY_STATEMENT
+            L11 :  #_t1 = cstate78 == 48
+            L12 :  if #_t1 goto IF_L9
+"; "            L14 :  goto START_ELSIF_L13
+"; "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  #_t144 = NOT q
+            L17 :  #_t3 = x_1 AND #_t144
+            L18 :  if #_t3 goto IF_L15
+"; "            L20 :  goto START_ELSIF_L19
+"; "         IF_L15 :  EMPTY_STATEMENT
+            L22 :  cstate78 = 48
+            L24 :  y_1 = false
+            L26 :  t_start = false
+            L27 :  goto END_IF_L15
+"; "START_ELSIF_L19 :  EMPTY_STATEMENT
+            L30 :  #_t145 = NOT x_1
+            L31 :  #_t9 = #_t145 AND #_t144
+            L32 :  if #_t9 goto ELSIF_L28
+"; "            L33 :  goto END_ELSIF_L28
+"; "      ELSIF_L28 :  EMPTY_STATEMENT
+            L35 :  cstate78 = 199
+            L37 :  y_1 = false
+            L39 :  t_start = false
+            L40 :  goto END_IF_L15
+"; "  END_ELSIF_L28 :  EMPTY_STATEMENT
+            L43 :  #_t14 = #_t145 AND q
+            L44 :  if #_t14 goto ELSIF_L41
+"; "            L45 :  goto END_ELSIF_L41
+"; "      ELSIF_L41 :  EMPTY_STATEMENT
+            L47 :  cstate78 = 6
+            L49 :  y_1 = false
+            L51 :  t_start = false
+            L52 :  goto END_IF_L15
+"; "  END_ELSIF_L41 :  EMPTY_STATEMENT
+            L54 :  #_t18 = x_1 AND q
+            L55 :  if #_t18 goto ELSIF_L53
+"; "            L56 :  goto END_ELSIF_L53
+"; "      ELSIF_L53 :  EMPTY_STATEMENT
+            L58 :  cstate78 = 10
+            L60 :  y_1 = true
+            L62 :  t_start = false
+            L63 :  goto END_IF_L15
+"; "  END_ELSIF_L53 :  EMPTY_STATEMENT
+"; "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+"; "START_ELSIF_L13 :  EMPTY_STATEMENT
+            L67 :  #_t23 = cstate78 == 10
+            L68 :  if #_t23 goto ELSIF_L65
+"; "            L69 :  goto END_ELSIF_L65
+"; "      ELSIF_L65 :  EMPTY_STATEMENT
+            L71 :  if x_1 goto IF_L70
+"; "            L73 :  goto START_ELSIF_L72
+"; "         IF_L70 :  EMPTY_STATEMENT
+            L75 :  cstate78 = 10
+            L77 :  y_1 = true
+            L79 :  t_start = false
+            L80 :  goto END_IF_L70
+"; "START_ELSIF_L72 :  EMPTY_STATEMENT
+            L82 :  #_t27 = NOT x_1
+            L83 :  if #_t27 goto ELSIF_L81
+"; "            L84 :  goto END_ELSIF_L81
+"; "      ELSIF_L81 :  EMPTY_STATEMENT
+            L86 :  cstate78 = 6
+            L88 :  y_1 = false
+            L90 :  t_start = false
+            L91 :  goto END_IF_L70
+"; "  END_ELSIF_L81 :  EMPTY_STATEMENT
+"; "     END_IF_L70 :  EMPTY_STATEMENT
+            L92 :  goto END_IF_L9
+"; "  END_ELSIF_L65 :  EMPTY_STATEMENT
+            L95 :  #_t32 = cstate78 == 0
+            L96 :  if #_t32 goto ELSIF_L93
+"; "            L97 :  goto END_ELSIF_L93
+"; "      ELSIF_L93 :  EMPTY_STATEMENT
+            L99 :  #_t33 = NOT q
+           L100 :  #_t34 = x_1 AND #_t33
+           L101 :  if #_t34 goto IF_L98
+"; "           L103 :  goto START_ELSIF_L102
+"; "         IF_L98 :  EMPTY_STATEMENT
+           L105 :  cstate78 = 11
+           L107 :  y_1 = false
+           L109 :  t_start = true
+           L111 :  t_up = false
+           L112 :  goto END_IF_L98
+"; "START_ELSIF_L102 :  EMPTY_STATEMENT
+           L114 :  #_t39 = NOT x_1
+           L115 :  if #_t39 goto ELSIF_L113
+"; "           L116 :  goto END_ELSIF_L113
+"; "     ELSIF_L113 :  EMPTY_STATEMENT
+           L118 :  cstate78 = 6
+           L120 :  y_1 = false
+           L122 :  t_start = false
+           L123 :  goto END_IF_L98
+"; " END_ELSIF_L113 :  EMPTY_STATEMENT
+           L125 :  #_t43 = x_1 AND q
+           L126 :  if #_t43 goto ELSIF_L124
+"; "           L127 :  goto END_ELSIF_L124
+"; "     ELSIF_L124 :  EMPTY_STATEMENT
+           L129 :  cstate78 = 11
+           L131 :  y_1 = true
+           L133 :  t_start = true
+           L135 :  t_up = false
+           L136 :  goto END_IF_L98
+"; " END_ELSIF_L124 :  EMPTY_STATEMENT
+"; "     END_IF_L98 :  EMPTY_STATEMENT
+           L137 :  goto END_IF_L9
+"; "  END_ELSIF_L93 :  EMPTY_STATEMENT
+           L140 :  #_t49 = cstate78 == 7
+           L141 :  if #_t49 goto ELSIF_L138
+"; "           L142 :  goto END_ELSIF_L138
+"; "     ELSIF_L138 :  EMPTY_STATEMENT
+           L144 :  #_t146 = NOT q
+           L145 :  #_t51 = x_1 AND #_t146
+           L146 :  if #_t51 goto IF_L143
+"; "           L148 :  goto START_ELSIF_L147
+"; "        IF_L143 :  EMPTY_STATEMENT
+           L150 :  cstate78 = 48
+           L152 :  y_1 = false
+           L154 :  t_start = true
+           L156 :  t_up = false
+           L157 :  goto END_IF_L143
+"; "START_ELSIF_L147 :  EMPTY_STATEMENT
+           L160 :  #_t147 = NOT x_1
+           L161 :  #_t58 = #_t147 AND #_t146
+           L162 :  if #_t58 goto ELSIF_L158
+"; "           L163 :  goto END_ELSIF_L158
+"; "     ELSIF_L158 :  EMPTY_STATEMENT
+           L165 :  cstate78 = 7
+           L167 :  y_1 = false
+           L169 :  t_start = false
+           L170 :  goto END_IF_L143
+"; " END_ELSIF_L158 :  EMPTY_STATEMENT
+           L173 :  #_t63 = #_t147 AND q
+           L174 :  if #_t63 goto ELSIF_L171
+"; "           L175 :  goto END_ELSIF_L171
+"; "     ELSIF_L171 :  EMPTY_STATEMENT
+           L177 :  cstate78 = 6
+           L179 :  y_1 = false
+           L181 :  t_start = false
+           L182 :  goto END_IF_L143
+"; " END_ELSIF_L171 :  EMPTY_STATEMENT
+           L184 :  #_t67 = x_1 AND q
+           L185 :  if #_t67 goto ELSIF_L183
+"; "           L186 :  goto END_ELSIF_L183
+"; "     ELSIF_L183 :  EMPTY_STATEMENT
+           L188 :  cstate78 = 11
+           L190 :  y_1 = true
+           L192 :  t_start = true
+           L194 :  t_up = false
+           L195 :  goto END_IF_L143
+"; " END_ELSIF_L183 :  EMPTY_STATEMENT
+"; "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+"; " END_ELSIF_L138 :  EMPTY_STATEMENT
+           L199 :  #_t73 = cstate78 == 199
+           L200 :  if #_t73 goto ELSIF_L197
+"; "           L201 :  goto END_ELSIF_L197
+"; "     ELSIF_L197 :  EMPTY_STATEMENT
+           L203 :  #_t148 = NOT q
+           L204 :  #_t75 = x_1 AND #_t148
+           L205 :  if #_t75 goto IF_L202
+"; "           L207 :  goto START_ELSIF_L206
+"; "        IF_L202 :  EMPTY_STATEMENT
+           L209 :  cstate78 = 48
+           L211 :  y_1 = false
+           L213 :  t_start = true
+           L215 :  t_up = false
+           L216 :  goto END_IF_L202
+"; "START_ELSIF_L206 :  EMPTY_STATEMENT
+           L219 :  #_t149 = NOT x_1
+           L220 :  #_t82 = #_t149 AND #_t148
+           L221 :  if #_t82 goto ELSIF_L217
+"; "           L222 :  goto END_ELSIF_L217
+"; "     ELSIF_L217 :  EMPTY_STATEMENT
+           L224 :  cstate78 = 199
+           L226 :  y_1 = false
+           L228 :  t_start = false
+           L229 :  goto END_IF_L202
+"; " END_ELSIF_L217 :  EMPTY_STATEMENT
+           L232 :  #_t87 = #_t149 AND q
+           L233 :  if #_t87 goto ELSIF_L230
+"; "           L234 :  goto END_ELSIF_L230
+"; "     ELSIF_L230 :  EMPTY_STATEMENT
+           L236 :  cstate78 = 6
+           L238 :  y_1 = false
+           L240 :  t_start = false
+           L241 :  goto END_IF_L202
+"; " END_ELSIF_L230 :  EMPTY_STATEMENT
+           L243 :  #_t91 = x_1 AND q
+           L244 :  if #_t91 goto ELSIF_L242
+"; "           L245 :  goto END_ELSIF_L242
+"; "     ELSIF_L242 :  EMPTY_STATEMENT
+           L247 :  cstate78 = 11
+           L249 :  y_1 = true
+           L251 :  t_start = true
+           L253 :  t_up = false
+           L254 :  goto END_IF_L202
+"; " END_ELSIF_L242 :  EMPTY_STATEMENT
+"; "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+"; " END_ELSIF_L197 :  EMPTY_STATEMENT
+           L258 :  #_t97 = cstate78 == 6
+           L259 :  if #_t97 goto ELSIF_L256
+"; "           L260 :  goto END_ELSIF_L256
+"; "     ELSIF_L256 :  EMPTY_STATEMENT
+           L262 :  #_t98 = NOT q
+           L263 :  #_t99 = x_1 AND #_t98
+           L264 :  if #_t99 goto IF_L261
+"; "           L266 :  goto START_ELSIF_L265
+"; "        IF_L261 :  EMPTY_STATEMENT
+           L268 :  cstate78 = 48
+           L270 :  y_1 = false
+           L272 :  t_start = true
+           L274 :  t_up = false
+           L275 :  goto END_IF_L261
+"; "START_ELSIF_L265 :  EMPTY_STATEMENT
+           L277 :  #_t104 = NOT x_1
+           L278 :  if #_t104 goto ELSIF_L276
+"; "           L279 :  goto END_ELSIF_L276
+"; "     ELSIF_L276 :  EMPTY_STATEMENT
+           L281 :  cstate78 = 6
+           L283 :  y_1 = false
+           L285 :  t_start = false
+           L286 :  goto END_IF_L261
+"; " END_ELSIF_L276 :  EMPTY_STATEMENT
+           L288 :  #_t108 = x_1 AND q
+           L289 :  if #_t108 goto ELSIF_L287
+"; "           L290 :  goto END_ELSIF_L287
+"; "     ELSIF_L287 :  EMPTY_STATEMENT
+           L292 :  cstate78 = 11
+           L294 :  y_1 = true
+           L296 :  t_start = true
+           L298 :  t_up = false
+           L299 :  goto END_IF_L261
+"; " END_ELSIF_L287 :  EMPTY_STATEMENT
+"; "    END_IF_L261 :  EMPTY_STATEMENT
+           L300 :  goto END_IF_L9
+"; " END_ELSIF_L256 :  EMPTY_STATEMENT
+           L303 :  #_t114 = cstate78 == 11
+           L304 :  if #_t114 goto ELSIF_L301
+"; "           L305 :  goto END_ELSIF_L301
+"; "     ELSIF_L301 :  EMPTY_STATEMENT
+           L307 :  #_t150 = NOT q
+           L308 :  #_t116 = x_1 AND #_t150
+           L309 :  if #_t116 goto IF_L306
+"; "           L311 :  goto START_ELSIF_L310
+"; "        IF_L306 :  EMPTY_STATEMENT
+           L313 :  cstate78 = 11
+           L315 :  y_1 = true
+           L317 :  t_start = false
+           L318 :  goto END_IF_L306
+"; "START_ELSIF_L310 :  EMPTY_STATEMENT
+           L321 :  #_t151 = NOT x_1
+           L322 :  #_t122 = #_t151 AND #_t150
+           L323 :  if #_t122 goto ELSIF_L319
+"; "           L324 :  goto END_ELSIF_L319
+"; "     ELSIF_L319 :  EMPTY_STATEMENT
+           L326 :  cstate78 = 7
+           L328 :  y_1 = false
+           L330 :  t_start = false
+           L331 :  goto END_IF_L306
+"; " END_ELSIF_L319 :  EMPTY_STATEMENT
+           L334 :  #_t127 = #_t151 AND q
+           L335 :  if #_t127 goto ELSIF_L332
+"; "           L336 :  goto END_ELSIF_L332
+"; "     ELSIF_L332 :  EMPTY_STATEMENT
+           L338 :  cstate78 = 6
+           L340 :  y_1 = false
+           L342 :  t_start = false
+           L343 :  goto END_IF_L306
+"; " END_ELSIF_L332 :  EMPTY_STATEMENT
+           L345 :  #_t131 = x_1 AND q
+           L346 :  if #_t131 goto ELSIF_L344
+"; "           L347 :  goto END_ELSIF_L344
+"; "     ELSIF_L344 :  EMPTY_STATEMENT
+           L349 :  cstate78 = 10
+           L351 :  y_1 = true
+           L353 :  t_start = false
+           L354 :  goto END_IF_L306
+"; " END_ELSIF_L344 :  EMPTY_STATEMENT
+"; "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+"; " END_ELSIF_L301 :  EMPTY_STATEMENT
+"; "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"; "           L359 :  goto START_ELSIF_L358
+"; "        IF_L356 :  EMPTY_STATEMENT
+           L361 :  t_reset = true
+           L362 :  goto END_IF_L356
+"; "START_ELSIF_L358 :  EMPTY_STATEMENT
+           L364 :  #_t136 = NOT t_up
+           L365 :  #_t137 = t_start AND #_t136
+           L366 :  if #_t137 goto ELSIF_L363
+"; "           L367 :  goto END_ELSIF_L363
+"; "     ELSIF_L363 :  EMPTY_STATEMENT
+           L369 :  t_up = true
+           L371 :  t_reset = false
+           L372 :  goto END_IF_L356
+"; " END_ELSIF_L363 :  EMPTY_STATEMENT
+"; "    END_IF_L356 :  EMPTY_STATEMENT
+           L375 :  if t_reset goto IF_L373
+"; "           L376 :  goto ELSE_L374
+"; "      ELSE_L374 :  EMPTY_STATEMENT
+           L378 :  q = false
+           L380 :  count = 0
+           L381 :  goto END_IF_L373
+"; "        IF_L373 :  EMPTY_STATEMENT
+           L384 :  #_t142 = count == T_VALUE
+           L385 :  if #_t142 goto IF_L382
+"; "           L386 :  goto ELSE_L383
+"; "      ELSE_L383 :  EMPTY_STATEMENT
+           L387 :  count = T_VALUE
+           L388 :  goto END_IF_L382
+"; "        IF_L382 :  EMPTY_STATEMENT
+           L390 :  q = true
+"; "    END_IF_L382 :  EMPTY_STATEMENT
+"; "    END_IF_L373 :  EMPTY_STATEMENT
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+           L391 :  print(cstate78,)
+           L392 :  print(t_start,)
+           L393 :  print(count,)
+           L394 :  print(q,)
+           L395 :  print(y_1,)
+           L396 :  print(T_VALUE,)
+           L397 :  print(t_up,)
+           L398 :  print(t_reset,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+           L399 :  x_1 = read()
+"; 
+  "      FB_G4LTL7 :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  cstate78 = 0
+             L1 :  t_reset = false
+             L2 :  t_up = false
+             L3 :  t_start = false
+             L4 :  count = 0
+             L5 :  q = false
+             L6 :  T_VALUE = 5
+             L7 :  x_1 = false
+             L8 :  y_1 = false
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  cstate78 = 0
+             L1 :  t_reset = false
+             L2 :  t_up = false
+             L3 :  t_start = false
+             L4 :  count = 0
+             L5 :  q = false
+             L6 :  T_VALUE = 5
+             L7 :  x_1 = false
+             L8 :  y_1 = false
+" -> "           Body :  EMPTY_STATEMENT
+            L11 :  #_t1 = cstate78 == 48
+            L12 :  if #_t1 goto IF_L9
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+            L11 :  #_t1 = cstate78 == 48
+            L12 :  if #_t1 goto IF_L9
+" -> "            L14 :  goto START_ELSIF_L13
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+            L11 :  #_t1 = cstate78 == 48
+            L12 :  if #_t1 goto IF_L9
+" -> "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  #_t144 = NOT q
+            L17 :  #_t3 = x_1 AND #_t144
+            L18 :  if #_t3 goto IF_L15
+"  [label="alter"];
+  "            L14 :  goto START_ELSIF_L13
+" -> "START_ELSIF_L13 :  EMPTY_STATEMENT
+            L67 :  #_t23 = cstate78 == 10
+            L68 :  if #_t23 goto ELSIF_L65
+"  [label="alter"];
+  "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  #_t144 = NOT q
+            L17 :  #_t3 = x_1 AND #_t144
+            L18 :  if #_t3 goto IF_L15
+" -> "            L20 :  goto START_ELSIF_L19
+"  [label="default"];
+  "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  #_t144 = NOT q
+            L17 :  #_t3 = x_1 AND #_t144
+            L18 :  if #_t3 goto IF_L15
+" -> "         IF_L15 :  EMPTY_STATEMENT
+            L22 :  cstate78 = 48
+            L24 :  y_1 = false
+            L26 :  t_start = false
+            L27 :  goto END_IF_L15
+"  [label="alter"];
+  "            L20 :  goto START_ELSIF_L19
+" -> "START_ELSIF_L19 :  EMPTY_STATEMENT
+            L30 :  #_t145 = NOT x_1
+            L31 :  #_t9 = #_t145 AND #_t144
+            L32 :  if #_t9 goto ELSIF_L28
+"  [label="alter"];
+  "         IF_L15 :  EMPTY_STATEMENT
+            L22 :  cstate78 = 48
+            L24 :  y_1 = false
+            L26 :  t_start = false
+            L27 :  goto END_IF_L15
+" -> "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L19 :  EMPTY_STATEMENT
+            L30 :  #_t145 = NOT x_1
+            L31 :  #_t9 = #_t145 AND #_t144
+            L32 :  if #_t9 goto ELSIF_L28
+" -> "            L33 :  goto END_ELSIF_L28
+"  [label="default"];
+  "START_ELSIF_L19 :  EMPTY_STATEMENT
+            L30 :  #_t145 = NOT x_1
+            L31 :  #_t9 = #_t145 AND #_t144
+            L32 :  if #_t9 goto ELSIF_L28
+" -> "      ELSIF_L28 :  EMPTY_STATEMENT
+            L35 :  cstate78 = 199
+            L37 :  y_1 = false
+            L39 :  t_start = false
+            L40 :  goto END_IF_L15
+"  [label="alter"];
+  "            L33 :  goto END_ELSIF_L28
+" -> "  END_ELSIF_L28 :  EMPTY_STATEMENT
+            L43 :  #_t14 = #_t145 AND q
+            L44 :  if #_t14 goto ELSIF_L41
+"  [label="alter"];
+  "      ELSIF_L28 :  EMPTY_STATEMENT
+            L35 :  cstate78 = 199
+            L37 :  y_1 = false
+            L39 :  t_start = false
+            L40 :  goto END_IF_L15
+" -> "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+"  [label="alter"];
+  "  END_ELSIF_L28 :  EMPTY_STATEMENT
+            L43 :  #_t14 = #_t145 AND q
+            L44 :  if #_t14 goto ELSIF_L41
+" -> "            L45 :  goto END_ELSIF_L41
+"  [label="default"];
+  "  END_ELSIF_L28 :  EMPTY_STATEMENT
+            L43 :  #_t14 = #_t145 AND q
+            L44 :  if #_t14 goto ELSIF_L41
+" -> "      ELSIF_L41 :  EMPTY_STATEMENT
+            L47 :  cstate78 = 6
+            L49 :  y_1 = false
+            L51 :  t_start = false
+            L52 :  goto END_IF_L15
+"  [label="alter"];
+  "            L45 :  goto END_ELSIF_L41
+" -> "  END_ELSIF_L41 :  EMPTY_STATEMENT
+            L54 :  #_t18 = x_1 AND q
+            L55 :  if #_t18 goto ELSIF_L53
+"  [label="alter"];
+  "      ELSIF_L41 :  EMPTY_STATEMENT
+            L47 :  cstate78 = 6
+            L49 :  y_1 = false
+            L51 :  t_start = false
+            L52 :  goto END_IF_L15
+" -> "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+"  [label="alter"];
+  "  END_ELSIF_L41 :  EMPTY_STATEMENT
+            L54 :  #_t18 = x_1 AND q
+            L55 :  if #_t18 goto ELSIF_L53
+" -> "            L56 :  goto END_ELSIF_L53
+"  [label="default"];
+  "  END_ELSIF_L41 :  EMPTY_STATEMENT
+            L54 :  #_t18 = x_1 AND q
+            L55 :  if #_t18 goto ELSIF_L53
+" -> "      ELSIF_L53 :  EMPTY_STATEMENT
+            L58 :  cstate78 = 10
+            L60 :  y_1 = true
+            L62 :  t_start = false
+            L63 :  goto END_IF_L15
+"  [label="alter"];
+  "            L56 :  goto END_ELSIF_L53
+" -> "  END_ELSIF_L53 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "      ELSIF_L53 :  EMPTY_STATEMENT
+            L58 :  cstate78 = 10
+            L60 :  y_1 = true
+            L62 :  t_start = false
+            L63 :  goto END_IF_L15
+" -> "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+"  [label="alter"];
+  "  END_ELSIF_L53 :  EMPTY_STATEMENT
+" -> "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+"  [label="default"];
+  "     END_IF_L15 :  EMPTY_STATEMENT
+            L64 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  "START_ELSIF_L13 :  EMPTY_STATEMENT
+            L67 :  #_t23 = cstate78 == 10
+            L68 :  if #_t23 goto ELSIF_L65
+" -> "            L69 :  goto END_ELSIF_L65
+"  [label="default"];
+  "START_ELSIF_L13 :  EMPTY_STATEMENT
+            L67 :  #_t23 = cstate78 == 10
+            L68 :  if #_t23 goto ELSIF_L65
+" -> "      ELSIF_L65 :  EMPTY_STATEMENT
+            L71 :  if x_1 goto IF_L70
+"  [label="alter"];
+  "            L69 :  goto END_ELSIF_L65
+" -> "  END_ELSIF_L65 :  EMPTY_STATEMENT
+            L95 :  #_t32 = cstate78 == 0
+            L96 :  if #_t32 goto ELSIF_L93
+"  [label="alter"];
+  "      ELSIF_L65 :  EMPTY_STATEMENT
+            L71 :  if x_1 goto IF_L70
+" -> "            L73 :  goto START_ELSIF_L72
+"  [label="default"];
+  "      ELSIF_L65 :  EMPTY_STATEMENT
+            L71 :  if x_1 goto IF_L70
+" -> "         IF_L70 :  EMPTY_STATEMENT
+            L75 :  cstate78 = 10
+            L77 :  y_1 = true
+            L79 :  t_start = false
+            L80 :  goto END_IF_L70
+"  [label="alter"];
+  "            L73 :  goto START_ELSIF_L72
+" -> "START_ELSIF_L72 :  EMPTY_STATEMENT
+            L82 :  #_t27 = NOT x_1
+            L83 :  if #_t27 goto ELSIF_L81
+"  [label="alter"];
+  "         IF_L70 :  EMPTY_STATEMENT
+            L75 :  cstate78 = 10
+            L77 :  y_1 = true
+            L79 :  t_start = false
+            L80 :  goto END_IF_L70
+" -> "     END_IF_L70 :  EMPTY_STATEMENT
+            L92 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L72 :  EMPTY_STATEMENT
+            L82 :  #_t27 = NOT x_1
+            L83 :  if #_t27 goto ELSIF_L81
+" -> "            L84 :  goto END_ELSIF_L81
+"  [label="default"];
+  "START_ELSIF_L72 :  EMPTY_STATEMENT
+            L82 :  #_t27 = NOT x_1
+            L83 :  if #_t27 goto ELSIF_L81
+" -> "      ELSIF_L81 :  EMPTY_STATEMENT
+            L86 :  cstate78 = 6
+            L88 :  y_1 = false
+            L90 :  t_start = false
+            L91 :  goto END_IF_L70
+"  [label="alter"];
+  "            L84 :  goto END_ELSIF_L81
+" -> "  END_ELSIF_L81 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "      ELSIF_L81 :  EMPTY_STATEMENT
+            L86 :  cstate78 = 6
+            L88 :  y_1 = false
+            L90 :  t_start = false
+            L91 :  goto END_IF_L70
+" -> "     END_IF_L70 :  EMPTY_STATEMENT
+            L92 :  goto END_IF_L9
+"  [label="alter"];
+  "  END_ELSIF_L81 :  EMPTY_STATEMENT
+" -> "     END_IF_L70 :  EMPTY_STATEMENT
+            L92 :  goto END_IF_L9
+"  [label="default"];
+  "     END_IF_L70 :  EMPTY_STATEMENT
+            L92 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  "  END_ELSIF_L65 :  EMPTY_STATEMENT
+            L95 :  #_t32 = cstate78 == 0
+            L96 :  if #_t32 goto ELSIF_L93
+" -> "            L97 :  goto END_ELSIF_L93
+"  [label="default"];
+  "  END_ELSIF_L65 :  EMPTY_STATEMENT
+            L95 :  #_t32 = cstate78 == 0
+            L96 :  if #_t32 goto ELSIF_L93
+" -> "      ELSIF_L93 :  EMPTY_STATEMENT
+            L99 :  #_t33 = NOT q
+           L100 :  #_t34 = x_1 AND #_t33
+           L101 :  if #_t34 goto IF_L98
+"  [label="alter"];
+  "            L97 :  goto END_ELSIF_L93
+" -> "  END_ELSIF_L93 :  EMPTY_STATEMENT
+           L140 :  #_t49 = cstate78 == 7
+           L141 :  if #_t49 goto ELSIF_L138
+"  [label="alter"];
+  "      ELSIF_L93 :  EMPTY_STATEMENT
+            L99 :  #_t33 = NOT q
+           L100 :  #_t34 = x_1 AND #_t33
+           L101 :  if #_t34 goto IF_L98
+" -> "           L103 :  goto START_ELSIF_L102
+"  [label="default"];
+  "      ELSIF_L93 :  EMPTY_STATEMENT
+            L99 :  #_t33 = NOT q
+           L100 :  #_t34 = x_1 AND #_t33
+           L101 :  if #_t34 goto IF_L98
+" -> "         IF_L98 :  EMPTY_STATEMENT
+           L105 :  cstate78 = 11
+           L107 :  y_1 = false
+           L109 :  t_start = true
+           L111 :  t_up = false
+           L112 :  goto END_IF_L98
+"  [label="alter"];
+  "           L103 :  goto START_ELSIF_L102
+" -> "START_ELSIF_L102 :  EMPTY_STATEMENT
+           L114 :  #_t39 = NOT x_1
+           L115 :  if #_t39 goto ELSIF_L113
+"  [label="alter"];
+  "         IF_L98 :  EMPTY_STATEMENT
+           L105 :  cstate78 = 11
+           L107 :  y_1 = false
+           L109 :  t_start = true
+           L111 :  t_up = false
+           L112 :  goto END_IF_L98
+" -> "     END_IF_L98 :  EMPTY_STATEMENT
+           L137 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L102 :  EMPTY_STATEMENT
+           L114 :  #_t39 = NOT x_1
+           L115 :  if #_t39 goto ELSIF_L113
+" -> "           L116 :  goto END_ELSIF_L113
+"  [label="default"];
+  "START_ELSIF_L102 :  EMPTY_STATEMENT
+           L114 :  #_t39 = NOT x_1
+           L115 :  if #_t39 goto ELSIF_L113
+" -> "     ELSIF_L113 :  EMPTY_STATEMENT
+           L118 :  cstate78 = 6
+           L120 :  y_1 = false
+           L122 :  t_start = false
+           L123 :  goto END_IF_L98
+"  [label="alter"];
+  "           L116 :  goto END_ELSIF_L113
+" -> " END_ELSIF_L113 :  EMPTY_STATEMENT
+           L125 :  #_t43 = x_1 AND q
+           L126 :  if #_t43 goto ELSIF_L124
+"  [label="alter"];
+  "     ELSIF_L113 :  EMPTY_STATEMENT
+           L118 :  cstate78 = 6
+           L120 :  y_1 = false
+           L122 :  t_start = false
+           L123 :  goto END_IF_L98
+" -> "     END_IF_L98 :  EMPTY_STATEMENT
+           L137 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L113 :  EMPTY_STATEMENT
+           L125 :  #_t43 = x_1 AND q
+           L126 :  if #_t43 goto ELSIF_L124
+" -> "           L127 :  goto END_ELSIF_L124
+"  [label="default"];
+  " END_ELSIF_L113 :  EMPTY_STATEMENT
+           L125 :  #_t43 = x_1 AND q
+           L126 :  if #_t43 goto ELSIF_L124
+" -> "     ELSIF_L124 :  EMPTY_STATEMENT
+           L129 :  cstate78 = 11
+           L131 :  y_1 = true
+           L133 :  t_start = true
+           L135 :  t_up = false
+           L136 :  goto END_IF_L98
+"  [label="alter"];
+  "           L127 :  goto END_ELSIF_L124
+" -> " END_ELSIF_L124 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L124 :  EMPTY_STATEMENT
+           L129 :  cstate78 = 11
+           L131 :  y_1 = true
+           L133 :  t_start = true
+           L135 :  t_up = false
+           L136 :  goto END_IF_L98
+" -> "     END_IF_L98 :  EMPTY_STATEMENT
+           L137 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L124 :  EMPTY_STATEMENT
+" -> "     END_IF_L98 :  EMPTY_STATEMENT
+           L137 :  goto END_IF_L9
+"  [label="default"];
+  "     END_IF_L98 :  EMPTY_STATEMENT
+           L137 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  "  END_ELSIF_L93 :  EMPTY_STATEMENT
+           L140 :  #_t49 = cstate78 == 7
+           L141 :  if #_t49 goto ELSIF_L138
+" -> "           L142 :  goto END_ELSIF_L138
+"  [label="default"];
+  "  END_ELSIF_L93 :  EMPTY_STATEMENT
+           L140 :  #_t49 = cstate78 == 7
+           L141 :  if #_t49 goto ELSIF_L138
+" -> "     ELSIF_L138 :  EMPTY_STATEMENT
+           L144 :  #_t146 = NOT q
+           L145 :  #_t51 = x_1 AND #_t146
+           L146 :  if #_t51 goto IF_L143
+"  [label="alter"];
+  "           L142 :  goto END_ELSIF_L138
+" -> " END_ELSIF_L138 :  EMPTY_STATEMENT
+           L199 :  #_t73 = cstate78 == 199
+           L200 :  if #_t73 goto ELSIF_L197
+"  [label="alter"];
+  "     ELSIF_L138 :  EMPTY_STATEMENT
+           L144 :  #_t146 = NOT q
+           L145 :  #_t51 = x_1 AND #_t146
+           L146 :  if #_t51 goto IF_L143
+" -> "           L148 :  goto START_ELSIF_L147
+"  [label="default"];
+  "     ELSIF_L138 :  EMPTY_STATEMENT
+           L144 :  #_t146 = NOT q
+           L145 :  #_t51 = x_1 AND #_t146
+           L146 :  if #_t51 goto IF_L143
+" -> "        IF_L143 :  EMPTY_STATEMENT
+           L150 :  cstate78 = 48
+           L152 :  y_1 = false
+           L154 :  t_start = true
+           L156 :  t_up = false
+           L157 :  goto END_IF_L143
+"  [label="alter"];
+  "           L148 :  goto START_ELSIF_L147
+" -> "START_ELSIF_L147 :  EMPTY_STATEMENT
+           L160 :  #_t147 = NOT x_1
+           L161 :  #_t58 = #_t147 AND #_t146
+           L162 :  if #_t58 goto ELSIF_L158
+"  [label="alter"];
+  "        IF_L143 :  EMPTY_STATEMENT
+           L150 :  cstate78 = 48
+           L152 :  y_1 = false
+           L154 :  t_start = true
+           L156 :  t_up = false
+           L157 :  goto END_IF_L143
+" -> "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L147 :  EMPTY_STATEMENT
+           L160 :  #_t147 = NOT x_1
+           L161 :  #_t58 = #_t147 AND #_t146
+           L162 :  if #_t58 goto ELSIF_L158
+" -> "           L163 :  goto END_ELSIF_L158
+"  [label="default"];
+  "START_ELSIF_L147 :  EMPTY_STATEMENT
+           L160 :  #_t147 = NOT x_1
+           L161 :  #_t58 = #_t147 AND #_t146
+           L162 :  if #_t58 goto ELSIF_L158
+" -> "     ELSIF_L158 :  EMPTY_STATEMENT
+           L165 :  cstate78 = 7
+           L167 :  y_1 = false
+           L169 :  t_start = false
+           L170 :  goto END_IF_L143
+"  [label="alter"];
+  "           L163 :  goto END_ELSIF_L158
+" -> " END_ELSIF_L158 :  EMPTY_STATEMENT
+           L173 :  #_t63 = #_t147 AND q
+           L174 :  if #_t63 goto ELSIF_L171
+"  [label="alter"];
+  "     ELSIF_L158 :  EMPTY_STATEMENT
+           L165 :  cstate78 = 7
+           L167 :  y_1 = false
+           L169 :  t_start = false
+           L170 :  goto END_IF_L143
+" -> "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L158 :  EMPTY_STATEMENT
+           L173 :  #_t63 = #_t147 AND q
+           L174 :  if #_t63 goto ELSIF_L171
+" -> "           L175 :  goto END_ELSIF_L171
+"  [label="default"];
+  " END_ELSIF_L158 :  EMPTY_STATEMENT
+           L173 :  #_t63 = #_t147 AND q
+           L174 :  if #_t63 goto ELSIF_L171
+" -> "     ELSIF_L171 :  EMPTY_STATEMENT
+           L177 :  cstate78 = 6
+           L179 :  y_1 = false
+           L181 :  t_start = false
+           L182 :  goto END_IF_L143
+"  [label="alter"];
+  "           L175 :  goto END_ELSIF_L171
+" -> " END_ELSIF_L171 :  EMPTY_STATEMENT
+           L184 :  #_t67 = x_1 AND q
+           L185 :  if #_t67 goto ELSIF_L183
+"  [label="alter"];
+  "     ELSIF_L171 :  EMPTY_STATEMENT
+           L177 :  cstate78 = 6
+           L179 :  y_1 = false
+           L181 :  t_start = false
+           L182 :  goto END_IF_L143
+" -> "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L171 :  EMPTY_STATEMENT
+           L184 :  #_t67 = x_1 AND q
+           L185 :  if #_t67 goto ELSIF_L183
+" -> "           L186 :  goto END_ELSIF_L183
+"  [label="default"];
+  " END_ELSIF_L171 :  EMPTY_STATEMENT
+           L184 :  #_t67 = x_1 AND q
+           L185 :  if #_t67 goto ELSIF_L183
+" -> "     ELSIF_L183 :  EMPTY_STATEMENT
+           L188 :  cstate78 = 11
+           L190 :  y_1 = true
+           L192 :  t_start = true
+           L194 :  t_up = false
+           L195 :  goto END_IF_L143
+"  [label="alter"];
+  "           L186 :  goto END_ELSIF_L183
+" -> " END_ELSIF_L183 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L183 :  EMPTY_STATEMENT
+           L188 :  cstate78 = 11
+           L190 :  y_1 = true
+           L192 :  t_start = true
+           L194 :  t_up = false
+           L195 :  goto END_IF_L143
+" -> "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L183 :  EMPTY_STATEMENT
+" -> "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+"  [label="default"];
+  "    END_IF_L143 :  EMPTY_STATEMENT
+           L196 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  " END_ELSIF_L138 :  EMPTY_STATEMENT
+           L199 :  #_t73 = cstate78 == 199
+           L200 :  if #_t73 goto ELSIF_L197
+" -> "           L201 :  goto END_ELSIF_L197
+"  [label="default"];
+  " END_ELSIF_L138 :  EMPTY_STATEMENT
+           L199 :  #_t73 = cstate78 == 199
+           L200 :  if #_t73 goto ELSIF_L197
+" -> "     ELSIF_L197 :  EMPTY_STATEMENT
+           L203 :  #_t148 = NOT q
+           L204 :  #_t75 = x_1 AND #_t148
+           L205 :  if #_t75 goto IF_L202
+"  [label="alter"];
+  "           L201 :  goto END_ELSIF_L197
+" -> " END_ELSIF_L197 :  EMPTY_STATEMENT
+           L258 :  #_t97 = cstate78 == 6
+           L259 :  if #_t97 goto ELSIF_L256
+"  [label="alter"];
+  "     ELSIF_L197 :  EMPTY_STATEMENT
+           L203 :  #_t148 = NOT q
+           L204 :  #_t75 = x_1 AND #_t148
+           L205 :  if #_t75 goto IF_L202
+" -> "           L207 :  goto START_ELSIF_L206
+"  [label="default"];
+  "     ELSIF_L197 :  EMPTY_STATEMENT
+           L203 :  #_t148 = NOT q
+           L204 :  #_t75 = x_1 AND #_t148
+           L205 :  if #_t75 goto IF_L202
+" -> "        IF_L202 :  EMPTY_STATEMENT
+           L209 :  cstate78 = 48
+           L211 :  y_1 = false
+           L213 :  t_start = true
+           L215 :  t_up = false
+           L216 :  goto END_IF_L202
+"  [label="alter"];
+  "           L207 :  goto START_ELSIF_L206
+" -> "START_ELSIF_L206 :  EMPTY_STATEMENT
+           L219 :  #_t149 = NOT x_1
+           L220 :  #_t82 = #_t149 AND #_t148
+           L221 :  if #_t82 goto ELSIF_L217
+"  [label="alter"];
+  "        IF_L202 :  EMPTY_STATEMENT
+           L209 :  cstate78 = 48
+           L211 :  y_1 = false
+           L213 :  t_start = true
+           L215 :  t_up = false
+           L216 :  goto END_IF_L202
+" -> "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L206 :  EMPTY_STATEMENT
+           L219 :  #_t149 = NOT x_1
+           L220 :  #_t82 = #_t149 AND #_t148
+           L221 :  if #_t82 goto ELSIF_L217
+" -> "           L222 :  goto END_ELSIF_L217
+"  [label="default"];
+  "START_ELSIF_L206 :  EMPTY_STATEMENT
+           L219 :  #_t149 = NOT x_1
+           L220 :  #_t82 = #_t149 AND #_t148
+           L221 :  if #_t82 goto ELSIF_L217
+" -> "     ELSIF_L217 :  EMPTY_STATEMENT
+           L224 :  cstate78 = 199
+           L226 :  y_1 = false
+           L228 :  t_start = false
+           L229 :  goto END_IF_L202
+"  [label="alter"];
+  "           L222 :  goto END_ELSIF_L217
+" -> " END_ELSIF_L217 :  EMPTY_STATEMENT
+           L232 :  #_t87 = #_t149 AND q
+           L233 :  if #_t87 goto ELSIF_L230
+"  [label="alter"];
+  "     ELSIF_L217 :  EMPTY_STATEMENT
+           L224 :  cstate78 = 199
+           L226 :  y_1 = false
+           L228 :  t_start = false
+           L229 :  goto END_IF_L202
+" -> "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L217 :  EMPTY_STATEMENT
+           L232 :  #_t87 = #_t149 AND q
+           L233 :  if #_t87 goto ELSIF_L230
+" -> "           L234 :  goto END_ELSIF_L230
+"  [label="default"];
+  " END_ELSIF_L217 :  EMPTY_STATEMENT
+           L232 :  #_t87 = #_t149 AND q
+           L233 :  if #_t87 goto ELSIF_L230
+" -> "     ELSIF_L230 :  EMPTY_STATEMENT
+           L236 :  cstate78 = 6
+           L238 :  y_1 = false
+           L240 :  t_start = false
+           L241 :  goto END_IF_L202
+"  [label="alter"];
+  "           L234 :  goto END_ELSIF_L230
+" -> " END_ELSIF_L230 :  EMPTY_STATEMENT
+           L243 :  #_t91 = x_1 AND q
+           L244 :  if #_t91 goto ELSIF_L242
+"  [label="alter"];
+  "     ELSIF_L230 :  EMPTY_STATEMENT
+           L236 :  cstate78 = 6
+           L238 :  y_1 = false
+           L240 :  t_start = false
+           L241 :  goto END_IF_L202
+" -> "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L230 :  EMPTY_STATEMENT
+           L243 :  #_t91 = x_1 AND q
+           L244 :  if #_t91 goto ELSIF_L242
+" -> "           L245 :  goto END_ELSIF_L242
+"  [label="default"];
+  " END_ELSIF_L230 :  EMPTY_STATEMENT
+           L243 :  #_t91 = x_1 AND q
+           L244 :  if #_t91 goto ELSIF_L242
+" -> "     ELSIF_L242 :  EMPTY_STATEMENT
+           L247 :  cstate78 = 11
+           L249 :  y_1 = true
+           L251 :  t_start = true
+           L253 :  t_up = false
+           L254 :  goto END_IF_L202
+"  [label="alter"];
+  "           L245 :  goto END_ELSIF_L242
+" -> " END_ELSIF_L242 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L242 :  EMPTY_STATEMENT
+           L247 :  cstate78 = 11
+           L249 :  y_1 = true
+           L251 :  t_start = true
+           L253 :  t_up = false
+           L254 :  goto END_IF_L202
+" -> "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L242 :  EMPTY_STATEMENT
+" -> "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+"  [label="default"];
+  "    END_IF_L202 :  EMPTY_STATEMENT
+           L255 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  " END_ELSIF_L197 :  EMPTY_STATEMENT
+           L258 :  #_t97 = cstate78 == 6
+           L259 :  if #_t97 goto ELSIF_L256
+" -> "           L260 :  goto END_ELSIF_L256
+"  [label="default"];
+  " END_ELSIF_L197 :  EMPTY_STATEMENT
+           L258 :  #_t97 = cstate78 == 6
+           L259 :  if #_t97 goto ELSIF_L256
+" -> "     ELSIF_L256 :  EMPTY_STATEMENT
+           L262 :  #_t98 = NOT q
+           L263 :  #_t99 = x_1 AND #_t98
+           L264 :  if #_t99 goto IF_L261
+"  [label="alter"];
+  "           L260 :  goto END_ELSIF_L256
+" -> " END_ELSIF_L256 :  EMPTY_STATEMENT
+           L303 :  #_t114 = cstate78 == 11
+           L304 :  if #_t114 goto ELSIF_L301
+"  [label="alter"];
+  "     ELSIF_L256 :  EMPTY_STATEMENT
+           L262 :  #_t98 = NOT q
+           L263 :  #_t99 = x_1 AND #_t98
+           L264 :  if #_t99 goto IF_L261
+" -> "           L266 :  goto START_ELSIF_L265
+"  [label="default"];
+  "     ELSIF_L256 :  EMPTY_STATEMENT
+           L262 :  #_t98 = NOT q
+           L263 :  #_t99 = x_1 AND #_t98
+           L264 :  if #_t99 goto IF_L261
+" -> "        IF_L261 :  EMPTY_STATEMENT
+           L268 :  cstate78 = 48
+           L270 :  y_1 = false
+           L272 :  t_start = true
+           L274 :  t_up = false
+           L275 :  goto END_IF_L261
+"  [label="alter"];
+  "           L266 :  goto START_ELSIF_L265
+" -> "START_ELSIF_L265 :  EMPTY_STATEMENT
+           L277 :  #_t104 = NOT x_1
+           L278 :  if #_t104 goto ELSIF_L276
+"  [label="alter"];
+  "        IF_L261 :  EMPTY_STATEMENT
+           L268 :  cstate78 = 48
+           L270 :  y_1 = false
+           L272 :  t_start = true
+           L274 :  t_up = false
+           L275 :  goto END_IF_L261
+" -> "    END_IF_L261 :  EMPTY_STATEMENT
+           L300 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L265 :  EMPTY_STATEMENT
+           L277 :  #_t104 = NOT x_1
+           L278 :  if #_t104 goto ELSIF_L276
+" -> "           L279 :  goto END_ELSIF_L276
+"  [label="default"];
+  "START_ELSIF_L265 :  EMPTY_STATEMENT
+           L277 :  #_t104 = NOT x_1
+           L278 :  if #_t104 goto ELSIF_L276
+" -> "     ELSIF_L276 :  EMPTY_STATEMENT
+           L281 :  cstate78 = 6
+           L283 :  y_1 = false
+           L285 :  t_start = false
+           L286 :  goto END_IF_L261
+"  [label="alter"];
+  "           L279 :  goto END_ELSIF_L276
+" -> " END_ELSIF_L276 :  EMPTY_STATEMENT
+           L288 :  #_t108 = x_1 AND q
+           L289 :  if #_t108 goto ELSIF_L287
+"  [label="alter"];
+  "     ELSIF_L276 :  EMPTY_STATEMENT
+           L281 :  cstate78 = 6
+           L283 :  y_1 = false
+           L285 :  t_start = false
+           L286 :  goto END_IF_L261
+" -> "    END_IF_L261 :  EMPTY_STATEMENT
+           L300 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L276 :  EMPTY_STATEMENT
+           L288 :  #_t108 = x_1 AND q
+           L289 :  if #_t108 goto ELSIF_L287
+" -> "           L290 :  goto END_ELSIF_L287
+"  [label="default"];
+  " END_ELSIF_L276 :  EMPTY_STATEMENT
+           L288 :  #_t108 = x_1 AND q
+           L289 :  if #_t108 goto ELSIF_L287
+" -> "     ELSIF_L287 :  EMPTY_STATEMENT
+           L292 :  cstate78 = 11
+           L294 :  y_1 = true
+           L296 :  t_start = true
+           L298 :  t_up = false
+           L299 :  goto END_IF_L261
+"  [label="alter"];
+  "           L290 :  goto END_ELSIF_L287
+" -> " END_ELSIF_L287 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L287 :  EMPTY_STATEMENT
+           L292 :  cstate78 = 11
+           L294 :  y_1 = true
+           L296 :  t_start = true
+           L298 :  t_up = false
+           L299 :  goto END_IF_L261
+" -> "    END_IF_L261 :  EMPTY_STATEMENT
+           L300 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L287 :  EMPTY_STATEMENT
+" -> "    END_IF_L261 :  EMPTY_STATEMENT
+           L300 :  goto END_IF_L9
+"  [label="default"];
+  "    END_IF_L261 :  EMPTY_STATEMENT
+           L300 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  " END_ELSIF_L256 :  EMPTY_STATEMENT
+           L303 :  #_t114 = cstate78 == 11
+           L304 :  if #_t114 goto ELSIF_L301
+" -> "           L305 :  goto END_ELSIF_L301
+"  [label="default"];
+  " END_ELSIF_L256 :  EMPTY_STATEMENT
+           L303 :  #_t114 = cstate78 == 11
+           L304 :  if #_t114 goto ELSIF_L301
+" -> "     ELSIF_L301 :  EMPTY_STATEMENT
+           L307 :  #_t150 = NOT q
+           L308 :  #_t116 = x_1 AND #_t150
+           L309 :  if #_t116 goto IF_L306
+"  [label="alter"];
+  "           L305 :  goto END_ELSIF_L301
+" -> " END_ELSIF_L301 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L301 :  EMPTY_STATEMENT
+           L307 :  #_t150 = NOT q
+           L308 :  #_t116 = x_1 AND #_t150
+           L309 :  if #_t116 goto IF_L306
+" -> "           L311 :  goto START_ELSIF_L310
+"  [label="default"];
+  "     ELSIF_L301 :  EMPTY_STATEMENT
+           L307 :  #_t150 = NOT q
+           L308 :  #_t116 = x_1 AND #_t150
+           L309 :  if #_t116 goto IF_L306
+" -> "        IF_L306 :  EMPTY_STATEMENT
+           L313 :  cstate78 = 11
+           L315 :  y_1 = true
+           L317 :  t_start = false
+           L318 :  goto END_IF_L306
+"  [label="alter"];
+  "           L311 :  goto START_ELSIF_L310
+" -> "START_ELSIF_L310 :  EMPTY_STATEMENT
+           L321 :  #_t151 = NOT x_1
+           L322 :  #_t122 = #_t151 AND #_t150
+           L323 :  if #_t122 goto ELSIF_L319
+"  [label="alter"];
+  "        IF_L306 :  EMPTY_STATEMENT
+           L313 :  cstate78 = 11
+           L315 :  y_1 = true
+           L317 :  t_start = false
+           L318 :  goto END_IF_L306
+" -> "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+"  [label="alter"];
+  "START_ELSIF_L310 :  EMPTY_STATEMENT
+           L321 :  #_t151 = NOT x_1
+           L322 :  #_t122 = #_t151 AND #_t150
+           L323 :  if #_t122 goto ELSIF_L319
+" -> "           L324 :  goto END_ELSIF_L319
+"  [label="default"];
+  "START_ELSIF_L310 :  EMPTY_STATEMENT
+           L321 :  #_t151 = NOT x_1
+           L322 :  #_t122 = #_t151 AND #_t150
+           L323 :  if #_t122 goto ELSIF_L319
+" -> "     ELSIF_L319 :  EMPTY_STATEMENT
+           L326 :  cstate78 = 7
+           L328 :  y_1 = false
+           L330 :  t_start = false
+           L331 :  goto END_IF_L306
+"  [label="alter"];
+  "           L324 :  goto END_ELSIF_L319
+" -> " END_ELSIF_L319 :  EMPTY_STATEMENT
+           L334 :  #_t127 = #_t151 AND q
+           L335 :  if #_t127 goto ELSIF_L332
+"  [label="alter"];
+  "     ELSIF_L319 :  EMPTY_STATEMENT
+           L326 :  cstate78 = 7
+           L328 :  y_1 = false
+           L330 :  t_start = false
+           L331 :  goto END_IF_L306
+" -> "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L319 :  EMPTY_STATEMENT
+           L334 :  #_t127 = #_t151 AND q
+           L335 :  if #_t127 goto ELSIF_L332
+" -> "           L336 :  goto END_ELSIF_L332
+"  [label="default"];
+  " END_ELSIF_L319 :  EMPTY_STATEMENT
+           L334 :  #_t127 = #_t151 AND q
+           L335 :  if #_t127 goto ELSIF_L332
+" -> "     ELSIF_L332 :  EMPTY_STATEMENT
+           L338 :  cstate78 = 6
+           L340 :  y_1 = false
+           L342 :  t_start = false
+           L343 :  goto END_IF_L306
+"  [label="alter"];
+  "           L336 :  goto END_ELSIF_L332
+" -> " END_ELSIF_L332 :  EMPTY_STATEMENT
+           L345 :  #_t131 = x_1 AND q
+           L346 :  if #_t131 goto ELSIF_L344
+"  [label="alter"];
+  "     ELSIF_L332 :  EMPTY_STATEMENT
+           L338 :  cstate78 = 6
+           L340 :  y_1 = false
+           L342 :  t_start = false
+           L343 :  goto END_IF_L306
+" -> "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L332 :  EMPTY_STATEMENT
+           L345 :  #_t131 = x_1 AND q
+           L346 :  if #_t131 goto ELSIF_L344
+" -> "           L347 :  goto END_ELSIF_L344
+"  [label="default"];
+  " END_ELSIF_L332 :  EMPTY_STATEMENT
+           L345 :  #_t131 = x_1 AND q
+           L346 :  if #_t131 goto ELSIF_L344
+" -> "     ELSIF_L344 :  EMPTY_STATEMENT
+           L349 :  cstate78 = 10
+           L351 :  y_1 = true
+           L353 :  t_start = false
+           L354 :  goto END_IF_L306
+"  [label="alter"];
+  "           L347 :  goto END_ELSIF_L344
+" -> " END_ELSIF_L344 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L344 :  EMPTY_STATEMENT
+           L349 :  cstate78 = 10
+           L351 :  y_1 = true
+           L353 :  t_start = false
+           L354 :  goto END_IF_L306
+" -> "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+"  [label="alter"];
+  " END_ELSIF_L344 :  EMPTY_STATEMENT
+" -> "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+"  [label="default"];
+  "    END_IF_L306 :  EMPTY_STATEMENT
+           L355 :  goto END_IF_L9
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="alter"];
+  " END_ELSIF_L301 :  EMPTY_STATEMENT
+" -> "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+"  [label="default"];
+  "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+" -> "           L359 :  goto START_ELSIF_L358
+"  [label="default"];
+  "      END_IF_L9 :  EMPTY_STATEMENT
+           L357 :  if t_up goto IF_L356
+" -> "        IF_L356 :  EMPTY_STATEMENT
+           L361 :  t_reset = true
+           L362 :  goto END_IF_L356
+"  [label="alter"];
+  "           L359 :  goto START_ELSIF_L358
+" -> "START_ELSIF_L358 :  EMPTY_STATEMENT
+           L364 :  #_t136 = NOT t_up
+           L365 :  #_t137 = t_start AND #_t136
+           L366 :  if #_t137 goto ELSIF_L363
+"  [label="alter"];
+  "        IF_L356 :  EMPTY_STATEMENT
+           L361 :  t_reset = true
+           L362 :  goto END_IF_L356
+" -> "    END_IF_L356 :  EMPTY_STATEMENT
+           L375 :  if t_reset goto IF_L373
+"  [label="alter"];
+  "START_ELSIF_L358 :  EMPTY_STATEMENT
+           L364 :  #_t136 = NOT t_up
+           L365 :  #_t137 = t_start AND #_t136
+           L366 :  if #_t137 goto ELSIF_L363
+" -> "           L367 :  goto END_ELSIF_L363
+"  [label="default"];
+  "START_ELSIF_L358 :  EMPTY_STATEMENT
+           L364 :  #_t136 = NOT t_up
+           L365 :  #_t137 = t_start AND #_t136
+           L366 :  if #_t137 goto ELSIF_L363
+" -> "     ELSIF_L363 :  EMPTY_STATEMENT
+           L369 :  t_up = true
+           L371 :  t_reset = false
+           L372 :  goto END_IF_L356
+"  [label="alter"];
+  "           L367 :  goto END_ELSIF_L363
+" -> " END_ELSIF_L363 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L363 :  EMPTY_STATEMENT
+           L369 :  t_up = true
+           L371 :  t_reset = false
+           L372 :  goto END_IF_L356
+" -> "    END_IF_L356 :  EMPTY_STATEMENT
+           L375 :  if t_reset goto IF_L373
+"  [label="alter"];
+  " END_ELSIF_L363 :  EMPTY_STATEMENT
+" -> "    END_IF_L356 :  EMPTY_STATEMENT
+           L375 :  if t_reset goto IF_L373
+"  [label="default"];
+  "    END_IF_L356 :  EMPTY_STATEMENT
+           L375 :  if t_reset goto IF_L373
+" -> "           L376 :  goto ELSE_L374
+"  [label="default"];
+  "    END_IF_L356 :  EMPTY_STATEMENT
+           L375 :  if t_reset goto IF_L373
+" -> "        IF_L373 :  EMPTY_STATEMENT
+           L384 :  #_t142 = count == T_VALUE
+           L385 :  if #_t142 goto IF_L382
+"  [label="alter"];
+  "           L376 :  goto ELSE_L374
+" -> "      ELSE_L374 :  EMPTY_STATEMENT
+           L378 :  q = false
+           L380 :  count = 0
+           L381 :  goto END_IF_L373
+"  [label="alter"];
+  "      ELSE_L374 :  EMPTY_STATEMENT
+           L378 :  q = false
+           L380 :  count = 0
+           L381 :  goto END_IF_L373
+" -> "    END_IF_L373 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "        IF_L373 :  EMPTY_STATEMENT
+           L384 :  #_t142 = count == T_VALUE
+           L385 :  if #_t142 goto IF_L382
+" -> "           L386 :  goto ELSE_L383
+"  [label="default"];
+  "        IF_L373 :  EMPTY_STATEMENT
+           L384 :  #_t142 = count == T_VALUE
+           L385 :  if #_t142 goto IF_L382
+" -> "        IF_L382 :  EMPTY_STATEMENT
+           L390 :  q = true
+"  [label="alter"];
+  "           L386 :  goto ELSE_L383
+" -> "      ELSE_L383 :  EMPTY_STATEMENT
+           L387 :  count = T_VALUE
+           L388 :  goto END_IF_L382
+"  [label="alter"];
+  "      ELSE_L383 :  EMPTY_STATEMENT
+           L387 :  count = T_VALUE
+           L388 :  goto END_IF_L382
+" -> "    END_IF_L382 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "        IF_L382 :  EMPTY_STATEMENT
+           L390 :  q = true
+" -> "    END_IF_L382 :  EMPTY_STATEMENT
+"  [label="default"];
+  "    END_IF_L382 :  EMPTY_STATEMENT
+" -> "    END_IF_L373 :  EMPTY_STATEMENT
+"  [label="default"];
+  "    END_IF_L373 :  EMPTY_STATEMENT
+" -> "            End :  EMPTY_STATEMENT
+           L391 :  print(cstate78,)
+           L392 :  print(t_start,)
+           L393 :  print(count,)
+           L394 :  print(q,)
+           L395 :  print(y_1,)
+           L396 :  print(T_VALUE,)
+           L397 :  print(t_up,)
+           L398 :  print(t_reset,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "      FB_G4LTL7 :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+           L391 :  print(cstate78,)
+           L392 :  print(t_start,)
+           L393 :  print(count,)
+           L394 :  print(q,)
+           L395 :  print(y_1,)
+           L396 :  print(T_VALUE,)
+           L397 :  print(t_up,)
+           L398 :  print(t_reset,)
+" -> "           Read :  EMPTY_STATEMENT
+           L399 :  x_1 = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+           L391 :  print(cstate78,)
+           L392 :  print(t_start,)
+           L393 :  print(count,)
+           L394 :  print(q,)
+           L395 :  print(y_1,)
+           L396 :  print(T_VALUE,)
+           L397 :  print(t_up,)
+           L398 :  print(t_reset,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+           L399 :  x_1 = read()
+" -> "           Body :  EMPTY_STATEMENT
+            L11 :  #_t1 = cstate78 == 48
+            L12 :  if #_t1 goto IF_L9
+"  [label="default"];
+}

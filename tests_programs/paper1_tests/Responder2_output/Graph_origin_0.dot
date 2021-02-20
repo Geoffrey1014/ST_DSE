@@ -1,0 +1,1259 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "     Responder2 :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  cstate0 = 0
+             L1 :  req1 = false
+             L2 :  req2 = false
+             L3 :  grant_1 = false
+             L4 :  grant_2 = false
+"; "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = 11
+             L7 :  #_t1 = cstate0 == #_t0
+             L8 :  if #_t1 goto IF_L5
+"; "            L10 :  goto START_ELSIF_L9
+"; "          IF_L5 :  EMPTY_STATEMENT
+            L11 :  #_t2 = 8
+            L12 :  cstate0 = #_t2
+            L13 :  #_t3 = false
+            L14 :  grant_1 = #_t3
+            L15 :  #_t4 = true
+            L16 :  grant_2 = #_t4
+            L17 :  goto END_IF_L5
+"; " START_ELSIF_L9 :  EMPTY_STATEMENT
+            L19 :  #_t5 = 12
+            L20 :  #_t6 = cstate0 == #_t5
+            L21 :  if #_t6 goto ELSIF_L18
+"; "            L22 :  goto END_ELSIF_L18
+"; "      ELSIF_L18 :  EMPTY_STATEMENT
+            L23 :  #_t7 = 3
+            L24 :  cstate0 = #_t7
+            L25 :  #_t8 = true
+            L26 :  grant_1 = #_t8
+            L27 :  #_t9 = false
+            L28 :  grant_2 = #_t9
+            L29 :  goto END_IF_L5
+"; "  END_ELSIF_L18 :  EMPTY_STATEMENT
+            L31 :  #_t10 = 13
+            L32 :  #_t11 = cstate0 == #_t10
+            L33 :  if #_t11 goto ELSIF_L30
+"; "            L34 :  goto END_ELSIF_L30
+"; "      ELSIF_L30 :  EMPTY_STATEMENT
+            L35 :  #_t12 = 8
+            L36 :  cstate0 = #_t12
+            L37 :  #_t13 = false
+            L38 :  grant_1 = #_t13
+            L39 :  #_t14 = true
+            L40 :  grant_2 = #_t14
+            L41 :  goto END_IF_L5
+"; "  END_ELSIF_L30 :  EMPTY_STATEMENT
+            L43 :  #_t15 = 14
+            L44 :  #_t16 = cstate0 == #_t15
+            L45 :  if #_t16 goto ELSIF_L42
+"; "            L46 :  goto END_ELSIF_L42
+"; "      ELSIF_L42 :  EMPTY_STATEMENT
+            L47 :  #_t17 = 13
+            L48 :  cstate0 = #_t17
+            L49 :  #_t18 = false
+            L50 :  grant_1 = #_t18
+            L51 :  #_t19 = false
+            L52 :  grant_2 = #_t19
+            L53 :  goto END_IF_L5
+"; "  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L55 :  #_t20 = 0
+            L56 :  #_t21 = cstate0 == #_t20
+            L57 :  if #_t21 goto ELSIF_L54
+"; "            L58 :  goto END_ELSIF_L54
+"; "      ELSIF_L54 :  EMPTY_STATEMENT
+            L60 :  #_t22 = NOT req2
+            L61 :  #_t23 = req1 AND #_t22
+            L62 :  if #_t23 goto IF_L59
+"; "            L64 :  goto START_ELSIF_L63
+"; "         IF_L59 :  EMPTY_STATEMENT
+            L65 :  #_t24 = 5
+            L66 :  cstate0 = #_t24
+            L67 :  #_t25 = false
+            L68 :  grant_1 = #_t25
+            L69 :  #_t26 = false
+            L70 :  grant_2 = #_t26
+            L71 :  goto END_IF_L59
+"; "START_ELSIF_L63 :  EMPTY_STATEMENT
+            L73 :  #_t27 = NOT req1
+            L74 :  #_t28 = #_t27 AND req2
+            L75 :  if #_t28 goto ELSIF_L72
+"; "            L76 :  goto END_ELSIF_L72
+"; "      ELSIF_L72 :  EMPTY_STATEMENT
+            L77 :  #_t29 = 6
+            L78 :  cstate0 = #_t29
+            L79 :  #_t30 = false
+            L80 :  grant_1 = #_t30
+            L81 :  #_t31 = false
+            L82 :  grant_2 = #_t31
+            L83 :  goto END_IF_L59
+"; "  END_ELSIF_L72 :  EMPTY_STATEMENT
+            L85 :  #_t32 = req1 AND req2
+            L86 :  if #_t32 goto ELSIF_L84
+"; "            L87 :  goto END_ELSIF_L84
+"; "      ELSIF_L84 :  EMPTY_STATEMENT
+            L88 :  #_t33 = 14
+            L89 :  cstate0 = #_t33
+            L90 :  #_t34 = false
+            L91 :  grant_1 = #_t34
+            L92 :  #_t35 = false
+            L93 :  grant_2 = #_t35
+            L94 :  goto END_IF_L59
+"; "  END_ELSIF_L84 :  EMPTY_STATEMENT
+            L96 :  #_t36 = NOT req2
+            L97 :  #_t37 = NOT req1
+            L98 :  #_t38 = #_t37 AND #_t36
+            L99 :  if #_t38 goto ELSIF_L95
+"; "           L100 :  goto END_ELSIF_L95
+"; "      ELSIF_L95 :  EMPTY_STATEMENT
+           L101 :  #_t39 = 0
+           L102 :  cstate0 = #_t39
+           L103 :  #_t40 = false
+           L104 :  grant_1 = #_t40
+           L105 :  #_t41 = false
+           L106 :  grant_2 = #_t41
+           L107 :  goto END_IF_L59
+"; "  END_ELSIF_L95 :  EMPTY_STATEMENT
+"; "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+"; "  END_ELSIF_L54 :  EMPTY_STATEMENT
+           L110 :  #_t42 = 1
+           L111 :  #_t43 = cstate0 == #_t42
+           L112 :  if #_t43 goto ELSIF_L109
+"; "           L113 :  goto END_ELSIF_L109
+"; "     ELSIF_L109 :  EMPTY_STATEMENT
+           L114 :  #_t44 = 2
+           L115 :  cstate0 = #_t44
+           L116 :  #_t45 = false
+           L117 :  grant_1 = #_t45
+           L118 :  #_t46 = false
+           L119 :  grant_2 = #_t46
+           L120 :  goto END_IF_L5
+"; " END_ELSIF_L109 :  EMPTY_STATEMENT
+           L122 :  #_t47 = 2
+           L123 :  #_t48 = cstate0 == #_t47
+           L124 :  if #_t48 goto ELSIF_L121
+"; "           L125 :  goto END_ELSIF_L121
+"; "     ELSIF_L121 :  EMPTY_STATEMENT
+           L126 :  #_t49 = 4
+           L127 :  cstate0 = #_t49
+           L128 :  #_t50 = true
+           L129 :  grant_1 = #_t50
+           L130 :  #_t51 = false
+           L131 :  grant_2 = #_t51
+           L132 :  goto END_IF_L5
+"; " END_ELSIF_L121 :  EMPTY_STATEMENT
+           L134 :  #_t52 = 3
+           L135 :  #_t53 = cstate0 == #_t52
+           L136 :  if #_t53 goto ELSIF_L133
+"; "           L137 :  goto END_ELSIF_L133
+"; "     ELSIF_L133 :  EMPTY_STATEMENT
+           L140 :  #_t54 = NOT req1
+           L141 :  if #_t54 goto IF_L138
+"; "           L142 :  goto ELSE_L139
+"; "      ELSE_L139 :  EMPTY_STATEMENT
+           L143 :  #_t55 = 9
+           L144 :  cstate0 = #_t55
+           L145 :  #_t56 = false
+           L146 :  grant_1 = #_t56
+           L147 :  #_t57 = false
+           L148 :  grant_2 = #_t57
+           L149 :  goto END_IF_L138
+"; "        IF_L138 :  EMPTY_STATEMENT
+           L150 :  #_t58 = 4
+           L151 :  cstate0 = #_t58
+           L152 :  #_t59 = false
+           L153 :  grant_1 = #_t59
+           L154 :  #_t60 = false
+           L155 :  grant_2 = #_t60
+"; "    END_IF_L138 :  EMPTY_STATEMENT
+           L156 :  goto END_IF_L5
+"; " END_ELSIF_L133 :  EMPTY_STATEMENT
+           L158 :  #_t61 = 4
+           L159 :  #_t62 = cstate0 == #_t61
+           L160 :  if #_t62 goto ELSIF_L157
+"; "           L161 :  goto END_ELSIF_L157
+"; "     ELSIF_L157 :  EMPTY_STATEMENT
+           L164 :  #_t63 = NOT req1
+           L165 :  if #_t63 goto IF_L162
+"; "           L166 :  goto ELSE_L163
+"; "      ELSE_L163 :  EMPTY_STATEMENT
+           L167 :  #_t64 = 5
+           L168 :  cstate0 = #_t64
+           L169 :  #_t65 = false
+           L170 :  grant_1 = #_t65
+           L171 :  #_t66 = true
+           L172 :  grant_2 = #_t66
+           L173 :  goto END_IF_L162
+"; "        IF_L162 :  EMPTY_STATEMENT
+           L174 :  #_t67 = 0
+           L175 :  cstate0 = #_t67
+           L176 :  #_t68 = false
+           L177 :  grant_1 = #_t68
+           L178 :  #_t69 = true
+           L179 :  grant_2 = #_t69
+"; "    END_IF_L162 :  EMPTY_STATEMENT
+           L180 :  goto END_IF_L5
+"; " END_ELSIF_L157 :  EMPTY_STATEMENT
+           L182 :  #_t70 = 5
+           L183 :  #_t71 = cstate0 == #_t70
+           L184 :  if #_t71 goto ELSIF_L181
+"; "           L185 :  goto END_ELSIF_L181
+"; "     ELSIF_L181 :  EMPTY_STATEMENT
+           L188 :  #_t72 = NOT req2
+           L189 :  if #_t72 goto IF_L186
+"; "           L190 :  goto ELSE_L187
+"; "      ELSE_L187 :  EMPTY_STATEMENT
+           L191 :  #_t73 = 1
+           L192 :  cstate0 = #_t73
+           L193 :  #_t74 = false
+           L194 :  grant_1 = #_t74
+           L195 :  #_t75 = false
+           L196 :  grant_2 = #_t75
+           L197 :  goto END_IF_L186
+"; "        IF_L186 :  EMPTY_STATEMENT
+           L198 :  #_t76 = 10
+           L199 :  cstate0 = #_t76
+           L200 :  #_t77 = false
+           L201 :  grant_1 = #_t77
+           L202 :  #_t78 = false
+           L203 :  grant_2 = #_t78
+"; "    END_IF_L186 :  EMPTY_STATEMENT
+           L204 :  goto END_IF_L5
+"; " END_ELSIF_L181 :  EMPTY_STATEMENT
+           L206 :  #_t79 = 6
+           L207 :  #_t80 = cstate0 == #_t79
+           L208 :  if #_t80 goto ELSIF_L205
+"; "           L209 :  goto END_ELSIF_L205
+"; "     ELSIF_L205 :  EMPTY_STATEMENT
+           L212 :  if req1 goto IF_L210
+"; "           L213 :  goto ELSE_L211
+"; "      ELSE_L211 :  EMPTY_STATEMENT
+           L214 :  #_t81 = 3
+           L215 :  cstate0 = #_t81
+           L216 :  #_t82 = false
+           L217 :  grant_1 = #_t82
+           L218 :  #_t83 = false
+           L219 :  grant_2 = #_t83
+           L220 :  goto END_IF_L210
+"; "        IF_L210 :  EMPTY_STATEMENT
+           L221 :  #_t84 = 7
+           L222 :  cstate0 = #_t84
+           L223 :  #_t85 = false
+           L224 :  grant_1 = #_t85
+           L225 :  #_t86 = false
+           L226 :  grant_2 = #_t86
+"; "    END_IF_L210 :  EMPTY_STATEMENT
+           L227 :  goto END_IF_L5
+"; " END_ELSIF_L205 :  EMPTY_STATEMENT
+           L229 :  #_t87 = 7
+           L230 :  #_t88 = cstate0 == #_t87
+           L231 :  if #_t88 goto ELSIF_L228
+"; "           L232 :  goto END_ELSIF_L228
+"; "     ELSIF_L228 :  EMPTY_STATEMENT
+           L233 :  #_t89 = 11
+           L234 :  cstate0 = #_t89
+           L235 :  #_t90 = false
+           L236 :  grant_1 = #_t90
+           L237 :  #_t91 = false
+           L238 :  grant_2 = #_t91
+           L239 :  goto END_IF_L5
+"; " END_ELSIF_L228 :  EMPTY_STATEMENT
+           L241 :  #_t92 = 8
+           L242 :  #_t93 = cstate0 == #_t92
+           L243 :  if #_t93 goto ELSIF_L240
+"; "           L244 :  goto END_ELSIF_L240
+"; "     ELSIF_L240 :  EMPTY_STATEMENT
+           L247 :  if req2 goto IF_L245
+"; "           L248 :  goto ELSE_L246
+"; "      ELSE_L246 :  EMPTY_STATEMENT
+           L249 :  #_t94 = 0
+           L250 :  cstate0 = #_t94
+           L251 :  #_t95 = true
+           L252 :  grant_1 = #_t95
+           L253 :  #_t96 = false
+           L254 :  grant_2 = #_t96
+           L255 :  goto END_IF_L245
+"; "        IF_L245 :  EMPTY_STATEMENT
+           L256 :  #_t97 = 6
+           L257 :  cstate0 = #_t97
+           L258 :  #_t98 = true
+           L259 :  grant_1 = #_t98
+           L260 :  #_t99 = false
+           L261 :  grant_2 = #_t99
+"; "    END_IF_L245 :  EMPTY_STATEMENT
+           L262 :  goto END_IF_L5
+"; " END_ELSIF_L240 :  EMPTY_STATEMENT
+           L264 :  #_t100 = 9
+           L265 :  #_t101 = cstate0 == #_t100
+           L266 :  if #_t101 goto ELSIF_L263
+"; "           L267 :  goto END_ELSIF_L263
+"; "     ELSIF_L263 :  EMPTY_STATEMENT
+           L268 :  #_t102 = 10
+           L269 :  cstate0 = #_t102
+           L270 :  #_t103 = false
+           L271 :  grant_1 = #_t103
+           L272 :  #_t104 = true
+           L273 :  grant_2 = #_t104
+           L274 :  goto END_IF_L5
+"; " END_ELSIF_L263 :  EMPTY_STATEMENT
+           L276 :  #_t105 = 10
+           L277 :  #_t106 = cstate0 == #_t105
+           L278 :  if #_t106 goto ELSIF_L275
+"; "           L279 :  goto END_ELSIF_L275
+"; "     ELSIF_L275 :  EMPTY_STATEMENT
+           L282 :  if req2 goto IF_L280
+"; "           L283 :  goto ELSE_L281
+"; "      ELSE_L281 :  EMPTY_STATEMENT
+           L284 :  #_t107 = 8
+           L285 :  cstate0 = #_t107
+           L286 :  #_t108 = false
+           L287 :  grant_1 = #_t108
+           L288 :  #_t109 = false
+           L289 :  grant_2 = #_t109
+           L290 :  goto END_IF_L280
+"; "        IF_L280 :  EMPTY_STATEMENT
+           L291 :  #_t110 = 12
+           L292 :  cstate0 = #_t110
+           L293 :  #_t111 = false
+           L294 :  grant_1 = #_t111
+           L295 :  #_t112 = false
+           L296 :  grant_2 = #_t112
+"; "    END_IF_L280 :  EMPTY_STATEMENT
+           L297 :  goto END_IF_L5
+"; " END_ELSIF_L275 :  EMPTY_STATEMENT
+"; "      END_IF_L5 :  EMPTY_STATEMENT
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+           L298 :  print(grant_2,)
+           L299 :  print(cstate0,)
+           L300 :  print(grant_1,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+           L301 :  req2 = read()
+           L302 :  req1 = read()
+"; 
+  "     Responder2 :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  cstate0 = 0
+             L1 :  req1 = false
+             L2 :  req2 = false
+             L3 :  grant_1 = false
+             L4 :  grant_2 = false
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  cstate0 = 0
+             L1 :  req1 = false
+             L2 :  req2 = false
+             L3 :  grant_1 = false
+             L4 :  grant_2 = false
+" -> "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = 11
+             L7 :  #_t1 = cstate0 == #_t0
+             L8 :  if #_t1 goto IF_L5
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = 11
+             L7 :  #_t1 = cstate0 == #_t0
+             L8 :  if #_t1 goto IF_L5
+" -> "            L10 :  goto START_ELSIF_L9
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = 11
+             L7 :  #_t1 = cstate0 == #_t0
+             L8 :  if #_t1 goto IF_L5
+" -> "          IF_L5 :  EMPTY_STATEMENT
+            L11 :  #_t2 = 8
+            L12 :  cstate0 = #_t2
+            L13 :  #_t3 = false
+            L14 :  grant_1 = #_t3
+            L15 :  #_t4 = true
+            L16 :  grant_2 = #_t4
+            L17 :  goto END_IF_L5
+"  [label="alter"];
+  "            L10 :  goto START_ELSIF_L9
+" -> " START_ELSIF_L9 :  EMPTY_STATEMENT
+            L19 :  #_t5 = 12
+            L20 :  #_t6 = cstate0 == #_t5
+            L21 :  if #_t6 goto ELSIF_L18
+"  [label="alter"];
+  "          IF_L5 :  EMPTY_STATEMENT
+            L11 :  #_t2 = 8
+            L12 :  cstate0 = #_t2
+            L13 :  #_t3 = false
+            L14 :  grant_1 = #_t3
+            L15 :  #_t4 = true
+            L16 :  grant_2 = #_t4
+            L17 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " START_ELSIF_L9 :  EMPTY_STATEMENT
+            L19 :  #_t5 = 12
+            L20 :  #_t6 = cstate0 == #_t5
+            L21 :  if #_t6 goto ELSIF_L18
+" -> "            L22 :  goto END_ELSIF_L18
+"  [label="default"];
+  " START_ELSIF_L9 :  EMPTY_STATEMENT
+            L19 :  #_t5 = 12
+            L20 :  #_t6 = cstate0 == #_t5
+            L21 :  if #_t6 goto ELSIF_L18
+" -> "      ELSIF_L18 :  EMPTY_STATEMENT
+            L23 :  #_t7 = 3
+            L24 :  cstate0 = #_t7
+            L25 :  #_t8 = true
+            L26 :  grant_1 = #_t8
+            L27 :  #_t9 = false
+            L28 :  grant_2 = #_t9
+            L29 :  goto END_IF_L5
+"  [label="alter"];
+  "            L22 :  goto END_ELSIF_L18
+" -> "  END_ELSIF_L18 :  EMPTY_STATEMENT
+            L31 :  #_t10 = 13
+            L32 :  #_t11 = cstate0 == #_t10
+            L33 :  if #_t11 goto ELSIF_L30
+"  [label="alter"];
+  "      ELSIF_L18 :  EMPTY_STATEMENT
+            L23 :  #_t7 = 3
+            L24 :  cstate0 = #_t7
+            L25 :  #_t8 = true
+            L26 :  grant_1 = #_t8
+            L27 :  #_t9 = false
+            L28 :  grant_2 = #_t9
+            L29 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "  END_ELSIF_L18 :  EMPTY_STATEMENT
+            L31 :  #_t10 = 13
+            L32 :  #_t11 = cstate0 == #_t10
+            L33 :  if #_t11 goto ELSIF_L30
+" -> "            L34 :  goto END_ELSIF_L30
+"  [label="default"];
+  "  END_ELSIF_L18 :  EMPTY_STATEMENT
+            L31 :  #_t10 = 13
+            L32 :  #_t11 = cstate0 == #_t10
+            L33 :  if #_t11 goto ELSIF_L30
+" -> "      ELSIF_L30 :  EMPTY_STATEMENT
+            L35 :  #_t12 = 8
+            L36 :  cstate0 = #_t12
+            L37 :  #_t13 = false
+            L38 :  grant_1 = #_t13
+            L39 :  #_t14 = true
+            L40 :  grant_2 = #_t14
+            L41 :  goto END_IF_L5
+"  [label="alter"];
+  "            L34 :  goto END_ELSIF_L30
+" -> "  END_ELSIF_L30 :  EMPTY_STATEMENT
+            L43 :  #_t15 = 14
+            L44 :  #_t16 = cstate0 == #_t15
+            L45 :  if #_t16 goto ELSIF_L42
+"  [label="alter"];
+  "      ELSIF_L30 :  EMPTY_STATEMENT
+            L35 :  #_t12 = 8
+            L36 :  cstate0 = #_t12
+            L37 :  #_t13 = false
+            L38 :  grant_1 = #_t13
+            L39 :  #_t14 = true
+            L40 :  grant_2 = #_t14
+            L41 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "  END_ELSIF_L30 :  EMPTY_STATEMENT
+            L43 :  #_t15 = 14
+            L44 :  #_t16 = cstate0 == #_t15
+            L45 :  if #_t16 goto ELSIF_L42
+" -> "            L46 :  goto END_ELSIF_L42
+"  [label="default"];
+  "  END_ELSIF_L30 :  EMPTY_STATEMENT
+            L43 :  #_t15 = 14
+            L44 :  #_t16 = cstate0 == #_t15
+            L45 :  if #_t16 goto ELSIF_L42
+" -> "      ELSIF_L42 :  EMPTY_STATEMENT
+            L47 :  #_t17 = 13
+            L48 :  cstate0 = #_t17
+            L49 :  #_t18 = false
+            L50 :  grant_1 = #_t18
+            L51 :  #_t19 = false
+            L52 :  grant_2 = #_t19
+            L53 :  goto END_IF_L5
+"  [label="alter"];
+  "            L46 :  goto END_ELSIF_L42
+" -> "  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L55 :  #_t20 = 0
+            L56 :  #_t21 = cstate0 == #_t20
+            L57 :  if #_t21 goto ELSIF_L54
+"  [label="alter"];
+  "      ELSIF_L42 :  EMPTY_STATEMENT
+            L47 :  #_t17 = 13
+            L48 :  cstate0 = #_t17
+            L49 :  #_t18 = false
+            L50 :  grant_1 = #_t18
+            L51 :  #_t19 = false
+            L52 :  grant_2 = #_t19
+            L53 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L55 :  #_t20 = 0
+            L56 :  #_t21 = cstate0 == #_t20
+            L57 :  if #_t21 goto ELSIF_L54
+" -> "            L58 :  goto END_ELSIF_L54
+"  [label="default"];
+  "  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L55 :  #_t20 = 0
+            L56 :  #_t21 = cstate0 == #_t20
+            L57 :  if #_t21 goto ELSIF_L54
+" -> "      ELSIF_L54 :  EMPTY_STATEMENT
+            L60 :  #_t22 = NOT req2
+            L61 :  #_t23 = req1 AND #_t22
+            L62 :  if #_t23 goto IF_L59
+"  [label="alter"];
+  "            L58 :  goto END_ELSIF_L54
+" -> "  END_ELSIF_L54 :  EMPTY_STATEMENT
+           L110 :  #_t42 = 1
+           L111 :  #_t43 = cstate0 == #_t42
+           L112 :  if #_t43 goto ELSIF_L109
+"  [label="alter"];
+  "      ELSIF_L54 :  EMPTY_STATEMENT
+            L60 :  #_t22 = NOT req2
+            L61 :  #_t23 = req1 AND #_t22
+            L62 :  if #_t23 goto IF_L59
+" -> "            L64 :  goto START_ELSIF_L63
+"  [label="default"];
+  "      ELSIF_L54 :  EMPTY_STATEMENT
+            L60 :  #_t22 = NOT req2
+            L61 :  #_t23 = req1 AND #_t22
+            L62 :  if #_t23 goto IF_L59
+" -> "         IF_L59 :  EMPTY_STATEMENT
+            L65 :  #_t24 = 5
+            L66 :  cstate0 = #_t24
+            L67 :  #_t25 = false
+            L68 :  grant_1 = #_t25
+            L69 :  #_t26 = false
+            L70 :  grant_2 = #_t26
+            L71 :  goto END_IF_L59
+"  [label="alter"];
+  "            L64 :  goto START_ELSIF_L63
+" -> "START_ELSIF_L63 :  EMPTY_STATEMENT
+            L73 :  #_t27 = NOT req1
+            L74 :  #_t28 = #_t27 AND req2
+            L75 :  if #_t28 goto ELSIF_L72
+"  [label="alter"];
+  "         IF_L59 :  EMPTY_STATEMENT
+            L65 :  #_t24 = 5
+            L66 :  cstate0 = #_t24
+            L67 :  #_t25 = false
+            L68 :  grant_1 = #_t25
+            L69 :  #_t26 = false
+            L70 :  grant_2 = #_t26
+            L71 :  goto END_IF_L59
+" -> "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+"  [label="alter"];
+  "START_ELSIF_L63 :  EMPTY_STATEMENT
+            L73 :  #_t27 = NOT req1
+            L74 :  #_t28 = #_t27 AND req2
+            L75 :  if #_t28 goto ELSIF_L72
+" -> "            L76 :  goto END_ELSIF_L72
+"  [label="default"];
+  "START_ELSIF_L63 :  EMPTY_STATEMENT
+            L73 :  #_t27 = NOT req1
+            L74 :  #_t28 = #_t27 AND req2
+            L75 :  if #_t28 goto ELSIF_L72
+" -> "      ELSIF_L72 :  EMPTY_STATEMENT
+            L77 :  #_t29 = 6
+            L78 :  cstate0 = #_t29
+            L79 :  #_t30 = false
+            L80 :  grant_1 = #_t30
+            L81 :  #_t31 = false
+            L82 :  grant_2 = #_t31
+            L83 :  goto END_IF_L59
+"  [label="alter"];
+  "            L76 :  goto END_ELSIF_L72
+" -> "  END_ELSIF_L72 :  EMPTY_STATEMENT
+            L85 :  #_t32 = req1 AND req2
+            L86 :  if #_t32 goto ELSIF_L84
+"  [label="alter"];
+  "      ELSIF_L72 :  EMPTY_STATEMENT
+            L77 :  #_t29 = 6
+            L78 :  cstate0 = #_t29
+            L79 :  #_t30 = false
+            L80 :  grant_1 = #_t30
+            L81 :  #_t31 = false
+            L82 :  grant_2 = #_t31
+            L83 :  goto END_IF_L59
+" -> "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+"  [label="alter"];
+  "  END_ELSIF_L72 :  EMPTY_STATEMENT
+            L85 :  #_t32 = req1 AND req2
+            L86 :  if #_t32 goto ELSIF_L84
+" -> "            L87 :  goto END_ELSIF_L84
+"  [label="default"];
+  "  END_ELSIF_L72 :  EMPTY_STATEMENT
+            L85 :  #_t32 = req1 AND req2
+            L86 :  if #_t32 goto ELSIF_L84
+" -> "      ELSIF_L84 :  EMPTY_STATEMENT
+            L88 :  #_t33 = 14
+            L89 :  cstate0 = #_t33
+            L90 :  #_t34 = false
+            L91 :  grant_1 = #_t34
+            L92 :  #_t35 = false
+            L93 :  grant_2 = #_t35
+            L94 :  goto END_IF_L59
+"  [label="alter"];
+  "            L87 :  goto END_ELSIF_L84
+" -> "  END_ELSIF_L84 :  EMPTY_STATEMENT
+            L96 :  #_t36 = NOT req2
+            L97 :  #_t37 = NOT req1
+            L98 :  #_t38 = #_t37 AND #_t36
+            L99 :  if #_t38 goto ELSIF_L95
+"  [label="alter"];
+  "      ELSIF_L84 :  EMPTY_STATEMENT
+            L88 :  #_t33 = 14
+            L89 :  cstate0 = #_t33
+            L90 :  #_t34 = false
+            L91 :  grant_1 = #_t34
+            L92 :  #_t35 = false
+            L93 :  grant_2 = #_t35
+            L94 :  goto END_IF_L59
+" -> "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+"  [label="alter"];
+  "  END_ELSIF_L84 :  EMPTY_STATEMENT
+            L96 :  #_t36 = NOT req2
+            L97 :  #_t37 = NOT req1
+            L98 :  #_t38 = #_t37 AND #_t36
+            L99 :  if #_t38 goto ELSIF_L95
+" -> "           L100 :  goto END_ELSIF_L95
+"  [label="default"];
+  "  END_ELSIF_L84 :  EMPTY_STATEMENT
+            L96 :  #_t36 = NOT req2
+            L97 :  #_t37 = NOT req1
+            L98 :  #_t38 = #_t37 AND #_t36
+            L99 :  if #_t38 goto ELSIF_L95
+" -> "      ELSIF_L95 :  EMPTY_STATEMENT
+           L101 :  #_t39 = 0
+           L102 :  cstate0 = #_t39
+           L103 :  #_t40 = false
+           L104 :  grant_1 = #_t40
+           L105 :  #_t41 = false
+           L106 :  grant_2 = #_t41
+           L107 :  goto END_IF_L59
+"  [label="alter"];
+  "           L100 :  goto END_ELSIF_L95
+" -> "  END_ELSIF_L95 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "      ELSIF_L95 :  EMPTY_STATEMENT
+           L101 :  #_t39 = 0
+           L102 :  cstate0 = #_t39
+           L103 :  #_t40 = false
+           L104 :  grant_1 = #_t40
+           L105 :  #_t41 = false
+           L106 :  grant_2 = #_t41
+           L107 :  goto END_IF_L59
+" -> "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+"  [label="alter"];
+  "  END_ELSIF_L95 :  EMPTY_STATEMENT
+" -> "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+"  [label="default"];
+  "     END_IF_L59 :  EMPTY_STATEMENT
+           L108 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "  END_ELSIF_L54 :  EMPTY_STATEMENT
+           L110 :  #_t42 = 1
+           L111 :  #_t43 = cstate0 == #_t42
+           L112 :  if #_t43 goto ELSIF_L109
+" -> "           L113 :  goto END_ELSIF_L109
+"  [label="default"];
+  "  END_ELSIF_L54 :  EMPTY_STATEMENT
+           L110 :  #_t42 = 1
+           L111 :  #_t43 = cstate0 == #_t42
+           L112 :  if #_t43 goto ELSIF_L109
+" -> "     ELSIF_L109 :  EMPTY_STATEMENT
+           L114 :  #_t44 = 2
+           L115 :  cstate0 = #_t44
+           L116 :  #_t45 = false
+           L117 :  grant_1 = #_t45
+           L118 :  #_t46 = false
+           L119 :  grant_2 = #_t46
+           L120 :  goto END_IF_L5
+"  [label="alter"];
+  "           L113 :  goto END_ELSIF_L109
+" -> " END_ELSIF_L109 :  EMPTY_STATEMENT
+           L122 :  #_t47 = 2
+           L123 :  #_t48 = cstate0 == #_t47
+           L124 :  if #_t48 goto ELSIF_L121
+"  [label="alter"];
+  "     ELSIF_L109 :  EMPTY_STATEMENT
+           L114 :  #_t44 = 2
+           L115 :  cstate0 = #_t44
+           L116 :  #_t45 = false
+           L117 :  grant_1 = #_t45
+           L118 :  #_t46 = false
+           L119 :  grant_2 = #_t46
+           L120 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L109 :  EMPTY_STATEMENT
+           L122 :  #_t47 = 2
+           L123 :  #_t48 = cstate0 == #_t47
+           L124 :  if #_t48 goto ELSIF_L121
+" -> "           L125 :  goto END_ELSIF_L121
+"  [label="default"];
+  " END_ELSIF_L109 :  EMPTY_STATEMENT
+           L122 :  #_t47 = 2
+           L123 :  #_t48 = cstate0 == #_t47
+           L124 :  if #_t48 goto ELSIF_L121
+" -> "     ELSIF_L121 :  EMPTY_STATEMENT
+           L126 :  #_t49 = 4
+           L127 :  cstate0 = #_t49
+           L128 :  #_t50 = true
+           L129 :  grant_1 = #_t50
+           L130 :  #_t51 = false
+           L131 :  grant_2 = #_t51
+           L132 :  goto END_IF_L5
+"  [label="alter"];
+  "           L125 :  goto END_ELSIF_L121
+" -> " END_ELSIF_L121 :  EMPTY_STATEMENT
+           L134 :  #_t52 = 3
+           L135 :  #_t53 = cstate0 == #_t52
+           L136 :  if #_t53 goto ELSIF_L133
+"  [label="alter"];
+  "     ELSIF_L121 :  EMPTY_STATEMENT
+           L126 :  #_t49 = 4
+           L127 :  cstate0 = #_t49
+           L128 :  #_t50 = true
+           L129 :  grant_1 = #_t50
+           L130 :  #_t51 = false
+           L131 :  grant_2 = #_t51
+           L132 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L121 :  EMPTY_STATEMENT
+           L134 :  #_t52 = 3
+           L135 :  #_t53 = cstate0 == #_t52
+           L136 :  if #_t53 goto ELSIF_L133
+" -> "           L137 :  goto END_ELSIF_L133
+"  [label="default"];
+  " END_ELSIF_L121 :  EMPTY_STATEMENT
+           L134 :  #_t52 = 3
+           L135 :  #_t53 = cstate0 == #_t52
+           L136 :  if #_t53 goto ELSIF_L133
+" -> "     ELSIF_L133 :  EMPTY_STATEMENT
+           L140 :  #_t54 = NOT req1
+           L141 :  if #_t54 goto IF_L138
+"  [label="alter"];
+  "           L137 :  goto END_ELSIF_L133
+" -> " END_ELSIF_L133 :  EMPTY_STATEMENT
+           L158 :  #_t61 = 4
+           L159 :  #_t62 = cstate0 == #_t61
+           L160 :  if #_t62 goto ELSIF_L157
+"  [label="alter"];
+  "     ELSIF_L133 :  EMPTY_STATEMENT
+           L140 :  #_t54 = NOT req1
+           L141 :  if #_t54 goto IF_L138
+" -> "           L142 :  goto ELSE_L139
+"  [label="default"];
+  "     ELSIF_L133 :  EMPTY_STATEMENT
+           L140 :  #_t54 = NOT req1
+           L141 :  if #_t54 goto IF_L138
+" -> "        IF_L138 :  EMPTY_STATEMENT
+           L150 :  #_t58 = 4
+           L151 :  cstate0 = #_t58
+           L152 :  #_t59 = false
+           L153 :  grant_1 = #_t59
+           L154 :  #_t60 = false
+           L155 :  grant_2 = #_t60
+"  [label="alter"];
+  "           L142 :  goto ELSE_L139
+" -> "      ELSE_L139 :  EMPTY_STATEMENT
+           L143 :  #_t55 = 9
+           L144 :  cstate0 = #_t55
+           L145 :  #_t56 = false
+           L146 :  grant_1 = #_t56
+           L147 :  #_t57 = false
+           L148 :  grant_2 = #_t57
+           L149 :  goto END_IF_L138
+"  [label="alter"];
+  "      ELSE_L139 :  EMPTY_STATEMENT
+           L143 :  #_t55 = 9
+           L144 :  cstate0 = #_t55
+           L145 :  #_t56 = false
+           L146 :  grant_1 = #_t56
+           L147 :  #_t57 = false
+           L148 :  grant_2 = #_t57
+           L149 :  goto END_IF_L138
+" -> "    END_IF_L138 :  EMPTY_STATEMENT
+           L156 :  goto END_IF_L5
+"  [label="alter"];
+  "        IF_L138 :  EMPTY_STATEMENT
+           L150 :  #_t58 = 4
+           L151 :  cstate0 = #_t58
+           L152 :  #_t59 = false
+           L153 :  grant_1 = #_t59
+           L154 :  #_t60 = false
+           L155 :  grant_2 = #_t60
+" -> "    END_IF_L138 :  EMPTY_STATEMENT
+           L156 :  goto END_IF_L5
+"  [label="default"];
+  "    END_IF_L138 :  EMPTY_STATEMENT
+           L156 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L133 :  EMPTY_STATEMENT
+           L158 :  #_t61 = 4
+           L159 :  #_t62 = cstate0 == #_t61
+           L160 :  if #_t62 goto ELSIF_L157
+" -> "           L161 :  goto END_ELSIF_L157
+"  [label="default"];
+  " END_ELSIF_L133 :  EMPTY_STATEMENT
+           L158 :  #_t61 = 4
+           L159 :  #_t62 = cstate0 == #_t61
+           L160 :  if #_t62 goto ELSIF_L157
+" -> "     ELSIF_L157 :  EMPTY_STATEMENT
+           L164 :  #_t63 = NOT req1
+           L165 :  if #_t63 goto IF_L162
+"  [label="alter"];
+  "           L161 :  goto END_ELSIF_L157
+" -> " END_ELSIF_L157 :  EMPTY_STATEMENT
+           L182 :  #_t70 = 5
+           L183 :  #_t71 = cstate0 == #_t70
+           L184 :  if #_t71 goto ELSIF_L181
+"  [label="alter"];
+  "     ELSIF_L157 :  EMPTY_STATEMENT
+           L164 :  #_t63 = NOT req1
+           L165 :  if #_t63 goto IF_L162
+" -> "           L166 :  goto ELSE_L163
+"  [label="default"];
+  "     ELSIF_L157 :  EMPTY_STATEMENT
+           L164 :  #_t63 = NOT req1
+           L165 :  if #_t63 goto IF_L162
+" -> "        IF_L162 :  EMPTY_STATEMENT
+           L174 :  #_t67 = 0
+           L175 :  cstate0 = #_t67
+           L176 :  #_t68 = false
+           L177 :  grant_1 = #_t68
+           L178 :  #_t69 = true
+           L179 :  grant_2 = #_t69
+"  [label="alter"];
+  "           L166 :  goto ELSE_L163
+" -> "      ELSE_L163 :  EMPTY_STATEMENT
+           L167 :  #_t64 = 5
+           L168 :  cstate0 = #_t64
+           L169 :  #_t65 = false
+           L170 :  grant_1 = #_t65
+           L171 :  #_t66 = true
+           L172 :  grant_2 = #_t66
+           L173 :  goto END_IF_L162
+"  [label="alter"];
+  "      ELSE_L163 :  EMPTY_STATEMENT
+           L167 :  #_t64 = 5
+           L168 :  cstate0 = #_t64
+           L169 :  #_t65 = false
+           L170 :  grant_1 = #_t65
+           L171 :  #_t66 = true
+           L172 :  grant_2 = #_t66
+           L173 :  goto END_IF_L162
+" -> "    END_IF_L162 :  EMPTY_STATEMENT
+           L180 :  goto END_IF_L5
+"  [label="alter"];
+  "        IF_L162 :  EMPTY_STATEMENT
+           L174 :  #_t67 = 0
+           L175 :  cstate0 = #_t67
+           L176 :  #_t68 = false
+           L177 :  grant_1 = #_t68
+           L178 :  #_t69 = true
+           L179 :  grant_2 = #_t69
+" -> "    END_IF_L162 :  EMPTY_STATEMENT
+           L180 :  goto END_IF_L5
+"  [label="default"];
+  "    END_IF_L162 :  EMPTY_STATEMENT
+           L180 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L157 :  EMPTY_STATEMENT
+           L182 :  #_t70 = 5
+           L183 :  #_t71 = cstate0 == #_t70
+           L184 :  if #_t71 goto ELSIF_L181
+" -> "           L185 :  goto END_ELSIF_L181
+"  [label="default"];
+  " END_ELSIF_L157 :  EMPTY_STATEMENT
+           L182 :  #_t70 = 5
+           L183 :  #_t71 = cstate0 == #_t70
+           L184 :  if #_t71 goto ELSIF_L181
+" -> "     ELSIF_L181 :  EMPTY_STATEMENT
+           L188 :  #_t72 = NOT req2
+           L189 :  if #_t72 goto IF_L186
+"  [label="alter"];
+  "           L185 :  goto END_ELSIF_L181
+" -> " END_ELSIF_L181 :  EMPTY_STATEMENT
+           L206 :  #_t79 = 6
+           L207 :  #_t80 = cstate0 == #_t79
+           L208 :  if #_t80 goto ELSIF_L205
+"  [label="alter"];
+  "     ELSIF_L181 :  EMPTY_STATEMENT
+           L188 :  #_t72 = NOT req2
+           L189 :  if #_t72 goto IF_L186
+" -> "           L190 :  goto ELSE_L187
+"  [label="default"];
+  "     ELSIF_L181 :  EMPTY_STATEMENT
+           L188 :  #_t72 = NOT req2
+           L189 :  if #_t72 goto IF_L186
+" -> "        IF_L186 :  EMPTY_STATEMENT
+           L198 :  #_t76 = 10
+           L199 :  cstate0 = #_t76
+           L200 :  #_t77 = false
+           L201 :  grant_1 = #_t77
+           L202 :  #_t78 = false
+           L203 :  grant_2 = #_t78
+"  [label="alter"];
+  "           L190 :  goto ELSE_L187
+" -> "      ELSE_L187 :  EMPTY_STATEMENT
+           L191 :  #_t73 = 1
+           L192 :  cstate0 = #_t73
+           L193 :  #_t74 = false
+           L194 :  grant_1 = #_t74
+           L195 :  #_t75 = false
+           L196 :  grant_2 = #_t75
+           L197 :  goto END_IF_L186
+"  [label="alter"];
+  "      ELSE_L187 :  EMPTY_STATEMENT
+           L191 :  #_t73 = 1
+           L192 :  cstate0 = #_t73
+           L193 :  #_t74 = false
+           L194 :  grant_1 = #_t74
+           L195 :  #_t75 = false
+           L196 :  grant_2 = #_t75
+           L197 :  goto END_IF_L186
+" -> "    END_IF_L186 :  EMPTY_STATEMENT
+           L204 :  goto END_IF_L5
+"  [label="alter"];
+  "        IF_L186 :  EMPTY_STATEMENT
+           L198 :  #_t76 = 10
+           L199 :  cstate0 = #_t76
+           L200 :  #_t77 = false
+           L201 :  grant_1 = #_t77
+           L202 :  #_t78 = false
+           L203 :  grant_2 = #_t78
+" -> "    END_IF_L186 :  EMPTY_STATEMENT
+           L204 :  goto END_IF_L5
+"  [label="default"];
+  "    END_IF_L186 :  EMPTY_STATEMENT
+           L204 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L181 :  EMPTY_STATEMENT
+           L206 :  #_t79 = 6
+           L207 :  #_t80 = cstate0 == #_t79
+           L208 :  if #_t80 goto ELSIF_L205
+" -> "           L209 :  goto END_ELSIF_L205
+"  [label="default"];
+  " END_ELSIF_L181 :  EMPTY_STATEMENT
+           L206 :  #_t79 = 6
+           L207 :  #_t80 = cstate0 == #_t79
+           L208 :  if #_t80 goto ELSIF_L205
+" -> "     ELSIF_L205 :  EMPTY_STATEMENT
+           L212 :  if req1 goto IF_L210
+"  [label="alter"];
+  "           L209 :  goto END_ELSIF_L205
+" -> " END_ELSIF_L205 :  EMPTY_STATEMENT
+           L229 :  #_t87 = 7
+           L230 :  #_t88 = cstate0 == #_t87
+           L231 :  if #_t88 goto ELSIF_L228
+"  [label="alter"];
+  "     ELSIF_L205 :  EMPTY_STATEMENT
+           L212 :  if req1 goto IF_L210
+" -> "           L213 :  goto ELSE_L211
+"  [label="default"];
+  "     ELSIF_L205 :  EMPTY_STATEMENT
+           L212 :  if req1 goto IF_L210
+" -> "        IF_L210 :  EMPTY_STATEMENT
+           L221 :  #_t84 = 7
+           L222 :  cstate0 = #_t84
+           L223 :  #_t85 = false
+           L224 :  grant_1 = #_t85
+           L225 :  #_t86 = false
+           L226 :  grant_2 = #_t86
+"  [label="alter"];
+  "           L213 :  goto ELSE_L211
+" -> "      ELSE_L211 :  EMPTY_STATEMENT
+           L214 :  #_t81 = 3
+           L215 :  cstate0 = #_t81
+           L216 :  #_t82 = false
+           L217 :  grant_1 = #_t82
+           L218 :  #_t83 = false
+           L219 :  grant_2 = #_t83
+           L220 :  goto END_IF_L210
+"  [label="alter"];
+  "      ELSE_L211 :  EMPTY_STATEMENT
+           L214 :  #_t81 = 3
+           L215 :  cstate0 = #_t81
+           L216 :  #_t82 = false
+           L217 :  grant_1 = #_t82
+           L218 :  #_t83 = false
+           L219 :  grant_2 = #_t83
+           L220 :  goto END_IF_L210
+" -> "    END_IF_L210 :  EMPTY_STATEMENT
+           L227 :  goto END_IF_L5
+"  [label="alter"];
+  "        IF_L210 :  EMPTY_STATEMENT
+           L221 :  #_t84 = 7
+           L222 :  cstate0 = #_t84
+           L223 :  #_t85 = false
+           L224 :  grant_1 = #_t85
+           L225 :  #_t86 = false
+           L226 :  grant_2 = #_t86
+" -> "    END_IF_L210 :  EMPTY_STATEMENT
+           L227 :  goto END_IF_L5
+"  [label="default"];
+  "    END_IF_L210 :  EMPTY_STATEMENT
+           L227 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L205 :  EMPTY_STATEMENT
+           L229 :  #_t87 = 7
+           L230 :  #_t88 = cstate0 == #_t87
+           L231 :  if #_t88 goto ELSIF_L228
+" -> "           L232 :  goto END_ELSIF_L228
+"  [label="default"];
+  " END_ELSIF_L205 :  EMPTY_STATEMENT
+           L229 :  #_t87 = 7
+           L230 :  #_t88 = cstate0 == #_t87
+           L231 :  if #_t88 goto ELSIF_L228
+" -> "     ELSIF_L228 :  EMPTY_STATEMENT
+           L233 :  #_t89 = 11
+           L234 :  cstate0 = #_t89
+           L235 :  #_t90 = false
+           L236 :  grant_1 = #_t90
+           L237 :  #_t91 = false
+           L238 :  grant_2 = #_t91
+           L239 :  goto END_IF_L5
+"  [label="alter"];
+  "           L232 :  goto END_ELSIF_L228
+" -> " END_ELSIF_L228 :  EMPTY_STATEMENT
+           L241 :  #_t92 = 8
+           L242 :  #_t93 = cstate0 == #_t92
+           L243 :  if #_t93 goto ELSIF_L240
+"  [label="alter"];
+  "     ELSIF_L228 :  EMPTY_STATEMENT
+           L233 :  #_t89 = 11
+           L234 :  cstate0 = #_t89
+           L235 :  #_t90 = false
+           L236 :  grant_1 = #_t90
+           L237 :  #_t91 = false
+           L238 :  grant_2 = #_t91
+           L239 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L228 :  EMPTY_STATEMENT
+           L241 :  #_t92 = 8
+           L242 :  #_t93 = cstate0 == #_t92
+           L243 :  if #_t93 goto ELSIF_L240
+" -> "           L244 :  goto END_ELSIF_L240
+"  [label="default"];
+  " END_ELSIF_L228 :  EMPTY_STATEMENT
+           L241 :  #_t92 = 8
+           L242 :  #_t93 = cstate0 == #_t92
+           L243 :  if #_t93 goto ELSIF_L240
+" -> "     ELSIF_L240 :  EMPTY_STATEMENT
+           L247 :  if req2 goto IF_L245
+"  [label="alter"];
+  "           L244 :  goto END_ELSIF_L240
+" -> " END_ELSIF_L240 :  EMPTY_STATEMENT
+           L264 :  #_t100 = 9
+           L265 :  #_t101 = cstate0 == #_t100
+           L266 :  if #_t101 goto ELSIF_L263
+"  [label="alter"];
+  "     ELSIF_L240 :  EMPTY_STATEMENT
+           L247 :  if req2 goto IF_L245
+" -> "           L248 :  goto ELSE_L246
+"  [label="default"];
+  "     ELSIF_L240 :  EMPTY_STATEMENT
+           L247 :  if req2 goto IF_L245
+" -> "        IF_L245 :  EMPTY_STATEMENT
+           L256 :  #_t97 = 6
+           L257 :  cstate0 = #_t97
+           L258 :  #_t98 = true
+           L259 :  grant_1 = #_t98
+           L260 :  #_t99 = false
+           L261 :  grant_2 = #_t99
+"  [label="alter"];
+  "           L248 :  goto ELSE_L246
+" -> "      ELSE_L246 :  EMPTY_STATEMENT
+           L249 :  #_t94 = 0
+           L250 :  cstate0 = #_t94
+           L251 :  #_t95 = true
+           L252 :  grant_1 = #_t95
+           L253 :  #_t96 = false
+           L254 :  grant_2 = #_t96
+           L255 :  goto END_IF_L245
+"  [label="alter"];
+  "      ELSE_L246 :  EMPTY_STATEMENT
+           L249 :  #_t94 = 0
+           L250 :  cstate0 = #_t94
+           L251 :  #_t95 = true
+           L252 :  grant_1 = #_t95
+           L253 :  #_t96 = false
+           L254 :  grant_2 = #_t96
+           L255 :  goto END_IF_L245
+" -> "    END_IF_L245 :  EMPTY_STATEMENT
+           L262 :  goto END_IF_L5
+"  [label="alter"];
+  "        IF_L245 :  EMPTY_STATEMENT
+           L256 :  #_t97 = 6
+           L257 :  cstate0 = #_t97
+           L258 :  #_t98 = true
+           L259 :  grant_1 = #_t98
+           L260 :  #_t99 = false
+           L261 :  grant_2 = #_t99
+" -> "    END_IF_L245 :  EMPTY_STATEMENT
+           L262 :  goto END_IF_L5
+"  [label="default"];
+  "    END_IF_L245 :  EMPTY_STATEMENT
+           L262 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L240 :  EMPTY_STATEMENT
+           L264 :  #_t100 = 9
+           L265 :  #_t101 = cstate0 == #_t100
+           L266 :  if #_t101 goto ELSIF_L263
+" -> "           L267 :  goto END_ELSIF_L263
+"  [label="default"];
+  " END_ELSIF_L240 :  EMPTY_STATEMENT
+           L264 :  #_t100 = 9
+           L265 :  #_t101 = cstate0 == #_t100
+           L266 :  if #_t101 goto ELSIF_L263
+" -> "     ELSIF_L263 :  EMPTY_STATEMENT
+           L268 :  #_t102 = 10
+           L269 :  cstate0 = #_t102
+           L270 :  #_t103 = false
+           L271 :  grant_1 = #_t103
+           L272 :  #_t104 = true
+           L273 :  grant_2 = #_t104
+           L274 :  goto END_IF_L5
+"  [label="alter"];
+  "           L267 :  goto END_ELSIF_L263
+" -> " END_ELSIF_L263 :  EMPTY_STATEMENT
+           L276 :  #_t105 = 10
+           L277 :  #_t106 = cstate0 == #_t105
+           L278 :  if #_t106 goto ELSIF_L275
+"  [label="alter"];
+  "     ELSIF_L263 :  EMPTY_STATEMENT
+           L268 :  #_t102 = 10
+           L269 :  cstate0 = #_t102
+           L270 :  #_t103 = false
+           L271 :  grant_1 = #_t103
+           L272 :  #_t104 = true
+           L273 :  grant_2 = #_t104
+           L274 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L263 :  EMPTY_STATEMENT
+           L276 :  #_t105 = 10
+           L277 :  #_t106 = cstate0 == #_t105
+           L278 :  if #_t106 goto ELSIF_L275
+" -> "           L279 :  goto END_ELSIF_L275
+"  [label="default"];
+  " END_ELSIF_L263 :  EMPTY_STATEMENT
+           L276 :  #_t105 = 10
+           L277 :  #_t106 = cstate0 == #_t105
+           L278 :  if #_t106 goto ELSIF_L275
+" -> "     ELSIF_L275 :  EMPTY_STATEMENT
+           L282 :  if req2 goto IF_L280
+"  [label="alter"];
+  "           L279 :  goto END_ELSIF_L275
+" -> " END_ELSIF_L275 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "     ELSIF_L275 :  EMPTY_STATEMENT
+           L282 :  if req2 goto IF_L280
+" -> "           L283 :  goto ELSE_L281
+"  [label="default"];
+  "     ELSIF_L275 :  EMPTY_STATEMENT
+           L282 :  if req2 goto IF_L280
+" -> "        IF_L280 :  EMPTY_STATEMENT
+           L291 :  #_t110 = 12
+           L292 :  cstate0 = #_t110
+           L293 :  #_t111 = false
+           L294 :  grant_1 = #_t111
+           L295 :  #_t112 = false
+           L296 :  grant_2 = #_t112
+"  [label="alter"];
+  "           L283 :  goto ELSE_L281
+" -> "      ELSE_L281 :  EMPTY_STATEMENT
+           L284 :  #_t107 = 8
+           L285 :  cstate0 = #_t107
+           L286 :  #_t108 = false
+           L287 :  grant_1 = #_t108
+           L288 :  #_t109 = false
+           L289 :  grant_2 = #_t109
+           L290 :  goto END_IF_L280
+"  [label="alter"];
+  "      ELSE_L281 :  EMPTY_STATEMENT
+           L284 :  #_t107 = 8
+           L285 :  cstate0 = #_t107
+           L286 :  #_t108 = false
+           L287 :  grant_1 = #_t108
+           L288 :  #_t109 = false
+           L289 :  grant_2 = #_t109
+           L290 :  goto END_IF_L280
+" -> "    END_IF_L280 :  EMPTY_STATEMENT
+           L297 :  goto END_IF_L5
+"  [label="alter"];
+  "        IF_L280 :  EMPTY_STATEMENT
+           L291 :  #_t110 = 12
+           L292 :  cstate0 = #_t110
+           L293 :  #_t111 = false
+           L294 :  grant_1 = #_t111
+           L295 :  #_t112 = false
+           L296 :  grant_2 = #_t112
+" -> "    END_IF_L280 :  EMPTY_STATEMENT
+           L297 :  goto END_IF_L5
+"  [label="default"];
+  "    END_IF_L280 :  EMPTY_STATEMENT
+           L297 :  goto END_IF_L5
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="alter"];
+  " END_ELSIF_L275 :  EMPTY_STATEMENT
+" -> "      END_IF_L5 :  EMPTY_STATEMENT
+"  [label="default"];
+  "      END_IF_L5 :  EMPTY_STATEMENT
+" -> "            End :  EMPTY_STATEMENT
+           L298 :  print(grant_2,)
+           L299 :  print(cstate0,)
+           L300 :  print(grant_1,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "     Responder2 :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+           L298 :  print(grant_2,)
+           L299 :  print(cstate0,)
+           L300 :  print(grant_1,)
+" -> "           Read :  EMPTY_STATEMENT
+           L301 :  req2 = read()
+           L302 :  req1 = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+           L298 :  print(grant_2,)
+           L299 :  print(cstate0,)
+           L300 :  print(grant_1,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+           L301 :  req2 = read()
+           L302 :  req1 = read()
+" -> "           Body :  EMPTY_STATEMENT
+             L6 :  #_t0 = 11
+             L7 :  #_t1 = cstate0 == #_t0
+             L8 :  if #_t1 goto IF_L5
+"  [label="default"];
+}

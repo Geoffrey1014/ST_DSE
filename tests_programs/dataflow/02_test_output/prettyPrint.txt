@@ -66,7 +66,7 @@
           |--rhs
             |--functionCallExpr
               |--name: add
-              |--type: ir.VARBlockDecl.IrTypeSimple@71ba6d4e
+              |--type: ir.VARBlockDecl.IrTypeSimple@41a0aa7d
               |--argsList:
                 |--assignStmtEquals
                   |--lhs

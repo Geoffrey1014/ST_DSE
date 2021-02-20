@@ -1,0 +1,139 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "     Responder1 :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L1 :  req1 = false
+             L2 :  grant_1 = false
+"; "           Body :  EMPTY_STATEMENT
+             L4 :  #_t0 = 0
+             L5 :  #_t1 = cstate12 == #_t0
+             L6 :  if #_t1 goto IF_L3
+"; "             L7 :  goto END_IF_L3
+"; "          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+            L11 :  if #_t2 goto IF_L8
+"; "            L12 :  goto ELSE_L9
+"; "        ELSE_L9 :  EMPTY_STATEMENT
+            L13 :  #_t3 = 0
+            L14 :  cstate12 = #_t3
+            L15 :  #_t4 = true
+            L16 :  grant_1 = #_t4
+            L17 :  goto END_IF_L8
+"; "          IF_L8 :  EMPTY_STATEMENT
+            L18 :  #_t5 = 0
+            L19 :  cstate12 = #_t5
+            L20 :  #_t6 = false
+            L21 :  grant_1 = #_t6
+"; "      END_IF_L8 :  EMPTY_STATEMENT
+"; "      END_IF_L3 :  EMPTY_STATEMENT
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+"; "           Exit :  EMPTY_STATEMENT
+"; "           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+"; 
+  "     Responder1 :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L1 :  req1 = false
+             L2 :  grant_1 = false
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L1 :  req1 = false
+             L2 :  grant_1 = false
+" -> "           Body :  EMPTY_STATEMENT
+             L4 :  #_t0 = 0
+             L5 :  #_t1 = cstate12 == #_t0
+             L6 :  if #_t1 goto IF_L3
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L4 :  #_t0 = 0
+             L5 :  #_t1 = cstate12 == #_t0
+             L6 :  if #_t1 goto IF_L3
+" -> "             L7 :  goto END_IF_L3
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L4 :  #_t0 = 0
+             L5 :  #_t1 = cstate12 == #_t0
+             L6 :  if #_t1 goto IF_L3
+" -> "          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+            L11 :  if #_t2 goto IF_L8
+"  [label="alter"];
+  "             L7 :  goto END_IF_L3
+" -> "      END_IF_L3 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+            L11 :  if #_t2 goto IF_L8
+" -> "            L12 :  goto ELSE_L9
+"  [label="default"];
+  "          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+            L11 :  if #_t2 goto IF_L8
+" -> "          IF_L8 :  EMPTY_STATEMENT
+            L18 :  #_t5 = 0
+            L19 :  cstate12 = #_t5
+            L20 :  #_t6 = false
+            L21 :  grant_1 = #_t6
+"  [label="alter"];
+  "            L12 :  goto ELSE_L9
+" -> "        ELSE_L9 :  EMPTY_STATEMENT
+            L13 :  #_t3 = 0
+            L14 :  cstate12 = #_t3
+            L15 :  #_t4 = true
+            L16 :  grant_1 = #_t4
+            L17 :  goto END_IF_L8
+"  [label="alter"];
+  "        ELSE_L9 :  EMPTY_STATEMENT
+            L13 :  #_t3 = 0
+            L14 :  cstate12 = #_t3
+            L15 :  #_t4 = true
+            L16 :  grant_1 = #_t4
+            L17 :  goto END_IF_L8
+" -> "      END_IF_L8 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "          IF_L8 :  EMPTY_STATEMENT
+            L18 :  #_t5 = 0
+            L19 :  cstate12 = #_t5
+            L20 :  #_t6 = false
+            L21 :  grant_1 = #_t6
+" -> "      END_IF_L8 :  EMPTY_STATEMENT
+"  [label="default"];
+  "      END_IF_L8 :  EMPTY_STATEMENT
+" -> "      END_IF_L3 :  EMPTY_STATEMENT
+"  [label="default"];
+  "      END_IF_L3 :  EMPTY_STATEMENT
+" -> "            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "     Responder1 :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+" -> "           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+" -> "           Body :  EMPTY_STATEMENT
+             L4 :  #_t0 = 0
+             L5 :  #_t1 = cstate12 == #_t0
+             L6 :  if #_t1 goto IF_L3
+"  [label="default"];
+}

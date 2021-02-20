@@ -1,0 +1,130 @@
+CFG:
+           Prog :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  CONSTANT = 3
+             L1 :  P_Fan1Lo_1 = 3
+             L2 :  P_Fan1Lo_2 = 7
+             L3 :  P_Fan1Hi = 8
+             L4 :  P_Fan2Lo_1 = 4
+             L5 :  P_Fan2Lo_2 = 6
+             L6 :  P_Fan2Hi_1 = 7
+             L7 :  P_Fan2Hi_2 = 8
+             L8 :  P_Fan3Lo = 5
+             L9 :  P_Fan3Hi_1 = 6
+            L10 :  P_Fan3Hi_2 = 8
+            L11 :  DBC_PV_CoStep = 0
+
+           Body :  EMPTY_STATEMENT
+            L20 :  #_t0 = DBC_PV_CoStep <= P_Fan1Lo_2
+            L21 :  #_t1 = DBC_PV_CoStep >= P_Fan1Lo_1
+            L22 :  #_t2 = #_t1 AND #_t0
+            L23 :  if #_t2 goto IF_L18
+
+            L24 :  goto ELSE_L19
+
+       ELSE_L19 :  EMPTY_STATEMENT
+            L26 :  DBC_PV_C_Fan1Lo = false
+            L27 :  goto END_IF_L18
+
+         IF_L18 :  EMPTY_STATEMENT
+            L29 :  DBC_PV_C_Fan1Lo = true
+
+     END_IF_L18 :  EMPTY_STATEMENT
+            L32 :  #_t5 = DBC_PV_CoStep == P_Fan1Hi
+            L33 :  if #_t5 goto IF_L30
+
+            L34 :  goto ELSE_L31
+
+       ELSE_L31 :  EMPTY_STATEMENT
+            L36 :  DBC_PV_C_Fan1Hi = false
+            L37 :  goto END_IF_L30
+
+         IF_L30 :  EMPTY_STATEMENT
+            L39 :  DBC_PV_C_Fan1Hi = true
+
+     END_IF_L30 :  EMPTY_STATEMENT
+            L42 :  #_t8 = DBC_PV_CoStep <= P_Fan2Lo_2
+            L43 :  #_t9 = DBC_PV_CoStep >= P_Fan2Lo_1
+            L44 :  #_t10 = #_t9 AND #_t8
+            L45 :  if #_t10 goto IF_L40
+
+            L46 :  goto ELSE_L41
+
+       ELSE_L41 :  EMPTY_STATEMENT
+            L48 :  DBC_PV_C_Fan2Lo = false
+            L49 :  goto END_IF_L40
+
+         IF_L40 :  EMPTY_STATEMENT
+            L51 :  DBC_PV_C_Fan2Lo = true
+
+     END_IF_L40 :  EMPTY_STATEMENT
+            L54 :  #_t13 = DBC_PV_CoStep <= P_Fan2Hi_2
+            L55 :  #_t14 = DBC_PV_CoStep >= P_Fan2Hi_1
+            L56 :  #_t15 = #_t14 AND #_t13
+            L57 :  if #_t15 goto IF_L52
+
+            L58 :  goto ELSE_L53
+
+       ELSE_L53 :  EMPTY_STATEMENT
+            L60 :  DBC_PV_C_Fan2Hi = false
+            L61 :  goto END_IF_L52
+
+         IF_L52 :  EMPTY_STATEMENT
+            L63 :  DBC_PV_C_Fan2Hi = true
+
+     END_IF_L52 :  EMPTY_STATEMENT
+            L66 :  #_t18 = DBC_PV_CoStep == P_Fan3Lo
+            L67 :  if #_t18 goto IF_L64
+
+            L68 :  goto ELSE_L65
+
+       ELSE_L65 :  EMPTY_STATEMENT
+            L70 :  DBC_PV_C_Fan3Lo = false
+            L71 :  goto END_IF_L64
+
+         IF_L64 :  EMPTY_STATEMENT
+            L73 :  DBC_PV_C_Fan3Lo = true
+
+     END_IF_L64 :  EMPTY_STATEMENT
+            L76 :  #_t21 = DBC_PV_CoStep <= P_Fan3Hi_2
+            L77 :  #_t22 = DBC_PV_CoStep >= P_Fan3Hi_1
+            L78 :  #_t23 = #_t22 AND #_t21
+            L79 :  if #_t23 goto IF_L74
+
+            L80 :  goto ELSE_L75
+
+       ELSE_L75 :  EMPTY_STATEMENT
+            L82 :  DBC_PV_C_Fan3Hi = false
+            L83 :  goto END_IF_L74
+
+         IF_L74 :  EMPTY_STATEMENT
+            L85 :  DBC_PV_C_Fan3Hi = true
+
+     END_IF_L74 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L86 :  print(CONSTANT,)
+            L87 :  print(DBC_PV_C_Fan2Hi,)
+            L88 :  print(P_Fan3Hi_2,)
+            L89 :  print(DBC_PV_C_Fan1Lo,)
+            L90 :  print(P_Fan3Hi_1,)
+            L91 :  print(P_Fan2Hi_2,)
+            L92 :  print(DBC_PV_C_Fan3Hi,)
+            L93 :  print(P_Fan3Lo,)
+            L94 :  print(P_Fan2Hi_1,)
+            L95 :  print(DBC_PV_C_Fan2Lo,)
+            L96 :  print(P_Fan2Lo_2,)
+            L97 :  print(P_Fan1Hi,)
+            L98 :  print(P_Fan2Lo_1,)
+            L99 :  print(P_Fan1Lo_2,)
+           L100 :  print(DBC_PV_C_Fan3Lo,)
+           L101 :  print(P_Fan1Lo_1,)
+           L102 :  print(DBC_PV_C_Fan1Hi,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+           L103 :  DBC_PV_CoStep = read()

@@ -1,0 +1,659 @@
+CFG:
+SimpleConveyorBelt :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate11 = 0
+             L1 :  s_1 = false
+             L2 :  s_2 = false
+             L3 :  s_3 = false
+             L4 :  k_1 = false
+             L5 :  k_2 = false
+             L6 :  error_1 = false
+
+           Body :  EMPTY_STATEMENT
+             L8 :  #_t0 = 0
+             L9 :  #_t1 = cstate11 == #_t0
+            L10 :  if #_t1 goto IF_L7
+
+            L12 :  goto START_ELSIF_L11
+
+          IF_L7 :  EMPTY_STATEMENT
+            L14 :  #_t2 = NOT s_2
+            L15 :  #_t3 = NOT s_1
+            L16 :  #_t4 = #_t3 AND #_t2
+            L17 :  if #_t4 goto IF_L13
+
+            L19 :  goto START_ELSIF_L18
+
+         IF_L13 :  EMPTY_STATEMENT
+            L20 :  #_t5 = 5
+            L21 :  cstate11 = #_t5
+            L22 :  #_t6 = false
+            L23 :  k_1 = #_t6
+            L24 :  #_t7 = false
+            L25 :  k_2 = #_t7
+            L26 :  #_t8 = false
+            L27 :  error_1 = #_t8
+            L28 :  goto END_IF_L13
+
+START_ELSIF_L18 :  EMPTY_STATEMENT
+            L30 :  #_t9 = s_1 AND s_2
+            L31 :  if #_t9 goto ELSIF_L29
+
+            L32 :  goto END_ELSIF_L29
+
+      ELSIF_L29 :  EMPTY_STATEMENT
+            L33 :  #_t10 = 6
+            L34 :  cstate11 = #_t10
+            L35 :  #_t11 = false
+            L36 :  k_1 = #_t11
+            L37 :  #_t12 = false
+            L38 :  k_2 = #_t12
+            L39 :  #_t13 = true
+            L40 :  error_1 = #_t13
+            L41 :  goto END_IF_L13
+
+  END_ELSIF_L29 :  EMPTY_STATEMENT
+            L43 :  #_t14 = NOT s_2
+            L44 :  #_t15 = s_1 AND #_t14
+            L45 :  #_t16 = #_t15 AND s_3
+            L46 :  #_t17 = NOT s_1
+            L47 :  #_t18 = #_t17 AND s_2
+            L48 :  #_t19 = #_t18 AND s_3
+            L49 :  #_t20 = #_t19 OR #_t16
+            L50 :  if #_t20 goto ELSIF_L42
+
+            L51 :  goto END_ELSIF_L42
+
+      ELSIF_L42 :  EMPTY_STATEMENT
+            L52 :  #_t21 = 3
+            L53 :  cstate11 = #_t21
+            L54 :  #_t22 = false
+            L55 :  k_1 = #_t22
+            L56 :  #_t23 = false
+            L57 :  k_2 = #_t23
+            L58 :  #_t24 = false
+            L59 :  error_1 = #_t24
+            L60 :  goto END_IF_L13
+
+  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L62 :  #_t25 = NOT s_3
+            L63 :  #_t26 = NOT s_2
+            L64 :  #_t27 = s_1 AND #_t26
+            L65 :  #_t28 = #_t27 AND #_t25
+            L66 :  #_t29 = NOT s_3
+            L67 :  #_t30 = NOT s_1
+            L68 :  #_t31 = #_t30 AND s_2
+            L69 :  #_t32 = #_t31 AND #_t29
+            L70 :  #_t33 = #_t32 OR #_t28
+            L71 :  if #_t33 goto ELSIF_L61
+
+            L72 :  goto END_ELSIF_L61
+
+      ELSIF_L61 :  EMPTY_STATEMENT
+            L73 :  #_t34 = 3
+            L74 :  cstate11 = #_t34
+            L75 :  #_t35 = false
+            L76 :  k_1 = #_t35
+            L77 :  #_t36 = false
+            L78 :  k_2 = #_t36
+            L79 :  #_t37 = true
+            L80 :  error_1 = #_t37
+            L81 :  goto END_IF_L13
+
+  END_ELSIF_L61 :  EMPTY_STATEMENT
+
+     END_IF_L13 :  EMPTY_STATEMENT
+            L82 :  goto END_IF_L7
+
+START_ELSIF_L11 :  EMPTY_STATEMENT
+            L84 :  #_t38 = 1
+            L85 :  #_t39 = cstate11 == #_t38
+            L86 :  if #_t39 goto ELSIF_L83
+
+            L87 :  goto END_ELSIF_L83
+
+      ELSIF_L83 :  EMPTY_STATEMENT
+            L89 :  #_t40 = NOT s_3
+            L90 :  #_t41 = NOT s_1
+            L91 :  #_t42 = #_t41 AND s_2
+            L92 :  #_t43 = #_t42 AND #_t40
+            L93 :  if #_t43 goto IF_L88
+
+            L95 :  goto START_ELSIF_L94
+
+         IF_L88 :  EMPTY_STATEMENT
+            L96 :  #_t44 = 2
+            L97 :  cstate11 = #_t44
+            L98 :  #_t45 = false
+            L99 :  k_1 = #_t45
+           L100 :  #_t46 = true
+           L101 :  k_2 = #_t46
+           L102 :  #_t47 = false
+           L103 :  error_1 = #_t47
+           L104 :  goto END_IF_L88
+
+START_ELSIF_L94 :  EMPTY_STATEMENT
+           L106 :  #_t48 = s_1 AND s_2
+           L107 :  if #_t48 goto ELSIF_L105
+
+           L108 :  goto END_ELSIF_L105
+
+     ELSIF_L105 :  EMPTY_STATEMENT
+           L109 :  #_t49 = 6
+           L110 :  cstate11 = #_t49
+           L111 :  #_t50 = false
+           L112 :  k_1 = #_t50
+           L113 :  #_t51 = false
+           L114 :  k_2 = #_t51
+           L115 :  #_t52 = true
+           L116 :  error_1 = #_t52
+           L117 :  goto END_IF_L88
+
+ END_ELSIF_L105 :  EMPTY_STATEMENT
+           L119 :  #_t53 = NOT s_3
+           L120 :  #_t54 = NOT s_2
+           L121 :  #_t55 = s_1 AND #_t54
+           L122 :  #_t56 = #_t55 AND #_t53
+           L123 :  if #_t56 goto ELSIF_L118
+
+           L124 :  goto END_ELSIF_L118
+
+     ELSIF_L118 :  EMPTY_STATEMENT
+           L125 :  #_t57 = 4
+           L126 :  cstate11 = #_t57
+           L127 :  #_t58 = true
+           L128 :  k_1 = #_t58
+           L129 :  #_t59 = false
+           L130 :  k_2 = #_t59
+           L131 :  #_t60 = false
+           L132 :  error_1 = #_t60
+           L133 :  goto END_IF_L88
+
+ END_ELSIF_L118 :  EMPTY_STATEMENT
+           L135 :  #_t61 = NOT s_2
+           L136 :  #_t62 = s_1 AND #_t61
+           L137 :  #_t63 = #_t62 AND s_3
+           L138 :  #_t64 = NOT s_1
+           L139 :  #_t65 = #_t64 AND s_2
+           L140 :  #_t66 = #_t65 AND s_3
+           L141 :  #_t67 = NOT s_2
+           L142 :  #_t68 = NOT s_1
+           L143 :  #_t69 = #_t68 AND #_t67
+           L144 :  #_t70 = #_t69 OR #_t66
+           L145 :  #_t71 = #_t70 OR #_t63
+           L146 :  if #_t71 goto ELSIF_L134
+
+           L147 :  goto END_ELSIF_L134
+
+     ELSIF_L134 :  EMPTY_STATEMENT
+           L148 :  #_t72 = 1
+           L149 :  cstate11 = #_t72
+           L150 :  #_t73 = false
+           L151 :  k_1 = #_t73
+           L152 :  #_t74 = false
+           L153 :  k_2 = #_t74
+           L154 :  #_t75 = false
+           L155 :  error_1 = #_t75
+           L156 :  goto END_IF_L88
+
+ END_ELSIF_L134 :  EMPTY_STATEMENT
+
+     END_IF_L88 :  EMPTY_STATEMENT
+           L157 :  goto END_IF_L7
+
+  END_ELSIF_L83 :  EMPTY_STATEMENT
+           L159 :  #_t76 = 2
+           L160 :  #_t77 = cstate11 == #_t76
+           L161 :  if #_t77 goto ELSIF_L158
+
+           L162 :  goto END_ELSIF_L158
+
+     ELSIF_L158 :  EMPTY_STATEMENT
+           L164 :  #_t78 = NOT s_3
+           L165 :  #_t79 = NOT s_2
+           L166 :  #_t80 = s_1 AND #_t79
+           L167 :  #_t81 = #_t80 AND #_t78
+           L168 :  if #_t81 goto IF_L163
+
+           L170 :  goto START_ELSIF_L169
+
+        IF_L163 :  EMPTY_STATEMENT
+           L171 :  #_t82 = 4
+           L172 :  cstate11 = #_t82
+           L173 :  #_t83 = true
+           L174 :  k_1 = #_t83
+           L175 :  #_t84 = false
+           L176 :  k_2 = #_t84
+           L177 :  #_t85 = false
+           L178 :  error_1 = #_t85
+           L179 :  goto END_IF_L163
+
+START_ELSIF_L169 :  EMPTY_STATEMENT
+           L181 :  #_t86 = NOT s_2
+           L182 :  #_t87 = s_1 AND #_t86
+           L183 :  #_t88 = #_t87 AND s_3
+           L184 :  #_t89 = NOT s_1
+           L185 :  #_t90 = #_t89 AND s_3
+           L186 :  #_t91 = #_t90 OR #_t88
+           L187 :  if #_t91 goto ELSIF_L180
+
+           L188 :  goto END_ELSIF_L180
+
+     ELSIF_L180 :  EMPTY_STATEMENT
+           L189 :  #_t92 = 1
+           L190 :  cstate11 = #_t92
+           L191 :  #_t93 = false
+           L192 :  k_1 = #_t93
+           L193 :  #_t94 = false
+           L194 :  k_2 = #_t94
+           L195 :  #_t95 = false
+           L196 :  error_1 = #_t95
+           L197 :  goto END_IF_L163
+
+ END_ELSIF_L180 :  EMPTY_STATEMENT
+           L199 :  #_t96 = NOT s_3
+           L200 :  #_t97 = NOT s_1
+           L201 :  #_t98 = #_t97 AND #_t96
+           L202 :  if #_t98 goto ELSIF_L198
+
+           L203 :  goto END_ELSIF_L198
+
+     ELSIF_L198 :  EMPTY_STATEMENT
+           L204 :  #_t99 = 2
+           L205 :  cstate11 = #_t99
+           L206 :  #_t100 = false
+           L207 :  k_1 = #_t100
+           L208 :  #_t101 = true
+           L209 :  k_2 = #_t101
+           L210 :  #_t102 = false
+           L211 :  error_1 = #_t102
+           L212 :  goto END_IF_L163
+
+ END_ELSIF_L198 :  EMPTY_STATEMENT
+           L214 :  #_t103 = s_1 AND s_2
+           L215 :  if #_t103 goto ELSIF_L213
+
+           L216 :  goto END_ELSIF_L213
+
+     ELSIF_L213 :  EMPTY_STATEMENT
+           L217 :  #_t104 = 6
+           L218 :  cstate11 = #_t104
+           L219 :  #_t105 = false
+           L220 :  k_1 = #_t105
+           L221 :  #_t106 = false
+           L222 :  k_2 = #_t106
+           L223 :  #_t107 = true
+           L224 :  error_1 = #_t107
+           L225 :  goto END_IF_L163
+
+ END_ELSIF_L213 :  EMPTY_STATEMENT
+
+    END_IF_L163 :  EMPTY_STATEMENT
+           L226 :  goto END_IF_L7
+
+ END_ELSIF_L158 :  EMPTY_STATEMENT
+           L228 :  #_t108 = 3
+           L229 :  #_t109 = cstate11 == #_t108
+           L230 :  if #_t109 goto ELSIF_L227
+
+           L231 :  goto END_ELSIF_L227
+
+     ELSIF_L227 :  EMPTY_STATEMENT
+           L233 :  #_t110 = NOT s_2
+           L234 :  #_t111 = s_1 AND #_t110
+           L235 :  #_t112 = #_t111 AND s_3
+           L236 :  #_t113 = NOT s_1
+           L237 :  #_t114 = #_t113 AND s_2
+           L238 :  #_t115 = #_t114 AND s_3
+           L239 :  #_t116 = #_t115 OR #_t112
+           L240 :  if #_t116 goto IF_L232
+
+           L242 :  goto START_ELSIF_L241
+
+        IF_L232 :  EMPTY_STATEMENT
+           L243 :  #_t117 = 3
+           L244 :  cstate11 = #_t117
+           L245 :  #_t118 = false
+           L246 :  k_1 = #_t118
+           L247 :  #_t119 = false
+           L248 :  k_2 = #_t119
+           L249 :  #_t120 = false
+           L250 :  error_1 = #_t120
+           L251 :  goto END_IF_L232
+
+START_ELSIF_L241 :  EMPTY_STATEMENT
+           L253 :  #_t121 = NOT s_3
+           L254 :  #_t122 = NOT s_2
+           L255 :  #_t123 = s_1 AND #_t122
+           L256 :  #_t124 = #_t123 AND #_t121
+           L257 :  #_t125 = NOT s_3
+           L258 :  #_t126 = NOT s_1
+           L259 :  #_t127 = #_t126 AND s_2
+           L260 :  #_t128 = #_t127 AND #_t125
+           L261 :  #_t129 = #_t128 OR #_t124
+           L262 :  if #_t129 goto ELSIF_L252
+
+           L263 :  goto END_ELSIF_L252
+
+     ELSIF_L252 :  EMPTY_STATEMENT
+           L264 :  #_t130 = 3
+           L265 :  cstate11 = #_t130
+           L266 :  #_t131 = false
+           L267 :  k_1 = #_t131
+           L268 :  #_t132 = false
+           L269 :  k_2 = #_t132
+           L270 :  #_t133 = true
+           L271 :  error_1 = #_t133
+           L272 :  goto END_IF_L232
+
+ END_ELSIF_L252 :  EMPTY_STATEMENT
+           L274 :  #_t134 = s_1 AND s_2
+           L275 :  if #_t134 goto ELSIF_L273
+
+           L276 :  goto END_ELSIF_L273
+
+     ELSIF_L273 :  EMPTY_STATEMENT
+           L277 :  #_t135 = 6
+           L278 :  cstate11 = #_t135
+           L279 :  #_t136 = false
+           L280 :  k_1 = #_t136
+           L281 :  #_t137 = false
+           L282 :  k_2 = #_t137
+           L283 :  #_t138 = true
+           L284 :  error_1 = #_t138
+           L285 :  goto END_IF_L232
+
+ END_ELSIF_L273 :  EMPTY_STATEMENT
+           L287 :  #_t139 = NOT s_2
+           L288 :  #_t140 = NOT s_1
+           L289 :  #_t141 = #_t140 AND #_t139
+           L290 :  if #_t141 goto ELSIF_L286
+
+           L291 :  goto END_ELSIF_L286
+
+     ELSIF_L286 :  EMPTY_STATEMENT
+           L292 :  #_t142 = 1
+           L293 :  cstate11 = #_t142
+           L294 :  #_t143 = false
+           L295 :  k_1 = #_t143
+           L296 :  #_t144 = false
+           L297 :  k_2 = #_t144
+           L298 :  #_t145 = false
+           L299 :  error_1 = #_t145
+           L300 :  goto END_IF_L232
+
+ END_ELSIF_L286 :  EMPTY_STATEMENT
+
+    END_IF_L232 :  EMPTY_STATEMENT
+           L301 :  goto END_IF_L7
+
+ END_ELSIF_L227 :  EMPTY_STATEMENT
+           L303 :  #_t146 = 4
+           L304 :  #_t147 = cstate11 == #_t146
+           L305 :  if #_t147 goto ELSIF_L302
+
+           L306 :  goto END_ELSIF_L302
+
+     ELSIF_L302 :  EMPTY_STATEMENT
+           L308 :  #_t148 = NOT s_3
+           L309 :  #_t149 = NOT s_1
+           L310 :  #_t150 = #_t149 AND s_2
+           L311 :  #_t151 = #_t150 AND #_t148
+           L312 :  if #_t151 goto IF_L307
+
+           L314 :  goto START_ELSIF_L313
+
+        IF_L307 :  EMPTY_STATEMENT
+           L315 :  #_t152 = 2
+           L316 :  cstate11 = #_t152
+           L317 :  #_t153 = false
+           L318 :  k_1 = #_t153
+           L319 :  #_t154 = true
+           L320 :  k_2 = #_t154
+           L321 :  #_t155 = false
+           L322 :  error_1 = #_t155
+           L323 :  goto END_IF_L307
+
+START_ELSIF_L313 :  EMPTY_STATEMENT
+           L325 :  #_t156 = NOT s_2
+           L326 :  #_t157 = s_1 AND #_t156
+           L327 :  #_t158 = #_t157 AND s_3
+           L328 :  #_t159 = NOT s_1
+           L329 :  #_t160 = #_t159 AND s_3
+           L330 :  #_t161 = #_t160 OR #_t158
+           L331 :  if #_t161 goto ELSIF_L324
+
+           L332 :  goto END_ELSIF_L324
+
+     ELSIF_L324 :  EMPTY_STATEMENT
+           L333 :  #_t162 = 1
+           L334 :  cstate11 = #_t162
+           L335 :  #_t163 = false
+           L336 :  k_1 = #_t163
+           L337 :  #_t164 = false
+           L338 :  k_2 = #_t164
+           L339 :  #_t165 = false
+           L340 :  error_1 = #_t165
+           L341 :  goto END_IF_L307
+
+ END_ELSIF_L324 :  EMPTY_STATEMENT
+           L343 :  #_t166 = NOT s_3
+           L344 :  #_t167 = NOT s_2
+           L345 :  #_t168 = #_t167 AND #_t166
+           L346 :  if #_t168 goto ELSIF_L342
+
+           L347 :  goto END_ELSIF_L342
+
+     ELSIF_L342 :  EMPTY_STATEMENT
+           L348 :  #_t169 = 4
+           L349 :  cstate11 = #_t169
+           L350 :  #_t170 = true
+           L351 :  k_1 = #_t170
+           L352 :  #_t171 = false
+           L353 :  k_2 = #_t171
+           L354 :  #_t172 = false
+           L355 :  error_1 = #_t172
+           L356 :  goto END_IF_L307
+
+ END_ELSIF_L342 :  EMPTY_STATEMENT
+           L358 :  #_t173 = s_1 AND s_2
+           L359 :  if #_t173 goto ELSIF_L357
+
+           L360 :  goto END_ELSIF_L357
+
+     ELSIF_L357 :  EMPTY_STATEMENT
+           L361 :  #_t174 = 6
+           L362 :  cstate11 = #_t174
+           L363 :  #_t175 = false
+           L364 :  k_1 = #_t175
+           L365 :  #_t176 = false
+           L366 :  k_2 = #_t176
+           L367 :  #_t177 = true
+           L368 :  error_1 = #_t177
+           L369 :  goto END_IF_L307
+
+ END_ELSIF_L357 :  EMPTY_STATEMENT
+
+    END_IF_L307 :  EMPTY_STATEMENT
+           L370 :  goto END_IF_L7
+
+ END_ELSIF_L302 :  EMPTY_STATEMENT
+           L372 :  #_t178 = 5
+           L373 :  #_t179 = cstate11 == #_t178
+           L374 :  if #_t179 goto ELSIF_L371
+
+           L375 :  goto END_ELSIF_L371
+
+     ELSIF_L371 :  EMPTY_STATEMENT
+           L377 :  #_t180 = NOT s_3
+           L378 :  #_t181 = NOT s_1
+           L379 :  #_t182 = #_t181 AND s_2
+           L380 :  #_t183 = #_t182 AND #_t180
+           L381 :  if #_t183 goto IF_L376
+
+           L383 :  goto START_ELSIF_L382
+
+        IF_L376 :  EMPTY_STATEMENT
+           L384 :  #_t184 = 2
+           L385 :  cstate11 = #_t184
+           L386 :  #_t185 = false
+           L387 :  k_1 = #_t185
+           L388 :  #_t186 = true
+           L389 :  k_2 = #_t186
+           L390 :  #_t187 = false
+           L391 :  error_1 = #_t187
+           L392 :  goto END_IF_L376
+
+START_ELSIF_L382 :  EMPTY_STATEMENT
+           L394 :  #_t188 = NOT s_2
+           L395 :  #_t189 = s_1 AND #_t188
+           L396 :  #_t190 = #_t189 AND s_3
+           L397 :  #_t191 = NOT s_1
+           L398 :  #_t192 = #_t191 AND s_2
+           L399 :  #_t193 = #_t192 AND s_3
+           L400 :  #_t194 = #_t193 OR #_t190
+           L401 :  if #_t194 goto ELSIF_L393
+
+           L402 :  goto END_ELSIF_L393
+
+     ELSIF_L393 :  EMPTY_STATEMENT
+           L403 :  #_t195 = 1
+           L404 :  cstate11 = #_t195
+           L405 :  #_t196 = false
+           L406 :  k_1 = #_t196
+           L407 :  #_t197 = false
+           L408 :  k_2 = #_t197
+           L409 :  #_t198 = false
+           L410 :  error_1 = #_t198
+           L411 :  goto END_IF_L376
+
+ END_ELSIF_L393 :  EMPTY_STATEMENT
+           L413 :  #_t199 = NOT s_2
+           L414 :  #_t200 = NOT s_1
+           L415 :  #_t201 = #_t200 AND #_t199
+           L416 :  if #_t201 goto ELSIF_L412
+
+           L417 :  goto END_ELSIF_L412
+
+     ELSIF_L412 :  EMPTY_STATEMENT
+           L418 :  #_t202 = 5
+           L419 :  cstate11 = #_t202
+           L420 :  #_t203 = false
+           L421 :  k_1 = #_t203
+           L422 :  #_t204 = false
+           L423 :  k_2 = #_t204
+           L424 :  #_t205 = false
+           L425 :  error_1 = #_t205
+           L426 :  goto END_IF_L376
+
+ END_ELSIF_L412 :  EMPTY_STATEMENT
+           L428 :  #_t206 = NOT s_3
+           L429 :  #_t207 = NOT s_2
+           L430 :  #_t208 = s_1 AND #_t207
+           L431 :  #_t209 = #_t208 AND #_t206
+           L432 :  if #_t209 goto ELSIF_L427
+
+           L433 :  goto END_ELSIF_L427
+
+     ELSIF_L427 :  EMPTY_STATEMENT
+           L434 :  #_t210 = 4
+           L435 :  cstate11 = #_t210
+           L436 :  #_t211 = true
+           L437 :  k_1 = #_t211
+           L438 :  #_t212 = false
+           L439 :  k_2 = #_t212
+           L440 :  #_t213 = false
+           L441 :  error_1 = #_t213
+           L442 :  goto END_IF_L376
+
+ END_ELSIF_L427 :  EMPTY_STATEMENT
+           L444 :  #_t214 = s_1 AND s_2
+           L445 :  if #_t214 goto ELSIF_L443
+
+           L446 :  goto END_ELSIF_L443
+
+     ELSIF_L443 :  EMPTY_STATEMENT
+           L447 :  #_t215 = 6
+           L448 :  cstate11 = #_t215
+           L449 :  #_t216 = false
+           L450 :  k_1 = #_t216
+           L451 :  #_t217 = false
+           L452 :  k_2 = #_t217
+           L453 :  #_t218 = true
+           L454 :  error_1 = #_t218
+           L455 :  goto END_IF_L376
+
+ END_ELSIF_L443 :  EMPTY_STATEMENT
+
+    END_IF_L376 :  EMPTY_STATEMENT
+           L456 :  goto END_IF_L7
+
+ END_ELSIF_L371 :  EMPTY_STATEMENT
+           L458 :  #_t219 = 6
+           L459 :  #_t220 = cstate11 == #_t219
+           L460 :  if #_t220 goto ELSIF_L457
+
+           L461 :  goto END_ELSIF_L457
+
+     ELSIF_L457 :  EMPTY_STATEMENT
+           L463 :  #_t221 = NOT s_1
+           L464 :  #_t222 = #_t221 AND s_2
+           L465 :  #_t223 = #_t222 OR s_1
+           L466 :  if #_t223 goto IF_L462
+
+           L468 :  goto START_ELSIF_L467
+
+        IF_L462 :  EMPTY_STATEMENT
+           L469 :  #_t224 = 6
+           L470 :  cstate11 = #_t224
+           L471 :  #_t225 = false
+           L472 :  k_1 = #_t225
+           L473 :  #_t226 = false
+           L474 :  k_2 = #_t226
+           L475 :  #_t227 = true
+           L476 :  error_1 = #_t227
+           L477 :  goto END_IF_L462
+
+START_ELSIF_L467 :  EMPTY_STATEMENT
+           L479 :  #_t228 = NOT s_2
+           L480 :  #_t229 = NOT s_1
+           L481 :  #_t230 = #_t229 AND #_t228
+           L482 :  if #_t230 goto ELSIF_L478
+
+           L483 :  goto END_ELSIF_L478
+
+     ELSIF_L478 :  EMPTY_STATEMENT
+           L484 :  #_t231 = 1
+           L485 :  cstate11 = #_t231
+           L486 :  #_t232 = false
+           L487 :  k_1 = #_t232
+           L488 :  #_t233 = false
+           L489 :  k_2 = #_t233
+           L490 :  #_t234 = false
+           L491 :  error_1 = #_t234
+           L492 :  goto END_IF_L462
+
+ END_ELSIF_L478 :  EMPTY_STATEMENT
+
+    END_IF_L462 :  EMPTY_STATEMENT
+           L493 :  goto END_IF_L7
+
+ END_ELSIF_L457 :  EMPTY_STATEMENT
+
+      END_IF_L7 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+           L494 :  print(error_1,)
+           L495 :  print(k_2,)
+           L496 :  print(cstate11,)
+           L497 :  print(k_1,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+           L498 :  s_3 = read()
+           L499 :  s_2 = read()
+           L500 :  s_1 = read()

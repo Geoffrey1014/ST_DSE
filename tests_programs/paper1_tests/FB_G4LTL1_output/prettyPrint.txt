@@ -1,0 +1,112 @@
+|--POUS
+  |--PROGRAM
+    |--name: Prog
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: cstate14
+            |--type: RES_INT
+        |--value: 0
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: x_0
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: x_1
+            |--type: RES_BOOL
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: y_0
+            |--type: RES_BOOL
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: cstate14
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--ifStmt
+                |--condExpr
+                  |--binaryCondOper
+                    |--lhs
+                      |--locationVar
+                        |--name: x_0
+                        |--type: RES_BOOL
+                    |--op: AND_OP
+                    |--rhs
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: x_1
+                              |--type: RES_BOOL
+                |--body
+                  |--codeBlock:
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: cstate14
+                          |--type: RES_INT
+                      |--rhs
+                        |--IntLiteral
+                          |--value: 0
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: y_0
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: true
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x_0
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--boolLiteral
+                                |--value: true
+                        |--op: OR_OP
+                        |--rhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: x_0
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: x_1
+                                |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate14
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 0
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y_0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false

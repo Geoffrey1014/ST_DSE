@@ -97,7 +97,7 @@ public class Main {
         String inputFileName = pathSegments[3];
 
         String inputFile = prefix + pathSegments[2] + "/" + inputFileName;
-        String outPutDir = prefix +   inputFileName.substring(0,7)+  "_output/" ;
+        String outPutDir = prefix +   inputFileName.split("\\.")[0]+  "_output/" ;
         File dir = new File(outPutDir);
         if (!dir.exists()) {// 判断目录是否存在
             dir.mkdir();
@@ -142,22 +142,19 @@ public class Main {
 //                System.out.println(cfg.toString());
 //                System.out.println(cfg.toGraphviz());
 
-                genGraphViz( "origin_" + cfgCounter,cfg,outPutDir);
+//                genGraphViz( "origin_" + cfgCounter,cfg,outPutDir);
 
 
                 System.out.println("_______________________ ");
                 writeFile(cfg.toString(), outPutDir + "origin_" + cfgCounter + ".txt");
 
-                printDominatorMap(cfg);
-
-//                printDUchain(cfg, 1);
+//                printDominatorMap(cfg);
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterCSE---------------------\n");
-                genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
-//                printDUchain(cfg, 2);
+//                genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
 
 //                GlobalCP.performGlobalCP(cfg, globalVArs);
 //                GlobalDCE.performGlobalDeadCodeElimination(cfg);
@@ -166,26 +163,27 @@ public class Main {
                 writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
                 System.out.println("\nafterCP---------------------\n");
 
-//                printDUchain(cfg, 3);
-                genGraphViz( "CP_"+cfgCounter,cfg,outPutDir);
+//                genGraphViz( "CP_"+cfgCounter,cfg,outPutDir);
 
                 GlobalDCE.performGlobalDeadCodeElimination(cfg);
                 writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterDSE---------------------\n");
-                genGraphViz( "DSE_"+cfgCounter,cfg,outPutDir);
-//                printDUchain(cfg, 4);
+//                genGraphViz( "DSE_"+cfgCounter,cfg,outPutDir);
 
 
 //                System.out.println("simulator.execute();------------");
 //                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
 //                simulator.execute();
 
+                System.out.println("CF------------------------");
                 GlobalCF.performGlobalCodeFolding(cfg);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CF_" + cfgCounter + ".txt");
 
+                System.out.println("URE------------------------");
                 GlobalURE.performGlobalURE(cfg);
                 writeFile(cfg.toString(), outPutDir + "new_" + "URE_" + cfgCounter + ".txt");
 
+                System.out.println("AS------------------------");
                 AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
                 writeFile(cfg.toString(), outPutDir + "new_" + "AS_" + cfgCounter + ".txt");
 
@@ -201,7 +199,8 @@ public class Main {
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
-//        String file = "04_test.txt";
+        inputDir = "tests_programs/paper1_tests/input/";
+//        String file = "FB_G4LTL15.txt";
 //        walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
@@ -216,7 +215,7 @@ public class Main {
         for(File f:fs) {                    //遍历File[]数组
             if (!f.isDirectory())        //若非目录(即文件)，则打印
                 System.out.println(Arrays.toString(f.toString().split("/")));
-            walkTree(f.toString());
+                walkTree(f.toString());
 
         }
     }

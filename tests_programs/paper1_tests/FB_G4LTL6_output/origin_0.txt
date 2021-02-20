@@ -1,0 +1,557 @@
+CFG:
+      FB_G4LTL6 :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate77 = 0
+             L1 :  t_reset = false
+             L2 :  t_up = false
+             L3 :  t_start = false
+             L4 :  count = 0
+             L5 :  q = false
+             L6 :  T_VALUE = 5
+             L7 :  x_1 = false
+             L8 :  y_1 = false
+
+           Body :  EMPTY_STATEMENT
+            L10 :  #_t0 = 0
+            L11 :  #_t1 = cstate77 == #_t0
+            L12 :  if #_t1 goto IF_L9
+
+            L14 :  goto START_ELSIF_L13
+
+          IF_L9 :  EMPTY_STATEMENT
+            L16 :  #_t2 = NOT q
+            L17 :  #_t3 = NOT x_1
+            L18 :  #_t4 = #_t3 AND #_t2
+            L19 :  if #_t4 goto IF_L15
+
+            L21 :  goto START_ELSIF_L20
+
+         IF_L15 :  EMPTY_STATEMENT
+            L22 :  #_t5 = 1
+            L23 :  cstate77 = #_t5
+            L24 :  #_t6 = false
+            L25 :  y_1 = #_t6
+            L26 :  #_t7 = false
+            L27 :  t_start = #_t7
+            L28 :  goto END_IF_L15
+
+START_ELSIF_L20 :  EMPTY_STATEMENT
+            L30 :  if x_1 goto ELSIF_L29
+
+            L31 :  goto END_ELSIF_L29
+
+      ELSIF_L29 :  EMPTY_STATEMENT
+            L32 :  #_t8 = 3
+            L33 :  cstate77 = #_t8
+            L34 :  #_t9 = true
+            L35 :  y_1 = #_t9
+            L36 :  #_t10 = false
+            L37 :  t_start = #_t10
+            L38 :  goto END_IF_L15
+
+  END_ELSIF_L29 :  EMPTY_STATEMENT
+            L40 :  #_t11 = NOT x_1
+            L41 :  #_t12 = #_t11 AND q
+            L42 :  if #_t12 goto ELSIF_L39
+
+            L43 :  goto END_ELSIF_L39
+
+      ELSIF_L39 :  EMPTY_STATEMENT
+            L44 :  #_t13 = 5
+            L45 :  cstate77 = #_t13
+            L46 :  #_t14 = false
+            L47 :  y_1 = #_t14
+            L48 :  #_t15 = false
+            L49 :  t_start = #_t15
+            L50 :  goto END_IF_L15
+
+  END_ELSIF_L39 :  EMPTY_STATEMENT
+
+     END_IF_L15 :  EMPTY_STATEMENT
+            L51 :  goto END_IF_L9
+
+START_ELSIF_L13 :  EMPTY_STATEMENT
+            L53 :  #_t16 = 1
+            L54 :  #_t17 = cstate77 == #_t16
+            L55 :  if #_t17 goto ELSIF_L52
+
+            L56 :  goto END_ELSIF_L52
+
+      ELSIF_L52 :  EMPTY_STATEMENT
+            L58 :  #_t18 = NOT q
+            L59 :  #_t19 = NOT x_1
+            L60 :  #_t20 = #_t19 AND #_t18
+            L61 :  if #_t20 goto IF_L57
+
+            L63 :  goto START_ELSIF_L62
+
+         IF_L57 :  EMPTY_STATEMENT
+            L64 :  #_t21 = 1
+            L65 :  cstate77 = #_t21
+            L66 :  #_t22 = false
+            L67 :  y_1 = #_t22
+            L68 :  #_t23 = false
+            L69 :  t_start = #_t23
+            L70 :  goto END_IF_L57
+
+START_ELSIF_L62 :  EMPTY_STATEMENT
+            L72 :  #_t24 = NOT x_1
+            L73 :  #_t25 = #_t24 AND q
+            L74 :  if #_t25 goto ELSIF_L71
+
+            L75 :  goto END_ELSIF_L71
+
+      ELSIF_L71 :  EMPTY_STATEMENT
+            L76 :  #_t26 = 5
+            L77 :  cstate77 = #_t26
+            L78 :  #_t27 = false
+            L79 :  y_1 = #_t27
+            L80 :  #_t28 = false
+            L81 :  t_start = #_t28
+            L82 :  goto END_IF_L57
+
+  END_ELSIF_L71 :  EMPTY_STATEMENT
+            L84 :  if x_1 goto ELSIF_L83
+
+            L85 :  goto END_ELSIF_L83
+
+      ELSIF_L83 :  EMPTY_STATEMENT
+            L86 :  #_t29 = 3
+            L87 :  cstate77 = #_t29
+            L88 :  #_t30 = true
+            L89 :  y_1 = #_t30
+            L90 :  #_t31 = false
+            L91 :  t_start = #_t31
+            L92 :  goto END_IF_L57
+
+  END_ELSIF_L83 :  EMPTY_STATEMENT
+
+     END_IF_L57 :  EMPTY_STATEMENT
+            L93 :  goto END_IF_L9
+
+  END_ELSIF_L52 :  EMPTY_STATEMENT
+            L95 :  #_t32 = 2
+            L96 :  #_t33 = cstate77 == #_t32
+            L97 :  if #_t33 goto ELSIF_L94
+
+            L98 :  goto END_ELSIF_L94
+
+      ELSIF_L94 :  EMPTY_STATEMENT
+           L100 :  #_t34 = NOT q
+           L101 :  #_t35 = x_1 AND #_t34
+           L102 :  if #_t35 goto IF_L99
+
+           L104 :  goto START_ELSIF_L103
+
+         IF_L99 :  EMPTY_STATEMENT
+           L105 :  #_t36 = 2
+           L106 :  cstate77 = #_t36
+           L107 :  #_t37 = true
+           L108 :  y_1 = #_t37
+           L109 :  #_t38 = false
+           L110 :  t_start = #_t38
+           L111 :  goto END_IF_L99
+
+START_ELSIF_L103 :  EMPTY_STATEMENT
+           L113 :  #_t39 = x_1 AND q
+           L114 :  if #_t39 goto ELSIF_L112
+
+           L115 :  goto END_ELSIF_L112
+
+     ELSIF_L112 :  EMPTY_STATEMENT
+           L116 :  #_t40 = 3
+           L117 :  cstate77 = #_t40
+           L118 :  #_t41 = true
+           L119 :  y_1 = #_t41
+           L120 :  #_t42 = false
+           L121 :  t_start = #_t42
+           L122 :  goto END_IF_L99
+
+ END_ELSIF_L112 :  EMPTY_STATEMENT
+           L124 :  #_t43 = NOT q
+           L125 :  #_t44 = NOT x_1
+           L126 :  #_t45 = #_t44 AND #_t43
+           L127 :  if #_t45 goto ELSIF_L123
+
+           L128 :  goto END_ELSIF_L123
+
+     ELSIF_L123 :  EMPTY_STATEMENT
+           L129 :  #_t46 = 4
+           L130 :  cstate77 = #_t46
+           L131 :  #_t47 = true
+           L132 :  y_1 = #_t47
+           L133 :  #_t48 = true
+           L134 :  t_start = #_t48
+           L135 :  #_t49 = false
+           L136 :  t_up = #_t49
+           L137 :  goto END_IF_L99
+
+ END_ELSIF_L123 :  EMPTY_STATEMENT
+           L139 :  #_t50 = NOT x_1
+           L140 :  #_t51 = #_t50 AND q
+           L141 :  if #_t51 goto ELSIF_L138
+
+           L142 :  goto END_ELSIF_L138
+
+     ELSIF_L138 :  EMPTY_STATEMENT
+           L143 :  #_t52 = 6
+           L144 :  cstate77 = #_t52
+           L145 :  #_t53 = true
+           L146 :  y_1 = #_t53
+           L147 :  #_t54 = true
+           L148 :  t_start = #_t54
+           L149 :  #_t55 = false
+           L150 :  t_up = #_t55
+           L151 :  goto END_IF_L99
+
+ END_ELSIF_L138 :  EMPTY_STATEMENT
+
+     END_IF_L99 :  EMPTY_STATEMENT
+           L152 :  goto END_IF_L9
+
+  END_ELSIF_L94 :  EMPTY_STATEMENT
+           L154 :  #_t56 = 3
+           L155 :  #_t57 = cstate77 == #_t56
+           L156 :  if #_t57 goto ELSIF_L153
+
+           L157 :  goto END_ELSIF_L153
+
+     ELSIF_L153 :  EMPTY_STATEMENT
+           L159 :  #_t58 = NOT x_1
+           L160 :  #_t59 = #_t58 AND q
+           L161 :  if #_t59 goto IF_L158
+
+           L163 :  goto START_ELSIF_L162
+
+        IF_L158 :  EMPTY_STATEMENT
+           L164 :  #_t60 = 6
+           L165 :  cstate77 = #_t60
+           L166 :  #_t61 = true
+           L167 :  y_1 = #_t61
+           L168 :  #_t62 = true
+           L169 :  t_start = #_t62
+           L170 :  #_t63 = false
+           L171 :  t_up = #_t63
+           L172 :  goto END_IF_L158
+
+START_ELSIF_L162 :  EMPTY_STATEMENT
+           L174 :  #_t64 = NOT q
+           L175 :  #_t65 = NOT x_1
+           L176 :  #_t66 = #_t65 AND #_t64
+           L177 :  if #_t66 goto ELSIF_L173
+
+           L178 :  goto END_ELSIF_L173
+
+     ELSIF_L173 :  EMPTY_STATEMENT
+           L179 :  #_t67 = 4
+           L180 :  cstate77 = #_t67
+           L181 :  #_t68 = true
+           L182 :  y_1 = #_t68
+           L183 :  #_t69 = true
+           L184 :  t_start = #_t69
+           L185 :  #_t70 = false
+           L186 :  t_up = #_t70
+           L187 :  goto END_IF_L158
+
+ END_ELSIF_L173 :  EMPTY_STATEMENT
+           L189 :  if x_1 goto ELSIF_L188
+
+           L190 :  goto END_ELSIF_L188
+
+     ELSIF_L188 :  EMPTY_STATEMENT
+           L191 :  #_t71 = 3
+           L192 :  cstate77 = #_t71
+           L193 :  #_t72 = true
+           L194 :  y_1 = #_t72
+           L195 :  #_t73 = false
+           L196 :  t_start = #_t73
+           L197 :  goto END_IF_L158
+
+ END_ELSIF_L188 :  EMPTY_STATEMENT
+
+    END_IF_L158 :  EMPTY_STATEMENT
+           L198 :  goto END_IF_L9
+
+ END_ELSIF_L153 :  EMPTY_STATEMENT
+           L200 :  #_t74 = 4
+           L201 :  #_t75 = cstate77 == #_t74
+           L202 :  if #_t75 goto ELSIF_L199
+
+           L203 :  goto END_ELSIF_L199
+
+     ELSIF_L199 :  EMPTY_STATEMENT
+           L205 :  #_t76 = NOT x_1
+           L206 :  #_t77 = #_t76 AND q
+           L207 :  if #_t77 goto IF_L204
+
+           L209 :  goto START_ELSIF_L208
+
+        IF_L204 :  EMPTY_STATEMENT
+           L210 :  #_t78 = 5
+           L211 :  cstate77 = #_t78
+           L212 :  #_t79 = false
+           L213 :  y_1 = #_t79
+           L214 :  #_t80 = false
+           L215 :  t_start = #_t80
+           L216 :  goto END_IF_L204
+
+START_ELSIF_L208 :  EMPTY_STATEMENT
+           L218 :  #_t81 = NOT q
+           L219 :  #_t82 = NOT x_1
+           L220 :  #_t83 = #_t82 AND #_t81
+           L221 :  if #_t83 goto ELSIF_L217
+
+           L222 :  goto END_ELSIF_L217
+
+     ELSIF_L217 :  EMPTY_STATEMENT
+           L223 :  #_t84 = 4
+           L224 :  cstate77 = #_t84
+           L225 :  #_t85 = true
+           L226 :  y_1 = #_t85
+           L227 :  #_t86 = false
+           L228 :  t_start = #_t86
+           L229 :  goto END_IF_L204
+
+ END_ELSIF_L217 :  EMPTY_STATEMENT
+           L231 :  #_t87 = NOT q
+           L232 :  #_t88 = x_1 AND #_t87
+           L233 :  if #_t88 goto ELSIF_L230
+
+           L234 :  goto END_ELSIF_L230
+
+     ELSIF_L230 :  EMPTY_STATEMENT
+           L235 :  #_t89 = 2
+           L236 :  cstate77 = #_t89
+           L237 :  #_t90 = true
+           L238 :  y_1 = #_t90
+           L239 :  #_t91 = false
+           L240 :  t_start = #_t91
+           L241 :  goto END_IF_L204
+
+ END_ELSIF_L230 :  EMPTY_STATEMENT
+           L243 :  #_t92 = x_1 AND q
+           L244 :  if #_t92 goto ELSIF_L242
+
+           L245 :  goto END_ELSIF_L242
+
+     ELSIF_L242 :  EMPTY_STATEMENT
+           L246 :  #_t93 = 3
+           L247 :  cstate77 = #_t93
+           L248 :  #_t94 = true
+           L249 :  y_1 = #_t94
+           L250 :  #_t95 = false
+           L251 :  t_start = #_t95
+           L252 :  goto END_IF_L204
+
+ END_ELSIF_L242 :  EMPTY_STATEMENT
+
+    END_IF_L204 :  EMPTY_STATEMENT
+           L253 :  goto END_IF_L9
+
+ END_ELSIF_L199 :  EMPTY_STATEMENT
+           L255 :  #_t96 = 5
+           L256 :  #_t97 = cstate77 == #_t96
+           L257 :  if #_t97 goto ELSIF_L254
+
+           L258 :  goto END_ELSIF_L254
+
+     ELSIF_L254 :  EMPTY_STATEMENT
+           L260 :  if x_1 goto IF_L259
+
+           L262 :  goto START_ELSIF_L261
+
+        IF_L259 :  EMPTY_STATEMENT
+           L263 :  #_t98 = 3
+           L264 :  cstate77 = #_t98
+           L265 :  #_t99 = true
+           L266 :  y_1 = #_t99
+           L267 :  #_t100 = false
+           L268 :  t_start = #_t100
+           L269 :  goto END_IF_L259
+
+START_ELSIF_L261 :  EMPTY_STATEMENT
+           L271 :  #_t101 = NOT q
+           L272 :  #_t102 = NOT x_1
+           L273 :  #_t103 = #_t102 AND #_t101
+           L274 :  if #_t103 goto ELSIF_L270
+
+           L275 :  goto END_ELSIF_L270
+
+     ELSIF_L270 :  EMPTY_STATEMENT
+           L276 :  #_t104 = 1
+           L277 :  cstate77 = #_t104
+           L278 :  #_t105 = false
+           L279 :  y_1 = #_t105
+           L280 :  #_t106 = false
+           L281 :  t_start = #_t106
+           L282 :  goto END_IF_L259
+
+ END_ELSIF_L270 :  EMPTY_STATEMENT
+           L284 :  #_t107 = NOT x_1
+           L285 :  #_t108 = #_t107 AND q
+           L286 :  if #_t108 goto ELSIF_L283
+
+           L287 :  goto END_ELSIF_L283
+
+     ELSIF_L283 :  EMPTY_STATEMENT
+           L288 :  #_t109 = 5
+           L289 :  cstate77 = #_t109
+           L290 :  #_t110 = false
+           L291 :  y_1 = #_t110
+           L292 :  #_t111 = false
+           L293 :  t_start = #_t111
+           L294 :  goto END_IF_L259
+
+ END_ELSIF_L283 :  EMPTY_STATEMENT
+
+    END_IF_L259 :  EMPTY_STATEMENT
+           L295 :  goto END_IF_L9
+
+ END_ELSIF_L254 :  EMPTY_STATEMENT
+           L297 :  #_t112 = 6
+           L298 :  #_t113 = cstate77 == #_t112
+           L299 :  if #_t113 goto ELSIF_L296
+
+           L300 :  goto END_ELSIF_L296
+
+     ELSIF_L296 :  EMPTY_STATEMENT
+           L302 :  #_t114 = NOT x_1
+           L303 :  #_t115 = #_t114 AND q
+           L304 :  if #_t115 goto IF_L301
+
+           L306 :  goto START_ELSIF_L305
+
+        IF_L301 :  EMPTY_STATEMENT
+           L307 :  #_t116 = 5
+           L308 :  cstate77 = #_t116
+           L309 :  #_t117 = false
+           L310 :  y_1 = #_t117
+           L311 :  #_t118 = false
+           L312 :  t_start = #_t118
+           L313 :  goto END_IF_L301
+
+START_ELSIF_L305 :  EMPTY_STATEMENT
+           L315 :  #_t119 = NOT q
+           L316 :  #_t120 = NOT x_1
+           L317 :  #_t121 = #_t120 AND #_t119
+           L318 :  if #_t121 goto ELSIF_L314
+
+           L319 :  goto END_ELSIF_L314
+
+     ELSIF_L314 :  EMPTY_STATEMENT
+           L320 :  #_t122 = 4
+           L321 :  cstate77 = #_t122
+           L322 :  #_t123 = true
+           L323 :  y_1 = #_t123
+           L324 :  #_t124 = false
+           L325 :  t_start = #_t124
+           L326 :  goto END_IF_L301
+
+ END_ELSIF_L314 :  EMPTY_STATEMENT
+           L328 :  #_t125 = NOT q
+           L329 :  #_t126 = x_1 AND #_t125
+           L330 :  if #_t126 goto ELSIF_L327
+
+           L331 :  goto END_ELSIF_L327
+
+     ELSIF_L327 :  EMPTY_STATEMENT
+           L332 :  #_t127 = 2
+           L333 :  cstate77 = #_t127
+           L334 :  #_t128 = true
+           L335 :  y_1 = #_t128
+           L336 :  #_t129 = false
+           L337 :  t_start = #_t129
+           L338 :  goto END_IF_L301
+
+ END_ELSIF_L327 :  EMPTY_STATEMENT
+           L340 :  #_t130 = x_1 AND q
+           L341 :  if #_t130 goto ELSIF_L339
+
+           L342 :  goto END_ELSIF_L339
+
+     ELSIF_L339 :  EMPTY_STATEMENT
+           L343 :  #_t131 = 3
+           L344 :  cstate77 = #_t131
+           L345 :  #_t132 = true
+           L346 :  y_1 = #_t132
+           L347 :  #_t133 = false
+           L348 :  t_start = #_t133
+           L349 :  goto END_IF_L301
+
+ END_ELSIF_L339 :  EMPTY_STATEMENT
+
+    END_IF_L301 :  EMPTY_STATEMENT
+           L350 :  goto END_IF_L9
+
+ END_ELSIF_L296 :  EMPTY_STATEMENT
+
+      END_IF_L9 :  EMPTY_STATEMENT
+           L352 :  if t_up goto IF_L351
+
+           L354 :  goto START_ELSIF_L353
+
+        IF_L351 :  EMPTY_STATEMENT
+           L355 :  #_t134 = true
+           L356 :  t_reset = #_t134
+           L357 :  goto END_IF_L351
+
+START_ELSIF_L353 :  EMPTY_STATEMENT
+           L359 :  #_t135 = NOT t_up
+           L360 :  #_t136 = t_start AND #_t135
+           L361 :  if #_t136 goto ELSIF_L358
+
+           L362 :  goto END_ELSIF_L358
+
+     ELSIF_L358 :  EMPTY_STATEMENT
+           L363 :  #_t137 = true
+           L364 :  t_up = #_t137
+           L365 :  #_t138 = false
+           L366 :  t_reset = #_t138
+           L367 :  goto END_IF_L351
+
+ END_ELSIF_L358 :  EMPTY_STATEMENT
+
+    END_IF_L351 :  EMPTY_STATEMENT
+           L370 :  if t_reset goto IF_L368
+
+           L371 :  goto ELSE_L369
+
+      ELSE_L369 :  EMPTY_STATEMENT
+           L372 :  #_t139 = false
+           L373 :  q = #_t139
+           L374 :  #_t140 = 0
+           L375 :  count = #_t140
+           L376 :  goto END_IF_L368
+
+        IF_L368 :  EMPTY_STATEMENT
+           L377 :  count = T_VALUE
+           L379 :  #_t141 = count == T_VALUE
+           L380 :  if #_t141 goto IF_L378
+
+           L381 :  goto END_IF_L378
+
+        IF_L378 :  EMPTY_STATEMENT
+           L382 :  #_t142 = true
+           L383 :  q = #_t142
+
+    END_IF_L378 :  EMPTY_STATEMENT
+
+    END_IF_L368 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+           L384 :  print(t_start,)
+           L385 :  print(cstate77,)
+           L386 :  print(count,)
+           L387 :  print(q,)
+           L388 :  print(y_1,)
+           L389 :  print(T_VALUE,)
+           L390 :  print(t_up,)
+           L391 :  print(t_reset,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+           L392 :  x_1 = read()

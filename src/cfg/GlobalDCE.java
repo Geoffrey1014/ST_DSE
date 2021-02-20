@@ -24,12 +24,12 @@ public class GlobalDCE {
         // TODO: Make sure that you do not remove assignment stmts for variables from other scopes
         // for example, i = 5 might look like dead code but it's not if i was declared in the scope above
         System.out.println("----before global DSE----deadCodeMap------");
-        for (BasicBlock bb : deadCodeMap.keySet()) {
-            HashSet<BlockLabelPair> blockLabelPairs= deadCodeMap.get(bb);
-            for(BlockLabelPair tuple : blockLabelPairs){
-                System.out.println(tuple);
-            }
-        }
+//        for (BasicBlock bb : deadCodeMap.keySet()) {
+//            HashSet<BlockLabelPair> blockLabelPairs= deadCodeMap.get(bb);
+//            for(BlockLabelPair tuple : blockLabelPairs){
+//                System.out.println(tuple);
+//            }
+//        }
         System.out.println("----before global DSE----deadCodeMap------");
 
         // iterate through each basic block where there is dead code

@@ -17,11 +17,14 @@ public enum OperKeyWordEnum implements Where {
 
     public static OperKeyWordEnum fromOperTpye(String typeName) {
         for (OperKeyWordEnum type : OperKeyWordEnum.values()) {
-            if (type.getTypeName().equals(typeName)) {
+            if (type.getTypeNameOrigin().equals(typeName)) {
                 return type;
             }
         }
         return null;
+    }
+    public String getTypeNameOrigin() {
+        return this.typeName;
     }
 
     public String getTypeName() {

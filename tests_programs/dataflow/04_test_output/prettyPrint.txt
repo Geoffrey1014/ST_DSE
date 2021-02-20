@@ -49,7 +49,7 @@
           |--rhs
             |--functionCallExpr
               |--name: get_int
-              |--type: ir.VARBlockDecl.IrTypeSimple@2931522b
+              |--type: ir.VARBlockDecl.IrTypeSimple@6d026701
               |--argsList:
                 |--argExpr:
                   |--IntLiteral
@@ -62,7 +62,7 @@
           |--rhs
             |--functionCallExpr
               |--name: get_int
-              |--type: ir.VARBlockDecl.IrTypeSimple@2931522b
+              |--type: ir.VARBlockDecl.IrTypeSimple@6d026701
               |--argsList:
                 |--argExpr:
                   |--IntLiteral
