@@ -106,7 +106,7 @@ public class GlobalCSE {
             Computation.BinaryComputation otherComp =
                     new Computation.BinaryComputation(
                             binaryOp.getLeftOperand(),
-                            binaryOp.getOperation(),
+                            binaryOp.getOperator(),
                             binaryOp.getRightOperand()
                     );
             return comp.equals(otherComp);
@@ -191,7 +191,7 @@ public class GlobalCSE {
                                         new LlAssignStmtBinaryOp(
                                                 compTemp,
                                                 binaryOp.getLeftOperand(),
-                                                binaryOp.getOperation(),
+                                                binaryOp.getOperator(),
                                                 binaryOp.getRightOperand()
                                         );
                                 labelstoStmtsMap.put(stmtlabel, compStmt);

@@ -146,7 +146,7 @@ public class AvailableExpressions {
                         && binaryOp.getRightOperand() instanceof LlLocationVar) {
                     Computation binComp = Computation.createBinaryComputation(
                             binaryOp.getLeftOperand(),
-                            binaryOp.getOperation(),
+                            binaryOp.getOperator(),
                             binaryOp.getRightOperand()
                     );
                     generatedExpressions.add(binComp);

@@ -1,25 +1,21 @@
 package ll.assignStmt;
 
 
-import cfg.LlStatementVisitor;
 import ll.LlComponent;
 import ll.literal.*;
 import ll.location.LlLocation;
-import simulation.BasicTypeEnum;
-import simulation.Memory;
-import simulation.Operation;
-import simulation.ValueOfDiffType;
+import simulation.*;
 
 public class LlAssignStmtBinaryOp extends LlAssignStmt {
 
     private final LlComponent leftOperand;
-    private final String operation;
+    private final String operator;
     private final LlComponent rightOperand;
 
-    public LlAssignStmtBinaryOp(LlLocation storeLocation, LlComponent leftOperand, String operation, LlComponent rightOperand) {
+    public LlAssignStmtBinaryOp(LlLocation storeLocation, LlComponent leftOperand, String operator, LlComponent rightOperand) {
         super(storeLocation);
         this.leftOperand = leftOperand;
-        this.operation = operation;
+        this.operator = operator;
         this.rightOperand = rightOperand;
     }
 
@@ -27,8 +23,8 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
         return this.leftOperand;
     }
 
-    public String getOperation() {
-        return this.operation;
+    public String getOperator() {
+        return this.operator;
     }
 
     public LlComponent getRightOperand() {
@@ -37,7 +33,7 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
 
     @Override
     public String toString() {
-        return this.storeLocation.toString() + " = " + this.leftOperand.toString() + " " + this.operation + " " + this.rightOperand.toString();
+        return this.storeLocation.toString() + " = " + this.leftOperand.toString() + " " + this.operator + " " + this.rightOperand.toString();
     }
 
     @Override
@@ -50,7 +46,7 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
         }
         return ((LlAssignStmtBinaryOp) obj).rightOperand.equals(this.rightOperand)
                 && ((LlAssignStmtBinaryOp) obj).leftOperand.equals(this.leftOperand)
-                && ((LlAssignStmtBinaryOp) obj).operation.equals(this.operation)
+                && ((LlAssignStmtBinaryOp) obj).operator.equals(this.operator)
                 && ((LlAssignStmtBinaryOp) obj).storeLocation.equals(this.storeLocation);
     }
 
@@ -58,7 +54,7 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
     public int hashCode() {
         return this.rightOperand.hashCode()
                 * this.leftOperand.hashCode()
-                * this.operation.hashCode()
+                * this.operator.hashCode()
                 * this.storeLocation.hashCode();
     }
 
@@ -116,7 +112,7 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
         }
         Operation operationOfSimulor = new Operation();
         ValueOfDiffType result = null;// after get the result, put it in the memory
-        switch (operation) {
+        switch (operator) {
             case "+":
                 result = operationOfSimulor.add(left, right);
                 break;
@@ -159,7 +155,7 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
                 break;
             default:
                 System.err.println("Runtime Error: Unrecognized Operation");
-                System.err.println(operation);
+                System.err.println(operator);
                 break;
         }
         

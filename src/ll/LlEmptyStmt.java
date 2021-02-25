@@ -1,7 +1,7 @@
 package ll;
 
 
-import cfg.LlStatementVisitor;
+import simulation.LlStatementVisitor;
 import simulation.Memory;
 
 public class LlEmptyStmt extends LlStatement {

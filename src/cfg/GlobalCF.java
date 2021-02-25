@@ -63,7 +63,7 @@ public class GlobalCF {
 
                         // compute the expression depending on whether its && or || or ==
                         boolean evaluatedExpr = op1 && op2;
-                        switch (binaryOp.getOperation()) {
+                        switch (binaryOp.getOperator()) {
                             case "||":
                                 evaluatedExpr = op1 || op2;
                                 break;
@@ -87,11 +87,11 @@ public class GlobalCF {
                         long op2 = ((LlLiteralInt) binaryOp.getRightOperand()).getIntValue();
 
                         // don't let a Divide-by-Zero error happen
-                        if (!binaryOp.getOperation().equals("/") && op2 != 0) {
+                        if (!binaryOp.getOperator().equals("/") && op2 != 0) {
 
                             // compute the expresssion depending on whether its %,+,*,-,/
                             long evaluatedExpr = 69696969;
-                            switch (binaryOp.getOperation()) {
+                            switch (binaryOp.getOperator()) {
                                 case "%":
                                     evaluatedExpr = op1 % op2;
                                     break;

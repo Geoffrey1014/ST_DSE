@@ -1145,15 +1145,19 @@ class JavaExample
     public void findModelExample1(Context ctx) throws TestFailedException
     {
         System.out.println("FindModelExample1");
-        Log.append("FindModelExample1");
+//        Log.append("FindModelExample1");
 
         BoolExpr x = ctx.mkBoolConst("x");
         BoolExpr y = ctx.mkBoolConst("y");
         BoolExpr x_xor_y = ctx.mkXor(x, y);
 
         Model model = check(ctx, x_xor_y, Status.SATISFIABLE);
-        System.out.println("x = " + model.evaluate(x, false) + ", y = "
-                + model.evaluate(y, false));
+        System.out.println("x = " + model.evaluate(x, true) + ", y = "
+                + model.evaluate(y, true));
+        //Parameters:
+        //t	An expression
+        //completion	When this flag is enabled, a model value will be assigned to any constant or function that does not have an interpretation in the model.
+
     }
 
     // / Find a model for <tt>x < y + 1, x > 2</tt>.
@@ -1162,7 +1166,7 @@ class JavaExample
     public void findModelExample2(Context ctx) throws TestFailedException
     {
         System.out.println("FindModelExample2");
-        Log.append("FindModelExample2");
+//        Log.append("FindModelExample2");
 
         IntExpr x = ctx.mkIntConst("x");
         IntExpr y = ctx.mkIntConst("y");
@@ -1178,7 +1182,7 @@ class JavaExample
 
         System.out.println("model for: x < y + 1, x > 2");
         Model model = check(ctx, q, Status.SATISFIABLE);
-        System.out.println("x = " + model.evaluate(x, false) + ", y ="
+        System.out.println("x = " + model.evaluate(x, false) + ", y = "
                 + model.evaluate(y, false));
 
         /* assert not(x = y) */
@@ -1301,7 +1305,7 @@ class JavaExample
     public void pushPopExample1(Context ctx) throws TestFailedException
     {
         System.out.println("PushPopExample1");
-        Log.append("PushPopExample1");
+//        Log.append("PushPopExample1");
 
         /* create a big number */
         IntSort int_type = ctx.getIntSort();
@@ -1527,7 +1531,7 @@ class JavaExample
     public void iteExample(Context ctx)
     {
         System.out.println("ITEExample");
-        Log.append("ITEExample");
+//        Log.append("ITEExample");
 
         BoolExpr f = ctx.mkFalse();
         Expr one = ctx.mkInt(1);
@@ -1843,7 +1847,7 @@ class JavaExample
     public void evalExample1(Context ctx)
     {
         System.out.println("EvalExample1");
-        Log.append("EvalExample1");
+//        Log.append("EvalExample1");
 
         IntExpr x = ctx.mkIntConst("x");
         IntExpr y = ctx.mkIntConst("y");

@@ -1,15 +1,16 @@
 PROGRAM Prog
 (* Variable definition *)
    VAR_INPUT
-      x_0	: BOOL;
+
       x_1	: BOOL;
+      cstate14	: INT := 0;
    END_VAR
    VAR_OUTPUT
       y_0	: BOOL;
    END_VAR
    VAR
    (* The total number of states equals to 1 *)
-      cstate14	: INT := 0;
+      x_0	: BOOL;
    END_VAR
 
    (* Constant definition  *)

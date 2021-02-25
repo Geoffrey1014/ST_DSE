@@ -45,7 +45,7 @@ public class AlgebraicSimplifications {
     }
 
     private static boolean isArithmeticExpression(LlAssignStmtBinaryOp binaryOp) {
-        switch (binaryOp.getOperation()) {
+        switch (binaryOp.getOperator()) {
             case "+":
                 return true;
             case "-":
@@ -64,7 +64,7 @@ public class AlgebraicSimplifications {
     private static LlStatement performBinaryArithmeticSimplifications(LlAssignStmtBinaryOp binaryOp) {
         LlAssignStmt simplifiedStmt = binaryOp;
         LlComponent op1 = binaryOp.getLeftOperand();
-        String operation = binaryOp.getOperation();
+        String operation = binaryOp.getOperator();
         LlComponent op2 = binaryOp.getRightOperand();
 
         // stmt is 0 + var
@@ -150,7 +150,7 @@ public class AlgebraicSimplifications {
     private static LlStatement performBinaryBooleanSimplifications(LlAssignStmtBinaryOp binaryOp) {
         LlAssignStmt simplifiedStmt = binaryOp;
         LlComponent op1 = binaryOp.getLeftOperand();
-        String operation = binaryOp.getOperation();
+        String operation = binaryOp.getOperator();
         LlComponent op2 = binaryOp.getRightOperand();
 
         // stmt is B || true

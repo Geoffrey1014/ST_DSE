@@ -293,7 +293,7 @@ public class GlobalCP {
         }
 
         // 7) return the optimized stmt
-        return new LlAssignStmtBinaryOp(optimizedStoreLoc, optimizedLeftOp, binaryOp.getOperation(), optimizedRightOp);
+        return new LlAssignStmtBinaryOp(optimizedStoreLoc, optimizedLeftOp, binaryOp.getOperator(), optimizedRightOp);
     }
 
 }

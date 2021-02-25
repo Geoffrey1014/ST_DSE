@@ -2,11 +2,13 @@ package simulation;
 
 import cfg.BasicBlock;
 import cfg.CFG;
-import cfg.LlStatementExeutor;
 import ll.LlComponent;
+import ll.LlEmptyStmt;
+import ll.LlMethodCallStmt;
 import ll.LlStatement;
 import ll.assignStmt.LlAssignStmt;
 import ll.jump.LlJumpConditional;
+import ll.jump.LlJumpUnconditional;
 import ll.literal.LlLiteral;
 
 /**
@@ -47,6 +49,9 @@ public class Simulator {
             if(llStatement instanceof LlAssignStmt){
                 llStatement.accept(llStatementExeutor,this.memory);
             }
+            else if(llStatement instanceof LlEmptyStmt){
+                llStatement.accept(llStatementExeutor,this.memory);
+            }
             else if (llStatement instanceof LlJumpConditional){
                 LlComponent condition = ((LlJumpConditional) llStatement).getCondition();
                 ValueOfDiffType conditionValue = null;
@@ -68,11 +73,18 @@ public class Simulator {
                     nextBlock = currentBolock.getDefaultBranch();
                 }
             }
-            else {
-                nextBlock = currentBolock.getDefaultBranch();
+            else if (llStatement instanceof LlJumpUnconditional){
+                nextBlock = currentBolock.getAlternativeBranch();
+            }
+            else if(llStatement instanceof LlMethodCallStmt){
+                llStatement.accept(llStatementExeutor,memory);
+            }
+            else{
+                System.err.println("not handled stmt: " + llStatement);
             }
 
         }
+        if(nextBlock == null)  nextBlock = currentBolock.getDefaultBranch();
         return nextBlock;
     }
 

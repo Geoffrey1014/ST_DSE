@@ -40,6 +40,41 @@ public class JavaExampleTest {
         } catch (JavaExample.TestFailedException e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void testFindModelExample1(){
+        try{
+            javaExample.findModelExample1(ctxModleTrue);
+        } catch (JavaExample.TestFailedException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testFindModelExample2(){
+        try{
+            javaExample.findModelExample2(ctxModleTrue);
+        } catch (JavaExample.TestFailedException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    @Test
+    public void testPushPopExample1(){
+        try{
+            javaExample.pushPopExample1(ctxModleTrue);
+        } catch (JavaExample.TestFailedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testIteExample(){
+        javaExample.iteExample(ctxModleTrue);
+    }
+
+    @Test
+    public void testEvalExample1(){
+        javaExample.evalExample1(ctxModleTrue);
     }
 }

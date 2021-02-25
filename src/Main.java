@@ -11,6 +11,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import simulation.LlStatementExeutor;
+import simulation.Memory;
+import simulation.Simulator;
 import tools.MyPrint;
 import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
@@ -75,7 +78,7 @@ public class Main {
 //                System.out.println(cfg.toString());
 //                System.out.println(cfg.toGraphviz());
 
-//                genGraphViz( "origin_" + cfgCounter,cfg,outPutDir);
+                genGraphViz( "origin_" + cfgCounter,cfg,outPutDir);
 
 
                 System.out.println("_______________________ ");
@@ -87,7 +90,7 @@ public class Main {
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterCSE---------------------\n");
-//                genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
+                genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
 
 //                GlobalCP.performGlobalCP(cfg, globalVArs);
 //                GlobalDCE.performGlobalDeadCodeElimination(cfg);
@@ -96,17 +99,17 @@ public class Main {
                 writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
                 System.out.println("\nafterCP---------------------\n");
 
-//                genGraphViz( "CP_"+cfgCounter,cfg,outPutDir);
+                genGraphViz( "CP_"+cfgCounter,cfg,outPutDir);
 
                 GlobalDCE.performGlobalDeadCodeElimination(cfg);
                 writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterDSE---------------------\n");
-//                genGraphViz( "DSE_"+cfgCounter,cfg,outPutDir);
+                genGraphViz( "DSE_"+cfgCounter,cfg,outPutDir);
 
 
-//                System.out.println("simulator.execute();------------");
-//                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
-//                simulator.execute();
+                System.out.println("simulator.execute();------------");
+                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
+                simulator.execute();
 
                 System.out.println("CF------------------------");
                 GlobalCF.performGlobalCodeFolding(cfg);
@@ -133,12 +136,12 @@ public class Main {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
-//        String file = "FB_G4LTL15.txt";
-//        walkTree(inputDir+file);
+        String file = "FB_G4LTL3.txt";
+        walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-        runDirFiles(inputDir);
+//        runDirFiles(inputDir);
 
     }
     public static void runDirFiles(String path){

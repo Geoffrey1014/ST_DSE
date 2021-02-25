@@ -177,7 +177,7 @@ public class LocalCSE {
         private final LlComponent leftOperand;
 
         public BinaryExprObject(LlAssignStmtBinaryOp binaryOp) {
-            super(binaryOp.getOperation(), binaryOp.getRightOperand());
+            super(binaryOp.getOperator(), binaryOp.getRightOperand());
             this.leftOperand = binaryOp.getLeftOperand();
         }
 

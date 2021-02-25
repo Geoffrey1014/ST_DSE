@@ -4,17 +4,17 @@
       |--VARBlock:
         |--accessType: VAR
         |--varDecl
-          |--name: cstate14
-            |--type: RES_INT
-        |--value: 0
+          |--name: x_0
+            |--type: RES_BOOL
       |--VARBlock:
         |--accessType: VAR_INPUT
         |--varDecl
-          |--name: x_0
-            |--type: RES_BOOL
-        |--varDecl
           |--name: x_1
             |--type: RES_BOOL
+        |--varDecl
+          |--name: cstate14
+            |--type: RES_INT
+        |--value: 0
       |--VARBlock:
         |--accessType: VAR_OUTPUT
         |--varDecl

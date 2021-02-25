@@ -1,6 +1,6 @@
 package ll;
 
-import cfg.LlStatementVisitor;
+import simulation.LlStatementVisitor;
 import simulation.Memory;
 
 /**

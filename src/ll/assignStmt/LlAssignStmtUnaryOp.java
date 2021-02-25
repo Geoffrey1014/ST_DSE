@@ -1,9 +1,9 @@
 package ll.assignStmt;
 
 
-import cfg.LlStatementVisitor;
 import ll.LlComponent;
 import ll.location.LlLocation;
+import simulation.LlStatementVisitor;
 import simulation.Memory;
 
 public class LlAssignStmtUnaryOp extends LlAssignStmt {

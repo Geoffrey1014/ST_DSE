@@ -7,6 +7,7 @@ public class Operation {
 
     //TODO: i have not finish up the complete version
     // it seems not necessary to judge consistency of types
+
     public ValueOfDiffType add(ValueOfDiffType left, ValueOfDiffType right){
 
         if (left.getType() == BasicTypeEnum.INTEGER){
@@ -156,5 +157,25 @@ public class Operation {
     public ValueOfDiffType or(ValueOfDiffType left, ValueOfDiffType right){
 
         return new ValueOfDiffType(left.getvBoolean() || right.getvBoolean());
+    }
+
+    public ValueOfDiffType not(ValueOfDiffType operand){
+        return new ValueOfDiffType(!operand.getvBoolean());
+    }
+
+    public ValueOfDiffType neg(ValueOfDiffType right) {
+        BasicTypeEnum type = right.getType();
+        switch (type){
+            case BOOLEAN:
+                return new ValueOfDiffType(!right.getvBoolean());
+            case INTEGER:
+                return new ValueOfDiffType(-right.getvInteger());
+            case FLOAT:
+                return new ValueOfDiffType(-right.getvFloat());
+            case STRING:
+                System.out.println("can not negate a string");
+            default:
+                return null;
+        }
     }
 }

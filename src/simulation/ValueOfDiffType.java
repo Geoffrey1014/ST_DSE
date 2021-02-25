@@ -24,6 +24,19 @@ public class ValueOfDiffType {
         this.vString = value;
         this.type = BasicTypeEnum.STRING;
     }
+    public String toString(){
+        switch (type){
+            case FLOAT:
+                return vFloat.toString();
+            case INTEGER:
+                return vInteger.toString();
+            case STRING:
+                return vString;
+            case BOOLEAN:
+                return vBoolean.toString();
+        }
+        return "";
+    }
 
     public BasicTypeEnum getType(){
         return this.type;

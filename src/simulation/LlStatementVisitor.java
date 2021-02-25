@@ -1,4 +1,4 @@
-package cfg;
+package simulation;
 
 import ll.LlEmptyStmt;
 import ll.LlMethodCallStmt;
@@ -8,7 +8,6 @@ import ll.assignStmt.LlAssignStmtRegular;
 import ll.assignStmt.LlAssignStmtUnaryOp;
 import ll.jump.LlJumpConditional;
 import ll.jump.LlJumpUnconditional;
-import simulation.Memory;
 
 
 public interface LlStatementVisitor {

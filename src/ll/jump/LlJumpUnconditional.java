@@ -1,7 +1,7 @@
 package ll.jump;
 
 
-import cfg.LlStatementVisitor;
+import simulation.LlStatementVisitor;
 import simulation.Memory;
 
 public class LlJumpUnconditional extends LlJump {
