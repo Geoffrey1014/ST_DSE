@@ -11,6 +11,8 @@ import ll.jump.LlJumpConditional;
 import ll.jump.LlJumpUnconditional;
 import ll.literal.LlLiteral;
 
+import java.util.HashSet;
+
 /**
 在CFG上模拟执行
  需要模拟内存状态，使用map
@@ -22,12 +24,24 @@ public class Simulator {
     private Memory memory;
     private final CFG cfg;
     private final LlStatementExeutor llStatementExeutor;
+    private HashSet<BasicBlock> coveredBlocks;
+    private Float blocksNumSum;
+    private HashSet<BasicBlock> brachBlocks;
 
 
     public Simulator(CFG cfg, Memory memory, LlStatementExeutor llStatementExeutor) {
         this.memory = memory;
         this.cfg = cfg;
         this.llStatementExeutor = llStatementExeutor;
+        this.coveredBlocks = new HashSet<>();
+        this.brachBlocks = new HashSet<>();
+        this.blocksNumSum = (float) (cfg.getBasicBlocks().size() - 2); //eliminate entry and exit
+        for(BasicBlock bb: cfg.getBasicBlocks()){
+            LlStatement llStatement = bb.getStmtsList().get(bb.getStmtsList().size()-1);
+            if (llStatement instanceof LlJumpConditional){
+                this.brachBlocks.add(bb);
+            }
+        }
     }
 
     /**
@@ -36,10 +50,16 @@ public class Simulator {
      */
     public void execute(){
         BasicBlock entryNode = this.cfg.getBasicBlocks().get(0);
+        this.coveredBlocks.add(entryNode);
         BasicBlock nextBlock = entryNode.getDefaultBranch();
         while (nextBlock != null){
+            System.out.println("\n"+CFG.getblockLeaderLabel(nextBlock));;
+            this.coveredBlocks.add(nextBlock);
             nextBlock = executeBasicBlock(nextBlock);
+            System.out.println("coverage: "+ this.coveredBlocks.size()/ blocksNumSum);
         }
+        System.out.println("coverage: "+ coveredBlocks.size()/ blocksNumSum);
+
 
     }
 

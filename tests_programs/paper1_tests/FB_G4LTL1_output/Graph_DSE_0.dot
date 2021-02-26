@@ -5,9 +5,9 @@ digraph G {
         fontsize=12,  height=1.2];
   "           Prog :  EMPTY_STATEMENT
 "; "           Init :  EMPTY_STATEMENT
-             L0 :  x_0 = false
-             L1 :  x_1 = false
-             L2 :  cstate14 = 0
+             L0 :  cstate14 = 0
+             L1 :  x_0 = false
+             L2 :  x_1 = false
              L3 :  y_0 = false
 "; "           Body :  EMPTY_STATEMENT
              L6 :  #_t1 = cstate14 == 0
@@ -19,6 +19,7 @@ digraph G {
             L12 :  if #_t3 goto IF_L9
 "; "            L14 :  goto START_ELSIF_L13
 "; "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  cstate14 = 0
             L18 :  y_0 = true
             L19 :  goto END_IF_L9
 "; "START_ELSIF_L13 :  EMPTY_STATEMENT
@@ -29,6 +30,7 @@ digraph G {
             L26 :  if #_t10 goto ELSIF_L20
 "; "            L27 :  goto END_ELSIF_L20
 "; "      ELSIF_L20 :  EMPTY_STATEMENT
+            L29 :  cstate14 = 0
             L31 :  y_0 = false
             L32 :  goto END_IF_L9
 "; "  END_ELSIF_L20 :  EMPTY_STATEMENT
@@ -36,24 +38,24 @@ digraph G {
 "; "      END_IF_L4 :  EMPTY_STATEMENT
 "; "          Entry :  EMPTY_STATEMENT
 "; "            End :  EMPTY_STATEMENT
-            L33 :  print(x_0,)
+            L33 :  print(cstate14,)
             L34 :  print(y_0,)
 "; "           Exit :  EMPTY_STATEMENT
 "; "           Read :  EMPTY_STATEMENT
             L35 :  x_1 = read()
-            L36 :  cstate14 = read()
+            L36 :  x_0 = read()
 "; 
   "           Prog :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
-             L0 :  x_0 = false
-             L1 :  x_1 = false
-             L2 :  cstate14 = 0
+             L0 :  cstate14 = 0
+             L1 :  x_0 = false
+             L2 :  x_1 = false
              L3 :  y_0 = false
 "  [label="default"];
   "           Init :  EMPTY_STATEMENT
-             L0 :  x_0 = false
-             L1 :  x_1 = false
-             L2 :  cstate14 = 0
+             L0 :  cstate14 = 0
+             L1 :  x_0 = false
+             L2 :  x_1 = false
              L3 :  y_0 = false
 " -> "           Body :  EMPTY_STATEMENT
              L6 :  #_t1 = cstate14 == 0
@@ -86,6 +88,7 @@ digraph G {
             L11 :  #_t3 = x_0 AND #_t2
             L12 :  if #_t3 goto IF_L9
 " -> "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  cstate14 = 0
             L18 :  y_0 = true
             L19 :  goto END_IF_L9
 "  [label="alter"];
@@ -98,6 +101,7 @@ digraph G {
             L26 :  if #_t10 goto ELSIF_L20
 "  [label="alter"];
   "          IF_L9 :  EMPTY_STATEMENT
+            L16 :  cstate14 = 0
             L18 :  y_0 = true
             L19 :  goto END_IF_L9
 " -> "      END_IF_L9 :  EMPTY_STATEMENT
@@ -117,6 +121,7 @@ digraph G {
             L25 :  #_t10 = #_t9 OR #_t6
             L26 :  if #_t10 goto ELSIF_L20
 " -> "      ELSIF_L20 :  EMPTY_STATEMENT
+            L29 :  cstate14 = 0
             L31 :  y_0 = false
             L32 :  goto END_IF_L9
 "  [label="alter"];
@@ -124,6 +129,7 @@ digraph G {
 " -> "  END_ELSIF_L20 :  EMPTY_STATEMENT
 "  [label="alter"];
   "      ELSIF_L20 :  EMPTY_STATEMENT
+            L29 :  cstate14 = 0
             L31 :  y_0 = false
             L32 :  goto END_IF_L9
 " -> "      END_IF_L9 :  EMPTY_STATEMENT
@@ -136,27 +142,27 @@ digraph G {
 "  [label="default"];
   "      END_IF_L4 :  EMPTY_STATEMENT
 " -> "            End :  EMPTY_STATEMENT
-            L33 :  print(x_0,)
+            L33 :  print(cstate14,)
             L34 :  print(y_0,)
 "  [label="default"];
   "          Entry :  EMPTY_STATEMENT
 " -> "           Prog :  EMPTY_STATEMENT
 "  [label="default"];
   "            End :  EMPTY_STATEMENT
-            L33 :  print(x_0,)
+            L33 :  print(cstate14,)
             L34 :  print(y_0,)
 " -> "           Read :  EMPTY_STATEMENT
             L35 :  x_1 = read()
-            L36 :  cstate14 = read()
+            L36 :  x_0 = read()
 "  [label="default"];
   "            End :  EMPTY_STATEMENT
-            L33 :  print(x_0,)
+            L33 :  print(cstate14,)
             L34 :  print(y_0,)
 " -> "           Exit :  EMPTY_STATEMENT
 "  [label="alter"];
   "           Read :  EMPTY_STATEMENT
             L35 :  x_1 = read()
-            L36 :  cstate14 = read()
+            L36 :  x_0 = read()
 " -> "           Body :  EMPTY_STATEMENT
              L6 :  #_t1 = cstate14 == 0
              L7 :  if #_t1 goto IF_L4

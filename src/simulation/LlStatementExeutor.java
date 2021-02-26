@@ -152,7 +152,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
 
     @Override
     public void visitor(LlEmptyStmt llEmptyStmt, Memory memory) {
-        System.out.println("\nexe\t" + llEmptyStmt);
+//        System.out.println("exe\t" + llEmptyStmt);
     }
 
     @Override

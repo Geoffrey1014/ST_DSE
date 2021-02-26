@@ -2,9 +2,9 @@ CFG:
            Prog :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
-             L0 :  x_0 = false
-             L1 :  x_1 = false
-             L2 :  cstate14 = 0
+             L0 :  cstate14 = 0
+             L1 :  x_0 = false
+             L2 :  x_1 = false
              L3 :  y_0 = false
 
            Body :  EMPTY_STATEMENT
@@ -54,11 +54,11 @@ START_ELSIF_L13 :  EMPTY_STATEMENT
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L33 :  print(x_0,)
+            L33 :  print(cstate14,)
             L34 :  print(y_0,)
 
            Exit :  EMPTY_STATEMENT
 
            Read :  EMPTY_STATEMENT
             L35 :  x_1 = read()
-            L36 :  cstate14 = read()
+            L36 :  x_0 = read()
