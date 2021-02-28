@@ -23,7 +23,7 @@ public class NewLivenessAnalysisTest {
     LlSymbolTable llSymbolTable;
     CFG cfg;
     NewLivenessAnalysis analysts;
-    HashMap<String, HashSet<LlLocationVar>> livenessOut;
+    HashMap<String, HashSet<LlLocationVar>> livenessOutRequred;
 
 
     public void prepareCalculateLiveness(String name){
@@ -32,11 +32,11 @@ public class NewLivenessAnalysisTest {
         llSymbolTable  = new LlSymbolTable(name);
         if(name.equals("HIT")){
             helper.createLlBuilderAndLlSymbolTableOfHIT(llBuilder, llSymbolTable);
-            livenessOut = helper.createOutLivenessOfHIT();
+            livenessOutRequred = helper.createOutLivenessOfHIT();
         }
         else if(name.equals("MITLiveness")){
             helper.createLlBuilderAndLlSymbolTableMITLiveness(llBuilder,llSymbolTable);
-            livenessOut = helper.createOutLivenessOfMIT();
+            livenessOutRequred = helper.createOutLivenessOfMIT();
         }
 
         cfg = new CFG(this.llBuilder, this.llSymbolTable,false);
@@ -60,8 +60,8 @@ public class NewLivenessAnalysisTest {
         calculateLiveness(1);
         for(BasicBlock basicBlock: analysts.livenessOUT.keySet()){
             String bbName= basicBlock.getLabelsToStmtsMap().keySet().iterator().next();
-            if(livenessOut.get(bbName) != null){
-                Assert.assertEquals(livenessOut.get(bbName).toString(), analysts.livenessOUT.get(basicBlock).toString());
+            if(livenessOutRequred.get(bbName) != null){
+                Assert.assertEquals(livenessOutRequred.get(bbName).toString(), analysts.livenessOUT.get(basicBlock).toString());
             }
         }
 
@@ -69,8 +69,8 @@ public class NewLivenessAnalysisTest {
         calculateLiveness(1);
         for(BasicBlock basicBlock: analysts.livenessOUT.keySet()){
             String bbName= basicBlock.getLabelsToStmtsMap().keySet().iterator().next();
-            if(livenessOut.get(bbName) != null){
-                Assert.assertEquals(livenessOut.get(bbName).toString(), analysts.livenessOUT.get(basicBlock).toString());
+            if(livenessOutRequred.get(bbName) != null){
+                Assert.assertEquals(livenessOutRequred.get(bbName).toString(), analysts.livenessOUT.get(basicBlock).toString());
             }
         }
 

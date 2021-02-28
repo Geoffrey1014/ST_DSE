@@ -12,7 +12,8 @@ public class LoopAnalysis {
         HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = new HashMap<>();
 
         // D[root] = {root}
-        BasicBlock root = cfg.getRootBasicBlock();
+//        BasicBlock root = cfg.getRootBasicBlock();
+        BasicBlock root = cfg.leadersToBBMap.get("Entry");
         HashSet<BasicBlock> rootDominatorSet = new HashSet<>();
         rootDominatorSet.add(root);
         dominatorsMap.put(root, rootDominatorSet);

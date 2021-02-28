@@ -13,13 +13,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 public class GlobalDCE {
+    public NewLivenessAnalysis livenessAnalysis;
+    public GlobalDCE(CFG cfg){
+        livenessAnalysis = new NewLivenessAnalysis(cfg);
+    }
 
     // mutates the CFG by performing Global Dead Code Elimination
-    public static void performGlobalDeadCodeElimination(CFG cfg) {
+    public void performGlobalDeadCodeElimination() {
 //        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = LivenessAnalysis.getLivenessAnalysisForCFG(cfg);
-        NewLivenessAnalysis livenessAnalysts =new NewLivenessAnalysis(cfg);
-        livenessAnalysts.livenessAnalysis2();
-        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = livenessAnalysts.calculateDeadCode();
+
+        livenessAnalysis.livenessAnalysis2();
+        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = livenessAnalysis.calculateDeadCode();
 
         // TODO: Make sure that you do not remove assignment stmts for variables from other scopes
         // for example, i = 5 might look like dead code but it's not if i was declared in the scope above

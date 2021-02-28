@@ -11,6 +11,10 @@ import ll.jump.LlJumpConditional;
 import ll.location.LlLocation;
 import ll.location.LlLocationVar;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class NewLivenessAnalysis {
@@ -253,13 +257,13 @@ public class NewLivenessAnalysis {
     }
 
     public HashMap<VarAndStmt,HashSet<VarAndStmt>> calculateDefinitionUseChain() {
-        // 如何存储结果：BlockLabelPair(VarAndStmt) -> HashSet<VarAndStmt>
+        // data structure of result：BlockLabelPair(VarAndStmt) -> HashSet<VarAndStmt>
         HashMap<VarAndStmt,HashSet<VarAndStmt>> result = new HashMap<>();
         for (BasicBlock bb : this.livenessOUT2.keySet()) {
 //            System.out.println("\nbasicBlock=" + bb.getLabelsToStmtsMap().keySet().iterator().next() + ":");
             HashMap<LlLocation, HashSet<VarAndStmt>> lives = this.livenessOUT2.get(bb);
-            // 1） 每个basicblock中定值到下个定值前，期间所有的use （which is not needed）
-            // 2） 定值之后没有再次定值，usage before OUT(not needed) and liveness of OUT
+            // 1） in a basicblock, a def's uses are all usage between it and the next def. （which is not needed）
+            // 2） in a basicblock, the uses of the last def (no more def behind)   are usages before OUT(not needed) and liveness of OUT
             HashMap<LlLocation,VarAndStmt> lastVarDefs = new HashMap<>();
             LinkedHashMap<String, LlStatement> labelsToStmtsMap = bb.getLabelsToStmtsMap();
             for (String label : labelsToStmtsMap.keySet()) {
@@ -295,7 +299,32 @@ public class NewLivenessAnalysis {
 
     }
 
+    public void writeDefUseChainToFile(String path){
+        ArrayList<NewLivenessAnalysis.VarAndStmt> defs= new ArrayList<>(definitionUseChain.keySet());
+        Collections.sort(defs);
+        StringBuilder stringBuilder = new StringBuilder();
+        for(NewLivenessAnalysis.VarAndStmt varAndStmt : defs){
+            stringBuilder.append("\ndef => ").append(varAndStmt);
+            stringBuilder.append("\nuse => ").append(definitionUseChain.get(varAndStmt)).append("\n");
+        }
+        writeFile(stringBuilder.toString(),path);
+        System.out.println("finish writing DUchain");
+    }
+    public static void writeFile(String content, String pathName) {
 
+        try {
+
+            File file = new File(pathName);
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public HashMap<BasicBlock, HashSet<BlockLabelPair>> calculateDeadCode() {
         //loop through the bb, find stmt which is not active in OUT

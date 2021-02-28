@@ -1,0 +1,18 @@
+
+def => L0: i = m - 1 @i
+use => [L3: i = i + 1 @i]
+
+def => L1: j = n @j
+use => [L4: j = j - 1 @j, L5: if j goto IF @j]
+
+def => L2: a = u1 @a
+use => [L10: print(a,) @a]
+
+def => L4: j = j - 1 @j
+use => [L4: j = j - 1 @j, L5: if j goto IF @j]
+
+def => L7: a = u2 @a
+use => [L10: print(a,) @a]
+
+def => L8: i = u3 @i
+use => [L3: i = i + 1 @i]

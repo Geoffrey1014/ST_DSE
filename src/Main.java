@@ -70,40 +70,41 @@ public class Main {
             ArrayList<LlSymbolTable> llSymbolTables = llBuilderList.getSymbolTables();
             ArrayList<LlBuilder> llBuilders = llBuilderList.getBuilders();
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
-
-            for (Iterator<LlBuilder> llBuilderIterator = llBuilders.iterator(); llBuilderIterator.hasNext();) {
-                CFG cfg = new CFG(llBuilderIterator.next(), llSymbolTableIterator.next(),true);
-//                System.out.println(cfg.toString());
-//                System.out.println(cfg.toGraphviz());
-
-                genGraphViz( "origin_" + cfgCounter,cfg,outPutDir);
-
-
+            Boolean updateFig = false;
+            for (LlBuilder llBuilder : llBuilders) {
+                CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
                 System.out.println("_______________________ ");
                 writeFile(cfg.toString(), outPutDir + "origin_" + cfgCounter + ".txt");
+                if (updateFig) genGraphViz("origin_" + cfgCounter, cfg, outPutDir);
 
-//                printDominatorMap(cfg);
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
                 System.out.println("\nafterCSE---------------------\n");
-                genGraphViz( "CSE_"+cfgCounter,cfg,outPutDir);
+                if (updateFig) genGraphViz("CSE_" + cfgCounter, cfg, outPutDir);
 
-//                GlobalCP.performGlobalCP(cfg, globalVArs);
-//                GlobalDCE.performGlobalDeadCodeElimination(cfg);
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
                 System.out.println("\nafterCP---------------------\n");
+                if (updateFig) genGraphViz("CP_" + cfgCounter, cfg, outPutDir);
 
-                genGraphViz( "CP_"+cfgCounter,cfg,outPutDir);
-
-                GlobalDCE.performGlobalDeadCodeElimination(cfg);
-                writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
+                GlobalDCE globalDCE = new GlobalDCE(cfg);
+                globalDCE.performGlobalDeadCodeElimination();
                 System.out.println("\nafterDSE---------------------\n");
-                genGraphViz( "DSE_"+cfgCounter,cfg,outPutDir);
+                if (updateFig) genGraphViz("DSE_" + cfgCounter, cfg, outPutDir);
 
+                globalDCE.livenessAnalysis.calculateDefinitionUseChain();
+                globalDCE.livenessAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
+                writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
+
+                printDominatorMap(cfg);
+
+//                NewLivenessAnalysis livenessAnalysis = new NewLivenessAnalysis(cfg);
+//                livenessAnalysis.livenessAnalysis2();
+//                livenessAnalysis.calculateDefinitionUseChain();
+//                livenessAnalysis.writeDefUseChainToFile(outPutDir + "DUChain" + cfgCounter + ".txt");
 
                 System.out.println("simulator.execute();------------");
                 Simulator simulator = new Simulator(cfg);
@@ -183,10 +184,11 @@ public class Main {
         HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
         System.out.println("dominatorsMap------------");
         for (BasicBlock bb : dominatorsMap.keySet()) {
-            System.out.println(bb.getLabelsToStmtsMap().entrySet().iterator().next() + "--------------dominators:");
+            System.out.println(cfg.blockLabels.get(bb) + "--------------dominators:");
             for (BasicBlock b : dominatorsMap.get(bb)) {
-                System.out.println(b.getLabelsToStmtsMap().entrySet().iterator().next());
+                System.out.println(cfg.blockLabels.get(b));
             }
+            System.out.println();
         }
     }
     public static void genGraphViz(String cfgCounter, CFG cfg,String outPutDir )  {
