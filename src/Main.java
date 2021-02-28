@@ -11,8 +11,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import simulation.LlStatementExeutor;
-import simulation.Memory;
 import simulation.Simulator;
 import tools.MyPrint;
 import visitor.DefPhaseVisitor;
@@ -108,7 +106,7 @@ public class Main {
 
 
                 System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg,new Memory(),new LlStatementExeutor());
+                Simulator simulator = new Simulator(cfg);
                 simulator.execute();
 
                 System.out.println("CF------------------------");

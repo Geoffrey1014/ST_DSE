@@ -4,7 +4,10 @@ package ll.assignStmt;
 import ll.LlComponent;
 import ll.literal.*;
 import ll.location.LlLocation;
-import simulation.*;
+import simulation.BasicTypeEnum;
+import simulation.LlStatementVisitor;
+import simulation.Memory;
+import simulation.ValueOfDiffType;
 
 public class LlAssignStmtBinaryOp extends LlAssignStmt {
 
@@ -68,9 +71,9 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
         if (operand instanceof LlLiteralBool) {
             return new ValueOfDiffType(((LlLiteralBool) operand).getBoolValue());
         } else if (operand instanceof LlLiteralInt) {
-            return new ValueOfDiffType((int) ((LlLiteralInt) operand).getIntValue());
+            return new ValueOfDiffType(((LlLiteralInt) operand).getIntValue());
         } else if (operand instanceof LlLiteralReal) {
-            return new ValueOfDiffType((float) ((LlLiteralReal) operand).getRealValue());
+            return new ValueOfDiffType(((LlLiteralReal) operand).getRealValue());
         } else if (operand instanceof LlLiteralString) {
             return new ValueOfDiffType(((LlLiteralString) operand).getStringValue());
         }
@@ -80,10 +83,10 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
     private ValueOfDiffType genLocationValue(BasicTypeEnum type, ValueOfDiffType value) {
         switch (type) {
             case INTEGER:
-                return new ValueOfDiffType(value.getvInteger());
+                return new ValueOfDiffType(value.getvLong());
 
             case FLOAT:
-                return new ValueOfDiffType(value.getvFloat());
+                return new ValueOfDiffType(value.getvDouble());
         }
         return null;
     }
@@ -96,77 +99,12 @@ public class LlAssignStmtBinaryOp extends LlAssignStmt {
      */
     @Override
     public void exe(Memory memory) {
-        ValueOfDiffType left, right;
-        if (this.leftOperand instanceof LlLiteral) {
-            left = getLlLiteralValue((LlLiteral) this.leftOperand);
-        } else {
-            ValueOfDiffType leftValue = memory.getLocationvalue(this.leftOperand);
-            left = genLocationValue(leftValue.getType(), leftValue);
-        }
-
-        if (this.rightOperand instanceof LlLiteral) {
-            right = getLlLiteralValue((LlLiteral) this.rightOperand);
-        } else {
-            ValueOfDiffType rightValue = memory.getLocationvalue(this.rightOperand);
-            right = genLocationValue(rightValue.getType(), rightValue);
-        }
-        Operation operationOfSimulor = new Operation();
-        ValueOfDiffType result = null;// after get the result, put it in the memory
-        switch (operator) {
-            case "+":
-                result = operationOfSimulor.add(left, right);
-                break;
-            case "-":
-                result = operationOfSimulor.sub(left, right);
-                break;
-            case "*":
-                result = operationOfSimulor.mul(left, right);
-                break;
-            case "/":
-                result = operationOfSimulor.devide(left, right);
-                break;
-            case "%":
-                result = operationOfSimulor.mod(left, right);
-                break;
-            case ">":
-                assert left != null; // is it possible that left is null??
-                result = operationOfSimulor.GT(left, right);
-                break;
-            case "<":
-                result = operationOfSimulor.LT(left, right);
-                break;
-            case ">=":
-                result = operationOfSimulor.EGT(left, right);
-                break;
-            case "<=":
-                result = operationOfSimulor.ELT(left, right);
-                break;
-            case "==":
-                result = operationOfSimulor.equal(left, right);
-                break;
-            case "!=":
-                result = operationOfSimulor.notEqual(left, right);
-                break;
-            case "||":
-                result = operationOfSimulor.or(left, right);
-                break;
-            case "&&":
-                result = operationOfSimulor.and(left, right);
-                break;
-            default:
-                System.err.println("Runtime Error: Unrecognized Operation");
-                System.err.println(operator);
-                break;
-        }
-        
-        memory.put(this.storeLocation, result);
-
 
     }
 
     @Override
     public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
-        llStatementVisitor.visitor(this,memory);
+        llStatementVisitor.visitor(this,  memory);
     }
 
 

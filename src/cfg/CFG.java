@@ -21,13 +21,15 @@ import java.util.regex.Pattern;
 public class CFG {
     private final LlBuilder builder;
     private final ArrayList<BasicBlock> basicBlocks;
-    private final LinkedHashMap<String, BasicBlock> leadersToBBMap;
+    public final LinkedHashMap<String, BasicBlock> leadersToBBMap;
     private final ArrayList<String> orderedLeadersList;
-    private  LinkedHashMap<BasicBlock, String> blockLabels;
+    public   LinkedHashMap<BasicBlock, String> blockLabels;
     private GraphViz graphViz;
+    private LlSymbolTable llSymbolTable;
 
     public CFG(LlBuilder builder, LlSymbolTable llSymbolTable, Boolean addLoop) {
         this.builder = builder;
+        this.llSymbolTable = llSymbolTable;
 
 //        System.out.println("LlBuilder statement list:");
 //        for (String s : this.builder.getStatementTable().keySet()){
@@ -175,6 +177,13 @@ public class CFG {
                 BasicBlock body = this.leadersToBBMap.get("Body");
                 readBB.setDefaultBranch(body);
                 body.addPredecessorNode(readBB);
+
+                // init-node connects to read-node
+                BasicBlock initBB = this.leadersToBBMap.get("Init");
+                initBB.setDefaultBranch(readBB);
+                readBB.addPredecessorNode(initBB);
+                body.rmPredecessorNode(initBB);
+
             }
 
 
@@ -329,6 +338,10 @@ public class CFG {
         return this.noDefTuple;
     }
 
+    public LlSymbolTable getLlSymbolTable() {
+        return llSymbolTable;
+    }
+
     public class defBlockLocationTuple {
         public String blockName;
 
@@ -423,8 +436,8 @@ public class CFG {
         if (head == null) {
             return;
         }
-        Edge left = head.getLeft();
-        Edge right = head.getRight();
+        Edge left = head.getDefaultEdge();
+        Edge right = head.getAlterName();
         if(isVisited.contains(left) && isVisited.contains(right)){
             return;
         }
@@ -520,12 +533,12 @@ public class CFG {
 
 
         if (left != null && !isVisited.contains(left)) {
-            isVisited.add(head.getLeft());
+            isVisited.add(head.getDefaultEdge());
             buildDefUseRecursive(head.getDefaultBranch(), new HashMap<>(recentDef));
         }
 
         if (right != null && !isVisited.contains(right)) {
-            isVisited.add(head.getRight());
+            isVisited.add(head.getAlterName());
             buildDefUseRecursive(head.getAlternativeBranch(), new HashMap<>(recentDef));
         }
     }

@@ -60,6 +60,6 @@ public class LlAssignStmtUnaryOp extends LlAssignStmt {
 
     @Override
     public void accept(LlStatementVisitor llStatementVisitor, Memory memory) {
-        llStatementVisitor.visitor(this,memory);
+        llStatementVisitor.visitor(this,  memory);
     }
 }

@@ -858,6 +858,8 @@ class JavaExample
         bigIntCheck(ctx, ctx.mkReal("-123123234234234234231232/234234333"));
         bigIntCheck(ctx, ctx.mkReal("-234234333"));
         bigIntCheck(ctx, ctx.mkReal("234234333/2"));
+        bigIntCheck(ctx, ctx.mkReal("234234333.123"));
+
 
         String bn = "1234567890987654321";
 

@@ -17,20 +17,20 @@ import java.util.Scanner;
 public class LlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlAssignStmtBinaryOp llAssignStmtBinaryOp, Memory memory) {
-
+        ConMemory conMemory = (ConMemory) memory;
         System.out.println("exe\t" + llAssignStmtBinaryOp);
         ValueOfDiffType left, right;
         if (llAssignStmtBinaryOp.getLeftOperand() instanceof LlLiteral) {
             left = getLlLiteralValue((LlLiteral) llAssignStmtBinaryOp.getLeftOperand());
         } else {
-            ValueOfDiffType leftValue = memory.getLocationvalue(llAssignStmtBinaryOp.getLeftOperand());
+            ValueOfDiffType leftValue = conMemory.getLocationvalue(llAssignStmtBinaryOp.getLeftOperand());
             left = genLocationValue(leftValue.getType(), leftValue);
         }
 
         if (llAssignStmtBinaryOp.getRightOperand() instanceof LlLiteral) {
             right = getLlLiteralValue((LlLiteral) llAssignStmtBinaryOp.getRightOperand());
         } else {
-            ValueOfDiffType rightValue = memory.getLocationvalue(llAssignStmtBinaryOp.getRightOperand());
+            ValueOfDiffType rightValue = conMemory.getLocationvalue(llAssignStmtBinaryOp.getRightOperand());
             right = genLocationValue(rightValue.getType(), rightValue);
         }
         Operation operationOfSimulor = new Operation();
@@ -95,18 +95,19 @@ public class LlStatementExeutor implements LlStatementVisitor {
                 break;
         }
 
-        memory.put(llAssignStmtBinaryOp.getStoreLocation(), result);
+        conMemory.put(llAssignStmtBinaryOp.getStoreLocation(), result);
     }
 
 
     @Override
     public void visitor(LlAssignStmtUnaryOp llAssignStmtUnaryOp, Memory memory) {
+        ConMemory conMemory = (ConMemory) memory;
         System.out.println("exe\t" + llAssignStmtUnaryOp);
         ValueOfDiffType right;
         if (llAssignStmtUnaryOp.getOperand() instanceof LlLiteral) {
             right = getLlLiteralValue((LlLiteral) llAssignStmtUnaryOp.getOperand());
         } else {
-            ValueOfDiffType leftValue = memory.getLocationvalue(llAssignStmtUnaryOp.getOperand());
+            ValueOfDiffType leftValue = conMemory.getLocationvalue(llAssignStmtUnaryOp.getOperand());
             right = genLocationValue(leftValue.getType(), leftValue);
         }
         Operation operationOfSimulor = new Operation();
@@ -123,20 +124,21 @@ public class LlStatementExeutor implements LlStatementVisitor {
                 System.err.println(llAssignStmtUnaryOp.getOperator());
                 break;
         }
-        memory.put(llAssignStmtUnaryOp.getStoreLocation(), result);
+        conMemory.put(llAssignStmtUnaryOp.getStoreLocation(), result);
     }
 
     @Override
     public void visitor(LlAssignStmtRegular llAssignStmtRegular, Memory memory) {
+        ConMemory conMemory = (ConMemory) memory;
         System.out.println("exe\t" + llAssignStmtRegular);
         ValueOfDiffType right;
         if (llAssignStmtRegular.getOperand() instanceof LlLiteral) {
             right = getLlLiteralValue((LlLiteral) llAssignStmtRegular.getOperand());
         } else {
-            ValueOfDiffType leftValue = memory.getLocationvalue(llAssignStmtRegular.getOperand());
+            ValueOfDiffType leftValue = conMemory.getLocationvalue(llAssignStmtRegular.getOperand());
             right = genLocationValue(leftValue.getType(), leftValue);
         }
-        memory.put(llAssignStmtRegular.getStoreLocation(), right);
+        conMemory.put(llAssignStmtRegular.getStoreLocation(), right);
     }
 
     @Override
@@ -154,25 +156,40 @@ public class LlStatementExeutor implements LlStatementVisitor {
     public void visitor(LlEmptyStmt llEmptyStmt, Memory memory) {
 //        System.out.println("exe\t" + llEmptyStmt);
     }
+    @Override
+    public void visitor(LlReturn llReturn, Memory memory) {
+        System.out.println("exe" + llReturn);
+    }
+
 
     @Override
     public void visitor(LlMethodCallStmt llMethodCallStmt, Memory memory) {
+        ConMemory conMemory = (ConMemory) memory;
         System.out.println("exe\t" + llMethodCallStmt);
         if (llMethodCallStmt.getMethodName().equals("print")) {
             LlComponent arg = llMethodCallStmt.getArgsList().get(0);
-            System.out.println(arg + " = " + memory.getLocationvalue(arg));
+            System.out.println(arg + " = " + conMemory.getLocationvalue(arg));
         }
         if (llMethodCallStmt.getMethodName().equals("read")) {
-            readFunctionExe(llMethodCallStmt, memory);
+            readFunctionExe(llMethodCallStmt, conMemory);
         }
 
     }
 
-    public void readFunctionExe(LlMethodCallStmt llMethodCallStmt, Memory memory) {
+
+
+    public void readFunctionExe(LlMethodCallStmt llMethodCallStmt, ConMemory conMemory) {
         Scanner sc = new Scanner(System.in);
         LlLocation location = llMethodCallStmt.getReturnLocation();
-        BasicTypeEnum type = memory.getLocationvalue(location).getType();
-        System.out.print("Please enter a " + type+" string : ");
+        BasicTypeEnum type;
+        if(conMemory.getLocationvalue(location) == null){
+            type = conMemory.getLocationvalue(location).getType();
+        }
+        else{
+            type = conMemory.getLocationvalue(location).getType();
+        }
+
+        System.out.print("Please enter a " + type + " string : ");
 
         String inPut = sc.next();
         try {
@@ -180,41 +197,37 @@ public class LlStatementExeutor implements LlStatementVisitor {
                 case BOOLEAN:
                     if (!inPut.equalsIgnoreCase("true") && !inPut.equalsIgnoreCase("false")) {
                         System.err.println("input is not boolean");
-                        readFunctionExe(llMethodCallStmt, memory);
+                        readFunctionExe(llMethodCallStmt, conMemory);
                     }
-                    memory.put(location, new ValueOfDiffType(Boolean.parseBoolean(inPut)));
+                    conMemory.put(location, new ValueOfDiffType(Boolean.parseBoolean(inPut)));
                     break;
                 case INTEGER:
-                    memory.put(location, new ValueOfDiffType(Integer.parseInt(inPut)));
+                    conMemory.put(location, new ValueOfDiffType(Long.parseLong(inPut)));
                     break;
                 case FLOAT:
-                    memory.put(location, new ValueOfDiffType(Float.parseFloat(inPut)));
+                    conMemory.put(location, new ValueOfDiffType(Double.parseDouble(inPut)));
                     break;
                 case STRING:
-                    memory.put(location, new ValueOfDiffType(inPut));
+                    conMemory.put(location, new ValueOfDiffType(inPut));
                     break;
                 default:
-                    System.out.println("");
+                    System.err.println("wrong type!");
             }
         } catch (NumberFormatException e) {
             System.err.println(e.getMessage());
             System.out.println("input is not valid");
-            readFunctionExe(llMethodCallStmt, memory);
+            readFunctionExe(llMethodCallStmt, conMemory);
         }
     }
 
-    @Override
-    public void visitor(LlReturn llReturn, Memory memory) {
-        System.out.println("exe" + llReturn);
-    }
 
     public ValueOfDiffType getLlLiteralValue(LlLiteral operand) {
         if (operand instanceof LlLiteralBool) {
             return new ValueOfDiffType(((LlLiteralBool) operand).getBoolValue());
         } else if (operand instanceof LlLiteralInt) {
-            return new ValueOfDiffType((int) ((LlLiteralInt) operand).getIntValue());
+            return new ValueOfDiffType( ((LlLiteralInt) operand).getIntValue());
         } else if (operand instanceof LlLiteralReal) {
-            return new ValueOfDiffType((float) ((LlLiteralReal) operand).getRealValue());
+            return new ValueOfDiffType(((LlLiteralReal) operand).getRealValue());
         } else if (operand instanceof LlLiteralString) {
             return new ValueOfDiffType(((LlLiteralString) operand).getStringValue());
         }
@@ -226,9 +239,9 @@ public class LlStatementExeutor implements LlStatementVisitor {
             case BOOLEAN:
                 return new ValueOfDiffType(value.getvBoolean());
             case INTEGER:
-                return new ValueOfDiffType(value.getvInteger());
+                return new ValueOfDiffType(value.getvLong());
             case FLOAT:
-                return new ValueOfDiffType(value.getvFloat());
+                return new ValueOfDiffType(value.getvDouble());
             case STRING:
                 return new ValueOfDiffType(value.getvString());
             default:

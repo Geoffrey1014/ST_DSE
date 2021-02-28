@@ -6,8 +6,6 @@ digraph G {
   "           Prog :  EMPTY_STATEMENT
 "; "           Init :  EMPTY_STATEMENT
              L0 :  cstate14 = 0
-             L1 :  x_0 = false
-             L2 :  x_1 = false
              L3 :  y_0 = false
 "; "           Body :  EMPTY_STATEMENT
              L6 :  #_t1 = cstate14 == 0
@@ -48,18 +46,14 @@ digraph G {
   "           Prog :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
              L0 :  cstate14 = 0
-             L1 :  x_0 = false
-             L2 :  x_1 = false
              L3 :  y_0 = false
 "  [label="default"];
   "           Init :  EMPTY_STATEMENT
              L0 :  cstate14 = 0
-             L1 :  x_0 = false
-             L2 :  x_1 = false
              L3 :  y_0 = false
-" -> "           Body :  EMPTY_STATEMENT
-             L6 :  #_t1 = cstate14 == 0
-             L7 :  if #_t1 goto IF_L4
+" -> "           Read :  EMPTY_STATEMENT
+            L35 :  x_1 = read()
+            L36 :  x_0 = read()
 "  [label="default"];
   "           Body :  EMPTY_STATEMENT
              L6 :  #_t1 = cstate14 == 0

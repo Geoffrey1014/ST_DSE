@@ -14,8 +14,8 @@ public class BasicBlock {
     private final LlBuilder builder;
     private final HashSet<BasicBlock> predecessors;
 
-    private Edge left = new Edge();
-    private Edge right = new Edge();
+    private Edge defaultEdge = new Edge();
+    private Edge alterName = new Edge();
 
     public BasicBlock(LinkedHashMap<String, LlStatement> labelsToStmtsMap, LlBuilder builder) {
         this.labelsToStmtsMap = new LinkedHashMap<>(labelsToStmtsMap);
@@ -79,16 +79,21 @@ public class BasicBlock {
     protected void addPredecessorNode(BasicBlock parent) {
         this.predecessors.add(parent);
     }
+    protected void rmPredecessorNode(BasicBlock parent){
+        if(this.predecessors.contains(parent)){
+            this.predecessors.remove(parent);
+        }
+    }
     public void setLabelsToStmtsMap(LinkedHashMap<String, LlStatement> labelsToStmtsMap) {
         this.labelsToStmtsMap = labelsToStmtsMap;
     }
 
-    public Edge getLeft() {
-        return this.left;
+    public Edge getDefaultEdge() {
+        return this.defaultEdge;
     }
 
-    public Edge getRight() {
-        return this.right;
+    public Edge getAlterName() {
+        return this.alterName;
     }
 
 }

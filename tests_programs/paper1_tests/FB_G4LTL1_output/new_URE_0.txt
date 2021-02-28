@@ -3,8 +3,6 @@ CFG:
 
            Init :  EMPTY_STATEMENT
              L0 :  cstate14 = 0
-             L1 :  x_0 = false
-             L2 :  x_1 = false
              L3 :  y_0 = false
 
            Body :  EMPTY_STATEMENT

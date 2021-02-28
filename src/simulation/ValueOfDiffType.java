@@ -2,8 +2,8 @@ package simulation;
 
 public class ValueOfDiffType {
     private Boolean vBoolean;
-    private Integer vInteger;
-    private Float vFloat;
+    private Long vLong;
+    private Double vDouble;
     private String vString;
     private BasicTypeEnum type;  // 0: bool, 1: int, 2:float, 3: String
 
@@ -11,25 +11,27 @@ public class ValueOfDiffType {
         this.vBoolean = value;
         this.type = BasicTypeEnum.BOOLEAN;
     }
-    public ValueOfDiffType(Integer value){
-        this.vInteger = value;
+    public ValueOfDiffType(Long value){
+        this.vLong = value;
         this.type = BasicTypeEnum.INTEGER;
     }
 
-    public ValueOfDiffType(Float value){
-        this.vFloat = value;
+    public ValueOfDiffType(Double value){
+        this.vDouble = value;
         this.type = BasicTypeEnum.FLOAT;
     }
     public ValueOfDiffType(String value){
         this.vString = value;
         this.type = BasicTypeEnum.STRING;
     }
+
+    @Override
     public String toString(){
         switch (type){
             case FLOAT:
-                return vFloat.toString();
+                return vDouble.toString();
             case INTEGER:
-                return vInteger.toString();
+                return vLong.toString();
             case STRING:
                 return vString;
             case BOOLEAN:
@@ -50,20 +52,20 @@ public class ValueOfDiffType {
         this.vBoolean = vBoolean;
     }
 
-    public Integer getvInteger() {
-        return vInteger;
+    public Long getvLong() {
+        return vLong;
     }
 
-    public void setvInteger(Integer vInteger) {
-        this.vInteger = vInteger;
+    public void setvLong(Long vLong) {
+        this.vLong = vLong;
     }
 
-    public Float getvFloat() {
-        return vFloat;
+    public Double getvDouble() {
+        return vDouble;
     }
 
-    public void setvFloat(Float vFloat) {
-        this.vFloat = vFloat;
+    public void setvDouble(Double vDouble) {
+        this.vDouble = vDouble;
     }
 
     public String getvString() {
