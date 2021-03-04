@@ -71,13 +71,13 @@ public class IrCtrlFlowIfElsifElse extends IrCtrlFlowIf {
         // Generate the conditional statement.
         LlLocation conditionalTemp = this.condExpr.generateLlIr(builder, symbolTable);
         LlJumpConditional conditionalJump = new LlJumpConditional(ifBlockLabel, conditionalTemp);
-        builder.appendStatement(conditionalJump);
+        builder.appendConditionJumpStatement(conditionalJump);
 
 
         // if the conditional doesnt work, go to the elsif part
         String elsifBlockLabel = "START_ELSIF_" + builder.generateLabel();
         LlJumpUnconditional unconditionalJumpElseif = new LlJumpUnconditional(elsifBlockLabel);
-        builder.appendStatement(unconditionalJumpElseif);
+        builder.appendUnConditionJumpStatement(unconditionalJumpElseif);
 
         // add the label to the if body block
         LlEmptyStmt emptyStmt = new LlEmptyStmt();
@@ -87,7 +87,7 @@ public class IrCtrlFlowIfElsifElse extends IrCtrlFlowIf {
         //   generate the if statement body itself
         this.stmtBody.generateLlIr(builder, symbolTable);
         LlJumpUnconditional unconditionalJumpEnd = new LlJumpUnconditional(endIfLabel);
-        builder.appendStatement(unconditionalJumpEnd);
+        builder.appendUnConditionJumpStatement(unconditionalJumpEnd);
 
         builder.getInBlock(ifBlockLabel);
         builder.appendStatement(elsifBlockLabel, emptyStmt);

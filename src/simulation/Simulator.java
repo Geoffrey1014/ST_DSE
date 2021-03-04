@@ -35,6 +35,7 @@ public class Simulator {
     private HashSet<BasicBlock> stmtBlocks;
     private Solver solver;
     private Context ctx;
+    private HashSet<LlComponent> inputs;
 
 
     public Simulator(CFG cfg) {
@@ -51,6 +52,7 @@ public class Simulator {
         this.ctx = new Context(config);
         this.solver = this.ctx.mkSolver();
 
+        // get branch block and blocks which has executable stmts (not empty stmt)
         ArrayList<BasicBlock> basicBlockArrayList = cfg.getBasicBlocks();
         for (BasicBlock bb : basicBlockArrayList) {
             LlStatement llStatement = bb.getStmtsList().get(bb.getStmtsList().size() - 1);
@@ -62,7 +64,16 @@ public class Simulator {
             }
         }
 
-        BasicBlock initBb = cfg.getLeadersToBBMap().get("Init");
+        // get input var
+        this.inputs = new HashSet<>();
+        BasicBlock readBB = this.cfg.leadersToBBMap.get("Read");
+        for(LlStatement llStatement: readBB.getStmtsList()){
+            if(llStatement instanceof LlMethodCallStmt){
+                LlMethodCallStmt llMethodCallStmt = (LlMethodCallStmt) llStatement;
+                this.inputs.add(llMethodCallStmt.getReturnLocation());
+            }
+
+        }
 
     }
 
@@ -101,8 +112,28 @@ public class Simulator {
         System.out.println(branches);
         symExe(route,branches);
 
-
     }
+    public void conExe(){
+        BasicBlock curBlock = this.cfg.leadersToBBMap.get("Body");
+        List<String> route = new ArrayList<>();
+        List<Tuple2<Integer,Boolean>> branches = new ArrayList<>();
+        int conuter = 0;
+        while (curBlock != null) {
+            String leaderLabel = this.cfg.blockLabels.get(curBlock);
+            System.out.println("\n" + leaderLabel);
+
+            route.add(leaderLabel);
+            if (leaderLabel.equals("Read") && conuter > 1) break;
+
+            Tuple2<BasicBlock,Boolean> nextBB = executeBasicBlock(curBlock);
+            if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter,nextBB.a2));
+            if (this.stmtBlocks.contains(curBlock)) this.coveredBlocks.add(curBlock);
+            conuter += 1;
+            curBlock = nextBB.a1;
+            System.out.println("coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
+        }
+    }
+
     public void symExe(List<String> route, List<Tuple2<Integer,Boolean>> branches ){
         //  需要过滤算法，去除route中不必要的分支
         mkInputSymbolic(ctx);
@@ -122,7 +153,7 @@ public class Simulator {
 
 
     public void symExecuteBasicBlock(BasicBlock currentBolock, SymLlStatementExeutor symLlStatementExeutor,
-                                     SymMemory symMemory, Boolean branchChoice) {
+                                     SymMemory symMemory, Boolean symBranchChoice) {
 
         for (LlStatement llStatement : currentBolock.getStmtsList()) {
             if (llStatement instanceof LlAssignStmt) {
@@ -137,8 +168,8 @@ public class Simulator {
                 } else {
                     conditionValue = symMemory.get(condition);
                 }
-                calNewInputs(conditionValue, branchChoice);
-                solver.add(ctx.mkEq(conditionValue,ctx.mkBool(!branchChoice)).simplify());
+                calNewInputs(conditionValue, symBranchChoice);
+                solver.add(ctx.mkEq(conditionValue,ctx.mkBool(!symBranchChoice)).simplify());
 
                 llStatement.accept(symLlStatementExeutor,symMemory);
                 // TODO get the next bb according to the condition
@@ -158,8 +189,15 @@ public class Simulator {
         this.solver.push();
         this.solver.add(ctx.mkEq(conditionValue,ctx.mkBool(branchChoice)));
 
-        if(this.solver.check().equals(Status.SATISFIABLE))
-            System.out.println(this.solver.getModel());
+        if(this.solver.check().equals(Status.SATISFIABLE)) {
+            LlLocation location = (LlLocation) this.inputs.iterator().next();
+            Expr var = symMemory.get(location);
+            System.out.println(this.solver.getModel().evaluate(var,true));
+            //TODO 把求解结果存起来
+        }
+        else{
+            System.out.println(Status.UNSATISFIABLE);
+        }
         this.solver.pop();
     }
     public Tuple2<BasicBlock,Boolean> executeBasicBlock(BasicBlock currentBolock) {

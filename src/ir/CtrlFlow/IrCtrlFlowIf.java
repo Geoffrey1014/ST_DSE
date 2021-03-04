@@ -53,11 +53,11 @@ public class IrCtrlFlowIf extends IrCtrlFlow {
         // Generate the conditional statement.
         LlLocation conditionalTemp = this.condExpr.generateLlIr(builder, symbolTable);
         LlJumpConditional conditionalJump = new LlJumpConditional(ifBlockLabel, conditionalTemp);
-        builder.appendStatement(conditionalJump);
+        builder.appendConditionJumpStatement(conditionalJump);
 
         // if the conditional doesnt work, jump to the end of the block.
         LlJumpUnconditional unconditionalJump = new LlJumpUnconditional(endIfLabel);
-        builder.appendStatement(unconditionalJump);
+        builder.appendUnConditionJumpStatement(unconditionalJump);
 
         // add the label to the if body block
         LlEmptyStmt emptyStmt = new LlEmptyStmt();

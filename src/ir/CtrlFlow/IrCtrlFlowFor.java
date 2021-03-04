@@ -82,8 +82,8 @@ public class IrCtrlFlowFor extends IrStmt {
         LlLocation condition = builder.generateTemp() ;
         builder.appendStatement(new LlAssignStmtBinaryOp(condition ,llCounter, "<", llHigh ));
 
-        builder.appendStatement(new LlJumpConditional(startLoopLabel, condition));
-        builder.appendStatement(new LlJumpUnconditional(endLoopLabel));
+        builder.appendConditionJumpStatement(new LlJumpConditional(startLoopLabel, condition));
+        builder.appendUnConditionJumpStatement(new LlJumpUnconditional(endLoopLabel));
 
         // 3）计算循环体
         builder.appendStatement(startLoopLabel, new LlEmptyStmt());
@@ -102,7 +102,7 @@ public class IrCtrlFlowFor extends IrStmt {
         }
 
         // 添加结束标签
-        builder.appendStatement(new LlJumpUnconditional(loopCondition));
+        builder.appendUnConditionJumpStatement(new LlJumpUnconditional(loopCondition));
         builder.appendStatement(endLoopLabel, new LlEmptyStmt());
 
         return null;

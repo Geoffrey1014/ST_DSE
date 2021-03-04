@@ -29,6 +29,15 @@ public class LlBuilder {
         statementTable.put(label, statement);
     }
 
+    public void appendUnConditionJumpStatement(LlStatement statement){
+        String label = "UCJ_"+this.generateLabel();
+        statementTable.put(label, statement);
+    }
+    public void appendConditionJumpStatement(LlStatement statement){
+        String label = "CJ_"+this.generateLabel();
+        statementTable.put(label, statement);
+    }
+
     public void appendStatement(String label, LlStatement statement){
         if(statementTable.containsKey(label)){
             System.err.println("Duplicate label key . Please use the label generator! ");

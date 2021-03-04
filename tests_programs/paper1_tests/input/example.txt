@@ -1,0 +1,28 @@
+PROGRAM program0
+  VAR_INPUT
+    X : INT ;
+  END_VAR
+  VAR_OUTPUT
+    Y : INT := 0 ;
+  END_VAR
+  VAR
+    V : INT := 0;
+  END_VAR
+
+IF V = 0 THEN
+	IF X = 3 THEN
+		V := 2;
+		Y := 1;
+	ELSIF X = 4 THEN
+		V := 0;
+		Y := 2;
+	END_IF;
+ELSIF V = 2 THEN
+	WHILE V < X DO
+		V := V + 1;
+	END_WHILE;
+	Y := 3;
+ELSIF V = 4 THEN
+	Y := 4;
+END_IF;
+END_PROGRAM

@@ -22,7 +22,7 @@ public class CFG {
     private final LlBuilder builder;
     private final ArrayList<BasicBlock> basicBlocks;
     public final LinkedHashMap<String, BasicBlock> leadersToBBMap;
-    private final ArrayList<String> orderedLeadersList;
+    private final LinkedList<String> orderedLeadersList;
     public   LinkedHashMap<BasicBlock, String> blockLabels;
     private GraphViz graphViz;
     private LlSymbolTable llSymbolTable;
@@ -36,15 +36,15 @@ public class CFG {
 //            System.out.println(s + " : " + this.builder.getStatementTable().get(s));
 //        }
 //        System.out.println("LlBuilder statement list  end\n");
-
 //        this.paramsList = builder.params;
-        // cache the Labels => Stmts map and extract the labels list
+//        cache the Labels => Stmts map and extract the labels list
+
         LinkedHashMap<String, LlStatement> labelStmtsMap = new LinkedHashMap<>(builder.getStatementTable());
         ArrayList<String> labelsList = new ArrayList<>(labelStmtsMap.keySet());
 
         if (labelsList.size() == 0) {
             this.basicBlocks = new ArrayList<>();
-            this.orderedLeadersList = new ArrayList<>();
+            this.orderedLeadersList = new LinkedList<>();
             this.leadersToBBMap = new LinkedHashMap<>();
             this.blockLabels = new LinkedHashMap<>();
         } else {
@@ -80,7 +80,7 @@ public class CFG {
             this.leadersToBBMap = new LinkedHashMap<>();
             HashSet<String> tempLeadersSet = new HashSet<>(leadersSet);
             LinkedList<String> labelsQueue = new LinkedList<>(labelsList);
-            this.orderedLeadersList = new ArrayList<>();
+            this.orderedLeadersList = new LinkedList<>();
             do {
                 LinkedHashMap<String, LlStatement> bbLabelsToStmtsMap = new LinkedHashMap<>();
 
@@ -125,6 +125,7 @@ public class CFG {
                     BasicBlock targetBB = this.leadersToBBMap.get(targetLabel);
                     bb.setAlternativeBranch(targetBB);
 
+                    System.out.println(targetLabel);
                     // set reverse edge B <-- C
                     targetBB.addPredecessorNode(bb);
                 }
@@ -186,6 +187,7 @@ public class CFG {
 
             }
 
+            removeUnconditionalJumpBlocks();
 
             // 5) assign the list of basic blocks as a field of THIS object
             ArrayList<BasicBlock> basicBlocks = new ArrayList<>();
@@ -196,6 +198,52 @@ public class CFG {
             this.basicBlocks = basicBlocks;
         }
     }
+    public void removeUnconditionalJumpBlocks(){
+        System.out.println("\nremoveGotoBlocks");
+
+        for (Iterator<String> iterator = this.orderedLeadersList.iterator(); iterator.hasNext();) {
+            String leaderLabel = iterator.next();
+            if(leaderLabel.startsWith("UCJ") ){
+                iterator.remove();
+                BasicBlock uselessBB = this.leadersToBBMap.get(leaderLabel);
+                BasicBlock predecessor = uselessBB.getPredecessors().iterator().next();
+                BasicBlock successor = uselessBB.getAlternativeBranch();
+
+                predecessor.setDefaultBranch(successor);
+                successor.rmPredecessorNode(uselessBB);
+                successor.addPredecessorNode(predecessor);
+                this.leadersToBBMap.remove(leaderLabel);
+            }
+            else if(leaderLabel.startsWith("END_ELSIF")){
+                BasicBlock uselessBB = this.leadersToBBMap.get(leaderLabel);
+                if(uselessBB.getStmtsList().size() == 1){
+                    iterator.remove();
+                    BasicBlock predecessor = uselessBB.getPredecessors().iterator().next();
+                    BasicBlock successor = uselessBB.getDefaultBranch();
+
+                    predecessor.setDefaultBranch(successor);
+                    successor.rmPredecessorNode(uselessBB);
+                    successor.addPredecessorNode(predecessor);
+                    this.leadersToBBMap.remove(leaderLabel);
+                }
+
+            }
+            else if(leaderLabel.startsWith("ELSIF")){
+                BasicBlock uselessBB = this.leadersToBBMap.get(leaderLabel);
+                if(uselessBB.getStmtsList().size() == 1){
+                    iterator.remove();
+                    BasicBlock predecessor = uselessBB.getPredecessors().iterator().next();
+                    BasicBlock successor = uselessBB.getDefaultBranch();
+
+                    predecessor.setAlternativeBranch(successor);
+                    successor.rmPredecessorNode(uselessBB);
+                    successor.addPredecessorNode(predecessor);
+                    this.leadersToBBMap.remove(leaderLabel);
+                }
+            }
+        }
+    }
+
     private BasicBlock createEmptyBB(String label){
         this.orderedLeadersList.add(label);
         LinkedHashMap<String, LlStatement> bBStmtsList = new LinkedHashMap<>();

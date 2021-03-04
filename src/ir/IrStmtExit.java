@@ -31,7 +31,7 @@ public class IrStmtExit extends IrStmt {
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
         String endBlock = "END_" + builder.getCurrentBlock();
         LlJumpUnconditional unconditionalJump = new LlJumpUnconditional(endBlock);
-        builder.appendStatement(unconditionalJump);
+        builder.appendUnConditionJumpStatement(unconditionalJump);
 
         return null;
     }

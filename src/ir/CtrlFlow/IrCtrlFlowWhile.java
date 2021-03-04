@@ -26,51 +26,42 @@ public class IrCtrlFlowWhile extends IrCtrlFlow {
     @Override
     public LlLocation generateLlIr(LlBuilder builder, LlSymbolTable symbolTable) {
 
-        String loopCondition = "WHILE_COND_" + builder.generateLabel();
-        String startLoopLabel = "WHILE_" + builder.generateLabel();
+        String loopCondition = "WHILE_" + builder.generateLabel();
+        String startLoopLabel = "LOOP_" + builder.generateLabel();
+        String endWhileLabel = "END_" + loopCondition;
 
-        LlEmptyStmt forConditionalLabelStmt = new LlEmptyStmt();
-
-        String endLoopLabel = "END_" + startLoopLabel;
-
-        builder.appendStatement(loopCondition, forConditionalLabelStmt);
-
+        LlEmptyStmt whileConditionalLabelStmt = new LlEmptyStmt();
+        builder.appendStatement(loopCondition, whileConditionalLabelStmt);
 
         //generate the goto Statemennt
         LlLocation conditionResultTemp = this.condExpr.generateLlIr(builder, symbolTable);
         LlJumpConditional conditionalJump = new LlJumpConditional(startLoopLabel, conditionResultTemp);
-
-        builder.appendStatement(conditionalJump);
+        builder.appendConditionJumpStatement(conditionalJump);
 
         //if the conditional evaluates to false, jump to the end of the loop
-        LlJumpUnconditional endOfForLoopJump = new LlJumpUnconditional(endLoopLabel);
-        builder.appendStatement(endOfForLoopJump);
+        LlJumpUnconditional endOfWhileLoopJump = new LlJumpUnconditional(endWhileLabel);
+        builder.appendUnConditionJumpStatement(endOfWhileLoopJump);
 
         // Else execute the for loop body.
         LlEmptyStmt forStart = new LlEmptyStmt();
         builder.appendStatement(startLoopLabel, forStart);
 
-        // if the condition fails, jump to the end of the fotr loop
-        LlEmptyStmt endForLabelEmptyStmt = new LlEmptyStmt();
-
 
         // get into block
         builder.getInBlock(loopCondition);
         // generate the code block Ll
-
         this.stmtBody.generateLlIr(builder, symbolTable);
+        //  get out of block
+        builder.getOutOfBlock();
 
 
-
-        // update the counter.
-
-        builder.appendStatement(new LlJumpUnconditional(loopCondition));
+        builder.appendUnConditionJumpStatement(new LlJumpUnconditional(loopCondition));
 
 
         LlEmptyStmt emptyStmt = new LlEmptyStmt();
 
         // now add the end of loop label
-        builder.appendStatement(endLoopLabel, emptyStmt);
+        builder.appendStatement(endWhileLabel, emptyStmt);
 
         return null;
     }
