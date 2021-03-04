@@ -117,8 +117,10 @@ public class SymLlStatementExeutor implements LlStatementVisitor {
                 result = ctx.mkNot(right);
                 break;
             case "-":
-                result = ctx.mkFPNeg(right);
+                result = ctx.mkSub(ctx.mkInt(0), right);
                 break;
+            case "+":
+                result = right;
             default:
                 System.err.println("Runtime Error: Unrecognized Operation");
                 System.err.println(llAssignStmtUnaryOp.getOperator());

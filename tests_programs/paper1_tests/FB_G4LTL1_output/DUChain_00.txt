@@ -18,7 +18,7 @@ def => L31: y_0 = false @y_0
 use => [L34: print(y_0,) @y_0]
 
 def => L35: x_1 = read() @x_1
-use => [L10: #_t2 = NOT x_1 @x_1, L21: #_t6 = x_0 AND x_1 @x_1]
+use => [L21: #_t6 = x_0 AND x_1 @x_1, L10: #_t2 = NOT x_1 @x_1]
 
 def => L36: x_0 = read() @x_0
-use => [L11: #_t3 = x_0 AND #_t2 @x_0, L23: #_t8 = NOT x_0 @x_0, L21: #_t6 = x_0 AND x_1 @x_0]
+use => [L23: #_t8 = NOT x_0 @x_0, L11: #_t3 = x_0 AND #_t2 @x_0, L21: #_t6 = x_0 AND x_1 @x_0]

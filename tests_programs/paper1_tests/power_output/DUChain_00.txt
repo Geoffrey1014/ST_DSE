@@ -1,30 +1,30 @@
 
-def => L3: RES = 1 @RES
-use => [L44: print(RES,) @RES, L34: #_t11 = 1 / RES @RES, L21: #_t5 = RES * X @RES]
-
-def => L4: FLAG = true @FLAG
-use => [L45: print(FLAG,) @FLAG]
-
 def => L12: EXP = #_t2 @EXP
-use => [L24: #_t7 = EXP - 1 @EXP, L18: #_t4 = EXP <> 0 @EXP, L46: print(EXP,) @EXP]
+use => [L28: #_t9 = EXP - 1 @EXP, L50: print(EXP,) @EXP, L22: #_t6 = EXP <> 0 @EXP]
 
 def => L14: EXP = Y @EXP
-use => [L24: #_t7 = EXP - 1 @EXP, L18: #_t4 = EXP <> 0 @EXP, L46: print(EXP,) @EXP]
+use => [L28: #_t9 = EXP - 1 @EXP, L50: print(EXP,) @EXP, L22: #_t6 = EXP <> 0 @EXP]
 
-def => L22: RES = #_t5 @RES
-use => [L44: print(RES,) @RES, L34: #_t11 = 1 / RES @RES, L21: #_t5 = RES * X @RES]
+def => L16: FLAG = true @FLAG
+use => [L49: print(FLAG,) @FLAG]
 
-def => L25: EXP = #_t7 @EXP
-use => [L24: #_t7 = EXP - 1 @EXP, L18: #_t4 = EXP <> 0 @EXP, L46: print(EXP,) @EXP]
+def => L18: RES = 1.0 @RES
+use => [L25: #_t7 = RES * X @RES, L48: print(RES,) @RES, L43: #_t15 = 1.0 / RES @RES]
 
-def => L35: RES = #_t11 @RES
-use => [L44: print(RES,) @RES]
+def => L26: RES = #_t7 @RES
+use => [L25: #_t7 = RES * X @RES, L48: print(RES,) @RES, L43: #_t15 = 1.0 / RES @RES]
 
-def => L43: FLAG = false @FLAG
-use => [L45: print(FLAG,) @FLAG]
+def => L29: EXP = #_t9 @EXP
+use => [L28: #_t9 = EXP - 1 @EXP, L50: print(EXP,) @EXP, L22: #_t6 = EXP <> 0 @EXP]
 
-def => L47: Y = read() @Y
-use => [L11: #_t2 = - Y @Y, L30: #_t9 = Y <= 0 @Y, L14: EXP = Y @Y, L8: #_t1 = Y > 0 @Y]
+def => L44: RES = #_t15 @RES
+use => [L48: print(RES,) @RES]
 
-def => L48: X = read() @X
-use => [L39: #_t13 = X == 0 @X, L21: #_t5 = RES * X @X]
+def => L47: FLAG = false @FLAG
+use => [L49: print(FLAG,) @FLAG]
+
+def => L51: Y = read() @Y
+use => [L14: EXP = Y @Y, L11: #_t2 = - Y @Y, L8: #_t1 = Y > 0 @Y, L33: #_t11 = Y <= 0 @Y]
+
+def => L52: X = read() @X
+use => [L25: #_t7 = RES * X @X, L39: #_t13 = X == 0.0 @X]

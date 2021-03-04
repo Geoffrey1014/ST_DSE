@@ -11,17 +11,13 @@ NumericalLTLRefined :  EMPTY_STATEMENT
            Body :  EMPTY_STATEMENT
              L6 :  #_t0 = 0
              L7 :  #_t1 = cstate94 == #_t0
-             L8 :  if #_t1 goto IF_L5
-
-            L10 :  goto START_ELSIF_L9
+          CJ_L8 :  if #_t1 goto IF_L5
 
           IF_L5 :  EMPTY_STATEMENT
             L12 :  #_t79 = NOT req1
            L208 :  #_t2 = #_t79
             L13 :  #_t3 = #_t2 AND req2
-            L14 :  if #_t3 goto IF_L11
-
-            L16 :  goto START_ELSIF_L15
+         CJ_L14 :  if #_t3 goto IF_L11
 
          IF_L11 :  EMPTY_STATEMENT
             L17 :  #_t4 = 1
@@ -30,13 +26,11 @@ NumericalLTLRefined :  EMPTY_STATEMENT
             L20 :  grant_1 = #_t5
             L21 :  #_t6 = false
             L22 :  grant_2 = #_t6
-            L23 :  goto END_IF_L11
+        UCJ_L23 :  goto END_IF_L11
 
 START_ELSIF_L15 :  EMPTY_STATEMENT
             L25 :  #_t7 = req1 AND req2
-            L26 :  if #_t7 goto ELSIF_L24
-
-            L27 :  goto END_ELSIF_L24
+         CJ_L26 :  if #_t7 goto ELSIF_L24
 
       ELSIF_L24 :  EMPTY_STATEMENT
             L28 :  #_t8 = 2
@@ -45,15 +39,13 @@ START_ELSIF_L15 :  EMPTY_STATEMENT
             L31 :  grant_1 = #_t9
             L32 :  #_t10 = false
             L33 :  grant_2 = #_t10
-            L34 :  goto END_IF_L11
+        UCJ_L34 :  goto END_IF_L11
 
   END_ELSIF_L24 :  EMPTY_STATEMENT
             L36 :  #_t80 = NOT req2
            L209 :  #_t11 = #_t80
             L37 :  #_t12 = req1 AND #_t11
-            L38 :  if #_t12 goto ELSIF_L35
-
-            L39 :  goto END_ELSIF_L35
+         CJ_L38 :  if #_t12 goto ELSIF_L35
 
       ELSIF_L35 :  EMPTY_STATEMENT
             L40 :  #_t13 = 3
@@ -62,15 +54,13 @@ START_ELSIF_L15 :  EMPTY_STATEMENT
             L43 :  grant_1 = #_t14
             L44 :  #_t15 = false
             L45 :  grant_2 = #_t15
-            L46 :  goto END_IF_L11
+        UCJ_L46 :  goto END_IF_L11
 
   END_ELSIF_L35 :  EMPTY_STATEMENT
             L48 :  #_t16 = #_t80
             L49 :  #_t17 = #_t79
             L50 :  #_t18 = #_t17 AND #_t16
-            L51 :  if #_t18 goto ELSIF_L47
-
-            L52 :  goto END_ELSIF_L47
+         CJ_L51 :  if #_t18 goto ELSIF_L47
 
       ELSIF_L47 :  EMPTY_STATEMENT
             L53 :  #_t19 = 0
@@ -79,25 +69,19 @@ START_ELSIF_L15 :  EMPTY_STATEMENT
             L56 :  grant_1 = #_t20
             L57 :  #_t21 = false
             L58 :  grant_2 = #_t21
-            L59 :  goto END_IF_L11
-
-  END_ELSIF_L47 :  EMPTY_STATEMENT
+        UCJ_L59 :  goto END_IF_L11
 
      END_IF_L11 :  EMPTY_STATEMENT
-            L60 :  goto END_IF_L5
+        UCJ_L60 :  goto END_IF_L5
 
  START_ELSIF_L9 :  EMPTY_STATEMENT
             L62 :  #_t22 = 1
             L63 :  #_t23 = cstate94 == #_t22
-            L64 :  if #_t23 goto ELSIF_L61
-
-            L65 :  goto END_ELSIF_L61
+         CJ_L64 :  if #_t23 goto ELSIF_L61
 
       ELSIF_L61 :  EMPTY_STATEMENT
             L67 :  #_t24 = req1 AND req2
-            L68 :  if #_t24 goto IF_L66
-
-            L70 :  goto START_ELSIF_L69
+         CJ_L68 :  if #_t24 goto IF_L66
 
          IF_L66 :  EMPTY_STATEMENT
             L71 :  #_t25 = 2
@@ -106,15 +90,13 @@ START_ELSIF_L15 :  EMPTY_STATEMENT
             L74 :  grant_1 = #_t26
             L75 :  #_t27 = false
             L76 :  grant_2 = #_t27
-            L77 :  goto END_IF_L66
+        UCJ_L77 :  goto END_IF_L66
 
 START_ELSIF_L69 :  EMPTY_STATEMENT
             L79 :  #_t81 = NOT req2
            L210 :  #_t28 = #_t81
             L80 :  #_t29 = req1 AND #_t28
-            L81 :  if #_t29 goto ELSIF_L78
-
-            L82 :  goto END_ELSIF_L78
+         CJ_L81 :  if #_t29 goto ELSIF_L78
 
       ELSIF_L78 :  EMPTY_STATEMENT
             L83 :  #_t30 = 3
@@ -123,16 +105,14 @@ START_ELSIF_L69 :  EMPTY_STATEMENT
             L86 :  grant_1 = #_t31
             L87 :  #_t32 = true
             L88 :  grant_2 = #_t32
-            L89 :  goto END_IF_L66
+        UCJ_L89 :  goto END_IF_L66
 
   END_ELSIF_L78 :  EMPTY_STATEMENT
             L91 :  #_t33 = #_t81
             L92 :  #_t82 = NOT req1
            L211 :  #_t34 = #_t82
             L93 :  #_t35 = #_t34 AND #_t33
-            L94 :  if #_t35 goto ELSIF_L90
-
-            L95 :  goto END_ELSIF_L90
+         CJ_L94 :  if #_t35 goto ELSIF_L90
 
       ELSIF_L90 :  EMPTY_STATEMENT
             L96 :  #_t36 = 0
@@ -141,14 +121,12 @@ START_ELSIF_L69 :  EMPTY_STATEMENT
             L99 :  grant_1 = #_t37
            L100 :  #_t38 = true
            L101 :  grant_2 = #_t38
-           L102 :  goto END_IF_L66
+       UCJ_L102 :  goto END_IF_L66
 
   END_ELSIF_L90 :  EMPTY_STATEMENT
            L104 :  #_t39 = #_t82
            L105 :  #_t40 = #_t39 AND req2
-           L106 :  if #_t40 goto ELSIF_L103
-
-           L107 :  goto END_ELSIF_L103
+        CJ_L106 :  if #_t40 goto ELSIF_L103
 
      ELSIF_L103 :  EMPTY_STATEMENT
            L108 :  #_t41 = 1
@@ -157,28 +135,22 @@ START_ELSIF_L69 :  EMPTY_STATEMENT
            L111 :  grant_1 = #_t42
            L112 :  #_t43 = true
            L113 :  grant_2 = #_t43
-           L114 :  goto END_IF_L66
-
- END_ELSIF_L103 :  EMPTY_STATEMENT
+       UCJ_L114 :  goto END_IF_L66
 
      END_IF_L66 :  EMPTY_STATEMENT
-           L115 :  goto END_IF_L5
+       UCJ_L115 :  goto END_IF_L5
 
   END_ELSIF_L61 :  EMPTY_STATEMENT
            L117 :  #_t44 = 2
            L118 :  #_t45 = cstate94 == #_t44
-           L119 :  if #_t45 goto ELSIF_L116
-
-           L120 :  goto END_ELSIF_L116
+        CJ_L119 :  if #_t45 goto ELSIF_L116
 
      ELSIF_L116 :  EMPTY_STATEMENT
            L122 :  #_t46 = NOT req2
            L123 :  #_t47 = req1 AND #_t46
            L124 :  #_t48 = NOT req1
            L125 :  #_t49 = #_t48 OR #_t47
-           L126 :  if #_t49 goto IF_L121
-
-           L128 :  goto START_ELSIF_L127
+        CJ_L126 :  if #_t49 goto IF_L121
 
         IF_L121 :  EMPTY_STATEMENT
            L129 :  #_t50 = 2
@@ -187,13 +159,11 @@ START_ELSIF_L69 :  EMPTY_STATEMENT
            L132 :  grant_1 = #_t51
            L133 :  #_t52 = false
            L134 :  grant_2 = #_t52
-           L135 :  goto END_IF_L121
+       UCJ_L135 :  goto END_IF_L121
 
 START_ELSIF_L127 :  EMPTY_STATEMENT
            L137 :  #_t53 = req1 AND req2
-           L138 :  if #_t53 goto ELSIF_L136
-
-           L139 :  goto END_ELSIF_L136
+        CJ_L138 :  if #_t53 goto ELSIF_L136
 
      ELSIF_L136 :  EMPTY_STATEMENT
            L140 :  #_t54 = 2
@@ -202,19 +172,15 @@ START_ELSIF_L127 :  EMPTY_STATEMENT
            L143 :  grant_1 = #_t55
            L144 :  #_t56 = false
            L145 :  grant_2 = #_t56
-           L146 :  goto END_IF_L121
-
- END_ELSIF_L136 :  EMPTY_STATEMENT
+       UCJ_L146 :  goto END_IF_L121
 
     END_IF_L121 :  EMPTY_STATEMENT
-           L147 :  goto END_IF_L5
+       UCJ_L147 :  goto END_IF_L5
 
  END_ELSIF_L116 :  EMPTY_STATEMENT
            L149 :  #_t57 = 3
            L150 :  #_t58 = cstate94 == #_t57
-           L151 :  if #_t58 goto ELSIF_L148
-
-           L152 :  goto END_ELSIF_L148
+        CJ_L151 :  if #_t58 goto ELSIF_L148
 
      ELSIF_L148 :  EMPTY_STATEMENT
            L154 :  #_t83 = NOT req2
@@ -222,9 +188,7 @@ START_ELSIF_L127 :  EMPTY_STATEMENT
            L155 :  #_t84 = NOT req1
            L213 :  #_t60 = #_t84
            L156 :  #_t61 = #_t60 AND #_t59
-           L157 :  if #_t61 goto IF_L153
-
-           L159 :  goto START_ELSIF_L158
+        CJ_L157 :  if #_t61 goto IF_L153
 
         IF_L153 :  EMPTY_STATEMENT
            L160 :  #_t62 = 0
@@ -233,14 +197,12 @@ START_ELSIF_L127 :  EMPTY_STATEMENT
            L163 :  grant_1 = #_t63
            L164 :  #_t64 = false
            L165 :  grant_2 = #_t64
-           L166 :  goto END_IF_L153
+       UCJ_L166 :  goto END_IF_L153
 
 START_ELSIF_L158 :  EMPTY_STATEMENT
            L168 :  #_t65 = #_t83
            L169 :  #_t66 = req1 AND #_t65
-           L170 :  if #_t66 goto ELSIF_L167
-
-           L171 :  goto END_ELSIF_L167
+        CJ_L170 :  if #_t66 goto ELSIF_L167
 
      ELSIF_L167 :  EMPTY_STATEMENT
            L172 :  #_t67 = 3
@@ -249,14 +211,12 @@ START_ELSIF_L158 :  EMPTY_STATEMENT
            L175 :  grant_1 = #_t68
            L176 :  #_t69 = false
            L177 :  grant_2 = #_t69
-           L178 :  goto END_IF_L153
+       UCJ_L178 :  goto END_IF_L153
 
  END_ELSIF_L167 :  EMPTY_STATEMENT
            L180 :  #_t70 = #_t84
            L181 :  #_t71 = #_t70 AND req2
-           L182 :  if #_t71 goto ELSIF_L179
-
-           L183 :  goto END_ELSIF_L179
+        CJ_L182 :  if #_t71 goto ELSIF_L179
 
      ELSIF_L179 :  EMPTY_STATEMENT
            L184 :  #_t72 = 1
@@ -265,13 +225,11 @@ START_ELSIF_L158 :  EMPTY_STATEMENT
            L187 :  grant_1 = #_t73
            L188 :  #_t74 = false
            L189 :  grant_2 = #_t74
-           L190 :  goto END_IF_L153
+       UCJ_L190 :  goto END_IF_L153
 
  END_ELSIF_L179 :  EMPTY_STATEMENT
            L192 :  #_t75 = req1 AND req2
-           L193 :  if #_t75 goto ELSIF_L191
-
-           L194 :  goto END_ELSIF_L191
+        CJ_L193 :  if #_t75 goto ELSIF_L191
 
      ELSIF_L191 :  EMPTY_STATEMENT
            L195 :  #_t76 = 2
@@ -280,14 +238,10 @@ START_ELSIF_L158 :  EMPTY_STATEMENT
            L198 :  grant_1 = #_t77
            L199 :  #_t78 = false
            L200 :  grant_2 = #_t78
-           L201 :  goto END_IF_L153
-
- END_ELSIF_L191 :  EMPTY_STATEMENT
+       UCJ_L201 :  goto END_IF_L153
 
     END_IF_L153 :  EMPTY_STATEMENT
-           L202 :  goto END_IF_L5
-
- END_ELSIF_L148 :  EMPTY_STATEMENT
+       UCJ_L202 :  goto END_IF_L5
 
       END_IF_L5 :  EMPTY_STATEMENT
 

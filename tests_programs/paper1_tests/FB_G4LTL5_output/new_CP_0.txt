@@ -14,14 +14,12 @@ CFG:
            Body :  EMPTY_STATEMENT
             L10 :  #_t0 = 10
             L11 :  #_t1 = c1 >= 10
-            L12 :  if #_t1 goto IF_L8
-
-            L13 :  goto ELSE_L9
+         CJ_L12 :  if #_t1 goto IF_L8
 
         ELSE_L9 :  EMPTY_STATEMENT
             L14 :  #_t2 = false
             L15 :  c1_geq10 = false
-            L16 :  goto END_IF_L8
+        UCJ_L16 :  goto END_IF_L8
 
           IF_L8 :  EMPTY_STATEMENT
             L17 :  #_t3 = true
@@ -30,9 +28,7 @@ CFG:
       END_IF_L8 :  EMPTY_STATEMENT
             L20 :  #_t4 = 10
             L21 :  #_t5 = cstate55 == 10
-            L22 :  if #_t5 goto IF_L19
-
-            L24 :  goto START_ELSIF_L23
+         CJ_L22 :  if #_t5 goto IF_L19
 
          IF_L19 :  EMPTY_STATEMENT
             L26 :  #_t181 = NOT c1_geq10
@@ -44,9 +40,7 @@ CFG:
            L398 :  #_t7 = #_t179
             L28 :  #_t8 = #_t179 AND x1
             L29 :  #_t9 = #_t8 AND #_t181
-            L30 :  if #_t9 goto IF_L25
-
-            L32 :  goto START_ELSIF_L31
+         CJ_L30 :  if #_t9 goto IF_L25
 
          IF_L25 :  EMPTY_STATEMENT
             L33 :  #_t10 = 10
@@ -57,13 +51,11 @@ CFG:
             L38 :  c1_add1 = false
             L39 :  #_t13 = true
             L40 :  c1_reset = true
-            L41 :  goto END_IF_L25
+        UCJ_L41 :  goto END_IF_L25
 
 START_ELSIF_L31 :  EMPTY_STATEMENT
             L43 :  #_t14 = x0 AND x1
-            L44 :  if #_t14 goto ELSIF_L42
-
-            L45 :  goto END_ELSIF_L42
+         CJ_L44 :  if #_t14 goto ELSIF_L42
 
       ELSIF_L42 :  EMPTY_STATEMENT
             L46 :  #_t15 = 14
@@ -74,15 +66,13 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
             L51 :  c1_add1 = true
             L52 :  #_t18 = false
             L53 :  c1_reset = false
-            L54 :  goto END_IF_L25
+        UCJ_L54 :  goto END_IF_L25
 
   END_ELSIF_L42 :  EMPTY_STATEMENT
             L56 :  #_t19 = #_t179
             L57 :  #_t20 = #_t179 AND x1
             L58 :  #_t21 = #_t20 AND c1_geq10
-            L59 :  if #_t21 goto ELSIF_L55
-
-            L60 :  goto END_ELSIF_L55
+         CJ_L59 :  if #_t21 goto ELSIF_L55
 
       ELSIF_L55 :  EMPTY_STATEMENT
             L61 :  #_t22 = 10
@@ -93,7 +83,7 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
             L66 :  c1_add1 = false
             L67 :  #_t25 = true
             L68 :  c1_reset = true
-            L69 :  goto END_IF_L25
+        UCJ_L69 :  goto END_IF_L25
 
   END_ELSIF_L55 :  EMPTY_STATEMENT
             L71 :  #_t26 = #_t181
@@ -104,9 +94,7 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
             L73 :  #_t28 = #_t179
             L74 :  #_t29 = #_t179 AND #_t182
             L75 :  #_t30 = #_t29 AND #_t181
-            L76 :  if #_t30 goto ELSIF_L70
-
-            L77 :  goto END_ELSIF_L70
+         CJ_L76 :  if #_t30 goto ELSIF_L70
 
       ELSIF_L70 :  EMPTY_STATEMENT
             L78 :  #_t31 = 10
@@ -117,15 +105,13 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
             L83 :  c1_add1 = false
             L84 :  #_t34 = false
             L85 :  c1_reset = false
-            L86 :  goto END_IF_L25
+        UCJ_L86 :  goto END_IF_L25
 
   END_ELSIF_L70 :  EMPTY_STATEMENT
             L88 :  #_t35 = #_t182
             L89 :  #_t36 = x0 AND #_t182
             L90 :  #_t37 = #_t36 AND c1_geq10
-            L91 :  if #_t37 goto ELSIF_L87
-
-            L92 :  goto END_ELSIF_L87
+         CJ_L91 :  if #_t37 goto ELSIF_L87
 
       ELSIF_L87 :  EMPTY_STATEMENT
             L93 :  #_t38 = 13
@@ -136,16 +122,14 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
             L98 :  c1_add1 = true
             L99 :  #_t41 = false
            L100 :  c1_reset = false
-           L101 :  goto END_IF_L25
+       UCJ_L101 :  goto END_IF_L25
 
   END_ELSIF_L87 :  EMPTY_STATEMENT
            L103 :  #_t42 = #_t182
            L104 :  #_t43 = #_t179
            L105 :  #_t44 = #_t179 AND #_t182
            L106 :  #_t45 = #_t44 AND c1_geq10
-           L107 :  if #_t45 goto ELSIF_L102
-
-           L108 :  goto END_ELSIF_L102
+        CJ_L107 :  if #_t45 goto ELSIF_L102
 
      ELSIF_L102 :  EMPTY_STATEMENT
            L109 :  #_t46 = 10
@@ -156,16 +140,14 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
            L114 :  c1_add1 = false
            L115 :  #_t49 = false
            L116 :  c1_reset = false
-           L117 :  goto END_IF_L25
+       UCJ_L117 :  goto END_IF_L25
 
  END_ELSIF_L102 :  EMPTY_STATEMENT
            L119 :  #_t50 = #_t181
            L120 :  #_t51 = #_t182
            L121 :  #_t52 = x0 AND #_t182
            L122 :  #_t53 = #_t52 AND #_t181
-           L123 :  if #_t53 goto ELSIF_L118
-
-           L124 :  goto END_ELSIF_L118
+        CJ_L123 :  if #_t53 goto ELSIF_L118
 
      ELSIF_L118 :  EMPTY_STATEMENT
            L125 :  #_t54 = 13
@@ -176,19 +158,15 @@ START_ELSIF_L31 :  EMPTY_STATEMENT
            L130 :  c1_add1 = true
            L131 :  #_t57 = false
            L132 :  c1_reset = false
-           L133 :  goto END_IF_L25
-
- END_ELSIF_L118 :  EMPTY_STATEMENT
+       UCJ_L133 :  goto END_IF_L25
 
      END_IF_L25 :  EMPTY_STATEMENT
-           L134 :  goto END_IF_L19
+       UCJ_L134 :  goto END_IF_L19
 
 START_ELSIF_L23 :  EMPTY_STATEMENT
            L136 :  #_t58 = 0
            L137 :  #_t59 = cstate55 == 0
-           L138 :  if #_t59 goto ELSIF_L135
-
-           L139 :  goto END_ELSIF_L135
+        CJ_L138 :  if #_t59 goto ELSIF_L135
 
      ELSIF_L135 :  EMPTY_STATEMENT
            L141 :  #_t189 = NOT c1_geq10
@@ -200,9 +178,7 @@ START_ELSIF_L23 :  EMPTY_STATEMENT
            L406 :  #_t61 = #_t187
            L143 :  #_t62 = #_t187 AND x1
            L144 :  #_t63 = #_t62 AND #_t189
-           L145 :  if #_t63 goto IF_L140
-
-           L147 :  goto START_ELSIF_L146
+        CJ_L145 :  if #_t63 goto IF_L140
 
         IF_L140 :  EMPTY_STATEMENT
            L148 :  #_t64 = 10
@@ -213,13 +189,11 @@ START_ELSIF_L23 :  EMPTY_STATEMENT
            L153 :  c1_add1 = false
            L154 :  #_t67 = true
            L155 :  c1_reset = true
-           L156 :  goto END_IF_L140
+       UCJ_L156 :  goto END_IF_L140
 
 START_ELSIF_L146 :  EMPTY_STATEMENT
            L158 :  #_t68 = x0 AND x1
-           L159 :  if #_t68 goto ELSIF_L157
-
-           L160 :  goto END_ELSIF_L157
+        CJ_L159 :  if #_t68 goto ELSIF_L157
 
      ELSIF_L157 :  EMPTY_STATEMENT
            L161 :  #_t69 = 14
@@ -230,15 +204,13 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L166 :  c1_add1 = true
            L167 :  #_t72 = false
            L168 :  c1_reset = false
-           L169 :  goto END_IF_L140
+       UCJ_L169 :  goto END_IF_L140
 
  END_ELSIF_L157 :  EMPTY_STATEMENT
            L171 :  #_t73 = #_t187
            L172 :  #_t74 = #_t187 AND x1
            L173 :  #_t75 = #_t74 AND c1_geq10
-           L174 :  if #_t75 goto ELSIF_L170
-
-           L175 :  goto END_ELSIF_L170
+        CJ_L174 :  if #_t75 goto ELSIF_L170
 
      ELSIF_L170 :  EMPTY_STATEMENT
            L176 :  #_t76 = 10
@@ -249,7 +221,7 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L181 :  c1_add1 = false
            L182 :  #_t79 = true
            L183 :  c1_reset = true
-           L184 :  goto END_IF_L140
+       UCJ_L184 :  goto END_IF_L140
 
  END_ELSIF_L170 :  EMPTY_STATEMENT
            L186 :  #_t80 = #_t189
@@ -260,9 +232,7 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L188 :  #_t82 = #_t187
            L189 :  #_t83 = #_t187 AND #_t190
            L190 :  #_t84 = #_t83 AND #_t189
-           L191 :  if #_t84 goto ELSIF_L185
-
-           L192 :  goto END_ELSIF_L185
+        CJ_L191 :  if #_t84 goto ELSIF_L185
 
      ELSIF_L185 :  EMPTY_STATEMENT
            L193 :  #_t85 = 10
@@ -273,15 +243,13 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L198 :  c1_add1 = false
            L199 :  #_t88 = false
            L200 :  c1_reset = false
-           L201 :  goto END_IF_L140
+       UCJ_L201 :  goto END_IF_L140
 
  END_ELSIF_L185 :  EMPTY_STATEMENT
            L203 :  #_t89 = #_t190
            L204 :  #_t90 = x0 AND #_t190
            L205 :  #_t91 = #_t90 AND c1_geq10
-           L206 :  if #_t91 goto ELSIF_L202
-
-           L207 :  goto END_ELSIF_L202
+        CJ_L206 :  if #_t91 goto ELSIF_L202
 
      ELSIF_L202 :  EMPTY_STATEMENT
            L208 :  #_t92 = 13
@@ -292,16 +260,14 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L213 :  c1_add1 = true
            L214 :  #_t95 = false
            L215 :  c1_reset = false
-           L216 :  goto END_IF_L140
+       UCJ_L216 :  goto END_IF_L140
 
  END_ELSIF_L202 :  EMPTY_STATEMENT
            L218 :  #_t96 = #_t190
            L219 :  #_t97 = #_t187
            L220 :  #_t98 = #_t187 AND #_t190
            L221 :  #_t99 = #_t98 AND c1_geq10
-           L222 :  if #_t99 goto ELSIF_L217
-
-           L223 :  goto END_ELSIF_L217
+        CJ_L222 :  if #_t99 goto ELSIF_L217
 
      ELSIF_L217 :  EMPTY_STATEMENT
            L224 :  #_t100 = 10
@@ -312,16 +278,14 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L229 :  c1_add1 = false
            L230 :  #_t103 = false
            L231 :  c1_reset = false
-           L232 :  goto END_IF_L140
+       UCJ_L232 :  goto END_IF_L140
 
  END_ELSIF_L217 :  EMPTY_STATEMENT
            L234 :  #_t104 = #_t189
            L235 :  #_t105 = #_t190
            L236 :  #_t106 = x0 AND #_t190
            L237 :  #_t107 = #_t106 AND #_t189
-           L238 :  if #_t107 goto ELSIF_L233
-
-           L239 :  goto END_ELSIF_L233
+        CJ_L238 :  if #_t107 goto ELSIF_L233
 
      ELSIF_L233 :  EMPTY_STATEMENT
            L240 :  #_t108 = 13
@@ -332,19 +296,15 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L245 :  c1_add1 = true
            L246 :  #_t111 = false
            L247 :  c1_reset = false
-           L248 :  goto END_IF_L140
-
- END_ELSIF_L233 :  EMPTY_STATEMENT
+       UCJ_L248 :  goto END_IF_L140
 
     END_IF_L140 :  EMPTY_STATEMENT
-           L249 :  goto END_IF_L19
+       UCJ_L249 :  goto END_IF_L19
 
  END_ELSIF_L135 :  EMPTY_STATEMENT
            L251 :  #_t112 = 13
            L252 :  #_t113 = cstate55 == 13
-           L253 :  if #_t113 goto ELSIF_L250
-
-           L254 :  goto END_ELSIF_L250
+        CJ_L253 :  if #_t113 goto ELSIF_L250
 
      ELSIF_L250 :  EMPTY_STATEMENT
            L256 :  #_t197 = NOT c1_geq10
@@ -356,9 +316,7 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L414 :  #_t115 = #_t195
            L258 :  #_t116 = #_t195 AND x1
            L259 :  #_t117 = #_t116 AND #_t197
-           L260 :  if #_t117 goto IF_L255
-
-           L262 :  goto START_ELSIF_L261
+        CJ_L260 :  if #_t117 goto IF_L255
 
         IF_L255 :  EMPTY_STATEMENT
            L263 :  #_t118 = 10
@@ -369,13 +327,11 @@ START_ELSIF_L146 :  EMPTY_STATEMENT
            L268 :  c1_add1 = false
            L269 :  #_t121 = true
            L270 :  c1_reset = true
-           L271 :  goto END_IF_L255
+       UCJ_L271 :  goto END_IF_L255
 
 START_ELSIF_L261 :  EMPTY_STATEMENT
            L273 :  #_t122 = x0 AND x1
-           L274 :  if #_t122 goto ELSIF_L272
-
-           L275 :  goto END_ELSIF_L272
+        CJ_L274 :  if #_t122 goto ELSIF_L272
 
      ELSIF_L272 :  EMPTY_STATEMENT
            L276 :  #_t123 = 14
@@ -386,15 +342,13 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L281 :  c1_add1 = true
            L282 :  #_t126 = false
            L283 :  c1_reset = false
-           L284 :  goto END_IF_L255
+       UCJ_L284 :  goto END_IF_L255
 
  END_ELSIF_L272 :  EMPTY_STATEMENT
            L286 :  #_t127 = #_t195
            L287 :  #_t128 = #_t195 AND x1
            L288 :  #_t129 = #_t128 AND c1_geq10
-           L289 :  if #_t129 goto ELSIF_L285
-
-           L290 :  goto END_ELSIF_L285
+        CJ_L289 :  if #_t129 goto ELSIF_L285
 
      ELSIF_L285 :  EMPTY_STATEMENT
            L291 :  #_t130 = 10
@@ -405,7 +359,7 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L296 :  c1_add1 = false
            L297 :  #_t133 = true
            L298 :  c1_reset = true
-           L299 :  goto END_IF_L255
+       UCJ_L299 :  goto END_IF_L255
 
  END_ELSIF_L285 :  EMPTY_STATEMENT
            L301 :  #_t134 = #_t197
@@ -416,9 +370,7 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L303 :  #_t136 = #_t195
            L304 :  #_t137 = #_t195 AND #_t198
            L305 :  #_t138 = #_t137 AND #_t197
-           L306 :  if #_t138 goto ELSIF_L300
-
-           L307 :  goto END_ELSIF_L300
+        CJ_L306 :  if #_t138 goto ELSIF_L300
 
      ELSIF_L300 :  EMPTY_STATEMENT
            L308 :  #_t139 = 10
@@ -429,15 +381,13 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L313 :  c1_add1 = false
            L314 :  #_t142 = false
            L315 :  c1_reset = false
-           L316 :  goto END_IF_L255
+       UCJ_L316 :  goto END_IF_L255
 
  END_ELSIF_L300 :  EMPTY_STATEMENT
            L318 :  #_t143 = #_t198
            L319 :  #_t144 = x0 AND #_t198
            L320 :  #_t145 = #_t144 AND c1_geq10
-           L321 :  if #_t145 goto ELSIF_L317
-
-           L322 :  goto END_ELSIF_L317
+        CJ_L321 :  if #_t145 goto ELSIF_L317
 
      ELSIF_L317 :  EMPTY_STATEMENT
            L323 :  #_t146 = 13
@@ -448,16 +398,14 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L328 :  c1_add1 = false
            L329 :  #_t149 = false
            L330 :  c1_reset = false
-           L331 :  goto END_IF_L255
+       UCJ_L331 :  goto END_IF_L255
 
  END_ELSIF_L317 :  EMPTY_STATEMENT
            L333 :  #_t150 = #_t198
            L334 :  #_t151 = #_t195
            L335 :  #_t152 = #_t195 AND #_t198
            L336 :  #_t153 = #_t152 AND c1_geq10
-           L337 :  if #_t153 goto ELSIF_L332
-
-           L338 :  goto END_ELSIF_L332
+        CJ_L337 :  if #_t153 goto ELSIF_L332
 
      ELSIF_L332 :  EMPTY_STATEMENT
            L339 :  #_t154 = 10
@@ -468,16 +416,14 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L344 :  c1_add1 = false
            L345 :  #_t157 = false
            L346 :  c1_reset = false
-           L347 :  goto END_IF_L255
+       UCJ_L347 :  goto END_IF_L255
 
  END_ELSIF_L332 :  EMPTY_STATEMENT
            L349 :  #_t158 = #_t197
            L350 :  #_t159 = #_t198
            L351 :  #_t160 = x0 AND #_t198
            L352 :  #_t161 = #_t160 AND #_t197
-           L353 :  if #_t161 goto ELSIF_L348
-
-           L354 :  goto END_ELSIF_L348
+        CJ_L353 :  if #_t161 goto ELSIF_L348
 
      ELSIF_L348 :  EMPTY_STATEMENT
            L355 :  #_t162 = 13
@@ -488,19 +434,15 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L360 :  c1_add1 = false
            L361 :  #_t165 = false
            L362 :  c1_reset = false
-           L363 :  goto END_IF_L255
-
- END_ELSIF_L348 :  EMPTY_STATEMENT
+       UCJ_L363 :  goto END_IF_L255
 
     END_IF_L255 :  EMPTY_STATEMENT
-           L364 :  goto END_IF_L19
+       UCJ_L364 :  goto END_IF_L19
 
  END_ELSIF_L250 :  EMPTY_STATEMENT
            L366 :  #_t166 = 14
            L367 :  #_t167 = cstate55 == 14
-           L368 :  if #_t167 goto ELSIF_L365
-
-           L369 :  goto END_ELSIF_L365
+        CJ_L368 :  if #_t167 goto ELSIF_L365
 
      ELSIF_L365 :  EMPTY_STATEMENT
            L370 :  #_t168 = 14
@@ -511,23 +453,17 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L375 :  c1_add1 = true
            L376 :  #_t171 = false
            L377 :  c1_reset = false
-           L378 :  goto END_IF_L19
-
- END_ELSIF_L365 :  EMPTY_STATEMENT
+       UCJ_L378 :  goto END_IF_L19
 
      END_IF_L19 :  EMPTY_STATEMENT
-           L380 :  if c1_reset goto IF_L379
-
-           L381 :  goto END_IF_L379
+        CJ_L380 :  if c1_reset goto IF_L379
 
         IF_L379 :  EMPTY_STATEMENT
            L382 :  #_t172 = 0
            L383 :  c1 = 0
 
     END_IF_L379 :  EMPTY_STATEMENT
-           L385 :  if c1_add1 goto IF_L384
-
-           L386 :  goto END_IF_L384
+        CJ_L385 :  if c1_add1 goto IF_L384
 
         IF_L384 :  EMPTY_STATEMENT
            L387 :  #_t173 = 1

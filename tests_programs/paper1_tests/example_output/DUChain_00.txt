@@ -1,6 +1,6 @@
 
 def => L0: V = 0 @V
-use => [L38: #_t12 = V < X @V, L42: #_t14 = V + 1 @V, L56: print(V,) @V, L5: #_t1 = V == 0 @V, L33: #_t11 = V == 2 @V, L50: #_t17 = V == 4 @V]
+use => [L5: #_t1 = V == 0 @V, L38: #_t12 = V < X @V, L56: print(V,) @V, L50: #_t17 = V == 4 @V, L42: #_t14 = V + 1 @V, L33: #_t11 = V == 2 @V]
 
 def => L2: Y = 0 @Y
 use => [L57: print(Y,) @Y]
@@ -18,7 +18,7 @@ def => L28: Y = 2 @Y
 use => [L57: print(Y,) @Y]
 
 def => L43: V = #_t14 @V
-use => [L38: #_t12 = V < X @V, L42: #_t14 = V + 1 @V, L56: print(V,) @V]
+use => [L38: #_t12 = V < X @V, L56: print(V,) @V, L42: #_t14 = V + 1 @V]
 
 def => L46: Y = 3 @Y
 use => [L57: print(Y,) @Y]
@@ -27,4 +27,4 @@ def => L54: Y = 4 @Y
 use => [L57: print(Y,) @Y]
 
 def => L58: X = read() @X
-use => [L38: #_t12 = V < X @X, L11: #_t3 = X == 3 @X, L22: #_t7 = X == 4 @X]
+use => [L22: #_t7 = X == 4 @X, L11: #_t3 = X == 3 @X, L38: #_t12 = V < X @X]

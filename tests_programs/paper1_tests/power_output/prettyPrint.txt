@@ -10,7 +10,7 @@
         |--accessType: VAR_INPUT
         |--varDecl
           |--name: X
-            |--type: RES_INT
+            |--type: RES_REAL
         |--varDecl
           |--name: Y
             |--type: RES_INT
@@ -19,11 +19,9 @@
         |--varDecl
           |--name: RES
             |--type: RES_REAL
-        |--value: 1
         |--varDecl
           |--name: FLAG
             |--type: RES_BOOL
-        |--value: true
       |--codeBlock:
         |--ifStmt
           |--condExpr
@@ -59,6 +57,22 @@
                      |--locationVar
                        |--name: Y
                        |--type: RES_INT
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: FLAG
+              |--type: RES_BOOL
+          |--rhs
+            |--boolLiteral
+              |--value: true
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: RES
+              |--type: RES_REAL
+          |--rhs
+            |--FloatLiteral
+              |--value: 1.0
         |--whileStmt
           |--condExpr
             |--binaryEquateOper
@@ -87,7 +101,7 @@
                     |--rhs
                       |--locationVar
                         |--name: X
-                        |--type: RES_INT
+                        |--type: RES_REAL
               |--assignStmtEquals
                 |--lhs
                   |--locationVar
@@ -122,11 +136,11 @@
                     |--lhs
                       |--locationVar
                         |--name: X
-                        |--type: RES_INT
+                        |--type: RES_REAL
                     |--op: EQ_OP
                     |--rhs
-                      |--IntLiteral
-                        |--value: 0
+                      |--FloatLiteral
+                        |--value: 0.0
                 |--body
                   |--codeBlock:
                     |--assignStmtEquals
@@ -137,20 +151,20 @@
                       |--rhs
                         |--boolLiteral
                           |--value: false
-        |--elseBody
-          |--codeBlock:
-            |--assignStmtEquals
-              |--lhs
-                |--locationVar
-                  |--name: RES
-                  |--type: RES_REAL
-              |--rhs
-                |--binaryArithOper
-                  |--lhs
-                    |--IntLiteral
-                      |--value: 1
-                  |--op: DIV_OP
-                  |--rhs
-                    |--locationVar
-                      |--name: RES
-                      |--type: RES_REAL
+              |--elseBody
+                |--codeBlock:
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: RES
+                        |--type: RES_REAL
+                    |--rhs
+                      |--binaryArithOper
+                        |--lhs
+                          |--FloatLiteral
+                            |--value: 1.0
+                        |--op: DIV_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: RES
+                            |--type: RES_REAL

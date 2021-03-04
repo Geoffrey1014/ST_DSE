@@ -57,7 +57,7 @@ public class Main {
             SemanticCheckVisitor semanticCheckVisitor = new SemanticCheckVisitor(defPhaseVisitor.symTable);
             listener.pous.accept(semanticCheckVisitor);
 
-            System.err.println("\n semantic check error message:");
+            System.out.println("\n semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
             System.out.println("\n pretty print:\n");
@@ -72,7 +72,7 @@ public class Main {
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
 
             // control of updating pictures
-            Boolean updateFig = true;
+            Boolean updateFig = false;
 
             for (LlBuilder llBuilder : llBuilders) {
                 CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
@@ -143,7 +143,7 @@ public class Main {
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
     public static void runDirFiles(String path){

@@ -3,33 +3,25 @@ CFG:
 
            Init :  EMPTY_STATEMENT
              L0 :  cstate_52 = 0
-             L1 :  x_0 = false
-             L2 :  x_1 = false
-             L3 :  x_2 = false
-             L4 :  x_3 = false
              L5 :  y_0 = false
              L6 :  y_1 = false
              L7 :  error = false
 
            Body :  EMPTY_STATEMENT
             L10 :  #_t1 = cstate_52 == 0
-            L11 :  if #_t1 goto IF_L8
-
-            L13 :  goto START_ELSIF_L12
+         CJ_L11 :  if #_t1 goto IF_L8
 
           IF_L8 :  EMPTY_STATEMENT
             L15 :  #_t57 = NOT x_2
             L16 :  #_t54 = NOT x_1
             L17 :  #_t4 = #_t54 AND #_t57
-            L18 :  if #_t4 goto IF_L14
-
-            L20 :  goto START_ELSIF_L19
+         CJ_L18 :  if #_t4 goto IF_L14
 
          IF_L14 :  EMPTY_STATEMENT
             L22 :  cstate_52 = 0
             L24 :  y_0 = true
             L26 :  y_1 = false
-            L27 :  goto END_IF_L14
+        UCJ_L27 :  goto END_IF_L14
 
 START_ELSIF_L19 :  EMPTY_STATEMENT
             L29 :  #_t58 = NOT x_3
@@ -39,15 +31,13 @@ START_ELSIF_L19 :  EMPTY_STATEMENT
             L35 :  #_t14 = #_t53 AND #_t54
             L36 :  #_t15 = #_t14 AND x_2
             L37 :  #_t16 = #_t15 OR #_t11
-            L38 :  if #_t16 goto ELSIF_L28
-
-            L39 :  goto END_ELSIF_L28
+         CJ_L38 :  if #_t16 goto ELSIF_L28
 
       ELSIF_L28 :  EMPTY_STATEMENT
             L41 :  cstate_52 = 0
             L43 :  y_0 = false
             L45 :  y_1 = false
-            L46 :  goto END_IF_L14
+        UCJ_L46 :  goto END_IF_L14
 
   END_ELSIF_L28 :  EMPTY_STATEMENT
             L48 :  #_t56 = x_0 AND x_1
@@ -61,48 +51,38 @@ START_ELSIF_L19 :  EMPTY_STATEMENT
             L60 :  #_t32 = #_t31 OR #_t28
             L61 :  #_t33 = #_t32 OR #_t25
             L62 :  #_t34 = #_t33 OR #_t21
-            L63 :  if #_t34 goto ELSIF_L47
-
-            L64 :  goto END_ELSIF_L47
+         CJ_L63 :  if #_t34 goto ELSIF_L47
 
       ELSIF_L47 :  EMPTY_STATEMENT
             L66 :  cstate_52 = 19
             L68 :  y_0 = true
             L70 :  y_1 = false
-            L71 :  goto END_IF_L14
+        UCJ_L71 :  goto END_IF_L14
 
   END_ELSIF_L47 :  EMPTY_STATEMENT
             L76 :  #_t41 = #_t56 AND #_t57
             L77 :  #_t42 = #_t41 AND #_t58
-            L78 :  if #_t42 goto ELSIF_L72
-
-            L79 :  goto END_ELSIF_L72
+         CJ_L78 :  if #_t42 goto ELSIF_L72
 
       ELSIF_L72 :  EMPTY_STATEMENT
             L81 :  cstate_52 = 0
             L83 :  y_0 = true
             L85 :  y_1 = true
-            L86 :  goto END_IF_L14
-
-  END_ELSIF_L72 :  EMPTY_STATEMENT
+        UCJ_L86 :  goto END_IF_L14
 
      END_IF_L14 :  EMPTY_STATEMENT
-            L87 :  goto END_IF_L8
+        UCJ_L87 :  goto END_IF_L8
 
 START_ELSIF_L12 :  EMPTY_STATEMENT
             L90 :  #_t47 = cstate_52 == 19
-            L91 :  if #_t47 goto ELSIF_L88
-
-            L92 :  goto END_ELSIF_L88
+         CJ_L91 :  if #_t47 goto ELSIF_L88
 
       ELSIF_L88 :  EMPTY_STATEMENT
             L94 :  cstate_52 = 19
             L96 :  y_0 = true
             L98 :  y_1 = false
            L100 :  error = true
-           L101 :  goto END_IF_L8
-
-  END_ELSIF_L88 :  EMPTY_STATEMENT
+       UCJ_L101 :  goto END_IF_L8
 
       END_IF_L8 :  EMPTY_STATEMENT
 

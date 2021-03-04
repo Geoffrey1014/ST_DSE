@@ -1,0 +1,87 @@
+
+def => L0: cstate_52 = 0 @cstate_52
+use => [L10: #_t1 = cstate_52 == 0 @cstate_52, L103: print(cstate_52,) @cstate_52, L90: #_t47 = cstate_52 == 19 @cstate_52]
+
+def => L5: y_0 = false @y_0
+use => [L105: print(y_0,) @y_0]
+
+def => L6: y_1 = false @y_1
+use => [L104: print(y_1,) @y_1]
+
+def => L7: error = false @error
+use => [L102: print(error,) @error]
+
+def => L15: #_t57 = NOT x_2 @#_t57
+use => [L50: #_t22 = #_t57 @#_t57, L52: #_t24 = #_t56 AND #_t57 @#_t57, L74: #_t39 = #_t57 @#_t57, L76: #_t41 = #_t56 AND #_t57 @#_t57]
+
+def => L16: #_t54 = NOT x_1 @#_t54
+use => [L33: #_t12 = #_t54 @#_t54, L55: #_t27 = x_0 AND #_t54 @#_t54, L35: #_t14 = #_t53 AND #_t54 @#_t54, L54: #_t26 = #_t54 @#_t54]
+
+def => L22: cstate_52 = 0 @cstate_52
+use => [L103: print(cstate_52,) @cstate_52]
+
+def => L24: y_0 = true @y_0
+use => [L105: print(y_0,) @y_0]
+
+def => L26: y_1 = false @y_1
+use => [L104: print(y_1,) @y_1]
+
+def => L29: #_t58 = NOT x_3 @#_t58
+use => [L77: #_t42 = #_t41 AND #_t58 @#_t58, L73: #_t38 = #_t58 @#_t58]
+
+def => L30: #_t53 = NOT x_0 @#_t53
+use => [L58: #_t30 = #_t53 AND x_1 @#_t53, L57: #_t29 = #_t53 @#_t53]
+
+def => L41: cstate_52 = 0 @cstate_52
+use => [L103: print(cstate_52,) @cstate_52]
+
+def => L43: y_0 = false @y_0
+use => [L105: print(y_0,) @y_0]
+
+def => L45: y_1 = false @y_1
+use => [L104: print(y_1,) @y_1]
+
+def => L48: #_t56 = x_0 AND x_1 @#_t56
+use => [L76: #_t41 = #_t56 AND #_t57 @#_t56, L75: #_t40 = #_t56 @#_t56]
+
+def => L66: cstate_52 = 19 @cstate_52
+use => [L103: print(cstate_52,) @cstate_52]
+
+def => L68: y_0 = true @y_0
+use => [L105: print(y_0,) @y_0]
+
+def => L70: y_1 = false @y_1
+use => [L104: print(y_1,) @y_1]
+
+def => L81: cstate_52 = 0 @cstate_52
+use => [L103: print(cstate_52,) @cstate_52]
+
+def => L83: y_0 = true @y_0
+use => [L105: print(y_0,) @y_0]
+
+def => L85: y_1 = true @y_1
+use => [L104: print(y_1,) @y_1]
+
+def => L94: cstate_52 = 19 @cstate_52
+use => [L103: print(cstate_52,) @cstate_52]
+
+def => L96: y_0 = true @y_0
+use => [L105: print(y_0,) @y_0]
+
+def => L98: y_1 = false @y_1
+use => [L104: print(y_1,) @y_1]
+
+def => L100: error = true @error
+use => [L102: print(error,) @error]
+
+def => L106: x_2 = read() @x_2
+use => [L36: #_t15 = #_t14 AND x_2 @x_2, L56: #_t28 = #_t27 AND x_2 @x_2, L15: #_t57 = NOT x_2 @x_2, L49: #_t21 = #_t56 AND x_2 @x_2]
+
+def => L107: x_1 = read() @x_1
+use => [L16: #_t54 = NOT x_1 @x_1, L48: #_t56 = x_0 AND x_1 @x_1, L58: #_t30 = #_t53 AND x_1 @x_1, L31: #_t10 = #_t53 AND x_1 @x_1]
+
+def => L108: x_0 = read() @x_0
+use => [L55: #_t27 = x_0 AND #_t54 @x_0, L30: #_t53 = NOT x_0 @x_0, L48: #_t56 = x_0 AND x_1 @x_0]
+
+def => L109: x_3 = read() @x_3
+use => [L59: #_t31 = #_t30 AND x_3 @x_3, L53: #_t25 = #_t24 AND x_3 @x_3, L29: #_t58 = NOT x_3 @x_3]

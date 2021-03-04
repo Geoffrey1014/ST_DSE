@@ -1,0 +1,324 @@
+
+def => L0: cstate55 = 0 @cstate55
+use => [L367: #_t167 = cstate55 == 14 @cstate55, L21: #_t5 = cstate55 == 10 @cstate55, L137: #_t59 = cstate55 == 0 @cstate55, L252: #_t113 = cstate55 == 13 @cstate55, L390: print(cstate55,) @cstate55]
+
+def => L1: c1 = 0 @c1
+use => [L11: #_t1 = c1 >= 10 @c1, L388: #_t174 = c1 + 1 @c1, L392: print(c1,) @c1]
+
+def => L3: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L4: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L7: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L15: c1_geq10 = false @c1_geq10
+use => [L106: #_t45 = #_t44 AND c1_geq10 @c1_geq10, L221: #_t99 = #_t98 AND c1_geq10 @c1_geq10, L90: #_t37 = #_t36 AND c1_geq10 @c1_geq10, L256: #_t197 = NOT c1_geq10 @c1_geq10, L320: #_t145 = #_t144 AND c1_geq10 @c1_geq10, L288: #_t129 = #_t128 AND c1_geq10 @c1_geq10, L173: #_t75 = #_t74 AND c1_geq10 @c1_geq10, L26: #_t181 = NOT c1_geq10 @c1_geq10, L141: #_t189 = NOT c1_geq10 @c1_geq10, L205: #_t91 = #_t90 AND c1_geq10 @c1_geq10, L336: #_t153 = #_t152 AND c1_geq10 @c1_geq10, L395: print(c1_geq10,) @c1_geq10, L58: #_t21 = #_t20 AND c1_geq10 @c1_geq10]
+
+def => L18: c1_geq10 = true @c1_geq10
+use => [L106: #_t45 = #_t44 AND c1_geq10 @c1_geq10, L221: #_t99 = #_t98 AND c1_geq10 @c1_geq10, L90: #_t37 = #_t36 AND c1_geq10 @c1_geq10, L256: #_t197 = NOT c1_geq10 @c1_geq10, L320: #_t145 = #_t144 AND c1_geq10 @c1_geq10, L288: #_t129 = #_t128 AND c1_geq10 @c1_geq10, L173: #_t75 = #_t74 AND c1_geq10 @c1_geq10, L26: #_t181 = NOT c1_geq10 @c1_geq10, L141: #_t189 = NOT c1_geq10 @c1_geq10, L205: #_t91 = #_t90 AND c1_geq10 @c1_geq10, L336: #_t153 = #_t152 AND c1_geq10 @c1_geq10, L395: print(c1_geq10,) @c1_geq10, L58: #_t21 = #_t20 AND c1_geq10 @c1_geq10]
+
+def => L26: #_t181 = NOT c1_geq10 @#_t181
+use => [L119: #_t50 = #_t181 @#_t181, L75: #_t30 = #_t29 AND #_t181 @#_t181, L71: #_t26 = #_t181 @#_t181, L122: #_t53 = #_t52 AND #_t181 @#_t181]
+
+def => L27: #_t179 = NOT x0 @#_t179
+use => [L57: #_t20 = #_t179 AND x1 @#_t179, L104: #_t43 = #_t179 @#_t179, L105: #_t44 = #_t179 AND #_t182 @#_t179, L74: #_t29 = #_t179 AND #_t182 @#_t179, L56: #_t19 = #_t179 @#_t179, L73: #_t28 = #_t179 @#_t179]
+
+def => L34: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L36: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L38: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L40: c1_reset = true @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L47: cstate55 = 14 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L49: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L51: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L53: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L62: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L64: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L66: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L68: c1_reset = true @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L72: #_t182 = NOT x1 @#_t182
+use => [L88: #_t35 = #_t182 @#_t182, L89: #_t36 = x0 AND #_t182 @#_t182, L105: #_t44 = #_t179 AND #_t182 @#_t182, L121: #_t52 = x0 AND #_t182 @#_t182, L103: #_t42 = #_t182 @#_t182, L120: #_t51 = #_t182 @#_t182]
+
+def => L79: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L81: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L83: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L85: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L94: cstate55 = 13 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L96: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L98: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L100: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L110: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L112: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L114: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L116: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L126: cstate55 = 13 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L128: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L130: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L132: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L141: #_t189 = NOT c1_geq10 @#_t189
+use => [L186: #_t80 = #_t189 @#_t189, L234: #_t104 = #_t189 @#_t189, L237: #_t107 = #_t106 AND #_t189 @#_t189, L190: #_t84 = #_t83 AND #_t189 @#_t189]
+
+def => L142: #_t187 = NOT x0 @#_t187
+use => [L171: #_t73 = #_t187 @#_t187, L188: #_t82 = #_t187 @#_t187, L172: #_t74 = #_t187 AND x1 @#_t187, L220: #_t98 = #_t187 AND #_t190 @#_t187, L189: #_t83 = #_t187 AND #_t190 @#_t187, L219: #_t97 = #_t187 @#_t187]
+
+def => L149: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L151: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L153: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L155: c1_reset = true @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L162: cstate55 = 14 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L164: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L166: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L168: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L177: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L179: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L181: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L183: c1_reset = true @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L187: #_t190 = NOT x1 @#_t190
+use => [L203: #_t89 = #_t190 @#_t190, L236: #_t106 = x0 AND #_t190 @#_t190, L218: #_t96 = #_t190 @#_t190, L220: #_t98 = #_t187 AND #_t190 @#_t190, L204: #_t90 = x0 AND #_t190 @#_t190, L235: #_t105 = #_t190 @#_t190]
+
+def => L194: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L196: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L198: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L200: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L209: cstate55 = 13 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L211: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L213: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L215: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L225: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L227: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L229: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L231: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L241: cstate55 = 13 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L243: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L245: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L247: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L256: #_t197 = NOT c1_geq10 @#_t197
+use => [L305: #_t138 = #_t137 AND #_t197 @#_t197, L352: #_t161 = #_t160 AND #_t197 @#_t197, L301: #_t134 = #_t197 @#_t197, L349: #_t158 = #_t197 @#_t197]
+
+def => L257: #_t195 = NOT x0 @#_t195
+use => [L286: #_t127 = #_t195 @#_t195, L335: #_t152 = #_t195 AND #_t198 @#_t195, L303: #_t136 = #_t195 @#_t195, L287: #_t128 = #_t195 AND x1 @#_t195, L334: #_t151 = #_t195 @#_t195, L304: #_t137 = #_t195 AND #_t198 @#_t195]
+
+def => L264: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L266: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L268: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L270: c1_reset = true @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L277: cstate55 = 14 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L279: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L281: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L283: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L292: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L294: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L296: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L298: c1_reset = true @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L302: #_t198 = NOT x1 @#_t198
+use => [L351: #_t160 = x0 AND #_t198 @#_t198, L318: #_t143 = #_t198 @#_t198, L350: #_t159 = #_t198 @#_t198, L319: #_t144 = x0 AND #_t198 @#_t198, L333: #_t150 = #_t198 @#_t198, L335: #_t152 = #_t195 AND #_t198 @#_t198]
+
+def => L309: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L311: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L313: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L315: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L324: cstate55 = 13 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L326: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L328: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L330: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L340: cstate55 = 10 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L342: y0 = true @y0
+use => [L393: print(y0,) @y0]
+
+def => L344: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L346: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L356: cstate55 = 13 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L358: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L360: c1_add1 = false @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L362: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L371: cstate55 = 14 @cstate55
+use => [L390: print(cstate55,) @cstate55]
+
+def => L373: y0 = false @y0
+use => [L393: print(y0,) @y0]
+
+def => L375: c1_add1 = true @c1_add1
+use => [CJ_L385: if c1_add1 goto IF_L384 @c1_add1, L394: print(c1_add1,) @c1_add1]
+
+def => L377: c1_reset = false @c1_reset
+use => [CJ_L380: if c1_reset goto IF_L379 @c1_reset, L391: print(c1_reset,) @c1_reset]
+
+def => L383: c1 = 0 @c1
+use => [L388: #_t174 = c1 + 1 @c1, L392: print(c1,) @c1]
+
+def => L389: c1 = #_t174 @c1
+use => [L392: print(c1,) @c1]
+
+def => L396: x1 = read() @x1
+use => [L158: #_t68 = x0 AND x1 @x1, L143: #_t62 = #_t187 AND x1 @x1, L172: #_t74 = #_t187 AND x1 @x1, L273: #_t122 = x0 AND x1 @x1, L287: #_t128 = #_t195 AND x1 @x1, L187: #_t190 = NOT x1 @x1, L72: #_t182 = NOT x1 @x1, L302: #_t198 = NOT x1 @x1, L43: #_t14 = x0 AND x1 @x1, L57: #_t20 = #_t179 AND x1 @x1, L258: #_t116 = #_t195 AND x1 @x1, L28: #_t8 = #_t179 AND x1 @x1]
+
+def => L397: x0 = read() @x0
+use => [L204: #_t90 = x0 AND #_t190 @x0, L27: #_t179 = NOT x0 @x0, L142: #_t187 = NOT x0 @x0, L43: #_t14 = x0 AND x1 @x0, L236: #_t106 = x0 AND #_t190 @x0, L273: #_t122 = x0 AND x1 @x0, L89: #_t36 = x0 AND #_t182 @x0, L121: #_t52 = x0 AND #_t182 @x0, L351: #_t160 = x0 AND #_t198 @x0, L257: #_t195 = NOT x0 @x0, L319: #_t144 = x0 AND #_t198 @x0, L158: #_t68 = x0 AND x1 @x0]

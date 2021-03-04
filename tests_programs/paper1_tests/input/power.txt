@@ -1,11 +1,11 @@
 PROGRAM power
   VAR_INPUT
-    X : INT ;
+    X : REAL ;
     Y : INT ;
   END_VAR
   VAR_OUTPUT
-    RES : REAL := 1;
-    FLAG : BOOL := TRUE;
+    RES : REAL;
+    FLAG : BOOL;
   END_VAR
   VAR
     EXP :INT;
@@ -16,18 +16,20 @@ IF Y > 0 THEN
 ELSE
     EXP := -Y;
 END_IF;
-
+FLAG := TRUE;
+RES := 1.0;
 WHILE EXP <> 0 DO
 	RES := RES * X;
 	EXP := EXP -1;
 END_WHILE;
 
 IF Y <= 0 THEN
-    IF X = 0 THEN
+    IF X = 0.0 THEN
         FLAG := FALSE;
+    ELSE
+        RES := 1.0 / RES;
     END_IF;
-ELSE
-    RES := 1 / RES;
+
 END_IF;
 
 END_PROGRAM

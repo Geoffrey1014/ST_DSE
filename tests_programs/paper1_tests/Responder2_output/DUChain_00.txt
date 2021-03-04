@@ -1,0 +1,237 @@
+
+def => L0: cstate0 = 0 @cstate0
+use => [L135: #_t53 = cstate0 == 3 @cstate0, L159: #_t62 = cstate0 == 4 @cstate0, L183: #_t71 = cstate0 == 5 @cstate0, L230: #_t88 = cstate0 == 7 @cstate0, L242: #_t93 = cstate0 == 8 @cstate0, L299: print(cstate0,) @cstate0, L20: #_t6 = cstate0 == 12 @cstate0, L277: #_t106 = cstate0 == 10 @cstate0, L265: #_t101 = cstate0 == 9 @cstate0, L32: #_t11 = cstate0 == 13 @cstate0, L123: #_t48 = cstate0 == 2 @cstate0, L7: #_t1 = cstate0 == 11 @cstate0, L44: #_t16 = cstate0 == 14 @cstate0, L56: #_t21 = cstate0 == 0 @cstate0, L111: #_t43 = cstate0 == 1 @cstate0, L207: #_t80 = cstate0 == 6 @cstate0]
+
+def => L3: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L4: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L12: cstate0 = 8 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L14: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L16: grant_2 = true @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L24: cstate0 = 3 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L26: grant_1 = true @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L28: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L36: cstate0 = 8 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L38: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L40: grant_2 = true @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L48: cstate0 = 13 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L50: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L52: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L60: #_t114 = NOT req2 @#_t114
+use => [L96: #_t36 = #_t114 @#_t114, L98: #_t38 = #_t113 AND #_t114 @#_t114]
+
+def => L66: cstate0 = 5 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L68: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L70: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L73: #_t113 = NOT req1 @#_t113
+use => [L97: #_t37 = #_t113 @#_t113, L98: #_t38 = #_t113 AND #_t114 @#_t113]
+
+def => L78: cstate0 = 6 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L80: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L82: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L89: cstate0 = 14 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L91: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L93: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L102: cstate0 = 0 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L104: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L106: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L115: cstate0 = 2 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L117: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L119: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L127: cstate0 = 4 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L129: grant_1 = true @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L131: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L144: cstate0 = 9 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L146: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L148: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L151: cstate0 = 4 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L153: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L155: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L168: cstate0 = 5 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L170: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L172: grant_2 = true @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L175: cstate0 = 0 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L177: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L179: grant_2 = true @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L192: cstate0 = 1 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L194: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L196: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L199: cstate0 = 10 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L201: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L203: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L215: cstate0 = 3 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L217: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L219: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L222: cstate0 = 7 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L224: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L226: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L234: cstate0 = 11 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L236: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L238: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L250: cstate0 = 0 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L252: grant_1 = true @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L254: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L257: cstate0 = 6 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L259: grant_1 = true @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L261: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L269: cstate0 = 10 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L271: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L273: grant_2 = true @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L285: cstate0 = 8 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L287: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L289: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L292: cstate0 = 12 @cstate0
+use => [L299: print(cstate0,) @cstate0]
+
+def => L294: grant_1 = false @grant_1
+use => [L300: print(grant_1,) @grant_1]
+
+def => L296: grant_2 = false @grant_2
+use => [L298: print(grant_2,) @grant_2]
+
+def => L301: req2 = read() @req2
+use => [CJ_L247: if req2 goto IF_L245 @req2, L74: #_t28 = #_t113 AND req2 @req2, CJ_L282: if req2 goto IF_L280 @req2, L60: #_t114 = NOT req2 @req2, L85: #_t32 = req1 AND req2 @req2, L188: #_t72 = NOT req2 @req2]
+
+def => L302: req1 = read() @req1
+use => [CJ_L212: if req1 goto IF_L210 @req1, L140: #_t54 = NOT req1 @req1, L61: #_t23 = req1 AND #_t114 @req1, L73: #_t113 = NOT req1 @req1, L85: #_t32 = req1 AND req2 @req1, L164: #_t63 = NOT req1 @req1]

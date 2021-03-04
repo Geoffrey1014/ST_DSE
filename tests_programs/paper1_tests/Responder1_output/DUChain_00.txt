@@ -1,0 +1,21 @@
+
+def => L0: cstate12 = 0 @cstate12
+use => [L5: #_t1 = cstate12 == 0 @cstate12, L22: print(cstate12,) @cstate12]
+
+def => L2: grant_1 = false @grant_1
+use => [L23: print(grant_1,) @grant_1]
+
+def => L14: cstate12 = 0 @cstate12
+use => [L22: print(cstate12,) @cstate12]
+
+def => L16: grant_1 = true @grant_1
+use => [L23: print(grant_1,) @grant_1]
+
+def => L19: cstate12 = 0 @cstate12
+use => [L22: print(cstate12,) @cstate12]
+
+def => L21: grant_1 = false @grant_1
+use => [L23: print(grant_1,) @grant_1]
+
+def => L24: req1 = read() @req1
+use => [L10: #_t2 = NOT req1 @req1]

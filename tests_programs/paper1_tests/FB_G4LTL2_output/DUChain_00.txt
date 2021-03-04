@@ -1,0 +1,30 @@
+
+def => L0: cstate_46 = 0 @cstate_46
+use => [L36: print(cstate_46,) @cstate_46, L6: #_t1 = cstate_46 == 0 @cstate_46]
+
+def => L3: y_0 = false @y_0
+use => [L37: print(y_0,) @y_0]
+
+def => L10: #_t16 = NOT x_1 @#_t16
+use => [L25: #_t10 = #_t16 @#_t16, L27: #_t12 = #_t17 AND #_t16 @#_t16]
+
+def => L12: #_t17 = NOT x_0 @#_t17
+use => [L27: #_t12 = #_t17 AND #_t16 @#_t17, L26: #_t11 = #_t17 @#_t17]
+
+def => L19: cstate_46 = 0 @cstate_46
+use => [L36: print(cstate_46,) @cstate_46]
+
+def => L21: y_0 = false @y_0
+use => [L37: print(y_0,) @y_0]
+
+def => L32: cstate_46 = 0 @cstate_46
+use => [L36: print(cstate_46,) @cstate_46]
+
+def => L34: y_0 = true @y_0
+use => [L37: print(y_0,) @y_0]
+
+def => L38: x_1 = read() @x_1
+use => [L13: #_t5 = #_t17 AND x_1 @x_1, L10: #_t16 = NOT x_1 @x_1, L24: #_t9 = x_0 AND x_1 @x_1]
+
+def => L39: x_0 = read() @x_0
+use => [L12: #_t17 = NOT x_0 @x_0, L24: #_t9 = x_0 AND x_1 @x_0, L11: #_t3 = x_0 AND #_t16 @x_0]

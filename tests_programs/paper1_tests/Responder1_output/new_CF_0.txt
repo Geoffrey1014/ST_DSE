@@ -3,25 +3,20 @@ CFG:
 
            Init :  EMPTY_STATEMENT
              L0 :  cstate12 = 0
-             L1 :  req1 = false
              L2 :  grant_1 = false
 
            Body :  EMPTY_STATEMENT
              L5 :  #_t1 = cstate12 == 0
-             L6 :  if #_t1 goto IF_L3
-
-             L7 :  goto END_IF_L3
+          CJ_L6 :  if #_t1 goto IF_L3
 
           IF_L3 :  EMPTY_STATEMENT
             L10 :  #_t2 = NOT req1
-            L11 :  if #_t2 goto IF_L8
-
-            L12 :  goto ELSE_L9
+         CJ_L11 :  if #_t2 goto IF_L8
 
         ELSE_L9 :  EMPTY_STATEMENT
             L14 :  cstate12 = 0
             L16 :  grant_1 = true
-            L17 :  goto END_IF_L8
+        UCJ_L17 :  goto END_IF_L8
 
           IF_L8 :  EMPTY_STATEMENT
             L19 :  cstate12 = 0

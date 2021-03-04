@@ -2,8 +2,6 @@ CFG:
           power :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
-             L3 :  RES = 1
-             L4 :  FLAG = true
 
            Body :  EMPTY_STATEMENT
              L8 :  #_t1 = Y > 0
@@ -18,47 +16,49 @@ CFG:
             L14 :  EXP = Y
 
       END_IF_L5 :  EMPTY_STATEMENT
+            L16 :  FLAG = true
+            L18 :  RES = 1.0
 
-      WHILE_L15 :  EMPTY_STATEMENT
-            L18 :  #_t4 = EXP <> 0
-         CJ_L19 :  if #_t4 goto LOOP_L16
+      WHILE_L19 :  EMPTY_STATEMENT
+            L22 :  #_t6 = EXP <> 0
+         CJ_L23 :  if #_t6 goto LOOP_L20
 
-       LOOP_L16 :  EMPTY_STATEMENT
-            L21 :  #_t5 = RES * X
-            L22 :  RES = #_t5
-            L24 :  #_t7 = EXP - 1
-            L25 :  EXP = #_t7
-        UCJ_L26 :  goto WHILE_L15
+       LOOP_L20 :  EMPTY_STATEMENT
+            L25 :  #_t7 = RES * X
+            L26 :  RES = #_t7
+            L28 :  #_t9 = EXP - 1
+            L29 :  EXP = #_t9
+        UCJ_L30 :  goto WHILE_L19
 
-  END_WHILE_L15 :  EMPTY_STATEMENT
-            L30 :  #_t9 = Y <= 0
-         CJ_L31 :  if #_t9 goto IF_L27
+  END_WHILE_L19 :  EMPTY_STATEMENT
+            L33 :  #_t11 = Y <= 0
+         CJ_L34 :  if #_t11 goto IF_L31
 
-       ELSE_L28 :  EMPTY_STATEMENT
-            L34 :  #_t11 = 1 / RES
-            L35 :  RES = #_t11
-        UCJ_L36 :  goto END_IF_L27
+         IF_L31 :  EMPTY_STATEMENT
+            L39 :  #_t13 = X == 0.0
+         CJ_L40 :  if #_t13 goto IF_L36
 
-         IF_L27 :  EMPTY_STATEMENT
-            L39 :  #_t13 = X == 0
-         CJ_L40 :  if #_t13 goto IF_L37
+       ELSE_L37 :  EMPTY_STATEMENT
+            L43 :  #_t15 = 1.0 / RES
+            L44 :  RES = #_t15
+        UCJ_L45 :  goto END_IF_L36
 
-         IF_L37 :  EMPTY_STATEMENT
-            L43 :  FLAG = false
+         IF_L36 :  EMPTY_STATEMENT
+            L47 :  FLAG = false
 
-     END_IF_L37 :  EMPTY_STATEMENT
+     END_IF_L36 :  EMPTY_STATEMENT
 
-     END_IF_L27 :  EMPTY_STATEMENT
+     END_IF_L31 :  EMPTY_STATEMENT
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L44 :  print(RES,)
-            L45 :  print(FLAG,)
-            L46 :  print(EXP,)
+            L48 :  print(RES,)
+            L49 :  print(FLAG,)
+            L50 :  print(EXP,)
 
            Exit :  EMPTY_STATEMENT
 
            Read :  EMPTY_STATEMENT
-            L47 :  Y = read()
-            L48 :  X = read()
+            L51 :  Y = read()
+            L52 :  X = read()

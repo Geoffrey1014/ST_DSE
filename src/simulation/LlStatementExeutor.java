@@ -119,6 +119,8 @@ public class LlStatementExeutor implements LlStatementVisitor {
             case "-":
                 result = operationOfSimulor.neg(right);
                 break;
+            case  "+":
+                result = right;
             default:
                 System.err.println("Runtime Error: Unrecognized Operation");
                 System.err.println(llAssignStmtUnaryOp.getOperator());
@@ -181,13 +183,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
     public void readFunctionExe(LlMethodCallStmt llMethodCallStmt, ConMemory conMemory) {
         Scanner sc = new Scanner(System.in);
         LlLocation location = llMethodCallStmt.getReturnLocation();
-        BasicTypeEnum type;
-        if(conMemory.getLocationvalue(location) == null){
-            type = conMemory.getLocationvalue(location).getType();
-        }
-        else{
-            type = conMemory.getLocationvalue(location).getType();
-        }
+        BasicTypeEnum type = conMemory.getLocationvalue(location).getType();
 
         System.out.print("Please enter a " + type + " string : ");
 

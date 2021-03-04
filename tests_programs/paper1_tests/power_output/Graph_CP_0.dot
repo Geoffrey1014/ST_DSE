@@ -6,9 +6,9 @@ digraph G {
   "          power :  EMPTY_STATEMENT
 "; "           Init :  EMPTY_STATEMENT
              L0 :  EXP = 0
-             L1 :  X = 0
+             L1 :  X = 0.0
              L2 :  Y = 0
-             L3 :  RES = 1
+             L3 :  RES = 0.0
              L4 :  FLAG = true
 "; "           Body :  EMPTY_STATEMENT
              L7 :  #_t0 = 0
@@ -21,62 +21,64 @@ digraph G {
 "; "          IF_L5 :  EMPTY_STATEMENT
             L14 :  EXP = Y
 "; "      END_IF_L5 :  EMPTY_STATEMENT
-"; "      WHILE_L15 :  EMPTY_STATEMENT
-            L17 :  #_t3 = 0
-            L18 :  #_t4 = EXP <> 0
-         CJ_L19 :  if #_t4 goto LOOP_L16
-"; "       LOOP_L16 :  EMPTY_STATEMENT
-            L21 :  #_t5 = RES * X
-            L22 :  RES = #_t5
-            L23 :  #_t6 = 1
-            L24 :  #_t7 = EXP - 1
-            L25 :  EXP = #_t7
-        UCJ_L26 :  goto WHILE_L15
-"; "  END_WHILE_L15 :  EMPTY_STATEMENT
-            L29 :  #_t8 = 0
-            L30 :  #_t9 = Y <= 0
-         CJ_L31 :  if #_t9 goto IF_L27
-"; "       ELSE_L28 :  EMPTY_STATEMENT
-            L33 :  #_t10 = 1
-            L34 :  #_t11 = 1 / RES
-            L35 :  RES = #_t11
-        UCJ_L36 :  goto END_IF_L27
-"; "         IF_L27 :  EMPTY_STATEMENT
-            L38 :  #_t12 = 0
-            L39 :  #_t13 = X == 0
-         CJ_L40 :  if #_t13 goto IF_L37
-"; "         IF_L37 :  EMPTY_STATEMENT
-            L42 :  #_t14 = false
-            L43 :  FLAG = false
-"; "     END_IF_L37 :  EMPTY_STATEMENT
-"; "     END_IF_L27 :  EMPTY_STATEMENT
+            L15 :  #_t3 = 1.0
+            L16 :  RES = 1.0
+"; "      WHILE_L17 :  EMPTY_STATEMENT
+            L19 :  #_t4 = 0
+            L20 :  #_t5 = EXP <> 0
+         CJ_L21 :  if #_t5 goto LOOP_L18
+"; "       LOOP_L18 :  EMPTY_STATEMENT
+            L23 :  #_t6 = RES * X
+            L24 :  RES = #_t6
+            L25 :  #_t7 = 1
+            L26 :  #_t8 = EXP - 1
+            L27 :  EXP = #_t8
+        UCJ_L28 :  goto WHILE_L17
+"; "  END_WHILE_L17 :  EMPTY_STATEMENT
+            L30 :  #_t9 = 0
+            L31 :  #_t10 = Y <= 0
+         CJ_L32 :  if #_t10 goto IF_L29
+"; "         IF_L29 :  EMPTY_STATEMENT
+            L36 :  #_t11 = 0.0
+            L37 :  #_t12 = X == 0.0
+         CJ_L38 :  if #_t12 goto IF_L34
+"; "       ELSE_L35 :  EMPTY_STATEMENT
+            L40 :  #_t13 = 1.0
+            L41 :  #_t14 = 1.0 / RES
+            L42 :  RES = #_t14
+        UCJ_L43 :  goto END_IF_L34
+"; "         IF_L34 :  EMPTY_STATEMENT
+            L44 :  #_t15 = false
+            L45 :  FLAG = false
+"; "     END_IF_L34 :  EMPTY_STATEMENT
+"; "     END_IF_L29 :  EMPTY_STATEMENT
 "; "          Entry :  EMPTY_STATEMENT
 "; "            End :  EMPTY_STATEMENT
-            L44 :  print(RES,)
-            L45 :  print(FLAG,)
-            L46 :  print(EXP,)
+            L46 :  print(RES,)
+            L47 :  print(FLAG,)
+            L48 :  print(EXP,)
 "; "           Exit :  EMPTY_STATEMENT
 "; "           Read :  EMPTY_STATEMENT
-            L47 :  Y = read()
-            L48 :  X = read()
+            L49 :  Y = read()
+            L50 :  X = read()
 "; 
   "          power :  EMPTY_STATEMENT
 " -> "           Init :  EMPTY_STATEMENT
              L0 :  EXP = 0
-             L1 :  X = 0
+             L1 :  X = 0.0
              L2 :  Y = 0
-             L3 :  RES = 1
+             L3 :  RES = 0.0
              L4 :  FLAG = true
 "  [label="default"];
   "           Init :  EMPTY_STATEMENT
              L0 :  EXP = 0
-             L1 :  X = 0
+             L1 :  X = 0.0
              L2 :  Y = 0
-             L3 :  RES = 1
+             L3 :  RES = 0.0
              L4 :  FLAG = true
 " -> "           Read :  EMPTY_STATEMENT
-            L47 :  Y = read()
-            L48 :  X = read()
+            L49 :  Y = read()
+            L50 :  X = read()
 "  [label="default"];
   "           Body :  EMPTY_STATEMENT
              L7 :  #_t0 = 0
@@ -99,124 +101,130 @@ digraph G {
             L12 :  EXP = #_t2
         UCJ_L13 :  goto END_IF_L5
 " -> "      END_IF_L5 :  EMPTY_STATEMENT
+            L15 :  #_t3 = 1.0
+            L16 :  RES = 1.0
 "  [label="alter"];
   "          IF_L5 :  EMPTY_STATEMENT
             L14 :  EXP = Y
 " -> "      END_IF_L5 :  EMPTY_STATEMENT
+            L15 :  #_t3 = 1.0
+            L16 :  RES = 1.0
 "  [label="default"];
   "      END_IF_L5 :  EMPTY_STATEMENT
-" -> "      WHILE_L15 :  EMPTY_STATEMENT
-            L17 :  #_t3 = 0
-            L18 :  #_t4 = EXP <> 0
-         CJ_L19 :  if #_t4 goto LOOP_L16
+            L15 :  #_t3 = 1.0
+            L16 :  RES = 1.0
+" -> "      WHILE_L17 :  EMPTY_STATEMENT
+            L19 :  #_t4 = 0
+            L20 :  #_t5 = EXP <> 0
+         CJ_L21 :  if #_t5 goto LOOP_L18
 "  [label="default"];
-  "      WHILE_L15 :  EMPTY_STATEMENT
-            L17 :  #_t3 = 0
-            L18 :  #_t4 = EXP <> 0
-         CJ_L19 :  if #_t4 goto LOOP_L16
-" -> "  END_WHILE_L15 :  EMPTY_STATEMENT
-            L29 :  #_t8 = 0
-            L30 :  #_t9 = Y <= 0
-         CJ_L31 :  if #_t9 goto IF_L27
+  "      WHILE_L17 :  EMPTY_STATEMENT
+            L19 :  #_t4 = 0
+            L20 :  #_t5 = EXP <> 0
+         CJ_L21 :  if #_t5 goto LOOP_L18
+" -> "  END_WHILE_L17 :  EMPTY_STATEMENT
+            L30 :  #_t9 = 0
+            L31 :  #_t10 = Y <= 0
+         CJ_L32 :  if #_t10 goto IF_L29
 "  [label="default"];
-  "      WHILE_L15 :  EMPTY_STATEMENT
-            L17 :  #_t3 = 0
-            L18 :  #_t4 = EXP <> 0
-         CJ_L19 :  if #_t4 goto LOOP_L16
-" -> "       LOOP_L16 :  EMPTY_STATEMENT
-            L21 :  #_t5 = RES * X
-            L22 :  RES = #_t5
-            L23 :  #_t6 = 1
-            L24 :  #_t7 = EXP - 1
-            L25 :  EXP = #_t7
-        UCJ_L26 :  goto WHILE_L15
+  "      WHILE_L17 :  EMPTY_STATEMENT
+            L19 :  #_t4 = 0
+            L20 :  #_t5 = EXP <> 0
+         CJ_L21 :  if #_t5 goto LOOP_L18
+" -> "       LOOP_L18 :  EMPTY_STATEMENT
+            L23 :  #_t6 = RES * X
+            L24 :  RES = #_t6
+            L25 :  #_t7 = 1
+            L26 :  #_t8 = EXP - 1
+            L27 :  EXP = #_t8
+        UCJ_L28 :  goto WHILE_L17
 "  [label="alter"];
-  "       LOOP_L16 :  EMPTY_STATEMENT
-            L21 :  #_t5 = RES * X
-            L22 :  RES = #_t5
-            L23 :  #_t6 = 1
-            L24 :  #_t7 = EXP - 1
-            L25 :  EXP = #_t7
-        UCJ_L26 :  goto WHILE_L15
-" -> "      WHILE_L15 :  EMPTY_STATEMENT
-            L17 :  #_t3 = 0
-            L18 :  #_t4 = EXP <> 0
-         CJ_L19 :  if #_t4 goto LOOP_L16
+  "       LOOP_L18 :  EMPTY_STATEMENT
+            L23 :  #_t6 = RES * X
+            L24 :  RES = #_t6
+            L25 :  #_t7 = 1
+            L26 :  #_t8 = EXP - 1
+            L27 :  EXP = #_t8
+        UCJ_L28 :  goto WHILE_L17
+" -> "      WHILE_L17 :  EMPTY_STATEMENT
+            L19 :  #_t4 = 0
+            L20 :  #_t5 = EXP <> 0
+         CJ_L21 :  if #_t5 goto LOOP_L18
 "  [label="alter"];
-  "  END_WHILE_L15 :  EMPTY_STATEMENT
-            L29 :  #_t8 = 0
-            L30 :  #_t9 = Y <= 0
-         CJ_L31 :  if #_t9 goto IF_L27
-" -> "       ELSE_L28 :  EMPTY_STATEMENT
-            L33 :  #_t10 = 1
-            L34 :  #_t11 = 1 / RES
-            L35 :  RES = #_t11
-        UCJ_L36 :  goto END_IF_L27
+  "  END_WHILE_L17 :  EMPTY_STATEMENT
+            L30 :  #_t9 = 0
+            L31 :  #_t10 = Y <= 0
+         CJ_L32 :  if #_t10 goto IF_L29
+" -> "     END_IF_L29 :  EMPTY_STATEMENT
 "  [label="default"];
-  "  END_WHILE_L15 :  EMPTY_STATEMENT
-            L29 :  #_t8 = 0
-            L30 :  #_t9 = Y <= 0
-         CJ_L31 :  if #_t9 goto IF_L27
-" -> "         IF_L27 :  EMPTY_STATEMENT
-            L38 :  #_t12 = 0
-            L39 :  #_t13 = X == 0
-         CJ_L40 :  if #_t13 goto IF_L37
+  "  END_WHILE_L17 :  EMPTY_STATEMENT
+            L30 :  #_t9 = 0
+            L31 :  #_t10 = Y <= 0
+         CJ_L32 :  if #_t10 goto IF_L29
+" -> "         IF_L29 :  EMPTY_STATEMENT
+            L36 :  #_t11 = 0.0
+            L37 :  #_t12 = X == 0.0
+         CJ_L38 :  if #_t12 goto IF_L34
 "  [label="alter"];
-  "       ELSE_L28 :  EMPTY_STATEMENT
-            L33 :  #_t10 = 1
-            L34 :  #_t11 = 1 / RES
-            L35 :  RES = #_t11
-        UCJ_L36 :  goto END_IF_L27
-" -> "     END_IF_L27 :  EMPTY_STATEMENT
+  "         IF_L29 :  EMPTY_STATEMENT
+            L36 :  #_t11 = 0.0
+            L37 :  #_t12 = X == 0.0
+         CJ_L38 :  if #_t12 goto IF_L34
+" -> "       ELSE_L35 :  EMPTY_STATEMENT
+            L40 :  #_t13 = 1.0
+            L41 :  #_t14 = 1.0 / RES
+            L42 :  RES = #_t14
+        UCJ_L43 :  goto END_IF_L34
+"  [label="default"];
+  "         IF_L29 :  EMPTY_STATEMENT
+            L36 :  #_t11 = 0.0
+            L37 :  #_t12 = X == 0.0
+         CJ_L38 :  if #_t12 goto IF_L34
+" -> "         IF_L34 :  EMPTY_STATEMENT
+            L44 :  #_t15 = false
+            L45 :  FLAG = false
 "  [label="alter"];
-  "         IF_L27 :  EMPTY_STATEMENT
-            L38 :  #_t12 = 0
-            L39 :  #_t13 = X == 0
-         CJ_L40 :  if #_t13 goto IF_L37
-" -> "     END_IF_L37 :  EMPTY_STATEMENT
-"  [label="default"];
-  "         IF_L27 :  EMPTY_STATEMENT
-            L38 :  #_t12 = 0
-            L39 :  #_t13 = X == 0
-         CJ_L40 :  if #_t13 goto IF_L37
-" -> "         IF_L37 :  EMPTY_STATEMENT
-            L42 :  #_t14 = false
-            L43 :  FLAG = false
+  "       ELSE_L35 :  EMPTY_STATEMENT
+            L40 :  #_t13 = 1.0
+            L41 :  #_t14 = 1.0 / RES
+            L42 :  RES = #_t14
+        UCJ_L43 :  goto END_IF_L34
+" -> "     END_IF_L34 :  EMPTY_STATEMENT
 "  [label="alter"];
-  "         IF_L37 :  EMPTY_STATEMENT
-            L42 :  #_t14 = false
-            L43 :  FLAG = false
-" -> "     END_IF_L37 :  EMPTY_STATEMENT
+  "         IF_L34 :  EMPTY_STATEMENT
+            L44 :  #_t15 = false
+            L45 :  FLAG = false
+" -> "     END_IF_L34 :  EMPTY_STATEMENT
 "  [label="default"];
-  "     END_IF_L37 :  EMPTY_STATEMENT
-" -> "     END_IF_L27 :  EMPTY_STATEMENT
+  "     END_IF_L34 :  EMPTY_STATEMENT
+" -> "     END_IF_L29 :  EMPTY_STATEMENT
 "  [label="default"];
-  "     END_IF_L27 :  EMPTY_STATEMENT
+  "     END_IF_L29 :  EMPTY_STATEMENT
 " -> "            End :  EMPTY_STATEMENT
-            L44 :  print(RES,)
-            L45 :  print(FLAG,)
-            L46 :  print(EXP,)
+            L46 :  print(RES,)
+            L47 :  print(FLAG,)
+            L48 :  print(EXP,)
 "  [label="default"];
   "          Entry :  EMPTY_STATEMENT
 " -> "          power :  EMPTY_STATEMENT
 "  [label="default"];
   "            End :  EMPTY_STATEMENT
-            L44 :  print(RES,)
-            L45 :  print(FLAG,)
-            L46 :  print(EXP,)
+            L46 :  print(RES,)
+            L47 :  print(FLAG,)
+            L48 :  print(EXP,)
 " -> "           Read :  EMPTY_STATEMENT
-            L47 :  Y = read()
-            L48 :  X = read()
+            L49 :  Y = read()
+            L50 :  X = read()
 "  [label="default"];
   "            End :  EMPTY_STATEMENT
-            L44 :  print(RES,)
-            L45 :  print(FLAG,)
-            L46 :  print(EXP,)
+            L46 :  print(RES,)
+            L47 :  print(FLAG,)
+            L48 :  print(EXP,)
 " -> "           Exit :  EMPTY_STATEMENT
 "  [label="alter"];
   "           Read :  EMPTY_STATEMENT
-            L47 :  Y = read()
-            L48 :  X = read()
+            L49 :  Y = read()
+            L50 :  X = read()
 " -> "           Body :  EMPTY_STATEMENT
              L7 :  #_t0 = 0
              L8 :  #_t1 = Y > 0

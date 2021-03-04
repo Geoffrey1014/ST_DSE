@@ -1,0 +1,303 @@
+
+def => L0: cstate77 = 0 @cstate77
+use => [L11: #_t1 = cstate77 == 0 @cstate77, L298: #_t113 = cstate77 == 6 @cstate77, L54: #_t17 = cstate77 == 1 @cstate77, L256: #_t97 = cstate77 == 5 @cstate77, L385: print(cstate77,) @cstate77, L201: #_t75 = cstate77 == 4 @cstate77, L96: #_t33 = cstate77 == 2 @cstate77, L155: #_t57 = cstate77 == 3 @cstate77]
+
+def => L1: t_reset = false @t_reset
+use => [CJ_L370: if t_reset goto IF_L368 @t_reset, L391: print(t_reset,) @t_reset]
+
+def => L2: t_up = false @t_up
+use => [L359: #_t135 = NOT t_up @t_up, L390: print(t_up,) @t_up, CJ_L352: if t_up goto IF_L351 @t_up]
+
+def => L3: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L5: q = false @q
+use => [L73: #_t25 = #_t144 AND q @q, L285: #_t108 = #_t150 AND q @q, L218: #_t149 = NOT q @q, L16: #_t2 = NOT q @q, L113: #_t39 = x_1 AND q @q, L140: #_t51 = #_t146 AND q @q, L174: #_t64 = NOT q @q, L160: #_t59 = #_t147 AND q @q, L243: #_t92 = x_1 AND q @q, L303: #_t115 = #_t151 AND q @q, L58: #_t18 = NOT q @q, L100: #_t145 = NOT q @q, L206: #_t77 = #_t148 AND q @q, L340: #_t130 = x_1 AND q @q, L315: #_t152 = NOT q @q, L271: #_t101 = NOT q @q, L41: #_t12 = #_t143 AND q @q, L387: print(q,) @q]
+
+def => L6: T_VALUE = 5 @T_VALUE
+use => [L379: #_t141 = T_VALUE == T_VALUE @T_VALUE, L389: print(T_VALUE,) @T_VALUE, L377: count = T_VALUE @T_VALUE]
+
+def => L8: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L17: #_t143 = NOT x_1 @#_t143
+use => [L41: #_t12 = #_t143 AND q @#_t143, L40: #_t11 = #_t143 @#_t143]
+
+def => L23: cstate77 = 1 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L25: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L27: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L33: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L35: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L37: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L45: cstate77 = 5 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L47: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L49: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L59: #_t144 = NOT x_1 @#_t144
+use => [L72: #_t24 = #_t144 @#_t144, L73: #_t25 = #_t144 AND q @#_t144]
+
+def => L65: cstate77 = 1 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L67: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L69: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L77: cstate77 = 5 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L79: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L81: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L87: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L89: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L91: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L100: #_t145 = NOT q @#_t145
+use => [L126: #_t45 = #_t146 AND #_t145 @#_t145, L124: #_t43 = #_t145 @#_t145]
+
+def => L106: cstate77 = 2 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L108: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L110: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L117: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L119: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L121: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L125: #_t146 = NOT x_1 @#_t146
+use => [L140: #_t51 = #_t146 AND q @#_t146, L139: #_t50 = #_t146 @#_t146]
+
+def => L130: cstate77 = 4 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L132: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L134: t_start = true @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L136: t_up = false @t_up
+use => [L359: #_t135 = NOT t_up @t_up, L390: print(t_up,) @t_up, CJ_L352: if t_up goto IF_L351 @t_up]
+
+def => L144: cstate77 = 6 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L146: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L148: t_start = true @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L150: t_up = false @t_up
+use => [L359: #_t135 = NOT t_up @t_up, L390: print(t_up,) @t_up, CJ_L352: if t_up goto IF_L351 @t_up]
+
+def => L159: #_t147 = NOT x_1 @#_t147
+use => [L176: #_t66 = #_t147 AND #_t64 @#_t147, L175: #_t65 = #_t147 @#_t147]
+
+def => L165: cstate77 = 6 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L167: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L169: t_start = true @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L171: t_up = false @t_up
+use => [L359: #_t135 = NOT t_up @t_up, L390: print(t_up,) @t_up, CJ_L352: if t_up goto IF_L351 @t_up]
+
+def => L180: cstate77 = 4 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L182: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L184: t_start = true @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L186: t_up = false @t_up
+use => [L359: #_t135 = NOT t_up @t_up, L390: print(t_up,) @t_up, CJ_L352: if t_up goto IF_L351 @t_up]
+
+def => L192: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L194: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L196: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L205: #_t148 = NOT x_1 @#_t148
+use => [L219: #_t82 = #_t148 @#_t148, L220: #_t83 = #_t148 AND #_t149 @#_t148]
+
+def => L211: cstate77 = 5 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L213: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L215: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L218: #_t149 = NOT q @#_t149
+use => [L232: #_t88 = x_1 AND #_t149 @#_t149, L231: #_t87 = #_t149 @#_t149]
+
+def => L224: cstate77 = 4 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L226: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L228: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L236: cstate77 = 2 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L238: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L240: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L247: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L249: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L251: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L264: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L266: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L268: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L272: #_t150 = NOT x_1 @#_t150
+use => [L284: #_t107 = #_t150 @#_t150, L285: #_t108 = #_t150 AND q @#_t150]
+
+def => L277: cstate77 = 1 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L279: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L281: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L289: cstate77 = 5 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L291: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L293: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L302: #_t151 = NOT x_1 @#_t151
+use => [L316: #_t120 = #_t151 @#_t151, L317: #_t121 = #_t151 AND #_t152 @#_t151]
+
+def => L308: cstate77 = 5 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L310: y_1 = false @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L312: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L315: #_t152 = NOT q @#_t152
+use => [L328: #_t125 = #_t152 @#_t152, L329: #_t126 = x_1 AND #_t152 @#_t152]
+
+def => L321: cstate77 = 4 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L323: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L325: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L333: cstate77 = 2 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L335: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L337: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L344: cstate77 = 3 @cstate77
+use => [L385: print(cstate77,) @cstate77]
+
+def => L346: y_1 = true @y_1
+use => [L388: print(y_1,) @y_1]
+
+def => L348: t_start = false @t_start
+use => [L384: print(t_start,) @t_start, L360: #_t136 = t_start AND #_t135 @t_start]
+
+def => L356: t_reset = true @t_reset
+use => [CJ_L370: if t_reset goto IF_L368 @t_reset, L391: print(t_reset,) @t_reset]
+
+def => L364: t_up = true @t_up
+use => [L390: print(t_up,) @t_up]
+
+def => L366: t_reset = false @t_reset
+use => [CJ_L370: if t_reset goto IF_L368 @t_reset, L391: print(t_reset,) @t_reset]
+
+def => L373: q = false @q
+use => [L387: print(q,) @q]
+
+def => L375: count = 0 @count
+use => [L386: print(count,) @count]
+
+def => L377: count = T_VALUE @count
+use => [L386: print(count,) @count]
+
+def => L383: q = true @q
+use => [L387: print(q,) @q]
+
+def => L392: x_1 = read() @x_1
+use => [L205: #_t148 = NOT x_1 @x_1, L329: #_t126 = x_1 AND #_t152 @x_1, L232: #_t88 = x_1 AND #_t149 @x_1, L159: #_t147 = NOT x_1 @x_1, CJ_L30: if x_1 goto ELSIF_L29 @x_1, CJ_L189: if x_1 goto ELSIF_L188 @x_1, L113: #_t39 = x_1 AND q @x_1, CJ_L260: if x_1 goto IF_L259 @x_1, L101: #_t35 = x_1 AND #_t145 @x_1, L125: #_t146 = NOT x_1 @x_1, CJ_L84: if x_1 goto ELSIF_L83 @x_1, L272: #_t150 = NOT x_1 @x_1, L340: #_t130 = x_1 AND q @x_1, L17: #_t143 = NOT x_1 @x_1, L302: #_t151 = NOT x_1 @x_1, L59: #_t144 = NOT x_1 @x_1, L243: #_t92 = x_1 AND q @x_1]

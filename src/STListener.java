@@ -900,13 +900,11 @@ public class STListener extends STParserBaseListener {
     @Override public void exitFloating_point_literal(STParser.Floating_point_literalContext ctx) {
         STListener.ProgramLocation l = new ProgramLocation(ctx);
         IrRealLiteral floatLiteral = (IrRealLiteral) getASTNode(ctx.floating_point_fraction());
-        Integer exponent = 1;
+        Integer exponent = 0;
         if (ctx.decimal_exponent() != null){
             IrIntLiteral irIntLiteral = (IrIntLiteral) getASTNode(ctx.decimal_exponent());
             exponent = irIntLiteral.getValue();
         }
-
-//        System.out.println(floatLiteral.getValue());
 
         floatLiteral = new IrRealLiteral((float) (floatLiteral.getValue() * Math.pow(10, exponent)), l.line, l.col);
         setASTNode(ctx, floatLiteral);

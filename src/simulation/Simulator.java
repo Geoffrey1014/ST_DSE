@@ -110,10 +110,19 @@ public class Simulator {
         System.out.println("coverage: " + coveredBlocks.size() / (float) this.stmtBlocks.size());
         System.out.println(route);
         System.out.println(branches);
-        symExe(route,branches);
+        LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs = new LinkedList<>();
+        symExe(route,branches,calculatedInputs);
+        System.out.println("calculatedInputs");
+        while (calculatedInputs.size() >0){
+            conExe(calculatedInputs.pop());
+        }
+
 
     }
-    public void conExe(){
+    public Tuple2<List<String> ,List<Tuple2<Integer,Boolean>>> conExe(HashMap<LlLocation,ValueOfDiffType> inputs){
+        for (LlLocation location :inputs.keySet()){
+            conMemory.put(location,inputs.get(location));
+        }
         BasicBlock curBlock = this.cfg.leadersToBBMap.get("Body");
         List<String> route = new ArrayList<>();
         List<Tuple2<Integer,Boolean>> branches = new ArrayList<>();
@@ -123,7 +132,7 @@ public class Simulator {
             System.out.println("\n" + leaderLabel);
 
             route.add(leaderLabel);
-            if (leaderLabel.equals("Read") && conuter > 1) break;
+            if (leaderLabel.equals("Read")) break;
 
             Tuple2<BasicBlock,Boolean> nextBB = executeBasicBlock(curBlock);
             if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter,nextBB.a2));
@@ -132,10 +141,13 @@ public class Simulator {
             curBlock = nextBB.a1;
             System.out.println("coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
         }
+        return new Tuple2<>(route,branches);
     }
 
-    public void symExe(List<String> route, List<Tuple2<Integer,Boolean>> branches ){
-        //  需要过滤算法，去除route中不必要的分支
+    public void symExe(List<String> route, List<Tuple2<Integer,Boolean>> branches,
+                       LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs){
+        // TODO  需要过滤算法，去除route中不必要的分支
+        // TODo 把函数整理一下
         mkInputSymbolic(ctx);
         SymLlStatementExeutor symLlStatementExeutor = new SymLlStatementExeutor(this.ctx);
         int left = 0;
@@ -144,7 +156,7 @@ public class Simulator {
             for(String bbLabel: route.subList(left,branch.a1+1)){
                 if (bbLabel.equals("Read")) continue;
                 symExecuteBasicBlock(this.cfg.leadersToBBMap.get(bbLabel),symLlStatementExeutor,
-                        symMemory,!branch.a2);
+                        symMemory,!branch.a2, calculatedInputs);
             }
             left = branch.a1+1;
         }
@@ -153,7 +165,8 @@ public class Simulator {
 
 
     public void symExecuteBasicBlock(BasicBlock currentBolock, SymLlStatementExeutor symLlStatementExeutor,
-                                     SymMemory symMemory, Boolean symBranchChoice) {
+                                     SymMemory symMemory, Boolean symBranchChoice,
+    LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs) {
 
         for (LlStatement llStatement : currentBolock.getStmtsList()) {
             if (llStatement instanceof LlAssignStmt) {
@@ -168,11 +181,13 @@ public class Simulator {
                 } else {
                     conditionValue = symMemory.get(condition);
                 }
-                calNewInputs(conditionValue, symBranchChoice);
+                HashMap<LlLocation,ValueOfDiffType> results = calNewInputs(conditionValue, symBranchChoice);
+                if(results != null)  calculatedInputs.add(results);
+
                 solver.add(ctx.mkEq(conditionValue,ctx.mkBool(!symBranchChoice)).simplify());
 
                 llStatement.accept(symLlStatementExeutor,symMemory);
-                // TODO get the next bb according to the condition
+                //  the next bb according to the condition is decided by concrete execution
 
             } else if (llStatement instanceof LlJumpUnconditional) {
 //                nextBlock = currentBolock.getAlternativeBranch();
@@ -185,20 +200,51 @@ public class Simulator {
         }
     }
 
-    public void calNewInputs(Expr conditionValue, Boolean branchChoice) {
+    public HashMap<LlLocation,ValueOfDiffType> calNewInputs(Expr conditionValue, Boolean branchChoice) {
+        HashMap<LlLocation,ValueOfDiffType> resluts = new HashMap<>();
+
         this.solver.push();
         this.solver.add(ctx.mkEq(conditionValue,ctx.mkBool(branchChoice)));
 
         if(this.solver.check().equals(Status.SATISFIABLE)) {
-            LlLocation location = (LlLocation) this.inputs.iterator().next();
-            Expr var = symMemory.get(location);
-            System.out.println(this.solver.getModel().evaluate(var,true));
-            //TODO 把求解结果存起来
+            for (LlComponent llComponent : this.inputs) {
+                LlLocation location = (LlLocation) llComponent;
+                Expr locationExpr = symMemory.get(location);
+                String locationValue = this.solver.getModel().evaluate(locationExpr, true).toString();
+                putValues(locationValue,location,resluts);
+                System.out.println(locationExpr.toString() + ": " + locationValue);
+            }
+            this.solver.pop();
+            return resluts;
+
         }
         else{
-            System.out.println(Status.UNSATISFIABLE);
+            System.out.println("\n"+Status.UNSATISFIABLE);
+            this.solver.pop();
+            return null;
         }
-        this.solver.pop();
+
+    }
+    public void putValues(String inPut, LlLocation location,HashMap<LlLocation,ValueOfDiffType> resluts){
+        BasicTypeEnum type = conMemory.getLocationvalue(location).getType();
+
+        switch (type) {
+            case BOOLEAN:
+                resluts.put(location, new ValueOfDiffType(Boolean.parseBoolean(inPut)));
+                break;
+            case INTEGER:
+                resluts.put(location, new ValueOfDiffType(Long.parseLong(inPut)));
+                break;
+            case FLOAT:
+                resluts.put(location, new ValueOfDiffType(Double.parseDouble(inPut)));
+                break;
+            case STRING:
+                resluts.put(location, new ValueOfDiffType(inPut));
+                break;
+            default:
+                System.err.println("wrong type!");
+        }
+
     }
     public Tuple2<BasicBlock,Boolean> executeBasicBlock(BasicBlock currentBolock) {
         BasicBlock nextBlock = null;

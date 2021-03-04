@@ -1,0 +1,30 @@
+
+def => L1: PREV_LOAD = false @PREV_LOAD
+use => [L7: #_t0 = NOT PREV_LOAD @PREV_LOAD]
+
+def => L6: OUT_1 = false @OUT_1
+use => [L24: print(OUT_1,) @OUT_1]
+
+def => L8: #_t1 = #_t0 AND TLOAD @#_t1
+use => [L18: #_t3 = LOAD OR #_t1 @#_t1, L26: print(#_t1,) @#_t1]
+
+def => L15: OUT_1 = true @OUT_1
+use => [L24: print(OUT_1,) @OUT_1]
+
+def => L21: OUT_1 = IN_1 @OUT_1
+use => [L24: print(OUT_1,) @OUT_1]
+
+def => L23: PREV_LOAD = TLOAD @PREV_LOAD
+use => [L7: #_t0 = NOT PREV_LOAD @PREV_LOAD]
+
+def => L27: LOAD = read() @LOAD
+use => [L18: #_t3 = LOAD OR #_t1 @LOAD]
+
+def => L28: IN_1 = read() @IN_1
+use => [L21: OUT_1 = IN_1 @IN_1]
+
+def => L29: RESET = read() @RESET
+use => [CJ_L11: if RESET goto IF_L10 @RESET]
+
+def => L30: TLOAD = read() @TLOAD
+use => [L8: #_t1 = #_t0 AND TLOAD @TLOAD, L25: print(TLOAD,) @TLOAD, L23: PREV_LOAD = TLOAD @TLOAD]
