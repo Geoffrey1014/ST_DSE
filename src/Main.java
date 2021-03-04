@@ -138,7 +138,7 @@ public class Main {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
-        String file = "example.txt";
+        String file = "power.txt";
         walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 

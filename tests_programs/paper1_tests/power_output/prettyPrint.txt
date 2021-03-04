@@ -1,0 +1,156 @@
+|--POUS
+  |--PROGRAM
+    |--name: power
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: EXP
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: X
+            |--type: RES_INT
+        |--varDecl
+          |--name: Y
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: RES
+            |--type: RES_REAL
+        |--value: 1
+        |--varDecl
+          |--name: FLAG
+            |--type: RES_BOOL
+        |--value: true
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |__binaryRelOper
+              |__lhs
+                |--locationVar
+                  |--name: Y
+                  |--type: RES_INT
+              |__op: GT_OP
+              |__rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: EXP
+                    |--type: RES_INT
+                |--rhs
+                  |--locationVar
+                    |--name: Y
+                    |--type: RES_INT
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: EXP
+                  |--type: RES_INT
+              |--rhs
+                |--unaryNegateOp
+                     |--locationVar
+                       |--name: Y
+                       |--type: RES_INT
+        |--whileStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: EXP
+                  |--type: RES_INT
+              |--op: NEQ_OP
+              |--rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: RES
+                    |--type: RES_REAL
+                |--rhs
+                  |--binaryArithOper
+                    |--lhs
+                      |--locationVar
+                        |--name: RES
+                        |--type: RES_REAL
+                    |--op: MUL_OP
+                    |--rhs
+                      |--locationVar
+                        |--name: X
+                        |--type: RES_INT
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: EXP
+                    |--type: RES_INT
+                |--rhs
+                  |--binaryArithOper
+                    |--lhs
+                      |--locationVar
+                        |--name: EXP
+                        |--type: RES_INT
+                    |--op: SUB_OP
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 1
+        |--ifStmt
+          |--condExpr
+            |__binaryRelOper
+              |__lhs
+                |--locationVar
+                  |--name: Y
+                  |--type: RES_INT
+              |__op: LEQ_OP
+              |__rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--ifStmt
+                |--condExpr
+                  |--binaryEquateOper
+                    |--lhs
+                      |--locationVar
+                        |--name: X
+                        |--type: RES_INT
+                    |--op: EQ_OP
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 0
+                |--body
+                  |--codeBlock:
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: FLAG
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: RES
+                  |--type: RES_REAL
+              |--rhs
+                |--binaryArithOper
+                  |--lhs
+                    |--IntLiteral
+                      |--value: 1
+                  |--op: DIV_OP
+                  |--rhs
+                    |--locationVar
+                      |--name: RES
+                      |--type: RES_REAL

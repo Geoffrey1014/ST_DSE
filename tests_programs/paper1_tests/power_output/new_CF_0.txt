@@ -1,0 +1,64 @@
+CFG:
+          power :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L3 :  RES = 1
+             L4 :  FLAG = true
+
+           Body :  EMPTY_STATEMENT
+             L8 :  #_t1 = Y > 0
+          CJ_L9 :  if #_t1 goto IF_L5
+
+        ELSE_L6 :  EMPTY_STATEMENT
+            L11 :  #_t2 = - Y
+            L12 :  EXP = #_t2
+        UCJ_L13 :  goto END_IF_L5
+
+          IF_L5 :  EMPTY_STATEMENT
+            L14 :  EXP = Y
+
+      END_IF_L5 :  EMPTY_STATEMENT
+
+      WHILE_L15 :  EMPTY_STATEMENT
+            L18 :  #_t4 = EXP <> 0
+         CJ_L19 :  if #_t4 goto LOOP_L16
+
+       LOOP_L16 :  EMPTY_STATEMENT
+            L21 :  #_t5 = RES * X
+            L22 :  RES = #_t5
+            L24 :  #_t7 = EXP - 1
+            L25 :  EXP = #_t7
+        UCJ_L26 :  goto WHILE_L15
+
+  END_WHILE_L15 :  EMPTY_STATEMENT
+            L30 :  #_t9 = Y <= 0
+         CJ_L31 :  if #_t9 goto IF_L27
+
+       ELSE_L28 :  EMPTY_STATEMENT
+            L34 :  #_t11 = 1 / RES
+            L35 :  RES = #_t11
+        UCJ_L36 :  goto END_IF_L27
+
+         IF_L27 :  EMPTY_STATEMENT
+            L39 :  #_t13 = X == 0
+         CJ_L40 :  if #_t13 goto IF_L37
+
+         IF_L37 :  EMPTY_STATEMENT
+            L43 :  FLAG = false
+
+     END_IF_L37 :  EMPTY_STATEMENT
+
+     END_IF_L27 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L44 :  print(RES,)
+            L45 :  print(FLAG,)
+            L46 :  print(EXP,)
+
+           Exit :  EMPTY_STATEMENT
+
+           Read :  EMPTY_STATEMENT
+            L47 :  Y = read()
+            L48 :  X = read()

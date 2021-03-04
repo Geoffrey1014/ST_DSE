@@ -1,0 +1,30 @@
+
+def => L3: RES = 1 @RES
+use => [L44: print(RES,) @RES, L34: #_t11 = 1 / RES @RES, L21: #_t5 = RES * X @RES]
+
+def => L4: FLAG = true @FLAG
+use => [L45: print(FLAG,) @FLAG]
+
+def => L12: EXP = #_t2 @EXP
+use => [L24: #_t7 = EXP - 1 @EXP, L18: #_t4 = EXP <> 0 @EXP, L46: print(EXP,) @EXP]
+
+def => L14: EXP = Y @EXP
+use => [L24: #_t7 = EXP - 1 @EXP, L18: #_t4 = EXP <> 0 @EXP, L46: print(EXP,) @EXP]
+
+def => L22: RES = #_t5 @RES
+use => [L44: print(RES,) @RES, L34: #_t11 = 1 / RES @RES, L21: #_t5 = RES * X @RES]
+
+def => L25: EXP = #_t7 @EXP
+use => [L24: #_t7 = EXP - 1 @EXP, L18: #_t4 = EXP <> 0 @EXP, L46: print(EXP,) @EXP]
+
+def => L35: RES = #_t11 @RES
+use => [L44: print(RES,) @RES]
+
+def => L43: FLAG = false @FLAG
+use => [L45: print(FLAG,) @FLAG]
+
+def => L47: Y = read() @Y
+use => [L11: #_t2 = - Y @Y, L30: #_t9 = Y <= 0 @Y, L14: EXP = Y @Y, L8: #_t1 = Y > 0 @Y]
+
+def => L48: X = read() @X
+use => [L39: #_t13 = X == 0 @X, L21: #_t5 = RES * X @X]
