@@ -57,14 +57,27 @@
                      |--locationVar
                        |--name: Y
                        |--type: RES_INT
-        |--assignStmtEquals
-          |--lhs
-            |--locationVar
-              |--name: FLAG
-              |--type: RES_BOOL
-          |--rhs
-            |--boolLiteral
-              |--value: true
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: FLAG
+                  |--type: RES_BOOL
+              |--op: EQ_OP
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: FLAG
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
         |--assignStmtEquals
           |--lhs
             |--locationVar

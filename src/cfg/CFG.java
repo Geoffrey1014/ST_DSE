@@ -22,7 +22,7 @@ public class CFG {
     private final LlBuilder builder;
     private final ArrayList<BasicBlock> basicBlocks;
     public final LinkedHashMap<String, BasicBlock> leadersToBBMap;
-    private final LinkedList<String> orderedLeadersList;
+    public final LinkedList<String> orderedLeadersList;
     public   LinkedHashMap<BasicBlock, String> blockLabels;
     private GraphViz graphViz;
     private LlSymbolTable llSymbolTable;
@@ -30,14 +30,6 @@ public class CFG {
     public CFG(LlBuilder builder, LlSymbolTable llSymbolTable, Boolean addLoop) {
         this.builder = builder;
         this.llSymbolTable = llSymbolTable;
-
-//        System.out.println("LlBuilder statement list:");
-//        for (String s : this.builder.getStatementTable().keySet()){
-//            System.out.println(s + " : " + this.builder.getStatementTable().get(s));
-//        }
-//        System.out.println("LlBuilder statement list  end\n");
-//        this.paramsList = builder.params;
-//        cache the Labels => Stmts map and extract the labels list
 
         LinkedHashMap<String, LlStatement> labelStmtsMap = new LinkedHashMap<>(builder.getStatementTable());
         ArrayList<String> labelsList = new ArrayList<>(labelStmtsMap.keySet());
@@ -163,11 +155,7 @@ public class CFG {
             endBB.addPredecessorNode(trueLastBB);
 
             if(addLoop){
-                // add an empty BasicBlock as the exit node and
-                // connect it and the orignal last BB to each other
-                BasicBlock exitBB = createEmptyBB("Exit");
-                endBB.setAlternativeBranch(exitBB);
-                exitBB.addPredecessorNode(endBB);
+
 
                 // add read input block
                 String readInputBBLabel = "Read";
@@ -185,6 +173,12 @@ public class CFG {
                 readBB.addPredecessorNode(initBB);
                 body.rmPredecessorNode(initBB);
 
+                // add an empty BasicBlock as the exit node and
+                // connect it and the orignal last BB to each other
+                BasicBlock exitBB = createEmptyBB("Exit");
+                endBB.setAlternativeBranch(exitBB);
+                exitBB.addPredecessorNode(endBB);
+
             }
 
             removeUnconditionalJumpBlocks();
@@ -193,6 +187,9 @@ public class CFG {
             ArrayList<BasicBlock> basicBlocks = new ArrayList<>();
             for (String leaderLabel : this.orderedLeadersList) {
                 basicBlocks.add(this.leadersToBBMap.get(leaderLabel));
+            }
+            for (String label : this.leadersToBBMap.keySet()){
+                this.leadersToBBMap.get(label).name = label;
             }
             this.blockLabels = new LinkedHashMap<>(reverse(leadersToBBMap));
             this.basicBlocks = basicBlocks;

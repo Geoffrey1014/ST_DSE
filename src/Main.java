@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import simulation.Simulator;
 import tools.MyPrint;
+import tools.Tuple2;
 import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
 
@@ -72,7 +73,7 @@ public class Main {
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
 
             // control of updating pictures
-            Boolean updateFig = false;
+            Boolean updateFig = true;
 
             for (LlBuilder llBuilder : llBuilders) {
                 CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
@@ -97,20 +98,31 @@ public class Main {
                 globalDCE.performGlobalDeadCodeElimination();
                 System.out.println("\nafterDSE---------------------\n");
                 if (updateFig) genGraphViz("DSE_" + cfgCounter, cfg, outPutDir);
-
-                globalDCE.livenessAnalysis.calculateDefinitionUseChain();
-                globalDCE.livenessAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
                 writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
 
+                // calculateDefinitionUseChain
+                NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
+                liveAnalysis.livenessAnalysis();
+                liveAnalysis.calculateDefinitionUseChain();
+                liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
 
-                printDominatorMap(cfg);
+                // Dominator writeFile
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
+                writeFile(dominatorMapToString(cfg,dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
+
+                //calCutNodes
+                HashMap<VarAndStmt,HashSet<VarAndStmt>> definitionUseChain = liveAnalysis.definitionUseChain;
+                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> duChianWithDmt = new HashMap<>();
+                calCutNodes(dominatorsMap,definitionUseChain,duChianWithDmt);
+
+                System.out.println("done!");
 
 //                NewLivenessAnalysis livenessAnalysis = new NewLivenessAnalysis(cfg);
 //                livenessAnalysis.livenessAnalysis2();
 //                livenessAnalysis.calculateDefinitionUseChain();
 //                livenessAnalysis.writeDefUseChainToFile(outPutDir + "DUChain" + cfgCounter + ".txt");
                 System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg);
+                Simulator simulator = new Simulator(cfg,duChianWithDmt);
                 simulator.execute();
 
                 System.out.println("CF------------------------");
@@ -143,7 +155,7 @@ public class Main {
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-        runDirFiles(inputDir);
+//        runDirFiles(inputDir);
 
     }
     public static void runDirFiles(String path){
@@ -174,17 +186,32 @@ public class Main {
         }
     }
 
-
-    public static void printDominatorMap(CFG cfg){
-        HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
-        System.out.println("dominatorsMap------------");
-        for (BasicBlock bb : dominatorsMap.keySet()) {
-            System.out.println(cfg.blockLabels.get(bb) + "--------------dominators:");
-            for (BasicBlock b : dominatorsMap.get(bb)) {
-                System.out.println(cfg.blockLabels.get(b));
+    public static void calCutNodes(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap,
+                                   HashMap<VarAndStmt,HashSet<VarAndStmt>>definitionUseChain,
+                                   HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> duChianWithDmt){
+        for (VarAndStmt def : definitionUseChain.keySet()) {
+            duChianWithDmt.put(def, new HashSet<>());
+            for (VarAndStmt use : definitionUseChain.get(def)) {
+                HashSet<BasicBlock> defDmt = new HashSet<>(dominatorsMap.get(def.getBlock()));
+                HashSet<BasicBlock> useDmt = new HashSet<>(dominatorsMap.get(use.getBlock()));
+                useDmt.removeAll(defDmt);
+                duChianWithDmt.get(def).add(new Tuple2<>(use, useDmt));
             }
-            System.out.println();
         }
+    }
+
+    public static String dominatorMapToString(CFG cfg,HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
+        System.out.println("dominatorsMap writing------------");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (BasicBlock bb : cfg.getBasicBlocks()) {
+            stringBuilder.append("Node: "+bb.name).append(" :\n");
+            for (BasicBlock b : dominatorsMap.get(bb)) {
+                stringBuilder.append(b.name).append(", ");
+            }
+            stringBuilder.append("\n\n");
+
+        }
+        return stringBuilder.toString();
     }
     public static void genGraphViz(String cfgCounter, CFG cfg,String outPutDir )  {
         String graphVizFilename = outPutDir + "Graph_"+cfgCounter+".dot";

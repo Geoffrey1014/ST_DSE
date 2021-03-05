@@ -2,6 +2,7 @@ package simulation;
 
 import cfg.BasicBlock;
 import cfg.CFG;
+import cfg.VarAndStmt;
 import com.microsoft.z3.Context;
 import com.microsoft.z3.Expr;
 import com.microsoft.z3.Solver;
@@ -36,9 +37,9 @@ public class Simulator {
     private Solver solver;
     private Context ctx;
     private HashSet<LlComponent> inputs;
+    HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> duChianWithDmt;
 
-
-    public Simulator(CFG cfg) {
+    public Simulator(CFG cfg, HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> duChianWithDmt) {
         this.cfg = cfg;
         this.conMemory = new ConMemory();
         this.symMemory = new SymMemory();
@@ -46,6 +47,7 @@ public class Simulator {
         this.coveredBlocks = new HashSet<>();
         this.branchBlocks = new HashSet<>();
         this.stmtBlocks = new HashSet<>();
+        this.duChianWithDmt = duChianWithDmt;
 
         HashMap<String, String> config = new HashMap<String, String>();
         config.put("model", "true");

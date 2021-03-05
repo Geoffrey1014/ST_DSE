@@ -9,7 +9,6 @@ import ll.assignStmt.LlAssignStmtRegular;
 import ll.assignStmt.LlAssignStmtUnaryOp;
 import ll.jump.LlJumpConditional;
 import ll.location.LlLocation;
-import ll.location.LlLocationVar;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -53,8 +52,8 @@ public class NewLivenessAnalysis {
     public  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> livenessIN2 ;
     public  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> livenessOUT2 ;
 
-    private  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> bb2Uses ;
-    private  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> bb2Defs ;
+    private  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> usesInBB;
+    private  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> defsInBB;
     public HashMap<VarAndStmt,HashSet<VarAndStmt>> definitionUseChain;
 
     public NewLivenessAnalysis(CFG cfg) {
@@ -64,15 +63,15 @@ public class NewLivenessAnalysis {
     public void livenessAnalysis2(){
         livenessIN2 = new HashMap<>();
         livenessOUT2 = new HashMap<>();
-        bb2Uses = new HashMap<>();
-        bb2Defs = new HashMap<>();
+        usesInBB = new HashMap<>();
+        defsInBB = new HashMap<>();
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
         for (BasicBlock bb : bbList) {
             HashMap<LlLocation, HashSet<VarAndStmt>> varDef2DefAndStmt = new HashMap<>();
             HashMap<LlLocation, HashSet<VarAndStmt>> varUse2UseAndStmt = new HashMap<>();
             calculateDEFAndUSE(bb, varDef2DefAndStmt, varUse2UseAndStmt);
-            this.bb2Defs.put(bb, varDef2DefAndStmt);
-            this.bb2Uses.put(bb, varUse2UseAndStmt);
+            this.defsInBB.put(bb, varDef2DefAndStmt);
+            this.usesInBB.put(bb, varUse2UseAndStmt);
 
         }
 
@@ -154,16 +153,16 @@ public class NewLivenessAnalysis {
         livenessOUT = new HashMap<>();
         livenessIN2 = new HashMap<>();
         livenessOUT2 = new HashMap<>();
-        bb2Uses = new HashMap<>();
-        bb2Defs = new HashMap<>();
+        usesInBB = new HashMap<>();
+        defsInBB = new HashMap<>();
         ArrayList<BasicBlock> bbList = this.cfg.getBasicBlocks();
 
         for (BasicBlock bb : bbList) {
             HashMap<LlLocation, HashSet<VarAndStmt>> varDef2DefAndStmt = new HashMap<>();
             HashMap<LlLocation, HashSet<VarAndStmt>> varUse2UseAndStmt = new HashMap<>();
             calculateDEFAndUSE(bb, varDef2DefAndStmt, varUse2UseAndStmt);
-            this.bb2Defs.put(bb, varDef2DefAndStmt);
-            this.bb2Uses.put(bb, varUse2UseAndStmt);
+            this.defsInBB.put(bb, varDef2DefAndStmt);
+            this.usesInBB.put(bb, varUse2UseAndStmt);
 
         }
 
@@ -172,6 +171,7 @@ public class NewLivenessAnalysis {
             this.livenessIN.put(bb, new HashSet<>());
             this.livenessIN2.put(bb, new HashMap<>());
         }
+
         // Changed = N - {Exit};
         LinkedList<BasicBlock> activeNodes = new LinkedList<>(bbList);
         BasicBlock exit = activeNodes.removeLast();
@@ -300,10 +300,10 @@ public class NewLivenessAnalysis {
     }
 
     public void writeDefUseChainToFile(String path){
-        ArrayList<NewLivenessAnalysis.VarAndStmt> defs= new ArrayList<>(definitionUseChain.keySet());
+        ArrayList<VarAndStmt> defs= new ArrayList<>(definitionUseChain.keySet());
         Collections.sort(defs);
         StringBuilder stringBuilder = new StringBuilder();
-        for(NewLivenessAnalysis.VarAndStmt varAndStmt : defs){
+        for(VarAndStmt varAndStmt : defs){
             stringBuilder.append("\ndef => ").append(varAndStmt);
             stringBuilder.append("\nuse => ").append(definitionUseChain.get(varAndStmt)).append("\n");
         }
@@ -442,22 +442,22 @@ public class NewLivenessAnalysis {
     }
     // USE - set of variables with upwards exposed uses in block
     private HashSet<LlLocation> USE(BasicBlock bb) {
-        HashMap<LlLocation, HashSet<VarAndStmt>> uses = this.bb2Uses.get(bb);
+        HashMap<LlLocation, HashSet<VarAndStmt>> uses = this.usesInBB.get(bb);
         return new HashSet<>(uses.keySet());
     }
 
     private HashMap<LlLocation, HashSet<VarAndStmt>> USE2(BasicBlock bb) {
-        return new HashMap<>(this.bb2Uses.get(bb));
+        return new HashMap<>(this.usesInBB.get(bb));
     }
 
     // DEF - set of variables defined in block
     private HashSet<LlLocation> DEF(BasicBlock bb) {
-        HashMap<LlLocation, HashSet<VarAndStmt>> defs = this.bb2Defs.get(bb);
+        HashMap<LlLocation, HashSet<VarAndStmt>> defs = this.defsInBB.get(bb);
         return new HashSet<>(defs.keySet());
     }
 
     private HashMap<LlLocation, HashSet<VarAndStmt>> DEF2(BasicBlock bb) {
-        return new HashMap<>(this.bb2Defs.get(bb));
+        return new HashMap<>(this.defsInBB.get(bb));
     }
 
 
@@ -591,66 +591,5 @@ public class NewLivenessAnalysis {
         }
     }
 
-     class VarAndStmt implements Comparable<VarAndStmt> {
-        public final String stmtLabel;
-        // the def is of the form
-        // (locationVar, statement, i, pos) which represents LlLocationVar  and LlStatement; @ instruction pos in block i
-        private final LlLocation location;
-        private final LlStatement statement;
-        private final BasicBlock block;
-
-        public VarAndStmt(LlLocation location, LlStatement statement, BasicBlock block, String stmtLabel) {
-            this.location = location;
-            this.statement = statement;
-            this.block = block;
-            this.stmtLabel = stmtLabel;
-        }
-
-        public LlLocation getLocation() {
-            return this.location;
-        }
-
-        public LlStatement getStatement() {
-            return this.statement;
-        }
-
-        public boolean containsVar(LlLocationVar var) {
-            return this.location.equals(var);
-        }
-
-        public BasicBlock getBlock() {
-            return block;
-        }
-
-        @Override
-        public String toString() {
-            return this.stmtLabel + ": " + this.statement.toString() + " @" + this.location.toString();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof VarAndStmt) {
-                VarAndStmt that = (VarAndStmt) obj;
-                // two defs will be equal if they have equivalent block, stmtLabel and statement
-                return this.block.equals(that.block) && that.stmtLabel.equals(that.stmtLabel)
-                        && this.location.equals(that.location);
-            }
-            return false;
-        }
-
-        @Override
-        public int hashCode() {
-            if (this.location != null) {
-                return this.block.hashCode() * this.stmtLabel.hashCode() * this.location.hashCode();
-            } else {
-                return this.block.hashCode() * this.stmtLabel.hashCode();
-            }
-
-        }
-
-        public int compareTo(VarAndStmt o) {
-            return Integer.parseInt(this.stmtLabel.substring(1)) - Integer.parseInt(o.stmtLabel.substring(1));
-        }
-    }
 
 }

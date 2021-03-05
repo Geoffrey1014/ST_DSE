@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class BasicBlock {
+    public String name; //the first stmt's label
     private LinkedHashMap<String, LlStatement> labelsToStmtsMap;
     private BasicBlock defaultBranch;
     private BasicBlock alternativeBranch;

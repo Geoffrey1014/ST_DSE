@@ -22,57 +22,64 @@ CFG:
             L14 :  EXP = Y
 
       END_IF_L5 :  EMPTY_STATEMENT
-            L15 :  #_t3 = true
-            L16 :  FLAG = #_t3
-            L17 :  #_t4 = 1.0
-            L18 :  RES = #_t4
+            L16 :  #_t3 = false
+            L17 :  #_t4 = FLAG == #_t3
+         CJ_L18 :  if #_t4 goto IF_L15
 
-      WHILE_L19 :  EMPTY_STATEMENT
-            L21 :  #_t5 = 0
-            L22 :  #_t6 = EXP <> #_t5
-         CJ_L23 :  if #_t6 goto LOOP_L20
+         IF_L15 :  EMPTY_STATEMENT
+            L20 :  #_t5 = true
+            L21 :  FLAG = #_t5
 
-       LOOP_L20 :  EMPTY_STATEMENT
-            L25 :  #_t7 = RES * X
-            L26 :  RES = #_t7
-            L27 :  #_t8 = 1
-            L28 :  #_t9 = EXP - #_t8
-            L29 :  EXP = #_t9
-        UCJ_L30 :  goto WHILE_L19
+     END_IF_L15 :  EMPTY_STATEMENT
+            L22 :  #_t6 = 1.0
+            L23 :  RES = #_t6
 
-  END_WHILE_L19 :  EMPTY_STATEMENT
-            L32 :  #_t10 = 0
-            L33 :  #_t11 = Y <= #_t10
-         CJ_L34 :  if #_t11 goto IF_L31
+      WHILE_L24 :  EMPTY_STATEMENT
+            L26 :  #_t7 = 0
+            L27 :  #_t8 = EXP <> #_t7
+         CJ_L28 :  if #_t8 goto LOOP_L25
 
-         IF_L31 :  EMPTY_STATEMENT
-            L38 :  #_t12 = 0.0
-            L39 :  #_t13 = X == #_t12
-         CJ_L40 :  if #_t13 goto IF_L36
+       LOOP_L25 :  EMPTY_STATEMENT
+            L30 :  #_t9 = RES * X
+            L31 :  RES = #_t9
+            L32 :  #_t10 = 1
+            L33 :  #_t11 = EXP - #_t10
+            L34 :  EXP = #_t11
+        UCJ_L35 :  goto WHILE_L24
 
-       ELSE_L37 :  EMPTY_STATEMENT
-            L42 :  #_t14 = 1.0
-            L43 :  #_t15 = #_t14 / RES
-            L44 :  RES = #_t15
-        UCJ_L45 :  goto END_IF_L36
+  END_WHILE_L24 :  EMPTY_STATEMENT
+            L37 :  #_t12 = 0
+            L38 :  #_t13 = Y <= #_t12
+         CJ_L39 :  if #_t13 goto IF_L36
 
          IF_L36 :  EMPTY_STATEMENT
-            L46 :  #_t16 = false
-            L47 :  FLAG = #_t16
+            L43 :  #_t14 = 0.0
+            L44 :  #_t15 = X == #_t14
+         CJ_L45 :  if #_t15 goto IF_L41
+
+       ELSE_L42 :  EMPTY_STATEMENT
+            L47 :  #_t16 = 1.0
+            L48 :  #_t17 = #_t16 / RES
+            L49 :  RES = #_t17
+        UCJ_L50 :  goto END_IF_L41
+
+         IF_L41 :  EMPTY_STATEMENT
+            L51 :  #_t18 = false
+            L52 :  FLAG = #_t18
+
+     END_IF_L41 :  EMPTY_STATEMENT
 
      END_IF_L36 :  EMPTY_STATEMENT
-
-     END_IF_L31 :  EMPTY_STATEMENT
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L48 :  print(RES,)
-            L49 :  print(FLAG,)
-            L50 :  print(EXP,)
-
-           Exit :  EMPTY_STATEMENT
+            L53 :  print(RES,)
+            L54 :  print(FLAG,)
+            L55 :  print(EXP,)
 
            Read :  EMPTY_STATEMENT
-            L51 :  Y = read()
-            L52 :  X = read()
+            L56 :  Y = read()
+            L57 :  X = read()
+
+           Exit :  EMPTY_STATEMENT

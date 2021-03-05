@@ -16,8 +16,12 @@ IF Y > 0 THEN
 ELSE
     EXP := -Y;
 END_IF;
-FLAG := TRUE;
+
+IF FLAG = FALSE THEN
+    FLAG := TRUE;
+END_IF;
 RES := 1.0;
+
 WHILE EXP <> 0 DO
 	RES := RES * X;
 	EXP := EXP -1;

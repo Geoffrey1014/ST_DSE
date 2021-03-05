@@ -1,30 +1,33 @@
 
-def => L12: EXP = #_t2 @EXP
-use => [L28: #_t9 = EXP - 1 @EXP, L50: print(EXP,) @EXP, L22: #_t6 = EXP <> 0 @EXP]
+def => FLAG @ L4: FLAG = false @ Init
+use => [FLAG @ L17: #_t4 = FLAG == false @ END_IF_L5, FLAG @ L54: print(FLAG,) @ End]
 
-def => L14: EXP = Y @EXP
-use => [L28: #_t9 = EXP - 1 @EXP, L50: print(EXP,) @EXP, L22: #_t6 = EXP <> 0 @EXP]
+def => EXP @ L12: EXP = #_t2 @ ELSE_L6
+use => [EXP @ L27: #_t8 = EXP <> 0 @ WHILE_L24, EXP @ L55: print(EXP,) @ End, EXP @ L33: #_t11 = EXP - 1 @ LOOP_L25]
 
-def => L16: FLAG = true @FLAG
-use => [L49: print(FLAG,) @FLAG]
+def => EXP @ L14: EXP = Y @ IF_L5
+use => [EXP @ L27: #_t8 = EXP <> 0 @ WHILE_L24, EXP @ L55: print(EXP,) @ End, EXP @ L33: #_t11 = EXP - 1 @ LOOP_L25]
 
-def => L18: RES = 1.0 @RES
-use => [L25: #_t7 = RES * X @RES, L48: print(RES,) @RES, L43: #_t15 = 1.0 / RES @RES]
+def => FLAG @ L21: FLAG = true @ IF_L15
+use => [FLAG @ L54: print(FLAG,) @ End]
 
-def => L26: RES = #_t7 @RES
-use => [L25: #_t7 = RES * X @RES, L48: print(RES,) @RES, L43: #_t15 = 1.0 / RES @RES]
+def => RES @ L23: RES = 1.0 @ END_IF_L15
+use => [RES @ L48: #_t17 = 1.0 / RES @ ELSE_L42, RES @ L53: print(RES,) @ End, RES @ L30: #_t9 = RES * X @ LOOP_L25]
 
-def => L29: EXP = #_t9 @EXP
-use => [L28: #_t9 = EXP - 1 @EXP, L50: print(EXP,) @EXP, L22: #_t6 = EXP <> 0 @EXP]
+def => RES @ L31: RES = #_t9 @ LOOP_L25
+use => [RES @ L48: #_t17 = 1.0 / RES @ ELSE_L42, RES @ L53: print(RES,) @ End, RES @ L30: #_t9 = RES * X @ LOOP_L25]
 
-def => L44: RES = #_t15 @RES
-use => [L48: print(RES,) @RES]
+def => EXP @ L34: EXP = #_t11 @ LOOP_L25
+use => [EXP @ L27: #_t8 = EXP <> 0 @ WHILE_L24, EXP @ L55: print(EXP,) @ End, EXP @ L33: #_t11 = EXP - 1 @ LOOP_L25]
 
-def => L47: FLAG = false @FLAG
-use => [L49: print(FLAG,) @FLAG]
+def => RES @ L49: RES = #_t17 @ ELSE_L42
+use => [RES @ L53: print(RES,) @ End]
 
-def => L51: Y = read() @Y
-use => [L14: EXP = Y @Y, L11: #_t2 = - Y @Y, L8: #_t1 = Y > 0 @Y, L33: #_t11 = Y <= 0 @Y]
+def => FLAG @ L52: FLAG = false @ IF_L41
+use => [FLAG @ L54: print(FLAG,) @ End]
 
-def => L52: X = read() @X
-use => [L25: #_t7 = RES * X @X, L39: #_t13 = X == 0.0 @X]
+def => Y @ L56: Y = read() @ Read
+use => [Y @ L11: #_t2 = - Y @ ELSE_L6, Y @ L8: #_t1 = Y > 0 @ Body, Y @ L14: EXP = Y @ IF_L5, Y @ L38: #_t13 = Y <= 0 @ END_WHILE_L24]
+
+def => X @ L57: X = read() @ Read
+use => [X @ L30: #_t9 = RES * X @ LOOP_L25, X @ L44: #_t15 = X == 0.0 @ IF_L36]

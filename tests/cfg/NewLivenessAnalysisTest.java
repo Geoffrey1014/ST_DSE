@@ -89,10 +89,10 @@ public class NewLivenessAnalysisTest {
     }
 
     public void writeDefUseChainToFile(){
-        ArrayList<NewLivenessAnalysis.VarAndStmt> defs= new ArrayList<>(analysts.definitionUseChain.keySet());
+        ArrayList<VarAndStmt> defs= new ArrayList<>(analysts.definitionUseChain.keySet());
         Collections.sort(defs);
         StringBuilder stringBuilder = new StringBuilder();
-        for(NewLivenessAnalysis.VarAndStmt varAndStmt : defs){
+        for(VarAndStmt varAndStmt : defs){
             stringBuilder.append("\ndef => ").append(varAndStmt);
             stringBuilder.append("\nuse => ").append(analysts.definitionUseChain.get(varAndStmt)).append("\n");
         }
