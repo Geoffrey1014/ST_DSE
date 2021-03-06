@@ -3,7 +3,7 @@ def => RES @ L1: RES = 0.0 @ Init
 use => [RES @ L3: #_t0 = RES + X @ Body, RES @ L15: print(RES,) @ End]
 
 def => FLAG @ L2: FLAG = false @ Init
-use => [FLAG @ L16: print(FLAG,) @ End, FLAG @ L10: #_t4 = FLAG == false @ Body]
+use => [FLAG @ L10: #_t4 = FLAG == false @ Body, FLAG @ L16: print(FLAG,) @ End]
 
 def => #_t0 @ L3: #_t0 = RES + X @ Body
 use => [#_t0 @ L13: #_t5 = #_t0 - #_t2 @ IF_L8]

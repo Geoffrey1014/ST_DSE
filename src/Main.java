@@ -102,7 +102,7 @@ public class Main {
 
                 // calculateDefinitionUseChain
                 NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
-                liveAnalysis.livenessAnalysis();
+                liveAnalysis.livenessAnalysis2();
                 liveAnalysis.calculateDefinitionUseChain();
                 liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
 
