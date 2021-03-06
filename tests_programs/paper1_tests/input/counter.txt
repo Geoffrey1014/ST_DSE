@@ -1,0 +1,17 @@
+PROGRAM counter
+  VAR_INPUT
+    X : REAL ;
+  END_VAR
+  VAR_OUTPUT
+    RES : REAL;
+    FLAG : BOOL;
+  END_VAR
+(*此例子用来证明可以正确识别 PLC loop 中的定值引用链*)
+
+RES  := RES + X;
+X := X + 2.0;
+IF FLAG = FALSE THEN
+    RES  := RES - X;
+END_IF;
+
+END_PROGRAM

@@ -1,0 +1,34 @@
+CFG:
+        counter :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  X = 0.0
+             L1 :  RES = 0.0
+             L2 :  FLAG = false
+
+           Body :  EMPTY_STATEMENT
+             L3 :  #_t0 = RES + X
+             L4 :  RES = #_t0
+             L5 :  #_t1 = 2.0
+             L6 :  #_t2 = X + 2.0
+             L7 :  X = #_t2
+             L9 :  #_t3 = false
+            L10 :  #_t4 = FLAG == false
+         CJ_L11 :  if #_t4 goto IF_L8
+
+          IF_L8 :  EMPTY_STATEMENT
+            L13 :  #_t5 = #_t0 - #_t2
+            L14 :  RES = #_t5
+
+      END_IF_L8 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L15 :  print(RES,)
+            L16 :  print(FLAG,)
+
+           Read :  EMPTY_STATEMENT
+            L17 :  X = read()
+
+           Exit :  EMPTY_STATEMENT

@@ -1,0 +1,77 @@
+|--POUS
+  |--PROGRAM
+    |--name: counter
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: X
+            |--type: RES_REAL
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: RES
+            |--type: RES_REAL
+        |--varDecl
+          |--name: FLAG
+            |--type: RES_BOOL
+      |--codeBlock:
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: RES
+              |--type: RES_REAL
+          |--rhs
+            |--binaryArithOper
+              |--lhs
+                |--locationVar
+                  |--name: RES
+                  |--type: RES_REAL
+              |--op: ADD_OP
+              |--rhs
+                |--locationVar
+                  |--name: X
+                  |--type: RES_REAL
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: X
+              |--type: RES_REAL
+          |--rhs
+            |--binaryArithOper
+              |--lhs
+                |--locationVar
+                  |--name: X
+                  |--type: RES_REAL
+              |--op: ADD_OP
+              |--rhs
+                |--FloatLiteral
+                  |--value: 2.0
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: FLAG
+                  |--type: RES_BOOL
+              |--op: EQ_OP
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: RES
+                    |--type: RES_REAL
+                |--rhs
+                  |--binaryArithOper
+                    |--lhs
+                      |--locationVar
+                        |--name: RES
+                        |--type: RES_REAL
+                    |--op: SUB_OP
+                    |--rhs
+                      |--locationVar
+                        |--name: X
+                        |--type: RES_REAL

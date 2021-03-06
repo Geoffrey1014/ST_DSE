@@ -1,0 +1,21 @@
+
+def => RES @ L1: RES = 0.0 @ Init
+use => [RES @ L3: #_t0 = RES + X @ Body, RES @ L15: print(RES,) @ End]
+
+def => FLAG @ L2: FLAG = false @ Init
+use => [FLAG @ L16: print(FLAG,) @ End, FLAG @ L10: #_t4 = FLAG == false @ Body]
+
+def => #_t0 @ L3: #_t0 = RES + X @ Body
+use => [#_t0 @ L13: #_t5 = #_t0 - #_t2 @ IF_L8]
+
+def => RES @ L4: RES = #_t0 @ Body
+use => [RES @ L3: #_t0 = RES + X @ Body, RES @ L15: print(RES,) @ End]
+
+def => #_t2 @ L6: #_t2 = X + 2.0 @ Body
+use => [#_t2 @ L13: #_t5 = #_t0 - #_t2 @ IF_L8]
+
+def => RES @ L14: RES = #_t5 @ IF_L8
+use => [RES @ L3: #_t0 = RES + X @ Body, RES @ L15: print(RES,) @ End]
+
+def => X @ L17: X = read() @ Read
+use => [X @ L6: #_t2 = X + 2.0 @ Body, X @ L3: #_t0 = RES + X @ Body]

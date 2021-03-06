@@ -1,0 +1,105 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "        counter :  EMPTY_STATEMENT
+"; "           Init :  EMPTY_STATEMENT
+             L0 :  X = 0.0
+             L1 :  RES = 0.0
+             L2 :  FLAG = false
+"; "           Body :  EMPTY_STATEMENT
+             L3 :  #_t0 = RES + X
+             L4 :  RES = #_t0
+             L5 :  #_t1 = 2.0
+             L6 :  #_t2 = X + #_t1
+             L7 :  X = #_t2
+             L9 :  #_t3 = false
+            L10 :  #_t4 = FLAG == #_t3
+         CJ_L11 :  if #_t4 goto IF_L8
+"; "          IF_L8 :  EMPTY_STATEMENT
+            L13 :  #_t5 = RES - X
+            L14 :  RES = #_t5
+"; "      END_IF_L8 :  EMPTY_STATEMENT
+"; "          Entry :  EMPTY_STATEMENT
+"; "            End :  EMPTY_STATEMENT
+            L15 :  print(RES,)
+            L16 :  print(FLAG,)
+"; "           Read :  EMPTY_STATEMENT
+            L17 :  X = read()
+"; "           Exit :  EMPTY_STATEMENT
+"; 
+  "        counter :  EMPTY_STATEMENT
+" -> "           Init :  EMPTY_STATEMENT
+             L0 :  X = 0.0
+             L1 :  RES = 0.0
+             L2 :  FLAG = false
+"  [label="default"];
+  "           Init :  EMPTY_STATEMENT
+             L0 :  X = 0.0
+             L1 :  RES = 0.0
+             L2 :  FLAG = false
+" -> "           Read :  EMPTY_STATEMENT
+            L17 :  X = read()
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L3 :  #_t0 = RES + X
+             L4 :  RES = #_t0
+             L5 :  #_t1 = 2.0
+             L6 :  #_t2 = X + #_t1
+             L7 :  X = #_t2
+             L9 :  #_t3 = false
+            L10 :  #_t4 = FLAG == #_t3
+         CJ_L11 :  if #_t4 goto IF_L8
+" -> "      END_IF_L8 :  EMPTY_STATEMENT
+"  [label="default"];
+  "           Body :  EMPTY_STATEMENT
+             L3 :  #_t0 = RES + X
+             L4 :  RES = #_t0
+             L5 :  #_t1 = 2.0
+             L6 :  #_t2 = X + #_t1
+             L7 :  X = #_t2
+             L9 :  #_t3 = false
+            L10 :  #_t4 = FLAG == #_t3
+         CJ_L11 :  if #_t4 goto IF_L8
+" -> "          IF_L8 :  EMPTY_STATEMENT
+            L13 :  #_t5 = RES - X
+            L14 :  RES = #_t5
+"  [label="alter"];
+  "          IF_L8 :  EMPTY_STATEMENT
+            L13 :  #_t5 = RES - X
+            L14 :  RES = #_t5
+" -> "      END_IF_L8 :  EMPTY_STATEMENT
+"  [label="default"];
+  "      END_IF_L8 :  EMPTY_STATEMENT
+" -> "            End :  EMPTY_STATEMENT
+            L15 :  print(RES,)
+            L16 :  print(FLAG,)
+"  [label="default"];
+  "          Entry :  EMPTY_STATEMENT
+" -> "        counter :  EMPTY_STATEMENT
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L15 :  print(RES,)
+            L16 :  print(FLAG,)
+" -> "           Read :  EMPTY_STATEMENT
+            L17 :  X = read()
+"  [label="default"];
+  "            End :  EMPTY_STATEMENT
+            L15 :  print(RES,)
+            L16 :  print(FLAG,)
+" -> "           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "           Read :  EMPTY_STATEMENT
+            L17 :  X = read()
+" -> "           Body :  EMPTY_STATEMENT
+             L3 :  #_t0 = RES + X
+             L4 :  RES = #_t0
+             L5 :  #_t1 = 2.0
+             L6 :  #_t2 = X + #_t1
+             L7 :  X = #_t2
+             L9 :  #_t3 = false
+            L10 :  #_t4 = FLAG == #_t3
+         CJ_L11 :  if #_t4 goto IF_L8
+"  [label="default"];
+}
