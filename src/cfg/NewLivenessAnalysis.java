@@ -93,7 +93,12 @@ public class NewLivenessAnalysis {
         while (activeNodes.size() > 0) {
             // get a node and remove it from active nodes
             BasicBlock node = activeNodes.removeLast();
-            HashMap<LlLocation, HashSet<VarAndStmt>> oldIN2 = this.livenessIN2.get(node);
+
+            HashSet<LlLocation> oldIN2Keys = new HashSet(this.livenessIN2.get(node).keySet());
+            HashSet<HashSet<VarAndStmt>> oldIN2Values =  new HashSet<>();
+            for(HashSet<VarAndStmt> values :this.livenessIN2.get(node).values()){
+                oldIN2Values.add(new HashSet<>(values));
+            }
 
             // OUT[n] = EmptySet
             HashMap<LlLocation, HashSet<VarAndStmt>> OUT2 = new HashMap<>();
@@ -139,14 +144,27 @@ public class NewLivenessAnalysis {
 
             this.livenessIN2.put(node, USEplusOUTminusDEF2);
 
+            boolean flag = equals(this.livenessIN2.get(node).values(),oldIN2Values);
             // if IN[n] changed, add its predecessors to activeNodes
-            if (!this.livenessIN2.get(node).keySet().equals(oldIN2.keySet())) {
+            if (!this.livenessIN2.get(node).keySet().equals(oldIN2Keys)
+            || !flag) {
                 for (BasicBlock pred : node.getPredecessors()) {
                     activeNodes.addFirst(pred);
                 }
             }
         }
     }
+
+    private boolean equals(Collection<HashSet<VarAndStmt>> set1, Collection<HashSet<VarAndStmt>> set2) {
+        if(set1 == null || set2 ==null){//null就直接不比了
+            return false;
+        }
+        if(set1.size()!=set2.size()){//大小不同也不用比了
+            return false;
+        }
+        return set1.containsAll(set2);//最后比containsAll
+    }
+
 
     public void livenessAnalysis(){
         livenessIN = new HashMap<>();
@@ -195,7 +213,6 @@ public class NewLivenessAnalysis {
             // OUT[n] = OUT[n] union IN[s] for all s in successors
             if (node.getAlternativeBranch() != null) {
                 OUT.addAll(this.livenessIN.get(node.getAlternativeBranch()));
-
 
                 HashMap<LlLocation, HashSet<VarAndStmt>> uses = this.livenessIN2.get(node.getAlternativeBranch());
                 for (LlLocation location : uses.keySet()) {

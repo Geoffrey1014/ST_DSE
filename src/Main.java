@@ -102,7 +102,7 @@ public class Main {
 
                 // calculateDefinitionUseChain
                 NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
-                liveAnalysis.livenessAnalysis();
+                liveAnalysis.livenessAnalysis2();
                 liveAnalysis.calculateDefinitionUseChain();
                 liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
 
@@ -150,7 +150,7 @@ public class Main {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
-        String file = "power.txt";
+        String file = "counter.txt";
         walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 

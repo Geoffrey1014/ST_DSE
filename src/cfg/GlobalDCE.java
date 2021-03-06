@@ -22,19 +22,12 @@ public class GlobalDCE {
     public void performGlobalDeadCodeElimination() {
 //        HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = LivenessAnalysis.getLivenessAnalysisForCFG(cfg);
 
-        livenessAnalysis.livenessAnalysis2();
+        livenessAnalysis.livenessAnalysis();
         HashMap<BasicBlock, HashSet<BlockLabelPair>> deadCodeMap = livenessAnalysis.calculateDeadCode();
 
         // TODO: Make sure that you do not remove assignment stmts for variables from other scopes
         // for example, i = 5 might look like dead code but it's not if i was declared in the scope above
-        System.out.println("----before global DSE----deadCodeMap------");
-//        for (BasicBlock bb : deadCodeMap.keySet()) {
-//            HashSet<BlockLabelPair> blockLabelPairs= deadCodeMap.get(bb);
-//            for(BlockLabelPair tuple : blockLabelPairs){
-//                System.out.println(tuple);
-//            }
-//        }
-        System.out.println("----before global DSE----deadCodeMap------");
+
 
         // iterate through each basic block where there is dead code
         for (BasicBlock bb : deadCodeMap.keySet()) {

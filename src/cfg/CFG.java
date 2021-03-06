@@ -22,7 +22,7 @@ public class CFG {
     private final LlBuilder builder;
     private final ArrayList<BasicBlock> basicBlocks;
     public final LinkedHashMap<String, BasicBlock> leadersToBBMap;
-    public final LinkedList<String> orderedLeadersList;
+    public LinkedList<String> orderedLeadersList;
     public   LinkedHashMap<BasicBlock, String> blockLabels;
     private GraphViz graphViz;
     private LlSymbolTable llSymbolTable;
@@ -150,17 +150,13 @@ public class CFG {
 
 
             BasicBlock endBB = createReadOrPrintBB("End",llSymbolTable);
-            this.leadersToBBMap.put("End", endBB);
             trueLastBB.setDefaultBranch(endBB);
             endBB.addPredecessorNode(trueLastBB);
 
             if(addLoop){
-
-
                 // add read input block
                 String readInputBBLabel = "Read";
                 BasicBlock readBB = createReadOrPrintBB(readInputBBLabel, llSymbolTable);
-                this.leadersToBBMap.put(readInputBBLabel,readBB);
                 endBB.setDefaultBranch(readBB);
                 readBB.addPredecessorNode(endBB);
                 BasicBlock body = this.leadersToBBMap.get("Body");
@@ -239,6 +235,7 @@ public class CFG {
                 }
             }
         }
+//        this.orderedLeadersList = new LinkedList<>(this.leadersToBBMap.keySet());
     }
 
     private BasicBlock createEmptyBB(String label){
@@ -265,7 +262,9 @@ public class CFG {
                 bBStmtsList.put(this.builder.generateLabel(), new LlMethodCallStmt("print", args));
             }
         }
-        return new BasicBlock(bBStmtsList, builder);
+        BasicBlock bb = new BasicBlock(bBStmtsList, builder);
+        this.leadersToBBMap.put(label, bb);
+        return bb;
     }
 
     public static String getblockLeaderLabel(BasicBlock bb){
