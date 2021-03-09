@@ -8,7 +8,7 @@ public class LoopAnalysis {
     // and the corresponding value is the set of all nodes that
     // dominate the key node
     public static HashMap<BasicBlock, HashSet<BasicBlock>> getDominatorsMap(CFG cfg) {
-        HashSet<BasicBlock> allNodes = new HashSet<>(cfg.getBasicBlocks());
+        HashSet<BasicBlock> allNodesMinusRoot = new HashSet<>(cfg.getBasicBlocks());
         HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = new HashMap<>();
 
         // D[root] = {root}
@@ -21,13 +21,14 @@ public class LoopAnalysis {
         // initialize D[n] = N
         for (BasicBlock bb : cfg.getBasicBlocks()) {
             if(bb != root){
-                dominatorsMap.put(bb, new HashSet<>(allNodes));
+                dominatorsMap.put(bb, new HashSet<>(allNodesMinusRoot));
             }
 
         }
+        HashSet<BasicBlock> allNodes = new HashSet<>(allNodesMinusRoot);
 
         // N = N - {root}
-        allNodes.remove(root);
+        allNodesMinusRoot.remove(root);
 
         // while D changes do
         HashMap<BasicBlock, HashSet<BasicBlock>> oldMap;
@@ -36,7 +37,7 @@ public class LoopAnalysis {
             oldMap = new HashMap<>(dominatorsMap);
 
             // loop until convergence
-            for (BasicBlock bb : allNodes) {
+            for (BasicBlock bb : allNodesMinusRoot) {
 
                 // Intersection ( D[p] for each p in predecessors[n] )
                 HashSet<BasicBlock> dominators = new HashSet<>(allNodes);
@@ -76,29 +77,35 @@ public class LoopAnalysis {
     public static HashMap<BasicBlock, BasicBlock> getImmediateDominatorsMap(CFG cfg) {
         HashMap<BasicBlock, HashSet<BasicBlock>> strictDomMap = LoopAnalysis.getStrictDominatorsMap(cfg);
 
-        // A is in idom(B) if there is no C such that A is in sdom(C) and both A and C are in sdom(B)
-        for (BasicBlock B : strictDomMap.keySet()) {
+//       BasicBlock entry = cfg.leadersToBBMap.get("Entry");
+//       strictDomMap.remove(entry);
 
-            // we will mutate strictDomMap.get(B) (in the if-stmt below)
-            // while iterating over it so we need to make a defensive copy
-            HashSet<BasicBlock> sdom = new HashSet<>(strictDomMap.get(B));
+        HashSet<BasicBlock> oldBlocks = new HashSet<>(cfg.getBasicBlocks());
+        HashSet<BasicBlock> blocks = new HashSet<>(oldBlocks);
 
-            for (BasicBlock A : sdom) {
-
-                // we will mutate sdom while iterating over it so we need
-                // to make a defensive copy
-                HashSet<BasicBlock> sdomMinusA = new HashSet<>(sdom);
-                sdomMinusA.remove(A);
-
-                for (BasicBlock C: sdomMinusA) {
-
-                    // if A is in sdom(C) then it can't be in idom(B)
-                    if (strictDomMap.get(C).contains(A)) {
-                        strictDomMap.get(B).remove(C);
+        // find node A with only one dominator nodes i.e. idom node
+        while (true){
+            HashSet<BasicBlock> candidates = new HashSet<>();
+            for(BasicBlock bb : oldBlocks){
+                HashSet<BasicBlock> doms = strictDomMap.get(bb);
+                if(doms.size() <= 1){
+                    candidates.add(bb);
+                    blocks.remove(bb);
+                }
+            }
+            if(candidates.size() == 0) break;
+            oldBlocks = new HashSet<>(blocks);
+            // remove A's idom from other nodes' dominator nodes
+            for(BasicBlock bb : candidates){
+                if(strictDomMap.get(bb).size() == 1){
+                    BasicBlock sdomNode = strictDomMap.get(bb).iterator().next();
+                    for(BasicBlock b : oldBlocks){
+                        strictDomMap.get(b).remove(sdomNode);
                     }
                 }
             }
         }
+
 
         // each set should be a singleton except for the root node which is null
         HashMap<BasicBlock, BasicBlock> iDomMap = new HashMap<>();
@@ -118,7 +125,7 @@ public class LoopAnalysis {
 
         // initialize each set to be empty
         HashMap<BasicBlock, HashSet<BasicBlock>> nodeToDominatingSet = new HashMap<>();
-        for (BasicBlock bb : iDomMap.keySet()) {
+        for (BasicBlock bb : cfg.getBasicBlocks()) {
             nodeToDominatingSet.put(bb, new HashSet<>());
         }
 
@@ -130,19 +137,19 @@ public class LoopAnalysis {
 
         // look at each nodes children and add child.children to the nodes set
         // until it converges.
-        HashMap<BasicBlock, HashSet<BasicBlock>> old;
-        do {
-            // cache a copy to check if nodeToDominatingSet changes this iteration
-            old = new HashMap<>(nodeToDominatingSet);
-
-            for (BasicBlock bb : nodeToDominatingSet.keySet()) {
-                for (BasicBlock succ : new HashSet<>(nodeToDominatingSet.get(bb))) {
-                    for (BasicBlock deepChild : nodeToDominatingSet.get(succ)) {
-                        nodeToDominatingSet.get(bb).add(deepChild);
-                    }
-                }
-            }
-        } while (!old.equals(nodeToDominatingSet));
+//        HashMap<BasicBlock, HashSet<BasicBlock>> old;
+//        do {
+//            // cache a copy to check if nodeToDominatingSet changes this iteration
+//            old = new HashMap<>(nodeToDominatingSet);
+//
+//            for (BasicBlock bb : nodeToDominatingSet.keySet()) {
+//                for (BasicBlock succ : new HashSet<>(nodeToDominatingSet.get(bb))) {
+//                    for (BasicBlock deepChild : nodeToDominatingSet.get(succ)) {
+//                        nodeToDominatingSet.get(bb).add(deepChild);
+//                    }
+//                }
+//            }
+//        } while (!old.equals(nodeToDominatingSet));
 
         return nodeToDominatingSet;
     }

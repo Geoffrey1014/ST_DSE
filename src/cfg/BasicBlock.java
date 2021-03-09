@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 
 public class BasicBlock {
     public String name; //the first stmt's label
+    private int id;
     private LinkedHashMap<String, LlStatement> labelsToStmtsMap;
     private BasicBlock defaultBranch;
     private BasicBlock alternativeBranch;
@@ -96,5 +97,9 @@ public class BasicBlock {
     public Edge getAlterName() {
         return this.alterName;
     }
+    public void setId(int id){this.id = id;}
+    public int getId(int id){return this.id;}
+
+
 
 }

@@ -327,6 +327,7 @@ public class NewLivenessAnalysis {
         writeFile(stringBuilder.toString(),path);
         System.out.println("finish writing DUchain");
     }
+
     public static void writeFile(String content, String pathName) {
 
         try {

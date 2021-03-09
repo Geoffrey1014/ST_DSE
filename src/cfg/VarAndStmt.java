@@ -8,9 +8,9 @@ public class VarAndStmt implements Comparable<VarAndStmt> {
     public final String stmtLabel;
     // the def is of the form
     // (locationVar, statement, i, pos) which represents LlLocationVar  and LlStatement; @ instruction pos in block i
-    private final LlLocation location;
-    private final LlStatement statement;
-    private final BasicBlock block;
+    public final LlLocation location;
+    public final LlStatement statement;
+    public final BasicBlock block;
 
     public VarAndStmt(LlLocation location, LlStatement statement, BasicBlock block, String stmtLabel) {
         this.location = location;

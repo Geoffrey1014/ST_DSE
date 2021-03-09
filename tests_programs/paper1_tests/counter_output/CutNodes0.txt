@@ -1,0 +1,44 @@
+def: FLAG @ L2 @ Init
+use: FLAG @ L10 @ Body
+dominators: Body Read 
+
+def: FLAG @ L2 @ Init
+use: FLAG @ L16 @ End
+dominators: END_IF_L8 End Body Read 
+
+def: #_t0 @ L3 @ Body
+use: #_t0 @ L13 @ IF_L8
+dominators: IF_L8 
+
+def: RES @ L14 @ IF_L8
+use: RES @ L3 @ Body
+dominators: 
+
+def: RES @ L4 @ Body
+use: RES @ L3 @ Body
+dominators: 
+
+def: RES @ L1 @ Init
+use: RES @ L3 @ Body
+dominators: Body Read 
+
+def: X @ L17 @ Read
+use: X @ L6 @ Body
+dominators: Body 
+
+def: #_t2 @ L6 @ Body
+use: #_t2 @ L13 @ IF_L8
+dominators: IF_L8 
+
+def: RES @ L4 @ Body
+use: RES @ L15 @ End
+dominators: END_IF_L8 End 
+
+def: RES @ L14 @ IF_L8
+use: RES @ L15 @ End
+dominators: END_IF_L8 End 
+
+def: X @ L17 @ Read
+use: X @ L3 @ Body
+dominators: Body 
+

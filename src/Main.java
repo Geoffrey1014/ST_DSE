@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import simulation.Simulator;
 import tools.MyPrint;
+import tools.Node;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
@@ -101,28 +102,35 @@ public class Main {
                 writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
 
                 // calculateDefinitionUseChain
-                NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
-                liveAnalysis.livenessAnalysis2();
-                liveAnalysis.calculateDefinitionUseChain();
-                liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
+//                NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
+//                liveAnalysis.livenessAnalysis2();
+//                liveAnalysis.calculateDefinitionUseChain();
+//                liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
+
+                ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
+                rDAnalysis.genUseDefinitionChains();
+                writeFile(rDAnalysis.printUseDefsChains(),outPutDir + "UDChain" + cfgCounter + ".txt");
+
 
                 // Dominator writeFile
-                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getStrictDominatorsMap(cfg);
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getDominatorsMap(cfg);
                 writeFile(dominatorMapToString(cfg,dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
+                createDominatorTree(dominatorsMap);
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTree = LoopAnalysis.getNodeToDominatingMap(cfg);
+                writeFile(dominatorMapToString(cfg,dominatingTree), outPutDir + "DominatorTree" + cfgCounter + ".txt");
+
 
                 //calCutNodes
-                HashMap<VarAndStmt,HashSet<VarAndStmt>> definitionUseChain = liveAnalysis.definitionUseChain;
-                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> duChianWithDmt = new HashMap<>();
-                calCutNodes(dominatorsMap,definitionUseChain,duChianWithDmt);
+                HashMap<VarAndStmt,HashSet<VarAndStmt>> useDefsChains = rDAnalysis.useDefsChains;
+                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt = new HashMap<>();
+                calCutNodes(dominatorsMap,useDefsChains,udChianWithDmt);
+                writeCutNodesToFile(udChianWithDmt, outPutDir + "CutNodes" + cfgCounter + ".txt");
+
 
                 System.out.println("done!");
 
-//                NewLivenessAnalysis livenessAnalysis = new NewLivenessAnalysis(cfg);
-//                livenessAnalysis.livenessAnalysis2();
-//                livenessAnalysis.calculateDefinitionUseChain();
-//                livenessAnalysis.writeDefUseChainToFile(outPutDir + "DUChain" + cfgCounter + ".txt");
                 System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg,duChianWithDmt);
+                Simulator simulator = new Simulator(cfg,udChianWithDmt);
                 simulator.execute();
 
                 System.out.println("CF------------------------");
@@ -186,16 +194,37 @@ public class Main {
         }
     }
 
+    public static void createDominatorTree(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
+        HashMap<String, Node> label2Node = new HashMap<>();
+        for(BasicBlock bb: dominatorsMap.keySet()){
+            Node curNode = label2Node.get(bb.name);
+            if(curNode == null){
+                curNode = new Node(bb);
+                label2Node.put(bb.name, curNode );
+            }
+            for(BasicBlock b: dominatorsMap.get(bb)){
+                Node dmNode = label2Node.get(bb.name);
+                if(dmNode == null){
+                    dmNode = new Node(bb);
+                    label2Node.put(bb.name, dmNode );
+                }
+
+            }
+
+
+        }
+    }
     public static void calCutNodes(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap,
-                                   HashMap<VarAndStmt,HashSet<VarAndStmt>>definitionUseChain,
-                                   HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> duChianWithDmt){
-        for (VarAndStmt def : definitionUseChain.keySet()) {
-            duChianWithDmt.put(def, new HashSet<>());
-            for (VarAndStmt use : definitionUseChain.get(def)) {
-                HashSet<BasicBlock> defDmt = new HashSet<>(dominatorsMap.get(def.getBlock()));
+                                   HashMap<VarAndStmt,HashSet<VarAndStmt>>udChain,
+                                   HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt){
+
+        for (VarAndStmt use : udChain.keySet()) {
+            udChianWithDmt.put(use, new HashSet<>());
+            for (VarAndStmt def : udChain.get(use)) {
                 HashSet<BasicBlock> useDmt = new HashSet<>(dominatorsMap.get(use.getBlock()));
+                HashSet<BasicBlock> defDmt = new HashSet<>(dominatorsMap.get(def.getBlock()));
                 useDmt.removeAll(defDmt);
-                duChianWithDmt.get(def).add(new Tuple2<>(use, useDmt));
+                udChianWithDmt.get(use).add(new Tuple2<>(def, useDmt));
             }
         }
     }
@@ -231,6 +260,25 @@ public class Main {
 
 
         System.out.println("to Graphviz finish!");
+    }
+    public static void writeCutNodesToFile(HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt, String path){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(VarAndStmt use: udChianWithDmt.keySet()){
+            HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>> defAndDomsSet = udChianWithDmt.get(use);
+            for(Tuple2<VarAndStmt,HashSet<BasicBlock>> defAndDoms : defAndDomsSet){
+                VarAndStmt def = defAndDoms.a1;
+                HashSet<BasicBlock> doms = defAndDoms.a2;
+                stringBuilder.append("def: ").append(def.location).append(" @ ").append(def.stmtLabel).append(" @ ").append(def.block.name).append("\n");
+                stringBuilder.append("use: ").append(use.location).append(" @ ").append(use.stmtLabel).append(" @ ").append(use.block.name).append("\n");
+
+                stringBuilder.append("dominators: ");
+                for(BasicBlock bb: doms){
+                    stringBuilder.append(bb.name).append(" ");
+                }
+                stringBuilder.append("\n\n");
+            }
+        }
+        writeFile(stringBuilder.toString(),path);
     }
 
 }

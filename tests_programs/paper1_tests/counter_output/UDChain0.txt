@@ -1,0 +1,24 @@
+use: FLAG @ L10 @ Body
+defs: L2 @ Init, 
+
+use: FLAG @ L16 @ End
+defs: L2 @ Init, 
+
+use: #_t0 @ L13 @ IF_L8
+defs: L3 @ Body, 
+
+use: RES @ L3 @ Body
+defs: L1 @ Init, L4 @ Body, L14 @ IF_L8, 
+
+use: X @ L6 @ Body
+defs: L17 @ Read, 
+
+use: #_t2 @ L13 @ IF_L8
+defs: L6 @ Body, 
+
+use: RES @ L15 @ End
+defs: L4 @ Body, L14 @ IF_L8, 
+
+use: X @ L3 @ Body
+defs: L17 @ Read, 
+

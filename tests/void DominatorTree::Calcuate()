@@ -1,0 +1,75 @@
+void DominatorTree::Calcuate()
+{
+	if (ReversePostOrder.size() == 0)
+		getReversePostOrder();
+
+	// iterate
+	bool changed = true;
+	RootNode->setIDom(RootNode);
+
+	while (changed)
+	{
+		changed = false;
+		for (auto CurNode : ReversePostOrder)
+		{
+			if (CurNode == RootNode)
+				continue;
+
+			// Get the predecessors of current node.
+			auto PredDomNodeFromCFG = getDomNodePredsFromCFG(CurNode);
+
+			// (1) Find the first non-nullptr predecessor.
+			auto getAvailiablePred = 
+				[this, &PredDomNodeFromCFG]() -> DomTreeNodePtr
+			{				
+				// 从Preds中找到一个IDom不为空的predecessor.
+				for (auto pred : PredDomNodeFromCFG)
+				{
+					if (pred->getIDom() != nullptr)
+						return pred;
+				}
+				assert(0 && "Unreachable code.");
+				return nullptr;
+			};
+			
+			auto AvailiablePred = getAvailiablePred();
+			DomTreeNodePtr NewIDom = AvailiablePred;
+
+			// (2) Traverse other predecessors.
+			for (auto pred : PredDomNodeFromCFG)
+			{
+				if (pred == NewIDom)
+					continue;
+				if (pred->getIDom() != nullptr)
+					NewIDom = Intersect(NewIDom, pred);
+			}
+
+			// (3) Judge the IDom is changed.
+			if (CurNode->getIDom() != NewIDom)
+			{
+				CurNode->setIDom(NewIDom);
+				changed = false;
+			}
+		}
+
+	}
+}
+
+void DominatorTree::ComputeDomFrontier()
+{
+	DomTreeNodePtr runner = nullptr;
+	// Just compute the join points.
+	for (auto Node : JoinNodes)
+	{
+		auto preds = getDomNodePredsFromCFG(Node);
+		for (auto pred : preds)
+		{
+			runner = pred;
+			while (runner != Node->getIDom())
+			{
+				InsertFrontier(runner, Node);
+				runner = runner->getIDom();
+			}
+		}
+	}
+}
