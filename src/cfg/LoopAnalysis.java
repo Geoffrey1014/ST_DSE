@@ -1,15 +1,25 @@
 package cfg;
 
+import tools.Node;
+
 import java.util.*;
 
 public class LoopAnalysis {
+    public HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = null;
+    public CFG cfg;
+    private int id;
+    private HashMap<String, Node> label2Node;
+
+    public LoopAnalysis(CFG cfg){
+        this.cfg = cfg;
+    }
 
     // returns a map where there is a key for each node in the CFG
     // and the corresponding value is the set of all nodes that
     // dominate the key node
-    public static HashMap<BasicBlock, HashSet<BasicBlock>> getDominatorsMap(CFG cfg) {
+    public HashMap<BasicBlock, HashSet<BasicBlock>> getDominatorsMap() {
         HashSet<BasicBlock> allNodesMinusRoot = new HashSet<>(cfg.getBasicBlocks());
-        HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = new HashMap<>();
+        dominatorsMap = new HashMap<>();
 
         // D[root] = {root}
 //        BasicBlock root = cfg.getRootBasicBlock();
@@ -58,9 +68,7 @@ public class LoopAnalysis {
     // and the corresponding value is the set of all nodes that
     // STRICTLY dominate the key node (i.e. the set doesn't
     // contain the key node)
-    public static HashMap<BasicBlock, HashSet<BasicBlock>> getStrictDominatorsMap(CFG cfg) {
-        HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getDominatorsMap(cfg);
-
+    public HashMap<BasicBlock, HashSet<BasicBlock>> getStrictDominatorsMap() {
         // loop through the dominators map and remove the
         // BasicBlock from its dominators set
         for (BasicBlock bb : dominatorsMap.keySet()) {
@@ -74,11 +82,8 @@ public class LoopAnalysis {
     // and the corresponding value is the set of all nodes that
     // IMMEDIATELY dominate the key node (i.e. the set contains
     // exactly 1 element)
-    public static HashMap<BasicBlock, BasicBlock> getImmediateDominatorsMap(CFG cfg) {
-        HashMap<BasicBlock, HashSet<BasicBlock>> strictDomMap = LoopAnalysis.getStrictDominatorsMap(cfg);
-
-//       BasicBlock entry = cfg.leadersToBBMap.get("Entry");
-//       strictDomMap.remove(entry);
+    public HashMap<BasicBlock, BasicBlock> getImmediateDominatorsMap() {
+        HashMap<BasicBlock, HashSet<BasicBlock>> strictDomMap = getStrictDominatorsMap();
 
         HashSet<BasicBlock> oldBlocks = new HashSet<>(cfg.getBasicBlocks());
         HashSet<BasicBlock> blocks = new HashSet<>(oldBlocks);
@@ -106,7 +111,6 @@ public class LoopAnalysis {
             }
         }
 
-
         // each set should be a singleton except for the root node which is null
         HashMap<BasicBlock, BasicBlock> iDomMap = new HashMap<>();
         for (BasicBlock bb : strictDomMap.keySet()) {
@@ -120,8 +124,8 @@ public class LoopAnalysis {
 
     // returns a dictionary where each node points to the set of
     // nodes that are its children in the dominator tree
-    public static HashMap<BasicBlock, HashSet<BasicBlock>> getNodeToDominatingMap(CFG cfg) {
-        HashMap<BasicBlock, BasicBlock> iDomMap = getImmediateDominatorsMap(cfg);
+    public HashMap<BasicBlock, HashSet<BasicBlock>> getDominatingTreeMap() {
+        HashMap<BasicBlock, BasicBlock> iDomMap = getImmediateDominatorsMap();
 
         // initialize each set to be empty
         HashMap<BasicBlock, HashSet<BasicBlock>> nodeToDominatingSet = new HashMap<>();
@@ -135,28 +139,51 @@ public class LoopAnalysis {
             nodeToDominatingSet.get(iDom).add(bb);
         }
 
-        // look at each nodes children and add child.children to the nodes set
-        // until it converges.
-//        HashMap<BasicBlock, HashSet<BasicBlock>> old;
-//        do {
-//            // cache a copy to check if nodeToDominatingSet changes this iteration
-//            old = new HashMap<>(nodeToDominatingSet);
-//
-//            for (BasicBlock bb : nodeToDominatingSet.keySet()) {
-//                for (BasicBlock succ : new HashSet<>(nodeToDominatingSet.get(bb))) {
-//                    for (BasicBlock deepChild : nodeToDominatingSet.get(succ)) {
-//                        nodeToDominatingSet.get(bb).add(deepChild);
-//                    }
-//                }
-//            }
-//        } while (!old.equals(nodeToDominatingSet));
-
         return nodeToDominatingSet;
     }
 
+    public Node createDominatorTree(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
+        label2Node = new HashMap<>();
+        for(BasicBlock bb: dominatorsMap.keySet()){
+            Node curNode = new Node(bb);
+            label2Node.put(bb.name, curNode );
+        }
+        for(BasicBlock bb: dominatorsMap.keySet()){
+            Node curNode = label2Node.get(bb.name);
+            for(BasicBlock b: dominatorsMap.get(bb)){
+                Node dmNode = label2Node.get(b.name);
+                curNode.addchild(dmNode);
+            }
+        }
+        Node root = label2Node.get("Entry");
+        this.id = 0;
+        dfs(root);
+        return root;
+    }
+    public void dfs(Node root){
+        if(root == null) return;
+        root.setId(this.id);
+        this.id += 1;
+        for(Node node : root.getChildrenNodes()){
+            dfs(node);
+        }
+    }
+
+    public String toGraphviz(){
+        GraphViz graphViz = new GraphViz(); // 这里重新new一个，会不会太浪费资源？？
+        for (Node node : this.label2Node.values()) {
+            String srcNode = node.toString();
+            graphViz.nodes.add(srcNode);
+            for(Node child : node.getChildrenNodes()){
+                graphViz.edges.map(srcNode,child.toString());
+            }
+        }
+        return graphViz.toDOT2();
+    }
+
     // returns the set of all the back edges in the CFG
-    public static HashSet<BackEdge> getBackEdges(CFG cfg) {
-        HashMap<BasicBlock, HashSet<BasicBlock>> dominatingMap = getNodeToDominatingMap(cfg);
+    public HashSet<BackEdge> getBackEdges() {
+        HashMap<BasicBlock, HashSet<BasicBlock>> dominatingMap = getDominatingTreeMap();
         HashSet<BackEdge> backEdges = new HashSet<>();
 
         // find each back edge that exists in the CFG
@@ -176,8 +203,8 @@ public class LoopAnalysis {
     // returns a map where the key is a loop header and the value
     // is the merged loop of all the natural loops that stem from
     // that header
-    public static HashMap<BasicBlock, Loop> getHeadersToLoopMap(CFG cfg) {
-        HashSet<BackEdge> backEdges = getBackEdges(cfg);
+    public HashMap<BasicBlock, Loop> getHeadersToLoopMap(CFG cfg) {
+        HashSet<BackEdge> backEdges = getBackEdges();
         HashMap<BasicBlock, HashSet<Loop>> headersToLoopsSet = new HashMap<>();
 
         // Initialization: header --> empty set

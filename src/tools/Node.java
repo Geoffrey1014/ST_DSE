@@ -8,18 +8,30 @@ import java.util.HashSet;
 public class Node {
     private BasicBlock basicBlock;
     private String name;
-    private HashSet<Node> nextNodes;
+    private HashSet<Node> childrenNodes;
     private int id;
 
-    public Node(BasicBlock basicBlock){
+    public Node(BasicBlock basicBlock) {
         this.basicBlock = basicBlock;
         this.name = basicBlock.name;
+        this.childrenNodes = new HashSet<>();
     }
-    public void addNextNode(Node node){this.nextNodes.add(node);}
-    public void setId(int id){this.id = id;}
+
+    public HashSet<Node> getChildrenNodes() {
+        return this.childrenNodes;
+    }
+
+    public void addchild(Node node) {
+        this.childrenNodes.add(node);
+    }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+        this.basicBlock.setId(id);
     }
 
     public String getName() {
@@ -30,5 +42,8 @@ public class Node {
         this.name = name;
     }
 
-
+    @Override
+    public String toString(){
+        return this.id +" "+ this.name;
+    }
 }

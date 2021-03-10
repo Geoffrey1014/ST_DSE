@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import simulation.Simulator;
 import tools.MyPrint;
-import tools.Node;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
@@ -113,11 +112,15 @@ public class Main {
 
 
                 // Dominator writeFile
-                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = LoopAnalysis.getDominatorsMap(cfg);
+                LoopAnalysis loopAnalysis = new LoopAnalysis(cfg);
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = loopAnalysis.getDominatorsMap();
                 writeFile(dominatorMapToString(cfg,dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
-                createDominatorTree(dominatorsMap);
-                HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTree = LoopAnalysis.getNodeToDominatingMap(cfg);
-                writeFile(dominatorMapToString(cfg,dominatingTree), outPutDir + "DominatorTree" + cfgCounter + ".txt");
+
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTreeMap = loopAnalysis.getDominatingTreeMap();
+                writeFile(dominatorMapToString(cfg,dominatingTreeMap), outPutDir + "DominatorTree" + cfgCounter + ".txt");
+                loopAnalysis.createDominatorTree(dominatingTreeMap);
+                if (updateFig) genGraphViz("DomTree_" + cfgCounter, loopAnalysis, outPutDir);
+
 
 
                 //calCutNodes
@@ -194,26 +197,7 @@ public class Main {
         }
     }
 
-    public static void createDominatorTree(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
-        HashMap<String, Node> label2Node = new HashMap<>();
-        for(BasicBlock bb: dominatorsMap.keySet()){
-            Node curNode = label2Node.get(bb.name);
-            if(curNode == null){
-                curNode = new Node(bb);
-                label2Node.put(bb.name, curNode );
-            }
-            for(BasicBlock b: dominatorsMap.get(bb)){
-                Node dmNode = label2Node.get(bb.name);
-                if(dmNode == null){
-                    dmNode = new Node(bb);
-                    label2Node.put(bb.name, dmNode );
-                }
 
-            }
-
-
-        }
-    }
     public static void calCutNodes(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap,
                                    HashMap<VarAndStmt,HashSet<VarAndStmt>>udChain,
                                    HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt){
@@ -250,6 +234,26 @@ public class Main {
 
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
             out.write(cfg.toGraphviz()); // \r\n即为换行
+            out.flush(); // 把缓存区内容压入文件
+            out.close(); // 最后记得关闭文件
+            Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_"+cfgCounter+".pdf").waitFor();
+        }
+        catch (IOException | InterruptedException e) {
+            System.err.println("There was an error:\n" + e);
+        }
+
+
+        System.out.println("to Graphviz finish!");
+    }
+    public static void genGraphViz(String cfgCounter, LoopAnalysis loopAyls,String outPutDir )  {
+        String graphVizFilename = outPutDir + "Graph_"+cfgCounter+".dot";
+        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
+        try{
+            writename.createNewFile();
+
+            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+            String s = loopAyls.toGraphviz();
+            out.write(s); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件
             Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_"+cfgCounter+".pdf").waitFor();

@@ -1,0 +1,15 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=circle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "3 Read"; "2 Init"; "0 Entry"; "6 End"; "8 IF_L8"; "1 counter"; "5 END_IF_L8"; "4 Body"; "7 Exit"; 
+  "3 Read" -> "4 Body";
+  "2 Init" -> "3 Read";
+  "0 Entry" -> "1 counter";
+  "6 End" -> "7 Exit";
+  "1 counter" -> "2 Init";
+  "5 END_IF_L8" -> "6 End";
+  "4 Body" -> "5 END_IF_L8";
+  "4 Body" -> "8 IF_L8";
+}
