@@ -1,0 +1,26 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=circle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "5 ELSE_L6"; "15 ELSE_L42"; "8 WHILE_L24"; "9 END_WHILE_L24"; "10 END_IF_L36"; "19 IF_L5"; "7 END_IF_L15"; "3 Read"; "6 END_IF_L5"; "0 Entry"; "2 Init"; "13 IF_L36"; "16 END_IF_L41"; "18 IF_L15"; "11 End"; "1 power"; "17 LOOP_L25"; "4 Body"; "14 IF_L41"; "12 Exit"; 
+  "8 WHILE_L24" -> "9 END_WHILE_L24";
+  "8 WHILE_L24" -> "17 LOOP_L25";
+  "9 END_WHILE_L24" -> "10 END_IF_L36";
+  "9 END_WHILE_L24" -> "13 IF_L36";
+  "10 END_IF_L36" -> "11 End";
+  "7 END_IF_L15" -> "8 WHILE_L24";
+  "3 Read" -> "4 Body";
+  "6 END_IF_L5" -> "7 END_IF_L15";
+  "6 END_IF_L5" -> "18 IF_L15";
+  "0 Entry" -> "1 power";
+  "2 Init" -> "3 Read";
+  "13 IF_L36" -> "14 IF_L41";
+  "13 IF_L36" -> "15 ELSE_L42";
+  "13 IF_L36" -> "16 END_IF_L41";
+  "11 End" -> "12 Exit";
+  "1 power" -> "2 Init";
+  "4 Body" -> "5 ELSE_L6";
+  "4 Body" -> "6 END_IF_L5";
+  "4 Body" -> "19 IF_L5";
+}

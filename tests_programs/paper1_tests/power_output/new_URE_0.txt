@@ -64,8 +64,8 @@ CFG:
             L54 :  print(FLAG,)
             L55 :  print(EXP,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
             L56 :  Y = read()
             L57 :  X = read()
+
+           Exit :  EMPTY_STATEMENT

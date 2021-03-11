@@ -37,7 +37,7 @@ public class VarAndStmt implements Comparable<VarAndStmt> {
 
     @Override
     public String toString() {
-        return this.location.toString()+ " @ "+ this.stmtLabel + ": " + this.statement.toString() +" @ "+this.block.name;
+        return this.location.toString()+ " @ "+ this.stmtLabel + ": " + this.statement.toString() +" @ "+ this.block.getId()+"-- "+this.block.name;
     }
 
     @Override

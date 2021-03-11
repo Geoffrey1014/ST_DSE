@@ -24,7 +24,6 @@ public class CFG {
     public final LinkedHashMap<String, BasicBlock> leadersToBBMap;
     public LinkedList<String> orderedLeadersList;
     public   LinkedHashMap<BasicBlock, String> blockLabels;
-    private GraphViz graphViz;
     private LlSymbolTable llSymbolTable;
 
     public CFG(LlBuilder builder, LlSymbolTable llSymbolTable, Boolean addLoop) {
@@ -281,30 +280,40 @@ public class CFG {
         return this.basicBlocks.get(0);
     }
 
-    public String toGraphviz(){
-        //  TODO: move this function out of CFG class
-        this.graphViz  = new GraphViz(); // 这里重新new一个，会不会太浪费资源？？
-        for (BasicBlock bb : this.basicBlocks) {
-//            String label = getblockLeaderLabel(bb);
-            String label = bb.toString();
-            this.graphViz.nodes.add(label);
-            if (bb.getDefaultBranch() != null){
-//                this.graphViz.edges.map(label, getblockLeaderLabel(bb.getDefaultBranch()));
-                this.graphViz.edges.map(label,bb.getDefaultBranch().toString() +"---default");
-            }
-            if(bb.getAlternativeBranch() != null){
-//                this.graphViz.edges.map(label,getblockLeaderLabel(bb.getAlternativeBranch()));
-                this.graphViz.edges.map(label,bb.getAlternativeBranch().toString()+ "---alter");
+    public HashSet<LlLocation> getInputVars(){
+        HashSet<LlLocation> inputVars = new HashSet<>();
+        BasicBlock readBB = this.leadersToBBMap.get("Read");
+        for(LlStatement llStatement: readBB.getStmtsList()){
+            if(llStatement instanceof LlMethodCallStmt){
+                LlMethodCallStmt llMethodCallStmt = (LlMethodCallStmt) llStatement;
+                inputVars.add(llMethodCallStmt.getReturnLocation());
             }
         }
-        return this.graphViz.toDOT();
+        return inputVars;
+    }
+
+    public String toGraphviz(){
+        GraphViz graphViz = new GraphViz();
+        for (BasicBlock bb : this.basicBlocks) {
+            String label = bb.toString() + bb.stmtsString();
+            graphViz.nodes.add(label);
+            if (bb.getDefaultBranch() != null){
+                BasicBlock b = bb.getDefaultBranch();
+                graphViz.edges.map(label,b.toString() + b.stmtsString() +"---default");
+            }
+            if(bb.getAlternativeBranch() != null){
+                BasicBlock b = bb.getAlternativeBranch();
+                graphViz.edges.map(label,b.toString()+ b.stmtsString() + "---alter");
+            }
+        }
+        return graphViz.toDOT();
     }
 
     @Override
     public String toString() {
         String str = "CFG:\n";
         for (BasicBlock bb : this.basicBlocks) {
-            str += bb.toString() + "\n";
+            str += bb.stmtsString() + "\n";
         }
         str = str.substring(0, str.length() - 1);
         return str;

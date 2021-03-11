@@ -23,6 +23,7 @@ public class BasicBlock {
         this.labelsToStmtsMap = new LinkedHashMap<>(labelsToStmtsMap);
         this.builder = builder;
         this.predecessors = new HashSet<>();
+        this.id = -1;
     }
 
     public LinkedHashMap<String, LlStatement> getLabelsToStmtsMap() {
@@ -60,8 +61,16 @@ public class BasicBlock {
 
     @Override
     public String toString() {
+        String str = "";
+        if(this.id >= 0){
+            str = str + this.id + " ";
+        }
+        str += this.name + "\n";
+        return str.toString();
+    }
+
+    public String stmtsString() {
         StringBuilder str = new StringBuilder();
-//        str += "++++++ new block +++++++\n";
         for(String label : this.labelsToStmtsMap.keySet()){
             str.append(String.format("%1$15s :  ", label));
             str.append(this.labelsToStmtsMap.get(label)).append("\n");
@@ -98,7 +107,7 @@ public class BasicBlock {
         return this.alterName;
     }
     public void setId(int id){this.id = id;}
-    public int getId(int id){return this.id;}
+    public int getId(){return this.id;}
 
 
 

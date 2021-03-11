@@ -11,7 +11,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import simulation.Simulator;
+import simulation.DFT;
 import tools.MyPrint;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
@@ -94,11 +94,22 @@ public class Main {
                 System.out.println("\nafterCP---------------------\n");
                 if (updateFig) genGraphViz("CP_" + cfgCounter, cfg, outPutDir);
 
+                // Dominator
+                LoopAnalysis loopAnalysis = new LoopAnalysis(cfg);
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = loopAnalysis.getDominatorsMap();
+                writeFile(dominatorMapToString(cfg,dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
+
+                // DominatorTree
+                HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTreeMap = loopAnalysis.getDominatingTreeMap();
+                writeFile(dominatorMapToString(cfg,dominatingTreeMap), outPutDir + "DominatorTree" + cfgCounter + ".txt");
+                loopAnalysis.createDominatorTree(dominatingTreeMap);
+                if (updateFig) genGraphViz("DomTree_" + cfgCounter, loopAnalysis, outPutDir);
+
                 GlobalDCE globalDCE = new GlobalDCE(cfg);
                 globalDCE.performGlobalDeadCodeElimination();
                 System.out.println("\nafterDSE---------------------\n");
-                if (updateFig) genGraphViz("DSE_" + cfgCounter, cfg, outPutDir);
                 writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
+                if (updateFig) genGraphViz("DSE_" + cfgCounter, cfg, outPutDir);
 
                 // calculateDefinitionUseChain
 //                NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
@@ -106,20 +117,10 @@ public class Main {
 //                liveAnalysis.calculateDefinitionUseChain();
 //                liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
 
+                //UDChain
                 ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
                 rDAnalysis.genUseDefinitionChains();
                 writeFile(rDAnalysis.printUseDefsChains(),outPutDir + "UDChain" + cfgCounter + ".txt");
-
-
-                // Dominator writeFile
-                LoopAnalysis loopAnalysis = new LoopAnalysis(cfg);
-                HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = loopAnalysis.getDominatorsMap();
-                writeFile(dominatorMapToString(cfg,dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
-
-                HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTreeMap = loopAnalysis.getDominatingTreeMap();
-                writeFile(dominatorMapToString(cfg,dominatingTreeMap), outPutDir + "DominatorTree" + cfgCounter + ".txt");
-                loopAnalysis.createDominatorTree(dominatingTreeMap);
-                if (updateFig) genGraphViz("DomTree_" + cfgCounter, loopAnalysis, outPutDir);
 
 
 
@@ -129,12 +130,13 @@ public class Main {
                 calCutNodes(dominatorsMap,useDefsChains,udChianWithDmt);
                 writeCutNodesToFile(udChianWithDmt, outPutDir + "CutNodes" + cfgCounter + ".txt");
 
+                DFT dft = new DFT(cfg,udChianWithDmt);
+                System.out.println("data flow testing!----------------");
+                dft.dataFlowTesting();
 
-                System.out.println("done!");
 
-                System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg,udChianWithDmt);
-                simulator.execute();
+//                System.out.println("simulator.execute();------------");
+//                simulator.execute();
 
                 System.out.println("CF------------------------");
                 GlobalCF.performGlobalCodeFolding(cfg);
@@ -161,7 +163,8 @@ public class Main {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
-        String file = "counter.txt";
+        String file = "power.txt";
+//        String file = "counter.txt";
         walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
@@ -217,7 +220,7 @@ public class Main {
         System.out.println("dominatorsMap writing------------");
         StringBuilder stringBuilder = new StringBuilder();
         for (BasicBlock bb : cfg.getBasicBlocks()) {
-            stringBuilder.append("Node: "+bb.name).append(" :\n");
+            stringBuilder.append("Node: ").append(bb.name).append(" :\n");
             for (BasicBlock b : dominatorsMap.get(bb)) {
                 stringBuilder.append(b.name).append(", ");
             }

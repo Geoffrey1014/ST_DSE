@@ -71,11 +71,14 @@ public class LoopAnalysis {
     public HashMap<BasicBlock, HashSet<BasicBlock>> getStrictDominatorsMap() {
         // loop through the dominators map and remove the
         // BasicBlock from its dominators set
-        for (BasicBlock bb : dominatorsMap.keySet()) {
-            dominatorsMap.get(bb).remove(bb);
+        HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMapCopy = new HashMap<>(dominatorsMap);
+        for (BasicBlock bb : dominatorsMapCopy.keySet()) {
+            HashSet<BasicBlock> domsCopy = new HashSet<>(dominatorsMap.get(bb));
+            domsCopy.remove(bb);
+            dominatorsMapCopy.put(bb, domsCopy);
         }
 
-        return dominatorsMap;
+        return dominatorsMapCopy;
     }
 
     // returns a map where there is a key for each node in the CFG
@@ -170,7 +173,7 @@ public class LoopAnalysis {
     }
 
     public String toGraphviz(){
-        GraphViz graphViz = new GraphViz(); // 这里重新new一个，会不会太浪费资源？？
+        GraphViz graphViz = new GraphViz();
         for (Node node : this.label2Node.values()) {
             String srcNode = node.toString();
             graphViz.nodes.add(srcNode);
