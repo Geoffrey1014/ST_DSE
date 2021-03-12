@@ -1,3 +1,5 @@
+package parser;
+
 import grammar.gen.STParser;
 import grammar.gen.STParserBaseListener;
 import ir.Arg.IrArg;

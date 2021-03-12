@@ -9,6 +9,7 @@ import ll.assignStmt.LlAssignStmtRegular;
 import ll.assignStmt.LlAssignStmtUnaryOp;
 import ll.jump.LlJumpConditional;
 import ll.location.LlLocation;
+import tools.Tuple2;
 
 import java.util.*;
 
@@ -54,21 +55,6 @@ public class ReachingDefinitionAnalysis {
     private HashMap<LlLocation, HashSet<cfg.VarAndStmt>> universalMap;
     private CFG cfg;
 
-    public String printUseDefsChains(){
-        StringBuilder stringBuilder = new StringBuilder();
-        for(VarAndStmt useAndStmt : useDefsChains.keySet()){
-            stringBuilder.append("use: ").append(useAndStmt.location.toString()).append(" @ ")
-                    .append(useAndStmt.stmtLabel).append(" @ ").append(useAndStmt.block.name);
-            stringBuilder.append("\ndefs: ");
-            HashSet<cfg.VarAndStmt> defStmts = useDefsChains.get(useAndStmt);
-            for(cfg.VarAndStmt defStmt : defStmts){
-                stringBuilder.append(defStmt.stmtLabel + " @ " + defStmt.block.name + ", ");
-            }
-            stringBuilder.append("\n\n");
-        }
-        return stringBuilder.toString();
-    }
-
     public ReachingDefinitionAnalysis(CFG cfg) {
         this.cfg = cfg;
         ArrayList<BasicBlock> bbList = cfg.getBasicBlocks();
@@ -89,7 +75,7 @@ public class ReachingDefinitionAnalysis {
         }
 
         ArrayList<BasicBlock> activeNodes = new ArrayList<>(bbList);
-        BasicBlock entry = activeNodes.get(activeNodes.size()-4);
+        BasicBlock entry = activeNodes.get(activeNodes.size() - 4);
 
         // IN[Entry] = emptyset;
         this.defsReachIN.put(entry, new HashSet<>());
@@ -98,7 +84,7 @@ public class ReachingDefinitionAnalysis {
         this.defsReachOUT.put(entry, GEN(entry));
 
         // Changed = N - {Entry};
-        activeNodes.remove(activeNodes.size()-4); // remove the entry since it was accounted for
+        activeNodes.remove(activeNodes.size() - 4); // remove the entry since it was accounted for
 
         while (activeNodes.size() > 0) {
 
@@ -137,6 +123,36 @@ public class ReachingDefinitionAnalysis {
                 }
             }
         }
+    }
+
+    public String printUseDefsChains() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (VarAndStmt useAndStmt : useDefsChains.keySet()) {
+            stringBuilder.append("use: ").append(useAndStmt.location.toString()).append(" @ ")
+                    .append(useAndStmt.stmtLabel).append(" @ ").append(useAndStmt.block.name);
+            stringBuilder.append("\ndefs: ");
+            HashSet<cfg.VarAndStmt> defStmts = useDefsChains.get(useAndStmt);
+            for (cfg.VarAndStmt defStmt : defStmts) {
+                stringBuilder.append(defStmt.stmtLabel + " @ " + defStmt.block.name + ", ");
+            }
+            stringBuilder.append("\n\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    public HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> calCutNodes(
+            HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap) {
+        HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = new HashMap<>();
+        for (VarAndStmt use : useDefsChains.keySet()) {
+            udChianWithDmt.put(use, new HashSet<>());
+            for (VarAndStmt def : useDefsChains.get(use)) {
+                HashSet<BasicBlock> useDmt = new HashSet<>(dominatorsMap.get(use.getBlock()));
+                HashSet<BasicBlock> defDmt = new HashSet<>(dominatorsMap.get(def.getBlock()));
+                useDmt.removeAll(defDmt);
+                udChianWithDmt.get(use).add(new Tuple2<>(def, useDmt));
+            }
+        }
+        return udChianWithDmt;
     }
 
     public void genUseDefinitionChains() {
@@ -186,7 +202,7 @@ public class ReachingDefinitionAnalysis {
                     createUseDefChainsForLocationUsage(right, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                 }
                 // LlJumpConditional
-                else if(stmt instanceof LlJumpConditional){
+                else if (stmt instanceof LlJumpConditional) {
                     LlComponent condition = ((LlJumpConditional) stmt).getCondition();
                     createUseDefChainsForLocationUsage(condition, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                 }
@@ -199,19 +215,17 @@ public class ReachingDefinitionAnalysis {
                         createUseDefChainsForLocationUsage(arg, stmt, bb, label, lastDefInBlock, curDefsReachINMap);
                     }
                 }
-                if(curStmtLeftValue == null){
+                if (curStmtLeftValue == null) {
 //                    System.out.println("----no curStmtLeftValue----");
-                }
-                else{
-                    curStmtDef = new cfg.VarAndStmt(curStmtLeftValue,stmt,bb,label);
+                } else {
+                    curStmtDef = new cfg.VarAndStmt(curStmtLeftValue, stmt, bb, label);
                     // 3) define the left value
-                    lastDefInBlock.put(curStmtLeftValue,curStmtDef);
+                    lastDefInBlock.put(curStmtLeftValue, curStmtDef);
                 }
 
             }
         }
     }
-
 
 
     private void createUseDefChainsForLocationUsage(LlComponent operand, LlStatement stmt, BasicBlock bb, String label,
@@ -227,11 +241,10 @@ public class ReachingDefinitionAnalysis {
             } else {
                 // 2) the used var is not defined in front of this BB
                 HashSet<cfg.VarAndStmt> defStmts = curDefsReachINMap.get(locationUsage);
-                if(defStmts == null){
+                if (defStmts == null) {
                     System.err.println("no definition for " + locationUsage.toString() + " @ " + label);
-                }
-                else{
-                    for (cfg.VarAndStmt defStmt : defStmts){
+                } else {
+                    for (cfg.VarAndStmt defStmt : defStmts) {
                         addUseDefToUseDefChains(useAndStmt, defStmt);
                     }
                 }
@@ -374,8 +387,6 @@ public class ReachingDefinitionAnalysis {
         this.bb2Kills.put(bb, killedDefStmtCandidates);
         return killedDefStmtCandidates;
     }
-
-
 
 
 }

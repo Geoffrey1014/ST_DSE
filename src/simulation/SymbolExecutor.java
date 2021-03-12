@@ -2,10 +2,7 @@ package simulation;
 
 import cfg.BasicBlock;
 import cfg.CFG;
-import com.microsoft.z3.Context;
-import com.microsoft.z3.Expr;
-import com.microsoft.z3.Solver;
-import com.microsoft.z3.Status;
+import com.microsoft.z3.*;
 import ll.LlComponent;
 import ll.LlEmptyStmt;
 import ll.LlMethodCallStmt;
@@ -37,7 +34,7 @@ public class SymbolExecutor {
         this.ctx = new Context(config);
         this.solver = this.ctx.mkSolver();
         // get input var
-        this.inputVars = new HashSet<>();
+        this.inputVars = cfg.getInputVars();
 
 
     }
@@ -45,7 +42,7 @@ public class SymbolExecutor {
     public LinkedList<HashMap<LlLocation,ValueOfDiffType>> symExe(List<String> route, List<Tuple2<Integer,Boolean>> branches){
         // TODO  需要过滤算法，去除route中不必要的分支
         // TODO 把函数整理一下
-        // TODO 需要拆分函数功能
+        // TODO 需要拆分函数功能, 这个函数是有问题的。 branches 的数字编码可能错位了
         LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs = new LinkedList<>();
         mkInputSymbolic(ctx);
         SymLlStatementExeutor symLlStatementExeutor = new SymLlStatementExeutor(this.ctx);
@@ -107,6 +104,7 @@ public class SymbolExecutor {
         this.solver.add(ctx.mkEq(conditionValue,ctx.mkBool(branchChoice)));
 
         if(this.solver.check().equals(Status.SATISFIABLE)) {
+            System.out.println("\n"+Status.SATISFIABLE);
             for (LlLocation location : this.inputVars) {
                 Expr locationExpr = symMemory.get(location);
                 String locationValue = this.solver.getModel().evaluate(locationExpr, true).toString();
@@ -126,23 +124,18 @@ public class SymbolExecutor {
     }
 
     public void putValues(String inPut, LlLocation location,HashMap<LlLocation,ValueOfDiffType> resluts){
-        BasicTypeEnum type = conMemory.getLocationvalue(location).getType();
-
-        switch (type) {
-            case BOOLEAN:
-                resluts.put(location, new ValueOfDiffType(Boolean.parseBoolean(inPut)));
-                break;
-            case INTEGER:
-                resluts.put(location, new ValueOfDiffType(Long.parseLong(inPut)));
-                break;
-            case FLOAT:
-                resluts.put(location, new ValueOfDiffType(Double.parseDouble(inPut)));
-                break;
-            case STRING:
-                resluts.put(location, new ValueOfDiffType(inPut));
-                break;
-            default:
-                System.err.println("wrong type!");
+        Sort type = symMemory.get(location).getSort();
+        if(type instanceof BoolSort){
+            resluts.put(location, new ValueOfDiffType(Boolean.parseBoolean(inPut)));
+        }
+        else if(type instanceof IntSort){
+            resluts.put(location, new ValueOfDiffType(Long.parseLong(inPut)));
+        }
+        else if(type instanceof RealSort){
+            resluts.put(location, new ValueOfDiffType(Double.parseDouble(inPut)));
+        }
+        else {
+            System.err.println("wrong type!");
         }
 
     }

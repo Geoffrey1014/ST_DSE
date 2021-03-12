@@ -11,7 +11,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import parser.STListener;
 import simulation.DFT;
+import simulation.Simulator;
 import tools.MyPrint;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
@@ -73,7 +75,7 @@ public class Main {
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
 
             // control of updating pictures
-            Boolean updateFig = true;
+            Boolean updateFig = false;
 
             for (LlBuilder llBuilder : llBuilders) {
                 CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
@@ -125,18 +127,17 @@ public class Main {
 
 
                 //calCutNodes
-                HashMap<VarAndStmt,HashSet<VarAndStmt>> useDefsChains = rDAnalysis.useDefsChains;
-                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt = new HashMap<>();
-                calCutNodes(dominatorsMap,useDefsChains,udChianWithDmt);
+                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
                 writeCutNodesToFile(udChianWithDmt, outPutDir + "CutNodes" + cfgCounter + ".txt");
 
                 DFT dft = new DFT(cfg,udChianWithDmt);
-                System.out.println("data flow testing!----------------");
-                dft.dataFlowTesting();
+//                System.out.println("data flow testing!----------------");
+//                dft.dataFlowTesting();
 
 
-//                System.out.println("simulator.execute();------------");
-//                simulator.execute();
+                System.out.println("simulator.execute();------------");
+                Simulator simulator = new Simulator(cfg);
+                simulator.execute();
 
                 System.out.println("CF------------------------");
                 GlobalCF.performGlobalCodeFolding(cfg);
@@ -201,20 +202,7 @@ public class Main {
     }
 
 
-    public static void calCutNodes(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap,
-                                   HashMap<VarAndStmt,HashSet<VarAndStmt>>udChain,
-                                   HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt){
 
-        for (VarAndStmt use : udChain.keySet()) {
-            udChianWithDmt.put(use, new HashSet<>());
-            for (VarAndStmt def : udChain.get(use)) {
-                HashSet<BasicBlock> useDmt = new HashSet<>(dominatorsMap.get(use.getBlock()));
-                HashSet<BasicBlock> defDmt = new HashSet<>(dominatorsMap.get(def.getBlock()));
-                useDmt.removeAll(defDmt);
-                udChianWithDmt.get(use).add(new Tuple2<>(def, useDmt));
-            }
-        }
-    }
 
     public static String dominatorMapToString(CFG cfg,HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
         System.out.println("dominatorsMap writing------------");

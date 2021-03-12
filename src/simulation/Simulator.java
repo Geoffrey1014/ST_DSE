@@ -55,9 +55,8 @@ public class Simulator {
     }
 
 
-
-    public HashMap<LlLocation,ValueOfDiffType> initInputs(){
-        HashMap<LlLocation,ValueOfDiffType> inputs = new HashMap<>();
+    public HashMap<LlLocation, ValueOfDiffType> initDefaultInputs() {
+        HashMap<LlLocation, ValueOfDiffType> inputs = new HashMap<>();
         Hashtable<LlComponent, LlLiteral> inputVarsInit = this.cfg.getLlSymbolTable().varInput;
         for (LlComponent llComponent : inputVarsInit.keySet()) {
             LlLiteral llLiteral = inputVarsInit.get(llComponent);
@@ -74,8 +73,8 @@ public class Simulator {
         return inputs;
     }
 
-    public HashMap<LlLocation,ValueOfDiffType> createRandomInputs(){
-        HashMap<LlLocation,ValueOfDiffType> inputs = new HashMap<>();
+    public HashMap<LlLocation, ValueOfDiffType> createRandomInputs() {
+        HashMap<LlLocation, ValueOfDiffType> inputs = new HashMap<>();
         Random random = new Random(19);
         Hashtable<LlComponent, LlLiteral> inputVarsInit = this.cfg.getLlSymbolTable().varInput;
         for (LlComponent llComponent : inputVarsInit.keySet()) {
@@ -83,11 +82,11 @@ public class Simulator {
             if (llLiteral instanceof LlLiteralBool)
                 inputs.put((LlLocation) llComponent, new ValueOfDiffType(random.nextBoolean()));
             else if (llLiteral instanceof LlLiteralInt)
-                inputs.put((LlLocation) llComponent, new ValueOfDiffType((long)random.nextInt()));
-            else if (llLiteral instanceof LlLiteralReal)
-                inputs.put((LlLocation) llComponent, new ValueOfDiffType(random.nextDouble()));
-            else if (llLiteral instanceof LlLiteralString)
-                inputs.put((LlLocation) llComponent, new ValueOfDiffType("pl,okm"));
+                inputs.put((LlLocation) llComponent, new ValueOfDiffType((long) random.nextInt(5)* (random.nextBoolean() ? -1 : 1)));
+            else if (llLiteral instanceof LlLiteralReal) {
+                inputs.put((LlLocation) llComponent, new ValueOfDiffType(((double) random.nextFloat()) * (random.nextBoolean() ? -1 : 1)));
+            } else if (llLiteral instanceof LlLiteralString)
+                inputs.put((LlLocation) llComponent, new ValueOfDiffType("it is not dealt with")); // easy to do this
             else System.out.println("wrong type!");
         }
         return inputs;
@@ -95,58 +94,85 @@ public class Simulator {
 
 
     /**
-     * 使用访问者模式
+     * use Visitor mode
      *
      * @return
      */
     public void execute() {
 
-        Tuple2<List<String> ,List<Tuple2<Integer,Boolean>>> result = conExeFromInit();
+        Tuple2<List<String>, List<Tuple2<Integer, Boolean>>> result = conExeFromInit(2);
         List<String> route = result.a1;
-        List<Tuple2<Integer,Boolean>> branches = result.a2;
+        List<Tuple2<Integer, Boolean>> branches = result.a2;
         System.out.println(route);
         System.out.println(branches);
 
-        LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs = this.symbolExecutor.symExe(route,branches);
+        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = this.symbolExecutor.symExe(route, branches);
 
-        while (calculatedInputs.size() >0){
+        while (calculatedInputs.size() > 0) {
             result = conExeFromRead(calculatedInputs.pop());
         }
 
     }
-    public Tuple2<List<String> ,List<Tuple2<Integer,Boolean>>> conExeFromInit(){
-        putInputVarInitToMemory(); // initialize some vars
+
+    /**
+     * execute from initBlock and circle the loop for n times
+     *
+     * @return
+     */
+    public Tuple2<List<String>, List<Tuple2<Integer, Boolean>>> conExeFromInit(int circleNumLimit) {
+        putNonInputVarInitToMemory(); // initialize NonInput vars
         List<String> route = new ArrayList<>();
-        List<Tuple2<Integer,Boolean>> branches = new ArrayList<>();
-        BasicBlock entryNode = this.cfg.getBasicBlocks().get(0);
-        BasicBlock curBlock = entryNode.getDefaultBranch();
-        int conuter = 0;
-        while (curBlock != null) {
+        List<Tuple2<Integer, Boolean>> branches = new ArrayList<>();
+        BasicBlock initNode = this.cfg.getBasicBlocks().get(0).getDefaultBranch(); //initNode
+        BasicBlock curBlock = initNode;
+        int bbConuter = 0;
+        int circleCounter = 0;
+        while (circleCounter < circleNumLimit) {
             String leaderLabel = this.cfg.blockLabels.get(curBlock);
             System.out.println("\n" + leaderLabel);
-
             route.add(leaderLabel);
-            if (leaderLabel.equals("Read") && conuter > 1) break;
 
-            Tuple2<BasicBlock,Boolean> nextBB = executeBasicBlock(curBlock);
-            if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter,nextBB.a2));
+            if (leaderLabel.equals("End")) {
+                circleCounter += 1;
+            }
+
+            Tuple2<BasicBlock, Boolean> nextBB;
+            if (leaderLabel.equals("Read") && circleCounter == 0) {
+                putInputVarInitToMemory(); // initialize input vars
+                nextBB = new Tuple2<>(curBlock.getDefaultBranch(), false);
+            } else {
+                nextBB = executeBasicBlock(curBlock);
+            }
+
+            if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(bbConuter, nextBB.a2));
             if (this.stmtBlocks.contains(curBlock)) this.coveredBlocks.add(curBlock);
-            conuter += 1;
+            bbConuter += 1;
             curBlock = nextBB.a1;
             System.out.println("stmt coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
         }
-        return new Tuple2<>(route,branches);
+        return new Tuple2<>(route, branches);
 
     }
-    public Tuple2<List<String> ,List<Tuple2<Integer,Boolean>>> conExeFromRead(HashMap<LlLocation,ValueOfDiffType> inputs){
-        for (LlLocation location :inputs.keySet()){
-            conMemory.put(location,inputs.get(location));
+
+    public void setInputIntoMemory(HashMap<LlLocation, ValueOfDiffType> inputs) {
+        for (LlLocation location : inputs.keySet()) {
+            conMemory.put(location, inputs.get(location));
         }
+    }
+
+    /**
+     * execute from readBlock with given inputs
+     *
+     * @param inputs
+     * @return
+     */
+    public Tuple2<List<String>, List<Tuple2<Integer, Boolean>>> conExeFromRead(HashMap<LlLocation, ValueOfDiffType> inputs) {
+        setInputIntoMemory(inputs);
         List<String> route = new ArrayList<>();
         route.add("Read");
 
         BasicBlock curBlock = this.cfg.leadersToBBMap.get("Body");
-        List<Tuple2<Integer,Boolean>> branches = new ArrayList<>();
+        List<Tuple2<Integer, Boolean>> branches = new ArrayList<>();
         int conuter = 1;
         while (curBlock != null) {
             String leaderLabel = this.cfg.blockLabels.get(curBlock);
@@ -155,57 +181,67 @@ public class Simulator {
             route.add(leaderLabel);
             if (leaderLabel.equals("Read")) break;
 
-            Tuple2<BasicBlock,Boolean> nextBB = executeBasicBlock(curBlock);
-            if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter,nextBB.a2));
+            Tuple2<BasicBlock, Boolean> nextBB = executeBasicBlock(curBlock);
+            if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter, nextBB.a2));
             if (this.stmtBlocks.contains(curBlock)) this.coveredBlocks.add(curBlock);
             conuter += 1;
             curBlock = nextBB.a1;
             System.out.println("coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
         }
-        return new Tuple2<>(route,branches);
+        return new Tuple2<>(route, branches);
     }
 
 
-
-    public Tuple2<BasicBlock,Boolean> executeBasicBlock(BasicBlock currentBolock) {
+    /**
+     * exe a basicBlock and get the next BB according to the condition if it is a branch BB otherwise the default BB
+     *
+     * @param currentBolock
+     * @return
+     */
+    public Tuple2<BasicBlock, Boolean> executeBasicBlock(BasicBlock currentBolock) {
         BasicBlock nextBlock = null;
         Boolean nextBlockChoice = false;
-        for (LlStatement llStatement : currentBolock.getStmtsList()) {
-            if (llStatement instanceof LlAssignStmt) {
-                llStatement.accept(llStatementExeutor, this.conMemory);
-            } else if (llStatement instanceof LlEmptyStmt) {
-                llStatement.accept(llStatementExeutor, this.conMemory);
-            } else if (llStatement instanceof LlJumpConditional) {
-                LlComponent condition = ((LlJumpConditional) llStatement).getCondition();
-                ValueOfDiffType conditionValue = null;
-                if (condition instanceof LlLiteral) {
-                    conditionValue = this.llStatementExeutor.getLlLiteralValue((LlLiteral) condition);
-                } else {
-                    conditionValue = this.conMemory.getLocationvalue(condition);
-                }
-                llStatement.accept(llStatementExeutor, this.conMemory);
+        if (currentBolock.name.equals("Read")) {
+            HashMap<LlLocation, ValueOfDiffType> inputs = createRandomInputs();
+            setInputIntoMemory(inputs);
+        } else {
+            for (LlStatement llStatement : currentBolock.getStmtsList()) {
+                if (llStatement instanceof LlAssignStmt) {
+                    llStatement.accept(llStatementExeutor, this.conMemory);
+                } else if (llStatement instanceof LlEmptyStmt) {
+                    llStatement.accept(llStatementExeutor, this.conMemory);
+                } else if (llStatement instanceof LlJumpConditional) {
+                    LlComponent condition = ((LlJumpConditional) llStatement).getCondition();
+                    ValueOfDiffType conditionValue = null;
+                    if (condition instanceof LlLiteral) {
+                        conditionValue = this.llStatementExeutor.getLlLiteralValue((LlLiteral) condition);
+                    } else {
+                        conditionValue = this.conMemory.getLocationvalue(condition);
+                    }
+                    llStatement.accept(llStatementExeutor, this.conMemory);
 
-                // get the next bb according to the condition
-                if (conditionValue.getvBoolean()) {
+                    // get the next bb according to the condition
+                    if (conditionValue.getvBoolean()) {
+                        nextBlock = currentBolock.getAlternativeBranch();
+                        nextBlockChoice = true;
+                    } else {
+                        nextBlock = currentBolock.getDefaultBranch();
+                    }
+                } else if (llStatement instanceof LlJumpUnconditional) {
                     nextBlock = currentBolock.getAlternativeBranch();
                     nextBlockChoice = true;
+                } else if (llStatement instanceof LlMethodCallStmt) {
+                    llStatement.accept(llStatementExeutor, conMemory);
                 } else {
-                    nextBlock = currentBolock.getDefaultBranch();
+                    System.err.println("not handled stmt: " + llStatement);
                 }
-            } else if (llStatement instanceof LlJumpUnconditional) {
-                nextBlock = currentBolock.getAlternativeBranch();
-                nextBlockChoice = true;
-            } else if (llStatement instanceof LlMethodCallStmt) {
-                llStatement.accept(llStatementExeutor, conMemory);
-            } else {
-                System.err.println("not handled stmt: " + llStatement);
-            }
 
+            }
         }
+
         if (nextBlock == null) nextBlock = currentBolock.getDefaultBranch();
         return new Tuple2<>(nextBlock, nextBlockChoice);
     }
-
 
 
     public void putInputVarInitToMemory() {
@@ -223,6 +259,7 @@ public class Simulator {
             else System.out.println("wrong type!");
         }
     }
+
     public void putNonInputVarInitToMemory() {
         Hashtable<LlComponent, LlLiteral> varNonInput = this.cfg.getLlSymbolTable().varNonInput;
         for (LlComponent llComponent : varNonInput.keySet()) {

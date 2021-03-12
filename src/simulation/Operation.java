@@ -34,17 +34,33 @@ public class Operation {
         return null;
     }
 
+    //TODO: 其他的Double和Long之间的转换待做， 因为有可能会导致错误查不出
     public ValueOfDiffType mul(ValueOfDiffType left, ValueOfDiffType right){
 
         if (left.getType() == BasicTypeEnum.INTEGER){
-            Long v = left.getvLong() * right.getvLong();
+            Long v = left.getvLong() * getRightOperandLong(right);
             return new ValueOfDiffType(v);
         }
         else if(left.getType() == BasicTypeEnum.FLOAT){
-            Double v =left.getvDouble() * right.getvDouble();
+            Double v =left.getvDouble() * getRightOperandDouble(right);
             return new ValueOfDiffType(v);
         }
         return null;
+    }
+
+    private Double getRightOperandDouble(ValueOfDiffType right){
+        Double vRight = right.getvDouble();
+        if(vRight == null){
+            vRight = right.getvLong().doubleValue();
+        }
+        return vRight;
+    }
+    private Long getRightOperandLong(ValueOfDiffType right){
+        Long vRight = right.getvLong();
+        if(vRight == null){
+            vRight = right.getvDouble().longValue();
+        }
+        return vRight;
     }
 
     public ValueOfDiffType devide(ValueOfDiffType left, ValueOfDiffType right){

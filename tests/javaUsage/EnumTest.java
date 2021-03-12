@@ -1,3 +1,4 @@
+package javaUsage;
 
 public class EnumTest {
     public static void main(String[] args) {

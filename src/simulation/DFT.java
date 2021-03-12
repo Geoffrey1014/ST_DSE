@@ -60,7 +60,7 @@ public class DFT {
 
         simulator.putNonInputVarInitToMemory(); // initialize NonInput vars
 //        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
-        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.initInputs();
+        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.initDefaultInputs();
         do{
             Tuple2<List<String>,List<Tuple2<Integer,Boolean>>> result = simulator.conExeFromRead(inputs);
 
