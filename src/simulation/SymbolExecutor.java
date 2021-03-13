@@ -18,51 +18,49 @@ import java.util.*;
 
 public class SymbolExecutor {
     private final CFG cfg;
-    private SymMemory symMemory;
-    private HashSet<BasicBlock> coveredBlocks;
-    private HashSet<BasicBlock> branchBlocks;
-    private HashSet<BasicBlock> stmtBlocks;
     private Solver solver;
     private Context ctx;
+    private SymLlStatementExeutor symLlStatementExeutor;
     private HashSet<LlLocation> inputVars;
-    public SymbolExecutor(CFG cfg){
+
+    public SymbolExecutor(CFG cfg) {
         this.cfg = cfg;
-        this.symMemory = new SymMemory();
-        this.inputVars = cfg.getInputVars();
         HashMap<String, String> config = new HashMap<String, String>();
         config.put("model", "true");
         this.ctx = new Context(config);
         this.solver = this.ctx.mkSolver();
-        // get input var
-        this.inputVars = cfg.getInputVars();
-
-
+        this.symLlStatementExeutor = new SymLlStatementExeutor(this.ctx); // executor 和 ctx 要保持一直，所以这里其实可以设置成类成员变量
+        this.inputVars = cfg.getInputVars();         // get input var
     }
 
-    public LinkedList<HashMap<LlLocation,ValueOfDiffType>> symExe(List<String> route, List<Tuple2<Integer,Boolean>> branches){
-        // TODO  需要过滤算法，去除route中不必要的分支
+    public SymMemory createInitSymMemory() {
+        SymMemory symMemory = new SymMemory();
+        putNonInputVarInitToMemory(symMemory);
+        return symMemory;
+    }
+
+
+    public LinkedList<HashMap<LlLocation, ValueOfDiffType>> symExeFromRead(
+            SymMemory symMemory, List<String> route, List<Tuple2<Integer, Boolean>> branches) {
         // TODO 把函数整理一下
-        // TODO 需要拆分函数功能, 这个函数是有问题的。 branches 的数字编码可能错位了
-        LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs = new LinkedList<>();
-        mkInputSymbolic(ctx);
-        SymLlStatementExeutor symLlStatementExeutor = new SymLlStatementExeutor(this.ctx);
+        // TODO 需要拆分函数功能, 这个函数是有问题的。 应该只考虑一个周期的执行
+        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = new LinkedList<>();
+
         int left = 0;
         solver.push();
-        for(Tuple2<Integer,Boolean> branch : branches){
-            for(String bbLabel: route.subList(left,branch.a1+1)){
+        for (Tuple2<Integer, Boolean> branch : branches) {
+            for (String bbLabel : route.subList(left, branch.a1 + 1)) {
                 if (bbLabel.equals("Read")) continue;
-                symExecuteBasicBlock(this.cfg.leadersToBBMap.get(bbLabel),symLlStatementExeutor,
-                        symMemory,!branch.a2, calculatedInputs);
+                symExecuteBasicBlock(this.cfg.leadersToBBMap.get(bbLabel), symMemory, branch.a2, calculatedInputs);
             }
-            left = branch.a1+1;
+            left = branch.a1 + 1;
         }
         solver.pop();
         return calculatedInputs;
     }
 
-    public void symExecuteBasicBlock(BasicBlock currentBolock, SymLlStatementExeutor symLlStatementExeutor,
-                                     SymMemory symMemory, Boolean symBranchChoice,
-                                     LinkedList<HashMap<LlLocation,ValueOfDiffType>> calculatedInputs) {
+    public void symExecuteBasicBlock(BasicBlock currentBolock, SymMemory symMemory, Boolean symBranchChoice,
+                                     LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs) {
 
         for (LlStatement llStatement : currentBolock.getStmtsList()) {
             if (llStatement instanceof LlAssignStmt) {
@@ -78,13 +76,13 @@ public class SymbolExecutor {
                     conditionValue = symMemory.get(condition);
                 }
 
-                //TODO :
-                HashMap<LlLocation,ValueOfDiffType> results = calNewInputs(conditionValue, symBranchChoice);
-                if(results != null)  calculatedInputs.add(results);
+                HashMap<LlLocation, ValueOfDiffType> results = calNewInputs(conditionValue, symBranchChoice, symMemory);
+                if (results != null) calculatedInputs.add(results);
 
-                solver.add(ctx.mkEq(conditionValue,ctx.mkBool(!symBranchChoice)).simplify());
+                // 这里直接取反，是简化过的，需要把这功能分出去, 计算不出来的时候可以采用具体值
+                solver.add(ctx.mkEq(conditionValue, ctx.mkBool(!symBranchChoice)).simplify());
 
-                llStatement.accept(symLlStatementExeutor,symMemory);
+                llStatement.accept(symLlStatementExeutor, symMemory);
                 //  the next bb according to the condition is decided by concrete execution
 
             } else if (llStatement instanceof LlJumpUnconditional) {
@@ -98,53 +96,49 @@ public class SymbolExecutor {
         }
     }
 
-    public HashMap<LlLocation,ValueOfDiffType> calNewInputs(Expr conditionValue, Boolean branchChoice) {
-        HashMap<LlLocation,ValueOfDiffType> resluts = new HashMap<>();
+    public HashMap<LlLocation, ValueOfDiffType> calNewInputs(Expr conditionValue, Boolean branchChoice, SymMemory symMemory) {
+        HashMap<LlLocation, ValueOfDiffType> resluts = new HashMap<>();
         this.solver.push();
-        this.solver.add(ctx.mkEq(conditionValue,ctx.mkBool(branchChoice)));
+        this.solver.add(ctx.mkEq(conditionValue, ctx.mkBool(branchChoice)));
 
-        if(this.solver.check().equals(Status.SATISFIABLE)) {
-            System.out.println("\n"+Status.SATISFIABLE);
+        if (this.solver.check().equals(Status.SATISFIABLE)) {
+            System.out.println("\n" + Status.SATISFIABLE);
             for (LlLocation location : this.inputVars) {
                 Expr locationExpr = symMemory.get(location);
                 String locationValue = this.solver.getModel().evaluate(locationExpr, true).toString();
-                putValues(locationValue,location,resluts);
+                putValues(symMemory, locationValue, location, resluts);
                 System.out.println(locationExpr.toString() + ": " + locationValue);
             }
             this.solver.pop();
             return resluts;
 
-        }
-        else{
-            System.out.println("\n"+Status.UNSATISFIABLE);
+        } else {
+            System.out.println("\n" + Status.UNSATISFIABLE);
             this.solver.pop();
             return null;
         }
 
     }
 
-    public void putValues(String inPut, LlLocation location,HashMap<LlLocation,ValueOfDiffType> resluts){
+    public void putValues(SymMemory symMemory, String inPut, LlLocation location, HashMap<LlLocation, ValueOfDiffType> resluts) {
         Sort type = symMemory.get(location).getSort();
-        if(type instanceof BoolSort){
+        if (type instanceof BoolSort) {
             resluts.put(location, new ValueOfDiffType(Boolean.parseBoolean(inPut)));
-        }
-        else if(type instanceof IntSort){
+        } else if (type instanceof IntSort) {
             resluts.put(location, new ValueOfDiffType(Long.parseLong(inPut)));
-        }
-        else if(type instanceof RealSort){
+        } else if (type instanceof RealSort) {
             resluts.put(location, new ValueOfDiffType(Double.parseDouble(inPut)));
-        }
-        else {
+        } else {
             System.err.println("wrong type!");
         }
 
     }
 
-    public void mkInputSymbolic(Context ctx) {
+    public void mkInputSymbolic(SymMemory symMemory) {
         Hashtable<LlComponent, LlLiteral> inputVarsInit = this.cfg.getLlSymbolTable().varInput;
         for (LlComponent location : inputVarsInit.keySet()) {
             Expr varSym = null;
-            String varName = ((LlLocation)location).getVarName();
+            String varName = ((LlLocation) location).getVarName();
             LlLiteral llLiteral = inputVarsInit.get(location);
             if (llLiteral instanceof LlLiteralBool)
                 varSym = ctx.mkBoolConst(varName);
@@ -156,8 +150,24 @@ public class SymbolExecutor {
                 //TODO: string needs to been handled
                 System.err.println("string needs to been handled");
             else System.err.println("wrong type!");
-            this.symMemory.put(location, varSym);
+            symMemory.put(location, varSym);
         }
 
+    }
+
+    public void putNonInputVarInitToMemory(SymMemory symMemory) {
+        Hashtable<LlComponent, LlLiteral> varNonInput = this.cfg.getLlSymbolTable().varNonInput;
+        for (LlComponent llComponent : varNonInput.keySet()) {
+            LlLiteral llLiteral = varNonInput.get(llComponent);
+            if (llLiteral instanceof LlLiteralBool)
+                symMemory.put(llComponent, ctx.mkBool(((LlLiteralBool) llLiteral).getBoolValue()));
+            else if (llLiteral instanceof LlLiteralInt)
+                symMemory.put(llComponent, ctx.mkInt(((LlLiteralInt) llLiteral).getIntValue()));
+            else if (llLiteral instanceof LlLiteralReal)
+                symMemory.put(llComponent, ctx.mkReal(String.valueOf(((LlLiteralReal) llLiteral).getRealValue())));
+            else if (llLiteral instanceof LlLiteralString)
+                System.err.println("string is not supported!");
+            else System.out.println("wrong type!");
+        }
     }
 }

@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 public class GlobalDCE {
-    public NewLivenessAnalysis livenessAnalysis;
+    public LiveVarAnalysis livenessAnalysis;
     public GlobalDCE(CFG cfg){
-        livenessAnalysis = new NewLivenessAnalysis(cfg);
+        livenessAnalysis = new LiveVarAnalysis(cfg);
     }
 
     // mutates the CFG by performing Global Dead Code Elimination

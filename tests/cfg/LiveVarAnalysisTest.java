@@ -17,12 +17,12 @@ import java.util.HashSet;
 
 import static cfg.testHelper.genGraphViz;
 
-public class NewLivenessAnalysisTest {
+public class LiveVarAnalysisTest {
 
     LlBuilder llBuilder;
     LlSymbolTable llSymbolTable;
     CFG cfg;
-    NewLivenessAnalysis analysts;
+    LiveVarAnalysis analysts;
     HashMap<String, HashSet<LlLocationVar>> livenessOutRequred;
 
 
@@ -41,7 +41,7 @@ public class NewLivenessAnalysisTest {
 
         cfg = new CFG(this.llBuilder, this.llSymbolTable,false);
         genGraphViz(name,cfg,"tests/");
-        analysts = new NewLivenessAnalysis(cfg);
+        analysts = new LiveVarAnalysis(cfg);
     }
     public void calculateLiveness(int choice){
 

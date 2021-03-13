@@ -16,7 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class NewLivenessAnalysis {
+public class LiveVarAnalysis {
 
     /**
      * Each basic block has
@@ -56,7 +56,7 @@ public class NewLivenessAnalysis {
     private  HashMap<BasicBlock, HashMap<LlLocation, HashSet<VarAndStmt>>> defsInBB;
     public HashMap<VarAndStmt,HashSet<VarAndStmt>> definitionUseChain;
 
-    public NewLivenessAnalysis(CFG cfg) {
+    public LiveVarAnalysis(CFG cfg) {
         this.cfg = cfg;
     }
 

@@ -5,7 +5,7 @@ public class ValueOfDiffType {
     private Long vLong;
     private Double vDouble;
     private String vString;
-    private BasicTypeEnum type;  // 0: bool, 1: int, 2:float, 3: String
+    private BasicTypeEnum type;
 
     public ValueOfDiffType(Boolean value){
         this.vBoolean = value;
@@ -38,6 +38,15 @@ public class ValueOfDiffType {
                 return vBoolean.toString();
         }
         return "";
+    }
+    @Override
+    public boolean equals(Object object){
+        if(object instanceof ValueOfDiffType){
+            ValueOfDiffType other = (ValueOfDiffType) object;
+            return this.type.equals(other.type) && this.vBoolean.equals(other.vBoolean)
+                    && this.vLong.equals(other.vLong)&& this.vDouble.equals(other.vDouble) && this.vString.equals(other.vString);
+        }
+        return false;
     }
 
     public BasicTypeEnum getType(){

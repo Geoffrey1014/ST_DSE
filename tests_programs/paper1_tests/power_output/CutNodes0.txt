@@ -50,10 +50,6 @@ def: FLAG @ L4 @ Init
 use: FLAG @ L54 @ End
 dominators: END_IF_L36 Read Body END_IF_L5 END_WHILE_L24 END_IF_L15 WHILE_L24 End 
 
-def: EXP @ L34 @ LOOP_L25
-use: EXP @ L55 @ End
-dominators: END_IF_L36 END_WHILE_L24 End 
-
 def: EXP @ L14 @ IF_L5
 use: EXP @ L55 @ End
 dominators: END_IF_L36 END_IF_L5 END_WHILE_L24 END_IF_L15 WHILE_L24 End 
@@ -61,6 +57,10 @@ dominators: END_IF_L36 END_IF_L5 END_WHILE_L24 END_IF_L15 WHILE_L24 End
 def: EXP @ L12 @ ELSE_L6
 use: EXP @ L55 @ End
 dominators: END_IF_L36 END_IF_L5 END_WHILE_L24 END_IF_L15 WHILE_L24 End 
+
+def: EXP @ L34 @ LOOP_L25
+use: EXP @ L55 @ End
+dominators: END_IF_L36 END_WHILE_L24 End 
 
 def: EXP @ L12 @ ELSE_L6
 use: EXP @ L33 @ LOOP_L25
@@ -78,21 +78,21 @@ def: Y @ L56 @ Read
 use: Y @ L14 @ IF_L5
 dominators: Body IF_L5 
 
-def: RES @ L31 @ LOOP_L25
-use: RES @ L30 @ LOOP_L25
-dominators: 
-
 def: RES @ L23 @ END_IF_L15
 use: RES @ L30 @ LOOP_L25
 dominators: WHILE_L24 LOOP_L25 
 
-def: FLAG @ L52 @ IF_L41
-use: FLAG @ L17 @ END_IF_L5
+def: RES @ L31 @ LOOP_L25
+use: RES @ L30 @ LOOP_L25
 dominators: 
 
 def: FLAG @ L4 @ Init
 use: FLAG @ L17 @ END_IF_L5
 dominators: Read Body END_IF_L5 
+
+def: FLAG @ L52 @ IF_L41
+use: FLAG @ L17 @ END_IF_L5
+dominators: 
 
 def: FLAG @ L21 @ IF_L15
 use: FLAG @ L17 @ END_IF_L5
@@ -102,11 +102,11 @@ def: RES @ L31 @ LOOP_L25
 use: RES @ L53 @ End
 dominators: END_IF_L36 END_WHILE_L24 End 
 
-def: RES @ L49 @ ELSE_L42
-use: RES @ L53 @ End
-dominators: END_IF_L36 End 
-
 def: RES @ L23 @ END_IF_L15
 use: RES @ L53 @ End
 dominators: END_IF_L36 END_WHILE_L24 WHILE_L24 End 
+
+def: RES @ L49 @ ELSE_L42
+use: RES @ L53 @ End
+dominators: END_IF_L36 End 
 

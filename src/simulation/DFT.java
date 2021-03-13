@@ -57,12 +57,11 @@ public class DFT {
         HashSet<Tuple2<BasicBlock,Boolean>> W = new HashSet<>();
         ArrayList<BasicBlock> sortedCuts = new ArrayList<>(cuts);
         sortedCuts.sort(Comparator.comparingInt(BasicBlock::getId));
+        ConMemory conMemory = simulator.createInitMemory();
 
-        simulator.putNonInputVarInitToMemory(); // initialize NonInput vars
-//        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
-        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.initDefaultInputs();
+        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
         do{
-            Tuple2<List<String>,List<Tuple2<Integer,Boolean>>> result = simulator.conExeFromRead(inputs);
+            Tuple2<List<String>,List<Tuple2<Integer,Boolean>>> result = simulator.conExeFromRead(inputs,conMemory);
 
             List<Tuple2<BasicBlock,Boolean>> branchNodes = getBranchNodes(result);
 
