@@ -10,6 +10,9 @@ public class SymMemory extends Memory{
     public SymMemory(){
         this.locationTable = new HashMap<>();
     }
+    public SymMemory(SymMemory symMemory){
+        this.locationTable = new HashMap<>(symMemory.locationTable);
+    }
     public void put(LlComponent location, Expr value){
         this.locationTable.put(location,value);
     }

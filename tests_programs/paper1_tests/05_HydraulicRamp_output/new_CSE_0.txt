@@ -715,11 +715,11 @@ START_ELSIF_L488 :  EMPTY_STATEMENT
            L592 :  print(k_2,)
            L593 :  print(k_1,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L594 :  s_5 = read()
            L595 :  s_4 = read()
            L596 :  s_3 = read()
            L597 :  s_2 = read()
            L598 :  s_1 = read()
+
+           Exit :  EMPTY_STATEMENT

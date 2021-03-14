@@ -130,7 +130,7 @@ CFG:
            L101 :  print(P_Fan1Lo_1,)
            L102 :  print(DBC_PV_C_Fan1Hi,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L103 :  DBC_PV_CoStep = read()
+
+           Exit :  EMPTY_STATEMENT

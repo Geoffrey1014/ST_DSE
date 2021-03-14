@@ -49,8 +49,8 @@ START_ELSIF_L13 :  EMPTY_STATEMENT
             L33 :  print(cstate14,)
             L34 :  print(y_0,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
             L35 :  x_1 = read()
             L36 :  x_0 = read()
+
+           Exit :  EMPTY_STATEMENT

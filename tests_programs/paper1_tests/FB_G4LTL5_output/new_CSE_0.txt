@@ -482,8 +482,8 @@ START_ELSIF_L261 :  EMPTY_STATEMENT
            L394 :  print(c1_add1,)
            L395 :  print(c1_geq10,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L396 :  x1 = read()
            L397 :  x0 = read()
+
+           Exit :  EMPTY_STATEMENT

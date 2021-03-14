@@ -1189,10 +1189,10 @@ END_ELSIF_L1007 :  EMPTY_STATEMENT
           L1033 :  print(cstate_76,)
           L1034 :  print(y_0,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
           L1035 :  x_2 = read()
           L1036 :  x_1 = read()
           L1037 :  x_0 = read()
           L1038 :  x_3 = read()
+
+           Exit :  EMPTY_STATEMENT

@@ -3,24 +3,24 @@ digraph G {
   edge [arrowsize=.5]
   node [shape=circle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
-  "6 ELSE_L6"; "16 ELSE_L42"; "10 WHILE_L24"; "11 END_WHILE_L24"; "12 END_IF_L36"; "5 IF_L5"; "9 END_IF_L15"; "3 Read"; "7 END_IF_L5"; "2 Init"; "0 Entry"; "15 IF_L36"; "8 IF_L15"; "17 END_IF_L41"; "13 End"; "1 power"; "19 LOOP_L25"; "4 Body"; "14 Exit"; "18 IF_L41"; 
-  "10 WHILE_L24" -> "11 END_WHILE_L24";
-  "10 WHILE_L24" -> "19 LOOP_L25";
-  "11 END_WHILE_L24" -> "12 END_IF_L36";
-  "11 END_WHILE_L24" -> "15 IF_L36";
-  "12 END_IF_L36" -> "13 End";
-  "9 END_IF_L15" -> "10 WHILE_L24";
+  "5 END_IF_L5"; "16 Exit"; "8 WHILE_L24"; "0 Entry"; "7 END_IF_L15"; "2 Init"; "6 IF_L15"; "15 End"; "18 ELSE_L6"; "11 ELSE_L42"; "17 LOOP_L25"; "19 IF_L5"; "12 END_IF_L41"; "4 Body"; "13 IF_L41"; "14 END_IF_L36"; "3 Read"; "1 power"; "9 END_WHILE_L24"; "10 IF_L36"; 
+  "8 WHILE_L24" -> "9 END_WHILE_L24";
+  "8 WHILE_L24" -> "17 LOOP_L25";
+  "9 END_WHILE_L24" -> "10 IF_L36";
+  "9 END_WHILE_L24" -> "14 END_IF_L36";
+  "14 END_IF_L36" -> "15 End";
+  "7 END_IF_L15" -> "8 WHILE_L24";
   "3 Read" -> "4 Body";
-  "7 END_IF_L5" -> "8 IF_L15";
-  "7 END_IF_L5" -> "9 END_IF_L15";
-  "2 Init" -> "3 Read";
+  "5 END_IF_L5" -> "6 IF_L15";
+  "5 END_IF_L5" -> "7 END_IF_L15";
   "0 Entry" -> "1 power";
-  "15 IF_L36" -> "16 ELSE_L42";
-  "15 IF_L36" -> "17 END_IF_L41";
-  "15 IF_L36" -> "18 IF_L41";
-  "13 End" -> "14 Exit";
+  "2 Init" -> "3 Read";
+  "10 IF_L36" -> "11 ELSE_L42";
+  "10 IF_L36" -> "12 END_IF_L41";
+  "10 IF_L36" -> "13 IF_L41";
+  "15 End" -> "16 Exit";
   "1 power" -> "2 Init";
-  "4 Body" -> "5 IF_L5";
-  "4 Body" -> "6 ELSE_L6";
-  "4 Body" -> "7 END_IF_L5";
+  "4 Body" -> "5 END_IF_L5";
+  "4 Body" -> "18 ELSE_L6";
+  "4 Body" -> "19 IF_L5";
 }

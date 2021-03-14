@@ -1,0 +1,39 @@
+Node: Prog :
+Init, 
+
+Node: Init :
+Read, 
+
+Node: Body :
+END_IF_L4, IF_L4, 
+
+Node: IF_L4 :
+START_ELSIF_L13, IF_L9, END_IF_L9, 
+
+Node: IF_L9 :
+
+
+Node: START_ELSIF_L13 :
+ELSIF_L20, 
+
+Node: ELSIF_L20 :
+
+
+Node: END_IF_L9 :
+
+
+Node: END_IF_L4 :
+End, 
+
+Node: Entry :
+Prog, 
+
+Node: End :
+Exit, 
+
+Node: Read :
+Body, 
+
+Node: Exit :
+
+

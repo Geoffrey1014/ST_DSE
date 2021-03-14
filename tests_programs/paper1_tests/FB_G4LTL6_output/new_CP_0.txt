@@ -473,7 +473,7 @@ START_ELSIF_L353 :  EMPTY_STATEMENT
            L390 :  print(t_up,)
            L391 :  print(t_reset,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L392 :  x_1 = read()
+
+           Exit :  EMPTY_STATEMENT

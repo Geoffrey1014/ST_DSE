@@ -57,7 +57,7 @@ public class SymbolExecutor {
         int left = 0;
         solver.push();
         for (Tuple2<Integer, Boolean> branch : branches) {
-            for (BasicBlock bb : route.subList(left, branch.a1 + 1)) {
+            for (BasicBlock bb : route.subList(left, branch.a1 + 1)) { //这里有问题
                 if (bb.name.equals("Read")) continue;
                 symExecuteBasicBlock(bb, symMemory, branch.a2, calculatedInputs);
             }

@@ -252,8 +252,8 @@ START_ELSIF_L158 :  EMPTY_STATEMENT
            L204 :  print(grant_1,)
            L205 :  print(cstate94,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L206 :  req2 = read()
            L207 :  req1 = read()
+
+           Exit :  EMPTY_STATEMENT

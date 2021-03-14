@@ -31705,9 +31705,9 @@ START_ELSIF_L28382 :  EMPTY_STATEMENT
          L28422 :  print(count0,)
          L28423 :  print(TVALUE0,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
          L28424 :  x_2 = read()
          L28425 :  x_1 = read()
          L28426 :  x_0 = read()
+
+           Exit :  EMPTY_STATEMENT

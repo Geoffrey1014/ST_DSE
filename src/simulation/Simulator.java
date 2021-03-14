@@ -2,6 +2,7 @@ package simulation;
 
 import cfg.BasicBlock;
 import cfg.CFG;
+import cfg.GraphViz;
 import ll.LlComponent;
 import ll.LlEmptyStmt;
 import ll.LlMethodCallStmt;
@@ -13,6 +14,10 @@ import ll.literal.*;
 import ll.location.LlLocation;
 import tools.Tuple2;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -59,6 +64,47 @@ public class Simulator {
 
     }
 
+    public String toGraphviz(){
+        GraphViz graphViz = new GraphViz();
+        for (BasicBlock bb : cfg.getBasicBlocks()) {
+            String label = bb.toString();
+            if(coveredBlocks.contains(bb)){
+                graphViz.nodes.put(label,true);
+            }
+            else{
+                graphViz.nodes.put(label,false);
+            }
+
+            if (bb.getDefaultBranch() != null){
+                BasicBlock b = bb.getDefaultBranch();
+                graphViz.edges.map(label,b.toString()  +"---default");
+            }
+            if(bb.getAlternativeBranch() != null){
+                BasicBlock b = bb.getAlternativeBranch();
+                graphViz.edges.map(label,b.toString()+ "---alter");
+            }
+        }
+        return graphViz.toDOT();
+    }
+
+    public void genGraphViz(String outPutDir) {
+        String graphVizFilename = outPutDir + "Graph_debug"  + ".dot";
+        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
+        try {
+            writename.createNewFile();
+
+            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+            out.write(toGraphviz()); // \r\n即为换行
+            out.flush(); // 把缓存区内容压入文件
+            out.close(); // 最后记得关闭文件
+            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_debug" + ".pdf").waitFor();
+        } catch (IOException | InterruptedException e) {
+            System.err.println("There was an error:\n" + e);
+        }
+
+
+        System.out.println("to Graphviz finish!");
+    }
 
     /**
      * use Visitor mode
@@ -102,23 +148,24 @@ public class Simulator {
 
     public void branchTest(){
         // create createInitMemory
-        ConMemory conMemory = createInitMemory();
-        ConMemory oldConMenory = new ConMemory(conMemory);
+        ConMemory oldConMenory = createInitMemory();
 
         //createSymMemory according to conMemory and mkInputSymbolic
-        SymMemory symMemory = symbolExecutor.createSymMemory(conMemory);
-        symbolExecutor.mkInputSymbolic(symMemory);
+        SymMemory oldsymMemory = symbolExecutor.createSymMemory(oldConMenory);
+        symbolExecutor.mkInputSymbolic(oldsymMemory);
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
         inputsWorkList.add(createDefaultInputs());
 
         int counter = 0;
         while (inputsWorkList.size() >0){
-            System.out.println("circle: "+counter + " -------------");
+            ConMemory conMemory = new ConMemory(oldConMenory);
+            SymMemory symMemory = new SymMemory(oldsymMemory);
+            System.out.println("circle: "+ counter + " -------------");
             Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(inputsWorkList.pollFirst(), conMemory);
 //            float stmtCoverage = this.coveredBlocks.size() / (float) this.stmtBlocks.size();
 //            System.out.println("stmts coverage: " + stmtCoverage);
-            if(branchManager.coverageRate() > 0.95) break;
-
+            if(branchManager.coverageRate() > 0.9 || counter>100) break;
+            genGraphViz("");
             stateManager.add(conMemory);
             branchManager.addRoute(result.a1,result.a2);
             // pruning algorithm

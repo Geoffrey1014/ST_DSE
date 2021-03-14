@@ -1,0 +1,30 @@
+use: V @ L33 @ START_ELSIF_L7
+defs: L16 @ IF_L9, L43 @ LOOP_L37, L26 @ ELSIF_L20, L0 @ Init, 
+
+use: X @ L38 @ WHILE_L36
+defs: L58 @ Read, 
+
+use: V @ L50 @ END_ELSIF_L31
+defs: L16 @ IF_L9, L43 @ LOOP_L37, L26 @ ELSIF_L20, L0 @ Init, 
+
+use: V @ L5 @ Body
+defs: L16 @ IF_L9, L43 @ LOOP_L37, L26 @ ELSIF_L20, L0 @ Init, 
+
+use: V @ L38 @ WHILE_L36
+defs: L16 @ IF_L9, L43 @ LOOP_L37, L26 @ ELSIF_L20, L0 @ Init, 
+
+use: V @ L56 @ End
+defs: L16 @ IF_L9, L43 @ LOOP_L37, L26 @ ELSIF_L20, L0 @ Init, 
+
+use: Y @ L57 @ End
+defs: L46 @ END_WHILE_L36, L28 @ ELSIF_L20, L54 @ ELSIF_L48, L18 @ IF_L9, L2 @ Init, 
+
+use: X @ L22 @ START_ELSIF_L13
+defs: L58 @ Read, 
+
+use: X @ L11 @ IF_L3
+defs: L58 @ Read, 
+
+use: V @ L42 @ LOOP_L37
+defs: L16 @ IF_L9, L43 @ LOOP_L37, L26 @ ELSIF_L20, L0 @ Init, 
+

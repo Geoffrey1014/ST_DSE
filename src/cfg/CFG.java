@@ -116,7 +116,6 @@ public class CFG {
                     BasicBlock targetBB = this.leadersToBBMap.get(targetLabel);
                     bb.setAlternativeBranch(targetBB);
 
-                    System.out.println(targetLabel);
                     // set reverse edge B <-- C
                     targetBB.addPredecessorNode(bb);
                 }
@@ -302,7 +301,7 @@ public class CFG {
         GraphViz graphViz = new GraphViz();
         for (BasicBlock bb : this.basicBlocks) {
             String label = bb.toString() + bb.stmtsString();
-            graphViz.nodes.add(label);
+            graphViz.nodes.put(label,false);
             if (bb.getDefaultBranch() != null){
                 BasicBlock b = bb.getDefaultBranch();
                 graphViz.edges.map(label,b.toString() + b.stmtsString() +"---default");

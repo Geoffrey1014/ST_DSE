@@ -1,0 +1,39 @@
+Node: FB_G4LTL2 :
+Init, 
+
+Node: Init :
+Read, 
+
+Node: Body :
+END_IF_L4, IF_L4, 
+
+Node: IF_L4 :
+IF_L9, END_IF_L9, START_ELSIF_L16, 
+
+Node: IF_L9 :
+
+
+Node: START_ELSIF_L16 :
+ELSIF_L23, 
+
+Node: ELSIF_L23 :
+
+
+Node: END_IF_L9 :
+
+
+Node: END_IF_L4 :
+End, 
+
+Node: Entry :
+FB_G4LTL2, 
+
+Node: End :
+Exit, 
+
+Node: Read :
+Body, 
+
+Node: Exit :
+
+

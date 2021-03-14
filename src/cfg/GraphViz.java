@@ -1,18 +1,18 @@
 package cfg;
 
 import org.antlr.v4.runtime.misc.MultiMap;
-import org.antlr.v4.runtime.misc.OrderedHashSet;
 import org.stringtemplate.v4.ST;
 
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GraphViz {
-    public Set<String> nodes;
+    public HashMap<String,Boolean> nodes;
     public MultiMap<String, String> edges;
 
     public GraphViz(){
         // use org.antlr.v4.runtime.misc: OrderedHashSet, MultiMap
-        this.nodes = new OrderedHashSet<String>(); // list of functions
+        this.nodes = new HashMap<String,Boolean>(); // list of functions
         this.edges = new MultiMap<String, String>();  // caller->callee
     }
 
@@ -30,8 +30,11 @@ public class GraphViz {
         buf.append("  node [shape=rectangle, fontname=\"ArialNarrow\",\n");
         buf.append("        fontsize=12,  height=1.2];\n");
         buf.append("  ");
-        for (String node : nodes) { // print all nodes first
-            buf.append("\"").append(node).append("\"");
+        for (Map.Entry<String,Boolean> entry : nodes.entrySet()) { // print all nodes first
+            buf.append("\"").append(entry.getKey()).append("\"");
+            if(entry.getValue()){
+                buf.append("[color=red]");
+            }
             buf.append("; ");
         }
         buf.append("\n");
@@ -57,7 +60,7 @@ public class GraphViz {
         buf.append("  node [shape=circle, fontname=\"ArialNarrow\",\n");
         buf.append("        fontsize=12,  height=1.2];\n");
         buf.append("  ");
-        for (String node : nodes) { // print all nodes first
+        for (String node : nodes.keySet()) { // print all nodes first
             buf.append("\"").append(node).append("\"");
             buf.append("; ");
         }

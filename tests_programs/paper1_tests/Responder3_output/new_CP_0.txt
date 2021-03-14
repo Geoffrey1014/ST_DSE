@@ -1878,9 +1878,9 @@ END_ELSIF_L1547 :  EMPTY_STATEMENT
           L1590 :  print(grant_1,)
           L1591 :  print(cstate70,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
           L1592 :  req3 = read()
           L1593 :  req2 = read()
           L1594 :  req1 = read()
+
+           Exit :  EMPTY_STATEMENT

@@ -66,7 +66,7 @@ public class BasicBlock {
             str = str + this.id + " ";
         }
         str += this.name + "\n";
-        return str.toString();
+        return str;
     }
 
     public String stmtsString() {

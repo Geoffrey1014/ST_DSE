@@ -1148,7 +1148,7 @@ START_ELSIF_L1301 :  EMPTY_STATEMENT
           L1344 :  print(count0,)
           L1345 :  print(TVALUE0,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
           L1346 :  x_1 = read()
+
+           Exit :  EMPTY_STATEMENT

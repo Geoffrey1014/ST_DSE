@@ -176,7 +176,7 @@ public class LoopAnalysis {
         GraphViz graphViz = new GraphViz();
         for (Node node : this.label2Node.values()) {
             String srcNode = node.toString();
-            graphViz.nodes.add(srcNode);
+            graphViz.nodes.put(srcNode,false);
             for(Node child : node.getChildrenNodes()){
                 graphViz.edges.map(srcNode,child.toString());
             }

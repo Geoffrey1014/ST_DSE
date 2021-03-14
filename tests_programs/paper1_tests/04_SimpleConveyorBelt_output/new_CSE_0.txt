@@ -590,9 +590,9 @@ START_ELSIF_L467 :  EMPTY_STATEMENT
            L496 :  print(cstate11,)
            L497 :  print(k_1,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L498 :  s_3 = read()
            L499 :  s_2 = read()
            L500 :  s_1 = read()
+
+           Exit :  EMPTY_STATEMENT

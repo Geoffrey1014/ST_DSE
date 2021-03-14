@@ -33,11 +33,11 @@ public class Main {
 
     public static void walkTree(String filePath) {
         String[] pathSegments = filePath.split("/");
-        String prefix = pathSegments[0] +"/"+ pathSegments[1]+"/";
+        String prefix = pathSegments[0] + "/" + pathSegments[1] + "/";
         String inputFileName = pathSegments[3];
 
         String inputFile = prefix + pathSegments[2] + "/" + inputFileName;
-        String outPutDir = prefix +   inputFileName.split("\\.")[0]+  "_output/" ;
+        String outPutDir = prefix + inputFileName.split("\\.")[0] + "_output/";
         File dir = new File(outPutDir);
         if (!dir.exists()) {// 判断目录是否存在
             dir.mkdir();
@@ -63,14 +63,14 @@ public class Main {
             SemanticCheckVisitor semanticCheckVisitor = new SemanticCheckVisitor(defPhaseVisitor.symTable);
             listener.pous.accept(semanticCheckVisitor);
 
-            System.out.println("\n semantic check error message:");
+            System.out.println("semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
-            System.out.println("\n pretty print:\n");
-            writeFile(listener.pous.prettyPrint(""),outPutDir+ "prettyPrint" + ".txt");
+            System.out.println("pretty print:");
+            writeFile(listener.pous.prettyPrint(""), outPutDir + "prettyPrint" + ".txt");
 
             int cfgCounter = 0;
-            System.out.println("\n low level IR\n");
+            System.out.println("low level IR");
 
             LlBuildersList llBuilderList = listener.pous.getBuilderList();
             ArrayList<LlSymbolTable> llSymbolTables = llBuilderList.getSymbolTables();
@@ -78,7 +78,7 @@ public class Main {
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
 
             // control of updating pictures
-            Boolean updateFig = false;
+            Boolean updateFig = true;
 
             for (LlBuilder llBuilder : llBuilders) {
                 CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
@@ -90,29 +90,30 @@ public class Main {
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
-                System.out.println("\nafterCSE---------------------\n");
+                System.out.println("afterCSE---------------------");
                 if (updateFig) genGraphViz("CSE_" + cfgCounter, cfg, outPutDir);
 
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
                 writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
-                System.out.println("\nafterCP---------------------\n");
+                System.out.println("afterCP-----------------------");
                 if (updateFig) genGraphViz("CP_" + cfgCounter, cfg, outPutDir);
 
                 // Dominator
                 LoopAnalysis loopAnalysis = new LoopAnalysis(cfg);
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = loopAnalysis.getDominatorsMap();
-                writeFile(dominatorMapToString(cfg,dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
+                writeFile(dominatorMapToString(cfg, dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
+                System.out.println("dominatorsMap------------");
 
                 // DominatorTree
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTreeMap = loopAnalysis.getDominatingTreeMap();
-                writeFile(dominatorMapToString(cfg,dominatingTreeMap), outPutDir + "DominatorTree" + cfgCounter + ".txt");
+                writeFile(dominatorMapToString(cfg, dominatingTreeMap), outPutDir + "DominatorTree" + cfgCounter + ".txt");
                 loopAnalysis.createDominatorTree(dominatingTreeMap);
                 if (updateFig) genGraphViz("DomTree_" + cfgCounter, loopAnalysis, outPutDir);
 
                 GlobalDCE globalDCE = new GlobalDCE(cfg);
                 globalDCE.performGlobalDeadCodeElimination();
-                System.out.println("\nafterDSE---------------------\n");
+                System.out.println("afterDSE---------------------");
                 writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
                 if (updateFig) genGraphViz("DSE_" + cfgCounter, cfg, outPutDir);
 
@@ -125,15 +126,14 @@ public class Main {
                 //UDChain
                 ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
                 rDAnalysis.genUseDefinitionChains();
-                writeFile(rDAnalysis.printUseDefsChains(),outPutDir + "UDChain" + cfgCounter + ".txt");
-
+                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + "UDChain" + cfgCounter + ".txt");
 
 
                 //calCutNodes
-                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
+                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
                 writeCutNodesToFile(udChianWithDmt, outPutDir + "CutNodes" + cfgCounter + ".txt");
 
-                DFT dft = new DFT(cfg,udChianWithDmt);
+                DFT dft = new DFT(cfg, udChianWithDmt);
 //                System.out.println("data flow testing!----------------");
 //                dft.dataFlowTesting();
 
@@ -142,7 +142,7 @@ public class Main {
                 Simulator simulator = new Simulator(cfg);
                 simulator.branchTest();
 
-                System.out.println("CF------------------------");
+//                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
 //                writeFile(cfg.toString(), outPutDir + "new_" + "CF_" + cfgCounter + ".txt");
 //
@@ -165,26 +165,29 @@ public class Main {
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
-        String inputDir = "tests_programs/dataflow/input/";		//要遍历的路径
+        String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
         String file = "power.txt";
 //        String file = "counter.txt";
-//        walkTree(inputDir+file);
-        // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
+        walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-        runDirFiles(inputDir);
+//        runDirFiles(inputDir);
 
     }
-    public static void runDirFiles(String path){
 
-        File file = new File(path);		//获取其file对象
-        File[] fs = file.listFiles();	//遍历path下的文件和目录，放在File数组中
-        for(File f:fs) {                    //遍历File[]数组
-            if (!f.isDirectory())  {
+    public static void runDirFiles(String path) {
+
+        File file = new File(path);        //获取其file对象
+        File[] fs = file.listFiles();    //遍历path下的文件和目录，放在File数组中
+        for (File f : fs) {                    //遍历File[]数组
+            if (!f.isDirectory()) {
                 //若非目录(即文件)，则打印
 //                System.out.println(Arrays.toString(f.toString().split("/")));
-                System.out.println("----- "+f+" ---------");
+                if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL15.txt")) {
+                    continue;
+                }
+                System.out.println("----- " + f + " ---------");
                 walkTree(f.toString());
             }
 
@@ -209,10 +212,7 @@ public class Main {
     }
 
 
-
-
-    public static String dominatorMapToString(CFG cfg,HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
-        System.out.println("dominatorsMap writing------------");
+    public static String dominatorMapToString(CFG cfg, HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap) {
         StringBuilder stringBuilder = new StringBuilder();
         for (BasicBlock bb : cfg.getBasicBlocks()) {
             stringBuilder.append("Node: ").append(bb.name).append(" :\n");
@@ -224,29 +224,30 @@ public class Main {
         }
         return stringBuilder.toString();
     }
-    public static void genGraphViz(String cfgCounter, CFG cfg,String outPutDir )  {
-        String graphVizFilename = outPutDir + "Graph_"+cfgCounter+".dot";
+
+    public static void genGraphViz(String cfgCounter, CFG cfg, String outPutDir) {
+        String graphVizFilename = outPutDir + "Graph_" + cfgCounter + ".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
-        try{
+        try {
             writename.createNewFile();
 
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
             out.write(cfg.toGraphviz()); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件
-            Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_"+cfgCounter+".pdf").waitFor();
-        }
-        catch (IOException | InterruptedException e) {
+            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_" + cfgCounter + ".pdf").waitFor();
+        } catch (IOException | InterruptedException e) {
             System.err.println("There was an error:\n" + e);
         }
 
 
         System.out.println("to Graphviz finish!");
     }
-    public static void genGraphViz(String cfgCounter, LoopAnalysis loopAyls,String outPutDir )  {
-        String graphVizFilename = outPutDir + "Graph_"+cfgCounter+".dot";
+
+    public static void genGraphViz(String cfgCounter, LoopAnalysis loopAyls, String outPutDir) {
+        String graphVizFilename = outPutDir + "Graph_" + cfgCounter + ".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
-        try{
+        try {
             writename.createNewFile();
 
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
@@ -254,33 +255,33 @@ public class Main {
             out.write(s); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件
-            Runtime.getRuntime().exec("dot"+" "+graphVizFilename+" -Tpdf"+" -o"+" "+outPutDir+"Graph_"+cfgCounter+".pdf").waitFor();
-        }
-        catch (IOException | InterruptedException e) {
+            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_" + cfgCounter + ".pdf").waitFor();
+        } catch (IOException | InterruptedException e) {
             System.err.println("There was an error:\n" + e);
         }
 
 
         System.out.println("to Graphviz finish!");
     }
-    public static void writeCutNodesToFile(HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt, String path){
+
+    public static void writeCutNodesToFile(HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt, String path) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(VarAndStmt use: udChianWithDmt.keySet()){
-            HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>> defAndDomsSet = udChianWithDmt.get(use);
-            for(Tuple2<VarAndStmt,HashSet<BasicBlock>> defAndDoms : defAndDomsSet){
+        for (VarAndStmt use : udChianWithDmt.keySet()) {
+            HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>> defAndDomsSet = udChianWithDmt.get(use);
+            for (Tuple2<VarAndStmt, HashSet<BasicBlock>> defAndDoms : defAndDomsSet) {
                 VarAndStmt def = defAndDoms.a1;
                 HashSet<BasicBlock> doms = defAndDoms.a2;
                 stringBuilder.append("def: ").append(def.location).append(" @ ").append(def.stmtLabel).append(" @ ").append(def.block.name).append("\n");
                 stringBuilder.append("use: ").append(use.location).append(" @ ").append(use.stmtLabel).append(" @ ").append(use.block.name).append("\n");
 
                 stringBuilder.append("dominators: ");
-                for(BasicBlock bb: doms){
+                for (BasicBlock bb : doms) {
                     stringBuilder.append(bb.name).append(" ");
                 }
                 stringBuilder.append("\n\n");
             }
         }
-        writeFile(stringBuilder.toString(),path);
+        writeFile(stringBuilder.toString(), path);
     }
 
 }
