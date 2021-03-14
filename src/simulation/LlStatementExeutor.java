@@ -15,10 +15,11 @@ import ll.location.LlLocation;
 import java.util.Scanner;
 
 public class LlStatementExeutor implements LlStatementVisitor {
+    Boolean printFlag = false;
     @Override
     public void visitor(LlAssignStmtBinaryOp llAssignStmtBinaryOp, Memory memory) {
         ConMemory conMemory = (ConMemory) memory;
-        System.out.println("exe\t" + llAssignStmtBinaryOp);
+        if (printFlag) System.out.println("exe\t" + llAssignStmtBinaryOp);
         ValueOfDiffType left, right;
         if (llAssignStmtBinaryOp.getLeftOperand() instanceof LlLiteral) {
             left = getLlLiteralValue((LlLiteral) llAssignStmtBinaryOp.getLeftOperand());
@@ -102,7 +103,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlAssignStmtUnaryOp llAssignStmtUnaryOp, Memory memory) {
         ConMemory conMemory = (ConMemory) memory;
-        System.out.println("exe\t" + llAssignStmtUnaryOp);
+        if (printFlag) System.out.println("exe\t" + llAssignStmtUnaryOp);
         ValueOfDiffType right;
         if (llAssignStmtUnaryOp.getOperand() instanceof LlLiteral) {
             right = getLlLiteralValue((LlLiteral) llAssignStmtUnaryOp.getOperand());
@@ -132,7 +133,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlAssignStmtRegular llAssignStmtRegular, Memory memory) {
         ConMemory conMemory = (ConMemory) memory;
-        System.out.println("exe\t" + llAssignStmtRegular);
+        if (printFlag) System.out.println("exe\t" + llAssignStmtRegular);
         ValueOfDiffType right;
         if (llAssignStmtRegular.getOperand() instanceof LlLiteral) {
             right = getLlLiteralValue((LlLiteral) llAssignStmtRegular.getOperand());
@@ -145,13 +146,13 @@ public class LlStatementExeutor implements LlStatementVisitor {
 
     @Override
     public void visitor(LlJumpConditional llJumpConditional, Memory memory) {
-        System.out.println("exe\t" + llJumpConditional);
+        if (printFlag) System.out.println("exe\t" + llJumpConditional);
 
     }
 
     @Override
     public void visitor(LlJumpUnconditional llJumpUnconditional, Memory memory) {
-        System.out.println("exe\t" + llJumpUnconditional); // it is not been executed
+        if (printFlag) System.out.println("exe\t" + llJumpUnconditional); // it is not been executed
     }
 
     @Override
@@ -160,17 +161,18 @@ public class LlStatementExeutor implements LlStatementVisitor {
     }
     @Override
     public void visitor(LlReturn llReturn, Memory memory) {
-        System.out.println("exe" + llReturn);
+
+        if (printFlag) System.out.println("exe" + llReturn);
     }
 
 
     @Override
     public void visitor(LlMethodCallStmt llMethodCallStmt, Memory memory) {
         ConMemory conMemory = (ConMemory) memory;
-        System.out.println("exe\t" + llMethodCallStmt);
+        if (printFlag) System.out.println("exe\t" + llMethodCallStmt);
         if (llMethodCallStmt.getMethodName().equals("print")) {
             LlComponent arg = llMethodCallStmt.getArgsList().get(0);
-            System.out.println(arg + " = " + conMemory.getLocationvalue(arg));
+            if (printFlag) System.out.println(arg + " = " + conMemory.getLocationvalue(arg));
         }
         if (llMethodCallStmt.getMethodName().equals("read")) {
             readFunctionExe(llMethodCallStmt, conMemory);
@@ -185,7 +187,7 @@ public class LlStatementExeutor implements LlStatementVisitor {
         LlLocation location = llMethodCallStmt.getReturnLocation();
         BasicTypeEnum type = conMemory.getLocationvalue(location).getType();
 
-        System.out.print("Please enter a " + type + " string : ");
+        if (printFlag) System.out.print("Please enter a " + type + " string : ");
 
         String inPut = sc.next();
         try {

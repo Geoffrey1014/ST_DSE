@@ -1,0 +1,36 @@
+Node: Responder1 :
+Responder1, Entry, 
+
+Node: Init :
+Responder1, Init, Entry, 
+
+Node: Body :
+Responder1, Init, Read, Entry, Body, 
+
+Node: IF_L3 :
+Responder1, IF_L3, Init, Read, Entry, Body, 
+
+Node: ELSE_L9 :
+ELSE_L9, Responder1, IF_L3, Init, Read, Entry, Body, 
+
+Node: IF_L8 :
+Responder1, IF_L3, Init, IF_L8, Read, Entry, Body, 
+
+Node: END_IF_L8 :
+Responder1, IF_L3, Init, Read, END_IF_L8, Entry, Body, 
+
+Node: END_IF_L3 :
+Responder1, Init, END_IF_L3, Read, Entry, Body, 
+
+Node: Entry :
+Entry, 
+
+Node: End :
+Responder1, Init, END_IF_L3, Read, End, Entry, Body, 
+
+Node: Read :
+Responder1, Init, Read, Entry, 
+
+Node: Exit :
+Responder1, Init, Exit, END_IF_L3, Read, End, Entry, Body, 
+

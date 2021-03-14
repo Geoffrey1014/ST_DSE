@@ -15,13 +15,14 @@ import ll.literal.*;
 
 public class SymLlStatementExeutor implements LlStatementVisitor {
     Context ctx;
+    Boolean printFlag = false;
     public SymLlStatementExeutor(Context context){this.ctx = context;}
 
 
     @Override
     public void visitor(LlAssignStmtBinaryOp llAssignStmtBinaryOp, Memory memory) {
         SymMemory symMemory = (SymMemory) memory;
-        System.out.println("symExe\t" + llAssignStmtBinaryOp);
+        if (printFlag) System.out.println("symExe\t" + llAssignStmtBinaryOp);
         Expr left, right;
         if (llAssignStmtBinaryOp.getLeftOperand() instanceof LlLiteral) {
             left = getLlLiteralValue( (LlLiteral) llAssignStmtBinaryOp.getLeftOperand());
@@ -103,7 +104,7 @@ public class SymLlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlAssignStmtUnaryOp llAssignStmtUnaryOp, Memory memory) {
         SymMemory symMemory = (SymMemory) memory;
-        System.out.println("symExe\t" + llAssignStmtUnaryOp);
+        if (printFlag) System.out.println("symExe\t" + llAssignStmtUnaryOp);
         Expr right;
         if (llAssignStmtUnaryOp.getOperand() instanceof LlLiteral) {
             right = getLlLiteralValue( (LlLiteral) llAssignStmtUnaryOp.getOperand());
@@ -132,7 +133,7 @@ public class SymLlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlAssignStmtRegular llAssignStmtRegular, Memory memory) {
         SymMemory symMemory = (SymMemory) memory;
-        System.out.println("symExe\t" + llAssignStmtRegular);
+        if (printFlag) System.out.println("symExe\t" + llAssignStmtRegular);
         Expr right;
         if (llAssignStmtRegular.getOperand() instanceof LlLiteral) {
             right = getLlLiteralValue((LlLiteral) llAssignStmtRegular.getOperand());
@@ -144,13 +145,13 @@ public class SymLlStatementExeutor implements LlStatementVisitor {
 
     @Override
     public void visitor(LlJumpConditional llJumpConditional, Memory memory) {
-        System.out.println("symExe\t" + llJumpConditional);
+        if (printFlag) System.out.println("symExe\t" + llJumpConditional);
 
     }
 
     @Override
     public void visitor(LlJumpUnconditional llJumpUnconditional, Memory memory) {
-        System.out.println("symExe\t" + llJumpUnconditional); // it is not been symExecuted
+        if (printFlag) System.out.println("symExe\t" + llJumpUnconditional); // it is not been symExecuted
     }
 
     @Override
@@ -161,10 +162,10 @@ public class SymLlStatementExeutor implements LlStatementVisitor {
     @Override
     public void visitor(LlMethodCallStmt llMethodCallStmt,  Memory memory) {
         SymMemory symMemory = (SymMemory) memory;
-        System.out.println("symExe\t" + llMethodCallStmt);
+        if (printFlag) System.out.println("symExe\t" + llMethodCallStmt);
         if (llMethodCallStmt.getMethodName().equals("print")) {
             LlComponent arg = llMethodCallStmt.getArgsList().get(0);
-            System.out.println(arg + " = " + symMemory.get(arg));
+            if (printFlag) System.out.println(arg + " = " + symMemory.get(arg));
         }
         if (llMethodCallStmt.getMethodName().equals("read")) {
             readFunctionExe(llMethodCallStmt, ctx, symMemory);
@@ -178,7 +179,8 @@ public class SymLlStatementExeutor implements LlStatementVisitor {
 
     @Override
     public void visitor(LlReturn llReturn, Memory memory) {
-        System.out.println("symExe" + llReturn);
+
+        if (printFlag) System.out.println("symExe" + llReturn);
     }
 
     public Expr getLlLiteralValue( LlLiteral operand) {

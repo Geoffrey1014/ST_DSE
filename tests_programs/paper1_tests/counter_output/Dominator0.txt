@@ -1,27 +1,27 @@
 Node: counter :
-counter, Entry, 
+Entry, counter, 
 
 Node: Init :
-Init, counter, Entry, 
+Entry, Init, counter, 
 
 Node: Body :
-Init, counter, Body, Read, Entry, 
+Entry, Init, Read, Body, counter, 
 
 Node: IF_L8 :
-Init, IF_L8, counter, Body, Read, Entry, 
+Entry, Init, Read, IF_L8, Body, counter, 
 
 Node: END_IF_L8 :
-Init, END_IF_L8, counter, Body, Read, Entry, 
+Entry, END_IF_L8, Init, Read, Body, counter, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-Init, END_IF_L8, counter, End, Body, Read, Entry, 
+Entry, END_IF_L8, Init, Read, Body, End, counter, 
 
 Node: Read :
-Init, counter, Read, Entry, 
+Entry, Init, Read, counter, 
 
 Node: Exit :
-Init, END_IF_L8, counter, End, Body, Read, Exit, Entry, 
+Entry, END_IF_L8, Init, Exit, Read, Body, End, counter, 
 

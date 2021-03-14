@@ -51,7 +51,7 @@ public class Simulator {
             if (llStatement instanceof LlJumpConditional) {
                 this.branchBlocks.add(bb);
             }
-            if (bb.getStmtsList().size() > 1) {
+            if (bb.getStmtsList().size() > 1 && !bb.name.equals("Init")) {
                 this.stmtBlocks.add(bb);
             }
         }
@@ -93,54 +93,43 @@ public class Simulator {
             ConMemory nextConMemory = new ConMemory(oldConMenory);
             result = conExeFromRead(calculatedInputs.pop(), nextConMemory);
             stateManager.add(nextConMemory);
+            branchManager.addRoute(result.a1,result.a2);
         }
 
-        while (stateManager.candidatesSize() > 0){
-            result = conExeFromRead(createRandomInputs(),stateManager.popLeft());
-        }
         System.out.println("branch coverage: "+branchManager.coverageRate());
 
     }
 
+    public void branchTest(){
+        // create createInitMemory
+        ConMemory conMemory = createInitMemory();
+        ConMemory oldConMenory = new ConMemory(conMemory);
 
+        //createSymMemory according to conMemory and mkInputSymbolic
+        SymMemory symMemory = symbolExecutor.createSymMemory(conMemory);
+        symbolExecutor.mkInputSymbolic(symMemory);
+        LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
+        inputsWorkList.add(createDefaultInputs());
 
-    /**
-     * execute from initBlock and circle the loop for n times
-     *
-     * @return
-     */
-    public Tuple2<List<String>, List<Tuple2<Integer, Boolean>>> conExeFromInit(int circleNumLimit, ConMemory conMemory) {
-        putNonInputVarInitToMemory(conMemory); // initialize NonInput vars
-        List<String> route = new ArrayList<>();
-        List<Tuple2<Integer, Boolean>> branches = new ArrayList<>();
-        BasicBlock initNode = this.cfg.getBasicBlocks().get(0).getDefaultBranch(); //initNode
-        BasicBlock curBlock = initNode;
-        int bbConuter = 0;
-        int circleCounter = 0;
-        while (circleCounter < circleNumLimit) {
-            String leaderLabel = this.cfg.blockLabels.get(curBlock);
-            System.out.println("\n" + leaderLabel);
-            route.add(leaderLabel);
-            bbConuter += 1;
-            if (leaderLabel.equals("End")) {
-                circleCounter += 1;
-            }
+        int counter = 0;
+        while (inputsWorkList.size() >0){
+            System.out.println("circle: "+counter + " -------------");
+            Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(inputsWorkList.pollFirst(), conMemory);
+//            float stmtCoverage = this.coveredBlocks.size() / (float) this.stmtBlocks.size();
+//            System.out.println("stmts coverage: " + stmtCoverage);
+            if(branchManager.coverageRate() > 0.95) break;
 
-            Tuple2<BasicBlock, Boolean> nextBB;
-            if (leaderLabel.equals("Read") && circleCounter == 0) {
-                putInputVarInitToMemory(conMemory); // initialize input vars
-                nextBB = new Tuple2<>(curBlock.getDefaultBranch(), false);
-            } else {
-                nextBB = executeBasicBlock(curBlock, conMemory);
-            }
-
-            if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(bbConuter, nextBB.a2));
-            if (this.stmtBlocks.contains(curBlock)) this.coveredBlocks.add(curBlock);
-
-            curBlock = nextBB.a1;
-            System.out.println("stmt coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
+            stateManager.add(conMemory);
+            branchManager.addRoute(result.a1,result.a2);
+            // pruning algorithm
+            List<Tuple2<Integer, Boolean>> flipBranches = branchManager.pruningBranches(result.a1, result.a2);
+            // SE and get calculatedInputs
+            LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, result.a1, flipBranches);
+            inputsWorkList.addAll(calculatedInputs);
+            counter +=1;
         }
-        return new Tuple2<>(route, branches);
+        System.out.println("branch coverage: "+branchManager.coverageRate());
+
 
     }
 
@@ -163,6 +152,7 @@ public class Simulator {
         setInputIntoMemory(inputs, conMemory);
         List<BasicBlock> route = new ArrayList<>();
         BasicBlock readBB = this.cfg.leadersToBBMap.get("Read");
+        this.coveredBlocks.add(readBB);
         route.add(readBB);
 
         BasicBlock curBlock = this.cfg.leadersToBBMap.get("Body");
@@ -170,7 +160,7 @@ public class Simulator {
         int conuter = 1;
         while (curBlock != null) {
             String leaderLabel = this.cfg.blockLabels.get(curBlock);
-            System.out.println("\n" + leaderLabel);
+//            System.out.println("\n" + leaderLabel);
 
             if (curBlock.equals(readBB)) break;
             route.add(curBlock);
@@ -180,7 +170,6 @@ public class Simulator {
             conuter += 1;
             curBlock = nextBB.a1;
         }
-        System.out.println("stmts coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
         return new Tuple2<>(route, branches);
     }
 

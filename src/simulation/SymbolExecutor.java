@@ -121,7 +121,7 @@ public class SymbolExecutor {
             return resluts;
 
         } else {
-            System.out.println("\n" + Status.UNSATISFIABLE);
+//            System.out.println("\n" + Status.UNSATISFIABLE);
             this.solver.pop();
             return null;
         }

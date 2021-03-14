@@ -364,8 +364,8 @@ START_ELSIF_L63 :  EMPTY_STATEMENT
            L299 :  print(cstate0,)
            L300 :  print(grant_1,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L301 :  req2 = read()
            L302 :  req1 = read()
+
+           Exit :  EMPTY_STATEMENT

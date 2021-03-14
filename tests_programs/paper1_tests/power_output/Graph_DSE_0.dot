@@ -12,58 +12,58 @@ digraph G {
            Body :  EMPTY_STATEMENT
              L8 :  #_t1 = Y > 0
           CJ_L9 :  if #_t1 goto IF_L5
-"; "5 ELSE_L6
+"; "6 ELSE_L6
         ELSE_L6 :  EMPTY_STATEMENT
             L11 :  #_t2 = - Y
             L12 :  EXP = #_t2
         UCJ_L13 :  goto END_IF_L5
-"; "19 IF_L5
+"; "5 IF_L5
           IF_L5 :  EMPTY_STATEMENT
             L14 :  EXP = Y
-"; "6 END_IF_L5
+"; "7 END_IF_L5
       END_IF_L5 :  EMPTY_STATEMENT
             L17 :  #_t4 = FLAG == false
          CJ_L18 :  if #_t4 goto IF_L15
-"; "18 IF_L15
+"; "8 IF_L15
          IF_L15 :  EMPTY_STATEMENT
             L21 :  FLAG = true
-"; "7 END_IF_L15
+"; "9 END_IF_L15
      END_IF_L15 :  EMPTY_STATEMENT
             L23 :  RES = 1.0
-"; "8 WHILE_L24
+"; "10 WHILE_L24
       WHILE_L24 :  EMPTY_STATEMENT
             L27 :  #_t8 = EXP <> 0
          CJ_L28 :  if #_t8 goto LOOP_L25
-"; "17 LOOP_L25
+"; "19 LOOP_L25
        LOOP_L25 :  EMPTY_STATEMENT
             L30 :  #_t9 = RES * X
             L31 :  RES = #_t9
             L33 :  #_t11 = EXP - 1
             L34 :  EXP = #_t11
         UCJ_L35 :  goto WHILE_L24
-"; "9 END_WHILE_L24
+"; "11 END_WHILE_L24
   END_WHILE_L24 :  EMPTY_STATEMENT
             L38 :  #_t13 = Y <= 0
          CJ_L39 :  if #_t13 goto IF_L36
-"; "13 IF_L36
+"; "15 IF_L36
          IF_L36 :  EMPTY_STATEMENT
             L44 :  #_t15 = X == 0.0
          CJ_L45 :  if #_t15 goto IF_L41
-"; "15 ELSE_L42
+"; "16 ELSE_L42
        ELSE_L42 :  EMPTY_STATEMENT
             L48 :  #_t17 = 1.0 / RES
             L49 :  RES = #_t17
         UCJ_L50 :  goto END_IF_L41
-"; "14 IF_L41
+"; "18 IF_L41
          IF_L41 :  EMPTY_STATEMENT
             L52 :  FLAG = false
-"; "16 END_IF_L41
+"; "17 END_IF_L41
      END_IF_L41 :  EMPTY_STATEMENT
-"; "10 END_IF_L36
+"; "12 END_IF_L36
      END_IF_L36 :  EMPTY_STATEMENT
 "; "0 Entry
           Entry :  EMPTY_STATEMENT
-"; "11 End
+"; "13 End
             End :  EMPTY_STATEMENT
             L53 :  print(RES,)
             L54 :  print(FLAG,)
@@ -72,7 +72,7 @@ digraph G {
            Read :  EMPTY_STATEMENT
             L56 :  Y = read()
             L57 :  X = read()
-"; "12 Exit
+"; "14 Exit
            Exit :  EMPTY_STATEMENT
 "; 
   "1 power
@@ -93,7 +93,7 @@ digraph G {
            Body :  EMPTY_STATEMENT
              L8 :  #_t1 = Y > 0
           CJ_L9 :  if #_t1 goto IF_L5
-" -> "5 ELSE_L6
+" -> "6 ELSE_L6
         ELSE_L6 :  EMPTY_STATEMENT
             L11 :  #_t2 = - Y
             L12 :  EXP = #_t2
@@ -103,73 +103,73 @@ digraph G {
            Body :  EMPTY_STATEMENT
              L8 :  #_t1 = Y > 0
           CJ_L9 :  if #_t1 goto IF_L5
-" -> "19 IF_L5
+" -> "5 IF_L5
           IF_L5 :  EMPTY_STATEMENT
             L14 :  EXP = Y
 "  [label="alter"];
-  "5 ELSE_L6
+  "6 ELSE_L6
         ELSE_L6 :  EMPTY_STATEMENT
             L11 :  #_t2 = - Y
             L12 :  EXP = #_t2
         UCJ_L13 :  goto END_IF_L5
-" -> "6 END_IF_L5
+" -> "7 END_IF_L5
       END_IF_L5 :  EMPTY_STATEMENT
             L17 :  #_t4 = FLAG == false
          CJ_L18 :  if #_t4 goto IF_L15
 "  [label="alter"];
-  "19 IF_L5
+  "5 IF_L5
           IF_L5 :  EMPTY_STATEMENT
             L14 :  EXP = Y
-" -> "6 END_IF_L5
+" -> "7 END_IF_L5
       END_IF_L5 :  EMPTY_STATEMENT
             L17 :  #_t4 = FLAG == false
          CJ_L18 :  if #_t4 goto IF_L15
 "  [label="default"];
-  "6 END_IF_L5
+  "7 END_IF_L5
       END_IF_L5 :  EMPTY_STATEMENT
             L17 :  #_t4 = FLAG == false
          CJ_L18 :  if #_t4 goto IF_L15
-" -> "7 END_IF_L15
+" -> "9 END_IF_L15
      END_IF_L15 :  EMPTY_STATEMENT
             L23 :  RES = 1.0
 "  [label="default"];
-  "6 END_IF_L5
+  "7 END_IF_L5
       END_IF_L5 :  EMPTY_STATEMENT
             L17 :  #_t4 = FLAG == false
          CJ_L18 :  if #_t4 goto IF_L15
-" -> "18 IF_L15
+" -> "8 IF_L15
          IF_L15 :  EMPTY_STATEMENT
             L21 :  FLAG = true
 "  [label="alter"];
-  "18 IF_L15
+  "8 IF_L15
          IF_L15 :  EMPTY_STATEMENT
             L21 :  FLAG = true
-" -> "7 END_IF_L15
+" -> "9 END_IF_L15
      END_IF_L15 :  EMPTY_STATEMENT
             L23 :  RES = 1.0
 "  [label="default"];
-  "7 END_IF_L15
+  "9 END_IF_L15
      END_IF_L15 :  EMPTY_STATEMENT
             L23 :  RES = 1.0
-" -> "8 WHILE_L24
+" -> "10 WHILE_L24
       WHILE_L24 :  EMPTY_STATEMENT
             L27 :  #_t8 = EXP <> 0
          CJ_L28 :  if #_t8 goto LOOP_L25
 "  [label="default"];
-  "8 WHILE_L24
+  "10 WHILE_L24
       WHILE_L24 :  EMPTY_STATEMENT
             L27 :  #_t8 = EXP <> 0
          CJ_L28 :  if #_t8 goto LOOP_L25
-" -> "9 END_WHILE_L24
+" -> "11 END_WHILE_L24
   END_WHILE_L24 :  EMPTY_STATEMENT
             L38 :  #_t13 = Y <= 0
          CJ_L39 :  if #_t13 goto IF_L36
 "  [label="default"];
-  "8 WHILE_L24
+  "10 WHILE_L24
       WHILE_L24 :  EMPTY_STATEMENT
             L27 :  #_t8 = EXP <> 0
          CJ_L28 :  if #_t8 goto LOOP_L25
-" -> "17 LOOP_L25
+" -> "19 LOOP_L25
        LOOP_L25 :  EMPTY_STATEMENT
             L30 :  #_t9 = RES * X
             L31 :  RES = #_t9
@@ -177,74 +177,74 @@ digraph G {
             L34 :  EXP = #_t11
         UCJ_L35 :  goto WHILE_L24
 "  [label="alter"];
-  "17 LOOP_L25
+  "19 LOOP_L25
        LOOP_L25 :  EMPTY_STATEMENT
             L30 :  #_t9 = RES * X
             L31 :  RES = #_t9
             L33 :  #_t11 = EXP - 1
             L34 :  EXP = #_t11
         UCJ_L35 :  goto WHILE_L24
-" -> "8 WHILE_L24
+" -> "10 WHILE_L24
       WHILE_L24 :  EMPTY_STATEMENT
             L27 :  #_t8 = EXP <> 0
          CJ_L28 :  if #_t8 goto LOOP_L25
 "  [label="alter"];
-  "9 END_WHILE_L24
+  "11 END_WHILE_L24
   END_WHILE_L24 :  EMPTY_STATEMENT
             L38 :  #_t13 = Y <= 0
          CJ_L39 :  if #_t13 goto IF_L36
-" -> "10 END_IF_L36
+" -> "12 END_IF_L36
      END_IF_L36 :  EMPTY_STATEMENT
 "  [label="default"];
-  "9 END_WHILE_L24
+  "11 END_WHILE_L24
   END_WHILE_L24 :  EMPTY_STATEMENT
             L38 :  #_t13 = Y <= 0
          CJ_L39 :  if #_t13 goto IF_L36
-" -> "13 IF_L36
+" -> "15 IF_L36
          IF_L36 :  EMPTY_STATEMENT
             L44 :  #_t15 = X == 0.0
          CJ_L45 :  if #_t15 goto IF_L41
 "  [label="alter"];
-  "13 IF_L36
+  "15 IF_L36
          IF_L36 :  EMPTY_STATEMENT
             L44 :  #_t15 = X == 0.0
          CJ_L45 :  if #_t15 goto IF_L41
-" -> "15 ELSE_L42
+" -> "16 ELSE_L42
        ELSE_L42 :  EMPTY_STATEMENT
             L48 :  #_t17 = 1.0 / RES
             L49 :  RES = #_t17
         UCJ_L50 :  goto END_IF_L41
 "  [label="default"];
-  "13 IF_L36
+  "15 IF_L36
          IF_L36 :  EMPTY_STATEMENT
             L44 :  #_t15 = X == 0.0
          CJ_L45 :  if #_t15 goto IF_L41
-" -> "14 IF_L41
+" -> "18 IF_L41
          IF_L41 :  EMPTY_STATEMENT
             L52 :  FLAG = false
 "  [label="alter"];
-  "15 ELSE_L42
+  "16 ELSE_L42
        ELSE_L42 :  EMPTY_STATEMENT
             L48 :  #_t17 = 1.0 / RES
             L49 :  RES = #_t17
         UCJ_L50 :  goto END_IF_L41
-" -> "16 END_IF_L41
+" -> "17 END_IF_L41
      END_IF_L41 :  EMPTY_STATEMENT
 "  [label="alter"];
-  "14 IF_L41
+  "18 IF_L41
          IF_L41 :  EMPTY_STATEMENT
             L52 :  FLAG = false
-" -> "16 END_IF_L41
+" -> "17 END_IF_L41
      END_IF_L41 :  EMPTY_STATEMENT
 "  [label="default"];
-  "16 END_IF_L41
+  "17 END_IF_L41
      END_IF_L41 :  EMPTY_STATEMENT
-" -> "10 END_IF_L36
+" -> "12 END_IF_L36
      END_IF_L36 :  EMPTY_STATEMENT
 "  [label="default"];
-  "10 END_IF_L36
+  "12 END_IF_L36
      END_IF_L36 :  EMPTY_STATEMENT
-" -> "11 End
+" -> "13 End
             End :  EMPTY_STATEMENT
             L53 :  print(RES,)
             L54 :  print(FLAG,)
@@ -255,7 +255,7 @@ digraph G {
 " -> "1 power
           power :  EMPTY_STATEMENT
 "  [label="default"];
-  "11 End
+  "13 End
             End :  EMPTY_STATEMENT
             L53 :  print(RES,)
             L54 :  print(FLAG,)
@@ -265,12 +265,12 @@ digraph G {
             L56 :  Y = read()
             L57 :  X = read()
 "  [label="default"];
-  "11 End
+  "13 End
             End :  EMPTY_STATEMENT
             L53 :  print(RES,)
             L54 :  print(FLAG,)
             L55 :  print(EXP,)
-" -> "12 Exit
+" -> "14 Exit
            Exit :  EMPTY_STATEMENT
 "  [label="alter"];
   "3 Read

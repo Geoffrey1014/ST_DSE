@@ -1005,9 +1005,9 @@ START_ELSIF_L843 :  EMPTY_STATEMENT
            L870 :  print(grant_2,)
            L871 :  print(grant_1,)
 
-           Exit :  EMPTY_STATEMENT
-
            Read :  EMPTY_STATEMENT
            L872 :  req3 = read()
            L873 :  req2 = read()
            L874 :  req1 = read()
+
+           Exit :  EMPTY_STATEMENT

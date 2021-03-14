@@ -23,7 +23,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Main {
     public static MyPrint myprint = new MyPrint(3);
@@ -137,19 +140,19 @@ public class Main {
 
                 System.out.println("simulator.execute();------------");
                 Simulator simulator = new Simulator(cfg);
-                simulator.execute();
+                simulator.branchTest();
 
                 System.out.println("CF------------------------");
-                GlobalCF.performGlobalCodeFolding(cfg);
-                writeFile(cfg.toString(), outPutDir + "new_" + "CF_" + cfgCounter + ".txt");
-
-                System.out.println("URE------------------------");
-                GlobalURE.performGlobalURE(cfg);
-                writeFile(cfg.toString(), outPutDir + "new_" + "URE_" + cfgCounter + ".txt");
-
-                System.out.println("AS------------------------");
-                AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
-                writeFile(cfg.toString(), outPutDir + "new_" + "AS_" + cfgCounter + ".txt");
+//                GlobalCF.performGlobalCodeFolding(cfg);
+//                writeFile(cfg.toString(), outPutDir + "new_" + "CF_" + cfgCounter + ".txt");
+//
+//                System.out.println("URE------------------------");
+//                GlobalURE.performGlobalURE(cfg);
+//                writeFile(cfg.toString(), outPutDir + "new_" + "URE_" + cfgCounter + ".txt");
+//
+//                System.out.println("AS------------------------");
+//                AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
+//                writeFile(cfg.toString(), outPutDir + "new_" + "AS_" + cfgCounter + ".txt");
 
                 cfgCounter++;
             }
@@ -166,11 +169,11 @@ public class Main {
         inputDir = "tests_programs/paper1_tests/input/";
         String file = "power.txt";
 //        String file = "counter.txt";
-        walkTree(inputDir+file);
+//        walkTree(inputDir+file);
         // 判断结果是否正确（感觉这个比较困难，看看别人是怎么做都）
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
     public static void runDirFiles(String path){
@@ -178,9 +181,13 @@ public class Main {
         File file = new File(path);		//获取其file对象
         File[] fs = file.listFiles();	//遍历path下的文件和目录，放在File数组中
         for(File f:fs) {                    //遍历File[]数组
-            if (!f.isDirectory())        //若非目录(即文件)，则打印
-                System.out.println(Arrays.toString(f.toString().split("/")));
+            if (!f.isDirectory())  {
+                //若非目录(即文件)，则打印
+//                System.out.println(Arrays.toString(f.toString().split("/")));
+                System.out.println("----- "+f+" ---------");
                 walkTree(f.toString());
+            }
+
 
         }
     }
