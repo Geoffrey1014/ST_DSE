@@ -22,6 +22,7 @@ public class SymbolExecutor {
     private Context ctx;
     private SymLlStatementExeutor symLlStatementExeutor;
     private HashSet<LlLocation> inputVars;
+    private HashSet<LlLocation> nonInputVars;
 
     public SymbolExecutor(CFG cfg) {
         this.cfg = cfg;
@@ -31,6 +32,7 @@ public class SymbolExecutor {
         this.solver = this.ctx.mkSolver();
         this.symLlStatementExeutor = new SymLlStatementExeutor(this.ctx); // executor 和 ctx 要保持一直，所以这里其实可以设置成类成员变量
         this.inputVars = cfg.getInputVars();         // get input var
+        this.nonInputVars = cfg.getNonInputVars();
     }
 
     public SymMemory createInitSymMemory() {
@@ -39,9 +41,15 @@ public class SymbolExecutor {
         return symMemory;
     }
 
+    public SymMemory createSymMemory(ConMemory conMemory){
+        SymMemory symMemory = new SymMemory();
+        copyNonInputVarToSymMemory(conMemory,symMemory);
+        return symMemory;
+    }
+
 
     public LinkedList<HashMap<LlLocation, ValueOfDiffType>> symExeFromRead(
-            SymMemory symMemory, List<String> route, List<Tuple2<Integer, Boolean>> branches) {
+            SymMemory symMemory, List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches) {
         // TODO 把函数整理一下
         // TODO 需要拆分函数功能, 这个函数是有问题的。 应该只考虑一个周期的执行
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = new LinkedList<>();
@@ -49,9 +57,9 @@ public class SymbolExecutor {
         int left = 0;
         solver.push();
         for (Tuple2<Integer, Boolean> branch : branches) {
-            for (String bbLabel : route.subList(left, branch.a1 + 1)) {
-                if (bbLabel.equals("Read")) continue;
-                symExecuteBasicBlock(this.cfg.leadersToBBMap.get(bbLabel), symMemory, branch.a2, calculatedInputs);
+            for (BasicBlock bb : route.subList(left, branch.a1 + 1)) {
+                if (bb.name.equals("Read")) continue;
+                symExecuteBasicBlock(bb, symMemory, branch.a2, calculatedInputs);
             }
             left = branch.a1 + 1;
         }
@@ -168,6 +176,30 @@ public class SymbolExecutor {
             else if (llLiteral instanceof LlLiteralString)
                 System.err.println("string is not supported!");
             else System.out.println("wrong type!");
+        }
+    }
+
+    public void copyNonInputVarToSymMemory(ConMemory conMemory, SymMemory symMemory) {
+
+        for (LlComponent llComponent : nonInputVars) {
+            ValueOfDiffType value = conMemory.getLocationvalue(llComponent);
+            BasicTypeEnum type = value.getType();
+            switch (type){
+                case STRING:
+                    System.err.println("string is not dealt with");
+                    break;
+                case FLOAT:
+                    symMemory.put(llComponent,ctx.mkReal(value.getvDouble().toString()));
+                    break;
+                case INTEGER:
+                    symMemory.put(llComponent,ctx.mkInt(value.getvLong()));
+                    break;
+                case BOOLEAN:
+                    symMemory.put(llComponent,ctx.mkBool(value.getvBoolean()));
+                    break;
+                default:
+                    System.out.println("wrong type!");
+            }
         }
     }
 }

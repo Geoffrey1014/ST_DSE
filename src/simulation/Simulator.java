@@ -32,6 +32,7 @@ public class Simulator {
     private SymbolExecutor symbolExecutor;
     private Random random = new Random(19);
     private StateManager stateManager;
+    private BranchManager branchManager;
 
     public Simulator(CFG cfg) {
         this.cfg = cfg;
@@ -42,6 +43,7 @@ public class Simulator {
         this.inputVars = cfg.getInputVars();
         this.symbolExecutor = new SymbolExecutor(cfg);
         this.stateManager = new StateManager();
+
         // get branch block and blocks which has executable stmts (not empty stmt)
         ArrayList<BasicBlock> basicBlockArrayList = cfg.getBasicBlocks();
         for (BasicBlock bb : basicBlockArrayList) {
@@ -53,6 +55,7 @@ public class Simulator {
                 this.stmtBlocks.add(bb);
             }
         }
+        this.branchManager = new BranchManager(cfg,this.branchBlocks);
 
     }
 
@@ -65,40 +68,41 @@ public class Simulator {
     public void execute() {
         //TODO：只考虑单周期。多周期由单周期组合而成，需要stateManager
 
+        // create createInitMemory
         ConMemory conMemory = createInitMemory();
         ConMemory oldConMenory = new ConMemory(conMemory);
-
-        HashMap<LlLocation, ValueOfDiffType> defaultInputs = createDefaultInputs();
-        Tuple2<List<String>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(defaultInputs, conMemory);
-        List<String> route = result.a1;
-        List<Tuple2<Integer, Boolean>> branches = result.a2;
-        System.out.println(route);
-        System.out.println(branches);
-
-        List<Tuple2<Integer, Boolean>> flipBranches = pruningAlgo(route, branches);
-
-        SymMemory symMemory = symbolExecutor.createInitSymMemory();
+        //createSymMemory according to conMemory and mkInputSymbolic
+        SymMemory symMemory = symbolExecutor.createSymMemory(conMemory);
         symbolExecutor.mkInputSymbolic(symMemory);
+
+        // initially concrete exe
+        Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(createDefaultInputs(), conMemory);
+        List<BasicBlock> route = result.a1;
+        List<Tuple2<Integer, Boolean>> branches = result.a2;
+        stateManager.add(conMemory);
+        branchManager.addRoute(route,branches);
+
+        // pruning algorithm
+        List<Tuple2<Integer, Boolean>> flipBranches = branchManager.pruningBranches(route, branches);
+
+        // SE and get calculatedInputs
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, route, flipBranches);
 
-
+        // concrete exe calculatedInputs
         while (calculatedInputs.size() > 0) {
             ConMemory nextConMemory = new ConMemory(oldConMenory);
             result = conExeFromRead(calculatedInputs.pop(), nextConMemory);
             stateManager.add(nextConMemory);
         }
 
+        while (stateManager.candidatesSize() > 0){
+            result = conExeFromRead(createRandomInputs(),stateManager.popLeft());
+        }
+        System.out.println("branch coverage: "+branchManager.coverageRate());
+
     }
 
-    public List<Tuple2<Integer, Boolean>> pruningAlgo(List<String> route, List<Tuple2<Integer, Boolean>> branches) {
-        // there is no pruning algorithm now
-        // TODO  需要过滤算法，去除route中不必要的分支
-        List<Tuple2<Integer, Boolean>> flipBranches = new ArrayList<>();
-        for (Tuple2<Integer, Boolean> branch : branches) {
-            flipBranches.add(new Tuple2<>(branch.a1, !branch.a2));
-        }
-        return flipBranches;
-    }
+
 
     /**
      * execute from initBlock and circle the loop for n times
@@ -152,13 +156,14 @@ public class Simulator {
      * @param inputs
      * @return
      */
-    public Tuple2<List<String>, List<Tuple2<Integer, Boolean>>> conExeFromRead(
+    public Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> conExeFromRead(
             HashMap<LlLocation, ValueOfDiffType> inputs, ConMemory conMemory) {
 
         // equal to executing Read Block
         setInputIntoMemory(inputs, conMemory);
-        List<String> route = new ArrayList<>();
-        route.add("Read");
+        List<BasicBlock> route = new ArrayList<>();
+        BasicBlock readBB = this.cfg.leadersToBBMap.get("Read");
+        route.add(readBB);
 
         BasicBlock curBlock = this.cfg.leadersToBBMap.get("Body");
         List<Tuple2<Integer, Boolean>> branches = new ArrayList<>();
@@ -167,15 +172,15 @@ public class Simulator {
             String leaderLabel = this.cfg.blockLabels.get(curBlock);
             System.out.println("\n" + leaderLabel);
 
-            if (leaderLabel.equals("Read")) break;
-            route.add(leaderLabel);
+            if (curBlock.equals(readBB)) break;
+            route.add(curBlock);
             Tuple2<BasicBlock, Boolean> nextBB = executeBasicBlock(curBlock, conMemory);
             if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter, nextBB.a2));
             if (this.stmtBlocks.contains(curBlock)) this.coveredBlocks.add(curBlock);
             conuter += 1;
             curBlock = nextBB.a1;
-            System.out.println("coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
         }
+        System.out.println("stmts coverage: " + this.coveredBlocks.size() / (float) this.stmtBlocks.size());
         return new Tuple2<>(route, branches);
     }
 

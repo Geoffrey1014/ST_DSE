@@ -36,17 +36,48 @@ public class ValueOfDiffType {
                 return vString;
             case BOOLEAN:
                 return vBoolean.toString();
+            default:
+                return "impossible";
         }
-        return "";
+
     }
     @Override
     public boolean equals(Object object){
         if(object instanceof ValueOfDiffType){
             ValueOfDiffType other = (ValueOfDiffType) object;
-            return this.type.equals(other.type) && this.vBoolean.equals(other.vBoolean)
-                    && this.vLong.equals(other.vLong)&& this.vDouble.equals(other.vDouble) && this.vString.equals(other.vString);
+            if(this.type.equals(other.type)){
+                switch (type){
+                    case FLOAT:
+                        return vDouble.equals(other.vDouble);
+                    case INTEGER:
+                        return vLong.equals(other.vLong);
+                    case STRING:
+                        return vString.equals(other.vString);
+                    case BOOLEAN:
+                        return vBoolean.equals(other.vBoolean);
+                    default:
+                        return false;
+                }
+            }
+
         }
         return false;
+    }
+
+    @Override
+    public int hashCode(){
+        switch (type){
+            case FLOAT:
+                return vDouble.hashCode();
+            case INTEGER:
+                return vLong.hashCode();
+            case STRING:
+                return vString.hashCode();
+            case BOOLEAN:
+                return vBoolean.hashCode();
+            default:
+                return 0;
+        }
     }
 
     public BasicTypeEnum getType(){

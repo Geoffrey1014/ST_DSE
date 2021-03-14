@@ -61,7 +61,7 @@ public class DFT {
 
         HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
         do{
-            Tuple2<List<String>,List<Tuple2<Integer,Boolean>>> result = simulator.conExeFromRead(inputs,conMemory);
+            Tuple2<List<BasicBlock>,List<Tuple2<Integer,Boolean>>> result = simulator.conExeFromRead(inputs,conMemory);
 
             List<Tuple2<BasicBlock,Boolean>> branchNodes = getBranchNodes(result);
 
@@ -114,22 +114,22 @@ public class DFT {
     }
 
 
-    public List<Tuple2<BasicBlock,Boolean>> getBranchNodes(Tuple2<List<String> ,List<Tuple2<Integer,Boolean>>> result){
+    public List<Tuple2<BasicBlock,Boolean>> getBranchNodes(Tuple2<List<BasicBlock> ,List<Tuple2<Integer,Boolean>>> result){
         List<Tuple2<BasicBlock,Boolean>> branchNodes = new ArrayList<>();
         for(Tuple2<Integer, Boolean> b: result.a2){
-            branchNodes.add(new Tuple2<>(this.cfg.leadersToBBMap.get(result.a1.get(b.a1)), b.a2));
+            branchNodes.add(new Tuple2<>(result.a1.get(b.a1), b.a2));
         }
         return branchNodes;
     }
 
 
-    public boolean pathCoverDu(List<String> path, VarAndStmt def, VarAndStmt use){
+    public boolean pathCoverDu(List<BasicBlock> path, VarAndStmt def, VarAndStmt use){
         boolean defFlag = false;
         boolean useFlag = false;
 
-        for(String bbLabel: path){
-            if(bbLabel.equals(def.block.name)) defFlag = true;
-            if(bbLabel.equals(use.block.name)) useFlag = true;
+        for(BasicBlock bbLabel: path){
+            if(bbLabel.equals(def.block)) defFlag = true;
+            if(bbLabel.equals(use.block)) useFlag = true;
 
         }
         return defFlag && useFlag;

@@ -281,15 +281,21 @@ public class CFG {
     }
 
     public HashSet<LlLocation> getInputVars(){
-        HashSet<LlLocation> inputVars = new HashSet<>();
-        BasicBlock readBB = this.leadersToBBMap.get("Read");
-        for(LlStatement llStatement: readBB.getStmtsList()){
-            if(llStatement instanceof LlMethodCallStmt){
-                LlMethodCallStmt llMethodCallStmt = (LlMethodCallStmt) llStatement;
-                inputVars.add(llMethodCallStmt.getReturnLocation());
-            }
+        HashSet<LlComponent> inputVars = new HashSet<>(this.getLlSymbolTable().varInput.keySet());
+        HashSet<LlLocation> inputVars2 = new HashSet<>();
+        for(LlComponent llComponent : inputVars){
+            inputVars2.add((LlLocation) llComponent);
         }
-        return inputVars;
+        return inputVars2;
+    }
+
+    public HashSet<LlLocation> getNonInputVars(){
+        HashSet<LlComponent> nonInputVars = new HashSet<>(this.getLlSymbolTable().varNonInput.keySet());
+        HashSet<LlLocation> nonInputVars2 = new HashSet<>();
+        for(LlComponent llComponent : nonInputVars){
+            nonInputVars2.add((LlLocation) llComponent);
+        }
+        return nonInputVars2;
     }
 
     public String toGraphviz(){

@@ -1,60 +1,60 @@
 Node: power :
-Entry, power, 
+power, Entry, 
 
 Node: Init :
-Entry, Init, power, 
+Init, power, Entry, 
 
 Node: Body :
-Read, Body, Entry, Init, power, 
+Read, Body, Init, power, Entry, 
 
 Node: ELSE_L6 :
-Read, Body, ELSE_L6, Entry, Init, power, 
+Read, Body, ELSE_L6, Init, power, Entry, 
 
 Node: IF_L5 :
-Read, Body, Entry, Init, power, IF_L5, 
+Read, Body, Init, power, Entry, IF_L5, 
 
 Node: END_IF_L5 :
-Read, Body, Entry, END_IF_L5, Init, power, 
+Read, Body, END_IF_L5, Init, power, Entry, 
 
 Node: IF_L15 :
-Read, Body, Entry, END_IF_L5, Init, power, IF_L15, 
+Read, IF_L15, Body, END_IF_L5, Init, power, Entry, 
 
 Node: END_IF_L15 :
-Read, Body, END_IF_L15, Entry, END_IF_L5, Init, power, 
+END_IF_L15, Read, Body, END_IF_L5, Init, power, Entry, 
 
 Node: WHILE_L24 :
-Read, Body, END_IF_L15, Entry, END_IF_L5, Init, power, WHILE_L24, 
+END_IF_L15, Read, Body, END_IF_L5, Init, power, WHILE_L24, Entry, 
 
 Node: LOOP_L25 :
-Read, Body, END_IF_L15, Entry, LOOP_L25, END_IF_L5, Init, power, WHILE_L24, 
+END_IF_L15, Read, Body, END_IF_L5, LOOP_L25, Init, power, WHILE_L24, Entry, 
 
 Node: END_WHILE_L24 :
-Read, Body, END_IF_L15, Entry, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, 
+END_IF_L15, Read, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, Entry, 
 
 Node: IF_L36 :
-Read, Body, IF_L36, END_IF_L15, Entry, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, 
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, Entry, 
 
 Node: ELSE_L42 :
-Read, Body, IF_L36, END_IF_L15, Entry, END_IF_L5, END_WHILE_L24, ELSE_L42, Init, power, WHILE_L24, 
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, ELSE_L42, Init, power, WHILE_L24, Entry, 
 
 Node: IF_L41 :
-Read, Body, IF_L36, END_IF_L15, IF_L41, Entry, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, 
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, IF_L41, Init, power, WHILE_L24, Entry, 
 
 Node: END_IF_L41 :
-Read, Body, IF_L36, END_IF_L15, Entry, END_IF_L5, END_WHILE_L24, END_IF_L41, Init, power, WHILE_L24, 
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, END_IF_L41, Init, power, WHILE_L24, Entry, 
 
 Node: END_IF_L36 :
-Read, END_IF_L36, Body, END_IF_L15, Entry, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, 
+END_IF_L15, Read, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, END_IF_L36, Entry, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-END_IF_L36, Read, Body, END_IF_L15, Entry, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, End, 
+END_IF_L15, Read, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, END_IF_L36, End, Entry, 
 
 Node: Read :
-Read, Entry, Init, power, 
+Read, Init, power, Entry, 
 
 Node: Exit :
-END_IF_L36, Read, Body, END_IF_L15, Exit, Entry, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, End, 
+END_IF_L15, Read, Exit, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, END_IF_L36, End, Entry, 
 
