@@ -5,10 +5,10 @@ Node: Init :
 Read, 
 
 Node: Body :
-END_IF_L4, IF_L4, 
+IF_L4, END_IF_L4, 
 
 Node: IF_L4 :
-IF_L9, END_IF_L9, START_ELSIF_L16, 
+START_ELSIF_L16, END_IF_L9, IF_L9, 
 
 Node: IF_L9 :
 

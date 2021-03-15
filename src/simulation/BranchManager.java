@@ -29,19 +29,19 @@ public class BranchManager {
         }
     }
 
-    public List<Tuple2<Integer, Boolean>> pruningBranches(List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches) {
+    public List<Integer> flipBranches(List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches) {
         // pruning covered Branches
 
-        List<Tuple2<Integer, Boolean>> flipBranches = new ArrayList<>();
+        List<Integer> flipBranches = new ArrayList<>();
         for (Tuple2<Integer, Boolean> branch : branches) {
             BasicBlock branchNode = route.get(branch.a1);
             if (branch.a2 == true) {
                 if (branchRecords.get(branchNode).get(0) == false){
-                    flipBranches.add(new Tuple2<>(branch.a1, !branch.a2));
+                    flipBranches.add(branch.a1);
                 }
             } else {
                 if (branchRecords.get(branchNode).get(1) == false){
-                    flipBranches.add(new Tuple2<>(branch.a1, !branch.a2));
+                    flipBranches.add(branch.a1);
                 }
             }
         }

@@ -1,39 +1,39 @@
 Node: FB_G4LTL2 :
-FB_G4LTL2, Entry, 
+Entry, FB_G4LTL2, 
 
 Node: Init :
-FB_G4LTL2, Entry, Init, 
+Entry, Init, FB_G4LTL2, 
 
 Node: Body :
-Body, Read, FB_G4LTL2, Entry, Init, 
+Entry, Init, Body, FB_G4LTL2, Read, 
 
 Node: IF_L4 :
-Body, Read, IF_L4, FB_G4LTL2, Entry, Init, 
+Entry, Init, Body, FB_G4LTL2, IF_L4, Read, 
 
 Node: IF_L9 :
-IF_L9, Body, Read, IF_L4, FB_G4LTL2, Entry, Init, 
+Entry, Init, Body, FB_G4LTL2, IF_L4, Read, IF_L9, 
 
 Node: START_ELSIF_L16 :
-Body, Read, IF_L4, FB_G4LTL2, START_ELSIF_L16, Entry, Init, 
+Entry, START_ELSIF_L16, Init, Body, FB_G4LTL2, IF_L4, Read, 
 
 Node: ELSIF_L23 :
-ELSIF_L23, Body, Read, IF_L4, FB_G4LTL2, START_ELSIF_L16, Entry, Init, 
+START_ELSIF_L16, Entry, Init, Body, FB_G4LTL2, IF_L4, ELSIF_L23, Read, 
 
 Node: END_IF_L9 :
-Body, Read, IF_L4, FB_G4LTL2, END_IF_L9, Entry, Init, 
+Entry, Init, Body, FB_G4LTL2, IF_L4, END_IF_L9, Read, 
 
 Node: END_IF_L4 :
-Body, Read, END_IF_L4, FB_G4LTL2, Entry, Init, 
+Entry, Init, END_IF_L4, Body, FB_G4LTL2, Read, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-Body, END_IF_L4, Read, FB_G4LTL2, Entry, End, Init, 
+Entry, Init, END_IF_L4, Body, FB_G4LTL2, End, Read, 
 
 Node: Read :
-Read, FB_G4LTL2, Entry, Init, 
+Entry, Init, FB_G4LTL2, Read, 
 
 Node: Exit :
-Body, END_IF_L4, Read, FB_G4LTL2, Exit, Entry, End, Init, 
+Entry, Exit, Init, END_IF_L4, Body, FB_G4LTL2, End, Read, 
 

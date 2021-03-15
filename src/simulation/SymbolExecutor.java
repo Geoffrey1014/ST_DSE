@@ -4,12 +4,8 @@ import cfg.BasicBlock;
 import cfg.CFG;
 import com.microsoft.z3.*;
 import ll.LlComponent;
-import ll.LlEmptyStmt;
-import ll.LlMethodCallStmt;
 import ll.LlStatement;
-import ll.assignStmt.LlAssignStmt;
 import ll.jump.LlJumpConditional;
-import ll.jump.LlJumpUnconditional;
 import ll.literal.*;
 import ll.location.LlLocation;
 import tools.Tuple2;
@@ -41,41 +37,59 @@ public class SymbolExecutor {
         return symMemory;
     }
 
-    public SymMemory createSymMemory(ConMemory conMemory){
+    public SymMemory createSymMemory(ConMemory conMemory) {
         SymMemory symMemory = new SymMemory();
-        copyNonInputVarToSymMemory(conMemory,symMemory);
+        copyNonInputVarToSymMemory(conMemory, symMemory);
         return symMemory;
     }
 
 
     public LinkedList<HashMap<LlLocation, ValueOfDiffType>> symExeFromRead(
-            SymMemory symMemory, List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches) {
-        // TODO 把函数整理一下
-        // TODO 需要拆分函数功能, 这个函数是有问题的。 应该只考虑一个周期的执行
-        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = new LinkedList<>();
+            SymMemory symMemory, List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches,
+            List<Integer> flippedBranches) {
 
-        int left = 0;
+        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = new LinkedList<>();
+        // change data structure
+        HashMap<BasicBlock,Boolean> branchNodes = new HashMap<>();
+        for(Tuple2<Integer, Boolean> b : branches){
+            branchNodes.put(route.get(b.a1),b.a2);
+        }
+        HashSet<BasicBlock> flippedBranchesNode = new HashSet<>();
+        for(Integer n: flippedBranches){
+            flippedBranchesNode.add(route.get(n));
+        }
+
         solver.push();
-        for (Tuple2<Integer, Boolean> branch : branches) {
-            for (BasicBlock bb : route.subList(left, branch.a1 + 1)) { //这里有问题
-                if (bb.name.equals("Read")) continue;
-                symExecuteBasicBlock(bb, symMemory, branch.a2, calculatedInputs);
+        for(BasicBlock bb: route){
+            if (bb.name.equals("Read")) continue;
+            if(branchNodes.containsKey(bb)){
+                if(flippedBranchesNode.contains(bb)){
+                    HashMap<LlLocation, ValueOfDiffType> result=symExecuteBasicBlock(bb, symMemory,branchNodes.get(bb),true);
+                    if(result != null) calculatedInputs.add(result);
+                }
+                else{
+                    symExecuteBasicBlock(bb, symMemory, branchNodes.get(bb),false);
+                }
             }
-            left = branch.a1 + 1;
         }
         solver.pop();
         return calculatedInputs;
     }
 
-    public void symExecuteBasicBlock(BasicBlock currentBolock, SymMemory symMemory, Boolean symBranchChoice,
-                                     LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs) {
-
+    /**
+     * symExecute a BasicBlock
+     * if it is branch node and the branch is flipped, calculate new inputs.
+     * then symExecute the branch chosen by the concrete execution
+     * @param currentBolock
+     * @param symMemory
+     * @param conExeBranchChoice
+     * @param flip
+     * */
+    public HashMap<LlLocation, ValueOfDiffType> symExecuteBasicBlock(BasicBlock currentBolock, SymMemory symMemory,
+                                                                     Boolean conExeBranchChoice, Boolean flip) {
+        HashMap<LlLocation, ValueOfDiffType> result = null;
         for (LlStatement llStatement : currentBolock.getStmtsList()) {
-            if (llStatement instanceof LlAssignStmt) {
-                llStatement.accept(symLlStatementExeutor, symMemory);
-            } else if (llStatement instanceof LlEmptyStmt) {
-                llStatement.accept(symLlStatementExeutor, symMemory);
-            } else if (llStatement instanceof LlJumpConditional) {
+            if (llStatement instanceof LlJumpConditional) {
                 LlComponent condition = ((LlJumpConditional) llStatement).getCondition();
                 Expr conditionValue;
                 if (condition instanceof LlLiteral) {
@@ -83,25 +97,17 @@ public class SymbolExecutor {
                 } else {
                     conditionValue = symMemory.get(condition);
                 }
+                // if the branch is flipped, calculate new inputs.
+                if (flip) {
+                    result = calNewInputs(conditionValue, !conExeBranchChoice, symMemory);
+                }
 
-                HashMap<LlLocation, ValueOfDiffType> results = calNewInputs(conditionValue, symBranchChoice, symMemory);
-                if (results != null) calculatedInputs.add(results);
+                solver.add(ctx.mkEq(conditionValue, ctx.mkBool(conExeBranchChoice)).simplify());
 
-                // 这里直接取反，是简化过的，需要把这功能分出去, 计算不出来的时候可以采用具体值
-                solver.add(ctx.mkEq(conditionValue, ctx.mkBool(!symBranchChoice)).simplify());
-
-                llStatement.accept(symLlStatementExeutor, symMemory);
-                //  the next bb according to the condition is decided by concrete execution
-
-            } else if (llStatement instanceof LlJumpUnconditional) {
-//                nextBlock = currentBolock.getAlternativeBranch();
-            } else if (llStatement instanceof LlMethodCallStmt) {
-                llStatement.accept(symLlStatementExeutor, symMemory);
-            } else {
-                System.err.println("not handled stmt: " + llStatement);
             }
-
+            llStatement.accept(symLlStatementExeutor, symMemory);
         }
+        return result;
     }
 
     public HashMap<LlLocation, ValueOfDiffType> calNewInputs(Expr conditionValue, Boolean branchChoice, SymMemory symMemory) {
@@ -184,18 +190,18 @@ public class SymbolExecutor {
         for (LlComponent llComponent : nonInputVars) {
             ValueOfDiffType value = conMemory.getLocationvalue(llComponent);
             BasicTypeEnum type = value.getType();
-            switch (type){
+            switch (type) {
                 case STRING:
                     System.err.println("string is not dealt with");
                     break;
                 case FLOAT:
-                    symMemory.put(llComponent,ctx.mkReal(value.getvDouble().toString()));
+                    symMemory.put(llComponent, ctx.mkReal(value.getvDouble().toString()));
                     break;
                 case INTEGER:
-                    symMemory.put(llComponent,ctx.mkInt(value.getvLong()));
+                    symMemory.put(llComponent, ctx.mkInt(value.getvLong()));
                     break;
                 case BOOLEAN:
-                    symMemory.put(llComponent,ctx.mkBool(value.getvBoolean()));
+                    symMemory.put(llComponent, ctx.mkBool(value.getvBoolean()));
                     break;
                 default:
                     System.out.println("wrong type!");

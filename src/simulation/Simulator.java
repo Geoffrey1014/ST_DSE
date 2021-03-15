@@ -106,47 +106,8 @@ public class Simulator {
         System.out.println("to Graphviz finish!");
     }
 
-    /**
-     * use Visitor mode
-     *
-     * @return
-     */
-    public void execute() {
-        //TODO：只考虑单周期。多周期由单周期组合而成，需要stateManager
 
-        // create createInitMemory
-        ConMemory conMemory = createInitMemory();
-        ConMemory oldConMenory = new ConMemory(conMemory);
-        //createSymMemory according to conMemory and mkInputSymbolic
-        SymMemory symMemory = symbolExecutor.createSymMemory(conMemory);
-        symbolExecutor.mkInputSymbolic(symMemory);
-
-        // initially concrete exe
-        Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(createDefaultInputs(), conMemory);
-        List<BasicBlock> route = result.a1;
-        List<Tuple2<Integer, Boolean>> branches = result.a2;
-        stateManager.add(conMemory);
-        branchManager.addRoute(route,branches);
-
-        // pruning algorithm
-        List<Tuple2<Integer, Boolean>> flipBranches = branchManager.pruningBranches(route, branches);
-
-        // SE and get calculatedInputs
-        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, route, flipBranches);
-
-        // concrete exe calculatedInputs
-        while (calculatedInputs.size() > 0) {
-            ConMemory nextConMemory = new ConMemory(oldConMenory);
-            result = conExeFromRead(calculatedInputs.pop(), nextConMemory);
-            stateManager.add(nextConMemory);
-            branchManager.addRoute(result.a1,result.a2);
-        }
-
-        System.out.println("branch coverage: "+branchManager.coverageRate());
-
-    }
-
-    public void branchTest(){
+    public void branchTest(String fileName){
         // create createInitMemory
         ConMemory oldConMenory = createInitMemory();
 
@@ -162,20 +123,20 @@ public class Simulator {
             SymMemory symMemory = new SymMemory(oldsymMemory);
             System.out.println("circle: "+ counter + " -------------");
             Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(inputsWorkList.pollFirst(), conMemory);
-//            float stmtCoverage = this.coveredBlocks.size() / (float) this.stmtBlocks.size();
-//            System.out.println("stmts coverage: " + stmtCoverage);
-            if(branchManager.coverageRate() > 0.9 || counter>100) break;
-            genGraphViz("");
+
+            float branchCoverage = branchManager.coverageRate();
+            if(branchCoverage > 0.99 || counter>100) break;
+//            genGraphViz("");
             stateManager.add(conMemory);
             branchManager.addRoute(result.a1,result.a2);
-            // pruning algorithm
-            List<Tuple2<Integer, Boolean>> flipBranches = branchManager.pruningBranches(result.a1, result.a2);
+            // flipBranches
+            List<Integer> flipBranches = branchManager.flipBranches(result.a1, result.a2);
             // SE and get calculatedInputs
-            LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, result.a1, flipBranches);
+            LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, result.a1,result.a2, flipBranches);
             inputsWorkList.addAll(calculatedInputs);
             counter +=1;
         }
-        System.out.println("branch coverage: "+branchManager.coverageRate());
+        System.err.println(fileName +" branch coverage: "+branchManager.coverageRate());
 
 
     }

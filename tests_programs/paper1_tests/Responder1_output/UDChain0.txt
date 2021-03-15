@@ -1,12 +1,12 @@
-use: cstate12 @ L5 @ Body
-defs: L14 @ ELSE_L9, L19 @ IF_L8, L0 @ Init, 
-
-use: grant_1 @ L23 @ End
-defs: L2 @ Init, L16 @ ELSE_L9, L21 @ IF_L8, 
-
 use: req1 @ L10 @ IF_L3
 defs: L24 @ Read, 
 
 use: cstate12 @ L22 @ End
-defs: L14 @ ELSE_L9, L19 @ IF_L8, L0 @ Init, 
+defs: L14 @ ELSE_L9, L0 @ Init, L19 @ IF_L8, 
+
+use: grant_1 @ L23 @ End
+defs: L16 @ ELSE_L9, L21 @ IF_L8, L2 @ Init, 
+
+use: cstate12 @ L5 @ Body
+defs: L0 @ Init, L14 @ ELSE_L9, L19 @ IF_L8, 
 

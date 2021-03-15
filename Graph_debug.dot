@@ -3,7 +3,7 @@ digraph G {
   edge [arrowsize=.5]
   node [shape=rectangle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
-  "8 WHILE_L24
+  "17 IF_L15
 "[color=red]; "14 END_IF_L36
 "; "2 Init
 "; "1 power
@@ -14,15 +14,15 @@ digraph G {
 "[color=red]; "13 IF_L41
 "[color=red]; "3 Read
 "[color=red]; "15 End
-"[color=red]; "17 LOOP_L25
+"[color=red]; "7 WHILE_L24
 "[color=red]; "5 END_IF_L5
 "[color=red]; "16 Exit
 "; "18 ELSE_L6
 "[color=red]; "12 END_IF_L41
-"; "7 END_IF_L15
-"[color=red]; "9 END_WHILE_L24
+"; "9 END_WHILE_L24
 "[color=red]; "10 IF_L36
-"[color=red]; "6 IF_L15
+"[color=red]; "6 END_IF_L15
+"[color=red]; "8 LOOP_L25
 "[color=red]; 
   "1 power
 " -> "2 Init
@@ -43,25 +43,25 @@ digraph G {
 " -> "5 END_IF_L5
 "  [label="default"];
   "5 END_IF_L5
-" -> "7 END_IF_L15
+" -> "6 END_IF_L15
 "  [label="default"];
   "5 END_IF_L5
-" -> "6 IF_L15
+" -> "17 IF_L15
 "  [label="alter"];
-  "6 IF_L15
-" -> "7 END_IF_L15
+  "17 IF_L15
+" -> "6 END_IF_L15
 "  [label="default"];
-  "7 END_IF_L15
-" -> "8 WHILE_L24
+  "6 END_IF_L15
+" -> "7 WHILE_L24
 "  [label="default"];
-  "8 WHILE_L24
+  "7 WHILE_L24
 " -> "9 END_WHILE_L24
 "  [label="default"];
-  "8 WHILE_L24
-" -> "17 LOOP_L25
+  "7 WHILE_L24
+" -> "8 LOOP_L25
 "  [label="alter"];
-  "17 LOOP_L25
-" -> "8 WHILE_L24
+  "8 LOOP_L25
+" -> "7 WHILE_L24
 "  [label="alter"];
   "9 END_WHILE_L24
 " -> "14 END_IF_L36

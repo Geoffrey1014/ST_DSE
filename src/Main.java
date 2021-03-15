@@ -78,7 +78,7 @@ public class Main {
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
 
             // control of updating pictures
-            Boolean updateFig = true;
+            Boolean updateFig = false;
 
             for (LlBuilder llBuilder : llBuilders) {
                 CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
@@ -140,7 +140,7 @@ public class Main {
 
                 System.out.println("simulator.execute();------------");
                 Simulator simulator = new Simulator(cfg);
-                simulator.branchTest();
+                simulator.branchTest(inputFile);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
@@ -172,7 +172,7 @@ public class Main {
         walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
 
@@ -185,6 +185,14 @@ public class Main {
                 //若非目录(即文件)，则打印
 //                System.out.println(Arrays.toString(f.toString().split("/")));
                 if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL15.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")){
+                    continue;
+                }else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
                     continue;
                 }
                 System.out.println("----- " + f + " ---------");

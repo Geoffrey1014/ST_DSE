@@ -1,39 +1,39 @@
 Node: Prog :
-Prog, Entry, 
+Entry, Prog, 
 
 Node: Init :
-Prog, Entry, Init, 
+Init, Entry, Prog, 
 
 Node: Body :
-Body, Prog, Entry, Read, Init, 
+Init, Entry, Prog, Body, Read, 
 
 Node: IF_L4 :
-Body, Prog, IF_L4, Entry, Read, Init, 
+Init, Entry, Prog, Body, Read, IF_L4, 
 
 Node: IF_L9 :
-Body, Prog, IF_L4, Entry, IF_L9, Read, Init, 
+Init, Entry, Prog, Body, IF_L9, Read, IF_L4, 
 
 Node: START_ELSIF_L13 :
-Body, Prog, IF_L4, Entry, Read, Init, START_ELSIF_L13, 
+Init, Entry, Prog, Body, Read, IF_L4, START_ELSIF_L13, 
 
 Node: ELSIF_L20 :
-ELSIF_L20, Body, Prog, IF_L4, Entry, Read, Init, START_ELSIF_L13, 
+Init, ELSIF_L20, Entry, Prog, Body, Read, IF_L4, START_ELSIF_L13, 
 
 Node: END_IF_L9 :
-Body, Prog, IF_L4, Entry, END_IF_L9, Read, Init, 
+Init, END_IF_L9, Entry, Prog, Body, Read, IF_L4, 
 
 Node: END_IF_L4 :
-Body, Prog, END_IF_L4, Entry, Read, Init, 
+Init, Entry, Prog, Body, Read, END_IF_L4, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-Body, Prog, END_IF_L4, Entry, End, Read, Init, 
+Init, Entry, End, Prog, Body, END_IF_L4, Read, 
 
 Node: Read :
-Prog, Entry, Read, Init, 
+Init, Entry, Prog, Read, 
 
 Node: Exit :
-Body, Prog, END_IF_L4, Entry, End, Exit, Read, Init, 
+Init, Entry, End, Prog, Body, END_IF_L4, Read, Exit, 
 
