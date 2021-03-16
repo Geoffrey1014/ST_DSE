@@ -12,6 +12,7 @@ RES  := RES + X;
 X := X + 2.0;
 IF FLAG = FALSE THEN
     RES  := RES - X;
+    FLAG := TRUE;
 END_IF;
 
 END_PROGRAM

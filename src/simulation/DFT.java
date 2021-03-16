@@ -12,11 +12,15 @@ public class DFT {
     private final CFG cfg;
     private HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt;
     private Simulator simulator;
+    private SymbolExecutor symbolExecutor;
+    private StateManager stateManager;
 
     public DFT(CFG cfg, HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt){
         this.cfg = cfg;
         this.udChianWithDmt = udChianWithDmt;
         this.simulator = new Simulator(cfg);
+        this.symbolExecutor = new SymbolExecutor(cfg);
+        this.stateManager = new StateManager();
     }
 
     public void dataFlowTesting(){
@@ -52,47 +56,67 @@ public class DFT {
      * 11 let t = guided_search(W)
      * 12 until t == nil
      * 13 return nil
+     *
+     * 这是在一个PLC state 下进行的测试，如果不行，则需要换一个新的PLC state。
+     * 我觉得算法应该是先想办法到达 def, 再从def 到 use
      */
     public HashMap<LlLocation,ValueOfDiffType> dfTestaDuPair(VarAndStmt def, VarAndStmt use, HashSet<BasicBlock> cuts){
-        HashSet<Tuple2<BasicBlock,Boolean>> W = new HashSet<>();
         ArrayList<BasicBlock> sortedCuts = new ArrayList<>(cuts);
         sortedCuts.sort(Comparator.comparingInt(BasicBlock::getId));
-        ConMemory conMemory = simulator.createInitMemory();
 
-        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
-        do{
-            Tuple2<List<BasicBlock>,List<Tuple2<Integer,Boolean>>> result = simulator.conExeFromRead(inputs,conMemory);
+        ConMemory conMemory = simulator.createInitMemory(); //目前没有做 conMemory 到备份
 
-            List<Tuple2<BasicBlock,Boolean>> branchNodes = getBranchNodes(result);
+        stateDuPairTest(def,use,sortedCuts,conMemory);
 
-
-            if(pathCoverDu(result.a1,def,use)) return inputs;
-            W.addAll(branchNodes);
-
-            redefinitionPruning();
-            inputs = guidedSearch(W,sortedCuts);
-
-
-        } while (inputs == null);
 
         return null;
 
+    }
+
+    public HashMap<LlLocation,ValueOfDiffType> stateDuPairTest(VarAndStmt def, VarAndStmt use, ArrayList<BasicBlock> sortedCuts,ConMemory startConMenory){
+        HashMap<BasicBlock,Boolean> W = new HashMap<>();
+
+        SymMemory startSymMemory = symbolExecutor.createSymMemory(startConMenory);
+        symbolExecutor.mkInputSymbolic(startSymMemory);
+
+        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
+        do{
+            Tuple2<ExecutedRoute,ConMemory> exeResult = simulator.conExeFromRead(inputs,startConMenory);
+            ExecutedRoute executedRoute = exeResult.a1;
+            ConMemory endConMemory = exeResult.a2;
+            List<BasicBlock> route = executedRoute.route;
+            LinkedHashMap<BasicBlock,Boolean> branchNodes = executedRoute.executedBranches;
+
+            if(pathCoverDu(route,def,use)) return inputs;
+            W.putAll(branchNodes);
+
+            redefinitionPruning();
+            inputs = guidedSearch(route,W,sortedCuts,startSymMemory,branchNodes);
+
+        } while (inputs != null);
+
+        return null;
     }
 
     public void redefinitionPruning(){
 
     }
 
-    public HashMap<LlLocation,ValueOfDiffType> guidedSearch(HashSet<Tuple2<BasicBlock,Boolean>> workList,ArrayList<BasicBlock> sortedCuts ){
+    public HashMap<LlLocation,ValueOfDiffType> guidedSearch(List<BasicBlock> route,
+                                                            HashMap<BasicBlock,Boolean> workList,
+                                                            ArrayList<BasicBlock> sortedCuts,
+                                                            SymMemory symMemory,
+                                                            LinkedHashMap<BasicBlock,Boolean> branchNodes){
+        SymMemory oldSymMemory = new SymMemory(symMemory);
         if(workList.isEmpty()) return null;
         int distance = 0; //先放弃 distance这个因素
-        int index = 0;
-        BasicBlock nextTarget = null;
+        BasicBlock curTargetCut = sortedCuts.get(0);
+        BasicBlock flippedBB = null;
 
-        for (Tuple2<BasicBlock, Boolean> branchNode : workList) {
-            int branchId = branchNode.a1.getId();
+        for (BasicBlock branchNode : workList.keySet()) {
+            int branchId = branchNode.getId();
             BasicBlock nextTargetCut = null;
-            // can use binary search to optimize
+            // look for next target cut TODO: can use binary search to optimize
             for (BasicBlock cutBB : sortedCuts) {
                 if (cutBB.getId() > branchId) {
                     nextTargetCut = cutBB;
@@ -100,26 +124,23 @@ public class DFT {
                 }
                 // if(cutBB.getId() <= branchId) case is not needed to considered.
             }
-            if (nextTargetCut.getId() > nextTarget.getId()) {
-                nextTarget = nextTargetCut;
 
+            if (nextTargetCut != null && nextTargetCut.getId() > curTargetCut.getId()) {
+                curTargetCut = nextTargetCut;
+                flippedBB = branchNode;
             }
 
         }
-        workList.remove(nextTarget);
-
-
-        return null;
-
-    }
-
-
-    public List<Tuple2<BasicBlock,Boolean>> getBranchNodes(Tuple2<List<BasicBlock> ,List<Tuple2<Integer,Boolean>>> result){
-        List<Tuple2<BasicBlock,Boolean>> branchNodes = new ArrayList<>();
-        for(Tuple2<Integer, Boolean> b: result.a2){
-            branchNodes.add(new Tuple2<>(result.a1.get(b.a1), b.a2));
+        if(flippedBB == null) {
+            workList.clear();
+            return null;
         }
-        return branchNodes;
+        workList.remove(flippedBB);
+        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory,route,branchNodes, Collections.singletonList(flippedBB));
+        if(calculatedInputs.size() > 0) return calculatedInputs.pollFirst();
+        else{
+            return guidedSearch(route,workList,sortedCuts,oldSymMemory,branchNodes);
+        }
     }
 
 

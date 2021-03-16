@@ -33,11 +33,11 @@ public class Simulator {
     private HashSet<BasicBlock> coveredBlocks;
     private HashSet<BasicBlock> branchBlocks;
     private HashSet<BasicBlock> stmtBlocks;
-    private HashSet<LlLocation> inputVars;
     private SymbolExecutor symbolExecutor;
     private Random random = new Random(19);
     private StateManager stateManager;
     private BranchManager branchManager;
+    private HashSet<BasicBlock> coveredBlocks2 = new HashSet<>();
 
     public Simulator(CFG cfg) {
         this.cfg = cfg;
@@ -45,7 +45,6 @@ public class Simulator {
         this.coveredBlocks = new HashSet<>();
         this.branchBlocks = new HashSet<>();
         this.stmtBlocks = new HashSet<>();
-        this.inputVars = cfg.getInputVars();
         this.symbolExecutor = new SymbolExecutor(cfg);
         this.stateManager = new StateManager();
 
@@ -60,35 +59,34 @@ public class Simulator {
                 this.stmtBlocks.add(bb);
             }
         }
-        this.branchManager = new BranchManager(cfg,this.branchBlocks);
+        this.branchManager = new BranchManager(cfg, this.branchBlocks);
 
     }
 
-    public String toGraphviz(){
+    public String toGraphviz() {
         GraphViz graphViz = new GraphViz();
         for (BasicBlock bb : cfg.getBasicBlocks()) {
             String label = bb.toString();
-            if(coveredBlocks.contains(bb)){
-                graphViz.nodes.put(label,true);
-            }
-            else{
-                graphViz.nodes.put(label,false);
+            if (coveredBlocks2.contains(bb)) {
+                graphViz.nodes.put(label, true);
+            } else {
+                graphViz.nodes.put(label, false);
             }
 
-            if (bb.getDefaultBranch() != null){
+            if (bb.getDefaultBranch() != null) {
                 BasicBlock b = bb.getDefaultBranch();
-                graphViz.edges.map(label,b.toString()  +"---default");
+                graphViz.edges.map(label, b.toString() + "---default");
             }
-            if(bb.getAlternativeBranch() != null){
+            if (bb.getAlternativeBranch() != null) {
                 BasicBlock b = bb.getAlternativeBranch();
-                graphViz.edges.map(label,b.toString()+ "---alter");
+                graphViz.edges.map(label, b.toString() + "---alter");
             }
         }
-        return graphViz.toDOT();
+        return graphViz.toDOT3();
     }
 
     public void genGraphViz(String outPutDir) {
-        String graphVizFilename = outPutDir + "Graph_debug"  + ".dot";
+        String graphVizFilename = outPutDir + "Graph_debug" + ".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
         try {
             writename.createNewFile();
@@ -102,41 +100,57 @@ public class Simulator {
             System.err.println("There was an error:\n" + e);
         }
 
-
         System.out.println("to Graphviz finish!");
     }
 
+    public void oneCircleTest(ConMemory startConMenory, HashMap<LlLocation, ValueOfDiffType> inputs) {
+        SymMemory startSymMemory = symbolExecutor.createSymMemory(startConMenory);
+        symbolExecutor.mkInputSymbolic(startSymMemory);
 
-    public void branchTest(String fileName){
-        // create createInitMemory
-        ConMemory oldConMenory = createInitMemory();
-
-        //createSymMemory according to conMemory and mkInputSymbolic
-        SymMemory oldsymMemory = symbolExecutor.createSymMemory(oldConMenory);
-        symbolExecutor.mkInputSymbolic(oldsymMemory);
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
-        inputsWorkList.add(createDefaultInputs());
-
+        inputsWorkList.add(inputs);
         int counter = 0;
-        while (inputsWorkList.size() >0){
-            ConMemory conMemory = new ConMemory(oldConMenory);
-            SymMemory symMemory = new SymMemory(oldsymMemory);
-            System.out.println("circle: "+ counter + " -------------");
-            Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> result = conExeFromRead(inputsWorkList.pollFirst(), conMemory);
+        while (inputsWorkList.size() > 0) {
+//            System.out.println("--inputs: " + counter++);
+            Tuple2<ExecutedRoute,ConMemory> exeResult= conExeFromRead(inputsWorkList.pollFirst(), startConMenory);
+            ExecutedRoute executedRoute = exeResult.a1;
+            stateManager.add(exeResult.a2);
+            branchManager.addRoute(executedRoute.route, executedRoute.branches);
 
             float branchCoverage = branchManager.coverageRate();
-            if(branchCoverage > 0.99 || counter>100) break;
-//            genGraphViz("");
-            stateManager.add(conMemory);
-            branchManager.addRoute(result.a1,result.a2);
+            if (branchCoverage > 0.99) break;
+
             // flipBranches
-            List<Integer> flipBranches = branchManager.flipBranches(result.a1, result.a2);
+            List<BasicBlock> flipBranches = branchManager.flipBranches(executedRoute.executedBranches);
             // SE and get calculatedInputs
-            LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, result.a1,result.a2, flipBranches);
+            LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(startSymMemory, executedRoute.route, executedRoute.executedBranches, flipBranches);
             inputsWorkList.addAll(calculatedInputs);
-            counter +=1;
+//            genGraphViz("");
+
         }
-        System.err.println(fileName +" branch coverage: "+branchManager.coverageRate());
+
+    }
+
+    public void branchTest(String fileName) {
+        HashMap<String,Double> oldBranchTestData = new OldBranchTestData().data;
+        // create createInitMemory
+        ConMemory oldConMenory = createInitMemory();
+        stateManager.add(oldConMenory);
+        int counter = 0;
+        float branchCoverage = 0;
+        while (stateManager.candidatesSize() > 0) {
+            counter++;
+//            System.out.println("------- circle -----------" + counter++);
+            oldConMenory = stateManager.popLeft();
+            oneCircleTest(oldConMenory, createRandomInputs());
+            branchCoverage = branchManager.coverageRate();
+            if (branchCoverage > 0.99 || counter > 40) break;
+//            genGraphViz("");
+        }
+        Double oldData = 0.0D;
+        if(oldBranchTestData.containsKey(fileName)) oldData= oldBranchTestData.get(fileName);
+
+        System.err.println(fileName + " branch coverage: " + branchCoverage+", "+oldData);
 
 
     }
@@ -153,32 +167,33 @@ public class Simulator {
      * @param inputs
      * @return
      */
-    public Tuple2<List<BasicBlock>, List<Tuple2<Integer, Boolean>>> conExeFromRead(
-            HashMap<LlLocation, ValueOfDiffType> inputs, ConMemory conMemory) {
-
+    public Tuple2<ExecutedRoute,ConMemory> conExeFromRead(
+            HashMap<LlLocation, ValueOfDiffType> inputs, ConMemory startConMemory) {
+        ConMemory endConMemory = new ConMemory(startConMemory);
         // equal to executing Read Block
-        setInputIntoMemory(inputs, conMemory);
+        setInputIntoMemory(inputs, endConMemory);
         List<BasicBlock> route = new ArrayList<>();
         BasicBlock readBB = this.cfg.leadersToBBMap.get("Read");
         this.coveredBlocks.add(readBB);
+        this.coveredBlocks2.add(readBB);
         route.add(readBB);
 
         BasicBlock curBlock = this.cfg.leadersToBBMap.get("Body");
         List<Tuple2<Integer, Boolean>> branches = new ArrayList<>();
         int conuter = 1;
         while (curBlock != null) {
-            String leaderLabel = this.cfg.blockLabels.get(curBlock);
-//            System.out.println("\n" + leaderLabel);
+//            System.out.println("\n" + curBlock.name);
 
             if (curBlock.equals(readBB)) break;
             route.add(curBlock);
-            Tuple2<BasicBlock, Boolean> nextBB = executeBasicBlock(curBlock, conMemory);
+            Tuple2<BasicBlock, Boolean> nextBB = executeBasicBlock(curBlock, endConMemory);
             if (this.branchBlocks.contains(curBlock)) branches.add(new Tuple2<>(conuter, nextBB.a2));
             if (this.stmtBlocks.contains(curBlock)) this.coveredBlocks.add(curBlock);
+            this.coveredBlocks2.add(curBlock);
             conuter += 1;
             curBlock = nextBB.a1;
         }
-        return new Tuple2<>(route, branches);
+        return new Tuple2<ExecutedRoute,ConMemory>(new ExecutedRoute(route, branches), endConMemory);
     }
 
 

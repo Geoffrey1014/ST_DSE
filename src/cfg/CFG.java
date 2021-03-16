@@ -190,7 +190,7 @@ public class CFG {
         }
     }
     public void removeUnconditionalJumpBlocks(){
-        System.out.println("\nremoveGotoBlocks");
+//        System.out.println("\nremoveGotoBlocks");
 
         for (Iterator<String> iterator = this.orderedLeadersList.iterator(); iterator.hasNext();) {
             String leaderLabel = iterator.next();
@@ -300,15 +300,15 @@ public class CFG {
     public String toGraphviz(){
         GraphViz graphViz = new GraphViz();
         for (BasicBlock bb : this.basicBlocks) {
-            String label = bb.toString() + bb.stmtsString();
-            graphViz.nodes.put(label,false);
+            String nodeString = bb.toString() + bb.stmtsString();
+            graphViz.nodes.put(nodeString,false);
             if (bb.getDefaultBranch() != null){
                 BasicBlock b = bb.getDefaultBranch();
-                graphViz.edges.map(label,b.toString() + b.stmtsString() +"---default");
+                graphViz.edges.map(nodeString,b.toString() + b.stmtsString() +"---default");
             }
             if(bb.getAlternativeBranch() != null){
                 BasicBlock b = bb.getAlternativeBranch();
-                graphViz.edges.map(label,b.toString()+ b.stmtsString() + "---alter");
+                graphViz.edges.map(nodeString,b.toString()+ b.stmtsString() + "---alter");
             }
         }
         return graphViz.toDOT();

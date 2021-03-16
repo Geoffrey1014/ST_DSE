@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
 import simulation.DFT;
-import simulation.Simulator;
 import tools.MyPrint;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
@@ -30,6 +29,8 @@ import java.util.Iterator;
 
 public class Main {
     public static MyPrint myprint = new MyPrint(3);
+    // control of updating pictures
+    public static Boolean updateFig = false;
 
     public static void walkTree(String filePath) {
         String[] pathSegments = filePath.split("/");
@@ -37,7 +38,8 @@ public class Main {
         String inputFileName = pathSegments[3];
 
         String inputFile = prefix + pathSegments[2] + "/" + inputFileName;
-        String outPutDir = prefix + inputFileName.split("\\.")[0] + "_output/";
+        String inputFileNamePrefix = inputFileName.split("\\.")[0];
+        String outPutDir = prefix + inputFileNamePrefix + "_output/";
         File dir = new File(outPutDir);
         if (!dir.exists()) {// 判断目录是否存在
             dir.mkdir();
@@ -62,97 +64,101 @@ public class Main {
 
             SemanticCheckVisitor semanticCheckVisitor = new SemanticCheckVisitor(defPhaseVisitor.symTable);
             listener.pous.accept(semanticCheckVisitor);
-
             System.out.println("semantic check error message:");
             System.err.println(semanticCheckVisitor.errorMessage);
 
-            System.out.println("pretty print:");
-            writeFile(listener.pous.prettyPrint(""), outPutDir + "prettyPrint" + ".txt");
+            if (updateFig) {
+                System.out.println("pretty print:");
+                writeFile(listener.pous.prettyPrint(""), outPutDir + "prettyPrint" + ".txt");
+                System.out.println("low level IR");
+            }
 
             int cfgCounter = 0;
-            System.out.println("low level IR");
 
             LlBuildersList llBuilderList = listener.pous.getBuilderList();
             ArrayList<LlSymbolTable> llSymbolTables = llBuilderList.getSymbolTables();
             ArrayList<LlBuilder> llBuilders = llBuilderList.getBuilders();
             Iterator<LlSymbolTable> llSymbolTableIterator = llSymbolTables.iterator();
 
-            // control of updating pictures
-            Boolean updateFig = false;
-
             for (LlBuilder llBuilder : llBuilders) {
                 CFG cfg = new CFG(llBuilder, llSymbolTableIterator.next(), true);
-                System.out.println("_______________________ ");
-                writeFile(cfg.toString(), outPutDir + "origin_" + cfgCounter + ".txt");
-                if (updateFig) genGraphViz("origin_" + cfgCounter, cfg, outPutDir);
+                if (updateFig) {
+                    System.out.println("_______________________ ");
+                    writeFile(cfg.toString(), outPutDir + "origin_" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix+ "_origin_" + cfgCounter, cfg, outPutDir);
+                }
 
 
                 HashSet<LlLocation> globalVArs = new HashSet<>();
                 GlobalCSE.performGlobalCommonSubexpressionEliminationOnCFG(cfg, globalVArs);
-                writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
-                System.out.println("afterCSE---------------------");
-                if (updateFig) genGraphViz("CSE_" + cfgCounter, cfg, outPutDir);
+
+                if (updateFig) {
+                    System.out.println("afterCSE---------------------");
+                    writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix+"_CSE_" + cfgCounter, cfg, outPutDir);
+                }
 
 
                 GlobalCP.performGlobalCP(cfg, globalVArs);
-                writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
-                System.out.println("afterCP-----------------------");
-                if (updateFig) genGraphViz("CP_" + cfgCounter, cfg, outPutDir);
+                if (updateFig) {
+                    System.out.println("afterCP-----------------------");
+                    writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix+"_CP_" + cfgCounter, cfg, outPutDir);
+                }
 
                 // Dominator
                 LoopAnalysis loopAnalysis = new LoopAnalysis(cfg);
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = loopAnalysis.getDominatorsMap();
-                writeFile(dominatorMapToString(cfg, dominatorsMap), outPutDir + "Dominator" + cfgCounter + ".txt");
-                System.out.println("dominatorsMap------------");
 
                 // DominatorTree
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTreeMap = loopAnalysis.getDominatingTreeMap();
-                writeFile(dominatorMapToString(cfg, dominatingTreeMap), outPutDir + "DominatorTree" + cfgCounter + ".txt");
                 loopAnalysis.createDominatorTree(dominatingTreeMap);
-                if (updateFig) genGraphViz("DomTree_" + cfgCounter, loopAnalysis, outPutDir);
+                if (updateFig) {
+                    writeFile(dominatorMapToString(cfg, dominatorsMap), outPutDir + inputFileNamePrefix+"_Dominator" + cfgCounter + ".txt");
+                    writeFile(dominatorMapToString(cfg, dominatingTreeMap), outPutDir + inputFileNamePrefix+"_DominatorTree" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix+"_DomTree_" + cfgCounter, loopAnalysis, outPutDir);
+                }
 
                 GlobalDCE globalDCE = new GlobalDCE(cfg);
                 globalDCE.performGlobalDeadCodeElimination();
-                System.out.println("afterDSE---------------------");
-                writeFile(cfg.toString(), outPutDir + "new_" + "DSE_" + cfgCounter + ".txt");
-                if (updateFig) genGraphViz("DSE_" + cfgCounter, cfg, outPutDir);
 
-                // calculateDefinitionUseChain
-//                NewLivenessAnalysis liveAnalysis = new NewLivenessAnalysis(cfg);
-//                liveAnalysis.livenessAnalysis2();
-//                liveAnalysis.calculateDefinitionUseChain();
-//                liveAnalysis.writeDefUseChainToFile(outPutDir + "DUChain_0" + cfgCounter + ".txt");
+                if (updateFig) {
+                    System.out.println("afterDSE---------------------");
+                    writeFile(cfg.toString(), outPutDir + inputFileNamePrefix+"_new_" + "DSE_" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix+"_DSE_" + cfgCounter, cfg, outPutDir);
+                }
+
 
                 //UDChain
                 ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
                 rDAnalysis.genUseDefinitionChains();
-                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + "UDChain" + cfgCounter + ".txt");
+                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + inputFileNamePrefix+"_UDChain" + cfgCounter + ".txt");
 
 
                 //calCutNodes
                 HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
-                writeCutNodesToFile(udChianWithDmt, outPutDir + "CutNodes" + cfgCounter + ".txt");
+                writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
                 DFT dft = new DFT(cfg, udChianWithDmt);
-//                System.out.println("data flow testing!----------------");
-//                dft.dataFlowTesting();
+                System.out.println("data flow testing!----------------");
+                dft.dataFlowTesting();
 
 
-                System.out.println("simulator.execute();------------");
-                Simulator simulator = new Simulator(cfg);
-                simulator.branchTest(inputFile);
+//                System.out.println("simulator.execute();------------");
+//                Simulator simulator = new Simulator(cfg);
+//                simulator.branchTest(inputFileNamePrefix);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
-//                writeFile(cfg.toString(), outPutDir + "new_" + "CF_" + cfgCounter + ".txt");
+//                writeFile(cfg.toString(), outPutDir + inputFileNamePrefix+"_new_" + "CF_" + cfgCounter + ".txt");
 //
 //                System.out.println("URE------------------------");
 //                GlobalURE.performGlobalURE(cfg);
-//                writeFile(cfg.toString(), outPutDir + "new_" + "URE_" + cfgCounter + ".txt");
+//                writeFile(cfg.toString(), outPutDir + inputFileNamePrefix+"_new_" + "URE_" + cfgCounter + ".txt");
 //
 //                System.out.println("AS------------------------");
 //                AlgebraicSimplifications.performAlgebraicSimplifications(cfg);
-//                writeFile(cfg.toString(), outPutDir + "new_" + "AS_" + cfgCounter + ".txt");
+//                writeFile(cfg.toString(), outPutDir + inputFileNamePrefix+"_new_" + "AS_" + cfgCounter + ".txt");
 
                 cfgCounter++;
             }
@@ -165,10 +171,15 @@ public class Main {
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
+        updateFig = false;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
-        String file = "power.txt";
+//        String file = "power.txt";
 //        String file = "counter.txt";
+        String file = "example.txt";
+
+//        String file = "FB_G4LTL13.txt";// TODO 有问题
+
         walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
@@ -186,16 +197,16 @@ public class Main {
 //                System.out.println(Arrays.toString(f.toString().split("/")));
                 if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL15.txt")) {
                     continue;
-                }
-                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")){
+                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")) {
                     continue;
-                }else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
+                    continue;
+                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL13.txt")) {
+                    continue;
+                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
                     continue;
                 }
-                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
-                    continue;
-                }
-                System.out.println("----- " + f + " ---------");
+                System.out.println("\n----- " + f + " ---------");
                 walkTree(f.toString());
             }
 

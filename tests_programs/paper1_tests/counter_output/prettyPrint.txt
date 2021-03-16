@@ -75,3 +75,11 @@
                       |--locationVar
                         |--name: X
                         |--type: RES_REAL
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: FLAG
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true

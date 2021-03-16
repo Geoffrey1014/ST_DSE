@@ -29,19 +29,19 @@ public class BranchManager {
         }
     }
 
-    public List<Integer> flipBranches(List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches) {
+    public List<BasicBlock> flipBranches(LinkedHashMap<BasicBlock,Boolean> executedBranch) {
         // pruning covered Branches
 
-        List<Integer> flipBranches = new ArrayList<>();
-        for (Tuple2<Integer, Boolean> branch : branches) {
-            BasicBlock branchNode = route.get(branch.a1);
-            if (branch.a2 == true) {
+        List<BasicBlock> flipBranches = new ArrayList<>();
+        for (BasicBlock branchNode : executedBranch.keySet()) {
+            boolean branchChoice = executedBranch.get(branchNode);
+            if (branchChoice == true) {
                 if (branchRecords.get(branchNode).get(0) == false){
-                    flipBranches.add(branch.a1);
+                    flipBranches.add(branchNode);
                 }
             } else {
                 if (branchRecords.get(branchNode).get(1) == false){
-                    flipBranches.add(branch.a1);
+                    flipBranches.add(branchNode);
                 }
             }
         }

@@ -1,36 +1,36 @@
 Node: Responder1 :
-Entry, Responder1, 
+Responder1, Entry, 
 
 Node: Init :
-Init, Entry, Responder1, 
+Init, Responder1, Entry, 
 
 Node: Body :
-Body, Init, Entry, Read, Responder1, 
+Init, Responder1, Entry, Read, Body, 
 
 Node: IF_L3 :
-Body, Init, Entry, Read, IF_L3, Responder1, 
+Init, Responder1, Entry, Read, Body, IF_L3, 
 
 Node: ELSE_L9 :
-Body, Init, Entry, Read, IF_L3, Responder1, ELSE_L9, 
+Init, Responder1, ELSE_L9, Entry, Read, Body, IF_L3, 
 
 Node: IF_L8 :
-Body, Init, IF_L8, Entry, Read, IF_L3, Responder1, 
+Init, Responder1, IF_L8, Entry, Read, Body, IF_L3, 
 
 Node: END_IF_L8 :
-END_IF_L8, Body, Init, Entry, Read, IF_L3, Responder1, 
+Init, Responder1, END_IF_L8, Entry, Read, Body, IF_L3, 
 
 Node: END_IF_L3 :
-Body, Init, Entry, Read, END_IF_L3, Responder1, 
+Init, Responder1, END_IF_L3, Entry, Read, Body, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-Body, Init, Entry, Read, END_IF_L3, Responder1, End, 
+Init, Responder1, End, END_IF_L3, Entry, Read, Body, 
 
 Node: Read :
-Init, Entry, Read, Responder1, 
+Init, Responder1, Entry, Read, 
 
 Node: Exit :
-Body, Init, Entry, Exit, Read, END_IF_L3, Responder1, End, 
+Init, Responder1, End, END_IF_L3, Exit, Entry, Read, Body, 
 

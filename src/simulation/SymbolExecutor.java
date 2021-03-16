@@ -8,7 +8,6 @@ import ll.LlStatement;
 import ll.jump.LlJumpConditional;
 import ll.literal.*;
 import ll.location.LlLocation;
-import tools.Tuple2;
 
 import java.util.*;
 
@@ -45,31 +44,25 @@ public class SymbolExecutor {
 
 
     public LinkedList<HashMap<LlLocation, ValueOfDiffType>> symExeFromRead(
-            SymMemory symMemory, List<BasicBlock> route, List<Tuple2<Integer, Boolean>> branches,
-            List<Integer> flippedBranches) {
-
+            SymMemory startSymMemory, List<BasicBlock> route, LinkedHashMap<BasicBlock, Boolean> branchNodes,
+            List<BasicBlock> flippedBranches) {
+        SymMemory symMemory = new SymMemory(startSymMemory);
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = new LinkedList<>();
-        // change data structure
-        HashMap<BasicBlock,Boolean> branchNodes = new HashMap<>();
-        for(Tuple2<Integer, Boolean> b : branches){
-            branchNodes.put(route.get(b.a1),b.a2);
-        }
-        HashSet<BasicBlock> flippedBranchesNode = new HashSet<>();
-        for(Integer n: flippedBranches){
-            flippedBranchesNode.add(route.get(n));
-        }
+        HashSet<BasicBlock> flippedBranchesNode = new HashSet<>(flippedBranches);
 
         solver.push();
-        for(BasicBlock bb: route){
+        for (BasicBlock bb : route) {
             if (bb.name.equals("Read")) continue;
-            if(branchNodes.containsKey(bb)){
-                if(flippedBranchesNode.contains(bb)){
-                    HashMap<LlLocation, ValueOfDiffType> result=symExecuteBasicBlock(bb, symMemory,branchNodes.get(bb),true);
-                    if(result != null) calculatedInputs.add(result);
+            if (branchNodes.containsKey(bb)) {
+                if (flippedBranchesNode.contains(bb)) {
+                    HashMap<LlLocation, ValueOfDiffType> result = symExecuteBasicBlock(bb, symMemory, branchNodes.get(bb), true);
+                    if (result != null) calculatedInputs.add(result);
+                } else {
+                    symExecuteBasicBlock(bb, symMemory, branchNodes.get(bb), false);
                 }
-                else{
-                    symExecuteBasicBlock(bb, symMemory, branchNodes.get(bb),false);
-                }
+            }
+            else {
+                symExecuteBasicBlock(bb, symMemory, false, false);
             }
         }
         solver.pop();
@@ -80,11 +73,12 @@ public class SymbolExecutor {
      * symExecute a BasicBlock
      * if it is branch node and the branch is flipped, calculate new inputs.
      * then symExecute the branch chosen by the concrete execution
+     *
      * @param currentBolock
      * @param symMemory
      * @param conExeBranchChoice
      * @param flip
-     * */
+     */
     public HashMap<LlLocation, ValueOfDiffType> symExecuteBasicBlock(BasicBlock currentBolock, SymMemory symMemory,
                                                                      Boolean conExeBranchChoice, Boolean flip) {
         HashMap<LlLocation, ValueOfDiffType> result = null;
@@ -116,12 +110,12 @@ public class SymbolExecutor {
         this.solver.add(ctx.mkEq(conditionValue, ctx.mkBool(branchChoice)));
 
         if (this.solver.check().equals(Status.SATISFIABLE)) {
-            System.out.println("\n" + Status.SATISFIABLE);
+//            System.out.println("\n" + Status.SATISFIABLE);
             for (LlLocation location : this.inputVars) {
                 Expr locationExpr = symMemory.get(location);
                 String locationValue = this.solver.getModel().evaluate(locationExpr, true).toString();
                 putValues(symMemory, locationValue, location, resluts);
-                System.out.println(locationExpr.toString() + ": " + locationValue);
+//                System.out.println(locationExpr.toString() + ": " + locationValue);
             }
             this.solver.pop();
             return resluts;

@@ -5,7 +5,7 @@ Node: Init :
 Read, 
 
 Node: Body :
-START_ELSIF_L12, END_IF_L8, IF_L8, 
+END_IF_L8, IF_L8, START_ELSIF_L12, 
 
 Node: IF_L8 :
 IF_L14, START_ELSIF_L19, END_IF_L14, 
@@ -14,7 +14,7 @@ Node: IF_L14 :
 
 
 Node: START_ELSIF_L19 :
-END_ELSIF_L28, ELSIF_L28, 
+ELSIF_L28, END_ELSIF_L28, 
 
 Node: ELSIF_L28 :
 

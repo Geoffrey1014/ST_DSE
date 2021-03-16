@@ -8,7 +8,7 @@ Node: Body :
 END_IF_L4, IF_L4, 
 
 Node: IF_L4 :
-IF_L9, END_IF_L9, START_ELSIF_L13, 
+START_ELSIF_L13, IF_L9, END_IF_L9, 
 
 Node: IF_L9 :
 

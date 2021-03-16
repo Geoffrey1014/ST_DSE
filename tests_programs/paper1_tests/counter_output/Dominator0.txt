@@ -2,26 +2,26 @@ Node: counter :
 counter, Entry, 
 
 Node: Init :
-counter, Entry, Init, 
+counter, Init, Entry, 
 
 Node: Body :
-Body, counter, Entry, Read, Init, 
+Body, counter, Read, Init, Entry, 
 
 Node: IF_L8 :
-IF_L8, Body, counter, Entry, Read, Init, 
+Body, counter, IF_L8, Read, Init, Entry, 
 
 Node: END_IF_L8 :
-END_IF_L8, Body, counter, Entry, Read, Init, 
+Body, counter, END_IF_L8, Read, Init, Entry, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-End, END_IF_L8, Body, counter, Entry, Read, Init, 
+Body, counter, END_IF_L8, Read, Init, End, Entry, 
 
 Node: Read :
-counter, Entry, Read, Init, 
+counter, Read, Init, Entry, 
 
 Node: Exit :
-End, END_IF_L8, Body, counter, Entry, Exit, Read, Init, 
+Body, counter, END_IF_L8, Read, Init, End, Exit, Entry, 
 

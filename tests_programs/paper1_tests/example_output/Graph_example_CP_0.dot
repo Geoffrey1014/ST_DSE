@@ -3,253 +3,322 @@ digraph G {
   edge [arrowsize=.5]
   node [shape=rectangle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
-  "       program0 :  EMPTY_STATEMENT
-"; "           Init :  EMPTY_STATEMENT
-             L0 :  V = 0
-             L1 :  X = 0
-             L2 :  Y = 0
-"; "           Body :  EMPTY_STATEMENT
+  "Body
+           Body :  EMPTY_STATEMENT
              L4 :  #_t0 = 0
              L5 :  #_t1 = V == 0
           CJ_L6 :  if #_t1 goto IF_L3
-"; "          IF_L3 :  EMPTY_STATEMENT
-            L10 :  #_t2 = 3
-            L11 :  #_t3 = X == 3
-         CJ_L12 :  if #_t3 goto IF_L9
-"; "          IF_L9 :  EMPTY_STATEMENT
-            L15 :  #_t4 = 2
-            L16 :  V = 2
-            L17 :  #_t5 = 1
-            L18 :  Y = 1
-        UCJ_L19 :  goto END_IF_L9
-"; "START_ELSIF_L13 :  EMPTY_STATEMENT
-            L21 :  #_t6 = 4
-            L22 :  #_t7 = X == 4
-         CJ_L23 :  if #_t7 goto ELSIF_L20
-"; "      ELSIF_L20 :  EMPTY_STATEMENT
+"; "LOOP_L37
+       LOOP_L37 :  EMPTY_STATEMENT
+            L41 :  #_t13 = 1
+            L42 :  #_t14 = V + 1
+            L43 :  V = #_t14
+        UCJ_L44 :  goto WHILE_L36
+"; "END_WHILE_L36
+  END_WHILE_L36 :  EMPTY_STATEMENT
+            L45 :  #_t15 = 3
+            L46 :  Y = 3
+        UCJ_L47 :  goto END_IF_L3
+"; "END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"; "ELSIF_L20
+      ELSIF_L20 :  EMPTY_STATEMENT
             L25 :  #_t8 = 0
             L26 :  V = 0
             L27 :  #_t9 = 2
             L28 :  Y = 2
         UCJ_L29 :  goto END_IF_L9
-"; "      END_IF_L9 :  EMPTY_STATEMENT
-        UCJ_L30 :  goto END_IF_L3
-"; " START_ELSIF_L7 :  EMPTY_STATEMENT
+"; "START_ELSIF_L7
+ START_ELSIF_L7 :  EMPTY_STATEMENT
             L32 :  #_t10 = 2
             L33 :  #_t11 = V == 2
          CJ_L34 :  if #_t11 goto ELSIF_L31
-"; "      WHILE_L36 :  EMPTY_STATEMENT
+"; "Exit
+           Exit :  EMPTY_STATEMENT
+"; "END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L30 :  goto END_IF_L3
+"; "Read
+           Read :  EMPTY_STATEMENT
+            L58 :  X = read()
+"; "Init
+           Init :  EMPTY_STATEMENT
+             L0 :  V = 0
+             L1 :  X = 0
+             L2 :  Y = 0
+"; "WHILE_L36
+      WHILE_L36 :  EMPTY_STATEMENT
             L38 :  #_t12 = V < X
          CJ_L39 :  if #_t12 goto LOOP_L37
-"; "       LOOP_L37 :  EMPTY_STATEMENT
-            L41 :  #_t13 = 1
-            L42 :  #_t14 = V + 1
-            L43 :  V = #_t14
-        UCJ_L44 :  goto WHILE_L36
-"; "  END_WHILE_L36 :  EMPTY_STATEMENT
-            L45 :  #_t15 = 3
-            L46 :  Y = 3
-        UCJ_L47 :  goto END_IF_L3
-"; "  END_ELSIF_L31 :  EMPTY_STATEMENT
-            L49 :  #_t16 = 4
-            L50 :  #_t17 = V == 4
-         CJ_L51 :  if #_t17 goto ELSIF_L48
-"; "      ELSIF_L48 :  EMPTY_STATEMENT
+"; "START_ELSIF_L13
+START_ELSIF_L13 :  EMPTY_STATEMENT
+            L21 :  #_t6 = 4
+            L22 :  #_t7 = X == 4
+         CJ_L23 :  if #_t7 goto ELSIF_L20
+"; "IF_L9
+          IF_L9 :  EMPTY_STATEMENT
+            L15 :  #_t4 = 2
+            L16 :  V = 2
+            L17 :  #_t5 = 1
+            L18 :  Y = 1
+        UCJ_L19 :  goto END_IF_L9
+"; "program0
+       program0 :  EMPTY_STATEMENT
+"; "ELSIF_L48
+      ELSIF_L48 :  EMPTY_STATEMENT
             L53 :  #_t18 = 4
             L54 :  Y = 4
         UCJ_L55 :  goto END_IF_L3
-"; "      END_IF_L3 :  EMPTY_STATEMENT
-"; "          Entry :  EMPTY_STATEMENT
-"; "            End :  EMPTY_STATEMENT
+"; "Entry
+          Entry :  EMPTY_STATEMENT
+"; "END_ELSIF_L31
+  END_ELSIF_L31 :  EMPTY_STATEMENT
+            L49 :  #_t16 = 4
+            L50 :  #_t17 = V == 4
+         CJ_L51 :  if #_t17 goto ELSIF_L48
+"; "IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = 3
+            L11 :  #_t3 = X == 3
+         CJ_L12 :  if #_t3 goto IF_L9
+"; "End
+            End :  EMPTY_STATEMENT
             L56 :  print(V,)
             L57 :  print(Y,)
-"; "           Exit :  EMPTY_STATEMENT
-"; "           Read :  EMPTY_STATEMENT
-            L58 :  X = read()
 "; 
-  "       program0 :  EMPTY_STATEMENT
-" -> "           Init :  EMPTY_STATEMENT
+  "program0
+       program0 :  EMPTY_STATEMENT
+" -> "Init
+           Init :  EMPTY_STATEMENT
              L0 :  V = 0
              L1 :  X = 0
              L2 :  Y = 0
 "  [label="default"];
-  "           Init :  EMPTY_STATEMENT
+  "Init
+           Init :  EMPTY_STATEMENT
              L0 :  V = 0
              L1 :  X = 0
              L2 :  Y = 0
-" -> "           Read :  EMPTY_STATEMENT
+" -> "Read
+           Read :  EMPTY_STATEMENT
             L58 :  X = read()
 "  [label="default"];
-  "           Body :  EMPTY_STATEMENT
+  "Body
+           Body :  EMPTY_STATEMENT
              L4 :  #_t0 = 0
              L5 :  #_t1 = V == 0
           CJ_L6 :  if #_t1 goto IF_L3
-" -> " START_ELSIF_L7 :  EMPTY_STATEMENT
+" -> "START_ELSIF_L7
+ START_ELSIF_L7 :  EMPTY_STATEMENT
             L32 :  #_t10 = 2
             L33 :  #_t11 = V == 2
          CJ_L34 :  if #_t11 goto ELSIF_L31
 "  [label="default"];
-  "           Body :  EMPTY_STATEMENT
+  "Body
+           Body :  EMPTY_STATEMENT
              L4 :  #_t0 = 0
              L5 :  #_t1 = V == 0
           CJ_L6 :  if #_t1 goto IF_L3
-" -> "          IF_L3 :  EMPTY_STATEMENT
+" -> "IF_L3
+          IF_L3 :  EMPTY_STATEMENT
             L10 :  #_t2 = 3
             L11 :  #_t3 = X == 3
          CJ_L12 :  if #_t3 goto IF_L9
 "  [label="alter"];
-  "          IF_L3 :  EMPTY_STATEMENT
+  "IF_L3
+          IF_L3 :  EMPTY_STATEMENT
             L10 :  #_t2 = 3
             L11 :  #_t3 = X == 3
          CJ_L12 :  if #_t3 goto IF_L9
-" -> "START_ELSIF_L13 :  EMPTY_STATEMENT
+" -> "START_ELSIF_L13
+START_ELSIF_L13 :  EMPTY_STATEMENT
             L21 :  #_t6 = 4
             L22 :  #_t7 = X == 4
          CJ_L23 :  if #_t7 goto ELSIF_L20
 "  [label="default"];
-  "          IF_L3 :  EMPTY_STATEMENT
+  "IF_L3
+          IF_L3 :  EMPTY_STATEMENT
             L10 :  #_t2 = 3
             L11 :  #_t3 = X == 3
          CJ_L12 :  if #_t3 goto IF_L9
-" -> "          IF_L9 :  EMPTY_STATEMENT
+" -> "IF_L9
+          IF_L9 :  EMPTY_STATEMENT
             L15 :  #_t4 = 2
             L16 :  V = 2
             L17 :  #_t5 = 1
             L18 :  Y = 1
         UCJ_L19 :  goto END_IF_L9
 "  [label="alter"];
-  "          IF_L9 :  EMPTY_STATEMENT
+  "IF_L9
+          IF_L9 :  EMPTY_STATEMENT
             L15 :  #_t4 = 2
             L16 :  V = 2
             L17 :  #_t5 = 1
             L18 :  Y = 1
         UCJ_L19 :  goto END_IF_L9
-" -> "      END_IF_L9 :  EMPTY_STATEMENT
+" -> "END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
         UCJ_L30 :  goto END_IF_L3
 "  [label="alter"];
-  "START_ELSIF_L13 :  EMPTY_STATEMENT
+  "START_ELSIF_L13
+START_ELSIF_L13 :  EMPTY_STATEMENT
             L21 :  #_t6 = 4
             L22 :  #_t7 = X == 4
          CJ_L23 :  if #_t7 goto ELSIF_L20
-" -> "      END_IF_L9 :  EMPTY_STATEMENT
+" -> "END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
         UCJ_L30 :  goto END_IF_L3
 "  [label="default"];
-  "START_ELSIF_L13 :  EMPTY_STATEMENT
+  "START_ELSIF_L13
+START_ELSIF_L13 :  EMPTY_STATEMENT
             L21 :  #_t6 = 4
             L22 :  #_t7 = X == 4
          CJ_L23 :  if #_t7 goto ELSIF_L20
-" -> "      ELSIF_L20 :  EMPTY_STATEMENT
+" -> "ELSIF_L20
+      ELSIF_L20 :  EMPTY_STATEMENT
             L25 :  #_t8 = 0
             L26 :  V = 0
             L27 :  #_t9 = 2
             L28 :  Y = 2
         UCJ_L29 :  goto END_IF_L9
 "  [label="alter"];
-  "      ELSIF_L20 :  EMPTY_STATEMENT
+  "ELSIF_L20
+      ELSIF_L20 :  EMPTY_STATEMENT
             L25 :  #_t8 = 0
             L26 :  V = 0
             L27 :  #_t9 = 2
             L28 :  Y = 2
         UCJ_L29 :  goto END_IF_L9
-" -> "      END_IF_L9 :  EMPTY_STATEMENT
+" -> "END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
         UCJ_L30 :  goto END_IF_L3
 "  [label="alter"];
-  "      END_IF_L9 :  EMPTY_STATEMENT
+  "END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
         UCJ_L30 :  goto END_IF_L3
-" -> "      END_IF_L3 :  EMPTY_STATEMENT
+" -> "END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
 "  [label="alter"];
-  " START_ELSIF_L7 :  EMPTY_STATEMENT
+  "START_ELSIF_L7
+ START_ELSIF_L7 :  EMPTY_STATEMENT
             L32 :  #_t10 = 2
             L33 :  #_t11 = V == 2
          CJ_L34 :  if #_t11 goto ELSIF_L31
-" -> "  END_ELSIF_L31 :  EMPTY_STATEMENT
+" -> "END_ELSIF_L31
+  END_ELSIF_L31 :  EMPTY_STATEMENT
             L49 :  #_t16 = 4
             L50 :  #_t17 = V == 4
          CJ_L51 :  if #_t17 goto ELSIF_L48
 "  [label="default"];
-  " START_ELSIF_L7 :  EMPTY_STATEMENT
+  "START_ELSIF_L7
+ START_ELSIF_L7 :  EMPTY_STATEMENT
             L32 :  #_t10 = 2
             L33 :  #_t11 = V == 2
          CJ_L34 :  if #_t11 goto ELSIF_L31
-" -> "      WHILE_L36 :  EMPTY_STATEMENT
+" -> "WHILE_L36
+      WHILE_L36 :  EMPTY_STATEMENT
             L38 :  #_t12 = V < X
          CJ_L39 :  if #_t12 goto LOOP_L37
 "  [label="alter"];
-  "      WHILE_L36 :  EMPTY_STATEMENT
+  "WHILE_L36
+      WHILE_L36 :  EMPTY_STATEMENT
             L38 :  #_t12 = V < X
          CJ_L39 :  if #_t12 goto LOOP_L37
-" -> "  END_WHILE_L36 :  EMPTY_STATEMENT
+" -> "END_WHILE_L36
+  END_WHILE_L36 :  EMPTY_STATEMENT
             L45 :  #_t15 = 3
             L46 :  Y = 3
         UCJ_L47 :  goto END_IF_L3
 "  [label="default"];
-  "      WHILE_L36 :  EMPTY_STATEMENT
+  "WHILE_L36
+      WHILE_L36 :  EMPTY_STATEMENT
             L38 :  #_t12 = V < X
          CJ_L39 :  if #_t12 goto LOOP_L37
-" -> "       LOOP_L37 :  EMPTY_STATEMENT
+" -> "LOOP_L37
+       LOOP_L37 :  EMPTY_STATEMENT
             L41 :  #_t13 = 1
             L42 :  #_t14 = V + 1
             L43 :  V = #_t14
         UCJ_L44 :  goto WHILE_L36
 "  [label="alter"];
-  "       LOOP_L37 :  EMPTY_STATEMENT
+  "LOOP_L37
+       LOOP_L37 :  EMPTY_STATEMENT
             L41 :  #_t13 = 1
             L42 :  #_t14 = V + 1
             L43 :  V = #_t14
         UCJ_L44 :  goto WHILE_L36
-" -> "      WHILE_L36 :  EMPTY_STATEMENT
+" -> "WHILE_L36
+      WHILE_L36 :  EMPTY_STATEMENT
             L38 :  #_t12 = V < X
          CJ_L39 :  if #_t12 goto LOOP_L37
 "  [label="alter"];
-  "  END_WHILE_L36 :  EMPTY_STATEMENT
+  "END_WHILE_L36
+  END_WHILE_L36 :  EMPTY_STATEMENT
             L45 :  #_t15 = 3
             L46 :  Y = 3
         UCJ_L47 :  goto END_IF_L3
-" -> "      END_IF_L3 :  EMPTY_STATEMENT
+" -> "END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
 "  [label="alter"];
-  "  END_ELSIF_L31 :  EMPTY_STATEMENT
+  "END_ELSIF_L31
+  END_ELSIF_L31 :  EMPTY_STATEMENT
             L49 :  #_t16 = 4
             L50 :  #_t17 = V == 4
          CJ_L51 :  if #_t17 goto ELSIF_L48
-" -> "      END_IF_L3 :  EMPTY_STATEMENT
+" -> "END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
 "  [label="default"];
-  "  END_ELSIF_L31 :  EMPTY_STATEMENT
+  "END_ELSIF_L31
+  END_ELSIF_L31 :  EMPTY_STATEMENT
             L49 :  #_t16 = 4
             L50 :  #_t17 = V == 4
          CJ_L51 :  if #_t17 goto ELSIF_L48
-" -> "      ELSIF_L48 :  EMPTY_STATEMENT
+" -> "ELSIF_L48
+      ELSIF_L48 :  EMPTY_STATEMENT
             L53 :  #_t18 = 4
             L54 :  Y = 4
         UCJ_L55 :  goto END_IF_L3
 "  [label="alter"];
-  "      ELSIF_L48 :  EMPTY_STATEMENT
+  "ELSIF_L48
+      ELSIF_L48 :  EMPTY_STATEMENT
             L53 :  #_t18 = 4
             L54 :  Y = 4
         UCJ_L55 :  goto END_IF_L3
-" -> "      END_IF_L3 :  EMPTY_STATEMENT
+" -> "END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
 "  [label="alter"];
-  "      END_IF_L3 :  EMPTY_STATEMENT
-" -> "            End :  EMPTY_STATEMENT
+  "END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+" -> "End
+            End :  EMPTY_STATEMENT
             L56 :  print(V,)
             L57 :  print(Y,)
 "  [label="default"];
-  "          Entry :  EMPTY_STATEMENT
-" -> "       program0 :  EMPTY_STATEMENT
+  "Entry
+          Entry :  EMPTY_STATEMENT
+" -> "program0
+       program0 :  EMPTY_STATEMENT
 "  [label="default"];
-  "            End :  EMPTY_STATEMENT
+  "End
+            End :  EMPTY_STATEMENT
             L56 :  print(V,)
             L57 :  print(Y,)
-" -> "           Read :  EMPTY_STATEMENT
+" -> "Read
+           Read :  EMPTY_STATEMENT
             L58 :  X = read()
 "  [label="default"];
-  "            End :  EMPTY_STATEMENT
+  "End
+            End :  EMPTY_STATEMENT
             L56 :  print(V,)
             L57 :  print(Y,)
-" -> "           Exit :  EMPTY_STATEMENT
+" -> "Exit
+           Exit :  EMPTY_STATEMENT
 "  [label="alter"];
-  "           Read :  EMPTY_STATEMENT
+  "Read
+           Read :  EMPTY_STATEMENT
             L58 :  X = read()
-" -> "           Body :  EMPTY_STATEMENT
+" -> "Body
+           Body :  EMPTY_STATEMENT
              L4 :  #_t0 = 0
              L5 :  #_t1 = V == 0
           CJ_L6 :  if #_t1 goto IF_L3
