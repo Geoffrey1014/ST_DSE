@@ -8,17 +8,17 @@ import tools.Tuple2;
 
 import java.util.*;
 
-public class DFT {
-    private final CFG cfg;
+public class DataFlowTest extends CoverageTest{
     private HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt;
-    private Simulator simulator;
+    private ConcreteExecutor concreteExecutor;
     private SymbolExecutor symbolExecutor;
     private StateManager stateManager;
 
-    public DFT(CFG cfg, HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt){
-        this.cfg = cfg;
+    public DataFlowTest(CFG cfg, HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt){
+        super(cfg);
+
         this.udChianWithDmt = udChianWithDmt;
-        this.simulator = new Simulator(cfg);
+        this.concreteExecutor = new ConcreteExecutor(cfg);
         this.symbolExecutor = new SymbolExecutor(cfg);
         this.stateManager = new StateManager();
     }
@@ -64,7 +64,7 @@ public class DFT {
         ArrayList<BasicBlock> sortedCuts = new ArrayList<>(cuts);
         sortedCuts.sort(Comparator.comparingInt(BasicBlock::getId));
 
-        ConMemory conMemory = simulator.createInitMemory(); //目前没有做 conMemory 到备份
+        ConMemory conMemory = createInitMemory();
 
         stateDuPairTest(def,use,sortedCuts,conMemory);
 
@@ -73,15 +73,16 @@ public class DFT {
 
     }
 
+
     public HashMap<LlLocation,ValueOfDiffType> stateDuPairTest(VarAndStmt def, VarAndStmt use, ArrayList<BasicBlock> sortedCuts,ConMemory startConMenory){
         HashMap<BasicBlock,Boolean> W = new HashMap<>();
 
         SymMemory startSymMemory = symbolExecutor.createSymMemory(startConMenory);
         symbolExecutor.mkInputSymbolic(startSymMemory);
 
-        HashMap<LlLocation,ValueOfDiffType> inputs = simulator.createRandomInputs();
+        HashMap<LlLocation,ValueOfDiffType> inputs = concreteExecutor.createRandomInputs();
         do{
-            Tuple2<ExecutedRoute,ConMemory> exeResult = simulator.conExeFromRead(inputs,startConMenory);
+            Tuple2<ExecutedRoute,ConMemory> exeResult = concreteExecutor.conExeFromRead(inputs,startConMenory);
             ExecutedRoute executedRoute = exeResult.a1;
             ConMemory endConMemory = exeResult.a2;
             List<BasicBlock> route = executedRoute.route;
@@ -98,9 +99,7 @@ public class DFT {
         return null;
     }
 
-    public void redefinitionPruning(){
 
-    }
 
     public HashMap<LlLocation,ValueOfDiffType> guidedSearch(List<BasicBlock> route,
                                                             HashMap<BasicBlock,Boolean> workList,
@@ -155,5 +154,7 @@ public class DFT {
         }
         return defFlag && useFlag;
     }
+    public void redefinitionPruning(){
 
+    }
 }

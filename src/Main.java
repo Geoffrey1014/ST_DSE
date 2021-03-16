@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
-import simulation.DFT;
+import simulation.BranchTest;
 import tools.MyPrint;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
@@ -139,14 +139,14 @@ public class Main {
                 HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
                 writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
-                DFT dft = new DFT(cfg, udChianWithDmt);
-                System.out.println("data flow testing!----------------");
-                dft.dataFlowTesting();
+//                DFT dft = new DFT(cfg, udChianWithDmt);
+//                System.out.println("data flow testing!----------------");
+//                dft.dataFlowTesting();
 
 
-//                System.out.println("simulator.execute();------------");
-//                Simulator simulator = new Simulator(cfg);
-//                simulator.branchTest(inputFileNamePrefix);
+                System.out.println("simulator.execute();------------");
+                BranchTest branchTest = new BranchTest(cfg);
+                branchTest.branchTest(inputFileNamePrefix);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);

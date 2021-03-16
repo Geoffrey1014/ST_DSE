@@ -1,34 +1,18 @@
-def: x_1 @ L38 @ Read
-use: x_1 @ L10 @ IF_L4
-dominators: Body IF_L4 
-
-def: y_0 @ L3 @ Init
-use: y_0 @ L37 @ End
-dominators: END_IF_L4 Read End Body 
-
-def: y_0 @ L21 @ IF_L9
-use: y_0 @ L37 @ End
-dominators: END_IF_L4 End 
-
-def: y_0 @ L34 @ ELSIF_L23
-use: y_0 @ L37 @ End
-dominators: END_IF_L4 End 
-
-def: x_0 @ L39 @ Read
-use: x_0 @ L24 @ START_ELSIF_L16
-dominators: START_ELSIF_L16 Body IF_L4 
-
-def: #_t17 @ L12 @ IF_L4
-use: #_t17 @ L27 @ START_ELSIF_L16
-dominators: START_ELSIF_L16 
-
 def: x_0 @ L39 @ Read
 use: x_0 @ L11 @ IF_L4
-dominators: Body IF_L4 
+dominators: IF_L4 Body 
 
 def: x_1 @ L38 @ Read
 use: x_1 @ L13 @ IF_L4
-dominators: Body IF_L4 
+dominators: IF_L4 Body 
+
+def: x_0 @ L39 @ Read
+use: x_0 @ L12 @ IF_L4
+dominators: IF_L4 Body 
+
+def: x_1 @ L38 @ Read
+use: x_1 @ L24 @ START_ELSIF_L16
+dominators: IF_L4 Body START_ELSIF_L16 
 
 def: cstate_46 @ L19 @ IF_L9
 use: cstate_46 @ L6 @ Body
@@ -42,13 +26,17 @@ def: cstate_46 @ L0 @ Init
 use: cstate_46 @ L6 @ Body
 dominators: Read Body 
 
+def: x_1 @ L38 @ Read
+use: x_1 @ L10 @ IF_L4
+dominators: IF_L4 Body 
+
 def: x_0 @ L39 @ Read
-use: x_0 @ L12 @ IF_L4
-dominators: Body IF_L4 
+use: x_0 @ L24 @ START_ELSIF_L16
+dominators: IF_L4 Body START_ELSIF_L16 
 
 def: cstate_46 @ L0 @ Init
 use: cstate_46 @ L36 @ End
-dominators: END_IF_L4 Read End Body 
+dominators: Read END_IF_L4 End Body 
 
 def: cstate_46 @ L32 @ ELSIF_L23
 use: cstate_46 @ L36 @ End
@@ -58,11 +46,23 @@ def: cstate_46 @ L19 @ IF_L9
 use: cstate_46 @ L36 @ End
 dominators: END_IF_L4 End 
 
-def: x_1 @ L38 @ Read
-use: x_1 @ L24 @ START_ELSIF_L16
-dominators: START_ELSIF_L16 Body IF_L4 
+def: #_t17 @ L12 @ IF_L4
+use: #_t17 @ L27 @ START_ELSIF_L16
+dominators: START_ELSIF_L16 
 
 def: #_t16 @ L10 @ IF_L4
 use: #_t16 @ L27 @ START_ELSIF_L16
 dominators: START_ELSIF_L16 
+
+def: y_0 @ L21 @ IF_L9
+use: y_0 @ L37 @ End
+dominators: END_IF_L4 End 
+
+def: y_0 @ L3 @ Init
+use: y_0 @ L37 @ End
+dominators: Read END_IF_L4 End Body 
+
+def: y_0 @ L34 @ ELSIF_L23
+use: y_0 @ L37 @ End
+dominators: END_IF_L4 End 
 

@@ -26,8 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class SimulatorTest {
-    Simulator simulator;
+public class BranchTestTest {
+    BranchTest branchTest;
     CFG cfg;
 
     @Before
@@ -36,7 +36,7 @@ public class SimulatorTest {
         String file = "power.txt";
         walkTree(inputDir + file);
 
-        simulator = new Simulator(cfg);
+        branchTest = new BranchTest(cfg);
     }
 
     @Test
