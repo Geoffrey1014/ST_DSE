@@ -1,5 +1,6 @@
 package cfg;
 
+import tools.GraphViz;
 import tools.Node;
 
 import java.util.*;

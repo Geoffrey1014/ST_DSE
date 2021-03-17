@@ -1,30 +1,30 @@
-use: X @ L22 @ START_ELSIF_L13
+use: X @ L38 @ WHILE_L36
 defs: L58 @ Read, 
-
-use: V @ L42 @ LOOP_L37
-defs: L26 @ ELSIF_L20, L43 @ LOOP_L37, L0 @ Init, L16 @ IF_L9, 
-
-use: V @ L56 @ End
-defs: L26 @ ELSIF_L20, L43 @ LOOP_L37, L0 @ Init, L16 @ IF_L9, 
 
 use: X @ L11 @ IF_L3
 defs: L58 @ Read, 
 
 use: Y @ L57 @ End
-defs: L54 @ ELSIF_L48, L2 @ Init, L28 @ ELSIF_L20, L18 @ IF_L9, L46 @ END_WHILE_L36, 
-
-use: X @ L38 @ WHILE_L36
-defs: L58 @ Read, 
-
-use: V @ L5 @ Body
-defs: L26 @ ELSIF_L20, L43 @ LOOP_L37, L0 @ Init, L16 @ IF_L9, 
+defs: L2 @ Init, L28 @ ELSIF_L20, L54 @ ELSIF_L48, L46 @ END_WHILE_L36, L18 @ IF_L9, 
 
 use: V @ L50 @ END_ELSIF_L31
-defs: L26 @ ELSIF_L20, L43 @ LOOP_L37, L0 @ Init, L16 @ IF_L9, 
+defs: L26 @ ELSIF_L20, L16 @ IF_L9, L0 @ Init, L43 @ LOOP_L37, 
+
+use: V @ L5 @ Body
+defs: L26 @ ELSIF_L20, L16 @ IF_L9, L0 @ Init, L43 @ LOOP_L37, 
+
+use: V @ L42 @ LOOP_L37
+defs: L26 @ ELSIF_L20, L16 @ IF_L9, L0 @ Init, L43 @ LOOP_L37, 
+
+use: X @ L22 @ START_ELSIF_L13
+defs: L58 @ Read, 
 
 use: V @ L33 @ START_ELSIF_L7
-defs: L26 @ ELSIF_L20, L43 @ LOOP_L37, L0 @ Init, L16 @ IF_L9, 
+defs: L26 @ ELSIF_L20, L16 @ IF_L9, L0 @ Init, L43 @ LOOP_L37, 
+
+use: V @ L56 @ End
+defs: L26 @ ELSIF_L20, L16 @ IF_L9, L0 @ Init, L43 @ LOOP_L37, 
 
 use: V @ L38 @ WHILE_L36
-defs: L26 @ ELSIF_L20, L43 @ LOOP_L37, L0 @ Init, L16 @ IF_L9, 
+defs: L26 @ ELSIF_L20, L16 @ IF_L9, L0 @ Init, L43 @ LOOP_L37, 
 

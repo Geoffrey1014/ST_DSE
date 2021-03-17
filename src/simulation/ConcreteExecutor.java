@@ -2,7 +2,6 @@ package simulation;
 
 import cfg.BasicBlock;
 import cfg.CFG;
-import cfg.GraphViz;
 import ll.LlComponent;
 import ll.LlEmptyStmt;
 import ll.LlMethodCallStmt;
@@ -12,6 +11,7 @@ import ll.jump.LlJumpConditional;
 import ll.jump.LlJumpUnconditional;
 import ll.literal.*;
 import ll.location.LlLocation;
+import tools.GraphViz;
 import tools.Tuple2;
 
 import java.text.DecimalFormat;
@@ -78,7 +78,7 @@ public class ConcreteExecutor {
             conuter += 1;
             curBlock = nextBB.a1;
         }
-        return new Tuple2<ExecutedRoute,ConMemory>(new ExecutedRoute(route, branches), endConMemory);
+        return new Tuple2<>(new ExecutedRoute(route, branches), endConMemory);
     }
 
     /**

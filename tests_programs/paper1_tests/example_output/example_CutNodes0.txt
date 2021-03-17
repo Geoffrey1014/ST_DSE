@@ -1,54 +1,14 @@
 def: X @ L58 @ Read
-use: X @ L22 @ START_ELSIF_L13
-dominators: Body IF_L3 START_ELSIF_L13 
-
-def: V @ L0 @ Init
-use: V @ L42 @ LOOP_L37
-dominators: Body WHILE_L36 Read START_ELSIF_L7 LOOP_L37 
-
-def: V @ L43 @ LOOP_L37
-use: V @ L42 @ LOOP_L37
-dominators: 
-
-def: V @ L26 @ ELSIF_L20
-use: V @ L42 @ LOOP_L37
-dominators: WHILE_L36 START_ELSIF_L7 LOOP_L37 
-
-def: V @ L16 @ IF_L9
-use: V @ L42 @ LOOP_L37
-dominators: WHILE_L36 START_ELSIF_L7 LOOP_L37 
-
-def: V @ L43 @ LOOP_L37
-use: V @ L56 @ End
-dominators: End END_IF_L3 
-
-def: V @ L16 @ IF_L9
-use: V @ L56 @ End
-dominators: End END_IF_L3 
-
-def: V @ L26 @ ELSIF_L20
-use: V @ L56 @ End
-dominators: End END_IF_L3 
-
-def: V @ L0 @ Init
-use: V @ L56 @ End
-dominators: Body Read End END_IF_L3 
+use: X @ L38 @ WHILE_L36
+dominators: START_ELSIF_L7 Body WHILE_L36 
 
 def: X @ L58 @ Read
 use: X @ L11 @ IF_L3
 dominators: Body IF_L3 
 
-def: Y @ L54 @ ELSIF_L48
-use: Y @ L57 @ End
-dominators: End END_IF_L3 
-
-def: Y @ L28 @ ELSIF_L20
-use: Y @ L57 @ End
-dominators: End END_IF_L3 
-
 def: Y @ L2 @ Init
 use: Y @ L57 @ End
-dominators: Body Read End END_IF_L3 
+dominators: Read End Body END_IF_L3 
 
 def: Y @ L18 @ IF_L9
 use: Y @ L57 @ End
@@ -58,33 +18,21 @@ def: Y @ L46 @ END_WHILE_L36
 use: Y @ L57 @ End
 dominators: End END_IF_L3 
 
-def: X @ L58 @ Read
-use: X @ L38 @ WHILE_L36
-dominators: Body WHILE_L36 START_ELSIF_L7 
+def: Y @ L54 @ ELSIF_L48
+use: Y @ L57 @ End
+dominators: End END_IF_L3 
 
-def: V @ L43 @ LOOP_L37
-use: V @ L5 @ Body
-dominators: 
-
-def: V @ L26 @ ELSIF_L20
-use: V @ L5 @ Body
-dominators: 
+def: Y @ L28 @ ELSIF_L20
+use: Y @ L57 @ End
+dominators: End END_IF_L3 
 
 def: V @ L0 @ Init
-use: V @ L5 @ Body
-dominators: Body Read 
-
-def: V @ L16 @ IF_L9
-use: V @ L5 @ Body
-dominators: 
+use: V @ L50 @ END_ELSIF_L31
+dominators: END_ELSIF_L31 Read START_ELSIF_L7 Body 
 
 def: V @ L16 @ IF_L9
 use: V @ L50 @ END_ELSIF_L31
 dominators: END_ELSIF_L31 START_ELSIF_L7 
-
-def: V @ L0 @ Init
-use: V @ L50 @ END_ELSIF_L31
-dominators: Body Read END_ELSIF_L31 START_ELSIF_L7 
 
 def: V @ L26 @ ELSIF_L20
 use: V @ L50 @ END_ELSIF_L31
@@ -94,33 +42,85 @@ def: V @ L43 @ LOOP_L37
 use: V @ L50 @ END_ELSIF_L31
 dominators: END_ELSIF_L31 
 
+def: V @ L0 @ Init
+use: V @ L5 @ Body
+dominators: Read Body 
+
+def: V @ L16 @ IF_L9
+use: V @ L5 @ Body
+dominators: 
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L5 @ Body
+dominators: 
+
+def: V @ L43 @ LOOP_L37
+use: V @ L5 @ Body
+dominators: 
+
+def: V @ L43 @ LOOP_L37
+use: V @ L42 @ LOOP_L37
+dominators: 
+
+def: V @ L0 @ Init
+use: V @ L42 @ LOOP_L37
+dominators: Read START_ELSIF_L7 LOOP_L37 Body WHILE_L36 
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L42 @ LOOP_L37
+dominators: START_ELSIF_L7 LOOP_L37 WHILE_L36 
+
+def: V @ L16 @ IF_L9
+use: V @ L42 @ LOOP_L37
+dominators: START_ELSIF_L7 LOOP_L37 WHILE_L36 
+
+def: X @ L58 @ Read
+use: X @ L22 @ START_ELSIF_L13
+dominators: START_ELSIF_L13 Body IF_L3 
+
+def: V @ L0 @ Init
+use: V @ L33 @ START_ELSIF_L7
+dominators: Read START_ELSIF_L7 Body 
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L33 @ START_ELSIF_L7
+dominators: START_ELSIF_L7 
+
+def: V @ L16 @ IF_L9
+use: V @ L33 @ START_ELSIF_L7
+dominators: START_ELSIF_L7 
+
 def: V @ L43 @ LOOP_L37
 use: V @ L33 @ START_ELSIF_L7
 dominators: 
 
+def: V @ L0 @ Init
+use: V @ L56 @ End
+dominators: Read End Body END_IF_L3 
+
+def: V @ L43 @ LOOP_L37
+use: V @ L56 @ End
+dominators: End END_IF_L3 
+
 def: V @ L16 @ IF_L9
-use: V @ L33 @ START_ELSIF_L7
-dominators: START_ELSIF_L7 
+use: V @ L56 @ End
+dominators: End END_IF_L3 
 
 def: V @ L26 @ ELSIF_L20
-use: V @ L33 @ START_ELSIF_L7
-dominators: START_ELSIF_L7 
-
-def: V @ L0 @ Init
-use: V @ L33 @ START_ELSIF_L7
-dominators: Body Read START_ELSIF_L7 
-
-def: V @ L26 @ ELSIF_L20
-use: V @ L38 @ WHILE_L36
-dominators: WHILE_L36 START_ELSIF_L7 
-
-def: V @ L0 @ Init
-use: V @ L38 @ WHILE_L36
-dominators: Body WHILE_L36 Read START_ELSIF_L7 
+use: V @ L56 @ End
+dominators: End END_IF_L3 
 
 def: V @ L16 @ IF_L9
 use: V @ L38 @ WHILE_L36
-dominators: WHILE_L36 START_ELSIF_L7 
+dominators: START_ELSIF_L7 WHILE_L36 
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L38 @ WHILE_L36
+dominators: START_ELSIF_L7 WHILE_L36 
+
+def: V @ L0 @ Init
+use: V @ L38 @ WHILE_L36
+dominators: Read START_ELSIF_L7 Body WHILE_L36 
 
 def: V @ L43 @ LOOP_L37
 use: V @ L38 @ WHILE_L36

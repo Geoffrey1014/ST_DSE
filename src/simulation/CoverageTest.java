@@ -6,19 +6,24 @@ import ll.literal.*;
 import ll.location.LlLocation;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 
 public class CoverageTest {
     final CFG cfg;
+    private HashSet<LlLocation> inputVars;
     public CoverageTest(CFG cfg){
         this.cfg = cfg;
+        this.inputVars = cfg.getInputVars();         // get input var
+
     }
 
     public ConMemory createInitMemory() {
-        ConMemory conMemory = new ConMemory();
+        ConMemory conMemory = new ConMemory(inputVars);
         putNonInputVarInitToMemory(conMemory);
         return conMemory;
     }
+
 
     public void putNonInputVarInitToMemory(ConMemory conMemory) {
         Hashtable<LlComponent, LlLiteral> varNonInput = this.cfg.getLlSymbolTable().varNonInput;

@@ -31,7 +31,6 @@ public class BranchTest extends CoverageTest{
     public BranchTest(CFG cfg) {
         super(cfg);
 
-
         this.concreteExecutor = new ConcreteExecutor(cfg);
         this.symbolExecutor = new SymbolExecutor(cfg);
         this.stateManager = new StateManager();
@@ -40,24 +39,58 @@ public class BranchTest extends CoverageTest{
 
     }
 
-
-
-    public void genGraphViz(String outPutDir) {
-        String graphVizFilename = outPutDir + "Graph_debug" + ".dot";
-        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
-        try {
-            writename.createNewFile();
-
-            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            out.write(this.concreteExecutor.toGraphviz()); // \r\n即为换行
-            out.flush(); // 把缓存区内容压入文件
-            out.close(); // 最后记得关闭文件
-            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_debug" + ".pdf").waitFor();
-        } catch (IOException | InterruptedException e) {
-            System.err.println("There was an error:\n" + e);
+    /**
+     * Input: CIG: coverage instruction graph, CP: the candidate path pool,
+     * CPP: Circle Path Pool, v: the input vector, s: the PLC state, statePool: PLC state set
+     * Output: TS: test case set, CR: coverage rate
+     * C P ← ∅; v ← v0; statePool ← s0;
+     * repeat
+         * s ← SelectNextState(statePool);
+         * repeat
+             * repeat
+                 * P ←DSE_EXE(v,s,CIG);
+                 * statePool ← AddStatePool();
+                 * CIG←UpdateCIG();
+                 * candidate_path_set ← CollectPathCandidates(P);
+                 * CPP ←SaveCirclePath(candidate_path_set,s);
+                 * CP ← PrunePath(CIG,CP,candidate_path_set,s);
+                 * candidate_path ← SelectNextCandidate(C P);
+                 * v ← GenerateTestCase(candidate_path, s);
+                 * T S ← T S + {v};
+             * until CP =∅
+         * until statePool=∅
+         * s,circle_path ← SelectOneCirclePath(C P P);
+         * v ← GenerateTestCase(candidate_path);
+         * P ←DSE_EXE(v,s,CIG);
+         * statePool ← AddStatePool();
+         * CIG←UpdateCIG();
+         * candidate_path_set ← CollectPathCandidates(P);
+         * C P P ← SaveCirclePath(candidate_path_set);
+     * until C P P = ∅ ∥ C R ≥ β
+     * @param fileName
+     */
+    public void branchTest(String fileName) {
+        HashMap<String,Double> oldBranchTestData = new OldBranchTestData().data;
+        // create createInitMemory
+        ConMemory oldConMenory = createInitMemory();
+        stateManager.add(oldConMenory);
+        int counter = 0;
+        float branchCoverage = 0;
+        while (stateManager.candidatesSize() > 0) {
+            counter++;
+//            System.out.println("------- circle -----------" + counter++);
+            oldConMenory = stateManager.popLeft();
+            oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
+            branchCoverage = branchManager.coverageRate();
+            if (branchCoverage > 0.99 || counter > 40) break;
+//            genGraphViz("");
         }
+        Double oldData = 0.0D;
+        if(oldBranchTestData.containsKey(fileName)) oldData= oldBranchTestData.get(fileName);
 
-        System.out.println("to Graphviz finish!");
+        System.err.println(fileName + " branch coverage: " + branchCoverage+", "+oldData);
+
+
     }
 
     public void oneCircleTest(ConMemory startConMenory, HashMap<LlLocation, ValueOfDiffType> inputs) {
@@ -88,37 +121,25 @@ public class BranchTest extends CoverageTest{
 
     }
 
-    public void branchTest(String fileName) {
-        HashMap<String,Double> oldBranchTestData = new OldBranchTestData().data;
-        // create createInitMemory
-        ConMemory oldConMenory = createInitMemory();
-        stateManager.add(oldConMenory);
-        int counter = 0;
-        float branchCoverage = 0;
-        while (stateManager.candidatesSize() > 0) {
-            counter++;
-//            System.out.println("------- circle -----------" + counter++);
-            oldConMenory = stateManager.popLeft();
-            oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
-            branchCoverage = branchManager.coverageRate();
-            if (branchCoverage > 0.99 || counter > 40) break;
-//            genGraphViz("");
+
+
+    public void genGraphViz(String outPutDir) {
+        String graphVizFilename = outPutDir + "Graph_debug" + ".dot";
+        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
+        try {
+            writename.createNewFile();
+
+            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+            out.write(this.concreteExecutor.toGraphviz()); // \r\n即为换行
+            out.flush(); // 把缓存区内容压入文件
+            out.close(); // 最后记得关闭文件
+            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_debug" + ".pdf").waitFor();
+        } catch (IOException | InterruptedException e) {
+            System.err.println("There was an error:\n" + e);
         }
-        Double oldData = 0.0D;
-        if(oldBranchTestData.containsKey(fileName)) oldData= oldBranchTestData.get(fileName);
 
-        System.err.println(fileName + " branch coverage: " + branchCoverage+", "+oldData);
-
-
+        System.out.println("to Graphviz finish!");
     }
-
-    public ConMemory createInitMemory() {
-        ConMemory conMemory = new ConMemory();
-        putNonInputVarInitToMemory(conMemory);
-        return conMemory;
-    }
-
-
 
 
 }

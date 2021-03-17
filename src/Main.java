@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
-import simulation.BranchTest;
+import simulation.DataFlowTest;
 import tools.MyPrint;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
@@ -139,14 +139,14 @@ public class Main {
                 HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
                 writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
-//                DFT dft = new DFT(cfg, udChianWithDmt);
-//                System.out.println("data flow testing!----------------");
-//                dft.dataFlowTesting();
+                DataFlowTest dft = new DataFlowTest(cfg, udChianWithDmt);
+                System.out.println("data flow testing!----------------");
+                dft.dataFlowTesting();
 
-
-                System.out.println("simulator.execute();------------");
-                BranchTest branchTest = new BranchTest(cfg);
-                branchTest.branchTest(inputFileNamePrefix);
+//
+//                System.out.println("simulator.execute();------------");
+//                BranchTest branchTest = new BranchTest(cfg);
+//                branchTest.branchTest(inputFileNamePrefix);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
@@ -171,7 +171,7 @@ public class Main {
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
-        updateFig = false;
+        updateFig = true;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
 //        String file = "power.txt";
@@ -183,7 +183,7 @@ public class Main {
         walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-        runDirFiles(inputDir);
+//        runDirFiles(inputDir);
 
     }
 

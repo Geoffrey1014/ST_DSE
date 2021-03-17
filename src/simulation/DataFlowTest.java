@@ -65,9 +65,11 @@ public class DataFlowTest extends CoverageTest{
         sortedCuts.sort(Comparator.comparingInt(BasicBlock::getId));
 
         ConMemory conMemory = createInitMemory();
-
-        stateDuPairTest(def,use,sortedCuts,conMemory);
-
+        stateManager.add(conMemory);
+        HashMap<LlLocation,ValueOfDiffType> inputs = null;
+        while(inputs == null && stateManager.candidatesSize()>0){
+            inputs = stateDuPairTest(def,use,sortedCuts,stateManager.popLeft());
+        }
 
         return null;
 
@@ -88,6 +90,7 @@ public class DataFlowTest extends CoverageTest{
             List<BasicBlock> route = executedRoute.route;
             LinkedHashMap<BasicBlock,Boolean> branchNodes = executedRoute.executedBranches;
 
+            this.stateManager.add(endConMemory);
             if(pathCoverDu(route,def,use)) return inputs;
             W.putAll(branchNodes);
 
