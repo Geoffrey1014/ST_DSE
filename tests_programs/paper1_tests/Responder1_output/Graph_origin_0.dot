@@ -1,7 +1,7 @@
 digraph G {
   ranksep=.25;
   edge [arrowsize=.5]
-  node [shape=rectangle, fontname="ArialNarrow",
+  domNode [shape=rectangle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
   "IF_L3
           IF_L3 :  EMPTY_STATEMENT

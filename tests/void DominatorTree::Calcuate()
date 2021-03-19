@@ -15,7 +15,7 @@ void DominatorTree::Calcuate()
 			if (CurNode == RootNode)
 				continue;
 
-			// Get the predecessors of current node.
+			// Get the predecessors of current domNode.
 			auto PredDomNodeFromCFG = getDomNodePredsFromCFG(CurNode);
 
 			// (1) Find the first non-nullptr predecessor.

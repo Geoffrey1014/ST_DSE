@@ -1,0 +1,60 @@
+Node: power :
+power, Entry, 
+
+Node: Init :
+Init, power, Entry, 
+
+Node: Body :
+Read, Body, Init, power, Entry, 
+
+Node: ELSE_L6 :
+Read, Body, ELSE_L6, Init, power, Entry, 
+
+Node: IF_L5 :
+Read, Body, Init, power, Entry, IF_L5, 
+
+Node: END_IF_L5 :
+Read, Body, END_IF_L5, Init, power, Entry, 
+
+Node: IF_L15 :
+Read, IF_L15, Body, END_IF_L5, Init, power, Entry, 
+
+Node: END_IF_L15 :
+END_IF_L15, Read, Body, END_IF_L5, Init, power, Entry, 
+
+Node: WHILE_L24 :
+END_IF_L15, Read, Body, END_IF_L5, Init, power, WHILE_L24, Entry, 
+
+Node: LOOP_L25 :
+END_IF_L15, Read, Body, END_IF_L5, LOOP_L25, Init, power, WHILE_L24, Entry, 
+
+Node: END_WHILE_L24 :
+END_IF_L15, Read, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, Entry, 
+
+Node: IF_L36 :
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, Entry, 
+
+Node: ELSE_L42 :
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, ELSE_L42, Init, power, WHILE_L24, Entry, 
+
+Node: IF_L41 :
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, IF_L41, Init, power, WHILE_L24, Entry, 
+
+Node: END_IF_L41 :
+END_IF_L15, Read, IF_L36, Body, END_IF_L5, END_WHILE_L24, END_IF_L41, Init, power, WHILE_L24, Entry, 
+
+Node: END_IF_L36 :
+END_IF_L15, Read, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, END_IF_L36, Entry, 
+
+Node: Entry :
+Entry, 
+
+Node: End :
+END_IF_L15, Read, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, END_IF_L36, End, Entry, 
+
+Node: Read :
+Read, Init, power, Entry, 
+
+Node: Exit :
+END_IF_L15, Read, Exit, Body, END_IF_L5, END_WHILE_L24, Init, power, WHILE_L24, END_IF_L36, End, Entry, 
+

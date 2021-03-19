@@ -10,6 +10,11 @@ public class StateManager {
         this.statesAppeared = new HashSet<>();
         this.stateCandidates = new LinkedList<>();
     }
+    public StateManager(HashSet<ConMemory> states){
+        this.statesAppeared = new HashSet<>(states);
+        this.stateCandidates = new LinkedList<>(states);
+    }
+
     public void add(ConMemory conMemory){
         if(!this.statesAppeared.contains(conMemory)){
             this.statesAppeared.add(conMemory);

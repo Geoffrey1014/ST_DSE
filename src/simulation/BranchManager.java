@@ -22,7 +22,7 @@ public class BranchManager {
         totalBranchesNum = branchBlocks.size() * 2;
         coveredBranchesNum = 0;
         this.sortedBranchBlocks = new ArrayList<>(branchBlocks);
-        this.sortedBranchBlocks.sort(Comparator.comparingInt(BasicBlock::getId));
+        this.sortedBranchBlocks.sort(Comparator.comparingInt(BasicBlock::getDomTreeLevel));
         this.branchRecords = new HashMap<>();
         for (BasicBlock bb : sortedBranchBlocks) {
             branchRecords.put(bb, Arrays.asList(false, false));

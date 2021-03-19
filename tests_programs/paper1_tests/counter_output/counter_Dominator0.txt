@@ -1,0 +1,27 @@
+Node: counter :
+counter, Entry, 
+
+Node: Init :
+counter, Entry, Init, 
+
+Node: Body :
+counter, Entry, Body, Read, Init, 
+
+Node: IF_L8 :
+counter, Entry, IF_L8, Body, Read, Init, 
+
+Node: END_IF_L8 :
+counter, END_IF_L8, Entry, Body, Read, Init, 
+
+Node: Entry :
+Entry, 
+
+Node: End :
+counter, END_IF_L8, Entry, Body, Read, Init, End, 
+
+Node: Read :
+counter, Entry, Read, Init, 
+
+Node: Exit :
+counter, END_IF_L8, Entry, Exit, Body, Read, Init, End, 
+

@@ -27,6 +27,9 @@ public class BranchTest extends CoverageTest{
     private StateManager stateManager;
     private BranchManager branchManager;
 
+    public StateManager getStateManager() {
+        return stateManager;
+    }
 
     public BranchTest(CFG cfg) {
         super(cfg);
@@ -88,8 +91,26 @@ public class BranchTest extends CoverageTest{
         Double oldData = 0.0D;
         if(oldBranchTestData.containsKey(fileName)) oldData= oldBranchTestData.get(fileName);
 
-        System.err.println(fileName + " branch coverage: " + branchCoverage+", "+oldData);
+        System.out.println(fileName + " branch coverage: " + branchCoverage+", "+oldData);
 
+
+    }
+
+    public void branchTest() {
+        // create createInitMemory
+        ConMemory oldConMenory = createInitMemory();
+        stateManager.add(oldConMenory);
+        int counter = 0;
+        float branchCoverage;
+        while (stateManager.candidatesSize() > 0) {
+            counter++;
+//            System.out.println("------- circle -----------" + counter++);
+            oldConMenory = stateManager.popLeft();
+            oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
+            branchCoverage = branchManager.coverageRate();
+            if (branchCoverage > 0.99 || counter > 40) break;
+//            genGraphViz("");
+        }
 
     }
 

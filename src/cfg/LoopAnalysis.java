@@ -1,15 +1,11 @@
 package cfg;
 
-import tools.GraphViz;
-import tools.Node;
-
 import java.util.*;
 
 public class LoopAnalysis {
     public HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap = null;
     public CFG cfg;
-    private int id;
-    private HashMap<String, Node> label2Node;
+    public DomTree domTree;
 
     public LoopAnalysis(CFG cfg){
         this.cfg = cfg;
@@ -146,44 +142,21 @@ public class LoopAnalysis {
         return nodeToDominatingSet;
     }
 
-    public Node createDominatorTree(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
-        label2Node = new HashMap<>();
+    public DomTree createDominatorTree(HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap){
+        domTree = new DomTree();
+        // add nodes
         for(BasicBlock bb: dominatorsMap.keySet()){
-            Node curNode = new Node(bb);
-            label2Node.put(bb.name, curNode );
+            domTree.addNode(new DomNode(bb));
         }
-        for(BasicBlock bb: dominatorsMap.keySet()){
-            Node curNode = label2Node.get(bb.name);
-            for(BasicBlock b: dominatorsMap.get(bb)){
-                Node dmNode = label2Node.get(b.name);
-                curNode.addchild(dmNode);
+        // add edge
+        for(BasicBlock from: dominatorsMap.keySet()){
+            for(BasicBlock to: dominatorsMap.get(from)){
+                domTree.addEdge(from,to);
             }
         }
-        Node root = label2Node.get("Entry");
-        this.id = 0;
-        dfs(root);
-        return root;
-    }
-    public void dfs(Node root){
-        if(root == null) return;
-        root.setId(this.id);
-        this.id += 1;
-        for(Node node : root.getChildrenNodes()){
-            dfs(node);
-        }
+        return domTree;
     }
 
-    public String toGraphviz(){
-        GraphViz graphViz = new GraphViz();
-        for (Node node : this.label2Node.values()) {
-            String srcNode = node.toString();
-            graphViz.nodes.put(srcNode,false);
-            for(Node child : node.getChildrenNodes()){
-                graphViz.edges.map(srcNode,child.toString());
-            }
-        }
-        return graphViz.toDOT2();
-    }
 
     // returns the set of all the back edges in the CFG
     public HashSet<BackEdge> getBackEdges() {

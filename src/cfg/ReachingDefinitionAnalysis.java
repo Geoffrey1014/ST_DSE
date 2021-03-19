@@ -9,7 +9,6 @@ import ll.assignStmt.LlAssignStmtRegular;
 import ll.assignStmt.LlAssignStmtUnaryOp;
 import ll.jump.LlJumpConditional;
 import ll.location.LlLocation;
-import tools.Tuple2;
 
 import java.util.*;
 
@@ -140,20 +139,7 @@ public class ReachingDefinitionAnalysis {
         return stringBuilder.toString();
     }
 
-    public HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> calCutNodes(
-            HashMap<BasicBlock, HashSet<BasicBlock>> dominatorsMap) {
-        HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = new HashMap<>();
-        for (VarAndStmt use : useDefsChains.keySet()) {
-            udChianWithDmt.put(use, new HashSet<>());
-            for (VarAndStmt def : useDefsChains.get(use)) {
-                HashSet<BasicBlock> useDmt = new HashSet<>(dominatorsMap.get(use.getBlock()));
-                HashSet<BasicBlock> defDmt = new HashSet<>(dominatorsMap.get(def.getBlock()));
-                useDmt.removeAll(defDmt);
-                udChianWithDmt.get(use).add(new Tuple2<>(def, useDmt));
-            }
-        }
-        return udChianWithDmt;
-    }
+
 
     public void genUseDefinitionChains() {
         // how to store the result? Map use --> defs

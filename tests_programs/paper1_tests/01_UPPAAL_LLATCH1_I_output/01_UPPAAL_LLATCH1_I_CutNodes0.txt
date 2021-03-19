@@ -1,42 +1,26 @@
-def: OUT_1 @ L15 @ IF_L10
-use: OUT_1 @ L24 @ End
-dominators: End END_IF_L10 
+def: #_t1 @ L8 @ Body
+use: #_t1 @ L26 @ End
+dominators: END_IF_L10 End 
 
-def: OUT_1 @ L21 @ ELSIF_L17
-use: OUT_1 @ L24 @ End
-dominators: End END_IF_L10 
+def: LOAD @ L27 @ Read
+use: LOAD @ L18 @ START_ELSIF_L12
+dominators: Body START_ELSIF_L12 
 
-def: OUT_1 @ L6 @ Init
-use: OUT_1 @ L24 @ End
-dominators: End Read Body END_IF_L10 
+def: PREV_LOAD @ L1 @ Init
+use: PREV_LOAD @ L7 @ Body
+dominators: Body Read 
 
 def: PREV_LOAD @ L23 @ END_IF_L10
 use: PREV_LOAD @ L7 @ Body
 dominators: 
 
-def: PREV_LOAD @ L1 @ Init
-use: PREV_LOAD @ L7 @ Body
-dominators: Read Body 
-
 def: TLOAD @ L30 @ Read
 use: TLOAD @ L8 @ Body
 dominators: Body 
 
-def: #_t1 @ L8 @ Body
-use: #_t1 @ L26 @ End
-dominators: End END_IF_L10 
-
-def: LOAD @ L27 @ Read
-use: LOAD @ L18 @ START_ELSIF_L12
-dominators: START_ELSIF_L12 Body 
-
-def: IN_1 @ L28 @ Read
-use: IN_1 @ L21 @ ELSIF_L17
-dominators: START_ELSIF_L12 Body ELSIF_L17 
-
-def: RESET @ L29 @ Read
-use: RESET @ CJ_L11 @ Body
-dominators: Body 
+def: TLOAD @ L30 @ Read
+use: TLOAD @ L23 @ END_IF_L10
+dominators: Body END_IF_L10 
 
 def: #_t1 @ L8 @ Body
 use: #_t1 @ L18 @ START_ELSIF_L12
@@ -44,9 +28,25 @@ dominators: START_ELSIF_L12
 
 def: TLOAD @ L30 @ Read
 use: TLOAD @ L25 @ End
-dominators: End Body END_IF_L10 
+dominators: Body END_IF_L10 End 
 
-def: TLOAD @ L30 @ Read
-use: TLOAD @ L23 @ END_IF_L10
-dominators: Body END_IF_L10 
+def: RESET @ L29 @ Read
+use: RESET @ CJ_L11 @ Body
+dominators: Body 
+
+def: IN_1 @ L28 @ Read
+use: IN_1 @ L21 @ ELSIF_L17
+dominators: Body ELSIF_L17 START_ELSIF_L12 
+
+def: OUT_1 @ L15 @ IF_L10
+use: OUT_1 @ L24 @ End
+dominators: END_IF_L10 End 
+
+def: OUT_1 @ L6 @ Init
+use: OUT_1 @ L24 @ End
+dominators: Body Read END_IF_L10 End 
+
+def: OUT_1 @ L21 @ ELSIF_L17
+use: OUT_1 @ L24 @ End
+dominators: END_IF_L10 End 
 

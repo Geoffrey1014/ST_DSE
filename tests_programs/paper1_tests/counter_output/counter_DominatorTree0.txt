@@ -5,7 +5,7 @@ Node: Init :
 Read, 
 
 Node: Body :
-IF_L8, END_IF_L8, 
+END_IF_L8, IF_L8, 
 
 Node: IF_L8 :
 

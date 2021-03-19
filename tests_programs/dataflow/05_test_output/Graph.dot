@@ -1,7 +1,7 @@
 digraph G {
   ranksep=.25;
   edge [arrowsize=.5]
-  node [shape=circle, fontname="ArialNarrow",
+  domNode [shape=circle, fontname="ArialNarrow",
         fontsize=12, fixedsize=true, height=.45];
   entry; Main; exit; 
   entry -> Main;

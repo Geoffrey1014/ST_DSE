@@ -15,16 +15,17 @@ CFG:
           IF_L8 :  EMPTY_STATEMENT
             L13 :  #_t5 = #_t0 - #_t2
             L14 :  RES = #_t5
+            L16 :  FLAG = true
 
       END_IF_L8 :  EMPTY_STATEMENT
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L15 :  print(RES,)
-            L16 :  print(FLAG,)
+            L17 :  print(RES,)
+            L18 :  print(FLAG,)
 
            Read :  EMPTY_STATEMENT
-            L17 :  X = read()
+            L19 :  X = read()
 
            Exit :  EMPTY_STATEMENT

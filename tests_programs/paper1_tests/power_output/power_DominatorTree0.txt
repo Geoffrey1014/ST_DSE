@@ -5,7 +5,7 @@ Node: Init :
 Read, 
 
 Node: Body :
-END_IF_L5, IF_L5, ELSE_L6, 
+ELSE_L6, END_IF_L5, IF_L5, 
 
 Node: ELSE_L6 :
 
@@ -14,7 +14,7 @@ Node: IF_L5 :
 
 
 Node: END_IF_L5 :
-IF_L15, END_IF_L15, 
+END_IF_L15, IF_L15, 
 
 Node: IF_L15 :
 
@@ -23,16 +23,16 @@ Node: END_IF_L15 :
 WHILE_L24, 
 
 Node: WHILE_L24 :
-END_WHILE_L24, LOOP_L25, 
+LOOP_L25, END_WHILE_L24, 
 
 Node: LOOP_L25 :
 
 
 Node: END_WHILE_L24 :
-END_IF_L36, IF_L36, 
+IF_L36, END_IF_L36, 
 
 Node: IF_L36 :
-IF_L41, END_IF_L41, ELSE_L42, 
+END_IF_L41, ELSE_L42, IF_L41, 
 
 Node: ELSE_L42 :
 

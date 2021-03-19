@@ -1,7 +1,7 @@
 digraph G {
   ranksep=.25;
   edge [arrowsize=.5]
-  node [shape=ellipse, fontname="ArialNarrow",
+  domNode [shape=ellipse, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
   "194 END_ELSIF_L157
 "; "195 END_ELSIF_L170

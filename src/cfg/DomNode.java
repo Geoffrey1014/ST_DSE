@@ -1,28 +1,26 @@
-package tools;
-
-import cfg.BasicBlock;
+package cfg;
 
 import java.util.HashSet;
 
 
-public class Node {
-    private BasicBlock basicBlock;
+public class DomNode {
+    public BasicBlock basicBlock;
     private String name;
-    private HashSet<Node> childrenNodes;
+    private HashSet<DomNode> childrenDomNodes;
     private int id;
 
-    public Node(BasicBlock basicBlock) {
+    public DomNode(BasicBlock basicBlock) {
         this.basicBlock = basicBlock;
         this.name = basicBlock.name;
-        this.childrenNodes = new HashSet<>();
+        this.childrenDomNodes = new HashSet<>();
     }
 
-    public HashSet<Node> getChildrenNodes() {
-        return this.childrenNodes;
+    public HashSet<DomNode> getChildrenDomNodes() {
+        return this.childrenDomNodes;
     }
 
-    public void addchild(Node node) {
-        this.childrenNodes.add(node);
+    public void addchild(DomNode domNode) {
+        this.childrenDomNodes.add(domNode);
     }
 
     public int getId() {
@@ -31,7 +29,7 @@ public class Node {
 
     public void setId(int id) {
         this.id = id;
-        this.basicBlock.setId(id);
+        this.basicBlock.setDomTreeLevel(id);
     }
 
     public String getName() {
@@ -46,4 +44,6 @@ public class Node {
     public String toString(){
         return this.id +" "+ this.name;
     }
+
+
 }

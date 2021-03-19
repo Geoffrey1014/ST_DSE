@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 
 public class BasicBlock {
     public String name; //the first stmt's label
-    private int id;
+    private int domTreeLevel;
     private LinkedHashMap<String, LlStatement> labelsToStmtsMap;
     private BasicBlock defaultBranch;
     private BasicBlock alternativeBranch;
@@ -23,7 +23,7 @@ public class BasicBlock {
         this.labelsToStmtsMap = new LinkedHashMap<>(labelsToStmtsMap);
         this.builder = builder;
         this.predecessors = new HashSet<>();
-        this.id = -1;
+        this.domTreeLevel = -1;
     }
 
     public LinkedHashMap<String, LlStatement> getLabelsToStmtsMap() {
@@ -62,8 +62,8 @@ public class BasicBlock {
     @Override
     public String toString() {
         String str = "";
-        if(this.id >= 0){
-            str = str + this.id + " ";
+        if(this.domTreeLevel >= 0){
+            str = str + this.domTreeLevel + " ";
         }
         str += this.name + "\n";
         return str;
@@ -106,8 +106,8 @@ public class BasicBlock {
     public Edge getAlterName() {
         return this.alterName;
     }
-    public void setId(int id){this.id = id;}
-    public int getId(){return this.id;}
+    public void setDomTreeLevel(int domTreeLevel){this.domTreeLevel = domTreeLevel;}
+    public int getDomTreeLevel(){return this.domTreeLevel;}
 
 
 

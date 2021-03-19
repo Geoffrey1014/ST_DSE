@@ -18,7 +18,6 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Before;
 import org.junit.Test;
 import parser.STListener;
-import tools.Tuple2;
 import visitor.DefPhaseVisitor;
 import visitor.SemanticCheckVisitor;
 
@@ -143,9 +142,6 @@ public class BranchTestTest {
                 ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
                 rDAnalysis.genUseDefinitionChains();
 
-
-                //calCutNodes
-                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt,HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
 
 //                DFT dft = new DFT(cfg,udChianWithDmt);
 //                System.out.println("data flow testing!----------------");

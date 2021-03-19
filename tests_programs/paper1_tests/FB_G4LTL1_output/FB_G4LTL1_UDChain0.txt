@@ -1,24 +1,24 @@
-use: x_0 @ L23 @ START_ELSIF_L13
+use: x_0 @ L11 @ IF_L4
 defs: L36 @ Read, 
 
-use: y_0 @ L34 @ End
-defs: L18 @ IF_L9, L31 @ ELSIF_L20, L3 @ Init, 
-
-use: x_0 @ L21 @ START_ELSIF_L13
-defs: L36 @ Read, 
-
-use: x_1 @ L21 @ START_ELSIF_L13
-defs: L35 @ Read, 
+use: cstate14 @ L6 @ Body
+defs: L16 @ IF_L9, L0 @ Init, L29 @ ELSIF_L20, 
 
 use: x_1 @ L10 @ IF_L4
 defs: L35 @ Read, 
 
-use: x_0 @ L11 @ IF_L4
-defs: L36 @ Read, 
+use: y_0 @ L34 @ End
+defs: L18 @ IF_L9, L31 @ ELSIF_L20, L3 @ Init, 
 
 use: cstate14 @ L33 @ End
 defs: L16 @ IF_L9, L0 @ Init, L29 @ ELSIF_L20, 
 
-use: cstate14 @ L6 @ Body
-defs: L16 @ IF_L9, L0 @ Init, L29 @ ELSIF_L20, 
+use: x_0 @ L21 @ START_ELSIF_L13
+defs: L36 @ Read, 
+
+use: x_0 @ L23 @ START_ELSIF_L13
+defs: L36 @ Read, 
+
+use: x_1 @ L21 @ START_ELSIF_L13
+defs: L35 @ Read, 
 

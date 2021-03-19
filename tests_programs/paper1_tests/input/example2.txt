@@ -1,0 +1,35 @@
+PROGRAM power
+  VAR_INPUT
+    X : INT ;
+    Y : INT ;
+  END_VAR
+  VAR_OUTPUT
+    RES : REAL;
+    FLAG : BOOL;
+  END_VAR
+  VAR
+    EXP :INT;
+  END_VAR
+
+IF Y > 0 THEN
+    EXP := Y;
+ELSE
+    EXP := -Y;
+END_IF;
+
+RES := 1.0;
+WHILE EXP <> 0 DO
+	RES := RES * X;
+	EXP := EXP -1;
+END_WHILE;
+
+IF Y <= 0 THEN
+    IF X = 0 THEN
+        FLAG := FALSE;
+    ELSE
+        RES := 1.0 / RES;
+    END_IF;
+
+END_IF;
+
+END_PROGRAM

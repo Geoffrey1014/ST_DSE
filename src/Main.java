@@ -12,7 +12,9 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
+import simulation.BranchTest;
 import simulation.DataFlowTest;
+import simulation.UdChainsAndDoms;
 import tools.MyPrint;
 import tools.Tuple2;
 import visitor.DefPhaseVisitor;
@@ -85,7 +87,7 @@ public class Main {
                 if (updateFig) {
                     System.out.println("_______________________ ");
                     writeFile(cfg.toString(), outPutDir + "origin_" + cfgCounter + ".txt");
-                    genGraphViz(inputFileNamePrefix+ "_origin_" + cfgCounter, cfg, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_origin_" + cfgCounter, cfg, outPutDir);
                 }
 
 
@@ -95,7 +97,7 @@ public class Main {
                 if (updateFig) {
                     System.out.println("afterCSE---------------------");
                     writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
-                    genGraphViz(inputFileNamePrefix+"_CSE_" + cfgCounter, cfg, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_CSE_" + cfgCounter, cfg, outPutDir);
                 }
 
 
@@ -103,7 +105,7 @@ public class Main {
                 if (updateFig) {
                     System.out.println("afterCP-----------------------");
                     writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
-                    genGraphViz(inputFileNamePrefix+"_CP_" + cfgCounter, cfg, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_CP_" + cfgCounter, cfg, outPutDir);
                 }
 
                 // Dominator
@@ -112,11 +114,13 @@ public class Main {
 
                 // DominatorTree
                 HashMap<BasicBlock, HashSet<BasicBlock>> dominatingTreeMap = loopAnalysis.getDominatingTreeMap();
-                loopAnalysis.createDominatorTree(dominatingTreeMap);
+                DomTree domTree = loopAnalysis.createDominatorTree(dominatingTreeMap);
+//                domTree.dfsSetNum( 0);
+                domTree.bfs(0);
                 if (updateFig) {
-                    writeFile(dominatorMapToString(cfg, dominatorsMap), outPutDir + inputFileNamePrefix+"_Dominator" + cfgCounter + ".txt");
-                    writeFile(dominatorMapToString(cfg, dominatingTreeMap), outPutDir + inputFileNamePrefix+"_DominatorTree" + cfgCounter + ".txt");
-                    genGraphViz(inputFileNamePrefix+"_DomTree_" + cfgCounter, loopAnalysis, outPutDir);
+                    writeFile(dominatorMapToString(cfg, dominatorsMap), outPutDir + inputFileNamePrefix + "_Dominator" + cfgCounter + ".txt");
+                    writeFile(dominatorMapToString(cfg, dominatingTreeMap), outPutDir + inputFileNamePrefix + "_DominatorTree" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix + "_DomTree_" + cfgCounter, domTree, outPutDir);
                 }
 
                 GlobalDCE globalDCE = new GlobalDCE(cfg);
@@ -124,29 +128,29 @@ public class Main {
 
                 if (updateFig) {
                     System.out.println("afterDSE---------------------");
-                    writeFile(cfg.toString(), outPutDir + inputFileNamePrefix+"_new_" + "DSE_" + cfgCounter + ".txt");
-                    genGraphViz(inputFileNamePrefix+"_DSE_" + cfgCounter, cfg, outPutDir);
+                    writeFile(cfg.toString(), outPutDir + inputFileNamePrefix + "_new_" + "DSE_" + cfgCounter + ".txt");
+                    genGraphViz(inputFileNamePrefix + "_DSE_" + cfgCounter, cfg, outPutDir);
                 }
 
 
                 //UDChain
                 ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
                 rDAnalysis.genUseDefinitionChains();
-                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + inputFileNamePrefix+"_UDChain" + cfgCounter + ".txt");
+                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + inputFileNamePrefix + "_UDChain" + cfgCounter + ".txt");
 
-
+                UdChainsAndDoms udChainsAndDoms = new UdChainsAndDoms(domTree, rDAnalysis.useDefsChains, dominatorsMap);
                 //calCutNodes
-                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = rDAnalysis.calCutNodes(dominatorsMap);
-                writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
+//                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = udChainAndDoms.udChianWithDmt;
+//                writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
-                DataFlowTest dft = new DataFlowTest(cfg, udChianWithDmt);
+                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms);
                 System.out.println("data flow testing!----------------");
                 dft.dataFlowTesting();
 
-//
-//                System.out.println("simulator.execute();------------");
-//                BranchTest branchTest = new BranchTest(cfg);
-//                branchTest.branchTest(inputFileNamePrefix);
+
+                System.out.println("simulator.execute();------------");
+                BranchTest branchTest = new BranchTest(cfg);
+                branchTest.branchTest(inputFileNamePrefix);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
@@ -171,19 +175,22 @@ public class Main {
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
-        updateFig = true;
+        updateFig = false;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
-//        String file = "power.txt";
-//        String file = "counter.txt";
-        String file = "example.txt";
+        String file;
+       file = "counter.txt";
 
+         file = "power.txt";
+        file = "example.txt";
+        file = "example2.txt";
+//         file = "Responder3.txt";
 //        String file = "FB_G4LTL13.txt";// TODO 有问题
 
-        walkTree(inputDir + file);
+//        walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
 
@@ -197,15 +204,16 @@ public class Main {
 //                System.out.println(Arrays.toString(f.toString().split("/")));
                 if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL15.txt")) {
                     continue;
-                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")) {
-                    continue;
-                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
-                    continue;
                 } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL13.txt")) {
                     continue;
-                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")) {
                     continue;
                 }
+//                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
+//                    continue;
+//                }  else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+//                    continue;
+//                }
                 System.out.println("\n----- " + f + " ---------");
                 walkTree(f.toString());
             }
@@ -263,14 +271,14 @@ public class Main {
         System.out.println("to Graphviz finish!");
     }
 
-    public static void genGraphViz(String cfgCounter, LoopAnalysis loopAyls, String outPutDir) {
+    public static void genGraphViz(String cfgCounter, DomTree domTree, String outPutDir) {
         String graphVizFilename = outPutDir + "Graph_" + cfgCounter + ".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
         try {
             writename.createNewFile();
 
             BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            String s = loopAyls.toGraphviz();
+            String s = domTree.toGraphviz();
             out.write(s); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件

@@ -1,7 +1,7 @@
 digraph G {
   ranksep=.25;
   edge [arrowsize=.5]
-  node [shape=rectangle, fontname="ArialNarrow",
+  domNode [shape=rectangle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
   "134 END_ELSIF_L1397
 END_ELSIF_L1397 :  EMPTY_STATEMENT

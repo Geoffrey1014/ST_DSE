@@ -1,7 +1,7 @@
 digraph G {
   ranksep=.25;
   edge [arrowsize=.5]
-  node [shape=circle, fontname="ArialNarrow",
+  domNode [shape=circle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
   "11 END_IF_L40"; "8 END_IF_L30"; "9 ELSE_L41"; "21 End"; "19 ELSE_L75"; "1 Prog"; "7 IF_L30"; "23 ELSE_L19"; "24 IF_L18"; "12 IF_L52"; "14 END_IF_L52"; "16 ELSE_L65"; "20 END_IF_L74"; "18 IF_L74"; "0 Entry"; "2 Init"; "4 Body"; "3 Read"; "22 Exit"; "15 IF_L64"; "17 END_IF_L64"; "10 IF_L40"; "13 ELSE_L53"; "5 END_IF_L18"; "6 ELSE_L31"; 
   "3 Read" -> "4 Body";

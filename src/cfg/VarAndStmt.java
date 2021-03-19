@@ -37,9 +37,12 @@ public class VarAndStmt implements Comparable<VarAndStmt> {
 
     @Override
     public String toString() {
-        return this.location.toString()+ " @ "+ this.stmtLabel + ": " + this.statement.toString() +" @ "+ this.block.getId()+"-- "+this.block.name;
+        return this.location.toString()+ " @ "+ this.stmtLabel + ": " + this.statement.toString() +" @ "+ this.block.getDomTreeLevel()+"-- "+this.block.name;
     }
 
+    public String toStringSimple() {
+        return this.location.toString()+ " @ "+ this.stmtLabel +" @ "+this.block.name;
+    }
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof VarAndStmt) {
