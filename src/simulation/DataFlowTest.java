@@ -14,7 +14,7 @@ public class DataFlowTest extends CoverageTest{
     private BranchTest branchTestor;
     private DomTree domTree;
     private UdChainsAndDoms udChainsAndDoms;
-    private int testedDu =0 ;
+    private int successTestedDu =0 ;
     public DataFlowTest(CFG cfg, DomTree domTree, UdChainsAndDoms udChainsAndDoms){
         super(cfg);
 
@@ -26,20 +26,21 @@ public class DataFlowTest extends CoverageTest{
         this.udChainsAndDoms = udChainsAndDoms;
     }
 
-    public void dataFlowTesting(){
+    public String dataFlowTesting(){
 
         int countInit = 0;
         branchTestor.branchTest();
         HashSet<ConMemory> states = branchTestor.getStateManager().statesAppeared;
-        System.out.println("branch states: "+ states.size());
+
         List<DuPairAndDoms> duPairAndDomsList = udChainsAndDoms.duPairAndDomsList;
 
         long startTime = System.currentTimeMillis(); //程序开始记录时间
         long totalTime = 0;
+        int countedDu = 0;
         for(DuPairAndDoms duPairAndDoms : duPairAndDomsList){
-
+            countedDu += 1;
             totalTime = System.currentTimeMillis() - startTime;       //总消耗时间
-            if(totalTime > 1800000){
+            if(totalTime > 180000){
                 break;
             }
 
@@ -50,26 +51,47 @@ public class DataFlowTest extends CoverageTest{
 //            System.out.println("use: "+ use.toStringSimple()+"\n");
 
             if(def.block.name.equals("Init")) {
-                this.testedDu += 1;
-                countInit ++;
+                this.successTestedDu += 1;
+                countInit += 1;
                 continue;
             }
 
             dfTestaDuPair(def,use,duPairAndDoms);
         }
-        System.out.println("consumed time: " + totalTime);
-        System.out.println("countInit: " + countInit);
-        System.out.println("testedDu: "+ testedDu);
-        System.out.println("totalDu: "+ duPairAndDomsList.size());
-        System.out.println((float) testedDu/duPairAndDomsList.size());
 
+        return printResult(states.size(),totalTime,countInit,countedDu,successTestedDu,duPairAndDomsList.size());
+    }
+    public String printResult(int statesSize, long totalTime, int countInit, int countedDu,int successTestedDu,
+                            int duPairAndDomsListSize){
+        String resultString = "";
+        System.out.println("branch states: "+ statesSize);
+        resultString += "branch states: "+ statesSize +"\n";
+
+        System.out.println("consumed time: " + totalTime);
+        resultString += "consumed time: " + totalTime + "\n";
+
+        System.out.println("countInit: " + countInit);
+        resultString += "countInit: " + countInit + "\n";
+
+        System.out.println("succTestedDu: "+ successTestedDu);
+        resultString += "succTestedDu: "+ successTestedDu + "\n";
+
+        System.out.println("countedDu: " + countedDu);
+        resultString += "countedDu: " + countedDu + "\n";
+
+        System.out.println("totalDu: "+ duPairAndDomsListSize);
+        resultString += "totalDu: "+ duPairAndDomsListSize + "\n";
+
+        System.out.println("dft: "+(float) successTestedDu /duPairAndDomsListSize);
+        resultString += "dft: "+(float) successTestedDu /duPairAndDomsListSize + "\n";
+
+        return resultString;
     }
 
     /**
      *
      * @param def 目标定义 -使用对 d
      * @param use 目标定义 -使用对 d
-     * @param cuts du 的一系列割点
      * @return 满足 du 的程序输入 t，如果找不到对应的 t，返回 nil
      *
      * 1 let W be a worklist of branching nodes (initialized as empty)
@@ -99,13 +121,13 @@ public class DataFlowTest extends CoverageTest{
         while( stateManager.candidatesSize()>0){
             long endTime   = System.currentTimeMillis(); //程序结束记录时间
             long totalTime = endTime - startTime;       //总消耗时间
-            if(totalTime > 2000){
+            if(totalTime > 500){
                 break;
             }
             inputs = stateDuPairTest(def,use,duPairAndDoms,stateManager.popLeft());
             if(inputs != null) {
 //                System.err.println("get the du test!");
-                this.testedDu += 1;
+                this.successTestedDu += 1;
                 return inputs;
             }
         }
@@ -126,7 +148,8 @@ public class DataFlowTest extends CoverageTest{
         HashMap<LlLocation,ValueOfDiffType> inputs = concreteExecutor.createRandomInputs();
         int counter = 0;
         do{
-            if(++counter >20) {
+            counter += 1;
+            if(counter >20) {
                 break;
             }
             Tuple2<ExecutedRoute,ConMemory> exeResult = concreteExecutor.conExeFromRead(inputs,startConMenory);
@@ -136,19 +159,18 @@ public class DataFlowTest extends CoverageTest{
             LinkedHashMap<BasicBlock,Boolean> branchNodes = executedRoute.executedBranches;
 
 //            this.stateManager.add(endConMemory);
-            //TODO: 先cover def 再 cover use
             int coverResult = pathCoverDu(route,def,use);
             if(coverResult == 2) return inputs;
-            if(coverResult == 1){
+            if(coverResult == 1){  //cover def
+
+//                LinkedHashMap<BasicBlock,Boolean> prunedBr = redefinitionPruning(def,branchNodes,route);
                 W.putAll(branchNodes);
-                redefinitionPruning();
                 inputs = guidedSearch(route,W,duPairAndDomss.sortedDomNodeFromDefToUSe,startSymMemory,branchNodes);
             }
             else{
                 // not cover def
                 W.putAll(branchNodes);
                 inputs = guidedSearch(route,W,duPairAndDomss.sortedDomNodeFromEntryToDef,startSymMemory,branchNodes);
-
             }
 
 
@@ -157,6 +179,26 @@ public class DataFlowTest extends CoverageTest{
         return null;
     }
 
+    public LinkedHashMap<BasicBlock,Boolean>  redefinitionPruning(VarAndStmt def,LinkedHashMap<BasicBlock,Boolean> branchNodes,
+                                    List<BasicBlock> route  ){
+        int defCounter = 0;
+        int i = 0;
+        LinkedHashMap<BasicBlock,Boolean> branchNodesNew = new LinkedHashMap<>();
+        for(; i< route.size(); i++){
+            BasicBlock bb = route.get(i);
+            if(bb.defs.contains(def)){
+                defCounter += 1;
+            }
+            if(defCounter > 1){
+                break;
+            }
+            if(branchNodes.containsKey(bb)){
+                branchNodesNew.put(bb,branchNodes.get(bb));
+            }
+        }
+        return branchNodesNew;
+
+    }
 
     /**
      * 15 Procedure guided_search(reference worklist W) ′
@@ -233,6 +275,15 @@ public class DataFlowTest extends CoverageTest{
         return domTree.searchNextCut( new HashSet<>(sortedCuts),root);
     }
 
+    /**
+     *  2: cover both def and use
+     *  1: cover def
+     *  0: other
+     * @param path
+     * @param def
+     * @param use
+     * @return
+     */
     public int pathCoverDu(List<BasicBlock> path, VarAndStmt def, VarAndStmt use){
         boolean defFlag = false;
         boolean useFlag = false;
@@ -252,10 +303,6 @@ public class DataFlowTest extends CoverageTest{
             return 0;
         }
     }
-    public void redefinitionPruning(){
 
-    }
-    public boolean pathCoverDef(){
-        return false;
-    }
+
 }

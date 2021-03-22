@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
-import simulation.BranchTest;
 import simulation.DataFlowTest;
 import simulation.UdChainsAndDoms;
 import tools.MyPrint;
@@ -34,7 +33,7 @@ public class Main {
     // control of updating pictures
     public static Boolean updateFig = false;
 
-    public static void walkTree(String filePath) {
+    public static String walkTree(String filePath) {
         String[] pathSegments = filePath.split("/");
         String prefix = pathSegments[0] + "/" + pathSegments[1] + "/";
         String inputFileName = pathSegments[3];
@@ -46,6 +45,7 @@ public class Main {
         if (!dir.exists()) {// 判断目录是否存在
             dir.mkdir();
         }
+        String dftResult = "";
 
         try {
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -66,17 +66,16 @@ public class Main {
 
             SemanticCheckVisitor semanticCheckVisitor = new SemanticCheckVisitor(defPhaseVisitor.symTable);
             listener.pous.accept(semanticCheckVisitor);
-            System.out.println("semantic check error message:");
-            System.err.println(semanticCheckVisitor.errorMessage);
 
             if (updateFig) {
+                System.out.println("semantic check error message:");
+                System.err.println(semanticCheckVisitor.errorMessage);
                 System.out.println("pretty print:");
                 writeFile(listener.pous.prettyPrint(""), outPutDir + "prettyPrint" + ".txt");
                 System.out.println("low level IR");
             }
 
             int cfgCounter = 0;
-
             LlBuildersList llBuilderList = listener.pous.getBuilderList();
             ArrayList<LlSymbolTable> llSymbolTables = llBuilderList.getSymbolTables();
             ArrayList<LlBuilder> llBuilders = llBuilderList.getBuilders();
@@ -145,12 +144,12 @@ public class Main {
 
                 DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms);
                 System.out.println("data flow testing!----------------");
-                dft.dataFlowTesting();
+                dftResult += dft.dataFlowTesting();
 
 
-                System.out.println("simulator.execute();------------");
-                BranchTest branchTest = new BranchTest(cfg);
-                branchTest.branchTest(inputFileNamePrefix);
+//                System.out.println("simulator.execute();------------");
+//                BranchTest branchTest = new BranchTest(cfg);
+//                branchTest.branchTest(inputFileNamePrefix);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
@@ -171,6 +170,7 @@ public class Main {
         } catch (IOException e) {
             System.err.println("There was an error:\n" + e);
         }
+        return dftResult;
     }
 
     public static void main(String[] args) {
@@ -184,18 +184,19 @@ public class Main {
          file = "power.txt";
         file = "example.txt";
         file = "example2.txt";
-//         file = "Responder3.txt";
+        file = "04_SimpleConveyorBelt.txt";
+         file = "Responder3.txt";
 //        String file = "FB_G4LTL13.txt";// TODO 有问题
 
-//        walkTree(inputDir + file);
+        walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-        runDirFiles(inputDir);
+//        runDirFiles(inputDir);
 
     }
 
     public static void runDirFiles(String path) {
-
+        String allDFTResults = "";
         File file = new File(path);        //获取其file对象
         File[] fs = file.listFiles();    //遍历path下的文件和目录，放在File数组中
         for (File f : fs) {                    //遍历File[]数组
@@ -215,11 +216,11 @@ public class Main {
 //                    continue;
 //                }
                 System.out.println("\n----- " + f + " ---------");
-                walkTree(f.toString());
+                allDFTResults += walkTree(f.toString());
             }
 
-
         }
+        writeFile(allDFTResults, "allDFTResults.txt");
     }
 
     public static void writeFile(String content, String pathName) {

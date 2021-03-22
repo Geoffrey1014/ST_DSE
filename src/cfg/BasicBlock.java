@@ -15,6 +15,7 @@ public class BasicBlock {
     private BasicBlock alternativeBranch;
     private final LlBuilder builder;
     private final HashSet<BasicBlock> predecessors;
+    public HashSet<VarAndStmt> defs;
 
     private Edge defaultEdge = new Edge();
     private Edge alterName = new Edge();
@@ -24,6 +25,7 @@ public class BasicBlock {
         this.builder = builder;
         this.predecessors = new HashSet<>();
         this.domTreeLevel = -1;
+        this.defs = new HashSet<>();
     }
 
     public LinkedHashMap<String, LlStatement> getLabelsToStmtsMap() {

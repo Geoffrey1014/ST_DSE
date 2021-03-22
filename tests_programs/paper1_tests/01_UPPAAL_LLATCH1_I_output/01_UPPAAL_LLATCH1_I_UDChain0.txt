@@ -1,25 +1,19 @@
-use: TLOAD @ L8 @ Body
-defs: L30 @ Read, 
-
-use: PREV_LOAD @ L7 @ Body
-defs: L1 @ Init, L23 @ END_IF_L10, 
-
-use: LOAD @ L18 @ START_ELSIF_L12
-defs: L27 @ Read, 
-
-use: #_t1 @ L18 @ START_ELSIF_L12
-defs: L8 @ Body, 
+use: OUT_1 @ L24 @ End
+defs: L15 @ IF_L10, L6 @ Init, L21 @ ELSIF_L17, 
 
 use: #_t1 @ L26 @ End
 defs: L8 @ Body, 
 
-use: OUT_1 @ L24 @ End
-defs: L15 @ IF_L10, L6 @ Init, L21 @ ELSIF_L17, 
+use: LOAD @ L18 @ START_ELSIF_L12
+defs: L27 @ Read, 
 
-use: TLOAD @ L25 @ End
+use: PREV_LOAD @ L7 @ Body
+defs: L23 @ END_IF_L10, L1 @ Init, 
+
+use: TLOAD @ L8 @ Body
 defs: L30 @ Read, 
 
-use: TLOAD @ L23 @ END_IF_L10
+use: TLOAD @ L25 @ End
 defs: L30 @ Read, 
 
 use: RESET @ CJ_L11 @ Body
@@ -27,4 +21,10 @@ defs: L29 @ Read,
 
 use: IN_1 @ L21 @ ELSIF_L17
 defs: L28 @ Read, 
+
+use: TLOAD @ L23 @ END_IF_L10
+defs: L30 @ Read, 
+
+use: #_t1 @ L18 @ START_ELSIF_L12
+defs: L8 @ Body, 
 

@@ -1,39 +1,39 @@
-use: X @ L23 @ LOOP_L18
-defs: L50 @ Read, 
-
-use: EXP @ L20 @ WHILE_L17
-defs: L12 @ ELSE_L6, L14 @ IF_L5, L27 @ LOOP_L18, 
-
-use: RES @ L23 @ LOOP_L18
-defs: L16 @ END_IF_L5, L24 @ LOOP_L18, 
-
-use: EXP @ L48 @ End
-defs: L12 @ ELSE_L6, L14 @ IF_L5, L27 @ LOOP_L18, 
-
-use: Y @ L14 @ IF_L5
-defs: L49 @ Read, 
-
-use: RES @ L46 @ End
-defs: L42 @ ELSE_L35, L16 @ END_IF_L5, L24 @ LOOP_L18, 
-
-use: FLAG @ L47 @ End
-defs: L45 @ IF_L34, L4 @ Init, 
-
 use: Y @ L31 @ END_WHILE_L17
 defs: L49 @ Read, 
 
 use: Y @ L11 @ ELSE_L6
 defs: L49 @ Read, 
 
-use: EXP @ L26 @ LOOP_L18
-defs: L12 @ ELSE_L6, L14 @ IF_L5, L27 @ LOOP_L18, 
-
-use: X @ L37 @ IF_L29
-defs: L50 @ Read, 
+use: EXP @ L48 @ End
+defs: L27 @ LOOP_L18, L14 @ IF_L5, L12 @ ELSE_L6, 
 
 use: RES @ L41 @ ELSE_L35
 defs: L16 @ END_IF_L5, L24 @ LOOP_L18, 
 
+use: X @ L37 @ IF_L29
+defs: L50 @ Read, 
+
+use: RES @ L46 @ End
+defs: L42 @ ELSE_L35, L16 @ END_IF_L5, L24 @ LOOP_L18, 
+
+use: Y @ L14 @ IF_L5
+defs: L49 @ Read, 
+
+use: EXP @ L26 @ LOOP_L18
+defs: L27 @ LOOP_L18, L14 @ IF_L5, L12 @ ELSE_L6, 
+
+use: EXP @ L20 @ WHILE_L17
+defs: L27 @ LOOP_L18, L14 @ IF_L5, L12 @ ELSE_L6, 
+
+use: FLAG @ L47 @ End
+defs: L4 @ Init, L45 @ IF_L34, 
+
 use: Y @ L8 @ Body
 defs: L49 @ Read, 
+
+use: RES @ L23 @ LOOP_L18
+defs: L16 @ END_IF_L5, L24 @ LOOP_L18, 
+
+use: X @ L23 @ LOOP_L18
+defs: L50 @ Read, 
 

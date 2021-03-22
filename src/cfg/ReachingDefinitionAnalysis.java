@@ -312,18 +312,19 @@ public class ReachingDefinitionAnalysis {
             // AssignStmts
             if (stmt instanceof LlAssignStmt) {
                 LlLocation llLocation = ((LlAssignStmt) stmt).getStoreLocation();
-                defStmtCandidates.add(new cfg.VarAndStmt(llLocation, stmt, bb, label));
+                defStmtCandidates.add(new VarAndStmt(llLocation, stmt, bb, label));
             }
             //LlMethodCallStmt
             else if (stmt instanceof LlMethodCallStmt) {
                 if (((LlMethodCallStmt) stmt).getReturnLocation() != null) {
                     LlLocation llLocation = ((LlMethodCallStmt) stmt).getReturnLocation();
-                    defStmtCandidates.add(new cfg.VarAndStmt(llLocation, stmt, bb, label));
+                    defStmtCandidates.add(new VarAndStmt(llLocation, stmt, bb, label));
                 }
 
             }
 
         }
+        bb.defs = new HashSet<>(defStmtCandidates);
         this.bb2Gens.put(bb, defStmtCandidates);
         return defStmtCandidates;
     }
