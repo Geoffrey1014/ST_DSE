@@ -8,19 +8,19 @@ import ll.location.LlLocation;
 import visitor.BaseVisitor;
 
 public class IrCtrlFlowForRange extends Ir {
-    private final IrExpr low;
-    private final IrExpr high;
+    private final IrExpr left;
+    private final IrExpr right;
     private final IrExpr step;
     public Integer stepNum;
 
     // TODO : 这里应该是被我复杂化了，一般情况下IrCtrlFlowForRange 只能是两个数值
 
 
-    public IrCtrlFlowForRange( IrExpr low, IrExpr high, IrExpr step) {
+    public IrCtrlFlowForRange(IrExpr left, IrExpr right, IrExpr step) {
 
-        super( low.getLineNumber(), low.getColNumber());
-        this.low = low;
-        this.high = high;
+        super( left.getLineNumber(), left.getColNumber());
+        this.left = left;
+        this.right = right;
         this.step = step;
     }
 
@@ -29,11 +29,11 @@ public class IrCtrlFlowForRange extends Ir {
     public String prettyPrint(String indentSpace) {
         String prettyString = indentSpace + "|--range\n";
 
-        prettyString += ("  " + indentSpace + "|--lowBoundary\n");
-        prettyString += (this.low.prettyPrint("    " + indentSpace));
+        prettyString += ("  " + indentSpace + "|--leftBoundary\n");
+        prettyString += (this.left.prettyPrint("    " + indentSpace));
 
-        prettyString += ("  " + indentSpace + "|--highBoundary\n");
-        prettyString += (this.high.prettyPrint("    " + indentSpace));
+        prettyString += ("  " + indentSpace + "|--rightBoundary\n");
+        prettyString += (this.right.prettyPrint("    " + indentSpace));
 
         if (this.step != null){
             prettyString += ("  " + indentSpace + "|--step\n");
@@ -54,12 +54,12 @@ public class IrCtrlFlowForRange extends Ir {
         return null;
     }
 
-    public IrExpr getLow() {
-        return low;
+    public IrExpr getLeft() {
+        return left;
     }
 
-    public IrExpr getHigh() {
-        return high;
+    public IrExpr getRight() {
+        return right;
     }
 
     public IrExpr getStep() {

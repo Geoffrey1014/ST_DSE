@@ -1,0 +1,230 @@
+----- tests_programs/paper1_tests/input/power.txt ---------
+branch states: 6
+consumed time: 128
+countInit: 2
+succTestedDu: 28
+countedDu: 28
+totalDu: 28
+dft: 1.0
+
+----- tests_programs/paper1_tests/input/counter.txt ---------
+branch states: 3
+consumed time: 21
+countInit: 3
+succTestedDu: 13
+countedDu: 13
+totalDu: 13
+dft: 1.0
+
+----- tests_programs/paper1_tests/input/example.txt ---------
+branch states: 12
+consumed time: 23
+countInit: 7
+succTestedDu: 23
+countedDu: 32
+totalDu: 32
+dft: 0.71875
+
+----- tests_programs/paper1_tests/input/example2.txt ---------
+branch states: 4
+consumed time: 75
+countInit: 1
+succTestedDu: 24
+countedDu: 24
+totalDu: 24
+dft: 1.0
+
+----- tests_programs/paper1_tests/input/01_UPPAAL_LLATCH1_I.txt ---------
+branch states: 4
+consumed time: 21
+countInit: 2
+succTestedDu: 13
+countedDu: 13
+totalDu: 13
+dft: 1.0
+
+
+----- tests_programs/paper1_tests/input/02_UPPAAL_FAN_CONTROL.txt ---------
+branch states: 7
+consumed time: 216
+countInit: 21
+succTestedDu: 42
+countedDu: 43
+totalDu: 43
+dft: 0.9767442
+
+----- tests_programs/paper1_tests/input/03_NumericalLTLRefined.txt ---------
+branch states: 42
+consumed time: 367
+countInit: 7
+succTestedDu: 112
+countedDu: 134
+totalDu: 134
+dft: 0.8358209
+
+----- tests_programs/paper1_tests/input/04_SimpleConveyorBelt.txt ---------
+branch states: 60
+consumed time: 3150
+countInit: 11
+succTestedDu: 313
+countedDu: 399
+totalDu: 399
+dft: 0.78446114
+
+----- tests_programs/paper1_tests/input/05_HydraulicRamp.txt ---------
+branch states: 64
+consumed time: 2445
+countInit: 8
+succTestedDu: 358
+countedDu: 417
+totalDu: 417
+dft: 0.8585132
+
+----- tests_programs/paper1_tests/input/06_ArbitorLTL.txt ---------
+branch states: 51
+consumed time: 11656
+countInit: 18
+succTestedDu: 311
+countedDu: 470
+totalDu: 470
+dft: 0.66170216
+
+----- tests_programs/paper1_tests/input/07_PriorityArbitorLTL.txt ---------
+branch states: 79
+consumed time: 50444
+countInit: 21
+succTestedDu: 810
+countedDu: 1252
+totalDu: 1252
+dft: 0.64696485
+
+----- tests_programs/paper1_tests/input/Responder1.txt ---------
+branch states: 3
+consumed time: 1
+countInit: 3
+succTestedDu: 10
+countedDu: 10
+totalDu: 10
+dft: 1.0
+
+----- tests_programs/paper1_tests/input/Responder2.txt ---------
+branch states: 51
+consumed time: 12444
+countInit: 18
+succTestedDu: 305
+countedDu: 464
+totalDu: 464
+dft: 0.6573276
+
+----- tests_programs/paper1_tests/input/Responder3.txt ---------
+branch states: 91
+consumed time: 2904020
+countInit: 54
+succTestedDu: 3226
+countedDu: 6007
+totalDu: 6007
+dft: 0.5370401
+
+----- tests_programs/paper1_tests/input/FB_G4LTL1.txt ---------
+branch states: 6
+consumed time: 7
+countInit: 3
+succTestedDu: 14
+countedDu: 14
+totalDu: 14
+dft: 1.0
+
+----- tests_programs/paper1_tests/input/FB_G4LTL2.txt ---------
+branch states: 6
+consumed time: 7
+countInit: 3
+succTestedDu: 17
+countedDu: 17
+totalDu: 17
+dft: 1.0
+
+----- tests_programs/paper1_tests/input/FB_G4LTL3.txt ---------
+branch states: 92
+consumed time: 36541
+countInit: 14
+succTestedDu: 866
+countedDu: 1250
+totalDu: 1250
+dft: 0.6928
+
+----- tests_programs/paper1_tests/input/FB_G4LTL4.txt ---------
+branch states: 26
+consumed time: 55
+countInit: 6
+succTestedDu: 48
+countedDu: 53
+totalDu: 53
+dft: 0.9056604
+
+----- tests_programs/paper1_tests/input/FB_G4LTL5.txt ---------
+branch states: 49
+consumed time: 6389
+countInit: 13
+succTestedDu: 183
+countedDu: 313
+totalDu: 313
+dft: 0.5846645
+
+
+
+----- tests_programs/paper1_tests/input/FB_G4LTL6.txt ---------
+branch states: 45
+consumed time: 6389
+countInit: 37
+succTestedDu: 230
+countedDu: 385
+totalDu: 385
+dft: 0.5974026
+
+----- tests_programs/paper1_tests/input/FB_G4LTL7.txt ---------
+branch states: 52
+consumed time: 6389
+countInit: 38
+succTestedDu: 291
+countedDu: 399
+totalDu: 399
+dft: 0.7293233
+
+----- tests_programs/paper1_tests/input/FB_G4LTL8.txt ---------
+branch states: 50
+consumed time: 6389
+countInit: 124
+succTestedDu: 829
+countedDu: 2284
+totalDu: 2284
+dft: 0.3629597
+
+----- tests_programs/paper1_tests/input/FB_G4LTL9.txt ---------
+branch states: 51
+consumed time: 6389
+countInit: 32
+succTestedDu: 62
+countedDu: 3372
+totalDu: 154529
+dft: 4.0121918E-4
+
+
+----- tests_programs/paper1_tests/input/FB_G4LTL10.txt ---------
+branch states: 109
+consumed time: 3600578
+countInit: 201
+succTestedDu: 1004
+countedDu: 6577
+totalDu: 21264
+dft: 0.047215953
+
+----- tests_programs/paper1_tests/input/FB_G4LTL11.txt ---------
+branch states: 42
+consumed time: 192
+countInit: 8
+succTestedDu: 108
+countedDu: 127
+totalDu: 127
+dft: 0.8503937
+
+

@@ -4,6 +4,7 @@ import helper.LlBuilder;
 import helper.LlSymbolTable;
 import ir.IrCodeBlock;
 import ir.IrStmt;
+import ir.Literal.IrIntLiteral;
 import ir.Location.IrLocationVar;
 import ll.LlComponent;
 import ll.LlEmptyStmt;
@@ -71,16 +72,22 @@ public class IrCtrlFlowFor extends IrStmt {
 
 //        1）先给 counter 初始化
         LlLocationVar llCounter = (LlLocationVar) this.counter.generateLlIr(builder, symbolTable);
-        LlLocation llLow = this.range.getLow().generateLlIr(builder, symbolTable);
-        builder.appendStatement(new LlAssignStmtRegular(llCounter, llLow));
+        LlLocation llLeft = this.range.getLeft().generateLlIr(builder, symbolTable);
+        builder.appendStatement(new LlAssignStmtRegular(llCounter, llLeft));
 
         // 添加标签
         builder.appendStatement(loopCondition, emptyStmt );
 
         //判断 counter 是否越界，如果越界则跳出loop
-        LlLocation llHigh = this.range.getHigh().generateLlIr(builder, symbolTable);
+        LlLocation llRight = this.range.getRight().generateLlIr(builder, symbolTable);
         LlLocation condition = builder.generateTemp() ;
-        builder.appendStatement(new LlAssignStmtBinaryOp(condition ,llCounter, "<", llHigh ));
+        if(this.range.getStep() != null && ((IrIntLiteral)this.range.getStep()).getValue() < 0){
+            builder.appendStatement(new LlAssignStmtBinaryOp(condition ,llCounter, ">", llRight ));
+        }
+        else{
+            builder.appendStatement(new LlAssignStmtBinaryOp(condition ,llCounter, "<", llRight ));
+        }
+
 
         builder.appendConditionJumpStatement(new LlJumpConditional(startLoopLabel, condition));
         builder.appendUnConditionJumpStatement(new LlJumpUnconditional(endLoopLabel));

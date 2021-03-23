@@ -40,7 +40,7 @@ public class DataFlowTest extends CoverageTest{
         for(DuPairAndDoms duPairAndDoms : duPairAndDomsList){
             countedDu += 1;
             totalTime = System.currentTimeMillis() - startTime;       //总消耗时间
-            if(totalTime > 180000){
+            if(totalTime > 3600000){
                 break;
             }
 
@@ -121,7 +121,7 @@ public class DataFlowTest extends CoverageTest{
         while( stateManager.candidatesSize()>0){
             long endTime   = System.currentTimeMillis(); //程序结束记录时间
             long totalTime = endTime - startTime;       //总消耗时间
-            if(totalTime > 500){
+            if(totalTime > 1000){
                 break;
             }
             inputs = stateDuPairTest(def,use,duPairAndDoms,stateManager.popLeft());

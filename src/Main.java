@@ -23,10 +23,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 public class Main {
     public static MyPrint myprint = new MyPrint(3);
@@ -175,7 +172,7 @@ public class Main {
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
-        updateFig = false;
+        updateFig = true;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
         String file;
@@ -184,8 +181,9 @@ public class Main {
          file = "power.txt";
         file = "example.txt";
         file = "example2.txt";
-        file = "04_SimpleConveyorBelt.txt";
-         file = "Responder3.txt";
+        file = "factor.txt";
+//        file = "04_SimpleConveyorBelt.txt";
+//         file = "Responder3.txt";
 //        String file = "FB_G4LTL13.txt";// TODO 有问题
 
         walkTree(inputDir + file);
@@ -196,10 +194,22 @@ public class Main {
     }
 
     public static void runDirFiles(String path) {
-        String allDFTResults = "";
+        StringBuilder allDFTResults = new StringBuilder();
         File file = new File(path);        //获取其file对象
-        File[] fs = file.listFiles();    //遍历path下的文件和目录，放在File数组中
-        for (File f : fs) {                    //遍历File[]数组
+        File[] files = file.listFiles();    //遍历path下的文件和目录，放在File数组中
+        List fileList = Arrays.asList(files);
+        Collections.sort(fileList, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                if (o1.isDirectory() && o2.isFile())
+                    return -1;
+                if (o1.isFile() && o2.isDirectory())
+                    return 1;
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        for (File f : files) {                    //遍历File[]数组
             if (!f.isDirectory()) {
                 //若非目录(即文件)，则打印
 //                System.out.println(Arrays.toString(f.toString().split("/")));
@@ -210,17 +220,20 @@ public class Main {
                 } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")) {
                     continue;
                 }
-//                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
-//                    continue;
-//                }  else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
-//                    continue;
-//                }
+                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
+                    continue;
+                }  else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                    continue;
+                }else if (f.toString().equals("tests_programs/paper1_tests/input/Responder3.txt")) {
+                    continue;
+                }
                 System.out.println("\n----- " + f + " ---------");
-                allDFTResults += walkTree(f.toString());
+                allDFTResults.append("\n\n----- " + f + " ---------");
+                allDFTResults.append(walkTree(f.toString()));
             }
 
         }
-        writeFile(allDFTResults, "allDFTResults.txt");
+        writeFile(allDFTResults.toString(), "allDFTResults_1.txt");
     }
 
     public static void writeFile(String content, String pathName) {
@@ -253,8 +266,8 @@ public class Main {
         return stringBuilder.toString();
     }
 
-    public static void genGraphViz(String cfgCounter, CFG cfg, String outPutDir) {
-        String graphVizFilename = outPutDir + "Graph_" + cfgCounter + ".dot";
+    public static void genGraphViz(String name, CFG cfg, String outPutDir) {
+        String graphVizFilename = outPutDir + "Graph_" + name + ".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
         try {
             writename.createNewFile();
@@ -263,7 +276,7 @@ public class Main {
             out.write(cfg.toGraphviz()); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件
-            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_" + cfgCounter + ".pdf").waitFor();
+            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_" + name + ".pdf").waitFor();
         } catch (IOException | InterruptedException e) {
             System.err.println("There was an error:\n" + e);
         }
@@ -272,8 +285,8 @@ public class Main {
         System.out.println("to Graphviz finish!");
     }
 
-    public static void genGraphViz(String cfgCounter, DomTree domTree, String outPutDir) {
-        String graphVizFilename = outPutDir + "Graph_" + cfgCounter + ".dot";
+    public static void genGraphViz(String name, DomTree domTree, String outPutDir) {
+        String graphVizFilename = outPutDir + "Graph_" + name + ".dot";
         File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
         try {
             writename.createNewFile();
@@ -283,7 +296,7 @@ public class Main {
             out.write(s); // \r\n即为换行
             out.flush(); // 把缓存区内容压入文件
             out.close(); // 最后记得关闭文件
-            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_" + cfgCounter + ".pdf").waitFor();
+            Runtime.getRuntime().exec("dot" + " " + graphVizFilename + " -Tpdf" + " -o" + " " + outPutDir + "Graph_" + name + ".pdf").waitFor();
         } catch (IOException | InterruptedException e) {
             System.err.println("There was an error:\n" + e);
         }

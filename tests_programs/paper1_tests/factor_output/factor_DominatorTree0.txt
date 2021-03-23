@@ -1,0 +1,39 @@
+Node: factor :
+Init, 
+
+Node: Init :
+Read, 
+
+Node: Body :
+IF_L5, ELSE_L6, END_IF_L5, 
+
+Node: ELSE_L6 :
+FOR_COND_L11, 
+
+Node: FOR_COND_L11 :
+FOR_L12, END_FOR_L12, 
+
+Node: FOR_L12 :
+
+
+Node: END_FOR_L12 :
+
+
+Node: IF_L5 :
+
+
+Node: END_IF_L5 :
+End, 
+
+Node: Entry :
+factor, 
+
+Node: End :
+Exit, 
+
+Node: Read :
+Body, 
+
+Node: Exit :
+
+

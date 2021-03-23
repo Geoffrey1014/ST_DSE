@@ -1,0 +1,42 @@
+CFG:
+         factor :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  EXP = 0
+
+           Body :  EMPTY_STATEMENT
+             L4 :  RES = 1
+             L8 :  #_t2 = X < 0
+          CJ_L9 :  if #_t2 goto IF_L5
+
+        ELSE_L6 :  EMPTY_STATEMENT
+            L13 :  EXP = X
+
+   FOR_COND_L11 :  EMPTY_STATEMENT
+            L15 :  #_t4 = EXP > 0
+         CJ_L16 :  if #_t4 goto FOR_L12
+
+        FOR_L12 :  EMPTY_STATEMENT
+            L18 :  #_t5 = RES * EXP
+            L19 :  RES = #_t5
+            L21 :  EXP = EXP + -1
+        UCJ_L22 :  goto FOR_COND_L11
+
+    END_FOR_L12 :  EMPTY_STATEMENT
+        UCJ_L23 :  goto END_IF_L5
+
+          IF_L5 :  EMPTY_STATEMENT
+            L25 :  RES = 0
+
+      END_IF_L5 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L26 :  print(RES,)
+            L27 :  print(EXP,)
+
+           Read :  EMPTY_STATEMENT
+            L28 :  X = read()
+
+           Exit :  EMPTY_STATEMENT

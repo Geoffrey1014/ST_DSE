@@ -17,6 +17,4 @@ public abstract class IrExpr extends Ir {
         return "IrExpr";
     }
 
-
-
 }

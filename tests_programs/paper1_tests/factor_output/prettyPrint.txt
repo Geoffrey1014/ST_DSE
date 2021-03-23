@@ -1,0 +1,85 @@
+|--POUS
+  |--PROGRAM
+    |--name: factor
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: EXP
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: X
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: RES
+            |--type: RES_INT
+      |--codeBlock:
+        |--assignStmtEquals
+          |--lhs
+            |--locationVar
+              |--name: RES
+              |--type: RES_INT
+          |--rhs
+            |--IntLiteral
+              |--value: 1
+        |--ifStmt
+          |--condExpr
+            |__binaryRelOper
+              |__lhs
+                |--locationVar
+                  |--name: X
+                  |--type: RES_INT
+              |__op: LT_OP
+              |__rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: RES
+                    |--type: RES_INT
+                |--rhs
+                  |--IntLiteral
+                    |--value: 0
+        |--elseBody
+          |--codeBlock:
+            |--forLoop
+              |--counter
+                |--locationVar
+                  |--name: EXP
+                  |--type: RES_INT
+                |--range
+                |--range
+                  |--leftBoundary
+                    |--locationVar
+                      |--name: X
+                      |--type: RES_INT
+                  |--rightBoundary
+                    |--IntLiteral
+                      |--value: 0
+                  |--step
+                    |--IntLiteral
+                      |--value: -1
+              |--body
+                |--codeBlock:
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: RES
+                        |--type: RES_INT
+                    |--rhs
+                      |--binaryArithOper
+                        |--lhs
+                          |--locationVar
+                            |--name: RES
+                            |--type: RES_INT
+                        |--op: MUL_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: EXP
+                            |--type: RES_INT

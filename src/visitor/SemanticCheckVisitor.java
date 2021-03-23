@@ -579,13 +579,13 @@ public class SemanticCheckVisitor implements BaseVisitor<Void> {
      */
     @Override
     public Void visitIrCtrlFlowForRange(IrCtrlFlowForRange node) {
-        node.getLow().accept(this);
-        if (node.getLow().getExpressionType() != VarTypeEnum.RES_INT){
+        node.getLeft().accept(this);
+        if (node.getLeft().getExpressionType() != VarTypeEnum.RES_INT){
             errorMessage.append(" the  low boundary shoud be int: ").append(" line:")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
-        node.getHigh().accept(this);
-        if (node.getHigh().getExpressionType() != VarTypeEnum.RES_INT){
+        node.getRight().accept(this);
+        if (node.getRight().getExpressionType() != VarTypeEnum.RES_INT){
             errorMessage.append(" the  high boundary shoud be int: ").append(" line:")
                     .append(node.getLineNumber()).append(" col: ").append(node.getColNumber()).append("\n\n");
         }
