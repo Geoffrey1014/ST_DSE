@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
+import simulation.BranchTest;
 import simulation.DataFlowTest;
 import simulation.UdChainsAndDoms;
 import tools.MyPrint;
@@ -142,11 +143,9 @@ public class Main {
                 DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
                 System.out.println("data flow testing!----------------");
                 dftResult += dft.dataFlowTesting();
-
-
-//                System.out.println("simulator.execute();------------");
-//                BranchTest branchTest = new BranchTest(cfg);
-//                branchTest.branchTest(inputFileNamePrefix);
+                System.out.println("branch testing;------------");
+                BranchTest branchTest = new BranchTest(cfg);
+                branchTest.branchTest(inputFileNamePrefix);
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
@@ -184,7 +183,7 @@ public class Main {
 //        file = "factor.txt";
         file = "04_SimpleConveyorBelt.txt";
 //         file = "Responder3.txt";
-
+        file = "FB_G4LTL8.txt";
         walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出

@@ -1,0 +1,72 @@
+use: P_Fan2Lo_1 @ L59 @ End
+defs: L4 @ Init, 
+
+use: CONSTANT @ L49 @ End
+defs: L0 @ Init, 
+
+use: DBC_PV_CoStep @ L29 @ END_IF_L15
+defs: L63 @ Read, 
+
+use: P_Fan3Hi_2 @ L50 @ End
+defs: L10 @ Init, 
+
+use: DBC_PV_CoStep @ L39 @ END_IF_L27
+defs: L63 @ Read, 
+
+use: P_Fan3Lo @ L54 @ End
+defs: L8 @ Init, 
+
+use: DBC_PV_CoStep @ L17 @ Body
+defs: L63 @ Read, 
+
+use: P_Fan2Hi_2 @ L53 @ End
+defs: L7 @ Init, 
+
+use: P_Fan1Lo_2 @ L17 @ Body
+defs: L2 @ Init, 
+
+use: P_Fan3Hi_1 @ L52 @ End
+defs: L9 @ Init, 
+
+use: P_Fan1Lo_2 @ L60 @ End
+defs: L2 @ Init, 
+
+use: P_Fan2Hi_1 @ L55 @ End
+defs: L6 @ Init, 
+
+use: P_Fan1Hi @ L29 @ END_IF_L15
+defs: L3 @ Init, 
+
+use: P_Fan1Lo_1 @ L61 @ End
+defs: L1 @ Init, 
+
+use: P_Fan2Lo_2 @ L39 @ END_IF_L27
+defs: L5 @ Init, 
+
+use: DBC_PV_CoStep @ L40 @ END_IF_L27
+defs: L63 @ Read, 
+
+use: DBC_PV_C_Fan2Lo @ L56 @ End
+defs: L48 @ IF_L37, L45 @ ELSE_L38, 
+
+use: DBC_PV_C_Fan1Lo @ L51 @ End
+defs: L23 @ ELSE_L16, L26 @ IF_L15, 
+
+use: P_Fan2Lo_2 @ L57 @ End
+defs: L5 @ Init, 
+
+use: DBC_PV_CoStep @ L18 @ Body
+defs: L63 @ Read, 
+
+use: DBC_PV_C_Fan1Hi @ L62 @ End
+defs: L33 @ ELSE_L28, L36 @ IF_L27, 
+
+use: P_Fan1Hi @ L58 @ End
+defs: L3 @ Init, 
+
+use: P_Fan1Lo_1 @ L18 @ Body
+defs: L1 @ Init, 
+
+use: P_Fan2Lo_1 @ L40 @ END_IF_L27
+defs: L4 @ Init, 
+

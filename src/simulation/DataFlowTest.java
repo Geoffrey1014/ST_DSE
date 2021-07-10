@@ -37,10 +37,10 @@ public class DataFlowTest extends CoverageTest {
         branchTestor.branchTest();
         HashSet<ConMemory> states = branchTestor.getStateManager().statesAppeared;
         Integer stateNum = states.size();
-        states = new HashSet<>();
-        for (int i = 0; i < stateNum; i++) {
-            states.add(createInitMemory());
-        }
+//        states = new HashSet<>();
+//        for (int i = 0; i < stateNum; i++) {
+//            states.add(createInitMemory());
+//        }
 
 
         List<DuPairAndDoms> duPairAndDomsList = udChainsAndDoms.duPairAndDomsList;
@@ -66,9 +66,9 @@ public class DataFlowTest extends CoverageTest {
             }
             HashMap<LlLocation, ValueOfDiffType> inputs = dfTestaDuPair(def, use, duPairAndDoms);
             if (inputs != null) {
-                testingResult.append("def: ").append(def.toStringSimple()).append("\n");
-                testingResult.append("use: ").append(use.toStringSimple()).append("\n");
-                testingResult.append(inputs.toString()).append("\n\n");
+//                testingResult.append("def: ").append(def.toStringSimple()).append("\n");
+//                testingResult.append("use: ").append(use.toStringSimple()).append("\n");
+//                testingResult.append(inputs.toString()).append("\n\n");
             }
         }
         System.out.println(testingResult);
@@ -141,7 +141,7 @@ public class DataFlowTest extends CoverageTest {
             inputs = stateDuPairTest(def, use, duPairAndDoms, state);
             if (inputs != null) {
 //                System.err.println("get the du test!");
-                testingResult.append(state.toString()).append("\n");
+//                testingResult.append(state.toString()).append("\n");
                 this.successTestedDu += 1;
                 return inputs;
             }
