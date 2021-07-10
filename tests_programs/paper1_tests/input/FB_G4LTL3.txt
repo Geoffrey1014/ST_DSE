@@ -17,161 +17,228 @@ VAR_INPUT
 (* Control logic *)
 IF cstate_76 = 20 THEN
     IF ((NOT x_0)  AND  x_3) OR (x_0   AND  (NOT x_2) AND  x_3) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+         y_0 := FALSE;
     ELSIF ((NOT x_0)  AND  (NOT x_3)) OR (x_0  AND  (NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+        y_0 := FALSE;
     ELSIF (x_0  AND  x_2 AND  x_3) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF (x_0  AND  x_1 AND  x_2  AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+        y_0 := TRUE;
     ELSIF (x_0 AND  (NOT x_1) AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 243; y_0 := TRUE;  
+        cstate_76 := 243;
+        y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 0 THEN
     IF ((NOT x_1) AND  (NOT x_2) ) OR ((NOT x_1) AND  x_2 AND  x_3 ) THEN 
-        cstate_76 := 18; y_0 := FALSE;  
+        cstate_76 := 18;
+         y_0 := FALSE;
     ELSIF (x_0 AND  x_1 AND  x_2 AND  x_3 ) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+         y_0 := FALSE;
     ELSIF ( x_1 AND  (NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  x_1 AND  x_3) OR (x_0 AND  x_1 AND  (NOT x_2) AND  x_3) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+         y_0 := FALSE;
     ELSIF (x_0 AND  x_1 AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+        y_0 := TRUE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 0; y_0 := TRUE;  
+        cstate_76 := 0;
+         y_0 := TRUE;
     ELSIF ((NOT x_0) AND  x_1 AND  x_2 AND  (NOT x_3 )) THEN 
-        cstate_76 := 24; y_0 := FALSE;  
+        cstate_76 := 24;
+         y_0 := FALSE;
     ELSIF (x_0 AND  (NOT x_1) AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 27; y_0 := TRUE;  
+        cstate_76 := 27;
+        y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 786 THEN
     IF ((NOT x_0) AND  (NOT x_2) ) OR ((NOT x_0) AND  x_2 AND  x_3) OR (x_0  AND  (NOT x_2) ) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF (x_0 AND  x_2 AND  x_3 ) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+         y_0 := FALSE;
     ELSIF (x_0 AND  x_1 AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 247; y_0 := TRUE;  
+        cstate_76 := 247;
+         y_0 := TRUE;
     ELSIF ((NOT x_0)  AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 786; y_0 := FALSE;  
+        cstate_76 := 786;
+        y_0 := FALSE;
     ELSIF (x_0 AND  (NOT x_1) AND  x_2 AND  (NOT x_3)) THEN 
-        cstate_76 := 246; y_0 := TRUE;  
+        cstate_76 := 246;
+        y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 22 THEN
     IF ((NOT x_0) ) OR (x_0 AND  (NOT x_2) ) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+         y_0 := FALSE;
     ELSIF ((x_0) AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 247; y_0 := TRUE;  
+        cstate_76 := 247;
+        y_0 := TRUE;
     ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 246; y_0 := TRUE;  
+        cstate_76 := 246;
+         y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 18 THEN
     IF ((NOT x_0) AND  (NOT x_1) ) OR ((x_0) AND  (NOT x_1) AND  (NOT x_2) ) OR ((x_0) AND  (NOT x_1) AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 18; y_0 := FALSE;  
+        cstate_76 := 18;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (x_1)  AND  (NOT x_3)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (x_1)  AND  (x_3)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_3)) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+        y_0 := TRUE;
     ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 27; y_0 := TRUE;  
+        cstate_76 := 27;
+        y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 243 THEN
     IF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_2) AND  (x_3)) OR ((NOT x_0) AND  (x_1) AND  (x_3)) OR ((x_0)  AND  (NOT x_2) AND  (x_3)) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+         y_0 := FALSE;
     ELSIF ((NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (x_3)) OR ((x_0)  AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+        y_0 := TRUE;
     ELSIF ((NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 243; y_0 := TRUE;  
+        cstate_76 := 243;
+        y_0 := TRUE;
     ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 24; y_0 := FALSE;  
+        cstate_76 := 24;
+        y_0 := FALSE;
     END_IF;
 ELSIF cstate_76 = 24 THEN
     IF ((NOT x_0)  AND  (x_3)) OR ((x_0)  AND  (NOT x_2) AND  (x_3)) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF ((NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+         y_0 := FALSE;
     ELSIF ((x_0) AND  (x_2) AND  (x_3 )) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+        y_0 := TRUE;
     ELSIF ((NOT x_0)  AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 24; y_0 := FALSE;  
+        cstate_76 := 24;
+         y_0 := FALSE;
     ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 243; y_0 := TRUE;  
+        cstate_76 := 243;
+         y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 27 THEN
     IF ((NOT x_1) AND  (NOT x_2) ) OR ( (NOT x_1) AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 18; y_0 := FALSE;  
+        cstate_76 := 18;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2 ) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+         y_0 := FALSE;
     ELSIF ((x_1) AND  (NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (x_1) AND  (x_3)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_3)) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+        y_0 := TRUE;
     ELSIF ((NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 27; y_0 := TRUE;  
+        cstate_76 := 27;
+        y_0 := TRUE;
     ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 24; y_0 := FALSE;  
+        cstate_76 := 24;
+        y_0 := FALSE;
     END_IF;
 ELSIF cstate_76 = 247 THEN
     IF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_2) ) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) ) OR ((NOT x_0) AND  (x_1) AND  (x_2) AND  (x_3)) OR ((x_0 ) AND  (NOT x_2)) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+         y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (x_3)) OR ((x_0)  AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) OR ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3 )) THEN 
-        cstate_76 := 247; y_0 := TRUE;  
+        cstate_76 := 247;
+         y_0 := TRUE;
     ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 786; y_0 := FALSE;  
+        cstate_76 := 786;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 246; y_0 := TRUE;  
+        cstate_76 := 246;
+        y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 28 THEN
     IF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_2) AND  (x_3)) OR ((NOT x_0) AND  (x_1)  AND  (x_3)) OR ((x_0 ) AND  (NOT x_2) AND  (x_3)) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF ((NOT x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 20; y_0 := FALSE;  
+        cstate_76 := 20;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (x_3)) OR ((x_0)  AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) OR ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 28; y_0 := TRUE;  
+        cstate_76 := 28;
+         y_0 := TRUE;
     ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 24; y_0 := FALSE;  
+        cstate_76 := 24;
+        y_0 := FALSE;
     ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 243; y_0 := TRUE;  
+        cstate_76 := 243;
+        y_0 := TRUE;
     END_IF;
 ELSIF cstate_76 = 246 THEN
     IF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_2) ) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) ) OR ((NOT x_0) AND  (x_1) AND  (x_2) AND  (x_3)) OR ((x_0) AND  (NOT x_2) ) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (x_3)) OR ((x_0) AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+         y_0 := FALSE;
     ELSIF ((x_0 ) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 247; y_0 := TRUE;  
+        cstate_76 := 247;
+        y_0 := TRUE;
     ELSIF ((NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 246; y_0 := TRUE;  
+        cstate_76 := 246;
+        y_0 := TRUE;
     ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 786; y_0 := FALSE;  
+        cstate_76 := 786;
+        y_0 := FALSE;
     END_IF;
 ELSIF cstate_76 = 29 THEN
     IF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_2)) OR ((NOT x_0) AND  (x_1) ) OR ((x_0)  AND  (NOT x_2) ) THEN 
-        cstate_76 := 22; y_0 := FALSE;  
+        cstate_76 := 22;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) ) OR ((x_0)  AND  (x_2) AND  (x_3)) THEN 
-        cstate_76 := 29; y_0 := FALSE;  
+        cstate_76 := 29;
+         y_0 := FALSE;
     ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 247; y_0 := TRUE;  
+        cstate_76 := 247;
+         y_0 := TRUE;
     ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_3)) THEN 
-        cstate_76 := 246; y_0 := TRUE;  
+        cstate_76 := 246;
+         y_0 := TRUE;
     END_IF;
 END_IF;
 END_PROGRAM

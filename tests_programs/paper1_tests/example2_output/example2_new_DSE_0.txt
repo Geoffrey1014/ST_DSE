@@ -1,51 +1,48 @@
 CFG:
-           Main :  EMPTY_STATEMENT
+       example2 :  EMPTY_STATEMENT
 
            Init :  EMPTY_STATEMENT
-             L1 :  PREV_LOAD = false
-             L6 :  OUT_1 = false
+             L2 :  V = 0
 
            Body :  EMPTY_STATEMENT
-             L7 :  #_t0 = NOT PREV_LOAD
-             L8 :  #_t1 = #_t0 AND TLOAD
-         CJ_L11 :  if RESET goto IF_L10
+             L6 :  #_t1 = V <= 0
+          CJ_L7 :  if #_t1 goto IF_L3
 
-         IF_L10 :  EMPTY_STATEMENT
-            L15 :  OUT_1 = true
-        UCJ_L16 :  goto END_IF_L10
+        ELSE_L4 :  EMPTY_STATEMENT
+            L12 :  #_t3 = X > 5
+         CJ_L13 :  if #_t3 goto IF_L9
 
-START_ELSIF_L12 :  EMPTY_STATEMENT
-            L18 :  #_t3 = LOAD OR #_t1
-         CJ_L19 :  if #_t3 goto ELSIF_L17
+       ELSE_L10 :  EMPTY_STATEMENT
+            L16 :  #_t4 = Y > X
+         CJ_L17 :  if #_t4 goto IF_L15
 
-      ELSIF_L17 :  EMPTY_STATEMENT
-            L21 :  OUT_1 = IN_1
-        UCJ_L22 :  goto END_IF_L10
+         IF_L15 :  EMPTY_STATEMENT
+            L19 :  #_t5 = V - Y
+            L20 :  V = #_t5
 
-  END_ELSIF_L17 :  EMPTY_STATEMENT
-         CJ_L24 :  if IN_1 goto ELSIF_L23
+     END_IF_L15 :  EMPTY_STATEMENT
+            L21 :  #_t6 = V - X
+            L22 :  V = #_t6
+        UCJ_L23 :  goto END_IF_L9
 
-      ELSIF_L23 :  EMPTY_STATEMENT
-            L26 :  OUT_1 = IN_1
-        UCJ_L27 :  goto END_IF_L10
+          IF_L9 :  EMPTY_STATEMENT
+            L25 :  V = 200
 
-  END_ELSIF_L23 :  EMPTY_STATEMENT
-       ELSE_L28 :  EMPTY_STATEMENT
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L26 :  goto END_IF_L3
 
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
+          IF_L3 :  EMPTY_STATEMENT
+            L28 :  V = 100
+
+      END_IF_L3 :  EMPTY_STATEMENT
 
           Entry :  EMPTY_STATEMENT
 
             End :  EMPTY_STATEMENT
-            L32 :  print(OUT_1,)
-            L33 :  print(TLOAD,)
-            L34 :  print(#_t1,)
+            L29 :  print(V,)
 
            Read :  EMPTY_STATEMENT
-            L35 :  LOAD = read()
-            L36 :  IN_1 = read()
-            L37 :  RESET = read()
-            L38 :  TLOAD = read()
+            L30 :  Y = read()
+            L31 :  X = read()
 
            Exit :  EMPTY_STATEMENT

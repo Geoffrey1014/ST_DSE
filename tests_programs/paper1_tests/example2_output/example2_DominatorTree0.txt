@@ -1,35 +1,38 @@
-Node: Main :
+Node: example2 :
 Init, 
 
 Node: Init :
 Read, 
 
 Node: Body :
-END_IF_L10, START_ELSIF_L12, IF_L10, 
+IF_L3, ELSE_L4, END_IF_L3, 
 
-Node: IF_L10 :
+Node: ELSE_L4 :
+ELSE_L10, END_IF_L9, IF_L9, 
 
+Node: ELSE_L10 :
+END_IF_L15, IF_L15, 
 
-Node: START_ELSIF_L12 :
-ELSIF_L17, END_ELSIF_L17, 
-
-Node: ELSIF_L17 :
-
-
-Node: END_ELSIF_L17 :
-ELSIF_L23, END_ELSIF_L23, 
-
-Node: ELSIF_L23 :
+Node: IF_L15 :
 
 
-Node: END_ELSIF_L23 :
+Node: END_IF_L15 :
 
 
-Node: END_IF_L10 :
+Node: IF_L9 :
+
+
+Node: END_IF_L9 :
+
+
+Node: IF_L3 :
+
+
+Node: END_IF_L3 :
 End, 
 
 Node: Entry :
-Main, 
+example2, 
 
 Node: End :
 Exit, 

@@ -1,0 +1,165 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "10 Exit
+           Exit :  EMPTY_STATEMENT
+"; "2 Init
+           Init :  EMPTY_STATEMENT
+             L1 :  PREV_LOAD = false
+             L6 :  OUT_1 = false
+"; "3 Read
+           Read :  EMPTY_STATEMENT
+            L27 :  LOAD = read()
+            L28 :  IN_1 = read()
+            L29 :  RESET = read()
+            L30 :  TLOAD = read()
+"; "8 ELSIF_L17
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
+        UCJ_L22 :  goto END_IF_L10
+"; "0 Entry
+          Entry :  EMPTY_STATEMENT
+"; "6 START_ELSIF_L12
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR #_t1
+         CJ_L19 :  if #_t3 goto ELSIF_L17
+"; "1 Main
+           Main :  EMPTY_STATEMENT
+"; "5 IF_L10
+         IF_L10 :  EMPTY_STATEMENT
+            L15 :  OUT_1 = true
+        UCJ_L16 :  goto END_IF_L10
+"; "4 Body
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+         CJ_L11 :  if RESET goto IF_L10
+"; "9 End
+            End :  EMPTY_STATEMENT
+            L24 :  print(OUT_1,)
+            L25 :  print(TLOAD,)
+            L26 :  print(#_t1,)
+"; "7 END_IF_L10
+     END_IF_L10 :  EMPTY_STATEMENT
+            L23 :  PREV_LOAD = TLOAD
+"; 
+  "1 Main
+           Main :  EMPTY_STATEMENT
+" -> "2 Init
+           Init :  EMPTY_STATEMENT
+             L1 :  PREV_LOAD = false
+             L6 :  OUT_1 = false
+"  [label="default"];
+  "2 Init
+           Init :  EMPTY_STATEMENT
+             L1 :  PREV_LOAD = false
+             L6 :  OUT_1 = false
+" -> "3 Read
+           Read :  EMPTY_STATEMENT
+            L27 :  LOAD = read()
+            L28 :  IN_1 = read()
+            L29 :  RESET = read()
+            L30 :  TLOAD = read()
+"  [label="default"];
+  "4 Body
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+         CJ_L11 :  if RESET goto IF_L10
+" -> "6 START_ELSIF_L12
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR #_t1
+         CJ_L19 :  if #_t3 goto ELSIF_L17
+"  [label="default"];
+  "4 Body
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+         CJ_L11 :  if RESET goto IF_L10
+" -> "5 IF_L10
+         IF_L10 :  EMPTY_STATEMENT
+            L15 :  OUT_1 = true
+        UCJ_L16 :  goto END_IF_L10
+"  [label="alter"];
+  "5 IF_L10
+         IF_L10 :  EMPTY_STATEMENT
+            L15 :  OUT_1 = true
+        UCJ_L16 :  goto END_IF_L10
+" -> "7 END_IF_L10
+     END_IF_L10 :  EMPTY_STATEMENT
+            L23 :  PREV_LOAD = TLOAD
+"  [label="alter"];
+  "6 START_ELSIF_L12
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR #_t1
+         CJ_L19 :  if #_t3 goto ELSIF_L17
+" -> "7 END_IF_L10
+     END_IF_L10 :  EMPTY_STATEMENT
+            L23 :  PREV_LOAD = TLOAD
+"  [label="default"];
+  "6 START_ELSIF_L12
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR #_t1
+         CJ_L19 :  if #_t3 goto ELSIF_L17
+" -> "8 ELSIF_L17
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
+        UCJ_L22 :  goto END_IF_L10
+"  [label="alter"];
+  "8 ELSIF_L17
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
+        UCJ_L22 :  goto END_IF_L10
+" -> "7 END_IF_L10
+     END_IF_L10 :  EMPTY_STATEMENT
+            L23 :  PREV_LOAD = TLOAD
+"  [label="alter"];
+  "7 END_IF_L10
+     END_IF_L10 :  EMPTY_STATEMENT
+            L23 :  PREV_LOAD = TLOAD
+" -> "9 End
+            End :  EMPTY_STATEMENT
+            L24 :  print(OUT_1,)
+            L25 :  print(TLOAD,)
+            L26 :  print(#_t1,)
+"  [label="default"];
+  "0 Entry
+          Entry :  EMPTY_STATEMENT
+" -> "1 Main
+           Main :  EMPTY_STATEMENT
+"  [label="default"];
+  "9 End
+            End :  EMPTY_STATEMENT
+            L24 :  print(OUT_1,)
+            L25 :  print(TLOAD,)
+            L26 :  print(#_t1,)
+" -> "3 Read
+           Read :  EMPTY_STATEMENT
+            L27 :  LOAD = read()
+            L28 :  IN_1 = read()
+            L29 :  RESET = read()
+            L30 :  TLOAD = read()
+"  [label="default"];
+  "9 End
+            End :  EMPTY_STATEMENT
+            L24 :  print(OUT_1,)
+            L25 :  print(TLOAD,)
+            L26 :  print(#_t1,)
+" -> "10 Exit
+           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "3 Read
+           Read :  EMPTY_STATEMENT
+            L27 :  LOAD = read()
+            L28 :  IN_1 = read()
+            L29 :  RESET = read()
+            L30 :  TLOAD = read()
+" -> "4 Body
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+         CJ_L11 :  if RESET goto IF_L10
+"  [label="default"];
+}

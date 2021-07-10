@@ -1,123 +1,110 @@
 |--POUS
   |--PROGRAM
-    |--name: Main
-      |--VARBlock:
-        |--accessType: VAR
-        |--varDecl
-          |--name: IS_LEAD_EDGE
-            |--type: RES_BOOL
-        |--varDecl
-          |--name: PREV_LOAD
-            |--type: RES_BOOL
+    |--name: example2
       |--VARBlock:
         |--accessType: VAR_INPUT
         |--varDecl
-          |--name: TLOAD
-            |--type: RES_BOOL
+          |--name: X
+            |--type: RES_INT
         |--varDecl
-          |--name: RESET
-            |--type: RES_BOOL
-        |--varDecl
-          |--name: LOAD
-            |--type: RES_BOOL
-        |--varDecl
-          |--name: IN_1
-            |--type: RES_BOOL
+          |--name: Y
+            |--type: RES_INT
       |--VARBlock:
         |--accessType: VAR_OUTPUT
         |--varDecl
-          |--name: OUT_1
-            |--type: RES_BOOL
+          |--name: V
+            |--type: RES_INT
+        |--value: 0
       |--codeBlock:
-        |--assignStmtEquals
-          |--lhs
-            |--locationVar
-              |--name: IS_LEAD_EDGE
-              |--type: RES_BOOL
-          |--rhs
-            |--binaryCondOper
-              |--lhs
-                |--unaryNotOp
-                      |--locationVar
-                        |--name: PREV_LOAD
-                        |--type: RES_BOOL
-              |--op: AND_OP
-              |--rhs
-                |--locationVar
-                  |--name: TLOAD
-                  |--type: RES_BOOL
         |--ifStmt
           |--condExpr
-            |--locationVar
-              |--name: RESET
-              |--type: RES_BOOL
+            |__binaryRelOper
+              |__lhs
+                |--locationVar
+                  |--name: V
+                  |--type: RES_INT
+              |__op: LEQ_OP
+              |__rhs
+                |--IntLiteral
+                  |--value: 0
           |--body
             |--codeBlock:
               |--assignStmtEquals
                 |--lhs
                   |--locationVar
-                    |--name: OUT_1
-                    |--type: RES_BOOL
+                    |--name: V
+                    |--type: RES_INT
                 |--rhs
-                  |--boolLiteral
-                    |--value: true
-          |--elsif
-            |--elsifStmt
-              |--condExpr
-                |--binaryCondOper
-                  |--lhs
-                    |--locationVar
-                      |--name: LOAD
-                      |--type: RES_BOOL
-                  |--op: OR_OP
-                  |--rhs
-                    |--locationVar
-                      |--name: IS_LEAD_EDGE
-                      |--type: RES_BOOL
-              |--body
-                |--codeBlock:
-                  |--assignStmtEquals
-                    |--lhs
-                      |--locationVar
-                        |--name: OUT_1
-                        |--type: RES_BOOL
-                    |--rhs
-                      |--locationVar
-                        |--name: IN_1
-                        |--type: RES_BOOL
-          |--elsif
-            |--elsifStmt
-              |--condExpr
-                |--locationVar
-                  |--name: IN_1
-                  |--type: RES_BOOL
-              |--body
-                |--codeBlock:
-                  |--assignStmtEquals
-                    |--lhs
-                      |--locationVar
-                        |--name: OUT_1
-                        |--type: RES_BOOL
-                    |--rhs
-                      |--locationVar
-                        |--name: IN_1
-                        |--type: RES_BOOL
+                  |--IntLiteral
+                    |--value: 100
         |--elseBody
           |--codeBlock:
-            |--assignStmtEquals
-              |--lhs
-                |--locationVar
-                  |--name: LOAD
-                  |--type: RES_BOOL
-              |--rhs
-                |--boolLiteral
-                  |--value: false
-        |--assignStmtEquals
-          |--lhs
-            |--locationVar
-              |--name: PREV_LOAD
-              |--type: RES_BOOL
-          |--rhs
-            |--locationVar
-              |--name: TLOAD
-              |--type: RES_BOOL
+            |--ifStmt
+              |--condExpr
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: X
+                      |--type: RES_INT
+                  |__op: GT_OP
+                  |__rhs
+                    |--IntLiteral
+                      |--value: 5
+              |--body
+                |--codeBlock:
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: V
+                        |--type: RES_INT
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 200
+            |--elseBody
+              |--codeBlock:
+                |--ifStmt
+                  |--condExpr
+                    |__binaryRelOper
+                      |__lhs
+                        |--locationVar
+                          |--name: Y
+                          |--type: RES_INT
+                      |__op: GT_OP
+                      |__rhs
+                        |--locationVar
+                          |--name: X
+                          |--type: RES_INT
+                  |--body
+                    |--codeBlock:
+                      |--assignStmtEquals
+                        |--lhs
+                          |--locationVar
+                            |--name: V
+                            |--type: RES_INT
+                        |--rhs
+                          |--binaryArithOper
+                            |--lhs
+                              |--locationVar
+                                |--name: V
+                                |--type: RES_INT
+                            |--op: SUB_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: Y
+                                |--type: RES_INT
+                |--assignStmtEquals
+                  |--lhs
+                    |--locationVar
+                      |--name: V
+                      |--type: RES_INT
+                  |--rhs
+                    |--binaryArithOper
+                      |--lhs
+                        |--locationVar
+                          |--name: V
+                          |--type: RES_INT
+                      |--op: SUB_OP
+                      |--rhs
+                        |--locationVar
+                          |--name: X
+                          |--type: RES_INT

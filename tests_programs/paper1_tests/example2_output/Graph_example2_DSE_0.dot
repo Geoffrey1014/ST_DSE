@@ -3,203 +3,192 @@ digraph G {
   edge [arrowsize=.5]
   node [shape=rectangle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
-  "9 END_ELSIF_L17
-  END_ELSIF_L17 :  EMPTY_STATEMENT
-         CJ_L24 :  if IN_1 goto ELSIF_L23
-"; "2 Init
-           Init :  EMPTY_STATEMENT
-             L1 :  PREV_LOAD = false
-             L6 :  OUT_1 = false
-"; "11 Exit
-           Exit :  EMPTY_STATEMENT
-"; "13 ELSIF_L23
-      ELSIF_L23 :  EMPTY_STATEMENT
-            L26 :  OUT_1 = IN_1
-        UCJ_L27 :  goto END_IF_L10
-"; "8 End
-            End :  EMPTY_STATEMENT
-            L32 :  print(OUT_1,)
-            L33 :  print(TLOAD,)
-            L34 :  print(#_t1,)
-"; "7 START_ELSIF_L12
-START_ELSIF_L12 :  EMPTY_STATEMENT
-            L18 :  #_t3 = LOAD OR #_t1
-         CJ_L19 :  if #_t3 goto ELSIF_L17
-"; "6 END_IF_L10
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
+  "7 ELSE_L4
+        ELSE_L4 :  EMPTY_STATEMENT
+            L12 :  #_t3 = X > 5
+         CJ_L13 :  if #_t3 goto IF_L9
+"; "11 ELSE_L10
+       ELSE_L10 :  EMPTY_STATEMENT
+            L16 :  #_t4 = Y > X
+         CJ_L17 :  if #_t4 goto IF_L15
+"; "13 IF_L15
+         IF_L15 :  EMPTY_STATEMENT
+            L19 :  #_t5 = V - Y
+            L20 :  V = #_t5
 "; "3 Read
            Read :  EMPTY_STATEMENT
-            L35 :  LOAD = read()
-            L36 :  IN_1 = read()
-            L37 :  RESET = read()
-            L38 :  TLOAD = read()
+            L30 :  Y = read()
+            L31 :  X = read()
+"; "6 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"; "10 IF_L9
+          IF_L9 :  EMPTY_STATEMENT
+            L25 :  V = 200
+"; "8 End
+            End :  EMPTY_STATEMENT
+            L29 :  print(V,)
+"; "5 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L28 :  V = 100
+"; "1 example2
+       example2 :  EMPTY_STATEMENT
+"; "2 Init
+           Init :  EMPTY_STATEMENT
+             L2 :  V = 0
 "; "0 Entry
           Entry :  EMPTY_STATEMENT
-"; "12 END_ELSIF_L23
-  END_ELSIF_L23 :  EMPTY_STATEMENT
-       ELSE_L28 :  EMPTY_STATEMENT
-"; "10 ELSIF_L17
-      ELSIF_L17 :  EMPTY_STATEMENT
-            L21 :  OUT_1 = IN_1
-        UCJ_L22 :  goto END_IF_L10
-"; "1 Main
-           Main :  EMPTY_STATEMENT
-"; "5 IF_L10
-         IF_L10 :  EMPTY_STATEMENT
-            L15 :  OUT_1 = true
-        UCJ_L16 :  goto END_IF_L10
+"; "9 END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L26 :  goto END_IF_L3
 "; "4 Body
            Body :  EMPTY_STATEMENT
-             L7 :  #_t0 = NOT PREV_LOAD
-             L8 :  #_t1 = #_t0 AND TLOAD
-         CJ_L11 :  if RESET goto IF_L10
+             L6 :  #_t1 = V <= 0
+          CJ_L7 :  if #_t1 goto IF_L3
+"; "12 Exit
+           Exit :  EMPTY_STATEMENT
+"; "14 END_IF_L15
+     END_IF_L15 :  EMPTY_STATEMENT
+            L21 :  #_t6 = V - X
+            L22 :  V = #_t6
+        UCJ_L23 :  goto END_IF_L9
 "; 
-  "1 Main
-           Main :  EMPTY_STATEMENT
+  "1 example2
+       example2 :  EMPTY_STATEMENT
 " -> "2 Init
            Init :  EMPTY_STATEMENT
-             L1 :  PREV_LOAD = false
-             L6 :  OUT_1 = false
+             L2 :  V = 0
 "  [label="default"];
   "2 Init
            Init :  EMPTY_STATEMENT
-             L1 :  PREV_LOAD = false
-             L6 :  OUT_1 = false
+             L2 :  V = 0
 " -> "3 Read
            Read :  EMPTY_STATEMENT
-            L35 :  LOAD = read()
-            L36 :  IN_1 = read()
-            L37 :  RESET = read()
-            L38 :  TLOAD = read()
+            L30 :  Y = read()
+            L31 :  X = read()
 "  [label="default"];
   "4 Body
            Body :  EMPTY_STATEMENT
-             L7 :  #_t0 = NOT PREV_LOAD
-             L8 :  #_t1 = #_t0 AND TLOAD
-         CJ_L11 :  if RESET goto IF_L10
-" -> "7 START_ELSIF_L12
-START_ELSIF_L12 :  EMPTY_STATEMENT
-            L18 :  #_t3 = LOAD OR #_t1
-         CJ_L19 :  if #_t3 goto ELSIF_L17
+             L6 :  #_t1 = V <= 0
+          CJ_L7 :  if #_t1 goto IF_L3
+" -> "7 ELSE_L4
+        ELSE_L4 :  EMPTY_STATEMENT
+            L12 :  #_t3 = X > 5
+         CJ_L13 :  if #_t3 goto IF_L9
 "  [label="default"];
   "4 Body
            Body :  EMPTY_STATEMENT
-             L7 :  #_t0 = NOT PREV_LOAD
-             L8 :  #_t1 = #_t0 AND TLOAD
-         CJ_L11 :  if RESET goto IF_L10
-" -> "5 IF_L10
-         IF_L10 :  EMPTY_STATEMENT
-            L15 :  OUT_1 = true
-        UCJ_L16 :  goto END_IF_L10
+             L6 :  #_t1 = V <= 0
+          CJ_L7 :  if #_t1 goto IF_L3
+" -> "5 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L28 :  V = 100
 "  [label="alter"];
-  "5 IF_L10
-         IF_L10 :  EMPTY_STATEMENT
-            L15 :  OUT_1 = true
-        UCJ_L16 :  goto END_IF_L10
-" -> "6 END_IF_L10
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
-"  [label="alter"];
-  "7 START_ELSIF_L12
-START_ELSIF_L12 :  EMPTY_STATEMENT
-            L18 :  #_t3 = LOAD OR #_t1
-         CJ_L19 :  if #_t3 goto ELSIF_L17
-" -> "9 END_ELSIF_L17
-  END_ELSIF_L17 :  EMPTY_STATEMENT
-         CJ_L24 :  if IN_1 goto ELSIF_L23
+  "7 ELSE_L4
+        ELSE_L4 :  EMPTY_STATEMENT
+            L12 :  #_t3 = X > 5
+         CJ_L13 :  if #_t3 goto IF_L9
+" -> "11 ELSE_L10
+       ELSE_L10 :  EMPTY_STATEMENT
+            L16 :  #_t4 = Y > X
+         CJ_L17 :  if #_t4 goto IF_L15
 "  [label="default"];
-  "7 START_ELSIF_L12
-START_ELSIF_L12 :  EMPTY_STATEMENT
-            L18 :  #_t3 = LOAD OR #_t1
-         CJ_L19 :  if #_t3 goto ELSIF_L17
-" -> "10 ELSIF_L17
-      ELSIF_L17 :  EMPTY_STATEMENT
-            L21 :  OUT_1 = IN_1
-        UCJ_L22 :  goto END_IF_L10
+  "7 ELSE_L4
+        ELSE_L4 :  EMPTY_STATEMENT
+            L12 :  #_t3 = X > 5
+         CJ_L13 :  if #_t3 goto IF_L9
+" -> "10 IF_L9
+          IF_L9 :  EMPTY_STATEMENT
+            L25 :  V = 200
 "  [label="alter"];
-  "10 ELSIF_L17
-      ELSIF_L17 :  EMPTY_STATEMENT
-            L21 :  OUT_1 = IN_1
-        UCJ_L22 :  goto END_IF_L10
-" -> "6 END_IF_L10
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
-"  [label="alter"];
-  "9 END_ELSIF_L17
-  END_ELSIF_L17 :  EMPTY_STATEMENT
-         CJ_L24 :  if IN_1 goto ELSIF_L23
-" -> "12 END_ELSIF_L23
-  END_ELSIF_L23 :  EMPTY_STATEMENT
-       ELSE_L28 :  EMPTY_STATEMENT
+  "11 ELSE_L10
+       ELSE_L10 :  EMPTY_STATEMENT
+            L16 :  #_t4 = Y > X
+         CJ_L17 :  if #_t4 goto IF_L15
+" -> "14 END_IF_L15
+     END_IF_L15 :  EMPTY_STATEMENT
+            L21 :  #_t6 = V - X
+            L22 :  V = #_t6
+        UCJ_L23 :  goto END_IF_L9
 "  [label="default"];
-  "9 END_ELSIF_L17
-  END_ELSIF_L17 :  EMPTY_STATEMENT
-         CJ_L24 :  if IN_1 goto ELSIF_L23
-" -> "13 ELSIF_L23
-      ELSIF_L23 :  EMPTY_STATEMENT
-            L26 :  OUT_1 = IN_1
-        UCJ_L27 :  goto END_IF_L10
+  "11 ELSE_L10
+       ELSE_L10 :  EMPTY_STATEMENT
+            L16 :  #_t4 = Y > X
+         CJ_L17 :  if #_t4 goto IF_L15
+" -> "13 IF_L15
+         IF_L15 :  EMPTY_STATEMENT
+            L19 :  #_t5 = V - Y
+            L20 :  V = #_t5
 "  [label="alter"];
-  "13 ELSIF_L23
-      ELSIF_L23 :  EMPTY_STATEMENT
-            L26 :  OUT_1 = IN_1
-        UCJ_L27 :  goto END_IF_L10
-" -> "6 END_IF_L10
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
-"  [label="alter"];
-  "12 END_ELSIF_L23
-  END_ELSIF_L23 :  EMPTY_STATEMENT
-       ELSE_L28 :  EMPTY_STATEMENT
-" -> "6 END_IF_L10
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
+  "13 IF_L15
+         IF_L15 :  EMPTY_STATEMENT
+            L19 :  #_t5 = V - Y
+            L20 :  V = #_t5
+" -> "14 END_IF_L15
+     END_IF_L15 :  EMPTY_STATEMENT
+            L21 :  #_t6 = V - X
+            L22 :  V = #_t6
+        UCJ_L23 :  goto END_IF_L9
 "  [label="default"];
-  "6 END_IF_L10
-     END_IF_L10 :  EMPTY_STATEMENT
-            L31 :  PREV_LOAD = TLOAD
+  "14 END_IF_L15
+     END_IF_L15 :  EMPTY_STATEMENT
+            L21 :  #_t6 = V - X
+            L22 :  V = #_t6
+        UCJ_L23 :  goto END_IF_L9
+" -> "9 END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L26 :  goto END_IF_L3
+"  [label="alter"];
+  "10 IF_L9
+          IF_L9 :  EMPTY_STATEMENT
+            L25 :  V = 200
+" -> "9 END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L26 :  goto END_IF_L3
+"  [label="default"];
+  "9 END_IF_L9
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L26 :  goto END_IF_L3
+" -> "6 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "5 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L28 :  V = 100
+" -> "6 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"  [label="default"];
+  "6 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
 " -> "8 End
             End :  EMPTY_STATEMENT
-            L32 :  print(OUT_1,)
-            L33 :  print(TLOAD,)
-            L34 :  print(#_t1,)
+            L29 :  print(V,)
 "  [label="default"];
   "0 Entry
           Entry :  EMPTY_STATEMENT
-" -> "1 Main
-           Main :  EMPTY_STATEMENT
+" -> "1 example2
+       example2 :  EMPTY_STATEMENT
 "  [label="default"];
   "8 End
             End :  EMPTY_STATEMENT
-            L32 :  print(OUT_1,)
-            L33 :  print(TLOAD,)
-            L34 :  print(#_t1,)
+            L29 :  print(V,)
 " -> "3 Read
            Read :  EMPTY_STATEMENT
-            L35 :  LOAD = read()
-            L36 :  IN_1 = read()
-            L37 :  RESET = read()
-            L38 :  TLOAD = read()
+            L30 :  Y = read()
+            L31 :  X = read()
 "  [label="default"];
   "8 End
             End :  EMPTY_STATEMENT
-            L32 :  print(OUT_1,)
-            L33 :  print(TLOAD,)
-            L34 :  print(#_t1,)
-" -> "11 Exit
+            L29 :  print(V,)
+" -> "12 Exit
            Exit :  EMPTY_STATEMENT
 "  [label="alter"];
   "3 Read
            Read :  EMPTY_STATEMENT
-            L35 :  LOAD = read()
-            L36 :  IN_1 = read()
-            L37 :  RESET = read()
-            L38 :  TLOAD = read()
+            L30 :  Y = read()
+            L31 :  X = read()
 " -> "4 Body
            Body :  EMPTY_STATEMENT
-             L7 :  #_t0 = NOT PREV_LOAD
-             L8 :  #_t1 = #_t0 AND TLOAD
-         CJ_L11 :  if RESET goto IF_L10
+             L6 :  #_t1 = V <= 0
+          CJ_L7 :  if #_t1 goto IF_L3
 "  [label="default"];
 }

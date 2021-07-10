@@ -139,7 +139,7 @@ public class Main {
 //                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = udChainAndDoms.udChianWithDmt;
 //                writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
-                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms);
+                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
                 System.out.println("data flow testing!----------------");
                 dftResult += dft.dataFlowTesting();
 
@@ -172,19 +172,18 @@ public class Main {
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
-        updateFig = true;
+        updateFig = false;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
         String file;
-       file = "counter.txt";
+//       file = "counter.txt";
 
-         file = "power.txt";
-        file = "example.txt";
-        file = "example2.txt";
-        file = "factor.txt";
-//        file = "04_SimpleConveyorBelt.txt";
+//         file = "power.txt";
+//        file = "example.txt";
+//        file = "example2.txt";
+//        file = "factor.txt";
+        file = "04_SimpleConveyorBelt.txt";
 //         file = "Responder3.txt";
-//        String file = "FB_G4LTL13.txt";// TODO 有问题
 
         walkTree(inputDir + file);
 

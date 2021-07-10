@@ -1,31 +1,22 @@
-PROGRAM Main
-VAR
-	IS_LEAD_EDGE: BOOL;
-	PREV_LOAD: BOOL;
-END_VAR
-
-VAR_OUTPUT
-	OUT_1: BOOL;
-END_VAR
-
+PROGRAM example2
 VAR_INPUT
-	TLOAD: BOOL;
-	RESET: BOOL;
-	LOAD: BOOL;
-	IN_1: BOOL;
+    X: INT;
+    Y: INT;
+END_VAR
+VAR_OUTPUT
+    V:INT := 0;
 END_VAR
 
-IS_LEAD_EDGE := (NOT PREV_LOAD) AND TLOAD;
-IF RESET THEN
-    OUT_1 := TRUE;
-ELSIF LOAD OR IS_LEAD_EDGE THEN
-    OUT_1 := IN_1;
-
-ELSIF IN_1 THEN
-    OUT_1 := IN_1;
+IF V <= 0 THEN
+    V:= 100;
 ELSE
-    LOAD := FALSE;
+    IF X > 5 THEN
+        V := 200;
+    ELSE
+        IF Y>X THEN
+            V := V-Y;
+        END_IF;
+        V := V-X;
+    END_IF;
 END_IF;
-PREV_LOAD := TLOAD;
-
 END_PROGRAM

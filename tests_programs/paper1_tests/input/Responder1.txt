@@ -16,9 +16,11 @@ PROGRAM Responder1
    (* Control logic *)
 IF cstate12 = 0 THEN
     IF ((NOT req1)) THEN 
-        cstate12 := 0; grant_1 := FALSE;  
+        cstate12 := 0;
+        grant_1 := FALSE;
     ELSE 
-        cstate12 := 0; grant_1 := TRUE;  
+        cstate12 := 0;
+        grant_1 := TRUE;
     END_IF;
 END_IF;
 

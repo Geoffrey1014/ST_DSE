@@ -26,24 +26,36 @@ P_Fan3Hi_1 : INT := 6;
 P_Fan3Hi_2 : INT := 8;
 END_VAR
 
-IF (DBC_PV_CoStep >= P_Fan1Lo_1) & (DBC_PV_CoStep <= P_Fan1Lo_2) THEN
-DBC_PV_C_Fan1Lo := TRUE;
-ELSE DBC_PV_C_Fan1Lo := FALSE; END_IF;
+IF (DBC_PV_CoStep >= P_Fan1Lo_1) AND (DBC_PV_CoStep <= P_Fan1Lo_2) THEN
+    DBC_PV_C_Fan1Lo := TRUE;
+ELSE
+    DBC_PV_C_Fan1Lo := FALSE;
+END_IF;
 IF (DBC_PV_CoStep = P_Fan1Hi) THEN
-DBC_PV_C_Fan1Hi := TRUE;
-ELSE DBC_PV_C_Fan1Hi := FALSE; END_IF;
-IF (DBC_PV_CoStep >= P_Fan2Lo_1) & (DBC_PV_CoStep <= P_Fan2Lo_2) THEN
-DBC_PV_C_Fan2Lo := TRUE;
-ELSE DBC_PV_C_Fan2Lo := FALSE; END_IF;
-IF (DBC_PV_CoStep >= P_Fan2Hi_1) & (DBC_PV_CoStep <= P_Fan2Hi_2) THEN
-DBC_PV_C_Fan2Hi := TRUE;
-ELSE DBC_PV_C_Fan2Hi := FALSE; END_IF;
+    DBC_PV_C_Fan1Hi := TRUE;
+ELSE
+    DBC_PV_C_Fan1Hi := FALSE;
+END_IF;
+IF (DBC_PV_CoStep >= P_Fan2Lo_1) AND (DBC_PV_CoStep <= P_Fan2Lo_2) THEN
+    DBC_PV_C_Fan2Lo := TRUE;
+ELSE
+    DBC_PV_C_Fan2Lo := FALSE;
+END_IF;
+IF (DBC_PV_CoStep >= P_Fan2Hi_1) AND (DBC_PV_CoStep <= P_Fan2Hi_2) THEN
+    DBC_PV_C_Fan2Hi := TRUE;
+ELSE
+    DBC_PV_C_Fan2Hi := FALSE;
+END_IF;
 IF (DBC_PV_CoStep = P_Fan3Lo) THEN
-DBC_PV_C_Fan3Lo := TRUE;
-ELSE DBC_PV_C_Fan3Lo := FALSE; END_IF;
-IF (DBC_PV_CoStep >= P_Fan3Hi_1) & (DBC_PV_CoStep <= P_Fan3Hi_2) THEN
-DBC_PV_C_Fan3Hi := TRUE;
-ELSE DBC_PV_C_Fan3Hi := FALSE; END_IF;
+    DBC_PV_C_Fan3Lo := TRUE;
+ELSE
+    DBC_PV_C_Fan3Lo := FALSE;
+END_IF;
+IF (DBC_PV_CoStep >= P_Fan3Hi_1) AND (DBC_PV_CoStep <= P_Fan3Hi_2) THEN
+    DBC_PV_C_Fan3Hi := TRUE;
+ELSE
+    DBC_PV_C_Fan3Hi := FALSE;
+END_IF;
 
 END_PROGRAM
 

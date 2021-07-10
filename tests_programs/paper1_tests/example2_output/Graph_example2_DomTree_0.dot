@@ -3,18 +3,19 @@ digraph G {
   edge [arrowsize=.5]
   node [shape=circle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
-  "10 ELSIF_L17"; "0 Entry"; "2 Init"; "5 IF_L10"; "1 Main"; "11 Exit"; "12 END_ELSIF_L23"; "4 Body"; "3 Read"; "7 START_ELSIF_L12"; "8 End"; "6 END_IF_L10"; "13 ELSIF_L23"; "9 END_ELSIF_L17"; 
-  "9 END_ELSIF_L17" -> "12 END_ELSIF_L23";
-  "9 END_ELSIF_L17" -> "13 ELSIF_L23";
+  "0 Entry"; "2 Init"; "10 IF_L9"; "11 ELSE_L10"; "1 example2"; "7 ELSE_L4"; "4 Body"; "14 END_IF_L15"; "3 Read"; "5 IF_L3"; "9 END_IF_L9"; "8 End"; "6 END_IF_L3"; "13 IF_L15"; "12 Exit"; 
+  "11 ELSE_L10" -> "13 IF_L15";
+  "11 ELSE_L10" -> "14 END_IF_L15";
   "3 Read" -> "4 Body";
-  "6 END_IF_L10" -> "8 End";
+  "6 END_IF_L3" -> "8 End";
   "2 Init" -> "3 Read";
-  "0 Entry" -> "1 Main";
-  "7 START_ELSIF_L12" -> "9 END_ELSIF_L17";
-  "7 START_ELSIF_L12" -> "10 ELSIF_L17";
-  "8 End" -> "11 Exit";
-  "1 Main" -> "2 Init";
-  "4 Body" -> "5 IF_L10";
-  "4 Body" -> "6 END_IF_L10";
-  "4 Body" -> "7 START_ELSIF_L12";
+  "0 Entry" -> "1 example2";
+  "1 example2" -> "2 Init";
+  "8 End" -> "12 Exit";
+  "4 Body" -> "5 IF_L3";
+  "4 Body" -> "6 END_IF_L3";
+  "4 Body" -> "7 ELSE_L4";
+  "7 ELSE_L4" -> "9 END_IF_L9";
+  "7 ELSE_L4" -> "10 IF_L9";
+  "7 ELSE_L4" -> "11 ELSE_L10";
 }

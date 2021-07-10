@@ -18,81 +18,129 @@ PROGRAM Responder2
    (* Control logic *)
 IF cstate0 = 11 THEN
    
-        cstate0 := 8; grant_1 := FALSE; grant_2 := TRUE;  
+        cstate0 := 8;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
     
 ELSIF cstate0 = 12 THEN
     
-        cstate0 := 3; grant_1 := TRUE; grant_2 := FALSE;  
+        cstate0 := 3;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
     
 ELSIF cstate0 = 13 THEN
     
-        cstate0 := 8; grant_1 := FALSE; grant_2 := TRUE;  
+        cstate0 := 8;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
     
 ELSIF cstate0 = 14 THEN
     
-        cstate0 := 13; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 13;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     
 ELSIF cstate0 = 0 THEN
     IF ((req1) AND  (NOT req2)) THEN 
-        cstate0 := 5; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 5;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     ELSIF ((NOT req1) AND  (req2)) THEN 
-        cstate0 := 6; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 6;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     ELSIF ((req1) AND  (req2)) THEN 
-        cstate0 := 14; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 14;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     ELSIF ((NOT req1) AND  (NOT req2)) THEN 
-        cstate0 := 0; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 0;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     END_IF;
 ELSIF cstate0 = 1 THEN
     
-        cstate0 := 2; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 2;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     
 ELSIF cstate0 = 2 THEN
     
-        cstate0 := 4; grant_1 := TRUE; grant_2 := FALSE;  
+        cstate0 := 4;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
     
 ELSIF cstate0 = 3 THEN
     IF ((NOT req1) ) THEN 
-        cstate0 := 4; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 4;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     ELSE 
-        cstate0 := 9; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 9;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
     END_IF;
 ELSIF cstate0 = 4 THEN
     IF ((NOT req1)) THEN 
-        cstate0 := 0; grant_1 := FALSE; grant_2 := TRUE;  
+        cstate0 := 0;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
     ELSE
-        cstate0 := 5; grant_1 := FALSE; grant_2 := TRUE;  
+        cstate0 := 5;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
     END_IF;
 ELSIF cstate0 = 5 THEN
     IF ((NOT req2)) THEN 
-        cstate0 := 10; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 10;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
     ELSE
-        cstate0 := 1; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 1;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     END_IF;
 ELSIF cstate0 = 6 THEN
     IF ((req1) ) THEN 
-        cstate0 := 7; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 7;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
     ELSE 
-        cstate0 := 3; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 3;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     END_IF;
 ELSIF cstate0 = 7 THEN
      
-        cstate0 := 11; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 11;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     
 ELSIF cstate0 = 8 THEN
     IF ((req2)) THEN 
-        cstate0 := 6; grant_1 := TRUE; grant_2 := FALSE;  
+        cstate0 := 6;
+        grant_1 := TRUE;
+         grant_2 := FALSE;
     ELSE
-        cstate0 := 0; grant_1 := TRUE; grant_2 := FALSE;  
+        cstate0 := 0;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
     END_IF;
 ELSIF cstate0 = 9 THEN
     
-        cstate0 := 10; grant_1 := FALSE; grant_2 := TRUE;  
+        cstate0 := 10;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
     
 ELSIF cstate0 = 10 THEN
     IF  (req2) THEN 
-        cstate0 := 12; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 12;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     ELSE
-        cstate0 := 8; grant_1 := FALSE; grant_2 := FALSE;  
+        cstate0 := 8;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
     END_IF;
 END_IF;
 

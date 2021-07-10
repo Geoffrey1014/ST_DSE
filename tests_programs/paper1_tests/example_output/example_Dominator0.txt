@@ -5,53 +5,53 @@ Node: Init :
 Entry, Init, program0, 
 
 Node: Body :
-Init, Entry, Body, program0, Read, 
+Body, Init, Entry, program0, Read, 
 
 Node: IF_L3 :
-Init, Entry, Body, program0, Read, IF_L3, 
+Body, IF_L3, Init, Entry, program0, Read, 
 
 Node: IF_L9 :
-Init, Entry, Body, IF_L9, program0, Read, IF_L3, 
+IF_L9, Body, IF_L3, Init, Entry, program0, Read, 
 
 Node: START_ELSIF_L13 :
-Init, Entry, Body, program0, Read, START_ELSIF_L13, IF_L3, 
+Body, IF_L3, Init, Entry, program0, START_ELSIF_L13, Read, 
 
 Node: ELSIF_L20 :
-Init, Entry, ELSIF_L20, Body, program0, Read, START_ELSIF_L13, IF_L3, 
+Body, IF_L3, Init, Entry, program0, START_ELSIF_L13, ELSIF_L20, Read, 
 
 Node: END_IF_L9 :
-Init, Entry, END_IF_L9, Body, program0, Read, IF_L3, 
+Body, IF_L3, Init, Entry, program0, END_IF_L9, Read, 
 
 Node: START_ELSIF_L7 :
-Init, Entry, Body, program0, Read, START_ELSIF_L7, 
+Body, Init, Entry, program0, Read, START_ELSIF_L7, 
 
 Node: WHILE_L36 :
-Init, Entry, Body, program0, Read, START_ELSIF_L7, WHILE_L36, 
+Body, Init, Entry, program0, WHILE_L36, Read, START_ELSIF_L7, 
 
 Node: LOOP_L37 :
-Init, Entry, Body, program0, Read, START_ELSIF_L7, LOOP_L37, WHILE_L36, 
+LOOP_L37, Body, Init, Entry, program0, WHILE_L36, Read, START_ELSIF_L7, 
 
 Node: END_WHILE_L36 :
-Init, Entry, Body, program0, Read, END_WHILE_L36, START_ELSIF_L7, WHILE_L36, 
+Body, Init, Entry, program0, WHILE_L36, END_WHILE_L36, Read, START_ELSIF_L7, 
 
 Node: END_ELSIF_L31 :
-Init, Entry, Body, END_ELSIF_L31, program0, Read, START_ELSIF_L7, 
+Body, Init, Entry, program0, END_ELSIF_L31, Read, START_ELSIF_L7, 
 
 Node: ELSIF_L48 :
-Init, Entry, Body, END_ELSIF_L31, program0, Read, START_ELSIF_L7, ELSIF_L48, 
+Body, Init, Entry, program0, END_ELSIF_L31, Read, ELSIF_L48, START_ELSIF_L7, 
 
 Node: END_IF_L3 :
-Init, Entry, Body, program0, Read, END_IF_L3, 
+Body, Init, Entry, END_IF_L3, program0, Read, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-Init, Entry, End, Body, program0, Read, END_IF_L3, 
+Body, Init, END_IF_L3, Entry, program0, End, Read, 
 
 Node: Read :
 Init, Entry, program0, Read, 
 
 Node: Exit :
-Init, Entry, Exit, End, Body, program0, Read, END_IF_L3, 
+Body, Init, END_IF_L3, Entry, program0, End, Read, Exit, 
 

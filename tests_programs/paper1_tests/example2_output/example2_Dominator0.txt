@@ -1,42 +1,45 @@
-Node: Main :
-Main, Entry, 
+Node: example2 :
+example2, Entry, 
 
 Node: Init :
-Main, Init, Entry, 
+example2, Init, Entry, 
 
 Node: Body :
-Read, Main, Body, Init, Entry, 
+Read, example2, Init, Entry, Body, 
 
-Node: IF_L10 :
-Read, Main, Body, Init, Entry, IF_L10, 
+Node: ELSE_L4 :
+ELSE_L4, Read, example2, Init, Entry, Body, 
 
-Node: START_ELSIF_L12 :
-Read, Main, Body, Init, START_ELSIF_L12, Entry, 
+Node: ELSE_L10 :
+ELSE_L4, Read, example2, Init, Entry, ELSE_L10, Body, 
 
-Node: ELSIF_L17 :
-Read, ELSIF_L17, Main, Body, Init, START_ELSIF_L12, Entry, 
+Node: IF_L15 :
+ELSE_L4, Read, example2, Init, ELSE_L10, Entry, Body, IF_L15, 
 
-Node: END_ELSIF_L17 :
-Read, Main, Body, Init, END_ELSIF_L17, START_ELSIF_L12, Entry, 
+Node: END_IF_L15 :
+ELSE_L4, Read, END_IF_L15, example2, Init, ELSE_L10, Entry, Body, 
 
-Node: ELSIF_L23 :
-Read, ELSIF_L23, Main, Body, Init, END_ELSIF_L17, START_ELSIF_L12, Entry, 
+Node: IF_L9 :
+ELSE_L4, Read, example2, Init, Entry, IF_L9, Body, 
 
-Node: END_ELSIF_L23 :
-Read, Main, Body, END_ELSIF_L23, Init, END_ELSIF_L17, START_ELSIF_L12, Entry, 
+Node: END_IF_L9 :
+ELSE_L4, Read, END_IF_L9, example2, Init, Entry, Body, 
 
-Node: END_IF_L10 :
-Read, Main, Body, Init, END_IF_L10, Entry, 
+Node: IF_L3 :
+IF_L3, Read, example2, Init, Entry, Body, 
+
+Node: END_IF_L3 :
+Read, END_IF_L3, example2, Init, Entry, Body, 
 
 Node: Entry :
 Entry, 
 
 Node: End :
-Read, End, Main, Body, Init, END_IF_L10, Entry, 
+Read, END_IF_L3, example2, Init, End, Entry, Body, 
 
 Node: Read :
-Read, Main, Init, Entry, 
+Read, example2, Init, Entry, 
 
 Node: Exit :
-Read, End, Main, Body, Exit, Init, END_IF_L10, Entry, 
+Read, END_IF_L3, example2, Init, End, Entry, Exit, Body, 
 

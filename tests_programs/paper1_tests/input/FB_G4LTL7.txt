@@ -24,65 +24,121 @@ PROGRAM FB_G4LTL7
   (* Control logic *)
 IF cstate78 = 48 THEN
     IF ((x_1) AND  (NOT q)) THEN 
-        cstate78 := 48; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 48;
+        y_1 := FALSE;
+         t_start := FALSE;
     ELSIF ((NOT x_1) AND  (NOT q)) THEN 
-        cstate78 := 199; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 199;
+        y_1 := FALSE;
+        t_start := FALSE;
     ELSIF ((NOT x_1) AND  (q)) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+         y_1 := FALSE;
+          t_start := FALSE;
     ELSIF ((x_1) AND  (q)) THEN 
-        cstate78 := 10; y_1 := TRUE; t_start := FALSE; 
+        cstate78 := 10;
+        y_1 := TRUE;
+        t_start := FALSE;
     END_IF;
 ELSIF cstate78 = 10 THEN
     IF (x_1) THEN 
-        cstate78 := 10; y_1 := TRUE; t_start := FALSE; 
+        cstate78 := 10;
+         y_1 := TRUE;
+         t_start := FALSE;
     ELSIF (NOT x_1) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+        y_1 := FALSE;
+        t_start := FALSE;
     END_IF;
 ELSIF cstate78 = 0 THEN
     IF ((x_1) AND  (NOT q)) THEN 
-        cstate78 := 11; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 11;
+        y_1 := FALSE;
+        t_start := TRUE;
+        t_up := FALSE;
     ELSIF ((NOT x_1)) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+         y_1 := FALSE;
+          t_start := FALSE;
     ELSIF ((x_1) AND  (q)) THEN 
-        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 11;
+        y_1 := TRUE;
+         t_start := TRUE;
+          t_up := FALSE;
     END_IF;
 ELSIF cstate78 = 7 THEN
     IF ((x_1) AND  (NOT q)) THEN 
-        cstate78 := 48; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 48;
+        y_1 := FALSE;
+        t_start := TRUE;
+        t_up := FALSE;
     ELSIF ((NOT x_1) AND  (NOT q)) THEN 
-        cstate78 := 7; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 7;
+        y_1 := FALSE;
+        t_start := FALSE;
     ELSIF ((NOT x_1) AND  (q)) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+         y_1 := FALSE;
+         t_start := FALSE;
     ELSIF ((x_1) AND  (q)) THEN 
-        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 11;
+        y_1 := TRUE;
+        t_start := TRUE;
+         t_up := FALSE;
     END_IF;
 ELSIF cstate78 = 199 THEN
     IF ((x_1) AND  (NOT q)) THEN 
-        cstate78 := 48; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 48;
+        y_1 := FALSE;
+        t_start := TRUE;
+        t_up := FALSE;
     ELSIF ((NOT x_1) AND  (NOT q)) THEN 
-        cstate78 := 199; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 199;
+         y_1 := FALSE;
+         t_start := FALSE;
     ELSIF ((NOT x_1) AND  (q)) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+         y_1 := FALSE;
+         t_start := FALSE;
     ELSIF ((x_1) AND  (q)) THEN 
-        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 11;
+        y_1 := TRUE;
+        t_start := TRUE;
+        t_up := FALSE;
     END_IF;
 ELSIF cstate78 = 6 THEN
     IF ((x_1) AND  (NOT q)) THEN 
-        cstate78 := 48; y_1 := FALSE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 48;
+        y_1 := FALSE;
+        t_start := TRUE;
+        t_up := FALSE;
     ELSIF ((NOT x_1)) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+        y_1 := FALSE;
+        t_start := FALSE;
     ELSIF ((x_1) AND  (q)) THEN 
-        cstate78 := 11; y_1 := TRUE; t_start := TRUE; t_up := FALSE; 
+        cstate78 := 11;
+        y_1 := TRUE;
+         t_start := TRUE;
+         t_up := FALSE;
     END_IF;
 ELSIF cstate78 = 11 THEN
     IF ((x_1) AND  (NOT q)) THEN 
-        cstate78 := 11; y_1 := TRUE; t_start := FALSE; 
+        cstate78 := 11;
+        y_1 := TRUE;
+        t_start := FALSE;
     ELSIF ((NOT x_1) AND  (NOT q)) THEN 
-        cstate78 := 7; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 7;
+        y_1 := FALSE;
+        t_start := FALSE;
     ELSIF ((NOT x_1) AND  (q)) THEN 
-        cstate78 := 6; y_1 := FALSE; t_start := FALSE; 
+        cstate78 := 6;
+        y_1 := FALSE;
+        t_start := FALSE;
     ELSIF ((x_1) AND  (q)) THEN 
-        cstate78 := 10; y_1 := TRUE; t_start := FALSE; 
+        cstate78 := 10;
+        y_1 := TRUE;
+        t_start := FALSE;
     END_IF;
 END_IF;
 

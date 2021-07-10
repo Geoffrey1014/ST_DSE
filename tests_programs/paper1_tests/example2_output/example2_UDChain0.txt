@@ -1,36 +1,27 @@
-use: #_t1 @ L18 @ START_ELSIF_L12
-defs: L8 @ Body, 
+use: V @ L6 @ Body
+defs: L25 @ IF_L9, L22 @ END_IF_L15, L28 @ IF_L3, L2 @ Init, 
 
-use: IN_1 @ L26 @ ELSIF_L23
-defs: L36 @ Read, 
+use: X @ L12 @ ELSE_L4
+defs: L31 @ Read, 
 
-use: OUT_1 @ L32 @ End
-defs: L21 @ ELSIF_L17, L15 @ IF_L10, L6 @ Init, L26 @ ELSIF_L23, 
+use: V @ L19 @ IF_L15
+defs: L25 @ IF_L9, L22 @ END_IF_L15, L28 @ IF_L3, L2 @ Init, 
 
-use: TLOAD @ L8 @ Body
-defs: L38 @ Read, 
+use: X @ L16 @ ELSE_L10
+defs: L31 @ Read, 
 
-use: TLOAD @ L33 @ End
-defs: L38 @ Read, 
+use: V @ L29 @ End
+defs: L25 @ IF_L9, L22 @ END_IF_L15, L28 @ IF_L3, 
 
-use: TLOAD @ L31 @ END_IF_L10
-defs: L38 @ Read, 
+use: Y @ L16 @ ELSE_L10
+defs: L30 @ Read, 
 
-use: RESET @ CJ_L11 @ Body
-defs: L37 @ Read, 
+use: X @ L21 @ END_IF_L15
+defs: L31 @ Read, 
 
-use: IN_1 @ CJ_L24 @ END_ELSIF_L17
-defs: L36 @ Read, 
+use: Y @ L19 @ IF_L15
+defs: L30 @ Read, 
 
-use: PREV_LOAD @ L7 @ Body
-defs: L31 @ END_IF_L10, L1 @ Init, 
-
-use: #_t1 @ L34 @ End
-defs: L8 @ Body, 
-
-use: LOAD @ L18 @ START_ELSIF_L12
-defs: L35 @ Read, 
-
-use: IN_1 @ L21 @ ELSIF_L17
-defs: L36 @ Read, 
+use: V @ L21 @ END_IF_L15
+defs: L25 @ IF_L9, L22 @ END_IF_L15, L28 @ IF_L3, L2 @ Init, L20 @ IF_L15, 
 

@@ -14,13 +14,12 @@ import ll.location.LlLocation;
 import tools.GraphViz;
 import tools.Tuple2;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class ConcreteExecutor {
     private final CFG cfg;
     private final LlStatementExeutor llStatementExeutor;
-    private Random random = new Random(19);
+    private RandomGen random = new RandomGen();
 
     HashSet<BasicBlock> branchBlocks;
     HashSet<BasicBlock> stmtBlocks;
@@ -139,15 +138,11 @@ public class ConcreteExecutor {
             if (llLiteral instanceof LlLiteralBool)
                 inputs.put((LlLocation) llComponent, new ValueOfDiffType(random.nextBoolean()));
             else if (llLiteral instanceof LlLiteralInt)
-                inputs.put((LlLocation) llComponent, new ValueOfDiffType((long) random.nextInt(5) * (random.nextBoolean() ? -1 : 1)));
+                inputs.put((LlLocation) llComponent, new ValueOfDiffType((long) random.nextInt() ));
             else if (llLiteral instanceof LlLiteralReal) {
-                float leftLimit = -5F;
-                float rightLimit = 5F;
-                DecimalFormat df = new DecimalFormat("0.0");
-                String s = df.format(leftLimit + random.nextDouble() * (rightLimit - leftLimit));
-                inputs.put((LlLocation) llComponent, new ValueOfDiffType(Double.parseDouble(s)));
+                inputs.put((LlLocation) llComponent, new ValueOfDiffType(random.nextDouble()));
             } else if (llLiteral instanceof LlLiteralString)
-                inputs.put((LlLocation) llComponent, new ValueOfDiffType("it is not dealt with")); // easy to do this
+                inputs.put((LlLocation) llComponent, new ValueOfDiffType(random.nextString()));
             else System.out.println("wrong type!");
         }
         return inputs;

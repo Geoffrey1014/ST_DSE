@@ -31,54 +31,120 @@ END_IF;
    (* Control logic *)
 IF cstate55 = 10 THEN
     IF ((NOT x0) AND  (x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := TRUE;  
+        cstate55 := 10;
+         y0 := FALSE;
+          c1_add1 := FALSE;
+          c1_reset := TRUE;
     ELSIF ((x0) AND  (x1)) THEN 
-        cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 14;
+        y0 := FALSE;
+        c1_add1 := TRUE;
+         c1_reset := FALSE;
     ELSIF ((NOT x0) AND  (x1) AND  (c1_geq10)) THEN 
-        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := TRUE;  
+        cstate55 := 10;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+         c1_reset := TRUE;
     ELSIF ((NOT x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 10;
+         y0 := FALSE;
+         c1_add1 := FALSE;
+          c1_reset := FALSE;
     ELSIF ((x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
-        cstate55 := 13; y0 := TRUE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 13;
+        y0 := TRUE;
+        c1_add1 := TRUE;
+        c1_reset := FALSE;
     ELSIF ((NOT x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
-        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 10;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+        c1_reset := FALSE;
     ELSIF ((x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 13; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 13;
+        y0 := FALSE;
+        c1_add1 := TRUE;
+         c1_reset := FALSE;
     END_IF;
 ELSIF cstate55 = 0 THEN
     IF ((NOT x0) AND  (x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := TRUE;  
+        cstate55 := 10;
+        y0 := FALSE;
+        c1_add1 := FALSE;
+         c1_reset := TRUE;
     ELSIF ((x0) AND  (x1)) THEN 
-        cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 14;
+         y0 := FALSE;
+         c1_add1 := TRUE;
+          c1_reset := FALSE;
     ELSIF ((NOT x0) AND  (x1) AND  (c1_geq10)) THEN 
-        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := TRUE;  
+        cstate55 := 10;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+        c1_reset := TRUE;
     ELSIF ((NOT x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 10;
+        y0 := FALSE;
+        c1_add1 := FALSE;
+        c1_reset := FALSE;
     ELSIF ((x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
-        cstate55 := 13; y0 := TRUE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 13;
+        y0 := TRUE;
+        c1_add1 := TRUE;
+        c1_reset := FALSE;
     ELSIF ((NOT x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
-        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 10;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+        c1_reset := FALSE;
     ELSIF ((x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 13; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 13;
+        y0 := FALSE;
+        c1_add1 := TRUE;
+        c1_reset := FALSE;
     END_IF;
 ELSIF cstate55 = 13 THEN
     IF ((NOT x0) AND  (x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := TRUE;  
+        cstate55 := 10;
+        y0 := FALSE;
+        c1_add1 := FALSE;
+        c1_reset := TRUE;
     ELSIF ((x0) AND  (x1)) THEN 
-        cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+        cstate55 := 14;
+        y0 := FALSE;
+        c1_add1 := TRUE;
+        c1_reset := FALSE;
     ELSIF ((NOT x0) AND  (x1) AND  (c1_geq10)) THEN 
-        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := TRUE;  
+        cstate55 := 10;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+        c1_reset := TRUE;
     ELSIF ((NOT x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 10; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 10;
+        y0 := FALSE;
+        c1_add1 := FALSE;
+         c1_reset := FALSE;
     ELSIF ((x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
-        cstate55 := 13; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 13;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+        c1_reset := FALSE;
     ELSIF ((NOT x0) AND  (NOT x1) AND  (c1_geq10)) THEN 
-        cstate55 := 10; y0 := TRUE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 10;
+        y0 := TRUE;
+        c1_add1 := FALSE;
+        c1_reset := FALSE;
     ELSIF ((x0) AND  (NOT x1) AND  (NOT c1_geq10)) THEN 
-        cstate55 := 13; y0 := FALSE; c1_add1 := FALSE; c1_reset := FALSE;  
+        cstate55 := 13;
+        y0 := FALSE;
+        c1_add1 := FALSE;
+        c1_reset := FALSE;
     END_IF;
 ELSIF cstate55 = 14 THEN
-    cstate55 := 14; y0 := FALSE; c1_add1 := TRUE; c1_reset := FALSE;  
+    cstate55 := 14;
+     y0 := FALSE;
+      c1_add1 := TRUE;
+       c1_reset := FALSE;
 END_IF;
 
 

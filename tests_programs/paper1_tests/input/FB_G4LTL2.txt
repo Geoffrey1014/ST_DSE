@@ -13,15 +13,16 @@ PROGRAM FB_G4LTL2
       cstate_46	: INT := 0;
    END_VAR
 
+
  (* Control logic *)
 IF cstate_46 = 0 THEN
     IF ((NOT x_0) AND  x_1) OR (x_0 AND  (NOT x_1)) THEN 
-        cstate_46 := 0; y_0 := FALSE;  
+        cstate_46 := 0;
+        y_0 := FALSE;
     ELSIF ((NOT x_0) AND  (NOT x_1)) OR (x_0 AND  x_1) THEN 
-        cstate_46 := 0; y_0 := TRUE;  
+        cstate_46 := 0;
+        y_0 := TRUE;
     END_IF;
 END_IF;
-
-
 END_PROGRAM
   
