@@ -183,7 +183,7 @@ public class Main {
 //        file = "factor.txt";
         file = "04_SimpleConveyorBelt.txt";
 //         file = "Responder3.txt";
-        file = "FB_G4LTL8.txt";
+        file = "SorterControl.txt";
         walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
