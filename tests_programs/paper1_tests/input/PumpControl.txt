@@ -1,17 +1,16 @@
 PROGRAM PumpControl
-
 (* Variable definition *)
    VAR_INPUT
-      x_1	: BOOL;
-      tup0	: BOOL;
-      tstart0	: BOOL;
-      tstart1	: BOOL;
-      q_0 : BOOL;
-      treset0	: BOOL;
-      treset1	: BOOL;
-      tup1	: BOOL;
-      q_1 : BOOL;
+      n_1	: BOOL;
       n : BOOL;
+      p_1 : BOOL;
+      p_2 : BOOL;
+      elec1	: BOOL;
+      tup1	: BOOL;
+      reset1	: BOOL;
+      reset2	: BOOL;
+      start1	: BOOL;
+      start2	: BOOL;
       req1	: BOOL;
       req2	: BOOL;
       req3	: BOOL;
@@ -26,12 +25,431 @@ PROGRAM PumpControl
 
    VAR
       cstate86	: INT := 0;
-      count0 : INT := 0;
-	  count1 : INT := 0;
 	  TVALUE0	: INT := 5;
       TVALUE1	: INT := 3;
       cstate16	: INT := 0;
    END_VAR
+
+IF cstate86 = 82 THEN
+    IF (NOT n_1)  THEN
+        cstate86 := 37;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF  (p_1) THEN
+        cstate86 := 41;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 82;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 66 THEN
+    IF (NOT n_1)  THEN
+        cstate86 := 10;
+        y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF   (p_1) THEN
+        cstate86 := 48;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2) ) THEN
+        cstate86 := 55;
+         y_1 := FALSE;
+         reset1 := TRUE;
+         elec1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 40 THEN
+    IF   (NOT p_1) THEN
+        cstate86 := 37;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF (NOT n_1) THEN
+        cstate86 := 41;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ( (NOT p_2)) THEN
+        cstate86 := 40;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 82;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 72 THEN
+    IF (NOT n_1)  THEN
+        cstate86 := 10;
+        y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF  (p_1) THEN
+        cstate86 := 48;
+         y_1 := FALSE;
+          reset1 := FALSE;
+          reset2 := FALSE;
+    ELSIF ((NOT p_2)) THEN
+        cstate86 := 12;
+         y_1 := FALSE;
+         reset1 := TRUE;
+         elec1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 55;
+         y_1 := FALSE;
+         reset1 := TRUE;
+          elec1 := FALSE;
+          reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 48 THEN
+    IF   (NOT p_1) THEN
+        cstate86 := 10;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF (NOT n_1) THEN
+        cstate86 := 48;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) ) THEN
+        cstate86 := 12;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 55;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 55 THEN
+    IF (NOT n_1)  THEN
+        cstate86 := 33;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ( (NOT p_1)) THEN
+        cstate86 := 37;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ( (p_2)) THEN
+        cstate86 := 41;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ((n_1)) THEN
+        cstate86 := 36;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 70;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 74 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 37;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF ( (p_1)) THEN
+        cstate86 := 41;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ((n_1) ) THEN
+        cstate86 := 40;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 82;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 33 THEN
+    cstate86 := 33;
+    y_1 := FALSE;
+    reset1 := FALSE;
+    reset2 := FALSE;
+
+ELSIF cstate86 = 36 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 33;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ( (p_2) ) THEN
+        cstate86 := 37;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF (   (p_1)) THEN
+        cstate86 := 41;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF ( (NOT p_2)) THEN
+        cstate86 := 36;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 94 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 37;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ( (p_1)) THEN
+        cstate86 := 41;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+        tup1 := FALSE;
+    ELSIF ((n_1) ) THEN
+        cstate86 := 40;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 0 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 66;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF (  (p_1)) THEN
+        cstate86 := 72;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) ) THEN
+        cstate86 := 94;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 70 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 37;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF ( (p_1)) THEN
+        cstate86 := 41;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF ((n_1)) THEN
+        cstate86 := 40;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 37 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 21;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ( (p_1)) THEN
+        cstate86 := 73;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) AND  (NOT p_1)) THEN
+        cstate86 := 33;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2) OR  (p_1)) THEN
+        cstate86 := 55;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 10 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 10;
+        y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF (  (p_1)) THEN
+        cstate86 := 48;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1)) THEN
+        cstate86 := 12;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ( (p_2)) THEN
+        cstate86 := 55;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 21 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 21;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ( (p_1)) THEN
+        cstate86 := 73;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) ) THEN
+        cstate86 := 33;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ( (NOT p_2)) THEN
+        cstate86 := 12;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 12 THEN
+    IF ((NOT n_1) ) THEN
+        cstate86 := 33;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ( (p_2) AND  (NOT p_1)) THEN
+        cstate86 := 37;
+         y_1 := TRUE;
+         reset1 := FALSE;
+         reset2 := TRUE;
+         tup1 := FALSE;
+    ELSIF ((NOT n_1) AND  (p_2) ) THEN
+        cstate86 := 41;
+         y_1 := TRUE;
+          reset1 := FALSE;
+          reset2 := TRUE;
+          tup1 := FALSE;
+    ELSIF ((n_1) OR  (p_2)) THEN
+        cstate86 := 70;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 41 THEN
+    IF ((NOT n_1) AND  (NOT p_1)) THEN
+        cstate86 := 21;
+        y_1 := TRUE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((NOT n_1) AND  (p_1)) THEN
+        cstate86 := 73;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2) OR  (p_1)) THEN
+        cstate86 := 55;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 73 THEN
+    IF ((NOT n_1) AND  (NOT p_1)) THEN
+        cstate86 := 10;
+        y_1 := FALSE;
+        reset1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (NOT p_2)) THEN
+        cstate86 := 12;
+         y_1 := FALSE;
+         reset1 := TRUE;
+         elec1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2) ) THEN
+        cstate86 := 55;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    END_IF;
+
+ELSIF cstate86 = 55 THEN
+    IF (NOT n_1)  THEN
+        cstate86 := 10;
+        y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF   (p_1) THEN
+        cstate86 := 48;
+         y_1 := FALSE;
+         reset1 := FALSE;
+         reset2 := FALSE;
+    ELSIF ((n_1) OR  (NOT p_2)) THEN
+        cstate86 := 12;
+        y_1 := FALSE;
+        reset1 := TRUE;
+        elec1 := FALSE;
+        reset2 := FALSE;
+    ELSIF ((n_1) OR  (p_2) ) THEN
+        cstate86 := 55;
+         y_1 := FALSE;
+         reset1 := TRUE;
+         elec1 := FALSE;
+         reset2 := FALSE;
+    END_IF;
+END_IF;
 
 IF cstate16 = 0 THEN
     IF ((NOT req1) AND  (req2) AND  (NOT req3)) THEN
@@ -44,37 +462,23 @@ IF cstate16 = 0 THEN
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := FALSE;
-    ELSIF ((NOT req1) AND  (NOT req2) AND  (req3)) THEN
-        cstate16 := 4;
-        grant_1 := FALSE;
-        grant_2 := FALSE;
-        grant_3 := FALSE;
     ELSIF ((req1 ) AND  (NOT req2) AND  (req3)) THEN
         cstate16 := 14;
         grant_1 := FALSE;
          grant_2 := FALSE;
           grant_3 := FALSE;
-    ELSIF ((NOT req1) AND  (NOT req2) AND  (NOT req3)) THEN
-        cstate16 := 0;
-        grant_1 := FALSE;
-         grant_2 := FALSE;
-         grant_3 := FALSE;
     ELSIF ((NOT req1) AND  (req2) AND  (req3)) THEN
         cstate16 := 10;
         grant_1 := FALSE;
          grant_2 := FALSE;
           grant_3 := FALSE;
-    ELSIF ((req1 ) AND  (req2) AND  (req3)) THEN
-        cstate16 := 1;
-        grant_1 := FALSE;
-         grant_2 := FALSE;
-          grant_3 := TRUE;
-    ELSIF ((req1 ) AND  (req2) AND  (NOT req3)) THEN
+    ELSIF ((req1 ) OR  (req2) OR  (NOT req3)) THEN
         cstate16 := 1;
         grant_1 := FALSE;
          grant_2 := FALSE;
          grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 1 THEN
     IF ( (NOT req3)) THEN
         cstate16 := 2;
@@ -87,6 +491,7 @@ ELSIF cstate16 = 1 THEN
         grant_2 := FALSE;
         grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 2 THEN
     IF ((NOT req1) AND  (req3)) THEN
         cstate16 := 6;
@@ -103,12 +508,13 @@ ELSIF cstate16 = 2 THEN
          grant_1 := FALSE;
           grant_2 := TRUE;
           grant_3 := FALSE;
-    ELSIF ((req1 ) AND  (NOT req3)) THEN
+    ELSIF ((req1 ) OR  (NOT req3)) THEN
         cstate16 := 9;
          grant_1 := FALSE;
          grant_2 := TRUE;
          grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 3 THEN
     IF ((NOT req1) AND  (NOT req3)) THEN
         cstate16 := 0;
@@ -125,34 +531,31 @@ ELSIF cstate16 = 3 THEN
         grant_1 := FALSE;
          grant_2 := TRUE;
           grant_3 := FALSE;
-    ELSIF ((NOT req1) AND  (req3)) THEN
+    ELSIF ((NOT req1) OR  (req3)) THEN
         cstate16 := 4;
         grant_1 := FALSE;
         grant_2 := TRUE;
         grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 4 THEN
     IF ((NOT req1) AND  (NOT req2)) THEN
         cstate16 := 5;
         grant_1 := FALSE;
          grant_2 := FALSE;
           grant_3 := FALSE;
-    ELSIF ((NOT req1) AND  (req2)) THEN
-        cstate16 := 8;
-        grant_1 := FALSE;
-         grant_2 := FALSE;
-         grant_3 := FALSE;
     ELSIF ((req1 ) AND  (NOT req2)) THEN
         cstate16 := 7;
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := FALSE;
-    ELSIF ((req1 ) AND  (req2)) THEN
+    ELSIF ((req1 ) OR  (req2)) THEN
         cstate16 := 1;
         grant_1 := FALSE;
          grant_2 := FALSE;
          grant_3 := TRUE;
     END_IF;
+
 ELSIF cstate16 = 5 THEN
     IF ((req1 ) AND  (NOT req2)) THEN
         cstate16 := 9;
@@ -164,17 +567,13 @@ ELSIF cstate16 = 5 THEN
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := FALSE;
-    ELSIF ((NOT req1) AND  (NOT req2)) THEN
-        cstate16 := 15;
-        grant_1 := FALSE;
-         grant_2 := FALSE;
-          grant_3 := FALSE;
-    ELSIF ((req1 ) AND  (req2)) THEN
+    ELSIF ((req1 ) OR  (req2)) THEN
         cstate16 := 1;
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := TRUE;
     END_IF;
+
 ELSIF cstate16 = 6 THEN
     IF ((req1 ) ) THEN
         cstate16 := 7;
@@ -187,6 +586,7 @@ ELSIF cstate16 = 6 THEN
          grant_2 := TRUE;
          grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 7 THEN
     IF ((NOT req2)) THEN
         cstate16 := 15;
@@ -199,6 +599,7 @@ ELSIF cstate16 = 7 THEN
         grant_2 := FALSE;
         grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 8 THEN
     IF ((req1 ) ) THEN
         cstate16 := 12;
@@ -211,28 +612,20 @@ ELSIF cstate16 = 8 THEN
          grant_2 := FALSE;
          grant_3 := TRUE;
     END_IF;
+
 ELSIF cstate16 = 9 THEN
     IF ((req2) AND  (req3)) THEN
         cstate16 := 10;
         grant_1 := TRUE;
         grant_2 := FALSE;
         grant_3 := FALSE;
-    ELSIF ((NOT req2) AND  (NOT req3)) THEN
-        cstate16 := 0;
-         grant_1 := TRUE;
-         grant_2 := FALSE;
-          grant_3 := FALSE;
     ELSIF ((req2) AND  (NOT req3)) THEN
         cstate16 := 11;
         grant_1 := TRUE;
         grant_2 := FALSE;
         grant_3 := FALSE;
-    ELSIF ((NOT req2) AND  (req3)) THEN
-        cstate16 := 4;
-        grant_1 := TRUE;
-        grant_2 := FALSE;
-        grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 10 THEN
     IF ((req1 )) THEN
         cstate16 := 12;
@@ -245,28 +638,30 @@ ELSIF cstate16 = 10 THEN
          grant_2 := FALSE;
           grant_3 := TRUE;
     END_IF;
+
 ELSIF cstate16 = 11 THEN
     IF ((req1 ) AND  (NOT req3)) THEN
         cstate16 := 12;
          grant_1 := FALSE;
          grant_2 := FALSE;
          grant_3 := FALSE;
-    ELSIF ((NOT req1) AND  (req3)) THEN
+    ELSIF (  (req3)) THEN
         cstate16 := 13;
          grant_1 := FALSE;
           grant_2 := FALSE;
           grant_3 := FALSE;
-    ELSIF ((req1 ) AND  (req3)) THEN
+    ELSIF ((req1 ) ) THEN
         cstate16 := 12;
          grant_1 := FALSE;
           grant_2 := FALSE;
           grant_3 := TRUE;
-    ELSIF ((NOT req1) AND  (NOT req3)) THEN
+    ELSIF ((NOT req1) OR  (NOT req3)) THEN
         cstate16 := 2;
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 12 THEN
     IF ((NOT req3)) THEN
         cstate16 := 3;
@@ -279,6 +674,7 @@ ELSIF cstate16 = 12 THEN
         grant_2 := FALSE;
         grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 13 THEN
     IF ((NOT req1)) THEN
         cstate16 := 3;
@@ -291,6 +687,7 @@ ELSIF cstate16 = 13 THEN
         grant_2 := TRUE;
         grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 14 THEN
     IF ((NOT req2) ) THEN
         cstate16 := 5;
@@ -303,28 +700,25 @@ ELSIF cstate16 = 14 THEN
           grant_2 := FALSE;
            grant_3 := FALSE;
     END_IF;
+
 ELSIF cstate16 = 15 THEN
     IF ((NOT req1) AND  (req2) ) THEN
         cstate16 := 11;
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := TRUE;
-    ELSIF ((req1 ) AND  (NOT req2) ) THEN
-        cstate16 := 9;
-         grant_1 := FALSE;
-          grant_2 := FALSE;
-           grant_3 := TRUE;
-    ELSIF ((NOT req1) AND  (NOT req2) ) THEN
+    ELSIF ((NOT req1) ) THEN
         cstate16 := 0;
          grant_1 := FALSE;
          grant_2 := FALSE;
           grant_3 := TRUE;
-    ELSIF ((req1 ) AND  (req2) ) THEN
+    ELSIF ((req1 )  ) THEN
         cstate16 := 1;
         grant_1 := FALSE;
         grant_2 := FALSE;
         grant_3 := TRUE;
     END_IF;
+
 ELSIF cstate16 = 16 THEN
     IF ((req1 )) THEN
         cstate16 := 12;
@@ -338,483 +732,4 @@ ELSIF cstate16 = 16 THEN
          grant_3 := TRUE;
     END_IF;
 END_IF;
-
-IF cstate86 = 82 THEN
-    IF (NOT x_1)  THEN
-        cstate86 := 37;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF  (q_1) THEN
-        cstate86 := 41;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 40;
-        y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 82;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 66 THEN
-    IF (NOT x_1)  THEN
-        cstate86 := 10;
-        y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF   (q_1) THEN
-        cstate86 := 48;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0) ) THEN
-        cstate86 := 55;
-         y_1 := FALSE;
-         tstart0 := TRUE;
-         tup0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 40 THEN
-    IF   (NOT q_1) THEN
-        cstate86 := 37;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF (NOT x_1) THEN
-        cstate86 := 41;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 40;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 82;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 72 THEN
-    IF (NOT x_1)  THEN
-        cstate86 := 10;
-        y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF  (q_1) THEN
-        cstate86 := 48;
-         y_1 := FALSE;
-          tstart0 := FALSE;
-          tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 12;
-         y_1 := FALSE;
-         tstart0 := TRUE;
-         tup0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 55;
-         y_1 := FALSE;
-         tstart0 := TRUE;
-          tup0 := FALSE;
-          tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 48 THEN
-    IF   (NOT q_1) THEN
-        cstate86 := 10;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF (NOT x_1) THEN
-        cstate86 := 48;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 55;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 55 THEN
-    IF (NOT x_1)  THEN
-        cstate86 := 33;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ( (q_0) AND  (NOT q_1)) THEN
-        cstate86 := 37;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ( (q_0) AND  (q_1)) THEN
-        cstate86 := 41;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 36;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 70;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 74 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 37;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF ((NOT x_1) AND  (q_1)) THEN
-        cstate86 := 41;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 40;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 82;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 33 THEN
-    cstate86 := 33;
-    y_1 := FALSE;
-    tstart0 := FALSE;
-    tstart1 := FALSE;
-
-ELSIF cstate86 = 36 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 33;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ( (q_0) AND  (NOT q_1)) THEN
-        cstate86 := 37;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF ( (q_0) AND  (q_1)) THEN
-        cstate86 := 41;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF ( (NOT q_0)) THEN
-        cstate86 := 36;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 94 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 37;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ( (q_1)) THEN
-        cstate86 := 41;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-        tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 40;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 0 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 66;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF (  (q_1)) THEN
-        cstate86 := 72;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 94;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 70 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 37;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF ( (q_1)) THEN
-        cstate86 := 41;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 40;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 37 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 21;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ( (q_1)) THEN
-        cstate86 := 73;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_1)) THEN
-        cstate86 := 33;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0) AND  (q_1)) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0) AND  (q_1)) THEN
-        cstate86 := 55;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 10 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 10;
-        y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF (  (q_1)) THEN
-        cstate86 := 48;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0) ) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 55;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 21 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 21;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ( (q_1)) THEN
-        cstate86 := 73;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_1)) THEN
-        cstate86 := 33;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0) AND  (q_1)) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 12 THEN
-    IF ((NOT x_1) ) THEN
-        cstate86 := 33;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ( (q_0) AND  (NOT q_1)) THEN
-        cstate86 := 37;
-         y_1 := TRUE;
-         tstart0 := FALSE;
-         tstart1 := TRUE;
-         tup1 := FALSE;
-    ELSIF ((NOT x_1) AND  (q_0) AND  (q_1)) THEN
-        cstate86 := 41;
-         y_1 := TRUE;
-          tstart0 := FALSE;
-          tstart1 := TRUE;
-          tup1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 36;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0)) THEN
-        cstate86 := 70;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 41 THEN
-    IF ((NOT x_1) AND  (NOT q_1)) THEN
-        cstate86 := 21;
-        y_1 := TRUE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((NOT x_1) AND  (q_1)) THEN
-        cstate86 := 73;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1)  AND  (NOT q_1)) THEN
-        cstate86 := 33;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0 ) AND  (q_1)) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-         tup0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0) AND  (q_1)) THEN
-        cstate86 := 55;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 73 THEN
-    IF ((NOT x_1) AND  (NOT q_1)) THEN
-        cstate86 := 10;
-        y_1 := FALSE;
-        tstart0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((NOT x_1) AND  (q_1)) THEN
-        cstate86 := 48;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 12;
-         y_1 := FALSE;
-         tstart0 := TRUE;
-         tup0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0) ) THEN
-        cstate86 := 55;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    END_IF;
-ELSIF cstate86 = 55 THEN
-    IF (NOT x_1)  THEN
-        cstate86 := 10;
-        y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF   (q_1) THEN
-        cstate86 := 48;
-         y_1 := FALSE;
-         tstart0 := FALSE;
-         tstart1 := FALSE;
-    ELSIF ((x_1) AND  (NOT q_0)) THEN
-        cstate86 := 12;
-        y_1 := FALSE;
-        tstart0 := TRUE;
-        tup0 := FALSE;
-        tstart1 := FALSE;
-    ELSIF ((x_1) AND  (q_0) ) THEN
-        cstate86 := 55;
-         y_1 := FALSE;
-         tstart0 := TRUE;
-         tup0 := FALSE;
-         tstart1 := FALSE;
-    END_IF;
-END_IF;
-
-IF(tup0) THEN
-    treset0 := TRUE;
-ELSIF(tstart0 AND (NOT tup0)) THEN
-    tup0 := TRUE;
-    treset0 := FALSE;
-END_IF;
-
-IF(treset0) THEN
-	IF(count0=TVALUE0) THEN
-		q_0 := TRUE;
-	ELSE
-		(*count0 := count0 + 1;	 *)
-		count0 := TVALUE0;
-	END_IF;
-ELSE
-	q_0 := FALSE;
-	count0 := 0;
-END_IF;
-
-IF(tup1) THEN
-    treset1 := TRUE;
-ELSIF(tstart1 AND (NOT tup1)) THEN
-    tup1 := TRUE;
-     treset1 := FALSE;
-END_IF;
-
-IF(treset1) THEN
-	count1 := TVALUE1;
-	IF(count1=TVALUE1) THEN
-		q_1 := TRUE;
-	END_IF;
-ELSE
-	q_1 := FALSE;
-	count1 := 0;
-END_IF;
-
 END_PROGRAM

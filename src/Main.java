@@ -181,9 +181,9 @@ public class Main {
 //        file = "example.txt";
 //        file = "example2.txt";
 //        file = "factor.txt";
-//        file = "04_SimpleConveyorBelt.txt";
+        file = "04_SimpleConveyorBelt.txt";
 //         file = "Responder3.txt";
-        file = "PumpControl.txt";
+//        file = "PumpControl.txt";
         walkTree(inputDir + file);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
