@@ -1,0 +1,30 @@
+use: X @ L20 @ LOOP_L16
+defs: L34 @ Read, 
+
+use: Y @ L17 @ WHILE_L15
+defs: L33 @ Read, 
+
+use: V @ L20 @ LOOP_L16
+defs: L28 @ IF_L9, L2 @ Init, L21 @ LOOP_L16, L24 @ END_WHILE_L15, L31 @ IF_L3, 
+
+use: V @ L6 @ Body
+defs: L28 @ IF_L9, L2 @ Init, L24 @ END_WHILE_L15, L31 @ IF_L3, 
+
+use: V @ L17 @ WHILE_L15
+defs: L28 @ IF_L9, L2 @ Init, L24 @ END_WHILE_L15, L21 @ LOOP_L16, L31 @ IF_L3, 
+
+use: X @ L12 @ ELSE_L4
+defs: L34 @ Read, 
+
+use: Y @ L23 @ END_WHILE_L15
+defs: L33 @ Read, 
+
+use: V @ L23 @ END_WHILE_L15
+defs: L28 @ IF_L9, L2 @ Init, L21 @ LOOP_L16, L24 @ END_WHILE_L15, L31 @ IF_L3, 
+
+use: V @ L27 @ IF_L9
+defs: L28 @ IF_L9, L2 @ Init, L24 @ END_WHILE_L15, L31 @ IF_L3, 
+
+use: V @ L32 @ End
+defs: L28 @ IF_L9, L24 @ END_WHILE_L15, L31 @ IF_L3, 
+

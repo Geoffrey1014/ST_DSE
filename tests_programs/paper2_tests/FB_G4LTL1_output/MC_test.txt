@@ -1,0 +1,1 @@
+MC_test1: {x_0=false, x_1=true}{x_0=true, x_1=false}

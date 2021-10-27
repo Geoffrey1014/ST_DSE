@@ -32,15 +32,18 @@ public class DataFlowTest extends CoverageTest {
 
     }
 
-    public String dataFlowTesting() {
+    public String dataFlowTesting(Boolean branchStates) {
         int countInit = 0;
         branchTestor.branchTest();
         HashSet<ConMemory> states = branchTestor.getStateManager().statesAppeared;
         Integer stateNum = states.size();
-//        states = new HashSet<>();
-//        for (int i = 0; i < stateNum; i++) {
-//            states.add(createInitMemory());
-//        }
+        if(!branchStates){
+            states = new HashSet<>();
+            for (int i = 0; i < stateNum; i++) {
+                states.add(createInitMemory());
+            }
+        }
+
 
 
         List<DuPairAndDoms> duPairAndDomsList = udChainsAndDoms.duPairAndDomsList;
@@ -64,7 +67,7 @@ public class DataFlowTest extends CoverageTest {
                 countInit += 1;
                 continue;
             }
-            HashMap<LlLocation, ValueOfDiffType> inputs = dfTestaDuPair(def, use, duPairAndDoms);
+            HashMap<LlLocation, ValueOfDiffType> inputs = dftTestaDuPair(def, use, duPairAndDoms);
             if (inputs != null) {
 //                testingResult.append("def: ").append(def.toStringSimple()).append("\n");
 //                testingResult.append("use: ").append(use.toStringSimple()).append("\n");
@@ -75,36 +78,10 @@ public class DataFlowTest extends CoverageTest {
         return printResult(stateNum, totalTime, countInit, countedDu, successTestedDu, duPairAndDomsList.size());
     }
 
-    public String printResult(int statesSize, long totalTime, int countInit, int countedDu, int successTestedDu,
-                              int duPairAndDomsListSize) {
-        String resultString = "";
-        System.out.println("branch states: " + statesSize);
-        resultString += "branch states: " + statesSize + "\n";
-
-        System.out.println("consumed time: " + totalTime);
-        resultString += "consumed time: " + totalTime + "\n";
-
-        System.out.println("countInit: " + countInit);
-        resultString += "countInit: " + countInit + "\n";
-
-        System.out.println("succTestedDu: " + successTestedDu);
-        resultString += "succTestedDu: " + successTestedDu + "\n";
-
-        System.out.println("countedDu: " + countedDu);
-        resultString += "countedDu: " + countedDu + "\n";
-
-        System.out.println("totalDu: " + duPairAndDomsListSize);
-        resultString += "totalDu: " + duPairAndDomsListSize + "\n";
-
-        System.out.println("dft: " + (float) successTestedDu / duPairAndDomsListSize);
-        resultString += "dft: " + (float) successTestedDu / duPairAndDomsListSize + "\n";
-
-        return resultString;
-    }
 
     /**
      * @param def 目标定义 -使用对 d
-     * @param use 目标定义 -使用对 d
+     * @param use 目标定义 -使用对 u
      * @return 满足 du 的程序输入 t，如果找不到对应的 t，返回 nil
      * <p>
      * 1 let W be a worklist of branching nodes (initialized as empty)
@@ -125,7 +102,7 @@ public class DataFlowTest extends CoverageTest {
      * 这是在一个PLC state 下进行的测试，如果不行，则需要换一个新的PLC state。
      * 我觉得算法应该是先想办法到达 def, 再从def 到 use
      */
-    public HashMap<LlLocation, ValueOfDiffType> dfTestaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
+    public HashMap<LlLocation, ValueOfDiffType> dftTestaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
 
 
         long startTime = System.currentTimeMillis(); //程序开始记录时间
@@ -390,5 +367,32 @@ public class DataFlowTest extends CoverageTest {
         return new HashMap<>();
     }
 
+
+    public String printResult(int statesSize, long totalTime, int countInit, int countedDu, int successTestedDu,
+                              int duPairAndDomsListSize) {
+        String resultString = "";
+        System.out.println("branch states: " + statesSize);
+        resultString += "branch states: " + statesSize + "\n";
+
+        System.out.println("consumed time: " + totalTime);
+        resultString += "consumed time: " + totalTime + "\n";
+
+        System.out.println("countInit: " + countInit);
+        resultString += "countInit: " + countInit + "\n";
+
+        System.out.println("succTestedDu: " + successTestedDu);
+        resultString += "succTestedDu: " + successTestedDu + "\n";
+
+        System.out.println("countedDu: " + countedDu);
+        resultString += "countedDu: " + countedDu + "\n";
+
+        System.out.println("totalDu: " + duPairAndDomsListSize);
+        resultString += "totalDu: " + duPairAndDomsListSize + "\n";
+
+        System.out.println("dft: " + (float) successTestedDu / duPairAndDomsListSize);
+        resultString += "dft: " + (float) successTestedDu / duPairAndDomsListSize + "\n";
+
+        return resultString;
+    }
 
 }

@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
 import simulation.BranchTest;
-import simulation.DataFlowTest;
 import simulation.UdChainsAndDoms;
 import tools.MyPrint;
 import tools.Tuple2;
@@ -31,7 +30,7 @@ public class Main {
     // control of updating pictures
     public static Boolean updateFig = false;
 
-    public static String walkTree(String filePath) {
+    public static String walkTree(String filePath, Boolean bts) {
         String[] pathSegments = filePath.split("/");
         String prefix = pathSegments[0] + "/" + pathSegments[1] + "/";
         String inputFileName = pathSegments[3];
@@ -140,12 +139,17 @@ public class Main {
 //                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = udChainAndDoms.udChianWithDmt;
 //                writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
-                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
-                System.out.println("data flow testing!----------------");
-                dftResult += dft.dataFlowTesting();
+//                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
+//                System.out.println("data flow testing!----------------");
+//                dftResult += dft.dataFlowTesting(bts);
                 System.out.println("branch testing;------------");
                 BranchTest branchTest = new BranchTest(cfg);
                 branchTest.branchTest(inputFileNamePrefix);
+                branchTest.ptestManager.buildMCTestTree();
+                System.out.println("\n------MCtest---------");
+                String MC_tests = branchTest.ptestManager.generatedMCtest();
+                System.out.println(MC_tests);
+                writeFile(MC_tests,outPutDir + "MC_test" + ".txt");
 
 //                System.out.println("CF------------------------");
 //                GlobalCF.performGlobalCodeFolding(cfg);
@@ -175,19 +179,27 @@ public class Main {
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
         String file;
-//       file = "counter.txt";
+       file = "counter.txt";
 
 //         file = "power.txt";
 //        file = "example.txt";
+//        file = "example4.txt";
 //        file = "example2.txt";
 //        file = "factor.txt";
-        file = "04_SimpleConveyorBelt.txt";
-//         file = "Responder3.txt";
+//        file = "04_SimpleConveyorBelt.txt";
+//        file = "05_HydraulicRamp.txt";
+//        file = "06_ArbitorLTL.txt";
+//        file = "Responder3.txt" ;
+//        file = "MotionControl.txt";
+//        file = "EmergenceyStop.txt";
+//        file = "SaftyRequest.txt";
+//        file = "GaMonitoring.txt";
+//        file = "SorterControl.txt";
 //        file = "PumpControl.txt";
-        walkTree(inputDir + file);
+        walkTree(inputDir + file, true);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
 
@@ -220,14 +232,17 @@ public class Main {
                 }
                 else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
                     continue;
-                }  else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                }  else if (f.toString().equals("tests_programs/paper1_tests/input/PumpControl.txt")) {
                     continue;
-                }else if (f.toString().equals("tests_programs/paper1_tests/input/Responder3.txt")) {
+                }else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper1_tests/input/SorterControl.txt")) {
                     continue;
                 }
                 System.out.println("\n----- " + f + " ---------");
                 allDFTResults.append("\n\n----- " + f + " ---------");
-                allDFTResults.append(walkTree(f.toString()));
+                allDFTResults.append(walkTree(f.toString(),false));
             }
 
         }

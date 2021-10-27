@@ -1,0 +1,172 @@
+MC_test1: {req3=true, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test2: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test3: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test4: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}
+MC_test5: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}
+MC_test6: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test7: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=true, req1=false}
+MC_test8: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test9: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test10: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test11: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test12: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test13: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test14: {req3=true, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test15: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test16: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test17: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test18: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}
+MC_test19: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}
+MC_test20: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test21: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test22: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test23: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test24: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test25: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test26: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test27: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test28: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test29: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test30: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test31: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=true, req1=false}
+MC_test32: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=false}
+MC_test33: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test34: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test35: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test36: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test37: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test38: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test39: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test40: {req3=true, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test41: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test42: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test43: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test44: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}
+MC_test45: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}
+MC_test46: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test47: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test48: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test49: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test50: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test51: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test52: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test53: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test54: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test55: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test56: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test57: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=true, req1=false}
+MC_test58: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=false}
+MC_test59: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test60: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test61: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test62: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test63: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test64: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test65: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test66: {req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test67: {req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test68: {req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test69: {req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test70: {req3=true, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test71: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test72: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test73: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test74: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}
+MC_test75: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}
+MC_test76: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test77: {req3=false, req2=true, req1=true}{req3=true, req2=false, req1=true}
+MC_test78: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test79: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test80: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test81: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test82: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test83: {req3=false, req2=true, req1=true}{req3=false, req2=false, req1=false}
+MC_test84: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test85: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test86: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test87: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test88: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test89: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=true, req1=false}
+MC_test90: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=false}
+MC_test91: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test92: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test93: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test94: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test95: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test96: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test97: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test98: {req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test99: {req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test100: {req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test101: {req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test102: {req3=true, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test103: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test104: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test105: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test106: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}
+MC_test107: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}
+MC_test108: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test109: {req3=false, req2=true, req1=true}{req3=true, req2=false, req1=true}
+MC_test110: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test111: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test112: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test113: {req3=true, req2=false, req1=true}{req3=false, req2=true, req1=true}
+MC_test114: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test115: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test116: {req3=false, req2=true, req1=true}{req3=false, req2=false, req1=false}
+MC_test117: {req3=true, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test118: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test119: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test120: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test121: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test122: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test123: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=true, req1=false}
+MC_test124: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=false}
+MC_test125: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test126: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test127: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test128: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test129: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test130: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test131: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test132: {req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test133: {req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test134: {req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test135: {req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test136: {req3=false, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test137: {req3=true, req2=false, req1=false}{req3=true, req2=true, req1=true}
+MC_test138: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test139: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test140: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test141: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}
+MC_test142: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}
+MC_test143: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}
+MC_test144: {req3=false, req2=true, req1=true}{req3=true, req2=false, req1=true}
+MC_test145: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test146: {req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test147: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test148: {req3=true, req2=false, req1=true}{req3=false, req2=true, req1=true}
+MC_test149: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test150: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test151: {req3=false, req2=true, req1=true}{req3=false, req2=false, req1=false}
+MC_test152: {req3=true, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test153: {req3=false, req2=false, req1=false}{req3=true, req2=true, req1=false}{req3=false, req2=false, req1=false}
+MC_test154: {req3=false, req2=false, req1=false}{req3=true, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test155: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test156: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test157: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test158: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=false}
+MC_test159: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=false, req1=true}
+MC_test160: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=true, req1=false}
+MC_test161: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=false}
+MC_test162: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}{req3=false, req2=true, req1=true}
+MC_test163: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=false}{req3=true, req2=false, req1=true}
+MC_test164: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test165: {req3=true, req2=false, req1=false}{req3=false, req2=true, req1=false}{req3=false, req2=false, req1=true}
+MC_test166: {req3=false, req2=true, req1=false}{req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test167: {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=true}
+MC_test168: {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test169: {req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
+MC_test170: {req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
+MC_test171: {req3=false, req2=false, req1=true}{req3=false, req2=true, req1=false}
+MC_test172: {req3=false, req2=false, req1=true}{req3=true, req2=false, req1=false}

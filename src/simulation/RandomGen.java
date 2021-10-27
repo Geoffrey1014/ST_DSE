@@ -11,7 +11,8 @@ public class RandomGen {
     }
 
     public Integer nextInt(){
-        return random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+        Integer integer = random.nextInt(5) * (random.nextBoolean() ? -1 : 1);
+        return integer;
     }
     public Double nextDouble(){
         float leftLimit = -5F;

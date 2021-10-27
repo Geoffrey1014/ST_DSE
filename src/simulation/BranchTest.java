@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class BranchTest extends CoverageTest{
     private ConcreteExecutor concreteExecutor;
     private StateManager stateManager;
     private BranchManager branchManager;
+    public PtestManager ptestManager;
+    private int ptestCounter;
 
     public StateManager getStateManager() {
         return stateManager;
@@ -37,9 +40,9 @@ public class BranchTest extends CoverageTest{
         this.concreteExecutor = new ConcreteExecutor(cfg);
         this.symbolExecutor = new SymbolExecutor(cfg);
         this.stateManager = new StateManager();
-
         this.branchManager = new BranchManager(cfg, this.concreteExecutor.branchBlocks);
-
+        this.ptestManager = new PtestManager();
+        this.ptestCounter = 0;
     }
 
     /**
@@ -73,6 +76,7 @@ public class BranchTest extends CoverageTest{
      * @param fileName
      */
     public void branchTest(String fileName) {
+        ptestCounter = 0;
         HashMap<String,Double> oldBranchTestData = new OldBranchTestData().data;
         // create createInitMemory
         ConMemory oldConMenory = createInitMemory();
@@ -120,21 +124,41 @@ public class BranchTest extends CoverageTest{
 
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
         inputsWorkList.add(inputs);
+//        System.out.println("\ncalculatedInputs:\n"+inputs);
         int counter = 0;
         while (inputsWorkList.size() > 0) {
 //            System.out.println("--inputs: " + counter++);
-            Tuple2<ExecutedRoute,ConMemory> exeResult= this.concreteExecutor.conExeFromRead(inputsWorkList.pollFirst(), startConMenory);
+            HashMap<LlLocation, ValueOfDiffType> ptest = inputsWorkList.pollFirst();
+            float oldBranchCoverage = branchManager.coverageRate();
+            PtestWithState ptestWithState = new PtestWithState(startConMenory,ptest, ptestCounter++);
+
+            Tuple2<ExecutedRoute,ConMemory> exeResult= this.concreteExecutor.conExeFromRead(ptest, startConMenory);
             ExecutedRoute executedRoute = exeResult.a1;
             stateManager.add(exeResult.a2);
             branchManager.addRoute(executedRoute.route, executedRoute.branches);
+            if(hasLoop(executedRoute)){
+                useCPP(startConMenory);
+            }
+            ptestWithState.addPLCEndState(exeResult.a2);
 
             float branchCoverage = branchManager.coverageRate();
+
+            if(oldBranchCoverage < branchCoverage){
+                ptestWithState.improveCoverage = true;
+            }
+
+
+//            System.out.println(ptestWithState);
+            ptestManager.addPtestWithStates(ptestWithState);
             if (branchCoverage > 0.99) break;
 
             // flipBranches
             List<BasicBlock> flipBranches = branchManager.flipBranches(executedRoute.executedBranches);
             // SE and get calculatedInputs
             LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(startSymMemory, executedRoute.route, executedRoute.executedBranches, flipBranches);
+//            if (calculatedInputs.size() > 0){
+//                System.out.println("\ncalculatedInputs:\n"+calculatedInputs);
+//            }
             inputsWorkList.addAll(calculatedInputs);
 //            genGraphViz("");
 
@@ -142,11 +166,31 @@ public class BranchTest extends CoverageTest{
 
     }
 
+    private void useCPP(ConMemory startConMenory){
+        for(int i=0 ; i < 5; i++){
+            HashMap<LlLocation, ValueOfDiffType> input = this.concreteExecutor.createRandomInputs();
+            Tuple2<ExecutedRoute,ConMemory> exeResult= this.concreteExecutor.conExeFromRead(input, startConMenory);
+            stateManager.add(exeResult.a2);
+        }
+
+    }
+    private boolean hasLoop(ExecutedRoute executedRoute){
+        HashSet<BasicBlock> basicBlockHashSet = new HashSet<>();
+        for (BasicBlock bb: executedRoute.route){
+            if(basicBlockHashSet.contains(bb)){
+                return true;
+            }
+            else {
+                basicBlockHashSet.add(bb);
+            }
+        }
+        return false;
+    }
 
 
     public void genGraphViz(String outPutDir) {
         String graphVizFilename = outPutDir + "Graph_debug" + ".dot";
-        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output。txt文件
+        File writename = new File(graphVizFilename); // 相对路径，如果没有则要建立一个新的output.txt文件
         try {
             writename.createNewFile();
 

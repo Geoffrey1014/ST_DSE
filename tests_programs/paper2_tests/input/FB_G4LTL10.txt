@@ -1,0 +1,1193 @@
+
+PROGRAM FB_G4LTL10
+
+   (* Variable definition *)
+   VAR_INPUT
+      x_0	: BOOL;
+      x_1	: BOOL;
+      x_2	: BOOL;
+      x_3	: BOOL;
+      x_10	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      y_0	: BOOL;
+      y_1	: BOOL;
+      y_2	: BOOL;
+      y_3	: BOOL;
+   END_VAR
+   VAR
+   (* Control logic for y_0, y_1; the total number of states equals to 13 *)
+      cstate23	: INT := 0;
+   (* Control logic for y_2, y_3; the total number of states equals to 37 *)
+      cstate64	: INT := 0;  
+	  
+      treset0	: BOOL;
+      tup0	: BOOL;
+      tstart0	: BOOL;
+	  count0 : INT := 0;
+	  q_0 : BOOL;
+
+      treset1	: BOOL;
+      tup1	: BOOL;
+      tstart1	: BOOL;
+	  count1 : INT := 0;
+	  q_1 : BOOL;
+	  
+      TVALUE0	: INT := 3;
+      TVALUE1	: INT := 6;	  
+   END_VAR
+
+   (* Constant definition  *)
+
+    (* Control logic for y_0, y_1*)
+IF cstate23 = 262 THEN
+    IF ((x_0) AND  (NOT x_1) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 20; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 265; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 262; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 260; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 669 THEN
+    IF ((x_0) AND  (NOT x_1) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 260; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 265; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 20; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 262; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 669; y_0 := TRUE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 260 THEN
+    IF ((x_0) AND  (NOT x_1) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (x_10)) OR ((NOT x_0) AND  (x_2)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 260; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 265; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 262; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 669; y_0 := TRUE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 18 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 257; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 24 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 257; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 279; y_0 := TRUE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 25 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 27 THEN
+    IF ((x_0) AND  (NOT x_1) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 20; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 265; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 27; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 260; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 20 THEN
+    IF ((x_0) AND  (NOT x_1) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1)) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 265; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 262; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 260; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 0 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) OR ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 279 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 257; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 279; y_0 := TRUE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 31 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := TRUE; y_1 := FALSE;  
+    END_IF;
+ELSIF cstate23 = 257 THEN
+    IF ((x_0) AND  (x_10)) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_10)) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 31; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 25; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 18; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (NOT x_10)) THEN 
+        cstate23 := 257; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 24; y_0 := FALSE; y_1 := TRUE;  
+    END_IF;
+ELSIF cstate23 = 265 THEN
+    IF ((x_0) AND  (NOT x_1) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((x_0) AND  (x_1) AND  (x_2) ) THEN 
+        cstate23 := 27; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (NOT x_2) AND  (x_10)) OR ((NOT x_0) AND  (x_1) AND  (x_2) ) THEN 
+        cstate23 := 20; y_0 := FALSE; y_1 := FALSE;  
+    ELSIF ((NOT x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 260; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((x_0) AND  (NOT x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 265; y_0 := FALSE; y_1 := TRUE;  
+    ELSIF ((NOT x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 20; y_0 := TRUE; y_1 := FALSE;  
+    ELSIF ((x_0) AND  (NOT x_1) AND  (x_2) AND  (NOT x_10)) THEN 
+        cstate23 := 27; y_0 := TRUE; y_1 := FALSE;  
+    END_IF;
+END_IF;
+
+
+ (* Control logic *)
+IF cstate64 = 19 THEN
+    IF ((NOT x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) ) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 83; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 35 THEN
+    IF ((NOT x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 83; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2)  AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 36 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 87; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 33 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) ) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 81; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 34 THEN
+    IF ((NOT x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 83; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 82; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 81; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 37 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 41; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 90; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 81; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 20 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2)  AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 87; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 41 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 41; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 90; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 107 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 107; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 91; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 87; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 40 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 44; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 91; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 87; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 81; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 106 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 106; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 90; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 82 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 99; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 83; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 65 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 83 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 99; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 83; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 81 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 86 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 106; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 90; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 99 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 99; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 83; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 87 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 107; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 91; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 100 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 87; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 84 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 67 THEN
+    IF ((NOT x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 66 THEN
+    IF ((NOT x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 69 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 41; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 73; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 68 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 44 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 44; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 91; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := TRUE; tup0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 87; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 86; y_2 := TRUE; y_3 := TRUE; tstart0 := TRUE; tup0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 91 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 107; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 91; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 90 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 106; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 100; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 90; y_2 := TRUE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 84; y_2 := TRUE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 0 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 51 THEN
+    IF ((NOT x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 19; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 51; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 52 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((NOT x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 20; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) OR ((x_2) AND  (x_10) AND  (NOT q_0)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 52; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 72 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 44; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 76; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 73 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 41; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 73; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+ELSIF cstate64 = 76 THEN
+    IF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 44; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 40; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 37; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 35; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 36; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 34; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((NOT x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 33; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 76; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 72; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (NOT x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 69; y_2 := FALSE; y_3 := TRUE; tstart0 := FALSE;tstart1 := TRUE; tup1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 67; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  (NOT q_0) AND  ( q_1)) THEN 
+        cstate64 := 68; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  (NOT q_1)) THEN 
+        cstate64 := 66; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    ELSIF ((x_2) AND  (x_10) AND  ( q_0) AND  ( q_1)) THEN 
+        cstate64 := 65; y_2 := FALSE; y_3 := FALSE; tstart0 := FALSE;tstart1 := FALSE; 
+    END_IF;
+END_IF;
+
+(* Additional processing to handle clocks - in CODESYS, it only starts
+    with rising edge and can not be placed inside IF statement *) 
+IF(tup0) THEN
+    treset0 := TRUE;
+ELSIF(tstart0 AND (NOT tup0)) THEN
+    tup0 := TRUE;  treset0 := FALSE;
+END_IF;
+IF(treset0) THEN
+	count0 := TVALUE0;
+	IF(count0=TVALUE0) THEN
+		q_0 := TRUE;(*第一个周期赋值成功*)
+
+	END_IF;
+ELSE
+	q_0 := FALSE;	
+	count0 := 0;
+END_IF;
+
+IF(tup1) THEN
+    treset1 := TRUE;
+ELSIF(tstart1 AND (NOT tup1)) THEN
+    tup1 := TRUE;  treset1 := FALSE;
+END_IF;
+IF(treset1) THEN
+	IF(count1=TVALUE1) THEN
+		q_1 := TRUE;(*第二个周期赋值成功*)
+		
+	ELSE
+		(*count1 := TVALUE1;	 *)
+		count1 := count1 + TVALUE0;
+	END_IF;
+ELSE
+	q_1 := FALSE;	
+	count1 := 0;
+END_IF;
+
+
+END_PROGRAM
+  

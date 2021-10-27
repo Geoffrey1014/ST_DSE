@@ -1,0 +1,29 @@
+
+PROGRAM Responder1
+
+   (* Variable definition *)
+   VAR_INPUT
+      req1	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      grant_1	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 1 *)
+      cstate12	: INT := 0;
+   END_VAR
+
+   (* Control logic *)
+IF cstate12 = 0 THEN
+    IF ((NOT req1)) THEN 
+        cstate12 := 0;
+        grant_1 := FALSE;
+    ELSE 
+        cstate12 := 0;
+        grant_1 := TRUE;
+    END_IF;
+END_IF;
+
+END_PROGRAM
+
+

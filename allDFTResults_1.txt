@@ -1,207 +1,57 @@
 
 
------ tests_programs/paper1_tests/input/01_UPPAAL_LLATCH1_I.txt ---------branch states: 4
-consumed time: 15
-countInit: 2
-succTestedDu: 12
-countedDu: 13
-totalDu: 13
-dft: 0.9230769
+----- tests_programs/paper1_tests/input/01_UPPAAL_LLATCH1_I.txt ---------
 
+----- tests_programs/paper1_tests/input/02_UPPAAL_FAN_CONTROL.txt ---------
 
------ tests_programs/paper1_tests/input/02_UPPAAL_FAN_CONTROL.txt ---------branch states: 7
-consumed time: 63
-countInit: 21
-succTestedDu: 42
-countedDu: 43
-totalDu: 43
-dft: 0.9767442
+----- tests_programs/paper1_tests/input/03_NumericalLTLRefined.txt ---------
 
+----- tests_programs/paper1_tests/input/04_SimpleConveyorBelt.txt ---------
 
------ tests_programs/paper1_tests/input/03_NumericalLTLRefined.txt ---------branch states: 42
-consumed time: 49
-countInit: 7
-succTestedDu: 30
-countedDu: 134
-totalDu: 134
-dft: 0.2238806
+----- tests_programs/paper1_tests/input/05_HydraulicRamp.txt ---------
 
+----- tests_programs/paper1_tests/input/06_ArbitorLTL.txt ---------
 
------ tests_programs/paper1_tests/input/04_SimpleConveyorBelt.txt ---------branch states: 60
-consumed time: 98
-countInit: 11
-succTestedDu: 46
-countedDu: 399
-totalDu: 399
-dft: 0.11528822
+----- tests_programs/paper1_tests/input/07_PriorityArbitorLTL.txt ---------
 
+----- tests_programs/paper1_tests/input/EmergenceyStop.txt ---------
 
------ tests_programs/paper1_tests/input/05_HydraulicRamp.txt ---------branch states: 64
-consumed time: 193
-countInit: 8
-succTestedDu: 69
-countedDu: 417
-totalDu: 417
-dft: 0.16546762
+----- tests_programs/paper1_tests/input/FB_G4LTL1.txt ---------
 
+----- tests_programs/paper1_tests/input/FB_G4LTL11.txt ---------
 
------ tests_programs/paper1_tests/input/06_ArbitorLTL.txt ---------branch states: 51
-consumed time: 405
-countInit: 18
-succTestedDu: 58
-countedDu: 470
-totalDu: 470
-dft: 0.12340426
+----- tests_programs/paper1_tests/input/FB_G4LTL2.txt ---------
 
+----- tests_programs/paper1_tests/input/FB_G4LTL3.txt ---------
 
------ tests_programs/paper1_tests/input/07_PriorityArbitorLTL.txt ---------branch states: 79
-consumed time: 1423
-countInit: 21
-succTestedDu: 131
-countedDu: 1252
-totalDu: 1252
-dft: 0.104632586
+----- tests_programs/paper1_tests/input/FB_G4LTL4.txt ---------
 
+----- tests_programs/paper1_tests/input/FB_G4LTL5.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL1.txt ---------branch states: 6
-consumed time: 7
-countInit: 3
-succTestedDu: 14
-countedDu: 14
-totalDu: 14
-dft: 1.0
+----- tests_programs/paper1_tests/input/FB_G4LTL6.txt ---------
 
+----- tests_programs/paper1_tests/input/FB_G4LTL7.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL11.txt ---------branch states: 42
-consumed time: 20
-countInit: 8
-succTestedDu: 28
-countedDu: 127
-totalDu: 127
-dft: 0.22047244
+----- tests_programs/paper1_tests/input/FB_G4LTL8.txt ---------
 
+----- tests_programs/paper1_tests/input/GaMonitoring.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL2.txt ---------branch states: 6
-consumed time: 8
-countInit: 3
-succTestedDu: 15
-countedDu: 17
-totalDu: 17
-dft: 0.88235295
+----- tests_programs/paper1_tests/input/MotionControl.txt ---------
 
+----- tests_programs/paper1_tests/input/Responder1.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL3.txt ---------branch states: 92
-consumed time: 354
-countInit: 14
-succTestedDu: 76
-countedDu: 1250
-totalDu: 1250
-dft: 0.0608
+----- tests_programs/paper1_tests/input/Responder2.txt ---------
 
+----- tests_programs/paper1_tests/input/Responder3.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL4.txt ---------branch states: 26
-consumed time: 20
-countInit: 6
-succTestedDu: 41
-countedDu: 53
-totalDu: 53
-dft: 0.7735849
+----- tests_programs/paper1_tests/input/SaftyRequest.txt ---------
 
+----- tests_programs/paper1_tests/input/counter.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL5.txt ---------branch states: 49
-consumed time: 416
-countInit: 13
-succTestedDu: 63
-countedDu: 313
-totalDu: 313
-dft: 0.20127796
+----- tests_programs/paper1_tests/input/example.txt ---------
 
+----- tests_programs/paper1_tests/input/example2.txt ---------
 
------ tests_programs/paper1_tests/input/FB_G4LTL6.txt ---------branch states: 45
-consumed time: 120
-countInit: 37
-succTestedDu: 52
-countedDu: 385
-totalDu: 385
-dft: 0.13506493
+----- tests_programs/paper1_tests/input/example4.txt ---------
 
-
------ tests_programs/paper1_tests/input/FB_G4LTL7.txt ---------branch states: 52
-consumed time: 265
-countInit: 38
-succTestedDu: 63
-countedDu: 399
-totalDu: 399
-dft: 0.15789473
-
-
------ tests_programs/paper1_tests/input/FB_G4LTL8.txt ---------branch states: 50
-consumed time: 5837
-countInit: 124
-succTestedDu: 168
-countedDu: 2284
-totalDu: 2284
-dft: 0.073555164
-
-
------ tests_programs/paper1_tests/input/Responder1.txt ---------branch states: 3
-consumed time: 6
-countInit: 3
-succTestedDu: 10
-countedDu: 10
-totalDu: 10
-dft: 1.0
-
-
------ tests_programs/paper1_tests/input/Responder2.txt ---------branch states: 51
-consumed time: 236
-countInit: 18
-succTestedDu: 57
-countedDu: 464
-totalDu: 464
-dft: 0.12284483
-
-
------ tests_programs/paper1_tests/input/counter.txt ---------branch states: 3
-consumed time: 1
-countInit: 3
-succTestedDu: 13
-countedDu: 13
-totalDu: 13
-dft: 1.0
-
-
------ tests_programs/paper1_tests/input/example.txt ---------branch states: 12
-consumed time: 11
-countInit: 7
-succTestedDu: 15
-countedDu: 32
-totalDu: 32
-dft: 0.46875
-
-
------ tests_programs/paper1_tests/input/example2.txt ---------branch states: 5
-consumed time: 8
-countInit: 2
-succTestedDu: 15
-countedDu: 16
-totalDu: 16
-dft: 0.9375
-
-
------ tests_programs/paper1_tests/input/factor.txt ---------branch states: 4
-consumed time: 9
-countInit: 1
-succTestedDu: 16
-countedDu: 16
-totalDu: 16
-dft: 1.0
-
-
------ tests_programs/paper1_tests/input/power.txt ---------branch states: 6
-consumed time: 26
-countInit: 2
-succTestedDu: 27
-countedDu: 28
-totalDu: 28
-dft: 0.96428573
+----- tests_programs/paper1_tests/input/power.txt ---------

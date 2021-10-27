@@ -1,0 +1,24 @@
+use: RES @ L18 @ FOR_L12
+defs: L4 @ Body, L19 @ FOR_L12, 
+
+use: EXP @ L27 @ End
+defs: L13 @ ELSE_L6, L21 @ FOR_L12, L0 @ Init, 
+
+use: X @ L13 @ ELSE_L6
+defs: L28 @ Read, 
+
+use: EXP @ L18 @ FOR_L12
+defs: L13 @ ELSE_L6, L21 @ FOR_L12, 
+
+use: EXP @ L21 @ FOR_L12
+defs: L13 @ ELSE_L6, L21 @ FOR_L12, 
+
+use: X @ L8 @ Body
+defs: L28 @ Read, 
+
+use: RES @ L26 @ End
+defs: L4 @ Body, L25 @ IF_L5, L19 @ FOR_L12, 
+
+use: EXP @ L15 @ FOR_COND_L11
+defs: L13 @ ELSE_L6, L21 @ FOR_L12, 
+

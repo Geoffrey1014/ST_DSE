@@ -1,0 +1,25 @@
+MC_test1: {x0=false, x1=true}{x0=true, x1=false}
+MC_test2: {x0=false, x1=true}{x0=false, x1=true}
+MC_test3: {x0=false, x1=true}{x0=true, x1=true}
+MC_test4: {x0=false, x1=true}{x0=false, x1=false}
+MC_test5: {x0=false, x1=true}{x0=true, x1=false}
+MC_test6: {x0=false, x1=true}{x0=false, x1=true}
+MC_test7: {x0=false, x1=true}{x0=true, x1=true}
+MC_test8: {x0=false, x1=true}{x0=false, x1=false}
+MC_test9: {x0=false, x1=false}
+MC_test10: {x0=false, x1=true}{x0=true, x1=false}
+MC_test11: {x0=false, x1=true}{x0=false, x1=true}
+MC_test12: {x0=false, x1=true}{x0=true, x1=true}
+MC_test13: {x0=false, x1=true}{x0=false, x1=false}
+MC_test14: {x0=true, x1=true}{x0=true, x1=false}
+MC_test15: {x0=false, x1=false}
+MC_test16: {x0=false, x1=true}{x0=true, x1=false}
+MC_test17: {x0=false, x1=true}{x0=false, x1=true}
+MC_test18: {x0=true, x1=false}{x0=false, x1=true}
+MC_test19: {x0=false, x1=true}{x0=true, x1=true}
+MC_test20: {x0=true, x1=false}{x0=true, x1=false}
+MC_test21: {x0=false, x1=true}{x0=false, x1=false}
+MC_test22: {x0=true, x1=false}{x0=false, x1=false}
+MC_test23: {x0=true, x1=false}{x0=true, x1=true}
+MC_test24: {x0=true, x1=true}{x0=true, x1=false}
+MC_test25: {x0=false, x1=false}

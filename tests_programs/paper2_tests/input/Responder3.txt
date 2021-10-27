@@ -1,0 +1,669 @@
+
+PROGRAM Responder3
+
+   (* Variable definition *)
+   VAR_INPUT
+      req1	: BOOL;
+      req2	: BOOL;
+      req3	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      grant_1	: BOOL;
+      grant_2	: BOOL;
+      grant_3	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 50 *)
+      cstate70	: INT := 0;
+   END_VAR
+
+    (* Control logic *)
+IF cstate70 = 44 THEN
+     
+        cstate70 := 6;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    
+ELSIF cstate70 = 45 THEN
+    
+        cstate70 := 31;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    
+ELSIF cstate70 = 46 THEN
+     
+        cstate70 := 31;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    
+ELSIF cstate70 = 47 THEN
+    
+        cstate70 := 19;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    
+ELSIF cstate70 = 48 THEN
+    
+        cstate70 := 21;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    
+ELSIF cstate70 = 49 THEN
+     
+        cstate70 := 21;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    
+ELSIF cstate70 = 10 THEN
+    IF ((NOT req1)) THEN 
+        cstate70 := 11;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    ELSIF (( req1)) THEN 
+        cstate70 := 13;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 11 THEN
+    IF ((NOT req1) AND  ( req3)) THEN 
+        cstate70 := 22;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF (( req1) AND  ( req3)) THEN 
+        cstate70 := 3;
+         grant_1 := FALSE;
+          grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  (NOT req3)) THEN 
+        cstate70 := 17;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF (( req1) AND  (NOT req3)) THEN 
+        cstate70 := 14;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 12 THEN
+    IF ((NOT req1) AND  ( req2)) THEN 
+        cstate70 := 25;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req1) AND  (NOT req2)) THEN 
+        cstate70 := 23;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  (NOT req2) ) THEN 
+        cstate70 := 28;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req1) AND  ( req2) ) THEN 
+        cstate70 := 49;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 13 THEN
+    IF ( req3) THEN 
+        cstate70 := 38;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 6;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 14 THEN
+    IF ( (NOT req3)) THEN 
+        cstate70 := 24;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    ELSIF ( req3) THEN 
+        cstate70 := 34;
+        grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 15 THEN
+    IF ( req1) THEN 
+        cstate70 := 16;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE 
+        cstate70 := 43;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 16 THEN
+    
+        cstate70 := 41;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    
+ELSIF cstate70 = 17 THEN
+    IF (( req1) AND  (NOT req3)) THEN 
+        cstate70 := 18;
+         grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  ( req3)) THEN 
+        cstate70 := 12;
+         grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  (NOT req3)) THEN 
+        cstate70 := 0;
+        grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    ELSIF (( req1) AND  ( req3)) THEN 
+        cstate70 := 35;
+        grant_1 := FALSE;
+         grant_2 := TRUE;
+          grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 18 THEN
+    IF ( ( req2) AND  (NOT req3)) THEN 
+        cstate70 := 40;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF (( req2) AND  ( req3)) THEN 
+        cstate70 := 46;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF ( (NOT req2) AND  (NOT req3)) THEN 
+        cstate70 := 24;
+         grant_1 := FALSE;
+          grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSIF ( (NOT req2) AND  ( req3)) THEN 
+        cstate70 := 34;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 19 THEN
+    IF ( req1) THEN 
+        cstate70 := 14;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+	ELSE
+        cstate70 := 17;
+         grant_1 := FALSE;
+          grant_2 := FALSE;
+          grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 0 THEN
+    IF ((NOT req1) AND  (NOT req2) AND  (NOT req3)) THEN 
+        cstate70 := 0;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  ( req2) AND  ( req3)) THEN 
+        cstate70 := 1;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req1) AND  (NOT req2) AND  (NOT req3)) THEN 
+        cstate70 := 18;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req1) AND  ( req2) AND  (NOT req3)) THEN 
+        cstate70 := 39;
+         grant_1 := FALSE;
+          grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  (NOT req2) AND  ( req3)) THEN 
+        cstate70 := 12;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF (( req1) AND  ( req2) AND  ( req3)) THEN 
+        cstate70 := 20;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  ( req2) AND  (NOT req3)) THEN 
+        cstate70 := 26;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF (( req1) AND  (NOT req2) AND  ( req3)) THEN 
+        cstate70 := 35;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 1 THEN
+    IF ( req1) THEN 
+        cstate70 := 2;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSE 
+        cstate70 := 19;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 2 THEN
+    
+        cstate70 := 6;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := TRUE;
+    
+ELSIF cstate70 = 3 THEN
+     
+        cstate70 := 4;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    
+ELSIF cstate70 = 4 THEN
+    IF ( req2) THEN 
+        cstate70 := 32;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := TRUE;
+    ELSE 
+        cstate70 := 9;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 5 THEN
+     
+        cstate70 := 6;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := TRUE;
+    
+ELSIF cstate70 = 6 THEN
+    IF ( req3) THEN 
+        cstate70 := 30;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 9;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 7 THEN
+    
+        cstate70 := 8;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+   
+ELSIF cstate70 = 8 THEN
+    IF ( req1) THEN 
+        cstate70 := 14;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := TRUE;
+    ELSE
+        cstate70 := 17;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 9 THEN
+    IF (( req2) AND  ( req3)) THEN 
+        cstate70 := 1;
+         grant_1 := TRUE;
+          grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSIF (  (NOT req2) AND  ( req3)) THEN 
+        cstate70 := 12;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF ( (NOT req2) AND  (NOT req3)) THEN 
+        cstate70 := 0;
+        grant_1 := TRUE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF ( ( req2) AND  (NOT req3)) THEN 
+        cstate70 := 26;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 20 THEN
+    
+        cstate70 := 21;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    
+ELSIF cstate70 = 21 THEN
+    IF ( req3) THEN 
+        cstate70 := 30;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    ELSE 
+        cstate70 := 9;
+         grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 22 THEN
+    IF (( req1)) THEN 
+        cstate70 := 23;
+        grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    ELSE
+        cstate70 := 28;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 23 THEN
+    IF (req2 ) THEN 
+		cstate70 := 45;
+		grant_1 := FALSE;
+		 grant_2 := FALSE;
+		  grant_3 := FALSE;
+        
+    ELSE
+        cstate70 := 41;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 24 THEN
+    IF ( ( req2) AND  (NOT req3)) THEN 
+        cstate70 := 32;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF ( (NOT req2) AND  (NOT req3)) THEN 
+        cstate70 := 9;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF ( (NOT req2) AND  ( req3)) THEN 
+        cstate70 := 30;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req2) AND  ( req3)) THEN 
+        cstate70 := 47;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 25 THEN
+    IF (req1) THEN 
+        cstate70 := 44;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 8;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 26 THEN
+    IF ((NOT req1) AND  (NOT req3)) THEN 
+        cstate70 := 11;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req1)  AND  ( req3)) THEN 
+        cstate70 := 5;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  ( req3)) THEN 
+        cstate70 := 15;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSIF (( req1) AND  (NOT req3)) THEN 
+        cstate70 := 13;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 27 THEN
+    IF ((NOT req1) AND  ( req2)) THEN 
+        cstate70 := 26;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    ELSIF (( req1) AND  (NOT req2) ) THEN 
+        cstate70 := 18;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := TRUE;
+    ELSIF ((NOT req1) AND  (NOT req2) ) THEN 
+        cstate70 := 0;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    ELSIF (( req1) AND  ( req2) ) THEN 
+        cstate70 := 39;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 28 THEN
+    IF (( req1) AND  (NOT req2) ) THEN 
+        cstate70 := 29;
+         grant_1 := FALSE;
+          grant_2 := FALSE;
+           grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  ( req2)) THEN 
+        cstate70 := 10;
+         grant_1 := FALSE;
+          grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSIF ((NOT req1) AND  (NOT req2) ) THEN 
+        cstate70 := 27;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSIF (( req1) AND  ( req2) ) THEN 
+        cstate70 := 48;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 29 THEN
+    IF (req2 ) THEN 
+        cstate70 := 40;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    ELSE
+        cstate70 := 24;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 30 THEN
+    IF (req2) THEN 
+        cstate70 := 25;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 28;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 31 THEN
+    IF ( req3) THEN 
+        cstate70 := 22;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 17;
+         grant_1 := TRUE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 32 THEN
+    IF ( req3) THEN 
+        cstate70 := 15;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    ELSE
+
+        cstate70 := 11;
+         grant_1 := TRUE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 33 THEN
+    IF ( req2) THEN 
+        cstate70 := 10;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 27;
+        grant_1 := TRUE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 34 THEN
+    IF (req2) THEN 
+        cstate70 := 7;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := FALSE;
+    ELSE
+        cstate70 := 33;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 35 THEN
+    IF (req2) THEN 
+        cstate70 := 37;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+
+         grant_3 := FALSE;
+    ELSE
+        cstate70 := 4;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 36 THEN
+    
+        cstate70 := 33;
+        grant_1 := FALSE;
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    
+ELSIF cstate70 = 37 THEN
+    
+        cstate70 := 31;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := TRUE;
+    
+ELSIF cstate70 = 38 THEN
+    
+        cstate70 := 33;
+        grant_1 := FALSE;
+         grant_2 := TRUE;
+         grant_3 := FALSE;
+    
+ELSIF cstate70 = 39 THEN
+    IF (req3) THEN 
+        cstate70 := 36;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSE
+        cstate70 := 21;
+        grant_1 := FALSE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 40 THEN
+    IF (req3) THEN 
+         cstate70 := 42;
+          grant_1 := FALSE;
+          grant_2 := FALSE;
+          grant_3 := FALSE;
+    ELSE
+        
+		 cstate70 := 31;
+		 grant_1 := FALSE;
+		  grant_2 := FALSE;
+		  grant_3 := FALSE;
+    END_IF;
+ELSIF cstate70 = 41 THEN
+    IF (req2) THEN 
+        cstate70 := 32;
+         grant_1 := FALSE;
+         grant_2 := FALSE;
+          grant_3 := TRUE;
+    ELSE
+        cstate70 := 9;
+        grant_1 := FALSE;
+        grant_2 := FALSE;
+        grant_3 := TRUE;
+    END_IF;
+ELSIF cstate70 = 42 THEN
+    
+        cstate70 := 43;
+        grant_1 := TRUE;
+         grant_2 := FALSE;
+         grant_3 := FALSE;
+    
+ELSIF cstate70 = 43 THEN
+    IF (( req1)) THEN 
+        cstate70 := 29;
+        grant_1 := FALSE;
+         grant_2 := TRUE;
+          grant_3 := FALSE;
+    ELSE
+        cstate70 := 27;
+        grant_1 := FALSE;
+
+        grant_2 := TRUE;
+        grant_3 := FALSE;
+    END_IF;
+END_IF;
+END_PROGRAM
+
+

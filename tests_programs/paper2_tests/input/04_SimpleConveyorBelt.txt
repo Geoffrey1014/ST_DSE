@@ -1,0 +1,176 @@
+
+PROGRAM SimpleConveyorBelt
+
+
+(* Variable definition *)
+   VAR_INPUT
+      s_1	: BOOL;
+      s_2	: BOOL;
+      s_3	: BOOL;
+   END_VAR
+   VAR_OUTPUT
+      k_1	: BOOL;
+      k_2	: BOOL;
+      error_1	: BOOL;
+   END_VAR
+   VAR
+   (* The total number of states equals to 7 *)
+      cstate11	: INT := 0;
+   END_VAR
+   
+
+   (* Control logic *)
+IF cstate11 = 0 THEN
+    IF ((NOT s_1) AND  (NOT s_2)) THEN 
+        cstate11 := 5;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((s_1) AND  (s_2)) THEN
+        cstate11 := 6;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := TRUE;
+    ELSIF ((NOT s_1) AND  (s_2) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) THEN
+        cstate11 := 3;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3)) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3)) THEN
+        cstate11 := 3;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := TRUE;
+    END_IF;
+ELSIF cstate11 = 1 THEN
+    IF ((NOT s_1) AND  (s_2) AND  (NOT s_3)) THEN
+        cstate11 := 2;
+        k_1 := FALSE;
+        k_2 := TRUE;
+        error_1 := FALSE;
+    ELSIF ((s_1) AND  (s_2) ) THEN
+        cstate11 := 6;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := TRUE;
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3)) THEN
+        cstate11 := 4;
+        k_1 := TRUE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (NOT s_2)) OR ((NOT s_1) AND  (s_2) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) THEN
+        cstate11 := 1;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    END_IF;
+ELSIF cstate11 = 2 THEN
+    IF ((s_1) AND  (NOT s_2) AND  (NOT s_3)) THEN
+        cstate11 := 4;
+        k_1 := TRUE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) THEN
+        cstate11 := 1;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (NOT s_3)) THEN
+        cstate11 := 2;
+        k_1 := FALSE;
+        k_2 := TRUE;
+        error_1 := FALSE;
+    ELSIF ((s_1) AND  (s_2)) THEN
+        cstate11 := 6;
+        k_1 := FALSE;
+        k_2 := FALSE;
+         error_1 := TRUE;
+    END_IF;
+ELSIF cstate11 = 3 THEN
+    IF ((NOT s_1) AND  (s_2) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) THEN
+        cstate11 := 3;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (s_2) AND  (NOT s_3)) OR ((s_1) AND  (NOT s_2) AND  (NOT s_3)) THEN
+        cstate11 := 3;
+         k_1 := FALSE;
+         k_2 := FALSE;
+         error_1 := TRUE;
+    ELSIF ((s_1) AND  (s_2)) THEN
+        cstate11 := 6;
+         k_1 := FALSE;
+         k_2 := FALSE;
+         error_1 := TRUE;
+    ELSIF ((NOT s_1) AND  (NOT s_2) ) THEN
+        cstate11 := 1;
+        k_1 := FALSE;
+        k_2 := FALSE;
+         error_1 := FALSE;
+    END_IF;
+ELSIF cstate11 = 4 THEN
+    IF ((NOT s_1) AND  (s_2) AND  (NOT s_3)) THEN
+        cstate11 := 2;
+        k_1 := FALSE;
+        k_2 := TRUE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) THEN
+        cstate11 := 1;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_2) AND  (NOT s_3)) THEN
+        cstate11 := 4;
+        k_1 := TRUE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((s_1) AND  (s_2)) THEN
+        cstate11 := 6;
+         k_1 := FALSE;
+         k_2 := FALSE;
+         error_1 := TRUE;
+    END_IF;
+ELSIF cstate11 = 5 THEN
+    IF ((NOT s_1) AND  (s_2) AND  (NOT s_3)) THEN
+        cstate11 := 2;
+        k_1 := FALSE;
+        k_2 := TRUE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (s_2) AND  (s_3)) OR ((s_1) AND  (NOT s_2) AND  (s_3)) THEN
+        cstate11 := 1;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((NOT s_1) AND  (NOT s_2) ) THEN
+        cstate11 := 5;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((s_1) AND  (NOT s_2) AND  (NOT s_3)) THEN
+        cstate11 := 4;
+        k_1 := TRUE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    ELSIF ((s_1) AND  (s_2)) THEN
+        cstate11 := 6;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := TRUE;
+    END_IF;
+ELSIF cstate11 = 6 THEN
+    IF ((NOT s_1) AND  (s_2) ) OR ((s_1)) THEN
+        cstate11 := 6;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := TRUE;
+    ELSIF ((NOT s_1) AND  (NOT s_2)) THEN
+        cstate11 := 1;
+        k_1 := FALSE;
+        k_2 := FALSE;
+        error_1 := FALSE;
+    END_IF;
+END_IF;
+
+END_PROGRAM
+
+

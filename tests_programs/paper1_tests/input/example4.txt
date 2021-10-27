@@ -1,0 +1,28 @@
+PROGRAM program0
+  VAR_INPUT
+    X : INT ;
+  END_VAR
+  VAR_OUTPUT
+    Q : BOOL := FALSE ;
+  END_VAR
+  VAR
+    V : INT := 0;
+  END_VAR
+
+IF V = 0 THEN
+	IF X = 3 THEN
+		V := 2;
+		Q := TRUE;
+	ELSIF X = 4 THEN
+		V := 0;
+		Q := FALSE;
+	END_IF;
+ELSIF V = 2 THEN
+	WHILE V < X DO
+		V := V + 1;
+	END_WHILE;
+	Q := TRUE;
+ELSIF V = 4 THEN
+	Q := FALSE;
+END_IF;
+END_PROGRAM
