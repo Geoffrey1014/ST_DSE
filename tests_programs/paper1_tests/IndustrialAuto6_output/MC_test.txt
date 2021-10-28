@@ -1,0 +1,8 @@
+MC_test1 : {x_1=true}{x_1=false}{x_1=true}{x_1=false}{x_1=false}{x_1=true}
+MC_test2 : {x_1=false}{x_1=true}
+MC_test3 : {x_1=true}{x_1=false}{x_1=true}{x_1=false}{x_1=true}
+MC_test4 : {x_1=true}{x_1=false}{x_1=false}{x_1=false}{x_1=true}
+MC_test5 : {x_1=false}{x_1=false}
+MC_test6 : {x_1=true}{x_1=true}
+MC_test7 : {x_1=true}{x_1=false}{x_1=true}{x_1=true}{x_1=false}
+MC_test8 : {x_1=true}{x_1=false}{x_1=false}{x_1=false}{x_1=false}

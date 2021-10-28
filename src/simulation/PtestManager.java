@@ -37,7 +37,7 @@ public class PtestManager {
             LinkedList<PtestWithState> ptestWithStateLinkedListCopy = (LinkedList<PtestWithState>) ptestWithStateLinkedList.clone();
             for(PtestWithState ptestWithState: ptestWithStateLinkedList){
                 if(ptestWithState.nextPtestWithStates.size() == 0){
-                    if(!ptestWithState.improveCoverage){
+                    if(!ptestWithState.improveCoverage && ptestWithState.fatherPtestWithStates != null){
                         ptestWithState.fatherPtestWithStates.nextPtestWithStates.remove(ptestWithState);
                         ptestWithStateLinkedListCopy.remove(ptestWithState);
                         changed = true;
@@ -49,23 +49,27 @@ public class PtestManager {
     }
 
     public String generatedMCtest(){
-        String s = "";
-        int count = 1;
+        HashSet<String> mc_tests = new HashSet<>();
         for(PtestWithState root : roots){
             travelTree(root);
 
             for(List<PtestWithState> path : pathMap.values()){
-                s += "MC_test" + count + ": ";
+                String s = "";
                 for(PtestWithState ptestWithState : path){
 
                     s += ptestWithState.Ptest.toString();
                 }
-                count ++;
+                mc_tests.add(s);
 
-                s += "\n";
             }
         }
-        return s;
+        StringBuilder result = new StringBuilder();
+        Iterator<String> itr = mc_tests.iterator();
+        int i = 1;
+        while(itr.hasNext()){
+            result.append("MC_test").append(i++).append(" : ").append(itr.next()).append("\n");
+        }
+        return result.toString();
     }
 
     private void travelTree(PtestWithState root){

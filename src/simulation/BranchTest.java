@@ -89,7 +89,7 @@ public class BranchTest extends CoverageTest{
             oldConMenory = stateManager.popLeft();
             oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
             branchCoverage = branchManager.coverageRate();
-            if (branchCoverage > 0.99 || counter > 40) break;
+            if (branchCoverage > 0.99 || counter > 500) break;
 //            genGraphViz("");
         }
         Double oldData = 0.0D;
@@ -124,7 +124,7 @@ public class BranchTest extends CoverageTest{
 
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
         inputsWorkList.add(inputs);
-//        System.out.println("\ncalculatedInputs:\n"+inputs);
+        createRandomInputs(inputsWorkList);
         int counter = 0;
         while (inputsWorkList.size() > 0) {
 //            System.out.println("--inputs: " + counter++);
@@ -166,6 +166,12 @@ public class BranchTest extends CoverageTest{
 
     }
 
+    private void createRandomInputs(LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList){
+        for(int i=0 ; i < 10; i++){
+            HashMap<LlLocation, ValueOfDiffType> input = this.concreteExecutor.createRandomInputs();
+            inputsWorkList.add(input);
+        }
+    }
     private void useCPP(ConMemory startConMenory){
         for(int i=0 ; i < 5; i++){
             HashMap<LlLocation, ValueOfDiffType> input = this.concreteExecutor.createRandomInputs();

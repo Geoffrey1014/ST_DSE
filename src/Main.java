@@ -132,7 +132,7 @@ public class Main {
                 //UDChain
                 ReachingDefinitionAnalysis rDAnalysis = new ReachingDefinitionAnalysis(cfg);
                 rDAnalysis.genUseDefinitionChains();
-                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + inputFileNamePrefix + "_UDChain" + cfgCounter + ".txt");
+//                writeFile(rDAnalysis.printUseDefsChains(), outPutDir + inputFileNamePrefix + "_UDChain" + cfgCounter + ".txt");
 
                 UdChainsAndDoms udChainsAndDoms = new UdChainsAndDoms(domTree, rDAnalysis.useDefsChains, dominatorsMap);
                 //calCutNodes
@@ -179,14 +179,15 @@ public class Main {
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
         String file;
-       file = "counter.txt";
+        file = "01_UPPAAL_LLATCH1_I.txt";
 
 //         file = "power.txt";
 //        file = "example.txt";
 //        file = "example4.txt";
 //        file = "example2.txt";
 //        file = "factor.txt";
-//        file = "04_SimpleConveyorBelt.txt";
+        file = "IndustrialAuto9.txt";
+//        file = "IndustrialAuto10.txt";
 //        file = "05_HydraulicRamp.txt";
 //        file = "06_ArbitorLTL.txt";
 //        file = "Responder3.txt" ;
@@ -199,7 +200,7 @@ public class Main {
         walkTree(inputDir + file, true);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-        runDirFiles(inputDir);
+//        runDirFiles(inputDir);
 
     }
 
@@ -235,6 +236,12 @@ public class Main {
                 }  else if (f.toString().equals("tests_programs/paper1_tests/input/PumpControl.txt")) {
                     continue;
                 }else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper1_tests/input/IndustrialAuto9.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper1_tests/input/IndustrialAuto10.txt")) {
                     continue;
                 }
                 else if (f.toString().equals("tests_programs/paper1_tests/input/SorterControl.txt")) {

@@ -1,0 +1,52 @@
+MC_test1 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test2 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}
+MC_test3 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test4 : {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=true, x_2=false, x_1=true, x_3=false}
+MC_test5 : {x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=true}
+MC_test6 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=true}
+MC_test7 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=true}
+MC_test8 : {x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=true}
+MC_test9 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test10 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=false, x_1=false, x_3=true}
+MC_test11 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=true, x_1=true, x_3=true}
+MC_test12 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=true, x_3=false}
+MC_test13 : {x_0=false, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test14 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=true}
+MC_test15 : {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test16 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test17 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test18 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=true, x_3=false}
+MC_test19 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test20 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test21 : {x_0=false, x_2=false, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}
+MC_test22 : {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=false, x_2=true, x_1=true, x_3=true}
+MC_test23 : {x_0=false, x_2=true, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test24 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test25 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=false, x_1=true, x_3=true}
+MC_test26 : {x_0=false, x_2=false, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=true}
+MC_test27 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=false, x_1=true, x_3=true}
+MC_test28 : {x_0=false, x_2=true, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=true}
+MC_test29 : {x_0=true, x_2=true, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}
+MC_test30 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test31 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test32 : {x_0=false, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test33 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=true}
+MC_test34 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test35 : {x_0=false, x_2=false, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test36 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test37 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=false, x_1=true, x_3=false}
+MC_test38 : {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=true}
+MC_test39 : {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=true, x_2=true, x_1=true, x_3=false}
+MC_test40 : {x_0=false, x_2=false, x_1=true, x_3=true}{x_0=false, x_2=true, x_1=true, x_3=true}
+MC_test41 : {x_0=false, x_2=true, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}
+MC_test42 : {x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=true, x_3=false}
+MC_test43 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=true, x_3=false}
+MC_test44 : {x_0=true, x_2=true, x_1=true, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=true, x_1=true, x_3=false}
+MC_test45 : {x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test46 : {x_0=false, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=true}
+MC_test47 : {x_0=true, x_2=true, x_1=true, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test48 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=false, x_1=false, x_3=false}
+MC_test49 : {x_0=false, x_2=true, x_1=false, x_3=false}
+MC_test50 : {x_0=true, x_2=true, x_1=false, x_3=false}{x_0=false, x_2=false, x_1=true, x_3=true}
+MC_test51 : {x_0=false, x_2=false, x_1=true, x_3=false}{x_0=true, x_2=false, x_1=true, x_3=true}
+MC_test52 : {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}

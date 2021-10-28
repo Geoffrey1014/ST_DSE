@@ -1,21 +1,9 @@
-MC_test1: {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=false, req1=true}
-MC_test2: {req2=true, req1=false}{req2=false, req1=false}{req2=false, req1=true}{req2=true, req1=false}
-MC_test3: {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=true, req1=false}
-MC_test4: {req2=true, req1=false}{req2=false, req1=true}{req2=true, req1=true}{req2=false, req1=true}
-MC_test5: {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=false, req1=true}
-MC_test6: {req2=false, req1=true}{req2=true, req1=true}{req2=true, req1=false}{req2=true, req1=true}
-MC_test7: {req2=true, req1=false}{req2=false, req1=false}{req2=false, req1=true}{req2=true, req1=false}
-MC_test8: {req2=false, req1=true}{req2=false, req1=false}{req2=false, req1=false}{req2=true, req1=true}
-MC_test9: {req2=false, req1=true}{req2=false, req1=false}{req2=true, req1=true}{req2=false, req1=false}
-MC_test10: {req2=false, req1=true}{req2=false, req1=false}{req2=false, req1=false}{req2=false, req1=false}
-MC_test11: {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=true, req1=false}
-MC_test12: {req2=true, req1=false}{req2=false, req1=true}{req2=true, req1=true}{req2=false, req1=true}
-MC_test13: {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=false, req1=true}
-MC_test14: {req2=false, req1=true}{req2=true, req1=true}{req2=true, req1=false}{req2=true, req1=true}
-MC_test15: {req2=true, req1=false}{req2=false, req1=false}{req2=false, req1=true}{req2=true, req1=false}
-MC_test16: {req2=false, req1=true}{req2=false, req1=false}{req2=false, req1=false}{req2=true, req1=true}
-MC_test17: {req2=false, req1=true}{req2=false, req1=false}{req2=true, req1=true}{req2=false, req1=false}
-MC_test18: {req2=false, req1=true}{req2=false, req1=false}{req2=false, req1=false}{req2=false, req1=false}
-MC_test19: {req2=false, req1=false}{req2=true, req1=true}{req2=false, req1=true}{req2=false, req1=false}
-MC_test20: {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=true, req1=false}
-MC_test21: {req2=true, req1=false}{req2=false, req1=true}{req2=true, req1=true}{req2=false, req1=true}
+MC_test1 : {req2=true, req1=false}{req2=false, req1=false}{req2=false, req1=true}{req2=true, req1=false}
+MC_test2 : {req2=false, req1=true}{req2=true, req1=true}{req2=true, req1=false}{req2=true, req1=true}
+MC_test3 : {req2=true, req1=false}{req2=false, req1=true}{req2=true, req1=true}{req2=false, req1=true}
+MC_test4 : {req2=false, req1=true}{req2=false, req1=false}{req2=false, req1=false}{req2=true, req1=true}
+MC_test5 : {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=true, req1=false}
+MC_test6 : {req2=true, req1=false}{req2=false, req1=false}{req2=true, req1=false}{req2=false, req1=true}
+MC_test7 : {req2=false, req1=false}{req2=true, req1=true}{req2=false, req1=true}{req2=false, req1=false}
+MC_test8 : {req2=false, req1=true}{req2=false, req1=false}{req2=false, req1=false}{req2=false, req1=false}
+MC_test9 : {req2=false, req1=true}{req2=false, req1=false}{req2=true, req1=true}{req2=false, req1=false}
