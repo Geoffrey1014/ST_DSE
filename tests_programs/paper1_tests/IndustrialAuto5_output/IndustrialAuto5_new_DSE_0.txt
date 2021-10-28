@@ -1,0 +1,341 @@
+CFG:
+      FB_G4LTL5 :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate55 = 0
+             L1 :  c1 = 0
+             L3 :  c1_add1 = false
+             L4 :  c1_reset = false
+             L7 :  y0 = false
+
+           Body :  EMPTY_STATEMENT
+            L11 :  #_t1 = c1 >= 10
+         CJ_L12 :  if #_t1 goto IF_L8
+
+        ELSE_L9 :  EMPTY_STATEMENT
+            L15 :  c1_geq10 = false
+        UCJ_L16 :  goto END_IF_L8
+
+          IF_L8 :  EMPTY_STATEMENT
+            L18 :  c1_geq10 = true
+
+      END_IF_L8 :  EMPTY_STATEMENT
+            L21 :  #_t5 = cstate55 == 10
+         CJ_L22 :  if #_t5 goto IF_L19
+
+         IF_L19 :  EMPTY_STATEMENT
+            L26 :  #_t181 = NOT c1_geq10
+            L27 :  #_t179 = NOT x0
+            L28 :  #_t8 = #_t179 AND x1
+            L29 :  #_t9 = #_t8 AND #_t181
+         CJ_L30 :  if #_t9 goto IF_L25
+
+         IF_L25 :  EMPTY_STATEMENT
+            L34 :  cstate55 = 10
+            L36 :  y0 = false
+            L38 :  c1_add1 = false
+            L40 :  c1_reset = true
+        UCJ_L41 :  goto END_IF_L25
+
+START_ELSIF_L31 :  EMPTY_STATEMENT
+            L43 :  #_t14 = x0 AND x1
+         CJ_L44 :  if #_t14 goto ELSIF_L42
+
+      ELSIF_L42 :  EMPTY_STATEMENT
+            L47 :  cstate55 = 14
+            L49 :  y0 = false
+            L51 :  c1_add1 = true
+            L53 :  c1_reset = false
+        UCJ_L54 :  goto END_IF_L25
+
+  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L57 :  #_t20 = #_t179 AND x1
+            L58 :  #_t21 = #_t20 AND c1_geq10
+         CJ_L59 :  if #_t21 goto ELSIF_L55
+
+      ELSIF_L55 :  EMPTY_STATEMENT
+            L62 :  cstate55 = 10
+            L64 :  y0 = true
+            L66 :  c1_add1 = false
+            L68 :  c1_reset = true
+        UCJ_L69 :  goto END_IF_L25
+
+  END_ELSIF_L55 :  EMPTY_STATEMENT
+            L72 :  #_t182 = NOT x1
+            L74 :  #_t29 = #_t179 AND #_t182
+            L75 :  #_t30 = #_t29 AND #_t181
+         CJ_L76 :  if #_t30 goto ELSIF_L70
+
+      ELSIF_L70 :  EMPTY_STATEMENT
+            L79 :  cstate55 = 10
+            L81 :  y0 = false
+            L83 :  c1_add1 = false
+            L85 :  c1_reset = false
+        UCJ_L86 :  goto END_IF_L25
+
+  END_ELSIF_L70 :  EMPTY_STATEMENT
+            L89 :  #_t36 = x0 AND #_t182
+            L90 :  #_t37 = #_t36 AND c1_geq10
+         CJ_L91 :  if #_t37 goto ELSIF_L87
+
+      ELSIF_L87 :  EMPTY_STATEMENT
+            L94 :  cstate55 = 13
+            L96 :  y0 = true
+            L98 :  c1_add1 = true
+           L100 :  c1_reset = false
+       UCJ_L101 :  goto END_IF_L25
+
+  END_ELSIF_L87 :  EMPTY_STATEMENT
+           L105 :  #_t44 = #_t179 AND #_t182
+           L106 :  #_t45 = #_t44 AND c1_geq10
+        CJ_L107 :  if #_t45 goto ELSIF_L102
+
+     ELSIF_L102 :  EMPTY_STATEMENT
+           L110 :  cstate55 = 10
+           L112 :  y0 = true
+           L114 :  c1_add1 = false
+           L116 :  c1_reset = false
+       UCJ_L117 :  goto END_IF_L25
+
+ END_ELSIF_L102 :  EMPTY_STATEMENT
+           L121 :  #_t52 = x0 AND #_t182
+           L122 :  #_t53 = #_t52 AND #_t181
+        CJ_L123 :  if #_t53 goto ELSIF_L118
+
+     ELSIF_L118 :  EMPTY_STATEMENT
+           L126 :  cstate55 = 13
+           L128 :  y0 = false
+           L130 :  c1_add1 = true
+           L132 :  c1_reset = false
+       UCJ_L133 :  goto END_IF_L25
+
+     END_IF_L25 :  EMPTY_STATEMENT
+       UCJ_L134 :  goto END_IF_L19
+
+START_ELSIF_L23 :  EMPTY_STATEMENT
+           L137 :  #_t59 = cstate55 == 0
+        CJ_L138 :  if #_t59 goto ELSIF_L135
+
+     ELSIF_L135 :  EMPTY_STATEMENT
+           L141 :  #_t189 = NOT c1_geq10
+           L142 :  #_t187 = NOT x0
+           L143 :  #_t62 = #_t187 AND x1
+           L144 :  #_t63 = #_t62 AND #_t189
+        CJ_L145 :  if #_t63 goto IF_L140
+
+        IF_L140 :  EMPTY_STATEMENT
+           L149 :  cstate55 = 10
+           L151 :  y0 = false
+           L153 :  c1_add1 = false
+           L155 :  c1_reset = true
+       UCJ_L156 :  goto END_IF_L140
+
+START_ELSIF_L146 :  EMPTY_STATEMENT
+           L158 :  #_t68 = x0 AND x1
+        CJ_L159 :  if #_t68 goto ELSIF_L157
+
+     ELSIF_L157 :  EMPTY_STATEMENT
+           L162 :  cstate55 = 14
+           L164 :  y0 = false
+           L166 :  c1_add1 = true
+           L168 :  c1_reset = false
+       UCJ_L169 :  goto END_IF_L140
+
+ END_ELSIF_L157 :  EMPTY_STATEMENT
+           L172 :  #_t74 = #_t187 AND x1
+           L173 :  #_t75 = #_t74 AND c1_geq10
+        CJ_L174 :  if #_t75 goto ELSIF_L170
+
+     ELSIF_L170 :  EMPTY_STATEMENT
+           L177 :  cstate55 = 10
+           L179 :  y0 = true
+           L181 :  c1_add1 = false
+           L183 :  c1_reset = true
+       UCJ_L184 :  goto END_IF_L140
+
+ END_ELSIF_L170 :  EMPTY_STATEMENT
+           L187 :  #_t190 = NOT x1
+           L189 :  #_t83 = #_t187 AND #_t190
+           L190 :  #_t84 = #_t83 AND #_t189
+        CJ_L191 :  if #_t84 goto ELSIF_L185
+
+     ELSIF_L185 :  EMPTY_STATEMENT
+           L194 :  cstate55 = 10
+           L196 :  y0 = false
+           L198 :  c1_add1 = false
+           L200 :  c1_reset = false
+       UCJ_L201 :  goto END_IF_L140
+
+ END_ELSIF_L185 :  EMPTY_STATEMENT
+           L204 :  #_t90 = x0 AND #_t190
+           L205 :  #_t91 = #_t90 AND c1_geq10
+        CJ_L206 :  if #_t91 goto ELSIF_L202
+
+     ELSIF_L202 :  EMPTY_STATEMENT
+           L209 :  cstate55 = 13
+           L211 :  y0 = true
+           L213 :  c1_add1 = true
+           L215 :  c1_reset = false
+       UCJ_L216 :  goto END_IF_L140
+
+ END_ELSIF_L202 :  EMPTY_STATEMENT
+           L220 :  #_t98 = #_t187 AND #_t190
+           L221 :  #_t99 = #_t98 AND c1_geq10
+        CJ_L222 :  if #_t99 goto ELSIF_L217
+
+     ELSIF_L217 :  EMPTY_STATEMENT
+           L225 :  cstate55 = 10
+           L227 :  y0 = true
+           L229 :  c1_add1 = false
+           L231 :  c1_reset = false
+       UCJ_L232 :  goto END_IF_L140
+
+ END_ELSIF_L217 :  EMPTY_STATEMENT
+           L236 :  #_t106 = x0 AND #_t190
+           L237 :  #_t107 = #_t106 AND #_t189
+        CJ_L238 :  if #_t107 goto ELSIF_L233
+
+     ELSIF_L233 :  EMPTY_STATEMENT
+           L241 :  cstate55 = 13
+           L243 :  y0 = false
+           L245 :  c1_add1 = true
+           L247 :  c1_reset = false
+       UCJ_L248 :  goto END_IF_L140
+
+    END_IF_L140 :  EMPTY_STATEMENT
+       UCJ_L249 :  goto END_IF_L19
+
+ END_ELSIF_L135 :  EMPTY_STATEMENT
+           L252 :  #_t113 = cstate55 == 13
+        CJ_L253 :  if #_t113 goto ELSIF_L250
+
+     ELSIF_L250 :  EMPTY_STATEMENT
+           L256 :  #_t197 = NOT c1_geq10
+           L257 :  #_t195 = NOT x0
+           L258 :  #_t116 = #_t195 AND x1
+           L259 :  #_t117 = #_t116 AND #_t197
+        CJ_L260 :  if #_t117 goto IF_L255
+
+        IF_L255 :  EMPTY_STATEMENT
+           L264 :  cstate55 = 10
+           L266 :  y0 = false
+           L268 :  c1_add1 = false
+           L270 :  c1_reset = true
+       UCJ_L271 :  goto END_IF_L255
+
+START_ELSIF_L261 :  EMPTY_STATEMENT
+           L273 :  #_t122 = x0 AND x1
+        CJ_L274 :  if #_t122 goto ELSIF_L272
+
+     ELSIF_L272 :  EMPTY_STATEMENT
+           L277 :  cstate55 = 14
+           L279 :  y0 = false
+           L281 :  c1_add1 = true
+           L283 :  c1_reset = false
+       UCJ_L284 :  goto END_IF_L255
+
+ END_ELSIF_L272 :  EMPTY_STATEMENT
+           L287 :  #_t128 = #_t195 AND x1
+           L288 :  #_t129 = #_t128 AND c1_geq10
+        CJ_L289 :  if #_t129 goto ELSIF_L285
+
+     ELSIF_L285 :  EMPTY_STATEMENT
+           L292 :  cstate55 = 10
+           L294 :  y0 = true
+           L296 :  c1_add1 = false
+           L298 :  c1_reset = true
+       UCJ_L299 :  goto END_IF_L255
+
+ END_ELSIF_L285 :  EMPTY_STATEMENT
+           L302 :  #_t198 = NOT x1
+           L304 :  #_t137 = #_t195 AND #_t198
+           L305 :  #_t138 = #_t137 AND #_t197
+        CJ_L306 :  if #_t138 goto ELSIF_L300
+
+     ELSIF_L300 :  EMPTY_STATEMENT
+           L309 :  cstate55 = 10
+           L311 :  y0 = false
+           L313 :  c1_add1 = false
+           L315 :  c1_reset = false
+       UCJ_L316 :  goto END_IF_L255
+
+ END_ELSIF_L300 :  EMPTY_STATEMENT
+           L319 :  #_t144 = x0 AND #_t198
+           L320 :  #_t145 = #_t144 AND c1_geq10
+        CJ_L321 :  if #_t145 goto ELSIF_L317
+
+     ELSIF_L317 :  EMPTY_STATEMENT
+           L324 :  cstate55 = 13
+           L326 :  y0 = true
+           L328 :  c1_add1 = false
+           L330 :  c1_reset = false
+       UCJ_L331 :  goto END_IF_L255
+
+ END_ELSIF_L317 :  EMPTY_STATEMENT
+           L335 :  #_t152 = #_t195 AND #_t198
+           L336 :  #_t153 = #_t152 AND c1_geq10
+        CJ_L337 :  if #_t153 goto ELSIF_L332
+
+     ELSIF_L332 :  EMPTY_STATEMENT
+           L340 :  cstate55 = 10
+           L342 :  y0 = true
+           L344 :  c1_add1 = false
+           L346 :  c1_reset = false
+       UCJ_L347 :  goto END_IF_L255
+
+ END_ELSIF_L332 :  EMPTY_STATEMENT
+           L351 :  #_t160 = x0 AND #_t198
+           L352 :  #_t161 = #_t160 AND #_t197
+        CJ_L353 :  if #_t161 goto ELSIF_L348
+
+     ELSIF_L348 :  EMPTY_STATEMENT
+           L356 :  cstate55 = 13
+           L358 :  y0 = false
+           L360 :  c1_add1 = false
+           L362 :  c1_reset = false
+       UCJ_L363 :  goto END_IF_L255
+
+    END_IF_L255 :  EMPTY_STATEMENT
+       UCJ_L364 :  goto END_IF_L19
+
+ END_ELSIF_L250 :  EMPTY_STATEMENT
+           L367 :  #_t167 = cstate55 == 14
+        CJ_L368 :  if #_t167 goto ELSIF_L365
+
+     ELSIF_L365 :  EMPTY_STATEMENT
+           L371 :  cstate55 = 14
+           L373 :  y0 = false
+           L375 :  c1_add1 = true
+           L377 :  c1_reset = false
+       UCJ_L378 :  goto END_IF_L19
+
+     END_IF_L19 :  EMPTY_STATEMENT
+        CJ_L380 :  if c1_reset goto IF_L379
+
+        IF_L379 :  EMPTY_STATEMENT
+           L383 :  c1 = 0
+
+    END_IF_L379 :  EMPTY_STATEMENT
+        CJ_L385 :  if c1_add1 goto IF_L384
+
+        IF_L384 :  EMPTY_STATEMENT
+           L388 :  #_t174 = c1 + 1
+           L389 :  c1 = #_t174
+
+    END_IF_L384 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+           L390 :  print(cstate55,)
+           L391 :  print(c1_reset,)
+           L392 :  print(c1,)
+           L393 :  print(y0,)
+           L394 :  print(c1_add1,)
+           L395 :  print(c1_geq10,)
+
+           Read :  EMPTY_STATEMENT
+           L396 :  x1 = read()
+           L397 :  x0 = read()
+
+           Exit :  EMPTY_STATEMENT

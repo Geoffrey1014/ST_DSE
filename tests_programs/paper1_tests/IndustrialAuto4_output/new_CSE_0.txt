@@ -1,0 +1,141 @@
+CFG:
+      FB_G4LTL4 :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate_52 = 0
+             L1 :  x_0 = false
+             L2 :  x_1 = false
+             L3 :  x_2 = false
+             L4 :  x_3 = false
+             L5 :  y_0 = false
+             L6 :  y_1 = false
+             L7 :  error = false
+
+           Body :  EMPTY_STATEMENT
+             L9 :  #_t0 = 0
+            L10 :  #_t1 = cstate_52 == #_t0
+         CJ_L11 :  if #_t1 goto IF_L8
+
+          IF_L8 :  EMPTY_STATEMENT
+            L15 :  #_t57 = NOT x_2
+           L115 :  #_t55 = #_t57
+           L113 :  #_t2 = #_t55
+            L16 :  #_t54 = NOT x_1
+           L112 :  #_t52 = #_t54
+           L110 :  #_t3 = #_t52
+            L17 :  #_t4 = #_t3 AND #_t2
+         CJ_L18 :  if #_t4 goto IF_L14
+
+         IF_L14 :  EMPTY_STATEMENT
+            L21 :  #_t5 = 0
+            L22 :  cstate_52 = #_t5
+            L23 :  #_t6 = true
+            L24 :  y_0 = #_t6
+            L25 :  #_t7 = false
+            L26 :  y_1 = #_t7
+        UCJ_L27 :  goto END_IF_L14
+
+START_ELSIF_L19 :  EMPTY_STATEMENT
+            L29 :  #_t58 = NOT x_3
+           L116 :  #_t8 = #_t58
+            L30 :  #_t53 = NOT x_0
+           L111 :  #_t9 = #_t53
+            L31 :  #_t10 = #_t9 AND x_1
+            L32 :  #_t11 = #_t10 AND #_t8
+            L33 :  #_t12 = #_t52
+            L34 :  #_t13 = #_t9
+            L35 :  #_t14 = #_t13 AND #_t12
+            L36 :  #_t15 = #_t14 AND x_2
+            L37 :  #_t16 = #_t15 OR #_t11
+         CJ_L38 :  if #_t16 goto ELSIF_L28
+
+      ELSIF_L28 :  EMPTY_STATEMENT
+            L40 :  #_t17 = 0
+            L41 :  cstate_52 = #_t17
+            L42 :  #_t18 = false
+            L43 :  y_0 = #_t18
+            L44 :  #_t19 = false
+            L45 :  y_1 = #_t19
+        UCJ_L46 :  goto END_IF_L14
+
+  END_ELSIF_L28 :  EMPTY_STATEMENT
+            L48 :  #_t56 = x_0 AND x_1
+           L114 :  #_t20 = #_t56
+            L49 :  #_t21 = #_t20 AND x_2
+            L50 :  #_t22 = #_t55
+            L51 :  #_t23 = #_t20
+            L52 :  #_t24 = #_t23 AND #_t22
+            L53 :  #_t25 = #_t24 AND x_3
+            L54 :  #_t26 = #_t54
+            L55 :  #_t27 = x_0 AND #_t26
+            L56 :  #_t28 = #_t27 AND x_2
+            L57 :  #_t29 = #_t53
+            L58 :  #_t30 = #_t29 AND x_1
+            L59 :  #_t31 = #_t30 AND x_3
+            L60 :  #_t32 = #_t31 OR #_t28
+            L61 :  #_t33 = #_t32 OR #_t25
+            L62 :  #_t34 = #_t33 OR #_t21
+         CJ_L63 :  if #_t34 goto ELSIF_L47
+
+      ELSIF_L47 :  EMPTY_STATEMENT
+            L65 :  #_t35 = 19
+            L66 :  cstate_52 = #_t35
+            L67 :  #_t36 = true
+            L68 :  y_0 = #_t36
+            L69 :  #_t37 = false
+            L70 :  y_1 = #_t37
+        UCJ_L71 :  goto END_IF_L14
+
+  END_ELSIF_L47 :  EMPTY_STATEMENT
+            L73 :  #_t38 = #_t58
+            L74 :  #_t39 = #_t57
+            L75 :  #_t40 = #_t56
+            L76 :  #_t41 = #_t40 AND #_t39
+            L77 :  #_t42 = #_t41 AND #_t38
+         CJ_L78 :  if #_t42 goto ELSIF_L72
+
+      ELSIF_L72 :  EMPTY_STATEMENT
+            L80 :  #_t43 = 0
+            L81 :  cstate_52 = #_t43
+            L82 :  #_t44 = true
+            L83 :  y_0 = #_t44
+            L84 :  #_t45 = true
+            L85 :  y_1 = #_t45
+        UCJ_L86 :  goto END_IF_L14
+
+     END_IF_L14 :  EMPTY_STATEMENT
+        UCJ_L87 :  goto END_IF_L8
+
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L89 :  #_t46 = 19
+            L90 :  #_t47 = cstate_52 == #_t46
+         CJ_L91 :  if #_t47 goto ELSIF_L88
+
+      ELSIF_L88 :  EMPTY_STATEMENT
+            L93 :  #_t48 = 19
+            L94 :  cstate_52 = #_t48
+            L95 :  #_t49 = true
+            L96 :  y_0 = #_t49
+            L97 :  #_t50 = false
+            L98 :  y_1 = #_t50
+            L99 :  #_t51 = true
+           L100 :  error = #_t51
+       UCJ_L101 :  goto END_IF_L8
+
+      END_IF_L8 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+           L102 :  print(error,)
+           L103 :  print(cstate_52,)
+           L104 :  print(y_1,)
+           L105 :  print(y_0,)
+
+           Read :  EMPTY_STATEMENT
+           L106 :  x_2 = read()
+           L107 :  x_1 = read()
+           L108 :  x_0 = read()
+           L109 :  x_3 = read()
+
+           Exit :  EMPTY_STATEMENT

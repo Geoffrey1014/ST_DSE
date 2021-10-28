@@ -29,6 +29,7 @@ public class BranchTest extends CoverageTest{
     private BranchManager branchManager;
     public PtestManager ptestManager;
     private int ptestCounter;
+    protected boolean inreaseInitInputs = false;
 
     public StateManager getStateManager() {
         return stateManager;
@@ -36,7 +37,6 @@ public class BranchTest extends CoverageTest{
 
     public BranchTest(CFG cfg) {
         super(cfg);
-
         this.concreteExecutor = new ConcreteExecutor(cfg);
         this.symbolExecutor = new SymbolExecutor(cfg);
         this.stateManager = new StateManager();
@@ -75,7 +75,9 @@ public class BranchTest extends CoverageTest{
      * until C P P = ∅ ∥ C R ≥ β
      * @param fileName
      */
-    public void branchTest(String fileName) {
+    public String branchTest(String fileName, boolean inreaseInitInputs) {
+        this.inreaseInitInputs = inreaseInitInputs;
+        long startTime = System.currentTimeMillis(); //程序开始记录时间
         ptestCounter = 0;
         HashMap<String,Double> oldBranchTestData = new OldBranchTestData().data;
         // create createInitMemory
@@ -89,13 +91,17 @@ public class BranchTest extends CoverageTest{
             oldConMenory = stateManager.popLeft();
             oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
             branchCoverage = branchManager.coverageRate();
-            if (branchCoverage > 0.99 || counter > 500) break;
+            if (branchCoverage > 0.99 || counter > 1000) break;
 //            genGraphViz("");
         }
         Double oldData = 0.0D;
         if(oldBranchTestData.containsKey(fileName)) oldData= oldBranchTestData.get(fileName);
-
-        System.out.println(fileName + " branch coverage: " + branchCoverage+", "+oldData);
+        long endTime = System.currentTimeMillis(); //程序结束记录时间
+        long consumedTime = endTime -startTime;
+        String result = "consumed time(ms): " + consumedTime + "\n";
+        result += fileName + " branch coverage: " + branchCoverage;
+        System.out.println(result);
+        return result;
 
 
     }
@@ -112,7 +118,7 @@ public class BranchTest extends CoverageTest{
             oldConMenory = stateManager.popLeft();
             oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
             branchCoverage = branchManager.coverageRate();
-            if (branchCoverage > 0.99 || counter > 40) break;
+            if (branchCoverage > 0.99 || counter > 1000) break;
 //            genGraphViz("");
         }
 
@@ -124,7 +130,7 @@ public class BranchTest extends CoverageTest{
 
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
         inputsWorkList.add(inputs);
-        createRandomInputs(inputsWorkList);
+        if (this.inreaseInitInputs) createRandomInputs(inputsWorkList);
         int counter = 0;
         while (inputsWorkList.size() > 0) {
 //            System.out.println("--inputs: " + counter++);

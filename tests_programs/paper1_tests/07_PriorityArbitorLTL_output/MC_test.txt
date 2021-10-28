@@ -1,3 +1,6 @@
+consumed time(ms): 57
+07_PriorityArbitorLTL branch coverage: 0.87323946
+------MCtest---------
 MC_test1 : {req3=false, req2=false, req1=true}{req3=true, req2=true, req1=true}
 MC_test2 : {req3=true, req2=false, req1=false}{req3=false, req2=false, req1=true}{req3=false, req2=false, req1=false}
 MC_test3 : {req3=false, req2=true, req1=false}{req3=true, req2=false, req1=false}{req3=false, req2=false, req1=false}

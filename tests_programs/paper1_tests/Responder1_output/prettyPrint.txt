@@ -1,0 +1,75 @@
+|--POUS
+  |--PROGRAM
+    |--name: Responder1
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: cstate12
+            |--type: RES_INT
+        |--value: 0
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: req1
+            |--type: RES_BOOL
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: grant_1
+            |--type: RES_BOOL
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: cstate12
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--ifStmt
+                |--condExpr
+                  |--unaryNotOp
+                        |--locationVar
+                          |--name: req1
+                          |--type: RES_BOOL
+                |--body
+                  |--codeBlock:
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: cstate12
+                          |--type: RES_INT
+                      |--rhs
+                        |--IntLiteral
+                          |--value: 0
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: grant_1
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+              |--elseBody
+                |--codeBlock:
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: cstate12
+                        |--type: RES_INT
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 0
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: grant_1
+                        |--type: RES_BOOL
+                    |--rhs
+                      |--boolLiteral
+                        |--value: true

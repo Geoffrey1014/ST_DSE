@@ -1,0 +1,307 @@
+CFG:
+     ArbitorLTL :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate60 = 0
+             L3 :  grant_1 = false
+             L4 :  grant_2 = false
+
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t1 = cstate60 == 11
+          CJ_L8 :  if #_t1 goto IF_L5
+
+          IF_L5 :  EMPTY_STATEMENT
+            L12 :  cstate60 = 8
+            L14 :  grant_1 = false
+            L16 :  grant_2 = true
+        UCJ_L17 :  goto END_IF_L5
+
+ START_ELSIF_L9 :  EMPTY_STATEMENT
+            L20 :  #_t6 = cstate60 == 12
+         CJ_L21 :  if #_t6 goto ELSIF_L18
+
+      ELSIF_L18 :  EMPTY_STATEMENT
+            L24 :  cstate60 = 3
+            L26 :  grant_1 = true
+            L28 :  grant_2 = false
+        UCJ_L29 :  goto END_IF_L5
+
+  END_ELSIF_L18 :  EMPTY_STATEMENT
+            L32 :  #_t11 = cstate60 == 13
+         CJ_L33 :  if #_t11 goto ELSIF_L30
+
+      ELSIF_L30 :  EMPTY_STATEMENT
+            L36 :  cstate60 = 8
+            L38 :  grant_1 = false
+            L40 :  grant_2 = true
+        UCJ_L41 :  goto END_IF_L5
+
+  END_ELSIF_L30 :  EMPTY_STATEMENT
+            L44 :  #_t16 = cstate60 == 14
+         CJ_L45 :  if #_t16 goto ELSIF_L42
+
+      ELSIF_L42 :  EMPTY_STATEMENT
+            L48 :  cstate60 = 13
+            L50 :  grant_1 = false
+            L52 :  grant_2 = false
+        UCJ_L53 :  goto END_IF_L5
+
+  END_ELSIF_L42 :  EMPTY_STATEMENT
+            L56 :  #_t21 = cstate60 == 0
+         CJ_L57 :  if #_t21 goto ELSIF_L54
+
+      ELSIF_L54 :  EMPTY_STATEMENT
+            L60 :  #_t117 = NOT req2
+            L61 :  #_t23 = req1 AND #_t117
+         CJ_L62 :  if #_t23 goto IF_L59
+
+         IF_L59 :  EMPTY_STATEMENT
+            L66 :  cstate60 = 5
+            L68 :  grant_1 = false
+            L70 :  grant_2 = false
+        UCJ_L71 :  goto END_IF_L59
+
+START_ELSIF_L63 :  EMPTY_STATEMENT
+            L73 :  #_t116 = NOT req1
+            L74 :  #_t28 = #_t116 AND req2
+         CJ_L75 :  if #_t28 goto ELSIF_L72
+
+      ELSIF_L72 :  EMPTY_STATEMENT
+            L78 :  cstate60 = 6
+            L80 :  grant_1 = false
+            L82 :  grant_2 = false
+        UCJ_L83 :  goto END_IF_L59
+
+  END_ELSIF_L72 :  EMPTY_STATEMENT
+            L85 :  #_t32 = req1 AND req2
+         CJ_L86 :  if #_t32 goto ELSIF_L84
+
+      ELSIF_L84 :  EMPTY_STATEMENT
+            L89 :  cstate60 = 14
+            L91 :  grant_1 = false
+            L93 :  grant_2 = false
+        UCJ_L94 :  goto END_IF_L59
+
+  END_ELSIF_L84 :  EMPTY_STATEMENT
+            L98 :  #_t38 = #_t116 AND #_t117
+         CJ_L99 :  if #_t38 goto ELSIF_L95
+
+      ELSIF_L95 :  EMPTY_STATEMENT
+           L102 :  cstate60 = 0
+           L104 :  grant_1 = false
+           L106 :  grant_2 = false
+       UCJ_L107 :  goto END_IF_L59
+
+     END_IF_L59 :  EMPTY_STATEMENT
+       UCJ_L108 :  goto END_IF_L5
+
+  END_ELSIF_L54 :  EMPTY_STATEMENT
+           L111 :  #_t43 = cstate60 == 1
+        CJ_L112 :  if #_t43 goto ELSIF_L109
+
+     ELSIF_L109 :  EMPTY_STATEMENT
+           L115 :  cstate60 = 2
+           L117 :  grant_1 = false
+           L119 :  grant_2 = false
+       UCJ_L120 :  goto END_IF_L5
+
+ END_ELSIF_L109 :  EMPTY_STATEMENT
+           L123 :  #_t48 = cstate60 == 2
+        CJ_L124 :  if #_t48 goto ELSIF_L121
+
+     ELSIF_L121 :  EMPTY_STATEMENT
+           L127 :  cstate60 = 4
+           L129 :  grant_1 = true
+           L131 :  grant_2 = false
+       UCJ_L132 :  goto END_IF_L5
+
+ END_ELSIF_L121 :  EMPTY_STATEMENT
+           L135 :  #_t53 = cstate60 == 3
+        CJ_L136 :  if #_t53 goto ELSIF_L133
+
+     ELSIF_L133 :  EMPTY_STATEMENT
+           L139 :  #_t54 = NOT req1
+        CJ_L140 :  if #_t54 goto IF_L138
+
+        IF_L138 :  EMPTY_STATEMENT
+           L144 :  cstate60 = 4
+           L146 :  grant_1 = false
+           L148 :  grant_2 = false
+       UCJ_L149 :  goto END_IF_L138
+
+START_ELSIF_L141 :  EMPTY_STATEMENT
+        CJ_L151 :  if req1 goto ELSIF_L150
+
+     ELSIF_L150 :  EMPTY_STATEMENT
+           L154 :  cstate60 = 9
+           L156 :  grant_1 = false
+           L158 :  grant_2 = false
+       UCJ_L159 :  goto END_IF_L138
+
+    END_IF_L138 :  EMPTY_STATEMENT
+       UCJ_L160 :  goto END_IF_L5
+
+ END_ELSIF_L133 :  EMPTY_STATEMENT
+           L163 :  #_t62 = cstate60 == 4
+        CJ_L164 :  if #_t62 goto ELSIF_L161
+
+     ELSIF_L161 :  EMPTY_STATEMENT
+           L167 :  #_t63 = NOT req1
+        CJ_L168 :  if #_t63 goto IF_L166
+
+        IF_L166 :  EMPTY_STATEMENT
+           L172 :  cstate60 = 0
+           L174 :  grant_1 = false
+           L176 :  grant_2 = true
+       UCJ_L177 :  goto END_IF_L166
+
+START_ELSIF_L169 :  EMPTY_STATEMENT
+        CJ_L179 :  if req1 goto ELSIF_L178
+
+     ELSIF_L178 :  EMPTY_STATEMENT
+           L182 :  cstate60 = 5
+           L184 :  grant_1 = false
+           L186 :  grant_2 = true
+       UCJ_L187 :  goto END_IF_L166
+
+    END_IF_L166 :  EMPTY_STATEMENT
+       UCJ_L188 :  goto END_IF_L5
+
+ END_ELSIF_L161 :  EMPTY_STATEMENT
+           L191 :  #_t71 = cstate60 == 5
+        CJ_L192 :  if #_t71 goto ELSIF_L189
+
+     ELSIF_L189 :  EMPTY_STATEMENT
+           L195 :  #_t72 = NOT req2
+        CJ_L196 :  if #_t72 goto IF_L194
+
+        IF_L194 :  EMPTY_STATEMENT
+           L200 :  cstate60 = 10
+           L202 :  grant_1 = false
+           L204 :  grant_2 = false
+       UCJ_L205 :  goto END_IF_L194
+
+START_ELSIF_L197 :  EMPTY_STATEMENT
+        CJ_L207 :  if req2 goto ELSIF_L206
+
+     ELSIF_L206 :  EMPTY_STATEMENT
+           L210 :  cstate60 = 1
+           L212 :  grant_1 = false
+           L214 :  grant_2 = false
+       UCJ_L215 :  goto END_IF_L194
+
+    END_IF_L194 :  EMPTY_STATEMENT
+       UCJ_L216 :  goto END_IF_L5
+
+ END_ELSIF_L189 :  EMPTY_STATEMENT
+           L219 :  #_t80 = cstate60 == 6
+        CJ_L220 :  if #_t80 goto ELSIF_L217
+
+     ELSIF_L217 :  EMPTY_STATEMENT
+        CJ_L223 :  if req1 goto IF_L222
+
+        IF_L222 :  EMPTY_STATEMENT
+           L227 :  cstate60 = 7
+           L229 :  grant_1 = false
+           L231 :  grant_2 = false
+       UCJ_L232 :  goto END_IF_L222
+
+START_ELSIF_L224 :  EMPTY_STATEMENT
+           L234 :  #_t84 = NOT req1
+        CJ_L235 :  if #_t84 goto ELSIF_L233
+
+     ELSIF_L233 :  EMPTY_STATEMENT
+           L238 :  cstate60 = 3
+           L240 :  grant_1 = false
+           L242 :  grant_2 = false
+       UCJ_L243 :  goto END_IF_L222
+
+    END_IF_L222 :  EMPTY_STATEMENT
+       UCJ_L244 :  goto END_IF_L5
+
+ END_ELSIF_L217 :  EMPTY_STATEMENT
+           L247 :  #_t89 = cstate60 == 7
+        CJ_L248 :  if #_t89 goto ELSIF_L245
+
+     ELSIF_L245 :  EMPTY_STATEMENT
+           L251 :  cstate60 = 11
+           L253 :  grant_1 = false
+           L255 :  grant_2 = false
+       UCJ_L256 :  goto END_IF_L5
+
+ END_ELSIF_L245 :  EMPTY_STATEMENT
+           L259 :  #_t94 = cstate60 == 8
+        CJ_L260 :  if #_t94 goto ELSIF_L257
+
+     ELSIF_L257 :  EMPTY_STATEMENT
+        CJ_L263 :  if req2 goto IF_L262
+
+        IF_L262 :  EMPTY_STATEMENT
+           L267 :  cstate60 = 6
+           L269 :  grant_1 = true
+           L271 :  grant_2 = false
+       UCJ_L272 :  goto END_IF_L262
+
+START_ELSIF_L264 :  EMPTY_STATEMENT
+           L274 :  #_t98 = NOT req2
+        CJ_L275 :  if #_t98 goto ELSIF_L273
+
+     ELSIF_L273 :  EMPTY_STATEMENT
+           L278 :  cstate60 = 0
+           L280 :  grant_1 = true
+           L282 :  grant_2 = false
+       UCJ_L283 :  goto END_IF_L262
+
+    END_IF_L262 :  EMPTY_STATEMENT
+       UCJ_L284 :  goto END_IF_L5
+
+ END_ELSIF_L257 :  EMPTY_STATEMENT
+           L287 :  #_t103 = cstate60 == 9
+        CJ_L288 :  if #_t103 goto ELSIF_L285
+
+     ELSIF_L285 :  EMPTY_STATEMENT
+           L291 :  cstate60 = 10
+           L293 :  grant_1 = false
+           L295 :  grant_2 = true
+       UCJ_L296 :  goto END_IF_L5
+
+ END_ELSIF_L285 :  EMPTY_STATEMENT
+           L299 :  #_t108 = cstate60 == 10
+        CJ_L300 :  if #_t108 goto ELSIF_L297
+
+     ELSIF_L297 :  EMPTY_STATEMENT
+        CJ_L303 :  if req2 goto IF_L302
+
+        IF_L302 :  EMPTY_STATEMENT
+           L307 :  cstate60 = 12
+           L309 :  grant_1 = false
+           L311 :  grant_2 = false
+       UCJ_L312 :  goto END_IF_L302
+
+START_ELSIF_L304 :  EMPTY_STATEMENT
+           L314 :  #_t112 = NOT req2
+        CJ_L315 :  if #_t112 goto ELSIF_L313
+
+     ELSIF_L313 :  EMPTY_STATEMENT
+           L318 :  cstate60 = 8
+           L320 :  grant_1 = false
+           L322 :  grant_2 = false
+       UCJ_L323 :  goto END_IF_L302
+
+    END_IF_L302 :  EMPTY_STATEMENT
+       UCJ_L324 :  goto END_IF_L5
+
+      END_IF_L5 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+           L325 :  print(grant_2,)
+           L326 :  print(cstate60,)
+           L327 :  print(grant_1,)
+
+           Read :  EMPTY_STATEMENT
+           L328 :  req2 = read()
+           L329 :  req1 = read()
+
+           Exit :  EMPTY_STATEMENT

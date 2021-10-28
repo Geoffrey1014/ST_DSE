@@ -1,3 +1,6 @@
+consumed time(ms): 38
+Responder2 branch coverage: 0.96
+------MCtest---------
 MC_test1 : {req2=true, req1=false}{req2=false, req1=false}{req2=false, req1=true}{req2=true, req1=false}
 MC_test2 : {req2=false, req1=true}{req2=true, req1=true}{req2=true, req1=false}{req2=true, req1=true}
 MC_test3 : {req2=true, req1=false}{req2=false, req1=true}{req2=true, req1=true}{req2=false, req1=true}

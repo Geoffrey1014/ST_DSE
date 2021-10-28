@@ -1,3 +1,6 @@
+consumed time(ms): 33
+03_NumericalLTLRefined branch coverage: 0.8611111
+------MCtest---------
 MC_test1 : {req2=true, req1=false}{req2=true, req1=false}
 MC_test2 : {req2=false, req1=false}{req2=false, req1=true}{req2=false, req1=true}
 MC_test3 : {req2=true, req1=false}{req2=false, req1=false}

@@ -1,0 +1,48 @@
+CFG:
+           Main :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  IS_LEAD_EDGE = false
+             L1 :  PREV_LOAD = false
+             L2 :  TLOAD = false
+             L3 :  RESET = false
+             L4 :  LOAD = false
+             L5 :  IN_1 = false
+             L6 :  OUT_1 = false
+
+           Body :  EMPTY_STATEMENT
+             L7 :  #_t0 = NOT PREV_LOAD
+             L8 :  #_t1 = #_t0 AND TLOAD
+             L9 :  IS_LEAD_EDGE = #_t1
+         CJ_L11 :  if RESET goto IF_L10
+
+         IF_L10 :  EMPTY_STATEMENT
+            L14 :  #_t2 = true
+            L15 :  OUT_1 = true
+        UCJ_L16 :  goto END_IF_L10
+
+START_ELSIF_L12 :  EMPTY_STATEMENT
+            L18 :  #_t3 = LOAD OR #_t1
+         CJ_L19 :  if #_t3 goto ELSIF_L17
+
+      ELSIF_L17 :  EMPTY_STATEMENT
+            L21 :  OUT_1 = IN_1
+        UCJ_L22 :  goto END_IF_L10
+
+     END_IF_L10 :  EMPTY_STATEMENT
+            L23 :  PREV_LOAD = TLOAD
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L24 :  print(OUT_1,)
+            L25 :  print(TLOAD,)
+            L26 :  print(#_t1,)
+
+           Read :  EMPTY_STATEMENT
+            L27 :  LOAD = read()
+            L28 :  IN_1 = read()
+            L29 :  RESET = read()
+            L30 :  TLOAD = read()
+
+           Exit :  EMPTY_STATEMENT

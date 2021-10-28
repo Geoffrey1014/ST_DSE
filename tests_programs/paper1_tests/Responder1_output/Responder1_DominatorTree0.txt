@@ -1,0 +1,36 @@
+Node: Responder1 :
+Init, 
+
+Node: Init :
+Read, 
+
+Node: Body :
+IF_L3, END_IF_L3, 
+
+Node: IF_L3 :
+END_IF_L8, ELSE_L9, IF_L8, 
+
+Node: ELSE_L9 :
+
+
+Node: IF_L8 :
+
+
+Node: END_IF_L8 :
+
+
+Node: END_IF_L3 :
+End, 
+
+Node: Entry :
+Responder1, 
+
+Node: End :
+Exit, 
+
+Node: Read :
+Body, 
+
+Node: Exit :
+
+

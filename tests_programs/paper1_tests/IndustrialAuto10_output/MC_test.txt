@@ -1,3 +1,6 @@
+consumed time(ms): 7218
+IndustrialAuto10 branch coverage: 0.2798574
+------MCtest---------
 MC_test1 : {x_10=true, x_0=false, x_2=true, x_1=false, x_3=true}{x_10=false, x_0=false, x_2=false, x_1=true, x_3=false}{x_10=false, x_0=true, x_2=false, x_1=true, x_3=false}
 MC_test2 : {x_10=true, x_0=false, x_2=true, x_1=false, x_3=true}{x_10=true, x_0=true, x_2=false, x_1=false, x_3=true}
 MC_test3 : {x_10=true, x_0=false, x_2=false, x_1=true, x_3=true}{x_10=false, x_0=true, x_2=true, x_1=false, x_3=false}{x_10=true, x_0=true, x_2=false, x_1=true, x_3=true}{x_10=true, x_0=false, x_2=false, x_1=false, x_3=false}

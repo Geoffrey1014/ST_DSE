@@ -1,0 +1,19 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=circle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "9 START_ELSIF_L16"; "0 Entry"; "7 End"; "5 END_IF_L4"; "2 Init"; "10 IF_L9"; "11 Exit"; "8 END_IF_L9"; "4 Body"; "6 IF_L4"; "3 Read"; "12 ELSIF_L23"; "1 FB_G4LTL2"; 
+  "1 FB_G4LTL2" -> "2 Init";
+  "6 IF_L4" -> "8 END_IF_L9";
+  "6 IF_L4" -> "9 START_ELSIF_L16";
+  "6 IF_L4" -> "10 IF_L9";
+  "3 Read" -> "4 Body";
+  "5 END_IF_L4" -> "7 End";
+  "2 Init" -> "3 Read";
+  "0 Entry" -> "1 FB_G4LTL2";
+  "9 START_ELSIF_L16" -> "12 ELSIF_L23";
+  "7 End" -> "11 Exit";
+  "4 Body" -> "5 END_IF_L4";
+  "4 Body" -> "6 IF_L4";
+}

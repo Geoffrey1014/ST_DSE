@@ -1,0 +1,33 @@
+Node: Main :
+Entry, Main, 
+
+Node: Init :
+Main, Entry, Init, 
+
+Node: Body :
+Main, Entry, Init, Body, Read, 
+
+Node: IF_L10 :
+Main, Entry, Init, Body, IF_L10, Read, 
+
+Node: START_ELSIF_L12 :
+Main, Entry, Init, Body, START_ELSIF_L12, Read, 
+
+Node: ELSIF_L17 :
+Main, Entry, Init, Body, ELSIF_L17, START_ELSIF_L12, Read, 
+
+Node: END_IF_L10 :
+Main, Entry, Init, Body, END_IF_L10, Read, 
+
+Node: Entry :
+Entry, 
+
+Node: End :
+Main, Entry, Init, Body, End, END_IF_L10, Read, 
+
+Node: Read :
+Main, Entry, Init, Read, 
+
+Node: Exit :
+Main, Entry, Init, Body, Exit, End, END_IF_L10, Read, 
+

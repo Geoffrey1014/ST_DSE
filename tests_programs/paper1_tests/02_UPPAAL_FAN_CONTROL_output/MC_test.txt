@@ -1,3 +1,6 @@
+consumed time(ms): 23
+02_UPPAAL_FAN_CONTROL branch coverage: 1.0
+------MCtest---------
 MC_test1 : {DBC_PV_CoStep=0}{DBC_PV_CoStep=3}
 MC_test2 : {DBC_PV_CoStep=0}{DBC_PV_CoStep=4}
 MC_test3 : {DBC_PV_CoStep=0}{DBC_PV_CoStep=5}

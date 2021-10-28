@@ -1,0 +1,44 @@
+CFG:
+     Responder1 :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L1 :  req1 = false
+             L2 :  grant_1 = false
+
+           Body :  EMPTY_STATEMENT
+             L4 :  #_t0 = 0
+             L5 :  #_t1 = cstate12 == 0
+          CJ_L6 :  if #_t1 goto IF_L3
+
+          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+         CJ_L11 :  if #_t2 goto IF_L8
+
+        ELSE_L9 :  EMPTY_STATEMENT
+            L13 :  #_t3 = 0
+            L14 :  cstate12 = 0
+            L15 :  #_t4 = true
+            L16 :  grant_1 = true
+        UCJ_L17 :  goto END_IF_L8
+
+          IF_L8 :  EMPTY_STATEMENT
+            L18 :  #_t5 = 0
+            L19 :  cstate12 = 0
+            L20 :  #_t6 = false
+            L21 :  grant_1 = false
+
+      END_IF_L8 :  EMPTY_STATEMENT
+
+      END_IF_L3 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+
+           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+
+           Exit :  EMPTY_STATEMENT

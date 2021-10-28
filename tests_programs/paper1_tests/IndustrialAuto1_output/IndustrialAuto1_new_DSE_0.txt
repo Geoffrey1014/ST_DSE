@@ -1,0 +1,48 @@
+CFG:
+           Prog :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate14 = 0
+             L3 :  y_0 = false
+
+           Body :  EMPTY_STATEMENT
+             L6 :  #_t1 = cstate14 == 0
+          CJ_L7 :  if #_t1 goto IF_L4
+
+          IF_L4 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT x_1
+            L11 :  #_t3 = x_0 AND #_t2
+         CJ_L12 :  if #_t3 goto IF_L9
+
+          IF_L9 :  EMPTY_STATEMENT
+            L16 :  cstate14 = 0
+            L18 :  y_0 = true
+        UCJ_L19 :  goto END_IF_L9
+
+START_ELSIF_L13 :  EMPTY_STATEMENT
+            L21 :  #_t6 = x_0 AND x_1
+            L23 :  #_t8 = NOT x_0
+            L24 :  #_t9 = #_t8 AND true
+            L25 :  #_t10 = #_t9 OR #_t6
+         CJ_L26 :  if #_t10 goto ELSIF_L20
+
+      ELSIF_L20 :  EMPTY_STATEMENT
+            L29 :  cstate14 = 0
+            L31 :  y_0 = false
+        UCJ_L32 :  goto END_IF_L9
+
+      END_IF_L9 :  EMPTY_STATEMENT
+
+      END_IF_L4 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L33 :  print(cstate14,)
+            L34 :  print(y_0,)
+
+           Read :  EMPTY_STATEMENT
+            L35 :  x_1 = read()
+            L36 :  x_0 = read()
+
+           Exit :  EMPTY_STATEMENT

@@ -1,2 +1,5 @@
+consumed time(ms): 17
+Responder1 branch coverage: 0.75
+------MCtest---------
 MC_test1 : {req1=false}
 MC_test2 : {req1=true}

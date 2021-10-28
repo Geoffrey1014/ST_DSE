@@ -1,0 +1,1334 @@
+|--POUS
+  |--PROGRAM
+    |--name: FB_G4LTL5
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: cstate55
+            |--type: RES_INT
+        |--value: 0
+        |--varDecl
+          |--name: c1
+            |--type: RES_INT
+        |--value: 0
+        |--varDecl
+          |--name: c1_geq10
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: c1_add1
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: c1_reset
+            |--type: RES_BOOL
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: x0
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: x1
+            |--type: RES_BOOL
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: y0
+            |--type: RES_BOOL
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |__binaryRelOper
+              |__lhs
+                |--locationVar
+                  |--name: c1
+                  |--type: RES_INT
+              |__op: GEQ_OP
+              |__rhs
+                |--IntLiteral
+                  |--value: 10
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: c1_geq10
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: c1_geq10
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: cstate55
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--IntLiteral
+                  |--value: 10
+          |--body
+            |--codeBlock:
+              |--ifStmt
+                |--condExpr
+                  |--binaryCondOper
+                    |--lhs
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: x0
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: x1
+                            |--type: RES_BOOL
+                    |--op: AND_OP
+                    |--rhs
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: c1_geq10
+                              |--type: RES_BOOL
+                |--body
+                  |--codeBlock:
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: cstate55
+                          |--type: RES_INT
+                      |--rhs
+                        |--IntLiteral
+                          |--value: 10
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: y0
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: c1_add1
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: c1_reset
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: true
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--locationVar
+                            |--name: x0
+                            |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: x1
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 14
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x0
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: x1
+                                |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: c1_geq10
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 10
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x0
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x1
+                                      |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: c1_geq10
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 10
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: x0
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x1
+                                      |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: c1_geq10
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 13
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x0
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x1
+                                      |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: c1_geq10
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 10
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: x0
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x1
+                                      |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: c1_geq10
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 13
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate55
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 0
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x0
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: x1
+                                |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: c1_geq10
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 10
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: x0
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: x1
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 14
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x0
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--locationVar
+                                    |--name: x1
+                                    |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: c1_geq10
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x0
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: c1_geq10
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: x0
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: c1_geq10
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 13
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x0
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: c1_geq10
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: x0
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: c1_geq10
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 13
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate55
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 13
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: x0
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: x1
+                                |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: c1_geq10
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate55
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 10
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: y0
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_add1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: c1_reset
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: x0
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: x1
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 14
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x0
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--locationVar
+                                    |--name: x1
+                                    |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: c1_geq10
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x0
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: c1_geq10
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: x0
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: c1_geq10
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 13
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x0
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: c1_geq10
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: x0
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: x1
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: c1_geq10
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate55
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 13
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: y0
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_add1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: c1_reset
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate55
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 14
+              |--body
+                |--codeBlock:
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: cstate55
+                        |--type: RES_INT
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 14
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: y0
+                        |--type: RES_BOOL
+                    |--rhs
+                      |--boolLiteral
+                        |--value: false
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: c1_add1
+                        |--type: RES_BOOL
+                    |--rhs
+                      |--boolLiteral
+                        |--value: true
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: c1_reset
+                        |--type: RES_BOOL
+                    |--rhs
+                      |--boolLiteral
+                        |--value: false
+        |--ifStmt
+          |--condExpr
+            |--locationVar
+              |--name: c1_reset
+              |--type: RES_BOOL
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: c1
+                    |--type: RES_INT
+                |--rhs
+                  |--IntLiteral
+                    |--value: 0
+        |--ifStmt
+          |--condExpr
+            |--locationVar
+              |--name: c1_add1
+              |--type: RES_BOOL
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: c1
+                    |--type: RES_INT
+                |--rhs
+                  |--binaryArithOper
+                    |--lhs
+                      |--locationVar
+                        |--name: c1
+                        |--type: RES_INT
+                    |--op: ADD_OP
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 1

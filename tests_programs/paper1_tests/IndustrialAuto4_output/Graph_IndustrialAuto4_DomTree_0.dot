@@ -1,0 +1,25 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=circle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "13 Exit"; "1 FB_G4LTL4"; "6 END_IF_L8"; "0 Entry"; "2 Init"; "18 ELSIF_L72"; "9 End"; "12 END_IF_L14"; "14 END_ELSIF_L28"; "16 ELSIF_L47"; "15 ELSIF_L28"; "4 Body"; "8 ELSIF_L88"; "7 IF_L8"; "3 Read"; "11 START_ELSIF_L19"; "17 END_ELSIF_L47"; "5 START_ELSIF_L12"; "10 IF_L14"; 
+  "14 END_ELSIF_L28" -> "16 ELSIF_L47";
+  "14 END_ELSIF_L28" -> "17 END_ELSIF_L47";
+  "11 START_ELSIF_L19" -> "14 END_ELSIF_L28";
+  "11 START_ELSIF_L19" -> "15 ELSIF_L28";
+  "7 IF_L8" -> "10 IF_L14";
+  "7 IF_L8" -> "11 START_ELSIF_L19";
+  "7 IF_L8" -> "12 END_IF_L14";
+  "17 END_ELSIF_L47" -> "18 ELSIF_L72";
+  "3 Read" -> "4 Body";
+  "2 Init" -> "3 Read";
+  "0 Entry" -> "1 FB_G4LTL4";
+  "5 START_ELSIF_L12" -> "8 ELSIF_L88";
+  "9 End" -> "13 Exit";
+  "1 FB_G4LTL4" -> "2 Init";
+  "4 Body" -> "5 START_ELSIF_L12";
+  "4 Body" -> "6 END_IF_L8";
+  "4 Body" -> "7 IF_L8";
+  "6 END_IF_L8" -> "9 End";
+}

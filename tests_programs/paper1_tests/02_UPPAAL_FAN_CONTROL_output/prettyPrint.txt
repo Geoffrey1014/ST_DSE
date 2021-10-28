@@ -1,0 +1,323 @@
+|--POUS
+  |--PROGRAM
+    |--name: Prog
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: CONSTANT
+            |--type: RES_INT
+        |--value: 3
+        |--varDecl
+          |--name: P_Fan1Lo_1
+            |--type: RES_INT
+        |--value: 3
+        |--varDecl
+          |--name: P_Fan1Lo_2
+            |--type: RES_INT
+        |--value: 7
+        |--varDecl
+          |--name: P_Fan1Hi
+            |--type: RES_INT
+        |--value: 8
+        |--varDecl
+          |--name: P_Fan2Lo_1
+            |--type: RES_INT
+        |--value: 4
+        |--varDecl
+          |--name: P_Fan2Lo_2
+            |--type: RES_INT
+        |--value: 6
+        |--varDecl
+          |--name: P_Fan2Hi_1
+            |--type: RES_INT
+        |--value: 7
+        |--varDecl
+          |--name: P_Fan2Hi_2
+            |--type: RES_INT
+        |--value: 8
+        |--varDecl
+          |--name: P_Fan3Lo
+            |--type: RES_INT
+        |--value: 5
+        |--varDecl
+          |--name: P_Fan3Hi_1
+            |--type: RES_INT
+        |--value: 6
+        |--varDecl
+          |--name: P_Fan3Hi_2
+            |--type: RES_INT
+        |--value: 8
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: DBC_PV_CoStep
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: DBC_PV_C_Fan1Lo
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: DBC_PV_C_Fan1Hi
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: DBC_PV_C_Fan2Lo
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: DBC_PV_C_Fan2Hi
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: DBC_PV_C_Fan3Lo
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: DBC_PV_C_Fan3Hi
+            |--type: RES_BOOL
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |--binaryCondOper
+              |--lhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: GEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan1Lo_1
+                      |--type: RES_INT
+              |--op: AND_OP
+              |--rhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: LEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan1Lo_2
+                      |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: DBC_PV_C_Fan1Lo
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_C_Fan1Lo
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_CoStep
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--locationVar
+                  |--name: P_Fan1Hi
+                  |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: DBC_PV_C_Fan1Hi
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_C_Fan1Hi
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+        |--ifStmt
+          |--condExpr
+            |--binaryCondOper
+              |--lhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: GEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan2Lo_1
+                      |--type: RES_INT
+              |--op: AND_OP
+              |--rhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: LEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan2Lo_2
+                      |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: DBC_PV_C_Fan2Lo
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_C_Fan2Lo
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+        |--ifStmt
+          |--condExpr
+            |--binaryCondOper
+              |--lhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: GEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan2Hi_1
+                      |--type: RES_INT
+              |--op: AND_OP
+              |--rhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: LEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan2Hi_2
+                      |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: DBC_PV_C_Fan2Hi
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_C_Fan2Hi
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_CoStep
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--locationVar
+                  |--name: P_Fan3Lo
+                  |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: DBC_PV_C_Fan3Lo
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_C_Fan3Lo
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false
+        |--ifStmt
+          |--condExpr
+            |--binaryCondOper
+              |--lhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: GEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan3Hi_1
+                      |--type: RES_INT
+              |--op: AND_OP
+              |--rhs
+                |__binaryRelOper
+                  |__lhs
+                    |--locationVar
+                      |--name: DBC_PV_CoStep
+                      |--type: RES_INT
+                  |__op: LEQ_OP
+                  |__rhs
+                    |--locationVar
+                      |--name: P_Fan3Hi_2
+                      |--type: RES_INT
+          |--body
+            |--codeBlock:
+              |--assignStmtEquals
+                |--lhs
+                  |--locationVar
+                    |--name: DBC_PV_C_Fan3Hi
+                    |--type: RES_BOOL
+                |--rhs
+                  |--boolLiteral
+                    |--value: true
+        |--elseBody
+          |--codeBlock:
+            |--assignStmtEquals
+              |--lhs
+                |--locationVar
+                  |--name: DBC_PV_C_Fan3Hi
+                  |--type: RES_BOOL
+              |--rhs
+                |--boolLiteral
+                  |--value: false

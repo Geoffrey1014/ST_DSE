@@ -1,3 +1,6 @@
+consumed time(ms): 38
+IndustrialAuto5 branch coverage: 0.75
+------MCtest---------
 MC_test1 : {x0=true, x1=true}{x0=true, x1=false}
 MC_test2 : {x0=true, x1=false}{x0=false, x1=false}
 MC_test3 : {x0=false, x1=false}

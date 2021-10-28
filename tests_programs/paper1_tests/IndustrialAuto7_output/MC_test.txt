@@ -1,3 +1,6 @@
+consumed time(ms): 40
+IndustrialAuto7 branch coverage: 0.85714287
+------MCtest---------
 MC_test1 : {x_1=false}{x_1=true}{x_1=true}{x_1=true}{x_1=true}
 MC_test2 : {x_1=true}{x_1=true}{x_1=true}{x_1=true}{x_1=true}
 MC_test3 : {x_1=true}{x_1=false}{x_1=true}

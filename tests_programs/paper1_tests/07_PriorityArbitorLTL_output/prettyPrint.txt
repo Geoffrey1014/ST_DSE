@@ -1,0 +1,2769 @@
+|--POUS
+  |--PROGRAM
+    |--name: PriorityArbitorLTL
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: cstate16
+            |--type: RES_INT
+        |--value: 0
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: req1
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: req2
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: req3
+            |--type: RES_BOOL
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: grant_1
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: grant_2
+            |--type: RES_BOOL
+        |--varDecl
+          |--name: grant_3
+            |--type: RES_BOOL
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: cstate16
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--IntLiteral
+                  |--value: 11
+          |--body
+            |--codeBlock:
+              |--ifStmt
+                |--condExpr
+                  |--binaryCondOper
+                    |--lhs
+                      |--locationVar
+                        |--name: req1
+                        |--type: RES_BOOL
+                    |--op: AND_OP
+                    |--rhs
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: req3
+                              |--type: RES_BOOL
+                |--body
+                  |--codeBlock:
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: cstate16
+                          |--type: RES_INT
+                      |--rhs
+                        |--IntLiteral
+                          |--value: 12
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: grant_1
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: grant_2
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: grant_3
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: false
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: req3
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 13
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--locationVar
+                            |--name: req1
+                            |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: req3
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 12
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req3
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 2
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 12
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: req3
+                              |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 3
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--locationVar
+                            |--name: req3
+                            |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 6
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 13
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: req1
+                              |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 3
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--locationVar
+                            |--name: req1
+                            |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 7
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 14
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: req2
+                              |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 5
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--locationVar
+                            |--name: req2
+                            |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 8
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 15
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: req2
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 11
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req2
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 9
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req2
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 0
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 1
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 16
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--locationVar
+                        |--name: req1
+                        |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 12
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 2
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 0
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req3
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 11
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: req1
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req2
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 9
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req1
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req2
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 4
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: req1
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req2
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 14
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req1
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req2
+                                          |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 0
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--unaryNotOp
+                                        |--locationVar
+                                          |--name: req1
+                                          |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--locationVar
+                                    |--name: req2
+                                    |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 10
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: req1
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--locationVar
+                                    |--name: req2
+                                    |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 1
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--binaryCondOper
+                                |--lhs
+                                  |--locationVar
+                                    |--name: req1
+                                    |--type: RES_BOOL
+                                |--op: AND_OP
+                                |--rhs
+                                  |--locationVar
+                                    |--name: req2
+                                    |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 1
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 1
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: req3
+                              |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 2
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--locationVar
+                            |--name: req3
+                            |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 13
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 2
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: req3
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 6
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 3
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 14
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 9
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 3
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req3
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 0
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 14
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 9
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 4
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 4
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req2
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 5
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 8
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req2
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 7
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 1
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 5
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--locationVar
+                            |--name: req1
+                            |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req2
+                                  |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 9
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 16
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req1
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req2
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 15
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req1
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 1
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 6
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--locationVar
+                        |--name: req1
+                        |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 7
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 5
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 7
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--unaryNotOp
+                            |--locationVar
+                              |--name: req2
+                              |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 15
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--locationVar
+                            |--name: req2
+                            |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 16
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 8
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--locationVar
+                        |--name: req1
+                        |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 12
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 2
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 9
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--binaryCondOper
+                        |--lhs
+                          |--locationVar
+                            |--name: req2
+                            |--type: RES_BOOL
+                        |--op: AND_OP
+                        |--rhs
+                          |--locationVar
+                            |--name: req3
+                            |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 10
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req2
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 0
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--locationVar
+                                |--name: req2
+                                |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req3
+                                      |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 11
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--binaryCondOper
+                            |--lhs
+                              |--unaryNotOp
+                                    |--locationVar
+                                      |--name: req2
+                                      |--type: RES_BOOL
+                            |--op: AND_OP
+                            |--rhs
+                              |--locationVar
+                                |--name: req3
+                                |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 4
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: cstate16
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 10
+              |--body
+                |--codeBlock:
+                  |--ifStmt
+                    |--condExpr
+                      |--locationVar
+                        |--name: req1
+                        |--type: RES_BOOL
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: cstate16
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 12
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_1
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_2
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: grant_3
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: true
+                    |--elsif
+                      |--elsifStmt
+                        |--condExpr
+                          |--unaryNotOp
+                                |--locationVar
+                                  |--name: req1
+                                  |--type: RES_BOOL
+                        |--body
+                          |--codeBlock:
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: cstate16
+                                  |--type: RES_INT
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 2
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_1
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_2
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: false
+                            |--assignStmtEquals
+                              |--lhs
+                                |--locationVar
+                                  |--name: grant_3
+                                  |--type: RES_BOOL
+                              |--rhs
+                                |--boolLiteral
+                                  |--value: true

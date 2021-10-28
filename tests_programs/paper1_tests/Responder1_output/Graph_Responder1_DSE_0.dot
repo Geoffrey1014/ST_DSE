@@ -1,0 +1,150 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=rectangle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "6 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+         CJ_L11 :  if #_t2 goto IF_L8
+"; "2 Init
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L2 :  grant_1 = false
+"; "5 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"; "1 Responder1
+     Responder1 :  EMPTY_STATEMENT
+"; "3 Read
+           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+"; "8 END_IF_L8
+      END_IF_L8 :  EMPTY_STATEMENT
+"; "0 Entry
+          Entry :  EMPTY_STATEMENT
+"; "11 Exit
+           Exit :  EMPTY_STATEMENT
+"; "10 ELSE_L9
+        ELSE_L9 :  EMPTY_STATEMENT
+            L14 :  cstate12 = 0
+            L16 :  grant_1 = true
+        UCJ_L17 :  goto END_IF_L8
+"; "4 Body
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t1 = cstate12 == 0
+          CJ_L6 :  if #_t1 goto IF_L3
+"; "9 IF_L8
+          IF_L8 :  EMPTY_STATEMENT
+            L19 :  cstate12 = 0
+            L21 :  grant_1 = false
+"; "7 End
+            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+"; 
+  "1 Responder1
+     Responder1 :  EMPTY_STATEMENT
+" -> "2 Init
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L2 :  grant_1 = false
+"  [label="default"];
+  "2 Init
+           Init :  EMPTY_STATEMENT
+             L0 :  cstate12 = 0
+             L2 :  grant_1 = false
+" -> "3 Read
+           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+"  [label="default"];
+  "4 Body
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t1 = cstate12 == 0
+          CJ_L6 :  if #_t1 goto IF_L3
+" -> "5 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"  [label="default"];
+  "4 Body
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t1 = cstate12 == 0
+          CJ_L6 :  if #_t1 goto IF_L3
+" -> "6 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+         CJ_L11 :  if #_t2 goto IF_L8
+"  [label="alter"];
+  "6 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+         CJ_L11 :  if #_t2 goto IF_L8
+" -> "10 ELSE_L9
+        ELSE_L9 :  EMPTY_STATEMENT
+            L14 :  cstate12 = 0
+            L16 :  grant_1 = true
+        UCJ_L17 :  goto END_IF_L8
+"  [label="default"];
+  "6 IF_L3
+          IF_L3 :  EMPTY_STATEMENT
+            L10 :  #_t2 = NOT req1
+         CJ_L11 :  if #_t2 goto IF_L8
+" -> "9 IF_L8
+          IF_L8 :  EMPTY_STATEMENT
+            L19 :  cstate12 = 0
+            L21 :  grant_1 = false
+"  [label="alter"];
+  "10 ELSE_L9
+        ELSE_L9 :  EMPTY_STATEMENT
+            L14 :  cstate12 = 0
+            L16 :  grant_1 = true
+        UCJ_L17 :  goto END_IF_L8
+" -> "8 END_IF_L8
+      END_IF_L8 :  EMPTY_STATEMENT
+"  [label="alter"];
+  "9 IF_L8
+          IF_L8 :  EMPTY_STATEMENT
+            L19 :  cstate12 = 0
+            L21 :  grant_1 = false
+" -> "8 END_IF_L8
+      END_IF_L8 :  EMPTY_STATEMENT
+"  [label="default"];
+  "8 END_IF_L8
+      END_IF_L8 :  EMPTY_STATEMENT
+" -> "5 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+"  [label="default"];
+  "5 END_IF_L3
+      END_IF_L3 :  EMPTY_STATEMENT
+" -> "7 End
+            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+"  [label="default"];
+  "0 Entry
+          Entry :  EMPTY_STATEMENT
+" -> "1 Responder1
+     Responder1 :  EMPTY_STATEMENT
+"  [label="default"];
+  "7 End
+            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+" -> "3 Read
+           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+"  [label="default"];
+  "7 End
+            End :  EMPTY_STATEMENT
+            L22 :  print(cstate12,)
+            L23 :  print(grant_1,)
+" -> "11 Exit
+           Exit :  EMPTY_STATEMENT
+"  [label="alter"];
+  "3 Read
+           Read :  EMPTY_STATEMENT
+            L24 :  req1 = read()
+" -> "4 Body
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t1 = cstate12 == 0
+          CJ_L6 :  if #_t1 goto IF_L3
+"  [label="default"];
+}

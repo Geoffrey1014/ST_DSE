@@ -1,0 +1,18 @@
+digraph G {
+  ranksep=.25;
+  edge [arrowsize=.5]
+  node [shape=circle, fontname="ArialNarrow",
+        fontsize=12,  height=1.2];
+  "4 Body"; "3 Read"; "9 IF_L8"; "5 END_IF_L3"; "0 Entry"; "7 End"; "2 Init"; "1 Responder1"; "10 ELSE_L9"; "11 Exit"; "6 IF_L3"; "8 END_IF_L8"; 
+  "3 Read" -> "4 Body";
+  "1 Responder1" -> "2 Init";
+  "2 Init" -> "3 Read";
+  "5 END_IF_L3" -> "7 End";
+  "0 Entry" -> "1 Responder1";
+  "7 End" -> "11 Exit";
+  "6 IF_L3" -> "8 END_IF_L8";
+  "6 IF_L3" -> "9 IF_L8";
+  "6 IF_L3" -> "10 ELSE_L9";
+  "4 Body" -> "5 END_IF_L3";
+  "4 Body" -> "6 IF_L3";
+}
