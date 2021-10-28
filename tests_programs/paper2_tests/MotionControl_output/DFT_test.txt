@@ -1,0 +1,59 @@
+branch states: 5
+consumed time: 34
+countInit: 16
+succTestedDu: 26
+countedDu: 27
+totalDu: 27
+dft: 0.962963
+
+
+def: AVD_CoStep @ L63 @ Read
+use: AVD_CoStep @ L39 @ END_IF_L27
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=0}
+
+def: AVD_CoStep @ L63 @ Read
+use: AVD_CoStep @ L40 @ END_IF_L27
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=-1}
+
+def: AVD_C_Motion2Lo @ L45 @ ELSE_L38
+use: AVD_C_Motion2Lo @ L58 @ End
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=7}
+
+def: AVD_CoStep @ L63 @ Read
+use: AVD_CoStep @ L18 @ Body
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=0}
+
+def: AVD_CoStep @ L63 @ Read
+use: AVD_CoStep @ L29 @ END_IF_L15
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=-2}
+
+def: AVD_C_Motion1Hi @ L36 @ IF_L27
+use: AVD_C_Motion1Hi @ L50 @ End
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=8}
+
+def: AVD_C_Motion1Hi @ L33 @ ELSE_L28
+use: AVD_C_Motion1Hi @ L50 @ End
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=-1}
+
+def: AVD_C_Motion1Lo @ L26 @ IF_L15
+use: AVD_C_Motion1Lo @ L56 @ End
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=4}
+
+def: AVD_C_Motion1Lo @ L23 @ ELSE_L16
+use: AVD_C_Motion1Lo @ L56 @ End
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=0}
+
+def: AVD_CoStep @ L63 @ Read
+use: AVD_CoStep @ L17 @ Body
+state: {AVD_C_Motion1Hi=true, AVD_C_Motion1Lo=false, AVD_C_Motion2Lo=false, P_Motion2Lo_2=6, P_Motion2Hi_2=8, #_t1=true, CONSTANT=3, P_Motion2Lo_1=4, P_Motion2Hi_1=7, #_t0=false, #_t2=false, #_t5=true, #_t10=false, P_Motion3Lo=5, #_t9=true, #_t8=false, P_Motion1Hi=8, AVD_CoStep=8, P_Motion3Hi_2=8, P_Motion3Hi_1=6, P_Motion1Lo_1=3, P_Motion1Lo_2=7}
+tc:{AVD_CoStep=-3}
+

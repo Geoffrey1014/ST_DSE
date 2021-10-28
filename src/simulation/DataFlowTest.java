@@ -67,14 +67,17 @@ public class DataFlowTest extends CoverageTest {
                 countInit += 1;
                 continue;
             }
-            HashMap<LlLocation, ValueOfDiffType> inputs = dftTestaDuPair(def, use, duPairAndDoms);
-            if (inputs != null) {
-//                testingResult.append("def: ").append(def.toStringSimple()).append("\n");
-//                testingResult.append("use: ").append(use.toStringSimple()).append("\n");
-//                testingResult.append(inputs.toString()).append("\n\n");
+            Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> result = dftTestaDuPair(def, use, duPairAndDoms);
+
+            if (result != null) {
+                HashMap<LlLocation, ValueOfDiffType> inputs = result.a1;
+                testingResult.append("def: ").append(def.toStringSimple()).append("\n");
+                testingResult.append("use: ").append(use.toStringSimple()).append("\n");
+                testingResult.append("state: ").append(result.a2.toString()).append("\n");
+                testingResult.append("tc:").append(inputs.toString()).append("\n\n");
             }
         }
-        System.out.println(testingResult);
+//        System.out.println(testingResult);
         return printResult(stateNum, totalTime, countInit, countedDu, successTestedDu, duPairAndDomsList.size());
     }
 
@@ -102,7 +105,7 @@ public class DataFlowTest extends CoverageTest {
      * 这是在一个PLC state 下进行的测试，如果不行，则需要换一个新的PLC state。
      * 我觉得算法应该是先想办法到达 def, 再从def 到 use
      */
-    public HashMap<LlLocation, ValueOfDiffType> dftTestaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
+    public Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> dftTestaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
 
 
         long startTime = System.currentTimeMillis(); //程序开始记录时间
@@ -120,7 +123,8 @@ public class DataFlowTest extends CoverageTest {
 //                System.err.println("get the du test!");
 //                testingResult.append(state.toString()).append("\n");
                 this.successTestedDu += 1;
-                return inputs;
+
+                return new Tuple2<>(inputs,state);
             }
         }
 //        System.err.println("def: " + def.toStringSimple());
@@ -371,27 +375,27 @@ public class DataFlowTest extends CoverageTest {
     public String printResult(int statesSize, long totalTime, int countInit, int countedDu, int successTestedDu,
                               int duPairAndDomsListSize) {
         String resultString = "";
-        System.out.println("branch states: " + statesSize);
+//        System.out.println("branch states: " + statesSize);
         resultString += "branch states: " + statesSize + "\n";
 
-        System.out.println("consumed time: " + totalTime);
+//        System.out.println("consumed time: " + totalTime);
         resultString += "consumed time: " + totalTime + "\n";
 
-        System.out.println("countInit: " + countInit);
+//        System.out.println("countInit: " + countInit);
         resultString += "countInit: " + countInit + "\n";
 
-        System.out.println("succTestedDu: " + successTestedDu);
+//        System.out.println("succTestedDu: " + successTestedDu);
         resultString += "succTestedDu: " + successTestedDu + "\n";
 
-        System.out.println("countedDu: " + countedDu);
+//        System.out.println("countedDu: " + countedDu);
         resultString += "countedDu: " + countedDu + "\n";
 
-        System.out.println("totalDu: " + duPairAndDomsListSize);
+//        System.out.println("totalDu: " + duPairAndDomsListSize);
         resultString += "totalDu: " + duPairAndDomsListSize + "\n";
 
-        System.out.println("dft: " + (float) successTestedDu / duPairAndDomsListSize);
-        resultString += "dft: " + (float) successTestedDu / duPairAndDomsListSize + "\n";
-
+//        System.out.println("dft: " + (float) successTestedDu / duPairAndDomsListSize);
+        resultString += "dft: " + (float) successTestedDu / duPairAndDomsListSize + "\n\n\n";
+        resultString += testingResult.toString();
         return resultString;
     }
 

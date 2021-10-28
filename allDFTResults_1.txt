@@ -1,49 +1,59 @@
 
 
------ tests_programs/paper1_tests/input/01_UPPAAL_LLATCH1_I.txt ---------
+----- tests_programs\paper2_tests\input\01_UPPAAL_LLATCH1_I.txt ---------
 
------ tests_programs/paper1_tests/input/02_UPPAAL_FAN_CONTROL.txt ---------
+----- tests_programs\paper2_tests\input\02_UPPAAL_FAN_CONTROL.txt ---------
 
------ tests_programs/paper1_tests/input/03_NumericalLTLRefined.txt ---------
+----- tests_programs\paper2_tests\input\03_NumericalLTLRefined.txt ---------
 
------ tests_programs/paper1_tests/input/04_SimpleConveyorBelt.txt ---------
+----- tests_programs\paper2_tests\input\04_SimpleConveyorBelt.txt ---------
 
------ tests_programs/paper1_tests/input/05_HydraulicRamp.txt ---------
+----- tests_programs\paper2_tests\input\05_HydraulicRamp.txt ---------
 
------ tests_programs/paper1_tests/input/06_ArbitorLTL.txt ---------
+----- tests_programs\paper2_tests\input\06_ArbitorLTL.txt ---------
 
------ tests_programs/paper1_tests/input/07_PriorityArbitorLTL.txt ---------
+----- tests_programs\paper2_tests\input\07_PriorityArbitorLTL.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto1.txt ---------
+----- tests_programs\paper2_tests\input\EmergenceyStop.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto11.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL1.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto2.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL2.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto3.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL3.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto4.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL4.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto5.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL5.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto6.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL6.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto7.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL7.txt ---------
 
------ tests_programs/paper1_tests/input/IndustrialAuto8.txt ---------
+----- tests_programs\paper2_tests\input\FB_G4LTL8.txt ---------
 
------ tests_programs/paper1_tests/input/Responder1.txt ---------
+----- tests_programs\paper2_tests\input\GaMonitoring.txt ---------
 
------ tests_programs/paper1_tests/input/Responder2.txt ---------
+----- tests_programs\paper2_tests\input\MotionControl.txt ---------
 
------ tests_programs/paper1_tests/input/Responder3.txt ---------
+----- tests_programs\paper2_tests\input\PumpControl.txt ---------
 
------ tests_programs/paper1_tests/input/counter.txt ---------
+----- tests_programs\paper2_tests\input\Responder1.txt ---------
 
------ tests_programs/paper1_tests/input/example.txt ---------
+----- tests_programs\paper2_tests\input\Responder2.txt ---------
 
------ tests_programs/paper1_tests/input/example2.txt ---------
+----- tests_programs\paper2_tests\input\SaftyRequest.txt ---------
 
------ tests_programs/paper1_tests/input/example3.txt ---------
+----- tests_programs\paper2_tests\input\SorterControl.txt ---------
 
------ tests_programs/paper1_tests/input/power.txt ---------
+----- tests_programs\paper2_tests\input\counter.txt ---------
+
+----- tests_programs\paper2_tests\input\example.txt ---------
+
+----- tests_programs\paper2_tests\input\example2.txt ---------
+
+----- tests_programs\paper2_tests\input\example4.txt ---------
+
+----- tests_programs\paper2_tests\input\factor.txt ---------
+
+----- tests_programs\paper2_tests\input\power.txt ---------

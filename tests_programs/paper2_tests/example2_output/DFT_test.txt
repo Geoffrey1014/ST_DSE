@@ -1,0 +1,79 @@
+branch states: 5
+consumed time: 6
+countInit: 3
+succTestedDu: 17
+countedDu: 21
+totalDu: 21
+dft: 0.8095238
+
+
+def: X @ L31 @ Read
+use: X @ L21 @ END_IF_L15
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=-1, Y=0}
+
+def: X @ L31 @ Read
+use: X @ L12 @ ELSE_L4
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=0, Y=-4}
+
+def: Y @ L30 @ Read
+use: Y @ L16 @ ELSE_L10
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=0, Y=0}
+
+def: X @ L31 @ Read
+use: X @ L16 @ ELSE_L10
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=4, Y=1}
+
+def: V @ L28 @ IF_L3
+use: V @ L29 @ End
+state: {V=0}
+tc:{X=4, Y=4}
+
+def: V @ L22 @ END_IF_L15
+use: V @ L29 @ End
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=3, Y=-3}
+
+def: V @ L25 @ IF_L9
+use: V @ L29 @ End
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=6, Y=0}
+
+def: Y @ L30 @ Read
+use: Y @ L19 @ IF_L15
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=-1, Y=0}
+
+def: V @ L28 @ IF_L3
+use: V @ L6 @ Body
+state: {V=0}
+tc:{X=0, Y=2}
+
+def: V @ L22 @ END_IF_L15
+use: V @ L6 @ Body
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=3, Y=-4}
+
+def: V @ L25 @ IF_L9
+use: V @ L6 @ Body
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=6, Y=0}
+
+def: V @ L22 @ END_IF_L15
+use: V @ L21 @ END_IF_L15
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=-1, Y=2}
+
+def: V @ L20 @ IF_L15
+use: V @ L21 @ END_IF_L15
+state: {V=101, X=-1, #_t1=false, Y=0, #_t3=false, #_t5=100, #_t4=true, #_t6=101}
+tc:{X=-2, Y=0}
+
+def: V @ L22 @ END_IF_L15
+use: V @ L19 @ IF_L15
+state: {X=-1, #_t1=true, Y=0, V=100}
+tc:{X=3, Y=4}
+

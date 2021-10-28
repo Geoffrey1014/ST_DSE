@@ -1,0 +1,57 @@
+Node: program0 :
+Init, 
+
+Node: Init :
+Read, 
+
+Node: Body :
+START_ELSIF_L7, END_IF_L3, IF_L3, 
+
+Node: IF_L3 :
+IF_L9, END_IF_L9, START_ELSIF_L13, 
+
+Node: IF_L9 :
+
+
+Node: START_ELSIF_L13 :
+ELSIF_L20, 
+
+Node: ELSIF_L20 :
+
+
+Node: END_IF_L9 :
+
+
+Node: START_ELSIF_L7 :
+WHILE_L36, END_ELSIF_L31, 
+
+Node: WHILE_L36 :
+END_WHILE_L36, LOOP_L37, 
+
+Node: LOOP_L37 :
+
+
+Node: END_WHILE_L36 :
+
+
+Node: END_ELSIF_L31 :
+ELSIF_L48, 
+
+Node: ELSIF_L48 :
+
+
+Node: END_IF_L3 :
+End, 
+
+Node: Entry :
+program0, 
+
+Node: End :
+Exit, 
+
+Node: Read :
+Body, 
+
+Node: Exit :
+
+

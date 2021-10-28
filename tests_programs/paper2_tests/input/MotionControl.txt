@@ -10,7 +10,7 @@ AVD_C_Motion1Hi: BOOL;
 AVD_C_Motion2Lo: BOOL;
 END_VAR
 
-VAR CONSTANT
+VAR
 P_Motion1Lo_1 : INT := 3;
 P_Motion1Lo_2 : INT := 7;
 P_Motion1Hi : INT := 8;

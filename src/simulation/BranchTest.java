@@ -29,7 +29,7 @@ public class BranchTest extends CoverageTest{
     private BranchManager branchManager;
     public PtestManager ptestManager;
     private int ptestCounter;
-    protected boolean inreaseInitInputs = false;
+    protected boolean inreaseRandomicity = false;
 
     public StateManager getStateManager() {
         return stateManager;
@@ -76,7 +76,7 @@ public class BranchTest extends CoverageTest{
      * @param fileName
      */
     public String branchTest(String fileName, boolean inreaseInitInputs) {
-        this.inreaseInitInputs = inreaseInitInputs;
+        this.inreaseRandomicity = inreaseInitInputs;
         long startTime = System.currentTimeMillis(); //程序开始记录时间
         ptestCounter = 0;
         HashMap<String,Double> oldBranchTestData = new OldBranchTestData().data;
@@ -118,7 +118,7 @@ public class BranchTest extends CoverageTest{
             oldConMenory = stateManager.popLeft();
             oneCircleTest(oldConMenory, this.concreteExecutor.createRandomInputs());
             branchCoverage = branchManager.coverageRate();
-            if (branchCoverage > 0.99 || counter > 1000) break;
+            if (branchCoverage > 0.99 || counter > 40) break;
 //            genGraphViz("");
         }
 
@@ -130,7 +130,7 @@ public class BranchTest extends CoverageTest{
 
         LinkedList<HashMap<LlLocation, ValueOfDiffType>> inputsWorkList = new LinkedList<>();
         inputsWorkList.add(inputs);
-        if (this.inreaseInitInputs) createRandomInputs(inputsWorkList);
+        if (this.inreaseRandomicity) createRandomInputs(inputsWorkList);
         int counter = 0;
         while (inputsWorkList.size() > 0) {
 //            System.out.println("--inputs: " + counter++);
@@ -142,8 +142,10 @@ public class BranchTest extends CoverageTest{
             ExecutedRoute executedRoute = exeResult.a1;
             stateManager.add(exeResult.a2);
             branchManager.addRoute(executedRoute.route, executedRoute.branches);
-            if(hasLoop(executedRoute)){
-                useCPP(startConMenory);
+            if (this.inreaseRandomicity){
+                if(hasLoop(executedRoute)){
+                    useCPP(startConMenory);
+                }
             }
             ptestWithState.addPLCEndState(exeResult.a2);
 

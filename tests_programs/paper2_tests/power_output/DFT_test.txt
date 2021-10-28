@@ -1,0 +1,139 @@
+branch states: 6
+consumed time: 24
+countInit: 2
+succTestedDu: 28
+countedDu: 28
+totalDu: 28
+dft: 1.0
+
+
+def: RES @ L23 @ END_IF_L15
+use: RES @ L30 @ LOOP_L25
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=-1}
+
+def: RES @ L31 @ LOOP_L25
+use: RES @ L30 @ LOOP_L25
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-2.5, Y=-4}
+
+def: X @ L57 @ Read
+use: X @ L30 @ LOOP_L25
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=-1}
+
+def: Y @ L56 @ Read
+use: Y @ L8 @ Body
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=2.5, Y=1}
+
+def: RES @ L23 @ END_IF_L15
+use: RES @ L53 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-4.9, Y=0}
+
+def: RES @ L49 @ ELSE_L42
+use: RES @ L53 @ End
+state: {RES=0.0, FLAG=false, EXP=0}
+tc:{X=-2.4, Y=-3}
+
+def: RES @ L31 @ LOOP_L25
+use: RES @ L53 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.9, Y=-3}
+
+def: RES @ L23 @ END_IF_L15
+use: RES @ L48 @ ELSE_L42
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=1.0, Y=-4}
+
+def: RES @ L31 @ LOOP_L25
+use: RES @ L48 @ ELSE_L42
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-4.2, Y=-2}
+
+def: Y @ L56 @ Read
+use: Y @ L14 @ IF_L5
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-2.0, Y=2}
+
+def: Y @ L56 @ Read
+use: Y @ L11 @ ELSE_L6
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=0}
+
+def: EXP @ L12 @ ELSE_L6
+use: EXP @ L27 @ WHILE_L24
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=4.3, Y=-4}
+
+def: EXP @ L34 @ LOOP_L25
+use: EXP @ L27 @ WHILE_L24
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=-1}
+
+def: EXP @ L14 @ IF_L5
+use: EXP @ L27 @ WHILE_L24
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=3.6, Y=4}
+
+def: FLAG @ L21 @ IF_L15
+use: FLAG @ L17 @ END_IF_L5
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=3.4, Y=-1}
+
+def: FLAG @ L52 @ IF_L41
+use: FLAG @ L17 @ END_IF_L5
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=-1}
+
+def: Y @ L56 @ Read
+use: Y @ L38 @ END_WHILE_L24
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-4.0, Y=3}
+
+def: EXP @ L12 @ ELSE_L6
+use: EXP @ L33 @ LOOP_L25
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=2.7, Y=-1}
+
+def: EXP @ L34 @ LOOP_L25
+use: EXP @ L33 @ LOOP_L25
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=1.2, Y=2}
+
+def: EXP @ L14 @ IF_L5
+use: EXP @ L33 @ LOOP_L25
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=1}
+
+def: X @ L57 @ Read
+use: X @ L44 @ IF_L36
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-2.6, Y=-2}
+
+def: EXP @ L12 @ ELSE_L6
+use: EXP @ L55 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=-1.3, Y=-3}
+
+def: EXP @ L34 @ LOOP_L25
+use: EXP @ L55 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=-1}
+
+def: EXP @ L14 @ IF_L5
+use: EXP @ L55 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=1}
+
+def: FLAG @ L21 @ IF_L15
+use: FLAG @ L54 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=2.2, Y=-2}
+
+def: FLAG @ L52 @ IF_L41
+use: FLAG @ L54 @ End
+state: {#_t13=true, RES=1.0, #_t8=false, #_t15=true, X=0.0, #_t1=false, Y=0, #_t2=0, FLAG=false, EXP=0, #_t4=true}
+tc:{X=0.0, Y=0}
+

@@ -1,0 +1,166 @@
+|--POUS
+  |--PROGRAM
+    |--name: program0
+      |--VARBlock:
+        |--accessType: VAR
+        |--varDecl
+          |--name: V
+            |--type: RES_INT
+        |--value: 0
+      |--VARBlock:
+        |--accessType: VAR_INPUT
+        |--varDecl
+          |--name: X
+            |--type: RES_INT
+      |--VARBlock:
+        |--accessType: VAR_OUTPUT
+        |--varDecl
+          |--name: Q
+            |--type: RES_BOOL
+        |--value: false
+      |--codeBlock:
+        |--ifStmt
+          |--condExpr
+            |--binaryEquateOper
+              |--lhs
+                |--locationVar
+                  |--name: V
+                  |--type: RES_INT
+              |--op: EQ_OP
+              |--rhs
+                |--IntLiteral
+                  |--value: 0
+          |--body
+            |--codeBlock:
+              |--ifStmt
+                |--condExpr
+                  |--binaryEquateOper
+                    |--lhs
+                      |--locationVar
+                        |--name: X
+                        |--type: RES_INT
+                    |--op: EQ_OP
+                    |--rhs
+                      |--IntLiteral
+                        |--value: 3
+                |--body
+                  |--codeBlock:
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: V
+                          |--type: RES_INT
+                      |--rhs
+                        |--IntLiteral
+                          |--value: 2
+                    |--assignStmtEquals
+                      |--lhs
+                        |--locationVar
+                          |--name: Q
+                          |--type: RES_BOOL
+                      |--rhs
+                        |--boolLiteral
+                          |--value: true
+                |--elsif
+                  |--elsifStmt
+                    |--condExpr
+                      |--binaryEquateOper
+                        |--lhs
+                          |--locationVar
+                            |--name: X
+                            |--type: RES_INT
+                        |--op: EQ_OP
+                        |--rhs
+                          |--IntLiteral
+                            |--value: 4
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: V
+                              |--type: RES_INT
+                          |--rhs
+                            |--IntLiteral
+                              |--value: 0
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: Q
+                              |--type: RES_BOOL
+                          |--rhs
+                            |--boolLiteral
+                              |--value: false
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: V
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 2
+              |--body
+                |--codeBlock:
+                  |--whileStmt
+                    |--condExpr
+                      |__binaryRelOper
+                        |__lhs
+                          |--locationVar
+                            |--name: V
+                            |--type: RES_INT
+                        |__op: LT_OP
+                        |__rhs
+                          |--locationVar
+                            |--name: X
+                            |--type: RES_INT
+                    |--body
+                      |--codeBlock:
+                        |--assignStmtEquals
+                          |--lhs
+                            |--locationVar
+                              |--name: V
+                              |--type: RES_INT
+                          |--rhs
+                            |--binaryArithOper
+                              |--lhs
+                                |--locationVar
+                                  |--name: V
+                                  |--type: RES_INT
+                              |--op: ADD_OP
+                              |--rhs
+                                |--IntLiteral
+                                  |--value: 1
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: Q
+                        |--type: RES_BOOL
+                    |--rhs
+                      |--boolLiteral
+                        |--value: true
+          |--elsif
+            |--elsifStmt
+              |--condExpr
+                |--binaryEquateOper
+                  |--lhs
+                    |--locationVar
+                      |--name: V
+                      |--type: RES_INT
+                  |--op: EQ_OP
+                  |--rhs
+                    |--IntLiteral
+                      |--value: 4
+              |--body
+                |--codeBlock:
+                  |--assignStmtEquals
+                    |--lhs
+                      |--locationVar
+                        |--name: Q
+                        |--type: RES_BOOL
+                    |--rhs
+                      |--boolLiteral
+                        |--value: false

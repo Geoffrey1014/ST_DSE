@@ -1,6 +1,0 @@
-MC_test1: {LOAD=true, IN_1=false, TLOAD=true, RESET=false}
-MC_test2: {LOAD=true, IN_1=false, TLOAD=true, RESET=false}
-MC_test3: {LOAD=false, IN_1=false, TLOAD=false, RESET=true}
-MC_test4: {LOAD=true, IN_1=false, TLOAD=true, RESET=false}
-MC_test5: {LOAD=false, IN_1=false, TLOAD=false, RESET=true}
-MC_test6: {LOAD=false, IN_1=false, TLOAD=false, RESET=false}

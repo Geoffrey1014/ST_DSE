@@ -1,0 +1,89 @@
+branch states: 12
+consumed time: 18
+countInit: 7
+succTestedDu: 23
+countedDu: 32
+totalDu: 32
+dft: 0.71875
+
+
+def: X @ L58 @ Read
+use: X @ L38 @ WHILE_L36
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=-1}
+
+def: Y @ L18 @ IF_L9
+use: Y @ L57 @ End
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=3}
+
+def: Y @ L54 @ ELSIF_L48
+use: Y @ L57 @ End
+state: {#_t14=4, #_t11=false, #_t12=false, #_t17=true, V=4, X=1, #_t1=false, Y=4, #_t3=true}
+tc:{X=1}
+
+def: Y @ L28 @ ELSIF_L20
+use: Y @ L57 @ End
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=4}
+
+def: Y @ L46 @ END_WHILE_L36
+use: Y @ L57 @ End
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=4}
+
+def: V @ L43 @ LOOP_L37
+use: V @ L33 @ START_ELSIF_L7
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=3}
+
+def: X @ L58 @ Read
+use: X @ L11 @ IF_L3
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=2}
+
+def: V @ L43 @ LOOP_L37
+use: V @ L5 @ Body
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=3}
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L5 @ Body
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=4}
+
+def: V @ L16 @ IF_L9
+use: V @ L5 @ Body
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=3}
+
+def: X @ L58 @ Read
+use: X @ L22 @ START_ELSIF_L13
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=-1}
+
+def: V @ L43 @ LOOP_L37
+use: V @ L42 @ LOOP_L37
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=3}
+
+def: V @ L43 @ LOOP_L37
+use: V @ L38 @ WHILE_L36
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=3}
+
+def: V @ L43 @ LOOP_L37
+use: V @ L56 @ End
+state: {X=3, #_t1=true, Y=1, #_t3=true, V=2}
+tc:{X=3}
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L56 @ End
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=4}
+
+def: V @ L16 @ IF_L9
+use: V @ L56 @ End
+state: {X=0, #_t1=true, Y=0, #_t3=false, V=0, #_t7=false}
+tc:{X=3}
+

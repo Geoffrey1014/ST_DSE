@@ -1,0 +1,45 @@
+Node: example2 :
+Init, 
+
+Node: Init :
+Read, 
+
+Node: Body :
+IF_L3, ELSE_L4, END_IF_L3, 
+
+Node: ELSE_L4 :
+ELSE_L10, END_IF_L9, IF_L9, 
+
+Node: ELSE_L10 :
+END_IF_L15, IF_L15, 
+
+Node: IF_L15 :
+
+
+Node: END_IF_L15 :
+
+
+Node: IF_L9 :
+
+
+Node: END_IF_L9 :
+
+
+Node: IF_L3 :
+
+
+Node: END_IF_L3 :
+End, 
+
+Node: Entry :
+example2, 
+
+Node: End :
+Exit, 
+
+Node: Read :
+Body, 
+
+Node: Exit :
+
+

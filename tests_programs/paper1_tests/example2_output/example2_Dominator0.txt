@@ -1,0 +1,45 @@
+Node: example2 :
+example2, Entry, 
+
+Node: Init :
+Init, example2, Entry, 
+
+Node: Body :
+Read, Init, Body, example2, Entry, 
+
+Node: ELSE_L4 :
+ELSE_L4, Read, Init, Body, example2, Entry, 
+
+Node: ELSE_L10 :
+ELSE_L4, Read, Init, Body, ELSE_L10, example2, Entry, 
+
+Node: IF_L15 :
+ELSE_L4, Read, IF_L15, Init, Body, ELSE_L10, example2, Entry, 
+
+Node: END_IF_L15 :
+END_IF_L15, ELSE_L4, Read, Init, Body, ELSE_L10, example2, Entry, 
+
+Node: IF_L9 :
+ELSE_L4, IF_L9, Read, Init, Body, example2, Entry, 
+
+Node: END_IF_L9 :
+END_IF_L9, ELSE_L4, Read, Init, Body, example2, Entry, 
+
+Node: IF_L3 :
+Read, Init, IF_L3, Body, example2, Entry, 
+
+Node: END_IF_L3 :
+Read, Init, Body, example2, END_IF_L3, Entry, 
+
+Node: Entry :
+Entry, 
+
+Node: End :
+Read, Init, Body, example2, END_IF_L3, End, Entry, 
+
+Node: Read :
+Read, Init, example2, Entry, 
+
+Node: Exit :
+Read, Init, Exit, Body, example2, END_IF_L3, End, Entry, 
+

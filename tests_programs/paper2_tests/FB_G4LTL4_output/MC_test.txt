@@ -1,3 +1,0 @@
-MC_test1: {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=true, x_2=false, x_1=true, x_3=false}
-MC_test2: {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=true, x_2=true, x_1=false, x_3=false}{x_0=true, x_2=true, x_1=false, x_3=false}
-MC_test3: {x_0=false, x_2=true, x_1=false, x_3=true}{x_0=false, x_2=false, x_1=false, x_3=false}

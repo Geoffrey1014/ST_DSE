@@ -1,3 +1,6 @@
+consumed time(ms): 53
+example branch coverage: 1.0
+------MCtest---------
 MC_test1 : {X=0}{X=4}
 MC_test2 : {X=0}{X=3}{X=3}{X=1}
 MC_test3 : {X=0}{X=3}{X=-4}{X=4}{X=-4}

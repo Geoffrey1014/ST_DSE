@@ -13,7 +13,7 @@ DBC_PV_C_Fan3Lo: BOOL;
 DBC_PV_C_Fan3Hi: BOOL;
 END_VAR
 
-VAR CONSTANT
+VAR
 P_Fan1Lo_1 : INT := 3;
 P_Fan1Lo_2 : INT := 7;
 P_Fan1Hi : INT := 8;

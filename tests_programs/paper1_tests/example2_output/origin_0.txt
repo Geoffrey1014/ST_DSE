@@ -1,0 +1,54 @@
+CFG:
+       example2 :  EMPTY_STATEMENT
+
+           Init :  EMPTY_STATEMENT
+             L0 :  X = 0
+             L1 :  Y = 0
+             L2 :  V = 0
+
+           Body :  EMPTY_STATEMENT
+             L5 :  #_t0 = 0
+             L6 :  #_t1 = V <= #_t0
+          CJ_L7 :  if #_t1 goto IF_L3
+
+        ELSE_L4 :  EMPTY_STATEMENT
+            L11 :  #_t2 = 5
+            L12 :  #_t3 = X > #_t2
+         CJ_L13 :  if #_t3 goto IF_L9
+
+       ELSE_L10 :  EMPTY_STATEMENT
+            L16 :  #_t4 = Y > X
+         CJ_L17 :  if #_t4 goto IF_L15
+
+         IF_L15 :  EMPTY_STATEMENT
+            L19 :  #_t5 = V - Y
+            L20 :  V = #_t5
+
+     END_IF_L15 :  EMPTY_STATEMENT
+            L21 :  #_t6 = V - X
+            L22 :  V = #_t6
+        UCJ_L23 :  goto END_IF_L9
+
+          IF_L9 :  EMPTY_STATEMENT
+            L24 :  #_t7 = 200
+            L25 :  V = #_t7
+
+      END_IF_L9 :  EMPTY_STATEMENT
+        UCJ_L26 :  goto END_IF_L3
+
+          IF_L3 :  EMPTY_STATEMENT
+            L27 :  #_t8 = 100
+            L28 :  V = #_t8
+
+      END_IF_L3 :  EMPTY_STATEMENT
+
+          Entry :  EMPTY_STATEMENT
+
+            End :  EMPTY_STATEMENT
+            L29 :  print(V,)
+
+           Read :  EMPTY_STATEMENT
+            L30 :  Y = read()
+            L31 :  X = read()
+
+           Exit :  EMPTY_STATEMENT

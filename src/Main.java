@@ -34,6 +34,7 @@ public class Main {
 
     public static String walkTree(String filePath,Boolean bts) {
         String[] pathSegments = filePath.split("/");
+//        String[] pathSegments = filePath.split("\\\\");
         String prefix = pathSegments[0] + "/" + pathSegments[1] + "/";
         String inputFileName = pathSegments[3];
 
@@ -44,7 +45,6 @@ public class Main {
         if (!dir.exists()) {// 判断目录是否存在
             dir.mkdir();
         }
-        String dftResult = "";
 
         try {
             CharStream stream = CharStreams.fromFileName(inputFile);
@@ -67,8 +67,8 @@ public class Main {
             listener.pous.accept(semanticCheckVisitor);
 
             if (updateFig) {
-                System.out.println("semantic check error message:");
-                System.err.println(semanticCheckVisitor.errorMessage);
+//                System.out.println("semantic check error message:");
+//                System.err.println(semanticCheckVisitor.errorMessage);
                 System.out.println("pretty print:");
                 writeFile(listener.pous.prettyPrint(""), outPutDir + "prettyPrint" + ".txt");
                 System.out.println("low level IR");
@@ -95,7 +95,7 @@ public class Main {
                 if (updateFig) {
                     System.out.println("afterCSE---------------------");
                     writeFile(cfg.toString(), outPutDir + "new_" + "CSE_" + cfgCounter + ".txt");
-//                    genGraphViz(inputFileNamePrefix + "_CSE_" + cfgCounter, cfg, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_CSE_" + cfgCounter, cfg, outPutDir);
                 }
 
 
@@ -103,7 +103,7 @@ public class Main {
                 if (updateFig) {
                     System.out.println("afterCP-----------------------");
                     writeFile(cfg.toString(), outPutDir + "new_" + "CP_" + cfgCounter + ".txt");
-//                    genGraphViz(inputFileNamePrefix + "_CP_" + cfgCounter, cfg, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_CP_" + cfgCounter, cfg, outPutDir);
                 }
 
                 // Dominator
@@ -118,7 +118,7 @@ public class Main {
                 if (updateFig) {
                     writeFile(dominatorMapToString(cfg, dominatorsMap), outPutDir + inputFileNamePrefix + "_Dominator" + cfgCounter + ".txt");
                     writeFile(dominatorMapToString(cfg, dominatingTreeMap), outPutDir + inputFileNamePrefix + "_DominatorTree" + cfgCounter + ".txt");
-//                    genGraphViz(inputFileNamePrefix + "_DomTree_" + cfgCounter, domTree, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_DomTree_" + cfgCounter, domTree, outPutDir);
                 }
 
                 GlobalDCE globalDCE = new GlobalDCE(cfg);
@@ -127,7 +127,7 @@ public class Main {
                 if (updateFig) {
                     System.out.println("afterDSE---------------------");
                     writeFile(cfg.toString(), outPutDir + inputFileNamePrefix + "_new_" + "DSE_" + cfgCounter + ".txt");
-//                    genGraphViz(inputFileNamePrefix + "_DSE_" + cfgCounter, cfg, outPutDir);
+                    genGraphViz(inputFileNamePrefix + "_DSE_" + cfgCounter, cfg, outPutDir);
                 }
 
 
@@ -141,10 +141,10 @@ public class Main {
 //                HashMap<VarAndStmt, HashSet<Tuple2<VarAndStmt, HashSet<BasicBlock>>>> udChianWithDmt = udChainAndDoms.udChianWithDmt;
 //                writeCutNodesToFile(udChianWithDmt, outPutDir +inputFileNamePrefix+ "_CutNodes" + cfgCounter + ".txt");
 
-//                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
-//                System.out.println("data flow testing!----------------");
-//                dftResult += dft.dataFlowTesting(bts);
-
+                DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
+                System.out.println("data flow testing!----------------");
+                String dftResult = dft.dataFlowTesting(bts);
+                writeFile(dftResult,outPutDir + "DFT_test" + ".txt");
 //                System.out.println("branch testing ------------");
 //                BranchTest branchTest = new BranchTest(cfg);
 //                String branchTestResult = branchTest.branchTest(inputFileNamePrefix,inreaseInitInputs);
@@ -174,44 +174,46 @@ public class Main {
         } catch (IOException e) {
             System.err.println("There was an error:\n" + e);
         }
-        return dftResult;
+        return "";
     }
 
     public static void main(String[] args) {
         MyPrint.levelZero.print(System.getProperty("user.home"));
-        updateFig = true;
+        updateFig = false;
         inreaseInitInputs = false;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
+        inputDir = "tests_programs/paper2_tests/input/";
         String file;
-        file = "01_UPPAAL_LLATCH1_I.txt";
+//        file = "01_UPPAAL_LLATCH1_I.txt";
         file = "02_UPPAAL_FAN_CONTROL.txt";
-        file = "03_NumericalLTLRefined.txt";
-        file = "04_SimpleConveyorBelt.txt";
-        file = "05_HydraulicRamp.txt";
-        file = "06_ArbitorLTL.txt";
-        file = "07_PriorityArbitorLTL.txt";
-        file = "IndustrialAuto1.txt";
-        file = "IndustrialAuto2.txt";
-        file = "IndustrialAuto3.txt";
-        file = "IndustrialAuto4.txt";
-        file = "IndustrialAuto5.txt";
-        file = "IndustrialAuto6.txt";
-        file = "IndustrialAuto7.txt";
-        file = "IndustrialAuto8.txt";
-        file = "IndustrialAuto9.txt";
+//        file = "03_NumericalLTLRefined.txt";
+//        file = "04_SimpleConveyorBelt.txt";
+//        file = "05_HydraulicRamp.txt";
+//        file = "06_ArbitorLTL.txt";
+//        file = "07_PriorityArbitorLTL.txt";
+//        file = "IndustrialAuto1.txt";
+//        file = "IndustrialAuto2.txt";
+//        file = "IndustrialAuto3.txt";
+//        file = "IndustrialAuto4.txt";
+//        file = "IndustrialAuto5.txt";
+//        file = "IndustrialAuto6.txt";
+//        file = "IndustrialAuto7.txt";
+//        file = "IndustrialAuto8.txt";
+//        file = "IndustrialAuto9.txt";
 //        file = "IndustrialAuto10.txt";
 //        file = "IndustrialAuto11.txt";
 //        file = "Responder1.txt" ;
 //        file = "Responder2.txt" ;
 //        file = "Responder3.txt" ;
 
-
-//         file = "power.txt";
-//        file = "example.txt";
-//        file = "example4.txt";
-//        file = "example2.txt";
 //        file = "factor.txt";
+//         file = "power.txt";
+
+//        file = "example.txt";
+//        file = "example2.txt";
+//        file = "example3.txt";
+//        file = "example4.txt";
 
 //        file = "MotionControl.txt";
 //        file = "EmergenceyStop.txt";
@@ -246,32 +248,36 @@ public class Main {
             if (!f.isDirectory()) {
                 //若非目录(即文件)，则打印
 //                System.out.println(Arrays.toString(f.toString().split("/")));
-                if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL15.txt")) {
-                    continue;
-                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL13.txt")) {
-                    continue;
-                } else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL12.txt")) {
-                    continue;
-                }
-                else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL9.txt")) {
-                    continue;
-                }  else if (f.toString().equals("tests_programs/paper1_tests/input/PumpControl.txt")) {
-                    continue;
-                }else if (f.toString().equals("tests_programs/paper1_tests/input/FB_G4LTL10.txt")) {
-                    continue;
-                }
-                else if (f.toString().equals("tests_programs/paper1_tests/input/IndustrialAuto9.txt")) {
+
+                if (f.toString().equals("tests_programs/paper1_tests/input/IndustrialAuto9.txt")) {
                     continue;
                 }
                 else if (f.toString().equals("tests_programs/paper1_tests/input/IndustrialAuto10.txt")) {
                     continue;
                 }
-                else if (f.toString().equals("tests_programs/paper1_tests/input/SorterControl.txt")) {
+                else if (f.toString().equals("tests_programs/paper2_tests/input/SorterControl.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper2_tests/input/PumpControl.txt")) {
+                    continue;
+                }
+                else if (f.toString().equals("tests_programs/paper2_tests/input/Responder3.txt")) {
+                    continue;
+                }else if (f.toString().equals("tests_programs/paper2_tests/input/FB_G4LTL8.txt")) {
+                    continue;
+                }
+//                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\SorterControl.txt")) {
+//                    continue;
+//                }
+//                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\PumpControl.txt")) {
+//                    continue;
+//                }
+                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\Responder3.txt")) {
                     continue;
                 }
                 System.out.println("\n----- " + f + " ---------");
                 allDFTResults.append("\n\n----- " + f + " ---------");
-                allDFTResults.append(walkTree(f.toString(),false));
+                allDFTResults.append(walkTree(f.toString(),true));
             }
 
         }

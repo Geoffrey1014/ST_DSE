@@ -1,0 +1,64 @@
+branch states: 4
+consumed time: 14
+countInit: 2
+succTestedDu: 13
+countedDu: 13
+totalDu: 13
+dft: 1.0
+
+
+def: OUT_1 @ L15 @ IF_L10
+use: OUT_1 @ L24 @ End
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=false, IN_1=false, TLOAD=false, RESET=true}
+
+def: OUT_1 @ L21 @ ELSIF_L17
+use: OUT_1 @ L24 @ End
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=true, IN_1=true, TLOAD=true, RESET=false}
+
+def: PREV_LOAD @ L23 @ END_IF_L10
+use: PREV_LOAD @ L7 @ Body
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=false, IN_1=true, TLOAD=true, RESET=true}
+
+def: TLOAD @ L30 @ Read
+use: TLOAD @ L23 @ END_IF_L10
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=true, IN_1=false, TLOAD=false, RESET=true}
+
+def: RESET @ L29 @ Read
+use: RESET @ CJ_L11 @ Body
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=true, IN_1=true, TLOAD=true, RESET=false}
+
+def: TLOAD @ L30 @ Read
+use: TLOAD @ L25 @ End
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=false, IN_1=false, TLOAD=true, RESET=false}
+
+def: #_t1 @ L8 @ Body
+use: #_t1 @ L18 @ START_ELSIF_L12
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=false}
+tc:{LOAD=true, IN_1=true, TLOAD=false, RESET=false}
+
+def: #_t1 @ L8 @ Body
+use: #_t1 @ L26 @ End
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=true, IN_1=true, TLOAD=false, RESET=true}
+
+def: LOAD @ L27 @ Read
+use: LOAD @ L18 @ START_ELSIF_L12
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=false, IN_1=false, TLOAD=false, RESET=false}
+
+def: TLOAD @ L30 @ Read
+use: TLOAD @ L8 @ Body
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=false, IN_1=true, TLOAD=true, RESET=false}
+
+def: IN_1 @ L28 @ Read
+use: IN_1 @ L21 @ ELSIF_L17
+state: {OUT_1=false, IS_LEAD_EDGE=false, PREV_LOAD=true, LOAD=true, IN_1=false, #_t1=true, TLOAD=true, #_t0=true, #_t3=true, RESET=false}
+tc:{LOAD=true, IN_1=false, TLOAD=false, RESET=false}
+
