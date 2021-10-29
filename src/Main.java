@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import parser.STListener;
-import simulation.BranchTest;
 import simulation.DataFlowTest;
 import simulation.UdChainsAndDoms;
 import tools.MyPrint;
@@ -187,11 +186,11 @@ public class Main {
         String file;
 //        file = "01_UPPAAL_LLATCH1_I.txt";
 //        file = "02_UPPAAL_FAN_CONTROL.txt";
-//        file = "03_NumericalLTLRefined.txt";
-//        file = "04_SimpleConveyorBelt.txt";
-//        file = "05_HydraulicRamp.txt";
-//        file = "06_ArbitorLTL.txt";
-//        file = "07_PriorityArbitorLTL.txt";
+        file = "03_NumericalLTLRefined.txt";
+        file = "04_SimpleConveyorBelt.txt";
+        file = "05_HydraulicRamp.txt";
+        file = "06_ArbitorLTL.txt";
+        file = "07_PriorityArbitorLTL.txt";
 //        file = "IndustrialAuto1.txt";
 //        file = "IndustrialAuto2.txt";
 //        file = "IndustrialAuto3.txt";
@@ -210,7 +209,7 @@ public class Main {
 //        file = "factor.txt";
 //         file = "power.txt";
 
-        file = "example.txt";
+//        file = "example.txt";
 //        file = "example2.txt";
 //        file = "example3.txt";
 //        file = "example4.txt";
