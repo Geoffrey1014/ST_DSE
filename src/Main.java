@@ -210,7 +210,7 @@ public class Main {
 //        file = "factor.txt";
 //         file = "power.txt";
 
-//        file = "example.txt";
+        file = "example.txt";
 //        file = "example2.txt";
 //        file = "example3.txt";
 //        file = "example4.txt";
@@ -221,7 +221,7 @@ public class Main {
 //        file = "SaftyRequest.txt";
 //        file = "GaMonitoring.txt";
 //        file = "SorterControl.txt";
-        file = "PumpControl.txt";
+//        file = "PumpControl.txt";
         walkTree(inputDir + file, true);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
