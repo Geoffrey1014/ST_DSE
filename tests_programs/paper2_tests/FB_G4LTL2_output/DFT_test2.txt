@@ -1,0 +1,79 @@
+branch states: 6
+consumed time: 6
+countInit: 3
+succTestedDu: 17
+countedDu: 17
+totalDu: 17
+dft: 1.0
+
+
+def: x_0 @ L39 @ Read
+use: x_0 @ L12 @ IF_L4
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=false, x_1=true}
+
+def: x_1 @ L38 @ Read
+use: x_1 @ L10 @ IF_L4
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=false}
+
+def: cstate_46 @ L32 @ ELSIF_L23
+use: cstate_46 @ L36 @ End
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=true}
+
+def: cstate_46 @ L19 @ IF_L9
+use: cstate_46 @ L36 @ End
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=false}
+
+def: #_t17 @ L12 @ IF_L4
+use: #_t17 @ L27 @ START_ELSIF_L16
+state: {#_t13=true, #_t12=false, #_t17=false, #_t16=false, x_0=true, #_t1=true, #_t3=false, y_0=true, x_1=true, #_t5=false, #_t6=false, #_t9=true, cstate_46=0}
+tc:{x_0=true, x_1=true}
+
+def: #_t16 @ L10 @ IF_L4
+use: #_t16 @ L27 @ START_ELSIF_L16
+state: {cstate_46=0, y_0=false}
+tc:{x_0=true, x_1=true}
+
+def: cstate_46 @ L32 @ ELSIF_L23
+use: cstate_46 @ L6 @ Body
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=false, x_1=false}
+
+def: cstate_46 @ L19 @ IF_L9
+use: cstate_46 @ L6 @ Body
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=false}
+
+def: x_1 @ L38 @ Read
+use: x_1 @ L13 @ IF_L4
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=false}
+
+def: x_0 @ L39 @ Read
+use: x_0 @ L24 @ START_ELSIF_L16
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=false, x_1=false}
+
+def: y_0 @ L34 @ ELSIF_L23
+use: y_0 @ L37 @ End
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=false, x_1=false}
+
+def: y_0 @ L21 @ IF_L9
+use: y_0 @ L37 @ End
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=false}
+
+def: x_0 @ L39 @ Read
+use: x_0 @ L11 @ IF_L4
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=false, x_1=false}
+
+def: x_1 @ L38 @ Read
+use: x_1 @ L24 @ START_ELSIF_L16
+state: {#_t13=true, #_t12=true, #_t17=true, #_t16=true, x_0=false, #_t1=true, #_t3=false, y_0=true, x_1=false, #_t5=false, #_t6=false, #_t9=false, cstate_46=0}
+tc:{x_0=true, x_1=true}
+

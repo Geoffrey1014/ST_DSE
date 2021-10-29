@@ -67,8 +67,8 @@ public class DataFlowTest extends CoverageTest {
                 countInit += 1;
                 continue;
             }
-            Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> result = dftTestaDuPair(def, use, duPairAndDoms);
-
+//            Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> result = domBasedDFTaDuPair(def, use, duPairAndDoms);
+            Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> result = cfgBasedDFTaDuPair(def, use, duPairAndDoms);
             if (result != null) {
                 HashMap<LlLocation, ValueOfDiffType> inputs = result.a1;
                 testingResult.append("def: ").append(def.toStringSimple()).append("\n");
@@ -105,7 +105,7 @@ public class DataFlowTest extends CoverageTest {
      * 这是在一个PLC state 下进行的测试，如果不行，则需要换一个新的PLC state。
      * 我觉得算法应该是先想办法到达 def, 再从def 到 use
      */
-    public Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> dftTestaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
+    public Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> domBasedDFTaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
 
 
         long startTime = System.currentTimeMillis(); //程序开始记录时间
@@ -119,6 +119,7 @@ public class DataFlowTest extends CoverageTest {
             }
             ConMemory state = stateManager.popLeft();
             inputs = stateDuPairTest(def, use, duPairAndDoms, state);
+
             if (inputs != null) {
 //                System.err.println("get the du test!");
 //                testingResult.append(state.toString()).append("\n");
@@ -303,31 +304,34 @@ public class DataFlowTest extends CoverageTest {
 
 
 
-    public HashMap<LlLocation, ValueOfDiffType> cfgBasedDFTaDuPair(VarAndStmt def, VarAndStmt use) {
+    public Tuple2<HashMap<LlLocation, ValueOfDiffType>,ConMemory> cfgBasedDFTaDuPair(VarAndStmt def, VarAndStmt use, DuPairAndDoms duPairAndDoms) {
         long startTime = System.currentTimeMillis(); //程序开始记录时间
 
         HashMap<LlLocation, ValueOfDiffType> inputs;
         while (stateManager.candidatesSize() > 0) {
             long endTime = System.currentTimeMillis(); //程序结束记录时间
             long totalTime = endTime - startTime;       //总消耗时间
-            if (totalTime > 1000) {
+            if (totalTime > 2000) {
                 break;
             }
-            inputs = cfgBasedStateDuPairTest(def, use, stateManager.popLeft());
+            ConMemory state = stateManager.popLeft();
+            inputs = cfgBasedStateDuPairTest(def, use,state,duPairAndDoms);
+
             if (inputs != null) {
 //                System.err.println("get the du test!");
+//                testingResult.append(state.toString()).append("\n");
                 this.successTestedDu += 1;
-                return inputs;
+
+                return new Tuple2<>(inputs,state);
             }
         }
-//        System.err.println("def: " + def.toStringSimple());
-//        System.err.println("use: "+ use.toStringSimple()+"\n");
 
         return null;
     }
 
-    private HashMap<LlLocation, ValueOfDiffType> cfgBasedStateDuPairTest(VarAndStmt def, VarAndStmt use, ConMemory startConMenory) {
-        HashMap<BasicBlock, Boolean> W = new HashMap<>();
+
+    private HashMap<LlLocation, ValueOfDiffType> cfgBasedStateDuPairTest(VarAndStmt def, VarAndStmt use, ConMemory startConMenory,  DuPairAndDoms duPairAndDomss) {
+        HashMap<BasicBlock, Boolean> worklist = new HashMap<>();
 
         SymMemory startSymMemory = symbolExecutor.createSymMemory(startConMenory);
         symbolExecutor.mkInputSymbolic(startSymMemory);
@@ -352,13 +356,12 @@ public class DataFlowTest extends CoverageTest {
 
                 // redefinition pruning
                 LinkedHashMap<BasicBlock, Boolean> prunedBr = redefinitionPruning(def, branchNodes, route);
-                W.putAll(prunedBr);
-//                W.putAll(branchNodes);
-                inputs = cfgBasedSearch(route, W, startSymMemory, branchNodes);
+                worklist.putAll(prunedBr);
+                inputs = cfgBasedSearch(route, worklist, startSymMemory, branchNodes,duPairAndDomss.sortedDomNodeFromDefToUSe);
             } else {
                 // not cover def
-                W.putAll(branchNodes);
-                inputs = cfgBasedSearch(route, W, startSymMemory, branchNodes);
+                worklist.putAll(branchNodes);
+                inputs = cfgBasedSearch(route, worklist, startSymMemory, branchNodes,duPairAndDomss.sortedDomNodeFromEntryToDef);
             }
 
 
@@ -367,10 +370,53 @@ public class DataFlowTest extends CoverageTest {
         return null;
     }
 
-    private HashMap<LlLocation, ValueOfDiffType> cfgBasedSearch(List<BasicBlock> route, HashMap<BasicBlock, Boolean> w, SymMemory startSymMemory, LinkedHashMap<BasicBlock, Boolean> branchNodes) {
-        return new HashMap<>();
+    private HashMap<LlLocation, ValueOfDiffType> cfgBasedSearch(List<BasicBlock> route,
+                                                                HashMap<BasicBlock, Boolean> workList,
+                                                                SymMemory symMemory,
+                                                                LinkedHashMap<BasicBlock, Boolean> branchNodes,
+                                                                ArrayList<BasicBlock> sortedCuts) {
+        SymMemory oldSymMemory = new SymMemory(symMemory);
+        if (workList.isEmpty() || sortedCuts.isEmpty()) return null;
+
+        BasicBlock flippedBB = getNearestNode(workList,sortedCuts,route,symMemory,branchNodes);
+
+        if (flippedBB == null) {
+            workList.clear();
+            return null;
+        }
+        workList.remove(flippedBB);
+        LinkedList<HashMap<LlLocation, ValueOfDiffType>> calculatedInputs = symbolExecutor.symExeFromRead(symMemory, route, branchNodes, Collections.singletonList(flippedBB));
+        if (calculatedInputs.size() > 0) return calculatedInputs.pollFirst();
+        else {
+            return cfgBasedSearch(route, workList, oldSymMemory, branchNodes,sortedCuts);
+        }
+
     }
 
+    private BasicBlock getNearestNode(HashMap<BasicBlock, Boolean> workList, ArrayList<BasicBlock> sortedCuts,List<BasicBlock> route,
+                                      SymMemory symMemory,
+                                      LinkedHashMap<BasicBlock, Boolean> branchNodes){
+        //choose a node which is near the target node. then we need to measure the distance
+        for (BasicBlock branchNode : workList.keySet()) {
+//            flippedBB = branchNode;
+            //進行遍歷，看距離ff
+            ArrayList<BasicBlock> bbs = this.cfg.getBasicBlocks();
+        }
+        BasicBlock flippedBB = null;
+        BasicBlock curTargetCut = sortedCuts.get(0);
+        for (BasicBlock branchNode : workList.keySet()) {
+
+            BasicBlock nextTargetCut = lookForNextCut(sortedCuts, branchNode);
+
+            if (nextTargetCut != null && nextTargetCut.getDomTreeLevel() > curTargetCut.getDomTreeLevel()) {
+                curTargetCut = nextTargetCut;
+                flippedBB = branchNode;
+            }
+
+        }
+        if(flippedBB != null) symbolExecutor.symExeFromRead(symMemory, route, branchNodes, Collections.singletonList(flippedBB));
+        return flippedBB;
+    }
 
     public String printResult(int statesSize, long totalTime, int countInit, int countedDu, int successTestedDu,
                               int duPairAndDomsListSize) {

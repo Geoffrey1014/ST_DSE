@@ -5,7 +5,7 @@ Node: Init :
 Read, 
 
 Node: Body :
-START_ELSIF_L12, END_IF_L10, IF_L10, 
+IF_L10, START_ELSIF_L12, END_IF_L10, 
 
 Node: IF_L10 :
 

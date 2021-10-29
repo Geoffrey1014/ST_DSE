@@ -4,14 +4,14 @@ digraph G {
   node [shape=circle, fontname="ArialNarrow",
         fontsize=12,  height=1.2];
   "4 Body"; "10 Exit"; "3 Read"; "0 Entry"; "2 Init"; "9 End"; "7 END_IF_L10"; "5 IF_L10"; "6 START_ELSIF_L12"; "8 ELSIF_L17"; "1 Main"; 
-  "7 END_IF_L10" -> "9 End";
   "3 Read" -> "4 Body";
-  "0 Entry" -> "1 Main";
+  "7 END_IF_L10" -> "9 End";
   "2 Init" -> "3 Read";
+  "0 Entry" -> "1 Main";
   "6 START_ELSIF_L12" -> "8 ELSIF_L17";
   "9 End" -> "10 Exit";
-  "1 Main" -> "2 Init";
   "4 Body" -> "5 IF_L10";
   "4 Body" -> "6 START_ELSIF_L12";
   "4 Body" -> "7 END_IF_L10";
+  "1 Main" -> "2 Init";
 }

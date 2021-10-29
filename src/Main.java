@@ -144,7 +144,7 @@ public class Main {
                 DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
                 System.out.println("data flow testing!----------------");
                 String dftResult = dft.dataFlowTesting(bts);
-                writeFile(dftResult,outPutDir + "DFT_test" + ".txt");
+                writeFile(dftResult,outPutDir + "DFT_test2" + ".txt");
 //                System.out.println("branch testing ------------");
 //                BranchTest branchTest = new BranchTest(cfg);
 //                String branchTestResult = branchTest.branchTest(inputFileNamePrefix,inreaseInitInputs);
@@ -186,7 +186,7 @@ public class Main {
         inputDir = "tests_programs/paper2_tests/input/";
         String file;
 //        file = "01_UPPAAL_LLATCH1_I.txt";
-        file = "02_UPPAAL_FAN_CONTROL.txt";
+//        file = "02_UPPAAL_FAN_CONTROL.txt";
 //        file = "03_NumericalLTLRefined.txt";
 //        file = "04_SimpleConveyorBelt.txt";
 //        file = "05_HydraulicRamp.txt";
@@ -214,13 +214,14 @@ public class Main {
 //        file = "example2.txt";
 //        file = "example3.txt";
 //        file = "example4.txt";
-
+//        file = "FB_G4LTL3.txt";
+//        file = "FB_G4LTL8.txt";
 //        file = "MotionControl.txt";
 //        file = "EmergenceyStop.txt";
 //        file = "SaftyRequest.txt";
 //        file = "GaMonitoring.txt";
 //        file = "SorterControl.txt";
-//        file = "PumpControl.txt";
+        file = "PumpControl.txt";
         walkTree(inputDir + file, true);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出

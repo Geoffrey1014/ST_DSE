@@ -4,10 +4,6 @@
       |--VARBlock:
         |--accessType: VAR
         |--varDecl
-          |--name: CONSTANT
-            |--type: RES_INT
-        |--value: 3
-        |--varDecl
           |--name: P_Fan1Lo_1
             |--type: RES_INT
         |--value: 3
