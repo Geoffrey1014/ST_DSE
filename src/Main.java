@@ -30,6 +30,7 @@ public class Main {
     // control of updating pictures
     public static Boolean updateFig = false;
     public static boolean inreaseInitInputs = false;
+    public static Boolean domBasedAlgo = true;
 
     public static String walkTree(String filePath,Boolean bts) {
         String[] pathSegments = filePath.split("/");
@@ -142,8 +143,13 @@ public class Main {
 
                 DataFlowTest dft = new DataFlowTest(cfg, domTree, udChainsAndDoms, inputFileName);
                 System.out.println("data flow testing!----------------");
-                String dftResult = dft.dataFlowTesting(bts);
-                writeFile(dftResult,outPutDir + "DFT_test2" + ".txt");
+                String dftResult = dft.dataFlowTesting(bts,domBasedAlgo);
+                if(domBasedAlgo){
+                    writeFile(dftResult,outPutDir + "DFT_test" + ".txt");
+                }else{
+                    writeFile(dftResult,outPutDir + "DFT_test2" + ".txt");
+                }
+
 //                System.out.println("branch testing ------------");
 //                BranchTest branchTest = new BranchTest(cfg);
 //                String branchTestResult = branchTest.branchTest(inputFileNamePrefix,inreaseInitInputs);
@@ -180,17 +186,18 @@ public class Main {
         MyPrint.levelZero.print(System.getProperty("user.home"));
         updateFig = false;
         inreaseInitInputs = false;
+        domBasedAlgo = false;
         String inputDir = "tests_programs/dataflow/input/";        //要遍历的路径
         inputDir = "tests_programs/paper1_tests/input/";
         inputDir = "tests_programs/paper2_tests/input/";
         String file;
 //        file = "01_UPPAAL_LLATCH1_I.txt";
 //        file = "02_UPPAAL_FAN_CONTROL.txt";
-        file = "03_NumericalLTLRefined.txt";
-        file = "04_SimpleConveyorBelt.txt";
-        file = "05_HydraulicRamp.txt";
-        file = "06_ArbitorLTL.txt";
-        file = "07_PriorityArbitorLTL.txt";
+//        file = "03_NumericalLTLRefined.txt";
+//        file = "04_SimpleConveyorBelt.txt";
+//        file = "05_HydraulicRamp.txt";
+//        file = "06_ArbitorLTL.txt";
+//        file = "07_PriorityArbitorLTL.txt";
 //        file = "IndustrialAuto1.txt";
 //        file = "IndustrialAuto2.txt";
 //        file = "IndustrialAuto3.txt";
@@ -221,10 +228,10 @@ public class Main {
 //        file = "GaMonitoring.txt";
 //        file = "SorterControl.txt";
 //        file = "PumpControl.txt";
-        walkTree(inputDir + file, true);
+//        walkTree(inputDir + file, true);
 
         // 打开一个文件夹，把所有文件都执行一边，把结果输出
-//        runDirFiles(inputDir);
+        runDirFiles(inputDir);
 
     }
 
@@ -255,17 +262,18 @@ public class Main {
                 else if (f.toString().equals("tests_programs/paper1_tests/input/IndustrialAuto10.txt")) {
                     continue;
                 }
-                else if (f.toString().equals("tests_programs/paper2_tests/input/SorterControl.txt")) {
-                    continue;
-                }
-                else if (f.toString().equals("tests_programs/paper2_tests/input/PumpControl.txt")) {
-                    continue;
-                }
-                else if (f.toString().equals("tests_programs/paper2_tests/input/Responder3.txt")) {
-                    continue;
-                }else if (f.toString().equals("tests_programs/paper2_tests/input/FB_G4LTL8.txt")) {
-                    continue;
-                }
+//                else if (f.toString().equals("tests_programs/paper2_tests/input/SorterControl.txt")) {
+//                    continue;
+//                }
+//                else if (f.toString().equals("tests_programs/paper2_tests/input/PumpControl.txt")) {
+//                    continue;
+//                }
+//                else if (f.toString().equals("tests_programs/paper2_tests/input/Responder3.txt")) {
+//                    continue;
+//                }
+//                else if (f.toString().equals("tests_programs/paper2_tests/input/FB_G4LTL8.txt")) {
+//                    continue;
+//                }
 //                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\SorterControl.txt")) {
 //                    continue;
 //                }

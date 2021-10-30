@@ -1,111 +1,36 @@
 branch states: 7
-consumed time: 307
+consumed time: 408
 countInit: 20
-succTestedDu: 42
+succTestedDu: 41
 countedDu: 42
 totalDu: 42
-dft: 1.0
+dft: 0.97619045
 
 
 def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L76 @ END_IF_L63
+use: DBC_PV_CoStep @ L53 @ END_IF_L39
 state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
 tc:{DBC_PV_CoStep=0}
 
-def: DBC_PV_C_Fan1Hi @ L35 @ ELSE_L30
-use: DBC_PV_C_Fan1Hi @ L100 @ End
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L41 @ END_IF_L29
 state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
 tc:{DBC_PV_CoStep=-1}
-
-def: DBC_PV_C_Fan1Hi @ L38 @ IF_L29
-use: DBC_PV_C_Fan1Hi @ L100 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=8}
-
-def: DBC_PV_C_Fan3Lo @ L72 @ IF_L63
-use: DBC_PV_C_Fan3Lo @ L98 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=false, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=false, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=false, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=0, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=5}
-
-def: DBC_PV_C_Fan3Lo @ L69 @ ELSE_L64
-use: DBC_PV_C_Fan3Lo @ L98 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=0}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L75 @ END_IF_L63
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=-2}
-
-def: DBC_PV_C_Fan2Lo @ L47 @ ELSE_L40
-use: DBC_PV_C_Fan2Lo @ L93 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=1}
-
-def: DBC_PV_C_Fan2Lo @ L50 @ IF_L39
-use: DBC_PV_C_Fan2Lo @ L93 @ End
-state: {P_Fan2Lo_1=4, #_t22=true, #_t23=true, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=true, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=true, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=7, P_Fan3Lo=5, #_t13=true, #_t14=true, #_t18=false, #_t15=true, #_t10=false, P_Fan1Lo_2=7, #_t9=true, P_Fan1Lo_1=3, #_t8=false, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=4}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L42 @ END_IF_L29
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=4}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L54 @ END_IF_L39
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=-3}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L31 @ END_IF_L17
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=3}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L20 @ Body
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=-3}
-
-def: DBC_PV_C_Fan1Lo @ L25 @ ELSE_L18
-use: DBC_PV_C_Fan1Lo @ L87 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=1}
 
 def: DBC_PV_C_Fan1Lo @ L28 @ IF_L17
 use: DBC_PV_C_Fan1Lo @ L87 @ End
 state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
 tc:{DBC_PV_CoStep=3}
 
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L19 @ Body
+def: DBC_PV_C_Fan1Lo @ L25 @ ELSE_L18
+use: DBC_PV_C_Fan1Lo @ L87 @ End
 state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=-4}
-
-def: DBC_PV_C_Fan2Hi @ L59 @ ELSE_L52
-use: DBC_PV_C_Fan2Hi @ L85 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=-2}
-
-def: DBC_PV_C_Fan2Hi @ L62 @ IF_L51
-use: DBC_PV_C_Fan2Hi @ L85 @ End
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=8}
+tc:{DBC_PV_CoStep=0}
 
 def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L53 @ END_IF_L39
+use: DBC_PV_CoStep @ L20 @ Body
 state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=2}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L41 @ END_IF_L29
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=-4}
-
-def: DBC_PV_CoStep @ L101 @ Read
-use: DBC_PV_CoStep @ L65 @ END_IF_L51
-state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
-tc:{DBC_PV_CoStep=2}
+tc:{DBC_PV_CoStep=0}
 
 def: DBC_PV_C_Fan3Hi @ L84 @ IF_L73
 use: DBC_PV_C_Fan3Hi @ L90 @ End
@@ -115,5 +40,75 @@ tc:{DBC_PV_CoStep=8}
 def: DBC_PV_C_Fan3Hi @ L81 @ ELSE_L74
 use: DBC_PV_C_Fan3Hi @ L90 @ End
 state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=1}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L65 @ END_IF_L51
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=4}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L19 @ Body
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=0}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L42 @ END_IF_L29
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=-2}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L31 @ END_IF_L17
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=1}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L54 @ END_IF_L39
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=-1}
+
+def: DBC_PV_C_Fan2Lo @ L47 @ ELSE_L40
+use: DBC_PV_C_Fan2Lo @ L93 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=7}
+
+def: DBC_PV_C_Fan2Lo @ L50 @ IF_L39
+use: DBC_PV_C_Fan2Lo @ L93 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=4}
+
+def: DBC_PV_C_Fan3Lo @ L69 @ ELSE_L64
+use: DBC_PV_C_Fan3Lo @ L98 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=-2}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L75 @ END_IF_L63
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=2}
+
+def: DBC_PV_CoStep @ L101 @ Read
+use: DBC_PV_CoStep @ L76 @ END_IF_L63
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
 tc:{DBC_PV_CoStep=-4}
+
+def: DBC_PV_C_Fan2Hi @ L62 @ IF_L51
+use: DBC_PV_C_Fan2Hi @ L85 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=8}
+
+def: DBC_PV_C_Fan2Hi @ L59 @ ELSE_L52
+use: DBC_PV_C_Fan2Hi @ L85 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=0}
+
+def: DBC_PV_C_Fan1Hi @ L35 @ ELSE_L30
+use: DBC_PV_C_Fan1Hi @ L100 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=-4}
+
+def: DBC_PV_C_Fan1Hi @ L38 @ IF_L29
+use: DBC_PV_C_Fan1Hi @ L100 @ End
+state: {P_Fan2Lo_1=4, #_t22=false, #_t23=false, P_Fan1Hi=8, P_Fan2Lo_2=6, #_t1=true, #_t0=true, DBC_PV_C_Fan2Hi=false, DBC_PV_C_Fan1Hi=false, #_t2=true, DBC_PV_C_Fan2Lo=false, #_t5=false, DBC_PV_C_Fan1Lo=true, DBC_PV_C_Fan3Hi=false, #_t21=true, P_Fan3Hi_2=8, P_Fan3Hi_1=6, DBC_PV_C_Fan3Lo=false, DBC_PV_CoStep=3, P_Fan3Lo=5, #_t13=true, #_t14=false, #_t18=false, #_t15=false, #_t10=false, P_Fan1Lo_2=7, #_t9=false, P_Fan1Lo_1=3, #_t8=true, P_Fan2Hi_2=8, P_Fan2Hi_1=7}
+tc:{DBC_PV_CoStep=8}
 

@@ -1,5 +1,5 @@
 branch states: 4
-consumed time: 11
+consumed time: 14
 countInit: 2
 succTestedDu: 13
 countedDu: 13

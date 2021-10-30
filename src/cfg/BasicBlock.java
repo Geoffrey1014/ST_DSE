@@ -3,9 +3,7 @@ package cfg;
 import helper.LlBuilder;
 import ll.LlStatement;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class BasicBlock {
     public String name; //the first stmt's label
@@ -26,6 +24,35 @@ public class BasicBlock {
         this.predecessors = new HashSet<>();
         this.domTreeLevel = -1;
         this.defs = new HashSet<>();
+    }
+    public int calDistance(BasicBlock target){
+        int distance = -1;
+        // 去掉 visitedVertex 的判断 不会变快？
+        List<BasicBlock> visitedVertex = new LinkedList<>();
+        Queue<BasicBlock> queue=new LinkedList<>();
+        queue.offer(this);
+        while(!queue.isEmpty()) {
+
+            int currentLevelSize = queue.size();
+            distance += 1;
+
+            for (int i = 1; i <= currentLevelSize; ++i) {
+                BasicBlock node = queue.poll();
+                if(node.equals(target)){
+                    return distance;
+                }
+                visitedVertex.add(node);
+                if (node.defaultBranch != null && !visitedVertex.contains(node.defaultBranch)) {
+                    queue.offer(node.defaultBranch);
+                }
+                if (node.alternativeBranch != null && !visitedVertex.contains(node.alternativeBranch)) {
+                    queue.offer(node.alternativeBranch);
+                }
+            }
+
+        }
+        return -2;
+
     }
 
     public LinkedHashMap<String, LlStatement> getLabelsToStmtsMap() {

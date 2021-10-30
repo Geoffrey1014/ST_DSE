@@ -1,5 +1,5 @@
 branch states: 11
-consumed time: 25
+consumed time: 38
 countInit: 7
 succTestedDu: 22
 countedDu: 32
@@ -7,6 +7,11 @@ totalDu: 32
 dft: 0.6875
 
 
+def: V @ L43 @ LOOP_L37
+use: V @ L5 @ Body
+state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
+tc:{X=3}
+
 def: V @ L16 @ IF_L9
 use: V @ L5 @ Body
 state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
@@ -18,39 +23,44 @@ state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
 tc:{X=4}
 
 def: V @ L43 @ LOOP_L37
-use: V @ L5 @ Body
+use: V @ L33 @ START_ELSIF_L7
+state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
+tc:{X=4}
+
+def: V @ L43 @ LOOP_L37
+use: V @ L38 @ WHILE_L36
 state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
 tc:{X=3}
 
 def: V @ L43 @ LOOP_L37
-use: V @ L33 @ START_ELSIF_L7
+use: V @ L56 @ End
+state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
+tc:{X=3}
+
+def: V @ L16 @ IF_L9
+use: V @ L56 @ End
+state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
+tc:{X=3}
+
+def: V @ L26 @ ELSIF_L20
+use: V @ L56 @ End
+state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
+tc:{X=4}
+
+def: X @ L58 @ Read
+use: X @ L38 @ WHILE_L36
 state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
 tc:{X=3}
 
 def: X @ L58 @ Read
 use: X @ L11 @ IF_L3
 state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
-tc:{X=-1}
-
-def: V @ L16 @ IF_L9
-use: V @ L56 @ End
-state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
-tc:{X=3}
-
-def: V @ L26 @ ELSIF_L20
-use: V @ L56 @ End
-state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
-tc:{X=4}
-
-def: V @ L43 @ LOOP_L37
-use: V @ L56 @ End
-state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
-tc:{X=3}
+tc:{X=-4}
 
 def: Q @ L46 @ END_WHILE_L36
 use: Q @ L57 @ End
 state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
-tc:{X=0}
+tc:{X=4}
 
 def: Q @ L18 @ IF_L9
 use: Q @ L57 @ End
@@ -62,23 +72,13 @@ use: Q @ L57 @ End
 state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
 tc:{X=4}
 
-def: X @ L58 @ Read
-use: X @ L38 @ WHILE_L36
-state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
-tc:{X=0}
-
-def: X @ L58 @ Read
-use: X @ L22 @ START_ELSIF_L13
-state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
-tc:{X=-3}
-
-def: V @ L43 @ LOOP_L37
-use: V @ L38 @ WHILE_L36
-state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
-tc:{X=3}
-
 def: V @ L43 @ LOOP_L37
 use: V @ L42 @ LOOP_L37
 state: {X=3, #_t1=true, Q=true, #_t3=true, V=2}
 tc:{X=3}
+
+def: X @ L58 @ Read
+use: X @ L22 @ START_ELSIF_L13
+state: {X=0, #_t1=true, Q=false, #_t3=false, V=0, #_t7=false}
+tc:{X=-2}
 

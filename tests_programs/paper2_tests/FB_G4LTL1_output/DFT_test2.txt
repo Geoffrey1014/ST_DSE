@@ -1,5 +1,5 @@
 branch states: 6
-consumed time: 6
+consumed time: 7
 countInit: 3
 succTestedDu: 14
 countedDu: 14
@@ -7,18 +7,18 @@ totalDu: 14
 dft: 1.0
 
 
-def: x_0 @ L36 @ Read
-use: x_0 @ L23 @ START_ELSIF_L13
+def: cstate14 @ L29 @ ELSIF_L20
+use: cstate14 @ L33 @ End
 state: {cstate14=0, y_0=false}
 tc:{x_0=false, x_1=true}
 
-def: x_0 @ L36 @ Read
-use: x_0 @ L21 @ START_ELSIF_L13
+def: cstate14 @ L16 @ IF_L9
+use: cstate14 @ L33 @ End
 state: {cstate14=0, y_0=false}
-tc:{x_0=false, x_1=false}
+tc:{x_0=true, x_1=false}
 
-def: x_1 @ L35 @ Read
-use: x_1 @ L21 @ START_ELSIF_L13
+def: y_0 @ L31 @ ELSIF_L20
+use: y_0 @ L34 @ End
 state: {cstate14=0, y_0=false}
 tc:{x_0=true, x_1=true}
 
@@ -27,38 +27,38 @@ use: y_0 @ L34 @ End
 state: {cstate14=0, y_0=false}
 tc:{x_0=true, x_1=false}
 
-def: y_0 @ L31 @ ELSIF_L20
-use: y_0 @ L34 @ End
+def: x_1 @ L35 @ Read
+use: x_1 @ L21 @ START_ELSIF_L13
 state: {cstate14=0, y_0=false}
 tc:{x_0=false, x_1=false}
-
-def: cstate14 @ L16 @ IF_L9
-use: cstate14 @ L6 @ Body
-state: {cstate14=0, y_0=false}
-tc:{x_0=true, x_1=false}
-
-def: cstate14 @ L29 @ ELSIF_L20
-use: cstate14 @ L6 @ Body
-state: {cstate14=0, y_0=false}
-tc:{x_0=false, x_1=true}
 
 def: x_0 @ L36 @ Read
 use: x_0 @ L11 @ IF_L4
 state: {cstate14=0, y_0=false}
-tc:{x_0=false, x_1=true}
-
-def: cstate14 @ L16 @ IF_L9
-use: cstate14 @ L33 @ End
-state: {cstate14=0, y_0=false}
-tc:{x_0=true, x_1=false}
-
-def: cstate14 @ L29 @ ELSIF_L20
-use: cstate14 @ L33 @ End
-state: {cstate14=0, y_0=false}
-tc:{x_0=false, x_1=false}
+tc:{x_0=true, x_1=true}
 
 def: x_1 @ L35 @ Read
 use: x_1 @ L10 @ IF_L4
+state: {cstate14=0, y_0=false}
+tc:{x_0=false, x_1=true}
+
+def: x_0 @ L36 @ Read
+use: x_0 @ L21 @ START_ELSIF_L13
+state: {cstate14=0, y_0=false}
+tc:{x_0=false, x_1=true}
+
+def: cstate14 @ L29 @ ELSIF_L20
+use: cstate14 @ L6 @ Body
+state: {cstate14=0, y_0=false}
+tc:{x_0=true, x_1=true}
+
+def: cstate14 @ L16 @ IF_L9
+use: cstate14 @ L6 @ Body
+state: {cstate14=0, y_0=false}
+tc:{x_0=true, x_1=false}
+
+def: x_0 @ L36 @ Read
+use: x_0 @ L23 @ START_ELSIF_L13
 state: {cstate14=0, y_0=false}
 tc:{x_0=false, x_1=false}
 

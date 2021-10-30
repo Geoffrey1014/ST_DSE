@@ -1,5 +1,5 @@
 branch states: 4
-consumed time: 10
+consumed time: 9
 countInit: 1
 succTestedDu: 16
 countedDu: 16
@@ -7,40 +7,10 @@ totalDu: 16
 dft: 1.0
 
 
-def: RES @ L4 @ Body
-use: RES @ L18 @ FOR_L12
-state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
-
-def: RES @ L19 @ FOR_L12
-use: RES @ L18 @ FOR_L12
-state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
-
-def: EXP @ L13 @ ELSE_L6
-use: EXP @ L21 @ FOR_L12
-state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
-
-def: EXP @ L21 @ FOR_L12
-use: EXP @ L21 @ FOR_L12
-state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
-
 def: X @ L28 @ Read
 use: X @ L8 @ Body
 state: {X=-1, RES=0, #_t2=true, EXP=0}
 tc:{X=0}
-
-def: EXP @ L13 @ ELSE_L6
-use: EXP @ L18 @ FOR_L12
-state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
-
-def: EXP @ L21 @ FOR_L12
-use: EXP @ L18 @ FOR_L12
-state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
 
 def: RES @ L25 @ IF_L5
 use: RES @ L26 @ End
@@ -50,15 +20,35 @@ tc:{X=-1}
 def: RES @ L4 @ Body
 use: RES @ L26 @ End
 state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=0}
+tc:{X=-4}
 
 def: RES @ L19 @ FOR_L12
 use: RES @ L26 @ End
 state: {X=-1, RES=0, #_t2=true, EXP=0}
 tc:{X=1}
 
-def: X @ L28 @ Read
-use: X @ L13 @ ELSE_L6
+def: RES @ L4 @ Body
+use: RES @ L18 @ FOR_L12
+state: {X=-1, RES=0, #_t2=true, EXP=0}
+tc:{X=1}
+
+def: RES @ L19 @ FOR_L12
+use: RES @ L18 @ FOR_L12
+state: {X=-1, RES=0, #_t2=true, EXP=0}
+tc:{X=1}
+
+def: EXP @ L21 @ FOR_L12
+use: EXP @ L18 @ FOR_L12
+state: {X=-1, RES=0, #_t2=true, EXP=0}
+tc:{X=1}
+
+def: EXP @ L13 @ ELSE_L6
+use: EXP @ L18 @ FOR_L12
+state: {X=-1, RES=0, #_t2=true, EXP=0}
+tc:{X=4}
+
+def: EXP @ L21 @ FOR_L12
+use: EXP @ L15 @ FOR_COND_L11
 state: {X=-1, RES=0, #_t2=true, EXP=0}
 tc:{X=1}
 
@@ -68,17 +58,27 @@ state: {X=-1, RES=0, #_t2=true, EXP=0}
 tc:{X=0}
 
 def: EXP @ L21 @ FOR_L12
-use: EXP @ L15 @ FOR_COND_L11
+use: EXP @ L21 @ FOR_L12
 state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=4}
+tc:{X=1}
 
 def: EXP @ L13 @ ELSE_L6
-use: EXP @ L27 @ End
+use: EXP @ L21 @ FOR_L12
+state: {X=-1, RES=0, #_t2=true, EXP=0}
+tc:{X=1}
+
+def: X @ L28 @ Read
+use: X @ L13 @ ELSE_L6
 state: {X=-1, RES=0, #_t2=true, EXP=0}
 tc:{X=4}
 
 def: EXP @ L21 @ FOR_L12
 use: EXP @ L27 @ End
 state: {X=-1, RES=0, #_t2=true, EXP=0}
-tc:{X=1}
+tc:{X=4}
+
+def: EXP @ L13 @ ELSE_L6
+use: EXP @ L27 @ End
+state: {X=-1, RES=0, #_t2=true, EXP=0}
+tc:{X=0}
 
