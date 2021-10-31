@@ -1,81 +1,96 @@
 branch states: 26
-consumed time: 87
+consumed time: 77
 countInit: 6
-succTestedDu: 48
+succTestedDu: 49
 countedDu: 53
 totalDu: 53
-dft: 0.9056604
+dft: 0.9245283
 
-
-def: #_t54 @ L16 @ IF_L8
-use: #_t54 @ L35 @ START_ELSIF_L19
-state: {#_t57=true, cstate_52=0, x_0=false, #_t1=true, y_1=false, x_2=false, y_0=true, x_1=false, error=false, x_3=false, #_t54=true, #_t4=true}
-tc:{x_0=true, x_2=false, x_1=true, x_3=false}
-
-def: cstate_52 @ L66 @ ELSIF_L47
-use: cstate_52 @ L103 @ End
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=false, x_3=false}
 
 def: cstate_52 @ L81 @ ELSIF_L72
-use: cstate_52 @ L103 @ End
+use: cstate_52 @ L10 @ Body
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=true, x_2=false, x_1=true, x_3=false}
 
+def: cstate_52 @ L22 @ IF_L14
+use: cstate_52 @ L10 @ Body
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=false, x_2=false, x_1=false, x_3=false}
+
+def: cstate_52 @ L41 @ ELSIF_L28
+use: cstate_52 @ L10 @ Body
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=false, x_2=true, x_1=false, x_3=false}
+
 def: cstate_52 @ L94 @ ELSIF_L88
-use: cstate_52 @ L103 @ End
+use: cstate_52 @ L10 @ Body
 state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
 tc:{x_0=true, x_2=false, x_1=false, x_3=true}
 
-def: cstate_52 @ L22 @ IF_L14
-use: cstate_52 @ L103 @ End
+def: cstate_52 @ L66 @ ELSIF_L47
+use: cstate_52 @ L10 @ Body
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=false, x_1=false, x_3=true}
-
-def: cstate_52 @ L41 @ ELSIF_L28
-use: cstate_52 @ L103 @ End
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=false, x_3=false}
-
-def: x_1 @ L107 @ Read
-use: x_1 @ L16 @ IF_L8
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=false, x_3=true}
-
-def: x_0 @ L108 @ Read
-use: x_0 @ L30 @ START_ELSIF_L19
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=false, x_3=false}
-
-def: x_1 @ L107 @ Read
-use: x_1 @ L31 @ START_ELSIF_L19
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=false, x_3=false}
-
-def: x_3 @ L109 @ Read
-use: x_3 @ L29 @ START_ELSIF_L19
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=true, x_3=true}
-
-def: #_t53 @ L30 @ START_ELSIF_L19
-use: #_t53 @ L58 @ END_ELSIF_L28
-state: {#_t57=true, cstate_52=0, x_0=false, #_t1=true, y_1=false, x_2=false, y_0=true, x_1=false, error=false, x_3=false, #_t54=true, #_t4=true}
-tc:{x_0=true, x_2=true, x_1=true, x_3=false}
-
-def: #_t54 @ L16 @ IF_L8
-use: #_t54 @ L55 @ END_ELSIF_L28
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=true, x_3=true}
+tc:{x_0=false, x_2=false, x_1=true, x_3=true}
 
 def: x_2 @ L106 @ Read
 use: x_2 @ L49 @ END_ELSIF_L28
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=false, x_2=true, x_1=true, x_3=true}
+
+def: x_3 @ L109 @ Read
+use: x_3 @ L53 @ END_ELSIF_L28
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+
+def: #_t53 @ L30 @ START_ELSIF_L19
+use: #_t53 @ L58 @ END_ELSIF_L28
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+
+def: x_0 @ L108 @ Read
+use: x_0 @ L55 @ END_ELSIF_L28
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=true, x_3=true}
+
+def: x_1 @ L107 @ Read
+use: x_1 @ L58 @ END_ELSIF_L28
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=true}
+
+def: #_t56 @ L48 @ END_ELSIF_L28
+use: #_t56 @ L76 @ END_ELSIF_L47
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=false}
+
+def: #_t57 @ L15 @ IF_L8
+use: #_t57 @ L52 @ END_ELSIF_L28
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+
+def: x_1 @ L107 @ Read
+use: x_1 @ L31 @ START_ELSIF_L19
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=true, x_3=false}
+
+def: error @ L100 @ ELSIF_L88
+use: error @ L102 @ End
+state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
+tc:{x_0=true, x_2=false, x_1=false, x_3=false}
+
+def: x_3 @ L109 @ Read
+use: x_3 @ L29 @ START_ELSIF_L19
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=true, x_3=false}
+
+def: y_0 @ L96 @ ELSIF_L88
+use: y_0 @ L105 @ End
+state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
 tc:{x_0=false, x_2=false, x_1=true, x_3=true}
 
-def: y_0 @ L43 @ ELSIF_L28
+def: y_0 @ L68 @ ELSIF_L47
 use: y_0 @ L105 @ End
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=false, x_3=false}
+tc:{x_0=false, x_2=false, x_1=true, x_3=true}
 
 def: y_0 @ L83 @ ELSIF_L72
 use: y_0 @ L105 @ End
@@ -87,20 +102,20 @@ use: y_0 @ L105 @ End
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=false, x_2=false, x_1=false, x_3=false}
 
-def: y_0 @ L68 @ ELSIF_L47
+def: y_0 @ L43 @ ELSIF_L28
 use: y_0 @ L105 @ End
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+tc:{x_0=false, x_2=true, x_1=false, x_3=false}
 
-def: y_0 @ L96 @ ELSIF_L88
-use: y_0 @ L105 @ End
+def: cstate_52 @ L94 @ ELSIF_L88
+use: cstate_52 @ L90 @ START_ELSIF_L12
 state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
-tc:{x_0=false, x_2=false, x_1=true, x_3=true}
+tc:{x_0=true, x_2=false, x_1=false, x_3=true}
 
-def: #_t57 @ L15 @ IF_L8
-use: #_t57 @ L76 @ END_ELSIF_L47
+def: x_0 @ L108 @ Read
+use: x_0 @ L48 @ END_ELSIF_L28
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=false, x_1=true, x_3=false}
+tc:{x_0=true, x_2=true, x_1=true, x_3=true}
 
 def: #_t58 @ L29 @ START_ELSIF_L19
 use: #_t58 @ L77 @ END_ELSIF_L47
@@ -108,64 +123,34 @@ state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=true, x_2=false, x_1=true, x_3=false}
 
 def: x_2 @ L106 @ Read
-use: x_2 @ L36 @ START_ELSIF_L19
+use: x_2 @ L15 @ IF_L8
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=false, x_1=true, x_3=false}
-
-def: x_3 @ L109 @ Read
-use: x_3 @ L53 @ END_ELSIF_L28
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=false, x_1=true, x_3=true}
-
-def: x_0 @ L108 @ Read
-use: x_0 @ L48 @ END_ELSIF_L28
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=true}
 
 def: x_2 @ L106 @ Read
-use: x_2 @ L56 @ END_ELSIF_L28
+use: x_2 @ L36 @ START_ELSIF_L19
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=false, x_3=true}
+tc:{x_0=true, x_2=true, x_1=true, x_3=true}
 
-def: cstate_52 @ L94 @ ELSIF_L88
-use: cstate_52 @ L90 @ START_ELSIF_L12
-state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
-tc:{x_0=true, x_2=false, x_1=false, x_3=true}
-
-def: cstate_52 @ L66 @ ELSIF_L47
-use: cstate_52 @ L10 @ Body
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=true, x_3=true}
-
-def: cstate_52 @ L81 @ ELSIF_L72
-use: cstate_52 @ L10 @ Body
+def: #_t57 @ L15 @ IF_L8
+use: #_t57 @ L76 @ END_ELSIF_L47
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=true, x_2=false, x_1=true, x_3=false}
 
-def: cstate_52 @ L94 @ ELSIF_L88
-use: cstate_52 @ L10 @ Body
-state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
-tc:{x_0=false, x_2=false, x_1=true, x_3=false}
-
-def: cstate_52 @ L22 @ IF_L14
-use: cstate_52 @ L10 @ Body
+def: #_t54 @ L16 @ IF_L8
+use: #_t54 @ L55 @ END_ELSIF_L28
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=false, x_1=false, x_3=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=true}
 
-def: cstate_52 @ L41 @ ELSIF_L28
-use: cstate_52 @ L10 @ Body
+def: #_t54 @ L16 @ IF_L8
+use: #_t54 @ L35 @ START_ELSIF_L19
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=false, x_2=true, x_1=false, x_3=false}
 
-def: x_2 @ L106 @ Read
-use: x_2 @ L15 @ IF_L8
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=false, x_1=false, x_3=false}
-
-def: y_1 @ L70 @ ELSIF_L47
+def: y_1 @ L98 @ ELSIF_L88
 use: y_1 @ L104 @ End
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=true, x_3=true}
+state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=true}
 
 def: y_1 @ L45 @ ELSIF_L28
 use: y_1 @ L104 @ End
@@ -177,43 +162,63 @@ use: y_1 @ L104 @ End
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=true, x_2=false, x_1=true, x_3=false}
 
+def: y_1 @ L70 @ ELSIF_L47
+use: y_1 @ L104 @ End
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=true, x_3=true}
+
 def: y_1 @ L26 @ IF_L14
 use: y_1 @ L104 @ End
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=false, x_2=false, x_1=false, x_3=false}
 
-def: y_1 @ L98 @ ELSIF_L88
-use: y_1 @ L104 @ End
-state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
-tc:{x_0=false, x_2=false, x_1=false, x_3=true}
+def: x_0 @ L108 @ Read
+use: x_0 @ L30 @ START_ELSIF_L19
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=false, x_2=true, x_1=false, x_3=false}
 
-def: x_1 @ L107 @ Read
-use: x_1 @ L58 @ END_ELSIF_L28
+def: x_2 @ L106 @ Read
+use: x_2 @ L56 @ END_ELSIF_L28
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+
+def: cstate_52 @ L81 @ ELSIF_L72
+use: cstate_52 @ L103 @ End
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=false}
+
+def: cstate_52 @ L22 @ IF_L14
+use: cstate_52 @ L103 @ End
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=false, x_2=false, x_1=false, x_3=false}
+
+def: cstate_52 @ L41 @ ELSIF_L28
+use: cstate_52 @ L103 @ End
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=false, x_2=true, x_1=true, x_3=false}
+
+def: cstate_52 @ L94 @ ELSIF_L88
+use: cstate_52 @ L103 @ End
+state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
+tc:{x_0=true, x_2=false, x_1=true, x_3=true}
+
+def: cstate_52 @ L66 @ ELSIF_L47
+use: cstate_52 @ L103 @ End
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
 tc:{x_0=true, x_2=true, x_1=false, x_3=false}
 
 def: x_1 @ L107 @ Read
 use: x_1 @ L48 @ END_ELSIF_L28
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=false, x_1=true, x_3=true}
+tc:{x_0=true, x_2=true, x_1=false, x_3=false}
+
+def: x_1 @ L107 @ Read
+use: x_1 @ L16 @ IF_L8
+state: {cstate_52=0, y_1=false, y_0=false, error=false}
+tc:{x_0=true, x_2=false, x_1=false, x_3=true}
 
 def: x_3 @ L109 @ Read
 use: x_3 @ L59 @ END_ELSIF_L28
 state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=true, x_1=true, x_3=true}
-
-def: #_t57 @ L15 @ IF_L8
-use: #_t57 @ L52 @ END_ELSIF_L28
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=false, x_2=false, x_1=true, x_3=true}
-
-def: error @ L100 @ ELSIF_L88
-use: error @ L102 @ End
-state: {#_t24=true, #_t25=true, #_t28=false, #_t27=false, #_t1=true, error=false, #_t4=false, #_t21=false, #_t57=true, #_t58=false, #_t14=false, #_t11=false, #_t33=true, #_t56=true, #_t34=true, cstate_52=19, #_t15=false, #_t16=false, x_0=true, y_1=false, x_2=false, y_0=true, x_1=true, #_t53=false, #_t31=false, x_3=true, #_t54=false, #_t10=false, #_t32=false, #_t30=false}
-tc:{x_0=false, x_2=false, x_1=false, x_3=false}
-
-def: x_0 @ L108 @ Read
-use: x_0 @ L55 @ END_ELSIF_L28
-state: {cstate_52=0, y_1=false, y_0=false, error=false}
-tc:{x_0=true, x_2=true, x_1=false, x_3=true}
+tc:{x_0=true, x_2=true, x_1=false, x_3=false}
 

@@ -42,6 +42,8 @@
 
 ----- tests_programs/paper2_tests/input/Responder2.txt ---------
 
+----- tests_programs/paper2_tests/input/Responder3.txt ---------
+
 ----- tests_programs/paper2_tests/input/SaftyRequest.txt ---------
 
 ----- tests_programs/paper2_tests/input/SorterControl.txt ---------

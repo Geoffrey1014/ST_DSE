@@ -7,18 +7,8 @@ totalDu: 10
 dft: 1.0
 
 
-def: req1 @ L24 @ Read
-use: req1 @ L10 @ IF_L3
-state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
-tc:{req1=true}
-
-def: cstate12 @ L14 @ ELSE_L9
-use: cstate12 @ L5 @ Body
-state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
-tc:{req1=true}
-
 def: cstate12 @ L19 @ IF_L8
-use: cstate12 @ L5 @ Body
+use: cstate12 @ L22 @ End
 state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
 tc:{req1=false}
 
@@ -27,8 +17,8 @@ use: cstate12 @ L22 @ End
 state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
 tc:{req1=true}
 
-def: cstate12 @ L19 @ IF_L8
-use: cstate12 @ L22 @ End
+def: grant_1 @ L21 @ IF_L8
+use: grant_1 @ L23 @ End
 state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
 tc:{req1=false}
 
@@ -37,8 +27,18 @@ use: grant_1 @ L23 @ End
 state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
 tc:{req1=true}
 
-def: grant_1 @ L21 @ IF_L8
-use: grant_1 @ L23 @ End
+def: cstate12 @ L19 @ IF_L8
+use: cstate12 @ L5 @ Body
+state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
+tc:{req1=false}
+
+def: cstate12 @ L14 @ ELSE_L9
+use: cstate12 @ L5 @ Body
+state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
+tc:{req1=true}
+
+def: req1 @ L24 @ Read
+use: req1 @ L10 @ IF_L3
 state: {#_t1=true, grant_1=false, #_t2=true, req1=false, cstate12=0}
 tc:{req1=false}
 

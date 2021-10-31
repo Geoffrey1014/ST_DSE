@@ -280,9 +280,9 @@ public class Main {
 //                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\PumpControl.txt")) {
 //                    continue;
 //                }
-                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\Responder3.txt")) {
-                    continue;
-                }
+//                else if (f.toString().equals("tests_programs\\paper2_tests\\input\\Responder3.txt")) {
+//                    continue;
+//                }
                 System.out.println("\n----- " + f + " ---------");
                 allDFTResults.append("\n\n----- " + f + " ---------");
                 allDFTResults.append(walkTree(f.toString(),true));
